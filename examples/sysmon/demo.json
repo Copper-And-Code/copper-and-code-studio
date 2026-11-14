@@ -1,0 +1,10 @@
+{
+  "id": "sysmon",
+  "name": "System Monitor",
+  "description": "A dashboard of the computer it runs on: CPU, memory and disk, a CPU chart and the busiest processes, read from /proc and ps on a Linux PC. In the browser, as on a board, it shows what MicroPython itself knows: its heap, no CPU and no processes.",
+  "kind": "application",
+  "page": null,
+  "prompt": "Build a system monitor for the STM32H7_CORE V1.3 (1024×600) as an LVGL MPY Studio project in `examples/sysmon`. On a Linux PC it shows three gauges, CPU, memory and disk, read from `/proc/stat`, `/proc/meminfo` and `os.statvfs(\"/\")`; the distribution, kernel and uptime at the top; a chart of the CPU over the last 60 seconds, refreshed every second; and a Processes button that runs `ps` through `os.system` and lists the five busiest processes. Put the reading of the system in a module of its own. The same project must run on a board: where `sys.platform` is not `\"linux\"`, show the CPU as not available, MicroPython's heap as the memory, the flash as the disk, and say that Processes needs the PC. Use only the font sizes of the board. Check it with simulate on Linux, and once more with the board's path forced from a scenario, before you finish.",
+  "prompt_note": "Not the original prompt: an AI agent built this demo through the MCP server in a conversation with the author. This prompt, written afterwards, asks for the same result. On a Linux PC the full dashboard runs in the simulator; the browser has no operating system, so the page shows the board's view.",
+  "order": 70
+}

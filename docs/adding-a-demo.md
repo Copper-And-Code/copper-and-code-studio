@@ -27,7 +27,8 @@ Create `examples/<id>/demo.json` next to the project:
 - `kind` is `game`, `application` or `program`.
 - `page` is the page used for the thumbnail, or `null` for the initial page.
 - `order` is a unique integer that controls the gallery order.
-- If no prompt exists, set `prompt` to `null` and explain that in `prompt_note`. Never reconstruct or invent one.
+- If no prompt exists, set `prompt` to `null` and explain that in `prompt_note`. Never present a reconstructed prompt as the original.
+- A prompt written afterwards, one that asks for the same result as the work that made the demo, is allowed only when `prompt_note` says so in its first words: "Not the original prompt", how the demo was actually made, and that the prompt was written afterwards. `examples/sysmon` is such a case.
 - If the demo was changed after the prompt produced it, keep the prompt and say what changed, and who changed it, in `prompt_note`.
 
 ### A program without pages

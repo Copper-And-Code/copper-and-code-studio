@@ -22,7 +22,7 @@ def test_demo_metadata_is_valid_and_projects_generate(tmp_path):
         if metadata["kind"] == "program":  # no pages to generate: the program runs as it is
             assert project.entry.is_file() and (project.display.width, project.display.height) == (1024, 600)
             continue
-        assert metadata["id"] == project.projectName.lower() or metadata["id"] in {"eim-01", "meteo", "weather"}
+        assert metadata["id"] == project.projectName.lower() or metadata["id"] in {"eim-01", "meteo", "weather", "sysmon"}
         target = tmp_path / metadata["id"]
         generate_project(project, target)
         assert (target / "main.py").is_file()
