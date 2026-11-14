@@ -917,6 +917,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../pc-programs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files, commands and the network on the PC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../boards/" class="md-nav__link">
         
   
@@ -2205,7 +2233,7 @@
 <p><strong>Run → Run Program…</strong> runs a MicroPython file that has no pages drawn in the designer, such as a shell or a text editor, as a board would run it. Choose the file: its folder is the program. Linux only, for now.</p>
 <ul>
 <li>The folder is copied into a <strong>flash</strong> of its own, which keeps between runs the files the program writes, as a board does. Files of the folder replace those of the same name; the others stay. <strong>Run → Open Program Flash Folder</strong> shows it, <strong>Run → Erase Program Flash…</strong> empties it. Your folder is never changed.</li>
-<li>The program sees the flash as <code>/</code> and cannot leave it: <code>..</code>, absolute paths and <code>rm -r /</code> stay inside.</li>
+<li>The program sees the flash as <code>/</code> and its paths cannot leave it: <code>..</code>, absolute paths and <code>rm -r /</code> stay inside. This imitates a board and is not a barrier: <code>os.system</code> and <code>ffi</code> still reach the whole system, as <a href="../pc-programs/">Files, commands and the network on the PC</a> explains.</li>
 <li>A terminal opens under the screen: it is the program's serial port. What the program prints appears there, and each key typed there, or on the screen of the simulator, reaches <code>sys.stdin</code> as it would from PuTTY. Ctrl-C stops the program while <code>micropython.kbd_intr(3)</code> is on, and arrives as a key after <code>kbd_intr(-1)</code>.</li>
 <li>As on a board, <code>import display_driver</code> starts the display, and <code>display_driver.start()</code> serves LVGL in the background, also while the program waits for a key. The driver has the names of contract 1 of the boards (<code>CONTRACT</code>, <code>running()</code>, <code>backlight()</code>…), and a Ctrl-C reaches the program while the screen goes on, as on a board with firmware v0.1.7. <code>os.dupterm</code>, <code>os.uname()</code> and <code>machine.reset()</code> work; <code>machine.reset()</code> starts the program again.</li>
 <li>When the program ends, a MicroPython REPL takes the keys.</li>
@@ -2412,6 +2440,7 @@ lvgl-mpy-studio<span class="w"> </span><span class="nb">test</span><span class="
 <p><strong>The serial port is busy.</strong> Only one program at a time can use it: close other serial terminals, or disconnect the IDE if an AI agent or <code>mpremote</code> needs it.</p>
 <p><strong>I changed the resolution and something overlaps.</strong> Ctrl+Z undoes it, then try the other choice, or fix by hand the widgets the output lists as outside the screen.</p>
 <p><strong>The AppImage does not start and mentions <code>GLIBC_2.38</code>.</strong> The system is older than the AppImage needs: see <a href="#1-installing-and-starting">Installing and starting</a>.</p>
+<p><strong>Is it safe to run a project someone sent me?</strong> As safe as running their Python script: in the simulator and in the executables the code has your permissions and can run commands and change files (<a href="../pc-programs/#safety">details</a>). Run only projects you trust.</p>
 <p><strong>The single-file executable does not start on an old Linux.</strong> It needs glibc 2.34 or later, that is Ubuntu 22.04, Debian 12 or newer. On Windows, if it does not start, look at <code>&lt;project&gt;.log</code> next to the file.</p>
 <p><strong>Windows says the app is not safe.</strong> The executables are not signed: <strong>More info → Run anyway</strong>.</p>
 
