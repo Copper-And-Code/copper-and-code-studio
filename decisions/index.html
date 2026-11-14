@@ -364,6 +364,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../chromebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running on a Chromebook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../boards/" class="md-nav__link">
         
   
@@ -1214,6 +1242,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-ide-in-the-browser-in-a-repository-of-its-own-2026-11-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The IDE in the browser, in a repository of its own (2026-11-14)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1658,6 +1697,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#the-ide-in-the-browser-in-a-repository-of-its-own-2026-11-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The IDE in the browser, in a repository of its own (2026-11-14)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1946,6 +1996,20 @@
 <li>Continuous integration ran only 3.12. <code>requires-python</code> is now <code>&gt;=3.12</code>, so pip refuses 3.11
   with a clear message instead of an IDE that crashes. The defect is not chased: it is in a
   dependency, and 3.12 is available on every supported system.</li>
+</ul>
+<h2 id="the-ide-in-the-browser-in-a-repository-of-its-own-2026-11-14">The IDE in the browser, in a repository of its own (2026-11-14)<a class="headerlink" href="#the-ide-in-the-browser-in-a-repository-of-its-own-2026-11-14" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The whole IDE is ported to the browser in <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio-web">lvgl-mpy-studio-web</a>, published at
+  <a href="https://copper-and-code.github.io/lvgl-mpy-studio-web/">https://copper-and-code.github.io/lvgl-mpy-studio-web/</a>, alongside the desktop IDE and not in its place: for GitHub Pages, Chromebooks
+  and, later, phones.</li>
+<li>That repository holds this one as a git submodule at a tag. It runs <code>core/</code>, <code>gen/</code> and
+  <code>build/</code> unchanged in Pyodide, with an interface in TypeScript and Lit, the simulator on the
+  WebAssembly runtime, and the board through Web Serial in Chromium browsers.</li>
+<li>Consequences here: <code>core/</code> and <code>gen/</code> stay free of Qt and of external processes. The changes
+  the web version needs come as requests from that repository and are made here only on the
+  owner's decision.</li>
+<li>A separate repository keeps the desktop IDE's history, CI and releases as they are, and lets
+  the web version follow a tag of this one instead of every commit.</li>
 </ul>
 
 

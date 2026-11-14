@@ -364,6 +364,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../chromebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running on a Chromebook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../boards/" class="md-nav__link">
         
   
@@ -818,6 +846,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-ide-in-the-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The IDE in the browser
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#known-defects-and-open-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1003,6 +1042,17 @@
     <span class="md-ellipsis">
       
         Project website
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ide-in-the-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The IDE in the browser
       
     </span>
   </a>
@@ -1280,7 +1330,7 @@ below as an open question, not as a formality.</p>
 <td>AppImage for Linux</td>
 <td></td>
 <td>yes, run from inside the package</td>
-<td>the package of 0.7.0, released: self-test from an empty folder, 82 steps passed, on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
+<td>the package of 0.7.0, released: self-test from an empty folder, 82 steps passed, on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB (<a href="../chromebook/">Running on a Chromebook</a>). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
 <td>on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system</td>
 </tr>
 <tr>
@@ -1294,13 +1344,18 @@ below as an open question, not as a formality.</p>
 </table>
 <p>"Author's use" means the author uses it while developing; it is not a test plan.</p>
 <h2 id="project-website">Project website<a class="headerlink" href="#project-website" title="Permanent link">&para;</a></h2>
-<p>The English documentation and five browser demos are published at
+<p>The English documentation and six browser demos are published at
 <a href="https://copper-and-code.github.io/lvgl-mpy-studio/">https://copper-and-code.github.io/lvgl-mpy-studio/</a> from the <code>gh-pages</code> branch. On 12 November
-2026, the public home, manual, gallery, and all five demos were checked in Chromium. Each demo
+2026, the public home, manual, gallery, and the five demos of that day were checked in Chromium. Each demo
 reported a running WebAssembly application and a non-black canvas; a simulated touch changed the
 Fifteen screen, and no requests went to external domains. The IDE test for <strong>Help → Online
 Documentation</strong> also passed and opens the same public address.</p>
 <p>Firefox, Safari, and a real phone with touch and sound have not been tried.</p>
+<h2 id="the-ide-in-the-browser">The IDE in the browser<a class="headerlink" href="#the-ide-in-the-browser" title="Permanent link">&para;</a></h2>
+<p>The whole IDE in the browser is built in <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio-web">lvgl-mpy-studio-web</a>, a repository of its own
+that holds this one as a git submodule at a tag and runs its <code>core/</code>, <code>gen/</code> and <code>build/</code> in
+Pyodide. It is published at <a href="https://copper-and-code.github.io/lvgl-mpy-studio-web/">https://copper-and-code.github.io/lvgl-mpy-studio-web/</a>. It is a work in progress: experimental, but already
+usable, in the author's judgement. Its checks are recorded in that repository, not here.</p>
 <h2 id="known-defects-and-open-points">Known defects and open points<a class="headerlink" href="#known-defects-and-open-points" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Windows.</strong> The portable package of 0.4 did not start on a real Windows: it bundled a copy
