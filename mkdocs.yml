@@ -62,6 +62,7 @@ nav:
   - User guide:
       - User manual: manual.md
       - Running on a Chromebook: chromebook.md
+      - Files, commands and the network on the PC: pc-programs.md
       - Boards: boards.md
       - Publishing on the web: publish-web.md
   - Extending:

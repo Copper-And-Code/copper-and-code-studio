@@ -24,6 +24,7 @@ below as an open question, not as a formality.
 | Designer, properties, undo | yes | yes | author's use | other users |
 | Code editor, handlers, Python modules | yes | yes | ESP32-4848S040 (modules) | |
 | Simulator on the PC | yes | yes | author's use | |
+| Files, commands and the network on the PC ([page](pc-programs.md)) | | | the examples, on the Linux runtime; the modules listed from each runtime, Windows under Wine | a real Windows |
 | MicroPython generation, upload as bytecode | yes | | ESP32-4848S040, STM32H7_CORE, Waveshare RP2350 | |
 | Live editing on a board | yes | | ESP32-4848S040 | the other boards |
 | Pictures in a project | yes | yes | STM32H7_CORE (seen on the display) | RP2350, ESP32-S3 |

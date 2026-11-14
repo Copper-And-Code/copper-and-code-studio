@@ -315,7 +315,7 @@ While the simulator is running the project is read-only: a bar above the editor 
 **Run → Run Program…** runs a MicroPython file that has no pages drawn in the designer, such as a shell or a text editor, as a board would run it. Choose the file: its folder is the program. Linux only, for now.
 
 - The folder is copied into a **flash** of its own, which keeps between runs the files the program writes, as a board does. Files of the folder replace those of the same name; the others stay. **Run → Open Program Flash Folder** shows it, **Run → Erase Program Flash…** empties it. Your folder is never changed.
-- The program sees the flash as `/` and cannot leave it: `..`, absolute paths and `rm -r /` stay inside.
+- The program sees the flash as `/` and its paths cannot leave it: `..`, absolute paths and `rm -r /` stay inside. This imitates a board and is not a barrier: `os.system` and `ffi` still reach the whole system, as [Files, commands and the network on the PC](pc-programs.md) explains.
 - A terminal opens under the screen: it is the program's serial port. What the program prints appears there, and each key typed there, or on the screen of the simulator, reaches `sys.stdin` as it would from PuTTY. Ctrl-C stops the program while `micropython.kbd_intr(3)` is on, and arrives as a key after `kbd_intr(-1)`.
 - As on a board, `import display_driver` starts the display, and `display_driver.start()` serves LVGL in the background, also while the program waits for a key. The driver has the names of contract 1 of the boards (`CONTRACT`, `running()`, `backlight()`…), and a Ctrl-C reaches the program while the screen goes on, as on a board with firmware v0.1.7. `os.dupterm`, `os.uname()` and `machine.reset()` work; `machine.reset()` starts the program again.
 - When the program ends, a MicroPython REPL takes the keys.
@@ -490,6 +490,8 @@ The same check applies to any program that writes the project file, the command 
 **I changed the resolution and something overlaps.** Ctrl+Z undoes it, then try the other choice, or fix by hand the widgets the output lists as outside the screen.
 
 **The AppImage does not start and mentions `GLIBC_2.38`.** The system is older than the AppImage needs: see [Installing and starting](#1-installing-and-starting).
+
+**Is it safe to run a project someone sent me?** As safe as running their Python script: in the simulator and in the executables the code has your permissions and can run commands and change files ([details](pc-programs.md#safety)). Run only projects you trust.
 
 **The single-file executable does not start on an old Linux.** It needs glibc 2.34 or later, that is Ubuntu 22.04, Debian 12 or newer. On Windows, if it does not start, look at `<project>.log` next to the file.
 

@@ -1,0 +1,607 @@
+{
+  "schemaVersion": 3,
+  "projectName": "System Monitor",
+  "display": {
+    "width": 1024,
+    "height": 600,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "c4723f529809481e8df0d7db38d78e24",
+      "name": "main",
+      "canvasSize": [
+        1024,
+        600
+      ],
+      "widgets": [
+        {
+          "id": "e7dfd7a873d741bab9c9afc3fc28737c",
+          "name": "background",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 1024,
+            "height": 600,
+            "bgColor": "#0F1722",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_AUTO"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d9be1e8e1a8340cdba5a46452e2c7657",
+          "name": "title",
+          "type": "label",
+          "props": {
+            "x": 24,
+            "y": 16,
+            "width": 400,
+            "height": 32,
+            "text": "System monitor",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6fa7c8cf4a8f44a7b4ded36be02e26be",
+          "name": "host",
+          "type": "label",
+          "props": {
+            "x": 424,
+            "y": 22,
+            "width": 576,
+            "height": 24,
+            "text": "-",
+            "textColor": "#9FB3C8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_RIGHT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7400a1c0dcd44a98862881197747c24b",
+          "name": "cpu_card",
+          "type": "panel",
+          "props": {
+            "x": 24,
+            "y": 64,
+            "width": 320,
+            "height": 252,
+            "bgColor": "#1E2A3A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 12,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_AUTO"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "540ca1dcf1984e8fa8a355a1765c6914",
+          "name": "cpu_arc",
+          "type": "arc",
+          "props": {
+            "x": 70,
+            "y": 12,
+            "width": 180,
+            "height": 180,
+            "min": 0,
+            "max": 100,
+            "value": 0,
+            "bgColor": "#2C3E50",
+            "indicatorColor": "#4FC3F7",
+            "startAngle": 135,
+            "endAngle": 45,
+            "rotation": 0,
+            "mode": "LV_ARC_MODE_NORMAL",
+            "knobColor": "#4FC3F7",
+            "lineWidth": 16
+          },
+          "events": {},
+          "parentId": "7400a1c0dcd44a98862881197747c24b",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4f2602615c6347d0848bc2dc5d4e2147",
+          "name": "cpu_value",
+          "type": "label",
+          "props": {
+            "x": 70,
+            "y": 86,
+            "width": 180,
+            "height": 32,
+            "text": "--",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "7400a1c0dcd44a98862881197747c24b",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a2d2525a55db484abdd33459cef5738d",
+          "name": "cpu_caption",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 196,
+            "width": 320,
+            "height": 24,
+            "text": "CPU",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "7400a1c0dcd44a98862881197747c24b",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9f05daf797304757be8ac0095cde24cc",
+          "name": "cpu_detail",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 222,
+            "width": 320,
+            "height": 20,
+            "text": "-",
+            "textColor": "#9FB3C8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "7400a1c0dcd44a98862881197747c24b",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3e45091bdc544fcb8d9265cac6a82e61",
+          "name": "mem_card",
+          "type": "panel",
+          "props": {
+            "x": 352,
+            "y": 64,
+            "width": 320,
+            "height": 252,
+            "bgColor": "#1E2A3A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 12,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_AUTO"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e31dcc2000954f588bf806b51b6b4001",
+          "name": "mem_arc",
+          "type": "arc",
+          "props": {
+            "x": 70,
+            "y": 12,
+            "width": 180,
+            "height": 180,
+            "min": 0,
+            "max": 100,
+            "value": 0,
+            "bgColor": "#2C3E50",
+            "indicatorColor": "#81C784",
+            "startAngle": 135,
+            "endAngle": 45,
+            "rotation": 0,
+            "mode": "LV_ARC_MODE_NORMAL",
+            "knobColor": "#81C784",
+            "lineWidth": 16
+          },
+          "events": {},
+          "parentId": "3e45091bdc544fcb8d9265cac6a82e61",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d9671b545ee942ada02f31c0802b473d",
+          "name": "mem_value",
+          "type": "label",
+          "props": {
+            "x": 70,
+            "y": 86,
+            "width": 180,
+            "height": 32,
+            "text": "--",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "3e45091bdc544fcb8d9265cac6a82e61",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a90c424372db41caad6fe366de9013e4",
+          "name": "mem_caption",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 196,
+            "width": 320,
+            "height": 24,
+            "text": "Memory",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "3e45091bdc544fcb8d9265cac6a82e61",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e54319adff2348ddad49ebd88259d6f0",
+          "name": "mem_detail",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 222,
+            "width": 320,
+            "height": 20,
+            "text": "-",
+            "textColor": "#9FB3C8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "3e45091bdc544fcb8d9265cac6a82e61",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "acb90e961b88479db359d00a686acd7d",
+          "name": "disk_card",
+          "type": "panel",
+          "props": {
+            "x": 680,
+            "y": 64,
+            "width": 320,
+            "height": 252,
+            "bgColor": "#1E2A3A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 12,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_AUTO"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "92ef17963ddb4b6eaa73c3bda63bf5c0",
+          "name": "disk_arc",
+          "type": "arc",
+          "props": {
+            "x": 70,
+            "y": 12,
+            "width": 180,
+            "height": 180,
+            "min": 0,
+            "max": 100,
+            "value": 0,
+            "bgColor": "#2C3E50",
+            "indicatorColor": "#FFB74D",
+            "startAngle": 135,
+            "endAngle": 45,
+            "rotation": 0,
+            "mode": "LV_ARC_MODE_NORMAL",
+            "knobColor": "#FFB74D",
+            "lineWidth": 16
+          },
+          "events": {},
+          "parentId": "acb90e961b88479db359d00a686acd7d",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0806071879c241ec8bcf4f119d09c66e",
+          "name": "disk_value",
+          "type": "label",
+          "props": {
+            "x": 70,
+            "y": 86,
+            "width": 180,
+            "height": 32,
+            "text": "--",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "acb90e961b88479db359d00a686acd7d",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3cc915aaffca40d08670f99cd19ce41e",
+          "name": "disk_caption",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 196,
+            "width": 320,
+            "height": 24,
+            "text": "Disk /",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "acb90e961b88479db359d00a686acd7d",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "54f08b8b460a48fe8a6f48dd63f6cbec",
+          "name": "disk_detail",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 222,
+            "width": 320,
+            "height": 20,
+            "text": "-",
+            "textColor": "#9FB3C8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "acb90e961b88479db359d00a686acd7d",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e3c95ef2eeb64738afbf4d9a61c50eda",
+          "name": "history_caption",
+          "type": "label",
+          "props": {
+            "x": 24,
+            "y": 328,
+            "width": 400,
+            "height": 20,
+            "text": "CPU, last 60 seconds",
+            "textColor": "#9FB3C8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4f48796ae9a8429d88eb70f2f9e70db5",
+          "name": "history",
+          "type": "chart",
+          "props": {
+            "x": 24,
+            "y": 352,
+            "width": 976,
+            "height": 112,
+            "chartType": "line",
+            "data": "",
+            "data2": "",
+            "bgColor": "#1E2A3A",
+            "lineColor": "#4FC3F7",
+            "lineColor2": "#FF5722",
+            "pointCount": 60,
+            "showPoints": false,
+            "rangeYMin": 0,
+            "rangeYMax": 100,
+            "divLineCount": 3,
+            "divLineCountSec": 0,
+            "updateMode": "shift"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5570219c884d489ea2ccf4a8c2f3dd3a",
+          "name": "processes",
+          "type": "button",
+          "props": {
+            "x": 24,
+            "y": 480,
+            "width": 200,
+            "height": 96,
+            "text": "Processes",
+            "bgColor": "#2196F3",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 10
+          },
+          "events": {
+            "CLICKED": "processes_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "625560bd3c6041869a8a0b4ab299fd70",
+          "name": "processes_out",
+          "type": "label",
+          "props": {
+            "x": 240,
+            "y": 480,
+            "width": 760,
+            "height": 104,
+            "text": "Processes runs ps through os.system and shows the busiest five.",
+            "textColor": "#C8D6E5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a2d92ded13694ec89cb91c4f27b03c19",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 1000,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "import sysinfo\n\nseries = None\ndisk_path = sysinfo.disk_path()\n\n\ndef gauge(arc, value_label, detail_label, percent, detail):\n    arc.set_value(percent)\n    value_label.set_text(\"%d %%\" % percent)\n    detail_label.set_text(detail)\n\n\ndef setup():\n    global series\n    series = ui.history.get_series_next(None)\n    for arc in (ui.cpu_arc, ui.mem_arc, ui.disk_arc):\n        arc.remove_style(None, lv.PART.KNOB)          # a gauge, not a control\n        arc.remove_flag(lv.obj.FLAG.CLICKABLE)\n    ui.history.set_style_size(0, 0, lv.PART.INDICATOR)               # a line, no dots\n    ui.history.set_style_border_width(0, 0)\n    ui.history.set_style_line_color(lv.color_hex(0x2C3E50), lv.PART.MAIN)  # the grid\n    ui.history.set_all_values(series, 0)\n    ui.disk_caption.set_text(\"Disk \" + disk_path)\n    sysinfo.cpu()                                     # the first reading only sets the start\n    refresh()\n\n\ndef refresh():\n    ui.host.set_text(sysinfo.host())\n    percent = sysinfo.cpu()\n    if percent is None:\n        ui.cpu_arc.set_value(0)\n        ui.cpu_value.set_text(\"n/a\")\n        ui.cpu_detail.set_text(\"not measured on a board\")\n    else:\n        gauge(ui.cpu_arc, ui.cpu_value, ui.cpu_detail, percent, \"%d cores\" % sysinfo.cores())\n        ui.history.set_next_value(series, percent)\n    used, total = sysinfo.memory()\n    gauge(ui.mem_arc, ui.mem_value, ui.mem_detail, 100 * used // total,\n          \"%s of %s\" % (sysinfo.size(used), sysinfo.size(total)))\n    used, total = sysinfo.disk(disk_path)\n    if total:\n        gauge(ui.disk_arc, ui.disk_value, ui.disk_detail, 100 * used // total,\n              \"%s of %s\" % (sysinfo.size(used), sysinfo.size(total)))\n    else:\n        ui.disk_value.set_text(\"n/a\")\n",
+    "handlers": {
+      "main_screen_loaded": {
+        "widget": "main",
+        "event": "SCREEN_LOADED",
+        "body": "setup()"
+      },
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "refresh()"
+      },
+      "processes_clicked": {
+        "widget": "processes",
+        "event": "CLICKED",
+        "body": "ui.processes_out.set_text(sysinfo.processes())"
+      }
+    }
+  },
+  "currentPageId": "c4723f529809481e8df0d7db38d78e24",
+  "assets": {},
+  "variables": [],
+  "projectId": "7d622aa1461140e0bbe49b9656ac09bc",
+  "board": {
+    "schemaVersion": 1,
+    "id": "stm32h7_core_v1_3_1024x600",
+    "revision": 1,
+    "name": "STM32H7_CORE V1.3 (1024×600)",
+    "adapter": "stm32h7_uart",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911",
+        "st_ltdc"
+      ]
+    },
+    "physicalWidth": 1024,
+    "physicalHeight": 600,
+    "logicalWidth": 1024,
+    "logicalHeight": 600,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver",
+      "appRoot": "/flash/lvgl_ide_apps",
+      "mainPath": "/flash/main.py"
+    }
+  },
+  "modules": [
+    {
+      "id": "e91154aa03e04b2f82f93e957af67524",
+      "name": "sysinfo",
+      "source": "\"\"\"What the system says about itself.\n\nOn a Linux PC, in the simulator and in the Linux executables, MicroPython is a program of the\noperating system: it reads /proc and runs commands with os.system. On a board the same calls\nanswer with what MicroPython knows: the heap and the flash.\n\"\"\"\nimport gc\nimport os\nimport sys\nimport time\n\nON_LINUX = sys.platform == \"linux\"\n_last_cpu = None\n\n\ndef _read(path):\n    with open(path) as f:\n        return f.read()\n\n\ndef host():\n    \"\"\"Host name, kernel and uptime, or the board's platform and time since start.\"\"\"\n    if ON_LINUX:\n        name = _read(\"/proc/sys/kernel/hostname\").strip()\n        kernel = _read(\"/proc/sys/kernel/osrelease\").strip()\n        seconds = int(float(_read(\"/proc/uptime\").split()[0]))\n        return \"%s  |  Linux %s  |  up %s\" % (name, kernel, duration(seconds))\n    return \"%s  |  MicroPython  |  up %s\" % (sys.platform, duration(time.ticks_ms() // 1000))\n\n\ndef duration(seconds):\n    days, seconds = divmod(seconds, 86400)\n    hours, seconds = divmod(seconds, 3600)\n    minutes = seconds // 60\n    if days:\n        return \"%dd %dh\" % (days, hours)\n    return \"%dh %02dm\" % (hours, minutes)\n\n\ndef cpu():\n    \"\"\"Percent of CPU busy since the last call, from /proc/stat; None where it cannot be read.\"\"\"\n    global _last_cpu\n    if not ON_LINUX:\n        return None\n    fields = [int(value) for value in _read(\"/proc/stat\").split(\"\\n\", 1)[0].split()[1:]]\n    idle = fields[3] + (fields[4] if len(fields) > 4 else 0)\n    total = sum(fields)\n    previous, _last_cpu = _last_cpu, (idle, total)\n    if previous is None or total == previous[1]:\n        return 0\n    return 100 - 100 * (idle - previous[0]) // (total - previous[1])\n\n\ndef cores():\n    if not ON_LINUX:\n        return 1\n    return _read(\"/proc/stat\").count(\"\\ncpu\")\n\n\ndef memory():\n    \"\"\"(used, total) in bytes: the PC's RAM from /proc/meminfo, or MicroPython's heap.\"\"\"\n    if ON_LINUX:\n        info = {}\n        for line in _read(\"/proc/meminfo\").split(\"\\n\"):\n            parts = line.split()\n            if len(parts) >= 2:\n                info[parts[0].rstrip(\":\")] = int(parts[1]) * 1024\n        total = info[\"MemTotal\"]\n        return total - info.get(\"MemAvailable\", info[\"MemFree\"]), total\n    gc.collect()\n    free, used = gc.mem_free(), gc.mem_alloc()\n    return used, free + used\n\n\ndef disk_path():\n    \"\"\"The root on the PC; on a board the flash, which the STM32 boards mount at /flash.\"\"\"\n    if ON_LINUX:\n        return \"/\"\n    try:\n        return \"/flash\" if \"flash\" in os.listdir(\"/\") else \"/\"\n    except OSError:\n        return \"/\"\n\n\ndef disk(path):\n    \"\"\"(used, total) in bytes of the filesystem holding path, as df counts them; (0, 0) if unknown.\"\"\"\n    try:\n        stat = os.statvfs(path)\n    except (OSError, AttributeError):\n        return 0, 0\n    size = stat[1] or stat[0]\n    used = (stat[2] - stat[3]) * size\n    return used, used + stat[4] * size\n\n\ndef size(value):\n    for unit in (\"B\", \"KB\", \"MB\", \"GB\", \"TB\"):\n        if value < 1024 or unit == \"TB\":\n            return (\"%d %s\" if unit == \"B\" else \"%.1f %s\") % (value, unit)\n        value /= 1024\n\n\ndef processes(count=5):\n    \"\"\"The busiest processes, from ps run through os.system; a sentence where there is no shell.\"\"\"\n    if not hasattr(os, \"system\"):\n        return \"No operating system here: this button needs the PC.\"\n    out = \"/tmp/lms_sysmon_ps.txt\"\n    # %CPU of ps is the average over each process's life; ps itself is left out.\n    if os.system(\"ps -eo pcpu,rss,comm --sort=-pcpu --no-headers > %s 2>&1\" % out):\n        return \"ps did not run.\"\n    lines = []\n    for line in _read(out).split(\"\\n\"):\n        parts = line.split(None, 2)\n        if len(parts) == 3 and parts[2] != \"ps\" and len(lines) < count:\n            lines.append(\"%s %%  CPU   %s   %s\" % (parts[0], size(int(parts[1]) * 1024), parts[2]))\n    os.remove(out)\n    return \"\\n\".join(lines)\n"
+    }
+  ]
+}

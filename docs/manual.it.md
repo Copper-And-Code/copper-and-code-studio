@@ -315,7 +315,7 @@ Mentre il simulatore è avviato il progetto è in sola lettura: una barra sopra 
 **Esegui → Esegui programma…** esegue un file MicroPython senza pagine disegnate nel designer, come una shell o un editor di testo, come lo eseguirebbe una board. Scegli il file: la sua cartella è il programma. Per ora solo su Linux.
 
 - La cartella viene copiata in una **flash** tutta sua, che tra un avvio e l'altro conserva i file scritti dal programma, come una board. I file della cartella sostituiscono quelli con lo stesso nome; gli altri restano. **Esegui → Apri la cartella della flash del programma** la mostra, **Esegui → Cancella la flash del programma…** la svuota. La tua cartella non viene mai modificata.
-- Il programma vede la flash come `/` e non ne può uscire: `..`, i percorsi assoluti e `rm -r /` restano dentro.
+- Il programma vede la flash come `/` e i suoi percorsi non ne escono: `..`, i percorsi assoluti e `rm -r /` restano dentro. Imita una board e non è una barriera: `os.system` e `ffi` raggiungono comunque tutto il sistema, come spiega [Files, commands and the network on the PC](pc-programs.md).
 - Sotto lo schermo si apre un terminale: è la porta seriale del programma. Ciò che il programma stampa compare lì, e ogni tasto premuto lì, o sullo schermo del simulatore, arriva a `sys.stdin` come da PuTTY. Ctrl-C ferma il programma finché `micropython.kbd_intr(3)` è attivo, e arriva come tasto dopo `kbd_intr(-1)`.
 - Come su una board, `import display_driver` avvia il display e `display_driver.start()` serve LVGL in sottofondo, anche mentre il programma aspetta un tasto. Il driver ha i nomi del contratto 1 delle board (`CONTRACT`, `running()`, `backlight()`…), e un Ctrl-C arriva al programma mentre lo schermo continua, come su una board con il firmware v0.1.7. Funzionano `os.dupterm`, `os.uname()` e `machine.reset()`; `machine.reset()` fa ripartire il programma.
 - Quando il programma finisce, un REPL di MicroPython prende i tasti.
@@ -490,6 +490,8 @@ Lo stesso controllo vale per ogni programma che scrive il file del progetto, com
 **Ho cambiato risoluzione e qualcosa si sovrappone.** Ctrl+Z annulla, poi prova l'altra scelta, oppure sistema a mano i widget elencati nell'output come fuori area.
 
 **L'AppImage non parte e cita `GLIBC_2.38`.** Il sistema è più vecchio di quanto l'AppImage richieda: vedi [Installazione e avvio](#1-installazione-e-avvio).
+
+**È sicuro eseguire un progetto che mi hanno mandato?** Quanto eseguire un loro script Python: nel simulatore e negli eseguibili il codice ha i tuoi permessi e può lanciare comandi e modificare file ([dettagli](pc-programs.md#safety)). Esegui solo progetti di cui ti fidi.
 
 **L'eseguibile a file unico non parte su un Linux vecchio.** Serve glibc 2.34 o successiva, cioè Ubuntu 22.04, Debian 12 o più recenti. Su Windows, se non parte, guarda `<progetto>.log` accanto al file.
 

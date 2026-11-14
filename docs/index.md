@@ -4,6 +4,8 @@ LVGL MPY Studio is a desktop IDE for building graphical interfaces with LVGL 9.5
 
 The same project can be uploaded to a supported board, exported as portable C sources, built as a standalone application, or published in the browser through WebAssembly. AI agents can perform the complete workflow through the MCP server.
 
+On the PC the same MicroPython is a program of the operating system: an application can run commands, read and write files, open sockets and call C libraries. See [Files, commands and the network on the PC](pc-programs.md).
+
 **The whole IDE in the browser** is a work in progress, experimental but already usable: [open it](https://copper-and-code.github.io/lvgl-mpy-studio-web/), nothing to install. It is built in [a repository of its own](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) that reuses the core of this one.
 
 ![The IDE with an industrial monitor running in its simulator, and the Files panel](images/ide-simulator.png)
