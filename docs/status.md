@@ -48,21 +48,28 @@ below as an open question, not as a formality.
 | Visual tests | yes | | used on the EIM-01 example | |
 | Print Sources | yes | | a PDF, read | a real printer |
 | Self-test, visible mode (`--show`) | | | | never run |
-| AppImage for Linux | | yes, run from inside the package | the package of 0.7.0, released: self-test from an empty folder, 82 steps passed, on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version | on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system |
+| AppImage for Linux | | yes, run from inside the package | the package of 0.7.0, released: self-test from an empty folder, 82 steps passed, on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB ([Running on a Chromebook](chromebook.md)). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version | on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system |
 | Portable Windows package | | | the package of 0.6.0: contents inspected (no bundled ICU, the icon in the program file, the blocks) and started by the author on a real Windows. The package of 0.6.1, released: contents inspected, started by the author on Windows, no console windows flashing | the package of 0.7.0, released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built |
 
 "Author's use" means the author uses it while developing; it is not a test plan.
 
 ## Project website
 
-The English documentation and five browser demos are published at
+The English documentation and six browser demos are published at
 <https://copper-and-code.github.io/lvgl-mpy-studio/> from the `gh-pages` branch. On 12 November
-2026, the public home, manual, gallery, and all five demos were checked in Chromium. Each demo
+2026, the public home, manual, gallery, and the five demos of that day were checked in Chromium. Each demo
 reported a running WebAssembly application and a non-black canvas; a simulated touch changed the
 Fifteen screen, and no requests went to external domains. The IDE test for **Help → Online
 Documentation** also passed and opens the same public address.
 
 Firefox, Safari, and a real phone with touch and sound have not been tried.
+
+## The IDE in the browser
+
+The whole IDE in the browser is built in [lvgl-mpy-studio-web](https://github.com/Copper-And-Code/lvgl-mpy-studio-web), a repository of its own
+that holds this one as a git submodule at a tag and runs its `core/`, `gen/` and `build/` in
+Pyodide. It is published at <https://copper-and-code.github.io/lvgl-mpy-studio-web/>. It is a work in progress: experimental, but already
+usable, in the author's judgement. Its checks are recorded in that repository, not here.
 
 ## Known defects and open points
 

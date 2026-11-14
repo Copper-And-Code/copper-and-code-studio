@@ -35,6 +35,7 @@ A desktop IDE for designing [LVGL](https://lvgl.io) 9.5 interfaces for MicroPyth
 - **Assets.** Pictures and TrueType fonts stored in the project and converted for LVGL by the IDE, kerning included, with no external tool.
 - **Distribute.** Single-file executables for Linux and Windows, a version that runs in the browser as WebAssembly, and portable C sources.
 - **Agents.** An [MCP server](docs/mcp.md) with 49 tools: an agent designs, renders, simulates and uploads. [From a prompt to an app](docs/mcp-demo.md) is a recorded session.
+- **The whole IDE in the browser** (work in progress, experimental but already usable): [open it](https://copper-and-code.github.io/lvgl-mpy-studio-web/), nothing to install. It is built in [a repository of its own](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) that reuses the core of this one through Pyodide.
 - **Testing.** Visual tests of a project on a simulated clock, and a [self-test](docs/manual.md#self-test) in which the IDE drives itself with mouse and keyboard.
 
 ## Try it

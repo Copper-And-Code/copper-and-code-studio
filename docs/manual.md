@@ -35,7 +35,7 @@ chmod +x LVGL_MPY_STUDIO-x86_64.AppImage
 ./LVGL_MPY_STUDIO-x86_64.AppImage
 ```
 
-Nothing else needs installing: Python, Qt, the simulator and the MicroPython compiler are inside the file. It needs glibc 2.38 or later: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer. On older systems, such as Ubuntu 22.04 or Debian 12, run it from the sources.
+Nothing else needs installing: Python, Qt, the simulator and the MicroPython compiler are inside the file. It needs glibc 2.38 or later: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer. On older systems, such as Ubuntu 22.04 or Debian 12, run it from the sources. On a Chromebook it runs in the Linux development environment: see [Running on a Chromebook](chromebook.md).
 
 ### Windows
 

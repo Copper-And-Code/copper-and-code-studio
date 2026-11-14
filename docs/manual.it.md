@@ -35,7 +35,7 @@ chmod +x LVGL_MPY_STUDIO-x86_64.AppImage
 ./LVGL_MPY_STUDIO-x86_64.AppImage
 ```
 
-Non serve installare altro: Python, Qt, il simulatore e il compilatore di MicroPython sono dentro il file.
+Non serve installare altro: Python, Qt, il simulatore e il compilatore di MicroPython sono dentro il file. Richiede glibc 2.38 o successiva: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 o più recenti. Su sistemi più vecchi, come Ubuntu 22.04 o Debian 12, avvialo dai sorgenti. Su un Chromebook gira nell'ambiente di sviluppo Linux: vedi [Running on a Chromebook](chromebook.md).
 
 ### Windows
 
@@ -488,6 +488,8 @@ Lo stesso controllo vale per ogni programma che scrive il file del progetto, com
 **La porta seriale è occupata.** Un solo programma alla volta può usarla: chiudi altri terminali seriali, o disconnetti l'IDE se la deve usare un agente AI o `mpremote`.
 
 **Ho cambiato risoluzione e qualcosa si sovrappone.** Ctrl+Z annulla, poi prova l'altra scelta, oppure sistema a mano i widget elencati nell'output come fuori area.
+
+**L'AppImage non parte e cita `GLIBC_2.38`.** Il sistema è più vecchio di quanto l'AppImage richieda: vedi [Installazione e avvio](#1-installazione-e-avvio).
 
 **L'eseguibile a file unico non parte su un Linux vecchio.** Serve glibc 2.34 o successiva, cioè Ubuntu 22.04, Debian 12 o più recenti. Su Windows, se non parte, guarda `<progetto>.log` accanto al file.
 

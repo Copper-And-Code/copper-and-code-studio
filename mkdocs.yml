@@ -61,6 +61,7 @@ nav:
   - Getting started: getting-started.md
   - User guide:
       - User manual: manual.md
+      - Running on a Chromebook: chromebook.md
       - Boards: boards.md
       - Publishing on the web: publish-web.md
   - Extending:

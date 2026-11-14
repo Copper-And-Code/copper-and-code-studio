@@ -271,3 +271,18 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 - Continuous integration ran only 3.12. `requires-python` is now `>=3.12`, so pip refuses 3.11
   with a clear message instead of an IDE that crashes. The defect is not chased: it is in a
   dependency, and 3.12 is available on every supported system.
+
+## The IDE in the browser, in a repository of its own (2026-11-14)
+
+- The whole IDE is ported to the browser in [lvgl-mpy-studio-web](https://github.com/Copper-And-Code/lvgl-mpy-studio-web), published at
+  <https://copper-and-code.github.io/lvgl-mpy-studio-web/>, alongside the desktop IDE and not in its place: for GitHub Pages, Chromebooks
+  and, later, phones.
+- That repository holds this one as a git submodule at a tag. It runs `core/`, `gen/` and
+  `build/` unchanged in Pyodide, with an interface in TypeScript and Lit, the simulator on the
+  WebAssembly runtime, and the board through Web Serial in Chromium browsers.
+- Consequences here: `core/` and `gen/` stay free of Qt and of external processes. The changes
+  the web version needs come as requests from that repository and are made here only on the
+  owner's decision.
+- A separate repository keeps the desktop IDE's history, CI and releases as they are, and lets
+  the web version follow a tag of this one instead of every commit.
+
