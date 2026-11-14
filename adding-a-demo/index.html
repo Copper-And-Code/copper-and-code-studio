@@ -1127,7 +1127,8 @@
 <li><code>kind</code> is <code>game</code>, <code>application</code> or <code>program</code>.</li>
 <li><code>page</code> is the page used for the thumbnail, or <code>null</code> for the initial page.</li>
 <li><code>order</code> is a unique integer that controls the gallery order.</li>
-<li>If no prompt exists, set <code>prompt</code> to <code>null</code> and explain that in <code>prompt_note</code>. Never reconstruct or invent one.</li>
+<li>If no prompt exists, set <code>prompt</code> to <code>null</code> and explain that in <code>prompt_note</code>. Never present a reconstructed prompt as the original.</li>
+<li>A prompt written afterwards, one that asks for the same result as the work that made the demo, is allowed only when <code>prompt_note</code> says so in its first words: "Not the original prompt", how the demo was actually made, and that the prompt was written afterwards. <code>examples/sysmon</code> is such a case.</li>
 <li>If the demo was changed after the prompt produced it, keep the prompt and say what changed, and who changed it, in <code>prompt_note</code>.</li>
 </ul>
 <h3 id="a-program-without-pages">A program without pages<a class="headerlink" href="#a-program-without-pages" title="Permanent link">&para;</a></h3>

@@ -1207,6 +1207,22 @@ The agent must run tests in the simulator and document the results, without clai
 </div>
 <details><summary>Creation prompt</summary><p class="demo-prompt">Not created from a prompt in LVGL MPY Studio: it comes from the examples of mpy-lvgl-boards, where it runs on the boards.</p></details>
 </article>
+<article class="demo-card" id="sysmon">
+<a href="sysmon/"><img class="demo-thumbnail" src="sysmon/thumbnail.png" alt="System Monitor initial page"></a>
+<h2>System Monitor</h2>
+<p>A dashboard of the computer it runs on: CPU, memory and disk, a CPU chart and the busiest processes, read from /proc and ps on a Linux PC. In the browser, as on a board, it shows what MicroPython itself knows: its heap, no CPU and no processes.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Application</dd>
+<dt>Resolution</dt><dd>1024 × 600</dd>
+<dt>Flash</dt><dd>13.0 KiB</dd>
+<dt>RAM</dt><dd>24.0 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="sysmon/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/lvgl-mpy-studio/tree/main/examples/sysmon">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">Build a system monitor for the STM32H7_CORE V1.3 (1024×600) as an LVGL MPY Studio project in `examples/sysmon`. On a Linux PC it shows three gauges, CPU, memory and disk, read from `/proc/stat`, `/proc/meminfo` and `os.statvfs(&quot;/&quot;)`; the distribution, kernel and uptime at the top; a chart of the CPU over the last 60 seconds, refreshed every second; and a Processes button that runs `ps` through `os.system` and lists the five busiest processes. Put the reading of the system in a module of its own. The same project must run on a board: where `sys.platform` is not `&quot;linux&quot;`, show the CPU as not available, MicroPython&#x27;s heap as the memory, the flash as the disk, and say that Processes needs the PC. Use only the font sizes of the board. Check it with simulate on Linux, and once more with the board&#x27;s path forced from a scenario, before you finish.</p><p>Not the original prompt: an AI agent built this demo through the MCP server in a conversation with the author. This prompt, written afterwards, asks for the same result. On a Linux PC the full dashboard runs in the simulator; the browser has no operating system, so the page shows the board&#x27;s view.</p></details>
+</article>
 </div>
 
 
