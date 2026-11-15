@@ -5793,9 +5793,5 @@
     "buzzer": {
       "audio": true
     }
-  },
-  "runTarget": {
-    "kind": "board",
-    "language": "micropython"
   }
 }

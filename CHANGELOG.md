@@ -6,6 +6,10 @@
 
 - Python 3.12 or later is required to run from the sources: with Python 3.11, PySide6 6.12.0 crashed in the self-test. The documentation states that the AppImage needs glibc 2.38 or later, that is Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer.
 
+### Fixed
+
+- The examples `eim-01`, `eim-01-480` and `weather` start in the simulator: they carried the board as run target from the session that uploaded them, so Start asked for a serial port, in the browser IDE too. Three labels of `eim-01` showed an empty box in place of an em dash, which the built-in font does not have. A test checks both for every example.
+
 ## 0.7.0 — 2026-11-14
 
 The Files panel, programs without pages in the simulator, in the browser and on the board, and contract 1 of the boards' display driver.

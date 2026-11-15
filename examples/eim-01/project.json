@@ -842,7 +842,7 @@
             "y": 496,
             "width": 600,
             "height": 22,
-            "text": "1 sample/s  •  bounded circular history  •  0—50 °C",
+            "text": "1 sample/s  •  bounded circular history  •  0-50 °C",
             "textColor": "#738BA1",
             "fontSize": 11,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
@@ -1733,7 +1733,7 @@
             "y": 486,
             "width": 456,
             "height": 20,
-            "text": "Range 0—50 °C  •  1 sample/s",
+            "text": "Range 0-50 °C  •  1 sample/s",
             "textColor": "#738BA1",
             "fontSize": 11,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
@@ -1868,7 +1868,7 @@
             "y": 486,
             "width": 456,
             "height": 20,
-            "text": "Range 0—3000 RPM  •  acquisition stays active",
+            "text": "Range 0-3000 RPM  •  acquisition stays active",
             "textColor": "#738BA1",
             "fontSize": 11,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
@@ -5793,9 +5793,5 @@
       "appRoot": "/flash/lms_apps",
       "mainPath": "/flash/main.py"
     }
-  },
-  "runTarget": {
-    "kind": "board",
-    "language": "micropython"
   }
 }
