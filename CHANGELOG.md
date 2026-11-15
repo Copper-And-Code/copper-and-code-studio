@@ -1,6 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.7.1 — 2026-11-15
+
+Fixes to the examples and to the C export, the System Monitor example, and documentation for the PC, Chromebooks and the IDE in the browser. The release also carries the two files the IDE in the browser downloads.
+
+### Added
+
+- **System Monitor** (`examples/sysmon`), the seventh demo of the website: CPU, memory and disk from `/proc`, a chart, and the busiest processes from `ps` through `os.system`; on a board or in the browser it shows what MicroPython knows there. Its gallery entry carries a prompt for an agent, written afterwards and marked as such.
+- **Documentation:** [files, commands and the network on the PC](docs/pc-programs.md), what MicroPython can do in the simulator and the executables; [running on a Chromebook](docs/chromebook.md); the IDE in the browser, work in progress, in the README and on the website; [the files for the IDE in the browser](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/packaging.md) in a release.
 
 ### Changed
 
