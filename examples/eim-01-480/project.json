@@ -102,7 +102,7 @@
             "height": 15,
             "text": "INDUSTRIAL MONITOR",
             "textColor": "#7F93A8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -122,7 +122,7 @@
             "height": 20,
             "text": "EIM-01",
             "textColor": "#B9C8D6",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -158,7 +158,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -194,7 +194,7 @@
             "height": 20,
             "text": "NO ALARMS",
             "textColor": "#9FB2C5",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -215,7 +215,7 @@
             "text": "SETUP",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -263,7 +263,7 @@
             "height": 16,
             "text": "TEMP",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -283,7 +283,7 @@
             "height": 30,
             "text": "24.6",
             "textColor": "#F3F7FA",
-            "fontSize": 22,
+            "fontSize": 24,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -303,7 +303,7 @@
             "height": 20,
             "text": "°C",
             "textColor": "#9DB1C3",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -339,7 +339,7 @@
             "height": 18,
             "text": "NORMAL",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -387,7 +387,7 @@
             "height": 16,
             "text": "HUMIDITY",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -407,7 +407,7 @@
             "height": 30,
             "text": "48",
             "textColor": "#F3F7FA",
-            "fontSize": 22,
+            "fontSize": 24,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -427,7 +427,7 @@
             "height": 20,
             "text": "%",
             "textColor": "#9DB1C3",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -463,7 +463,7 @@
             "height": 18,
             "text": "NORMAL",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -511,7 +511,7 @@
             "height": 16,
             "text": "FAN SPEED",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -531,7 +531,7 @@
             "height": 30,
             "text": "1450",
             "textColor": "#F3F7FA",
-            "fontSize": 22,
+            "fontSize": 24,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -551,7 +551,7 @@
             "height": 20,
             "text": "RPM",
             "textColor": "#9DB1C3",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -587,7 +587,7 @@
             "height": 18,
             "text": "T 1500",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -635,7 +635,7 @@
             "height": 16,
             "text": "POWER",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -655,7 +655,7 @@
             "height": 30,
             "text": "7.4",
             "textColor": "#F3F7FA",
-            "fontSize": 22,
+            "fontSize": 24,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -675,7 +675,7 @@
             "height": 20,
             "text": "W",
             "textColor": "#9DB1C3",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -711,7 +711,7 @@
             "height": 18,
             "text": "12.1 V",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -759,7 +759,7 @@
             "height": 18,
             "text": "TEMPERATURE / 60 s",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -779,7 +779,7 @@
             "height": 18,
             "text": "ALARM 40.0 °C",
             "textColor": "#FF7A72",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_RIGHT",
             "recolor": false
@@ -844,7 +844,7 @@
             "height": 16,
             "text": "Last event: simulator started",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -864,7 +864,7 @@
             "height": 16,
             "text": "1 Hz • 900 max",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_RIGHT",
             "recolor": false
@@ -912,7 +912,7 @@
             "height": 18,
             "text": "FAN CONTROL",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -932,7 +932,7 @@
             "height": 18,
             "text": "REQUESTED",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -952,7 +952,7 @@
             "height": 26,
             "text": "50 %",
             "textColor": "#45C8FF",
-            "fontSize": 18,
+            "fontSize": 16,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_RIGHT",
             "recolor": false
@@ -997,7 +997,7 @@
             "height": 18,
             "text": "CONFIRMED",
             "textColor": "#8EA4B8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1017,7 +1017,7 @@
             "height": 28,
             "text": "1450 RPM",
             "textColor": "#F3F7FA",
-            "fontSize": 18,
+            "fontSize": 16,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1037,7 +1037,7 @@
             "height": 18,
             "text": "TRACKING",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1058,7 +1058,7 @@
             "text": "AUTO",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -1079,7 +1079,7 @@
             "text": "STOP",
             "bgColor": "#70343B",
             "textColor": "#FFE8E8",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -1099,7 +1099,7 @@
             "height": 34,
             "text": "Request vs confirmed",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1147,7 +1147,7 @@
             "height": 16,
             "text": "SYSTEM NORMAL",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1167,7 +1167,7 @@
             "height": 16,
             "text": "DATA 0 s",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1188,7 +1188,7 @@
             "text": "Overview",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1209,7 +1209,7 @@
             "text": "Trends",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1230,7 +1230,7 @@
             "text": "Alarms",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1251,7 +1251,7 @@
             "text": "Diagn.",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1351,7 +1351,7 @@
             "height": 18,
             "text": "ECOSISTEMA",
             "textColor": "#F2F6FA",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1371,7 +1371,7 @@
             "height": 15,
             "text": "INDUSTRIAL MONITOR",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1427,7 +1427,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1448,7 +1448,7 @@
             "text": "SETUP",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -1496,7 +1496,7 @@
             "height": 18,
             "text": "WINDOW",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1517,7 +1517,7 @@
             "text": "1 m",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1538,7 +1538,7 @@
             "text": "5 m",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1559,7 +1559,7 @@
             "text": "15 m",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1579,7 +1579,7 @@
             "height": 28,
             "text": "LIVE 60",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1600,7 +1600,7 @@
             "text": "PAUSE",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1648,7 +1648,7 @@
             "height": 20,
             "text": "TEMPERATURE °C",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1715,7 +1715,7 @@
             "height": 18,
             "text": "MIN 24.6   MAX 24.6   AVG 24.6",
             "textColor": "#B9C8D6",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1735,7 +1735,7 @@
             "height": 13,
             "text": "0-50 °C • 1 sample/s",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1783,7 +1783,7 @@
             "height": 20,
             "text": "FAN SPEED RPM",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1850,7 +1850,7 @@
             "height": 18,
             "text": "MIN 1450   MAX 1450   AVG 1450",
             "textColor": "#B9C8D6",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1870,7 +1870,7 @@
             "height": 14,
             "text": "0-3000 RPM • acquisition remains active",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1918,7 +1918,7 @@
             "height": 16,
             "text": "SYSTEM NORMAL",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1938,7 +1938,7 @@
             "height": 16,
             "text": "DATA 0 s",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -1959,7 +1959,7 @@
             "text": "Overview",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -1980,7 +1980,7 @@
             "text": "Trends",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2001,7 +2001,7 @@
             "text": "Alarms",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2022,7 +2022,7 @@
             "text": "Diagn.",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2108,7 +2108,7 @@
             "height": 18,
             "text": "ECOSISTEMA",
             "textColor": "#F2F6FA",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2128,7 +2128,7 @@
             "height": 15,
             "text": "INDUSTRIAL MONITOR",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2184,7 +2184,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2205,7 +2205,7 @@
             "text": "SETUP",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -2253,7 +2253,7 @@
             "height": 20,
             "text": "0 ACTIVE • 0 ACK • 5 CLEARED",
             "textColor": "#B9C8D6",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2274,7 +2274,7 @@
             "text": "ACKNOWLEDGE ACTIVE",
             "bgColor": "#5B4625",
             "textColor": "#FFE9BC",
-            "fontSize": 8,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2294,7 +2294,7 @@
             "height": 14,
             "text": "CODE",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2314,7 +2314,7 @@
             "height": 14,
             "text": "LEVEL",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2334,7 +2334,7 @@
             "height": 14,
             "text": "STATE",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2354,7 +2354,7 @@
             "height": 14,
             "text": "TIME",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2374,7 +2374,7 @@
             "height": 14,
             "text": "DESCRIPTION",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_RIGHT",
             "recolor": false
@@ -2422,7 +2422,7 @@
             "height": 18,
             "text": "TEMP_HIGH",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2442,7 +2442,7 @@
             "height": 18,
             "text": "ALARM",
             "textColor": "#FF7A72",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2462,7 +2462,7 @@
             "height": 18,
             "text": "CLEARED",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2482,7 +2482,7 @@
             "height": 18,
             "text": "--:--:--",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2502,7 +2502,7 @@
             "height": 18,
             "text": "Temperature above threshold",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2523,7 +2523,7 @@
             "text": "ACK",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2571,7 +2571,7 @@
             "height": 18,
             "text": "FAN_STALL",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2591,7 +2591,7 @@
             "height": 18,
             "text": "ALARM",
             "textColor": "#FF7A72",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2611,7 +2611,7 @@
             "height": 18,
             "text": "CLEARED",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2631,7 +2631,7 @@
             "height": 18,
             "text": "--:--:--",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2651,7 +2651,7 @@
             "height": 18,
             "text": "RPM below expected for delay",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2672,7 +2672,7 @@
             "text": "ACK",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2720,7 +2720,7 @@
             "height": 18,
             "text": "SENSOR_LOST",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2740,7 +2740,7 @@
             "height": 18,
             "text": "ALARM",
             "textColor": "#FF7A72",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2760,7 +2760,7 @@
             "height": 18,
             "text": "CLEARED",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2780,7 +2780,7 @@
             "height": 18,
             "text": "--:--:--",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2800,7 +2800,7 @@
             "height": 18,
             "text": "Invalid or unavailable sensor data",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2821,7 +2821,7 @@
             "text": "ACK",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -2869,7 +2869,7 @@
             "height": 18,
             "text": "LINK_LOST",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2889,7 +2889,7 @@
             "height": 18,
             "text": "WARNING",
             "textColor": "#FFC857",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2909,7 +2909,7 @@
             "height": 18,
             "text": "CLEARED",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2929,7 +2929,7 @@
             "height": 18,
             "text": "--:--:--",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2949,7 +2949,7 @@
             "height": 18,
             "text": "Communication interrupted",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -2970,7 +2970,7 @@
             "text": "ACK",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3018,7 +3018,7 @@
             "height": 18,
             "text": "POWER_LOW",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3038,7 +3038,7 @@
             "height": 18,
             "text": "ALARM",
             "textColor": "#FF7A72",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3058,7 +3058,7 @@
             "height": 18,
             "text": "CLEARED",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3078,7 +3078,7 @@
             "height": 18,
             "text": "--:--:--",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3098,7 +3098,7 @@
             "height": 18,
             "text": "Supply below configured threshold",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3119,7 +3119,7 @@
             "text": "ACK",
             "bgColor": "#203347",
             "textColor": "#DCE7F0",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3139,7 +3139,7 @@
             "height": 12,
             "text": "ACK does not clear an active condition.",
             "textColor": "#8EA4B8",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3187,7 +3187,7 @@
             "height": 16,
             "text": "SYSTEM NORMAL",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3207,7 +3207,7 @@
             "height": 16,
             "text": "DATA 0 s",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3228,7 +3228,7 @@
             "text": "Overview",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3249,7 +3249,7 @@
             "text": "Trends",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3270,7 +3270,7 @@
             "text": "Alarms",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3291,7 +3291,7 @@
             "text": "Diagn.",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -3377,7 +3377,7 @@
             "height": 18,
             "text": "ECOSISTEMA",
             "textColor": "#F2F6FA",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3397,7 +3397,7 @@
             "height": 15,
             "text": "INDUSTRIAL MONITOR",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3453,7 +3453,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3474,7 +3474,7 @@
             "text": "SETUP",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -3522,7 +3522,7 @@
             "height": 22,
             "text": "SYSTEM",
             "textColor": "#DCE7F0",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3542,7 +3542,7 @@
             "height": 16,
             "text": "Board",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3562,7 +3562,7 @@
             "height": 20,
             "text": "ESP32-4848S040",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3582,7 +3582,7 @@
             "height": 16,
             "text": "Firmware",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3602,7 +3602,7 @@
             "height": 20,
             "text": "EIM-01 / v0.1",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3622,7 +3622,7 @@
             "height": 16,
             "text": "Data protocol",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3642,7 +3642,7 @@
             "height": 20,
             "text": "EIM-DATA / v1.0",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3662,7 +3662,7 @@
             "height": 16,
             "text": "Free memory",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3682,7 +3682,7 @@
             "height": 20,
             "text": "N/A",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3702,7 +3702,7 @@
             "height": 16,
             "text": "Uptime",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3722,7 +3722,7 @@
             "height": 20,
             "text": "00:00:00",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3742,7 +3742,7 @@
             "height": 16,
             "text": "UI refresh",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3762,7 +3762,7 @@
             "height": 20,
             "text": "1000 ms",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3782,7 +3782,7 @@
             "height": 16,
             "text": "UI update",
             "textColor": "#8EA4B8",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3802,7 +3802,7 @@
             "height": 16,
             "text": "N/A",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3822,7 +3822,7 @@
             "height": 12,
             "text": "LVGL render",
             "textColor": "#8EA4B8",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3842,7 +3842,7 @@
             "height": 12,
             "text": "N/A",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3862,7 +3862,7 @@
             "height": 24,
             "text": "N/A if unavailable",
             "textColor": "#738BA1",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3910,7 +3910,7 @@
             "height": 22,
             "text": "DATA LINK",
             "textColor": "#DCE7F0",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3930,7 +3930,7 @@
             "height": 16,
             "text": "Selected source",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3950,7 +3950,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3970,7 +3970,7 @@
             "height": 16,
             "text": "Connection",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -3990,7 +3990,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4010,7 +4010,7 @@
             "height": 16,
             "text": "Messages received",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4030,7 +4030,7 @@
             "height": 20,
             "text": "0",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4050,7 +4050,7 @@
             "height": 16,
             "text": "Messages discarded",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4070,7 +4070,7 @@
             "height": 20,
             "text": "0",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4090,7 +4090,7 @@
             "height": 16,
             "text": "Last sequence",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4110,7 +4110,7 @@
             "height": 20,
             "text": "N/A",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4130,7 +4130,7 @@
             "height": 16,
             "text": "Demo scenario",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4150,7 +4150,7 @@
             "height": 20,
             "text": "NORMAL",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4170,7 +4170,7 @@
             "height": 16,
             "text": "I/O timeout",
             "textColor": "#8EA4B8",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4190,7 +4190,7 @@
             "height": 16,
             "text": "2000 ms",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4210,7 +4210,7 @@
             "height": 12,
             "text": "History",
             "textColor": "#8EA4B8",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4230,7 +4230,7 @@
             "height": 12,
             "text": "900 / channel",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4250,7 +4250,7 @@
             "height": 0,
             "text": "",
             "textColor": "#738BA1",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4298,7 +4298,7 @@
             "height": 16,
             "text": "SYSTEM NORMAL",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4318,7 +4318,7 @@
             "height": 16,
             "text": "DATA 0 s",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4339,7 +4339,7 @@
             "text": "Overview",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -4360,7 +4360,7 @@
             "text": "Trends",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -4381,7 +4381,7 @@
             "text": "Alarms",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -4402,7 +4402,7 @@
             "text": "Diagn.",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -4488,7 +4488,7 @@
             "height": 18,
             "text": "ECOSISTEMA",
             "textColor": "#F2F6FA",
-            "fontSize": 12,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4508,7 +4508,7 @@
             "height": 15,
             "text": "INDUSTRIAL MONITOR",
             "textColor": "#7F93A8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4564,7 +4564,7 @@
             "height": 20,
             "text": "SIMULATION",
             "textColor": "#36D399",
-            "fontSize": 9,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4585,7 +4585,7 @@
             "text": "HOME",
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 5
           },
           "events": {
@@ -4633,7 +4633,7 @@
             "height": 20,
             "text": "DATA & UI",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4653,7 +4653,7 @@
             "height": 14,
             "text": "Data source",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4675,7 +4675,7 @@
             "selected": 0,
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "dir": "LV_DIR_BOTTOM",
             "symbol": "LV_SYMBOL_DOWN",
             "highlightSelected": true
@@ -4695,7 +4695,7 @@
             "height": 28,
             "text": "Simulator",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4734,7 +4734,7 @@
             "height": 14,
             "text": "UI refresh",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4756,7 +4756,7 @@
             "selected": 2,
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "dir": "LV_DIR_BOTTOM",
             "symbol": "LV_SYMBOL_DOWN",
             "highlightSelected": true
@@ -4776,7 +4776,7 @@
             "height": 14,
             "text": "TCP host",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4798,7 +4798,7 @@
             "placeholder": "Type here",
             "bgColor": "#0D1620",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "oneLine": true,
             "password": false,
             "maxLength": 40,
@@ -4819,7 +4819,7 @@
             "height": 14,
             "text": "TCP port",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4841,7 +4841,7 @@
             "placeholder": "Type here",
             "bgColor": "#0D1620",
             "textColor": "#E7F0F8",
-            "fontSize": 9,
+            "fontSize": 14,
             "oneLine": true,
             "password": false,
             "maxLength": 5,
@@ -4862,7 +4862,7 @@
             "height": 14,
             "text": "Serial port",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4884,7 +4884,7 @@
             "placeholder": "Type here",
             "bgColor": "#0D1620",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "oneLine": true,
             "password": false,
             "maxLength": 32,
@@ -4905,7 +4905,7 @@
             "height": 0,
             "text": "",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4925,7 +4925,7 @@
             "height": 0,
             "text": "",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -4946,7 +4946,7 @@
             "text": "APPLY",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -4994,7 +4994,7 @@
             "height": 20,
             "text": "ALARMS",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5014,7 +5014,7 @@
             "height": 28,
             "text": "Temp high (0.1 °C)",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5058,7 +5058,7 @@
             "height": 28,
             "text": "Power low (0.1 V)",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5102,7 +5102,7 @@
             "height": 28,
             "text": "Fan stall delay (s)",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5146,7 +5146,7 @@
             "height": 38,
             "text": "APPLY updates RAM only; no flash writes.",
             "textColor": "#738BA1",
-            "fontSize": 7,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5167,7 +5167,7 @@
             "text": "DEFAULTS",
             "bgColor": "#5B4625",
             "textColor": "#FFE9BC",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -5215,7 +5215,7 @@
             "height": 20,
             "text": "DEMO",
             "textColor": "#DCE7F0",
-            "fontSize": 11,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5235,7 +5235,7 @@
             "height": 14,
             "text": "Scenario",
             "textColor": "#8EA4B8",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5257,7 +5257,7 @@
             "selected": 0,
             "bgColor": "#203347",
             "textColor": "#E7F0F8",
-            "fontSize": 8,
+            "fontSize": 14,
             "dir": "LV_DIR_BOTTOM",
             "symbol": "LV_SYMBOL_DOWN",
             "highlightSelected": true
@@ -5280,7 +5280,7 @@
             "text": "RUN",
             "bgColor": "#24516A",
             "textColor": "#FFFFFF",
-            "fontSize": 10,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -5300,7 +5300,7 @@
             "height": 80,
             "text": "NORMAL: stable values and fan tracking.",
             "textColor": "#B9C8D6",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5320,7 +5320,7 @@
             "height": 54,
             "text": "Internal simulator only. No physical outputs.",
             "textColor": "#738BA1",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5340,7 +5340,7 @@
             "height": 60,
             "text": "Ready. Runtime only.",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5388,7 +5388,7 @@
             "height": 16,
             "text": "SYSTEM NORMAL",
             "textColor": "#36D399",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5408,7 +5408,7 @@
             "height": 16,
             "text": "DATA 0 s",
             "textColor": "#9FB2C5",
-            "fontSize": 8,
+            "fontSize": 14,
             "longMode": "LV_LABEL_LONG_MODE_WRAP",
             "textAlign": "LV_TEXT_ALIGN_CENTER",
             "recolor": false
@@ -5429,7 +5429,7 @@
             "text": "Overview",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -5450,7 +5450,7 @@
             "text": "Trends",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -5471,7 +5471,7 @@
             "text": "Alarms",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {
@@ -5492,7 +5492,7 @@
             "text": "Diagn.",
             "bgColor": "#203347",
             "textColor": "#C4D2DF",
-            "fontSize": 9,
+            "fontSize": 14,
             "radius": 4
           },
           "events": {

@@ -32,3 +32,11 @@ def test_example_texts_have_glyphs_of_the_builtin_font(path):
                 if isinstance(value, str):
                     missing += [f"{widget.get('name')}.{key}: {ch!r}" for ch in value if not builtin_glyph(ch)]
     assert not missing, missing
+
+
+@pytest.mark.parametrize("path", PROJECTS, ids=lambda p: p.parent.name)
+def test_example_draws_what_it_asks(path):
+    # Font sizes the board lacks fill the Output panel with warnings when the example starts.
+    from lvgl_mpy_studio.core.model import Project
+
+    assert Project.load(path).text_warnings() == []
