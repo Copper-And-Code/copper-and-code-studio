@@ -118,7 +118,9 @@ LVSIM_DIR ?= @LVSIM_DIR@
 CACHE_DIR ?= @CACHE_DIR@
 SDL2_DIR ?= @SDL2_DIR@
 CFLAGS ?= -O2
-CFLAGS += -std=c11 -Wall -Wextra -Werror -DLV_CPYTHON_BUILD -DLV_CONF_INCLUDE_SIMPLE -I"$(CONF_DIR)" -I"$(LVGL_DIR)" -I"$(LVSIM_DIR)"
+# -Werror applies to the generated code only: a newer compiler may warn about the LVGL sources.
+APP_WERROR ?= -Werror
+CFLAGS += -std=c11 -Wall -Wextra -DLV_CPYTHON_BUILD -DLV_CONF_INCLUDE_SIMPLE -I"$(CONF_DIR)" -I"$(LVGL_DIR)" -I"$(LVSIM_DIR)"
 
 ifeq ($(OS),Windows_NT)
 APP := app.exe
@@ -138,7 +140,7 @@ endif
 all: $(APP)
 
 $(APP): $(APP_SOURCES) ui.h ui_events.h $(CACHE_DIR)/liblvgl.a
-	$(CC) $(CFLAGS) -o $@ $(APP_SOURCES) $(CACHE_DIR)/liblvgl.a $(LDLIBS)
+	$(CC) $(CFLAGS) $(APP_WERROR) -o $@ $(APP_SOURCES) $(CACHE_DIR)/liblvgl.a $(LDLIBS)
 
 ifeq ($(OS),Windows_NT)
 $(CACHE_DIR)/liblvgl.a:

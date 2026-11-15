@@ -14,7 +14,8 @@ CC=${CC:-${CROSS_COMPILE}gcc}
 AR=${AR:-${CROSS_COMPILE}ar}
 mkdir -p "$OBJECTS"
 
-flags=(-O2 -std=c11 -Wall -Wextra -Werror -DLV_CPYTHON_BUILD -DLV_CONF_INCLUDE_SIMPLE -I"$CONF_DIR" -I"$LVGL_DIR")
+# No -Werror: these are the LVGL sources, and a newer compiler may warn about them.
+flags=(-O2 -std=c11 -Wall -Wextra -DLV_CPYTHON_BUILD -DLV_CONF_INCLUDE_SIMPLE -I"$CONF_DIR" -I"$LVGL_DIR")
 objects=()
 while IFS= read -r -d '' source; do
     relative=${source#"$LVGL_DIR/src/"}

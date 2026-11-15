@@ -9,6 +9,7 @@
 ### Fixed
 
 - The examples `eim-01`, `eim-01-480` and `weather` start in the simulator: they carried the board as run target from the session that uploaded them, so Start asked for a serial port, in the browser IDE too. Three labels of `eim-01` showed an empty box in place of an em dash, which the built-in font does not have. A test checks both for every example.
+- The C export builds with GCC of Ubuntu 26.04: its Makefile, and the script of the Windows C library, compiled the LVGL sources with `-Werror`, and that GCC warns about `lv_sprintf_builtin.c`. `-Werror` now applies to the generated code only.
 
 ## 0.7.0 — 2026-11-14
 
