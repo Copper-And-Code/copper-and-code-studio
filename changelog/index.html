@@ -1624,6 +1624,7 @@
 <h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The examples <code>eim-01</code>, <code>eim-01-480</code> and <code>weather</code> start in the simulator: they carried the board as run target from the session that uploaded them, so Start asked for a serial port, in the browser IDE too. Three labels of <code>eim-01</code> showed an empty box in place of an em dash, which the built-in font does not have. A test checks both for every example.</li>
+<li>The C export builds with GCC of Ubuntu 26.04: its Makefile, and the script of the Windows C library, compiled the LVGL sources with <code>-Werror</code>, and that GCC warns about <code>lv_sprintf_builtin.c</code>. <code>-Werror</code> now applies to the generated code only.</li>
 </ul>
 <h2 id="070-2026-11-14">0.7.0 — 2026-11-14<a class="headerlink" href="#070-2026-11-14" title="Permanent link">&para;</a></h2>
 <p>The Files panel, programs without pages in the simulator, in the browser and on the board, and contract 1 of the boards' display driver.</p>
