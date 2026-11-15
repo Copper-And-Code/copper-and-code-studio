@@ -1,0 +1,100 @@
+# The showreel of Snake: python -m tools.showreel examples/snake
+[video]
+title = "Snake"
+subtitle = "A game in MicroPython and LVGL, built in LVGL MPY Studio"
+gif = { from = "start", seconds = 10 }
+poster = "wait"
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project, 1024×600"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["background", "score_label", "field"]
+balloon = "Drag widgets from the Toolbox onto the page"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "main"
+per_frame = 1
+balloon = "A timer and a buzzer are components: no size, still in the project"
+anchor = "project"
+
+[[step]]
+do = "code"
+handler = "timer1_tick"
+balloon = "The timer's handler moves the snake at every tick"
+anchor = "code.editor"
+
+[[step]]
+do = "start"
+balloon = "Start: the real MicroPython and LVGL, compiled for the PC"
+anchor = "simulator"
+
+[[step]]
+do = "tap"
+x = 512
+y = 300
+balloon = "Touch to play"
+anchor = "simulator"
+
+[[step]]
+do = "wait"
+seconds = 0.8
+
+# Round and round: going right touch below the head, going down touch left of it,
+# going left touch above, going up touch right.
+[[step]]
+do = "tap"
+x = 512
+y = 590
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "tap"
+x = 10
+y = 330
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "tap"
+x = 512
+y = 70
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "tap"
+x = 1010
+y = 330
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "tap"
+x = 512
+y = 590
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "tap"
+x = 10
+y = 330
+hold = 0.6
+speed = 0.3
+
+[[step]]
+do = "wait"
+seconds = 1.5
+
+[[step]]
+do = "end"

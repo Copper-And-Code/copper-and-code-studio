@@ -10,7 +10,9 @@ The website has the documentation; the demos are games and a shell made with LVG
 
 A desktop IDE for designing [LVGL](https://lvgl.io) 9.5 interfaces for MicroPython boards: you draw the pages, write the handlers in Python, run the application in a simulator that uses the real LVGL, and upload it to a board. An AI agent can do the same through an MCP server.
 
-![The IDE with an industrial monitor running in its simulator, and the Files panel](docs/images/ide-simulator.png)
+[![The IDE building an industrial monitor: widgets dragged onto the page, a property changed, a handler typed, then the app touched in the simulator](https://copper-and-code.github.io/lvgl-mpy-studio/media/showreel/eim-01-short.gif)](https://copper-and-code.github.io/lvgl-mpy-studio/videos/)
+
+A scripted replay of the real IDE, sped up: [more videos](https://copper-and-code.github.io/lvgl-mpy-studio/videos/).
 
 > **Status: 0.7.1 ([download](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest)).** The automated tests are many and human testing is scarce: much has been written and checked by machine, and little has been used by people. [What is verified, and how](docs/status.md) says it area by area.
 
@@ -38,6 +40,8 @@ A desktop IDE for designing [LVGL](https://lvgl.io) 9.5 interfaces for MicroPyth
 - **The whole IDE in the browser** (work in progress, experimental but already usable): [open it](https://copper-and-code.github.io/lvgl-mpy-studio-web/), nothing to install. It is built in [a repository of its own](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) that reuses the core of this one through Pyodide.
 - **More than a preview on the PC.** In the simulator and in the executables MicroPython is a program of the operating system: an LVGL application can run commands, read and write any file, open sockets, start threads and call C libraries through `ffi`. A kiosk, a test bench or a dashboard on a Linux PC, in the same MicroPython as the board ([how](docs/pc-programs.md)).
 - **Testing.** Visual tests of a project on a simulated clock, and a [self-test](docs/manual.md#self-test) in which the IDE drives itself with mouse and keyboard.
+
+![The IDE with an industrial monitor running in its simulator, and the Files panel](docs/images/ide-simulator.png)
 
 ## Try it
 

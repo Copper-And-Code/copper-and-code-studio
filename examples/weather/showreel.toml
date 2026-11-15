@@ -1,0 +1,81 @@
+# The showreel of Weather: python -m tools.showreel examples/weather
+[video]
+title = "Weather"
+subtitle = "Built and run in LVGL MPY Studio"
+gif = { from = "start", seconds = 12 }
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project for an ESP32 board with a 480×480 screen"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["background", "city", "settings_button"]
+balloon = "Drag widgets from the Toolbox onto the page"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "main"
+per_frame = 2
+balloon = "…a five-day forecast, with images for the weather"
+anchor = "canvas"
+
+[[step]]
+do = "code"
+handler = "refresh_clicked"
+chars_per_frame = 2
+balloon = "The Refresh button shows the next city"
+anchor = "code.editor"
+
+[[step]]
+do = "fill"
+pages = "rest"
+per_frame = 1
+balloon = "A settings page, with a switch for °F"
+anchor = "canvas"
+
+[[step]]
+do = "page"
+name = "main"
+
+[[step]]
+do = "start"
+balloon = "Start: the real MicroPython and LVGL, compiled for the PC"
+anchor = "simulator"
+
+[[step]]
+do = "tap"
+widget = "refresh"
+balloon = "Touch input goes to the running app"
+anchor = "simulator"
+hold = 1.2
+
+[[step]]
+do = "tap"
+widget = "refresh"
+hold = 1.2
+
+[[step]]
+do = "tap"
+widget = "settings_button"
+hold = 1
+
+[[step]]
+do = "tap"
+widget = "units"
+balloon = "The same code runs on the board"
+anchor = "simulator"
+hold = 1
+
+[[step]]
+do = "tap"
+widget = "back"
+hold = 2
+
+[[step]]
+do = "end"

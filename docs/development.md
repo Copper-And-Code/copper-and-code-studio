@@ -90,6 +90,10 @@ The suite covers generation, fuzzing, the runtime, the GUI, the protocol, all 30
 
 The self-test opens the real IDE and drives it through nine scenarios; see the [manual](manual.md#self-test).
 
+## Videos
+
+`tools/showreel` makes the videos of the website: it drives the real IDE offscreen through a storyboard and encodes the frames with `ffmpeg`. See `tools/showreel/README.md`.
+
 ## Packages
 
 [Building the packages](packaging.md) has the commands, what each runtime is for, and how to check a package before giving it out.

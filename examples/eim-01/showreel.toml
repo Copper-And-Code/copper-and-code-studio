@@ -1,0 +1,95 @@
+# The showreel of EIM-01: python -m tools.showreel examples/eim-01
+[video]
+title = "EIM-01 industrial monitor"
+subtitle = "Built and run in LVGL MPY Studio"
+gif = { from = "start", seconds = 12 }
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project for an STM32H7 board, 1024×600"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["ov_bg", "ov_header", "ov_brand"]
+balloon = "Drag widgets from the Toolbox onto the page"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "Overview"
+per_frame = 3
+balloon = "…and the rest of the overview: 57 widgets"
+anchor = "canvas"
+
+[[step]]
+do = "set"
+widget = "ov_brand"
+prop = "text"
+value = "MY PLANT"
+balloon = "Every LVGL property is in the Properties panel"
+anchor = "properties.text"
+
+[[step]]
+do = "code"
+handler = "ov_speed_slider_value_changed"
+chars_per_frame = 2
+balloon = "Events tab, double click: a handler, in plain MicroPython"
+anchor = "code.editor"
+
+[[step]]
+do = "code"
+module = true
+lines = [489, 498]
+chars_per_frame = 4
+balloon = "The general code holds the logic of the app"
+anchor = "code.editor"
+
+[[step]]
+do = "fill"
+pages = "rest"
+per_frame = 8
+balloon = "Four more pages: trends, alarms, diagnostics, settings"
+anchor = "project"
+
+[[step]]
+do = "page"
+name = "Overview"
+
+[[step]]
+do = "start"
+balloon = "Start: the real MicroPython and LVGL, compiled for the PC"
+anchor = "simulator"
+
+[[step]]
+do = "drag"
+x = 844
+y = 295
+x_to = 960
+y_to = 295
+ms = 900
+balloon = "Touch input goes to the running app"
+anchor = "simulator"
+
+[[step]]
+do = "tap"
+widget = "ov_mode"
+hold = 1.5
+
+[[step]]
+do = "tap"
+widget = "ov_nav_trends"
+balloon = "The same code runs on the board"
+anchor = "simulator"
+hold = 2
+
+[[step]]
+do = "tap"
+widget = "ov_nav_alarms"
+hold = 2
+
+[[step]]
+do = "end"

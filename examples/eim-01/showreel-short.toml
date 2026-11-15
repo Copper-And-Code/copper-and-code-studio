@@ -1,0 +1,72 @@
+# A short cut for the README GIF:
+# python -m tools.showreel examples/eim-01 --storyboard examples/eim-01/showreel-short.toml --name eim-01-short
+[video]
+title = "EIM-01 industrial monitor"
+subtitle = "Built and run in LVGL MPY Studio"
+gif = { from = 0, fps = 10, width = 800 }
+
+[[step]]
+do = "title"
+seconds = 1.5
+
+[[step]]
+do = "create"
+hold = 0.2
+
+[[step]]
+do = "add"
+widgets = ["ov_bg", "ov_header"]
+seconds_each = 0.2
+balloon = "Drag widgets onto the page"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "Overview"
+per_frame = 6
+hold = 0.3
+
+[[step]]
+do = "set"
+widget = "ov_brand"
+prop = "text"
+value = "MY PLANT"
+balloon = "Set any LVGL property"
+anchor = "properties.text"
+hold = 0.3
+
+[[step]]
+do = "code"
+handler = "ov_speed_slider_value_changed"
+chars_per_frame = 4
+balloon = "Write handlers in MicroPython"
+anchor = "code.editor"
+hold = 0.3
+
+[[step]]
+do = "page"
+name = "Overview"
+hold = 0.1
+
+[[step]]
+do = "start"
+balloon = "Run it: real MicroPython and LVGL"
+anchor = "simulator"
+
+[[step]]
+do = "drag"
+x = 844
+y = 295
+x_to = 960
+y_to = 295
+ms = 700
+hold = 0.5
+
+[[step]]
+do = "tap"
+widget = "ov_nav_trends"
+hold = 1.5
+
+[[step]]
+do = "end"
+seconds = 2

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **Videos** of the IDE building and running `eim-01`, `weather` and `snake`, on a new page of the website, and a short one at the top of the README. They are made by `tools/showreel`, which drives the real IDE offscreen through a storyboard (`examples/<name>/showreel.toml`) with comic-style balloons; they say they are a scripted replay, sped up.
+
+### Fixed
+
+- `eim-01` and `eim-01-480` asked for font sizes their boards do not have (193 and 194 labels), so the Output panel filled with warnings at each Start. They now ask for the size that was drawn anyway, so they look the same; a test checks that no example has such warnings. The visual baselines of `eim-01` were still those before the em dash fix of 0.7.1, and are updated.
+
 ## 0.7.1 — 2026-11-15
 
 Fixes to the examples and to the C export, the System Monitor example, and documentation for the PC, Chromebooks and the IDE in the browser. The release also carries the two files the IDE in the browser downloads.

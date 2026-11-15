@@ -30,6 +30,17 @@ FIELDS = {"id", "name", "description", "kind", "page", "prompt", "prompt_note", 
 PROGRAM_FIELDS = FIELDS | {"entry"}  # a program without pages: the file to run, in the same folder
 
 
+# The videos of the Videos page, made by tools/showreel into build/showreel/<id>/; the README shows README_GIF.
+VIDEOS = (
+    ("eim-01", "EIM-01 industrial monitor", "Five pages and 256 widgets on an STM32H7 board at 1024×600: a property changed, a handler written from the Events tab, the general code, then the app touched in the simulator."),
+    ("weather", "Weather", "A forecast for a 480×480 ESP32 screen, with images, a Python module and a settings page; in the simulator the cities change and the switch moves to °F."),
+    ("snake", "Snake", "A game: a timer moves the snake and touches turn it. The run is played with taps on the simulator screen."),
+)
+README_GIF = ("eim-01-short", "eim-01-short.gif")
+SHOWREEL = "build/showreel"
+MEDIA = "media/showreel"
+
+
 class ProgramDemo:
     """What the gallery needs of a program without pages: its name and the size of its screen."""
 
@@ -241,7 +252,34 @@ def program_demo_page(metadata, program):
 '''
 
 
-def build_documentation(root, output, gallery_markdown):
+def showreel_files(root):
+    """The video files of the Videos page, (source, name in the site), or the list of what is missing."""
+    files, missing = [], []
+    for identifier, _title, _text in VIDEOS:
+        for name in (f"{identifier}.mp4", f"{identifier}.webm", f"{identifier}-poster.png"):
+            files.append((root / SHOWREEL / identifier / name, name))
+    files.append((root / SHOWREEL / README_GIF[0] / README_GIF[1], README_GIF[1]))
+    missing = [str(source.relative_to(root)) for source, _name in files if not source.is_file()]
+    return files, missing
+
+
+def videos_page(demo_ids):
+    parts = ["# Videos\n",
+             "Short videos of the IDE building an example and running it. Each is a scripted replay: "
+             "[a tool of the repository](https://github.com/Copper-And-Code/lvgl-mpy-studio/tree/main/tools/showreel) "
+             "drives the real IDE, adds the widgets, types the code and plays touches in the simulator. "
+             "The design part is sped up; the run is in real time. They are not recordings of a person at work.\n"]
+    for identifier, title, text in VIDEOS:
+        demo = f" [Try it in your browser](../demos/{identifier}/)." if identifier in demo_ids else ""
+        parts.append(f"## {title}\n\n"
+                     f'<video controls preload="none" playsinline width="100%" poster="../{MEDIA}/{identifier}-poster.png">\n'
+                     f'<source src="../{MEDIA}/{identifier}.webm" type="video/webm">\n'
+                     f'<source src="../{MEDIA}/{identifier}.mp4" type="video/mp4">\n'
+                     f"</video>\n\n{text}{demo}\n")
+    return "\n".join(parts)
+
+
+def build_documentation(root, output, gallery_markdown, videos=None):
     import yaml
 
     with tempfile.TemporaryDirectory(prefix="site-docs-", dir=root / "build") as temporary:
@@ -251,6 +289,14 @@ def build_documentation(root, output, gallery_markdown):
         shutil.copy2(root / "CHANGELOG.md", temporary / "CHANGELOG.md")
         (docs / "demos.md").write_text(gallery_markdown, encoding="utf-8", newline="\n")
         config = yaml.safe_load((root / "mkdocs.yml").read_text(encoding="utf-8"))
+        if videos:
+            markdown, files = videos
+            (docs / "videos.md").write_text(markdown, encoding="utf-8", newline="\n")
+            (docs / MEDIA).mkdir(parents=True)
+            for source, name in files:
+                shutil.copy2(source, docs / MEDIA / name)
+        else:
+            config["nav"] = [entry for entry in config["nav"] if entry != {"Videos": "videos.md"}]
         config["docs_dir"] = str(docs)
         config["site_dir"] = str(output)
         config_path = temporary / "mkdocs.yml"
@@ -351,7 +397,11 @@ def main():
     for name in RUNTIME_FILES:
         shutil.copy2(runtime / name, runtime_target)
     shutil.copytree(THIRD_PARTY_LICENSES, staging / "demos/licenses")
-    build_documentation(root, output, gallery(built))
+    files, missing = showreel_files(root)
+    if missing:
+        warnings.append("Videos page left out, missing: " + ", ".join(missing) + "; make them with python -m tools.showreel (see tools/showreel/README.md)")
+    videos = None if missing else (videos_page({metadata["id"] for metadata, _project, _budget in built}), files)
+    build_documentation(root, output, gallery(built), videos)
     shutil.copytree(staging / "demos", output / "demos", dirs_exist_ok=True)
     (output / ".nojekyll").write_bytes(b"")
     check_internal_links(output)
