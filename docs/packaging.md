@@ -160,11 +160,29 @@ What to look at before giving a package out:
 
 Record in [the status page](status.md) what was checked and on which system.
 
+## The files for the IDE in the browser
+
+The [IDE in the browser](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) holds this
+repository as a submodule at a tag, and downloads two files from the release of that tag instead
+of building Emscripten itself:
+
+| File | Contents | Made by |
+|---|---|---|
+| `lms-web-runtime-<tag>.zip` | `micropython.mjs`, `micropython.wasm` and the licence texts | `runtime/build_web.sh` here, then `node scripts/pack-runtime.mjs runtime <this repository>/runtime/out-web` in the web repository |
+| `lms-mpy-cross-<tag>.zip` | `mpy-cross.mjs`, `mpy-cross.wasm` and the licence text of MicroPython | `scripts/build-mpy-cross-web.sh <micropython checkout> <emsdk> <folder>` and then `pack-runtime.mjs mpyCross <folder>`, in the web repository |
+
+`pack-runtime.mjs` needs the web repository's submodule checked out at the new tag, writes the
+zip into its `.cache/runtime/`, the same byte for byte on every run, and records its sha256 in
+`runtime.lock.json`. Attach both zips to the release, with their lines in `SHA256SUMS.txt`,
+**before** the web repository pushes the submodule at the new tag: its CI downloads them and
+checks them against the lock. Their history and the reasons are in that repository's
+`docs/upstream-requests.md`, requests 1 and 2.
+
 ## What is not done
 
 - Binaries are not signed: Windows SmartScreen asks for **More info → Run anyway**.
-- Releases are made by hand: no workflow builds or uploads the packages. The two files and their
-  checksums are attached to a GitHub release with `gh release create`.
+- Releases are made by hand: no workflow builds or uploads the packages. The two packages, the two
+  files for the browser and the checksums are attached to a GitHub release with `gh release create`.
 - The AppImage is built on the author's Ubuntu 24.04 and needs glibc 2.38 or later: it does not start on
   Ubuntu 22.04 or Debian 12. The self-test of the 0.7.0 package passed on Ubuntu 24.04, Debian 13, Fedora 43
   and Arch Linux, in containers without a display.
