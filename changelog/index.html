@@ -945,6 +945,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1013,7 +1024,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed" class="md-nav__link">
+  <a href="#fixed_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1102,7 +1113,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_1" class="md-nav__link">
+  <a href="#fixed_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1152,7 +1163,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_2" class="md-nav__link">
+  <a href="#fixed_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1202,7 +1213,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_3" class="md-nav__link">
+  <a href="#fixed_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1293,6 +1304,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1361,7 +1383,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed" class="md-nav__link">
+  <a href="#fixed_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1450,7 +1472,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_1" class="md-nav__link">
+  <a href="#fixed_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1500,7 +1522,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_2" class="md-nav__link">
+  <a href="#fixed_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1550,7 +1572,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixed_3" class="md-nav__link">
+  <a href="#fixed_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
@@ -1599,6 +1621,10 @@
 <ul>
 <li>Python 3.12 or later is required to run from the sources: with Python 3.11, PySide6 6.12.0 crashed in the self-test. The documentation states that the AppImage needs glibc 2.38 or later, that is Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer.</li>
 </ul>
+<h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The examples <code>eim-01</code>, <code>eim-01-480</code> and <code>weather</code> start in the simulator: they carried the board as run target from the session that uploaded them, so Start asked for a serial port, in the browser IDE too. Three labels of <code>eim-01</code> showed an empty box in place of an em dash, which the built-in font does not have. A test checks both for every example.</li>
+</ul>
 <h2 id="070-2026-11-14">0.7.0 — 2026-11-14<a class="headerlink" href="#070-2026-11-14" title="Permanent link">&para;</a></h2>
 <p>The Files panel, programs without pages in the simulator, in the browser and on the board, and contract 1 of the boards' display driver.</p>
 <h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
@@ -1633,7 +1659,7 @@
 <li><strong>One engine, four places it runs</strong>, in <code>docs/stack.md</code>: the board, the simulator, the executables and the browser version run the same compiled MicroPython and LVGL, so upstream fixes reach all of them.</li>
 <li><strong><code>docs/packaging.md</code></strong>: how to build the packages, in which order, and what to check before handing one out.</li>
 </ul>
-<h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
+<h3 id="fixed_1">Fixed<a class="headerlink" href="#fixed_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>The self-test accepts a relative <code>--output</code> folder: the projects are saved through the file dialog, which read a relative path from its own folder.</li>
 <li>The page of a game exported for the browser declares English as its language.</li>
@@ -1668,7 +1694,7 @@
 <li><strong>Upload progress.</strong> Sending an application to a board opens a small window with a bar that follows the bytes sent, the file being written, the time elapsed and an estimate of the time left, and a Cancel button. On boards reached through mpremote the bar moves inside a file by estimate, from the speed of the last upload to that board. It appears when the upload lasts more than a moment. Until now the only sign was a file count in the status bar, which stood still for most of a long upload.</li>
 <li>Changing the resolution, or the board of the project, fits the page to the window again, as <strong>View → Fit to Window</strong> does. Each page is fitted when it is shown; other changes keep the zoom.</li>
 </ul>
-<h3 id="fixed_1">Fixed<a class="headerlink" href="#fixed_1" title="Permanent link">&para;</a></h3>
+<h3 id="fixed_2">Fixed<a class="headerlink" href="#fixed_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>A widget chosen with a double click in the toolbox was placed twice in a project with several pages: once where you clicked, and again at the first click on another page. Found by the self-test.</li>
 <li>On Windows, started from <code>LVGL_MPY_STUDIO.exe</code>, a console window flashed four times at almost every operation: the IDE compiles four files with <code>mpy-cross</code> and each run opened its own window. The compiler, the C toolchain and <code>mpremote</code> are now started without a window. It had been so since the first Windows package.</li>
@@ -1706,7 +1732,7 @@
 <li>The IDE package is 4.7 MB smaller: it ships only the names the code editor completes instead of the whole binding API.</li>
 <li>The Simulator panel no longer has an unused path for running the C build.</li>
 </ul>
-<h3 id="fixed_2">Fixed<a class="headerlink" href="#fixed_2" title="Permanent link">&para;</a></h3>
+<h3 id="fixed_3">Fixed<a class="headerlink" href="#fixed_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Choosing a picture that is still above 512 kB once converted to PNG raised an error inside the undo step instead of showing a message.</li>
 <li>The free space of an STM32H7 board was reported as zero: it was read from the root instead of the filesystem apps are written to.</li>
@@ -1762,7 +1788,7 @@
 <li>The resolution menu lists the common sizes 240×240, 480×480, 1024×600 and 1024×1024, even when a board has the same size.</li>
 <li>Project settings list the common sizes and those of the known boards.</li>
 </ul>
-<h3 id="fixed_3">Fixed<a class="headerlink" href="#fixed_3" title="Permanent link">&para;</a></h3>
+<h3 id="fixed_4">Fixed<a class="headerlink" href="#fixed_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Runtime errors in the simulator did not appear in the Errors panel. The simulator prints tracebacks on standard output, while the IDE read only standard error. This also affected handler errors in 0.3.</li>
 <li><strong>Custom…</strong> in the resolution menu raised an error and did nothing.</li>
