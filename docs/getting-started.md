@@ -1,5 +1,8 @@
 # Getting started
 
+!!! tip "Try it without installing"
+    [The IDE in the browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/) opens with nothing to install. It is a work in progress, experimental but already usable: projects are kept in the browser, and a board is reached over Web Serial, which Chrome and Edge have and Firefox and Safari do not. The rest of this page is about the IDE on the PC.
+
 ## Install from the sources
 
 On Linux you need Python 3.12 or later (with Python 3.11 PySide6 6.12.0 crashes), a C compiler, CMake, `pkg-config`, SDL2 development headers, and `xvfb` for headless simulator windows. The first runtime build also downloads the pinned SDL2 sources.

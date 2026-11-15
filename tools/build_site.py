@@ -160,7 +160,7 @@ def gallery(demos):
 </div>
 <details><summary>Creation prompt</summary><p class="demo-prompt">{html.escape(prompt)}</p>{note}</details>
 </article>''')
-    return "# Browser demos\n\nThese applications and games run locally in your browser on one shared WebAssembly runtime. The flash and RAM figures are measured by the IDE; RAM is a 64-bit simulator estimate and overestimates 32-bit boards.\n\n" + '<div class="demo-grid">\n' + "\n".join(cards) + "\n</div>\n"
+    return "# Browser demos\n\nThese applications and games run locally in your browser on one shared WebAssembly runtime. The flash and RAM figures are measured by the IDE; RAM is a 64-bit simulator estimate and overestimates 32-bit boards.\n\nThe demos made of pages are projects in the `examples/` folder of the repository: open their `project.json` in the IDE on the PC, or choose them from **File → Open Example** in [the IDE in the browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/), which is experimental.\n\n" + '<div class="demo-grid">\n' + "\n".join(cards) + "\n</div>\n"
 
 
 def demo_page(metadata, project):
