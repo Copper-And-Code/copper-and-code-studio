@@ -87,3 +87,21 @@ def test_tone_markers_become_sound_and_never_reach_output(qtbot, monkeypatch):
     panel._stdout()
     assert tones == [(440, 30), (880, 0)]
     assert "".join(output) == "prima\ndopo\nfine\n"
+
+
+def test_a_character_cut_between_two_reads_arrives_whole(qtbot, monkeypatch):
+    panel = SimPanel()
+    qtbot.addWidget(panel)
+    output = []
+    panel.output.connect(lambda text, _error: output.append(text))
+    text = "città ┌─┐\n".encode("utf-8")
+    cut = text.index("┌".encode("utf-8")) + 1          # inside the three bytes of the corner
+    fake_stdout(panel, monkeypatch, text[:4], text[4:cut], text[cut:])
+    for _ in range(3):
+        panel._stdout()
+    assert "".join(output) == "città ┌─┐\n"
+    errors = [b"\xc3", b"\xa8\n"]
+    monkeypatch.setattr(panel.process, "readAllStandardError", lambda: errors.pop(0))
+    panel._stderr()
+    panel._stderr()
+    assert "".join(output).endswith("è\n")

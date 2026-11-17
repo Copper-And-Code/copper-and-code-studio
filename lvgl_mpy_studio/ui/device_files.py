@@ -24,9 +24,12 @@ def folder_items(folder):
 
 
 def run_line(text):
-    """What to type at the board's prompt: a file of the board runs from its folder, as __main__; anything else is code."""
+    """What to type at the board's prompt: a file of the board runs from its folder, as __main__; anything else is code.
+
+    A line that starts with / is never Python, so it is a path even with spaces or parentheses in it.
+    """
     text = text.strip()
-    if text.endswith(".py") and "(" not in text and " " not in text:
+    if text.endswith(".py") and (text.startswith("/") or ("(" not in text and " " not in text)):
         path = text if text.startswith("/") else "/" + text
         folder, name = path.rsplit("/", 1)
         return f"import os; os.chdir({folder or '/'!r}); exec(open({name!r}).read(), {{'__name__': '__main__', '__file__': {path!r}}})"

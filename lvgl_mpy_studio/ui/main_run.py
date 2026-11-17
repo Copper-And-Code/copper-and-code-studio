@@ -83,8 +83,11 @@ class RunMixin:
         path = self.settings.value("simulator/program", "")
         return Path(path) if path else None
 
-    def run_program(self, entry=None):
-        """Run a .py file and its folder in the simulator as on a board: no pages, a terminal for the keys."""
+    def run_program(self, entry=None, upload=True):
+        """Run a .py file and its folder in the simulator as on a board: no pages, a terminal for the keys.
+
+        upload False keeps the flash as the program left it: machine.reset() on a board does not copy the files again.
+        """
         if IS_WINDOWS:
             self.append_error(tr("Programs without pages run only in the Linux simulator for now."))
             return False
@@ -98,12 +101,12 @@ class RunMixin:
                 return False
             entry = path
         entry = Path(entry)
-        if not self.save_files_in(entry.parent):
+        if upload and not self.save_files_in(entry.parent):
             return False
         self.files_panel.set_folder(entry.parent)
         board, width, height = program_board()
         try:
-            prepared = prepare_program(entry, width, height, board)
+            prepared = prepare_program(entry, width, height, board, upload=upload)
         except (OSError, ValueError) as exc:
             self.append_error(str(exc))
             return False
@@ -122,7 +125,7 @@ class RunMixin:
     def _program_restart(self):
         """machine.reset() in the program: start it again with its flash as it is."""
         if self._program_entry:
-            self.run_program(self._program_entry)
+            self.run_program(self._program_entry, upload=False)
 
     def open_program_flash(self):
         last = self._last_program()

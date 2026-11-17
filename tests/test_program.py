@@ -49,6 +49,9 @@ def test_prepare_copies_the_folder_like_an_upload(config):
     assert (flash / "written-by-the-program.txt").read_text() == "keep"  # a board keeps its files
     assert (flash / "main.py").read_text() == "print('changed')\n"
     assert flash == program.flash_dir(folder)
+    write(flash / "main.py", "print('rewritten by the program')\n")
+    program.prepare_program(entry, 480, 320, upload=False)   # machine.reset(): the flash as the program left it
+    assert (flash / "main.py").read_text() == "print('rewritten by the program')\n"
     program.reset_flash(folder)
     assert not flash.exists()
 
@@ -63,6 +66,20 @@ def test_prepare_refuses_what_is_not_a_program(config, monkeypatch):
     monkeypatch.setattr(program, "MAX_BYTES", 10)
     with pytest.raises(ValueError, match="MB"):
         program.prepare_program(write(config / "big" / "main.py", "x" * 100), 480, 320)
+
+
+def test_a_program_folder_is_walked_without_what_it_skips_and_stops_when_too_large(config, monkeypatch):
+    folder = config / "prog"
+    write(folder / "main.py", "")
+    write(folder / "lib" / "b.py", "")
+    write(folder / "lib" / "a.py", "")
+    write(folder / ".cache" / "huge.bin", "x" * 1000)
+    write(folder / "node_modules" / "x.js", "")
+    write(folder / ".hidden.py", "")
+    assert [relative.as_posix() for _path, relative in program.program_files(folder)] == ["lib/a.py", "lib/b.py", "main.py"]
+    monkeypatch.setattr(program, "MAX_FILES", 2)
+    with pytest.raises(ValueError, match="more than 2 files"):
+        program.program_files(folder)
 
 
 def test_sandbox_paths_never_leave_the_root():
@@ -236,10 +253,12 @@ print("ready")
 while True:
     c = sys.stdin.read(1)
     if c == "r":
+        open("state.txt", "w").write("after the reset")
         machine.reset()
     label.set_text("key " + c)
     print("key", c)
 """)
+    write(config / "prog" / "state.txt", "as shipped")
     window = MainWindow()
     qtbot.addWidget(window)
     started = []
@@ -255,6 +274,7 @@ while True:
     window.sim_panel.write_keys(b"r")
     qtbot.waitUntil(lambda: len(started) == 2, timeout=10000)  # machine.reset() started it again
     qtbot.waitUntil(lambda: terminal.text().count("ready") >= 2, timeout=10000)
+    assert (program.flash_dir(entry.parent) / "state.txt").read_text() == "after the reset"   # a board keeps what it wrote
     window.sim_panel.shutdown()
     assert Path(window.settings.value("simulator/program")) == entry
     window.document.undo_stack.setClean()

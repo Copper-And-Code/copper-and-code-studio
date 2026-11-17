@@ -6,6 +6,7 @@ runtime/program. Projects with pages never come here.
 """
 
 import hashlib
+import os
 from pathlib import Path
 import shutil
 
@@ -18,6 +19,7 @@ PROGRAM_ENTRY = ["-X", f"heapsize={HEAP}", "-c", "import lms_program_boot"]
 RESET_EXIT_CODE = 75  # machine.reset() in the simulator: see runtime/program/machine.py
 SKIPPED = {"__pycache__", ".git", ".hg", ".svn", ".venv", "node_modules"}
 MAX_BYTES = 64 * 1024 * 1024  # a folder larger than this is not a program for a board
+MAX_FILES = 2000  # nor one with more files: the home folder, chosen by mistake, is stopped here and not walked to the end
 PROGRAM_BOARD = "stm32h7_core_v1_3_1024x600"  # every program runs as this board, whatever project is open
 
 
@@ -39,21 +41,30 @@ def flash_dir(folder):
     return program_dir(folder) / "flash"
 
 
-def _files(folder):
-    for path in sorted(Path(folder).rglob("*")):
-        relative = path.relative_to(folder)
-        if any(part in SKIPPED or part.startswith(".") for part in relative.parts):
-            continue
-        if path.is_file():
-            yield path, relative
+def program_files(folder):
+    """The files of a program's folder, as (path, path relative to the folder), sorted: what a board gets.
+
+    Hidden names, caches and version control are left out and not walked. A folder too large to be a
+    program raises ValueError as soon as that is known.
+    """
+    folder = Path(folder)
+    found, size = [], 0
+    for root, folders, names in os.walk(folder):
+        folders[:] = [name for name in folders if name not in SKIPPED and not name.startswith(".")]
+        for name in names:
+            path = Path(root) / name
+            if name.startswith(".") or not path.is_file():
+                continue
+            found.append((path, path.relative_to(folder)))
+            size += path.stat().st_size
+            if size > MAX_BYTES or len(found) > MAX_FILES:
+                raise ValueError(f"{folder} holds more than {MAX_FILES} files or {MAX_BYTES // (1024 * 1024)} MB: a program for a board is smaller. Choose the folder of the program alone.")
+    return sorted(found, key=lambda item: item[1].parts)
 
 
 def copy_program(folder, flash):
     """The files of the folder into the flash, as an upload: they replace those of the same name, the others stay."""
-    files = list(_files(folder))
-    size = sum(path.stat().st_size for path, _relative in files)
-    if size > MAX_BYTES:
-        raise ValueError(f"The folder holds {size // (1024 * 1024)} MB: a program for a board is smaller. Choose the folder of the program alone.")
+    files = program_files(folder)
     for path, relative in files:
         target = flash / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -61,8 +72,11 @@ def copy_program(folder, flash):
     return [str(relative) for _path, relative in files]
 
 
-def prepare_program(entry, width, height, board="simulator", runtime_dir=None):
-    """Prepare a run of entry, a .py file: returns the folder to start from and the environment."""
+def prepare_program(entry, width, height, board="simulator", runtime_dir=None, upload=True):
+    """Prepare a run of entry, a .py file: returns the folder to start from and the environment.
+
+    upload False starts again from the flash as the program left it, as a board after machine.reset().
+    """
     entry = Path(entry).resolve()
     if entry.suffix != ".py" or not entry.is_file():
         raise ValueError(f"Not a Python file: {entry}")
@@ -76,7 +90,8 @@ def prepare_program(entry, width, height, board="simulator", runtime_dir=None):
     source = Path(runtime_dir) if runtime_dir else root_dir() / "runtime" / "program"
     for module in sorted(source.glob("*.py")):
         shutil.copyfile(module, boot / module.name)
-    copy_program(folder, flash)
+    if upload:
+        copy_program(folder, flash)
     environment = {
         "LVSIM_WIDTH": str(width),
         "LVSIM_HEIGHT": str(height),

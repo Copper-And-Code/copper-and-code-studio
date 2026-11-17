@@ -1,3 +1,4 @@
+import codecs
 import re
 import secrets
 import time
@@ -146,6 +147,7 @@ class SimPanel(QWidget):
         self.started_at = 0.0
         self.first_frame_ms = None
         self._stdout_tail = ""
+        self._new_decoders()
         self.tone_player = TonePlayer(self)
         self.tone.connect(self.tone_player.play)
         self.screen = SimScreen()
@@ -194,6 +196,8 @@ class SimPanel(QWidget):
         if not self.server.listen(QHostAddress.LocalHost, 0):
             raise RuntimeError(self.server.errorString())
         self.decoder = Decoder()
+        self._new_decoders()
+        self._stdout_tail = ""
         self._frames = 0
         self._fps_started = time.monotonic()
         self.first_frame_ms = None
@@ -306,8 +310,13 @@ class SimPanel(QWidget):
     def send_wheel(self, delta):
         self._send(encode_wheel(delta))
 
+    def _new_decoders(self):
+        """One per pipe and per run: a UTF-8 character cut between two reads is kept until its last byte arrives."""
+        self._stdout_decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
+        self._stderr_decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
+
     def _stdout(self):
-        text = self._stdout_tail + bytes(self.process.readAllStandardOutput()).decode("utf-8", errors="replace")
+        text = self._stdout_tail + self._stdout_decoder.decode(bytes(self.process.readAllStandardOutput()))
         if not self.program:
             text = text.replace("\r\n", "\n")
         self._stdout_tail = ""
@@ -323,7 +332,7 @@ class SimPanel(QWidget):
             self.output.emit(text, False)
 
     def _stderr(self):
-        text = bytes(self.process.readAllStandardError()).decode("utf-8", errors="replace")
+        text = self._stderr_decoder.decode(bytes(self.process.readAllStandardError()))
         if self.program:
             self.terminal.feed_serial(text)
         else:

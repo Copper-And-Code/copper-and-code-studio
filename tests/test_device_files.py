@@ -141,6 +141,8 @@ def test_run_line_runs_a_file_from_its_folder_or_types_code():
     assert run_line("/flash/shell.py") == "import os; os.chdir('/flash'); exec(open('shell.py').read(), {'__name__': '__main__', '__file__': '/flash/shell.py'})"
     assert run_line("main.py").startswith("import os; os.chdir('/');")
     assert run_line("import shell; shell.main()") == "import shell; shell.main()"
+    assert run_line("/flash/my project/demo (v2).py") == "import os; os.chdir('/flash/my project'); exec(open('demo (v2).py').read(), {'__name__': '__main__', '__file__': '/flash/my project/demo (v2).py'})"
+    assert run_line("exec(open('a.py').read())") == "exec(open('a.py').read())"
 
 
 def test_run_file_on_board_types_at_the_prompt(qtbot, tmp_path):

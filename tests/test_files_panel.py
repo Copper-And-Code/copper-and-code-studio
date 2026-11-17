@@ -116,6 +116,80 @@ def test_the_panel_shows_the_folder_and_manages_files(qtbot, tmp_path, monkeypat
         tab.editor.document().setModified(False)
 
 
+def test_a_folder_under_a_hidden_one_is_shown_and_its_hidden_files_are_not(qtbot, tmp_path):
+    folder = tmp_path / ".config" / "proj"          # as ~/.config/proj or ~/.local/share/proj
+    (folder / ".cache").mkdir(parents=True)
+    (folder / "main.py").write_text("")
+    ide = window(qtbot)
+    panel = ide.files_panel
+    panel.set_folder(folder)
+
+    def names():
+        root = panel.tree.rootIndex()
+        if panel.path_at(root) != folder.resolve():
+            return None
+        return sorted(panel.proxy.index(row, 0, root).data() for row in range(panel.proxy.rowCount(root)))
+
+    qtbot.waitUntil(lambda: names() == ["main.py"], timeout=3000)
+    ide.document.undo_stack.setClean()
+
+
+def test_open_tabs_follow_a_rename_and_a_delete(qtbot, tmp_path, monkeypatch):
+    folder = tmp_path / "prog"
+    (folder / "lib").mkdir(parents=True)
+    (folder / "a.py").write_text("a = 1\n", encoding="utf-8")
+    (folder / "lib" / "util.py").write_text("", encoding="utf-8")
+    (folder / "notes.txt").write_text("", encoding="utf-8")
+    ide = window(qtbot)
+    panel = ide.files_panel
+    panel.set_folder(folder)
+    tab = ide.open_file(folder / "a.py")
+    tab.editor.appendPlainText("b = 2")                          # unsaved, then renamed
+    util = ide.open_file(folder / "lib" / "util.py")
+    notes = ide.open_file(folder / "notes.txt")
+    answers = iter([("b.py", True), ("tools", True)])
+    monkeypatch.setattr(QInputDialog, "getText", lambda *arguments, **keywords: next(answers))
+    assert panel.rename(folder / "a.py") == folder / "b.py"
+    assert tab.path == (folder / "b.py").resolve() and tab.modified
+    assert ide.tabs.tabText(ide.tabs.indexOf(tab)) == "b.py *"
+    ide.tabs.setCurrentWidget(tab)
+    ide.save_action.trigger()
+    assert not (folder / "a.py").exists()                       # the old file is not written again
+    assert (folder / "b.py").read_text(encoding="utf-8").endswith("b = 2")
+    assert panel.rename(folder / "lib") == folder / "tools"     # a folder: the tabs inside follow too
+    assert util.path == (folder / "tools" / "util.py").resolve()
+    assert ide.tabs.tabToolTip(ide.tabs.indexOf(util)) == str(util.path)
+    notes.editor.appendPlainText("keep me")
+    monkeypatch.setattr(QFile, "moveToTrash", lambda path: Path(path).unlink() or True)
+    monkeypatch.setattr(QMessageBox, "question", lambda *arguments: QMessageBox.Yes)
+    assert panel.delete(folder / "tools" / "util.py") and util not in ide.file_tabs    # nothing unsaved: it closes
+    assert panel.delete(folder / "notes.txt") and notes in ide.file_tabs                # changes: it stays, to be saved again
+    ide.document.undo_stack.setClean()
+    notes.editor.document().setModified(False)
+
+
+def test_rename_and_new_file_errors_are_shown(qtbot, tmp_path, monkeypatch):
+    folder = tmp_path / "prog"
+    folder.mkdir()
+    (folder / "a.py").write_text("", encoding="utf-8")
+    warned = []
+    monkeypatch.setattr(QMessageBox, "warning", lambda *arguments: warned.append(arguments[2]))
+    answers = iter([("b.py", True), ("c.py", True)])
+    monkeypatch.setattr(QInputDialog, "getText", lambda *arguments, **keywords: next(answers))
+    ide = window(qtbot)
+    panel = ide.files_panel
+
+    def refuse(*arguments, **keywords):
+        raise PermissionError("Permission denied")
+
+    monkeypatch.setattr(Path, "rename", refuse)
+    monkeypatch.setattr(Path, "write_text", refuse)
+    assert panel.rename(folder / "a.py") is None
+    assert panel.new_file(folder) is None
+    assert warned == ["Permission denied", "Permission denied"]
+    ide.document.undo_stack.setClean()
+
+
 def test_a_binary_file_is_not_opened(qtbot, tmp_path, monkeypatch):
     path = tmp_path / "data.bin"
     path.write_bytes(bytes(range(256)))
@@ -278,6 +352,29 @@ def test_run_on_the_board_uploads_the_folder_then_runs_the_file(qtbot, tmp_path,
     assert uploads == [(["shell/ansiterm.py", "shell/shell.py"], "/flash")]  # the STM32 flash: no folder chosen
     assert b"".join(typed).startswith(b"\x03import os; os.chdir('/flash/shell'); exec(open('shell.py').read()")
     board.disconnect()
+    ide.document.undo_stack.setClean()
+
+
+def test_run_on_the_board_refuses_a_folder_that_is_not_a_program(qtbot, tmp_path, monkeypatch):
+    from PySide6.QtWidgets import QMessageBox
+
+    from lvgl_mpy_studio.build import program
+
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
+    monkeypatch.setattr(program, "MAX_FILES", 5)
+    folder = tmp_path / "home"                       # ~/test.py: the folder is the whole home
+    for index in range(10):
+        (folder / f"notes-{index}").mkdir(parents=True)
+        (folder / f"notes-{index}" / "a.txt").write_text("", encoding="utf-8")
+    (folder / "test.py").write_text("print('hi')\n", encoding="utf-8")
+    warnings = []
+    monkeypatch.setattr(QMessageBox, "warning", lambda parent, title, text: warnings.append(text))
+    ide = window(qtbot)
+    board = BoardFiles()
+    board.upload_files = lambda *args, **kwargs: pytest.fail("nothing is uploaded")
+    ide.device = board
+    assert not ide.run_program_on_board(folder / "test.py")
+    assert "more than 5 files" in warnings[0]
     ide.document.undo_stack.setClean()
 
 

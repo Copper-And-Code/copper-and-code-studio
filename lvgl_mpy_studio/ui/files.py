@@ -131,6 +131,14 @@ class FileTab(QWidget):
         self.load()
         self.titleChanged.emit()
 
+    def move_to(self, path):
+        """The file was renamed, or a folder above it: the tab follows it, and keeps what is typed."""
+        self._watcher.removePath(str(self.path))
+        self.path = Path(path).resolve()
+        if self.path.exists():
+            self._watcher.addPath(str(self.path))
+        self.titleChanged.emit()
+
     def save(self):
         self._watcher.removePath(str(self.path))  # our own write is not an outside change
         try:
@@ -173,11 +181,25 @@ HIDDEN = {"__pycache__"}  # and names starting with a dot
 
 
 class _Visible(QSortFilterProxyModel):
-    """The folder without caches and hidden files."""
+    """The folder without caches and hidden files.
+
+    The folders on the way to the root are always kept, hidden or not: without its row the root of
+    ~/.config/x would have no index, and the tree would show the whole filesystem.
+    """
+
+    root = None
+
+    def set_root(self, folder):
+        self.beginFilterChange()
+        self.root = Path(folder)
+        self.endFilterChange()
 
     def filterAcceptsRow(self, row, parent):
-        name = self.sourceModel().fileName(self.sourceModel().index(row, 0, parent))
-        return name not in HIDDEN and not name.startswith(".")
+        index = self.sourceModel().index(row, 0, parent)
+        name = self.sourceModel().fileName(index)
+        if name not in HIDDEN and not name.startswith("."):
+            return True
+        return self.root is not None and self.root.is_relative_to(Path(self.sourceModel().filePath(index)))
 
 
 class FilesPanel(QWidget):
@@ -188,6 +210,8 @@ class FilesPanel(QWidget):
     browserRequested = Signal(str)  # a .py file, in the browser
     uploadRequested = Signal(str, str)  # a file or folder of the PC, a folder of the board
     boardRunRequested = Signal(str)  # a .py file: its folder is uploaded to the board, then it runs there
+    renamed = Signal(str, str)  # a file or folder, before and after: the open tabs follow it
+    deleted = Signal(str)  # a file or folder moved to the trash
 
     def __init__(self, settings, parent=None):
         super().__init__(parent)
@@ -238,6 +262,7 @@ class FilesPanel(QWidget):
         self.settings.setValue("files/folder", str(self.folder))
         self.folder_label.setText(self.folder.name or str(self.folder))  # the whole path is in the tooltip
         self.folder_label.setToolTip(str(self.folder))
+        self.proxy.set_root(self.folder)
         self.model.setRootPath(str(self.folder))
         self._root_loaded(str(self.folder))
         self.tree.setVisible(True)
@@ -310,7 +335,11 @@ class FilesPanel(QWidget):
         if path.exists():
             QMessageBox.warning(self, tr("New File…"), tr("{name} already exists.", name=name))
             return None
-        path.write_text("", encoding="utf-8")
+        try:
+            path.write_text("", encoding="utf-8")
+        except OSError as exc:
+            QMessageBox.warning(self, tr("New File…"), str(exc))
+            return None
         self.openRequested.emit(str(path))
         return path
 
@@ -334,7 +363,12 @@ class FilesPanel(QWidget):
         if target.exists():
             QMessageBox.warning(self, tr("Rename…"), tr("{name} already exists.", name=name))
             return None
-        path.rename(target)
+        try:
+            path.rename(target)
+        except OSError as exc:
+            QMessageBox.warning(self, tr("Rename…"), str(exc))
+            return None
+        self.renamed.emit(str(path), str(target))
         return target
 
     def delete(self, path):
@@ -346,6 +380,7 @@ class FilesPanel(QWidget):
         if not QFile.moveToTrash(str(path)):
             QMessageBox.warning(self, tr("Delete…"), tr("{name} could not be moved to the trash.", name=path.name))
             return False
+        self.deleted.emit(str(path))
         return True
 
     def select(self, path):

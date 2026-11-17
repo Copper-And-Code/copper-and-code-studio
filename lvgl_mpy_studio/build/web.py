@@ -92,11 +92,11 @@ def program_page(title, width, height, board, entry, flash="flash/", runtime="")
 
 def copy_program_files(entry, flash):
     """The folder of entry into flash/, as Run Program copies it, with files.json for the page."""
-    from .program import _files
+    from .program import program_files
 
     folder = Path(entry).resolve().parent
     names = []
-    for path, relative in _files(folder):
+    for path, relative in program_files(folder):
         target = flash / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, target)

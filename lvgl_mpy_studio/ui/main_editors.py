@@ -8,6 +8,7 @@ from shiboken6 import isValid
 from lvgl_mpy_studio.core.i18n import tr
 from lvgl_mpy_studio.device.common import DeviceError
 from lvgl_mpy_studio.platform import config_dir
+from lvgl_mpy_studio.build.program import program_files
 from lvgl_mpy_studio.ui.device_files import folder_items
 from lvgl_mpy_studio.ui.files import FileTab, FilesPanel
 
@@ -22,6 +23,8 @@ class EditorTabsMixin:
         self.files_panel.browserRequested.connect(lambda path: self.program_in_browser(path))
         self.files_panel.uploadRequested.connect(self._upload_local_to_board)
         self.files_panel.boardRunRequested.connect(self.run_program_on_board)
+        self.files_panel.renamed.connect(self._files_renamed)
+        self.files_panel.deleted.connect(self._files_deleted)
         board = self.files_panel.board
         board.listRequested.connect(self._board_list)
         board.openRequested.connect(self.open_board_file)
@@ -68,6 +71,24 @@ class EditorTabsMixin:
         self.tabs.setCurrentWidget(tab)
         tab.editor.setFocus(Qt.OtherFocusReason)
         return tab
+
+    def _tabs_under(self, path):
+        """The tabs of files of the PC at path or inside it, with the part of their path below it."""
+        path = Path(path).resolve()
+        return [(tab, tab.path.relative_to(path)) for tab in self.file_tabs if not tab.remote and tab.path.is_relative_to(path)]
+
+    def _files_renamed(self, old, new):
+        """Renamed in the Files panel: the tabs follow, so that Save does not write the old file again."""
+        for tab, below in self._tabs_under(old):
+            tab.move_to(Path(new) / below)
+            self.tabs.setTabToolTip(self.tabs.indexOf(tab), str(tab.path))
+
+    def _files_deleted(self, path):
+        """Moved to the trash from the Files panel: a tab with nothing unsaved closes; one with changes stays, to be saved again."""
+        for tab, _below in self._tabs_under(path):
+            if not tab.modified:
+                self.tabs.removeTab(self.tabs.indexOf(tab))
+                tab.deleteLater()
 
     def close_file(self, tab):
         """Close a tab, asking about unsaved changes. A file of the board closes when the board has it: False until then."""
@@ -286,7 +307,11 @@ class EditorTabsMixin:
         view = self.files_panel.board
         destination = view.current_folder() if view.connected and view.tree.currentItem() else self._board_program_root()
         remote = f"{destination.rstrip('/')}/{entry.parent.name}/{entry.name}"
-        items = list(folder_items(entry.parent))
+        try:
+            items = [(path, f"{entry.parent.name}/{relative.as_posix()}") for path, relative in program_files(entry.parent)]
+        except (OSError, ValueError) as exc:
+            QMessageBox.warning(self, tr("Run on the Board"), str(exc))
+            return False
         self.statusBar().showMessage(tr("Uploading {folder} to {destination} on the board, then running {name}…", folder=entry.parent.name, destination=destination, name=entry.name))
         return self._confirm_and_upload_files(items, destination, then=lambda: self.run_file_on_board(remote))
 

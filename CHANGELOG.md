@@ -19,6 +19,11 @@
 - **Run → Stop stops a program without pages while the target is a board.** The program runs in the simulator whatever the target, but Stop was disabled and would have stopped the board: the program could not be stopped. Found by the suite of every action, on the virtual board.
 - **The console of the board opens after Device → Connect.** It stayed “Console not available” until another operation on the board ended. Found by the new board scenario of the self-test.
 - **Device → Run File on Board…** failed at once when chosen from the menu, without asking which file: the menu passed its checked state where the file was expected. Found by the new suite of every action.
+- **Run on the Board uploads a program, not whatever folder it is in.** For `~/test.py` it walked the whole home folder on the window's thread and queued every file for the board. A folder with more than 2000 files or 64 MB is now refused at once, as the simulator already did by size; hidden folders, caches and version control are not walked. A path with a space or a parenthesis, such as `my project/main.py`, now runs on the board instead of being typed at its prompt as Python.
+- **Open tabs follow a rename in the Files panel.** After renaming a file, or a folder above it, Save wrote the old file again next to the new one. Deleting closes the tabs of the deleted files that have nothing unsaved. A rename or a new file that the system refuses shows why, instead of an error in the log.
+- **A folder under a hidden one shows its files.** Open Folder, or Run Program, in `~/.config/x` or `~/.local/share/x` showed the whole filesystem, and New, Rename and Delete acted there.
+- **`machine.reset()` in a program keeps its flash, as on a board.** The simulator started the program again by copying its folder over the flash, so a file the program had written was put back as shipped.
+- **Text from a program is not broken in the terminal.** A character of more than one byte cut between two reads of the simulator's output showed as two `�`.
 - **A board whose files cannot be read is not asked again and again.** If listing the board failed, or the board had no files, the Files panel asked again after each answer, without end, stopping the console every time. It now asks once per connection; Refresh asks again.
 
 ## 0.7.1 — 2026-11-15
