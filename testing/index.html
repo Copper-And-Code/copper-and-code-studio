@@ -1276,9 +1276,9 @@ says what is checked, by what, how to run it, and what no automated check can se
 </tr>
 <tr>
 <td>Self-test</td>
-<td>the real IDE window driven as a person would, through 9 scenarios and 82 steps</td>
+<td>the real IDE window driven as a person would, through 13 scenarios and 105 steps</td>
 <td>at each push, in the CI, on Linux and Windows</td>
-<td>under a minute</td>
+<td>about 30 seconds</td>
 </tr>
 <tr>
 <td>Visual tests</td>
@@ -1309,8 +1309,12 @@ says what is checked, by what, how to run it, and what no automated check can se
 <h3 id="test-suite">Test suite<a class="headerlink" href="#test-suite" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nv">QT_QPA_PLATFORM</span><span class="o">=</span>offscreen<span class="w"> </span>.venv/bin/pytest<span class="w"> </span>-q
 </code></pre></div>
-<p>The tests use a temporary configuration folder and never open serial ports: boards are
-replaced by fakes that answer as <code>mpremote</code> or the board's REPL would. Tests that need a
+<p>The tests use a temporary configuration folder and never open a real board's port. Boards
+are replaced by fakes that answer as <code>mpremote</code> or the board's REPL would, and, on Linux, by a
+virtual board (<code>tests/virtual_board.py</code>): the MicroPython of the runtime behind a
+pseudo-terminal, which the IDE's board code reaches with the real <code>mpremote</code> and the real raw
+REPL. Its flash is a folder of the PC it cannot leave; it counts the soft resets, so a test can
+tell whether an operation restarted the board. Tests that need a
 built runtime, the Windows cross-compiler or a browser are skipped, and say why, when those
 are missing.</p>
 <p>The CI (<code>.github/workflows/ci.yml</code>) runs at each push to <code>main</code> and on pull requests. On Linux
@@ -1322,7 +1326,13 @@ the packages.</p>
 </code></pre></div>
 <p>It creates a project, takes widgets from the toolbox, sets properties, types a handler,
 saves, starts the simulator and touches the screen; other scenarios cover pages, resolution,
-pictures and fonts, Python modules, the Timer and the Buzzer, errors and hardware blocks.
+pictures and fonts, Python modules, the Timer and the Buzzer, errors and hardware blocks, the
+Files panel and its tabs (open a folder, edit, save, New File and Rename from the panel's
+menu), programs without pages (Run Program, typing in the terminal; Linux only), Project
+Settings and board profiles (a profile duplicated in the Profile Manager, then used by the
+project), and the files of a board (Connect, the board's files in the Files panel, Upload
+Files, Run File on Board). The board is one the self-test keeps in memory: it answers what
+the window asks, without the serial protocol, which the test suite covers with its own fakes.
 See the <a href="../manual/#self-test">manual</a> for its options and report.</p>
 <h3 id="visual-tests">Visual tests<a class="headerlink" href="#visual-tests" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span><span class="nb">test</span><span class="w"> </span>project.json
@@ -1346,8 +1356,13 @@ See the <a href="../manual/#self-test">manual</a> for its options and report.</p
 <tbody>
 <tr>
 <td><code>test_every_action.py</code></td>
-<td>about 8 minutes</td>
+<td>about 3 minutes</td>
 <td>every menu entry and toolbar button</td>
+</tr>
+<tr>
+<td><code>test_random_use.py</code></td>
+<td>about 1 minute; longer with <code>LMS_RANDOM_EXAMPLES</code></td>
+<td>random sequences of what a person does</td>
 </tr>
 </tbody>
 </table>
@@ -1358,7 +1373,9 @@ five states of the IDE:</p>
 <li>an example open, with two widgets selected and one change to undo;</li>
 <li>the simulator running;</li>
 <li>a program without pages running;</li>
-<li>a fake board connected.</li>
+<li>a board connected: on Linux the virtual board, reached with the real <code>mpremote</code>, so that
+  Upload and Run, Stop, Autostart, Upload Files and the rest of the Device menu go through the
+  real protocol; elsewhere a fake.</li>
 </ul>
 <p>Every dialog it opens is answered by a watcher, once with Cancel and once with OK:</p>
 <ul>
@@ -1379,12 +1396,26 @@ five states of the IDE:</p>
 the dialogs each action opened and how long it took. Each run prints what changed since the
 last one: entries added or removed, other dialogs, a result that changed. That list is the
 place to start when trying the IDE by hand.</p>
-<p>The suite never reaches a real board: listing ports finds none, and anything that would run
-<code>mpremote</code> or open a port makes the test fail. Three entries are not triggered, and the
+<p>The suite never reaches a real board: listing ports finds only the virtual board, and
+anything that would run <code>mpremote</code> towards another port, or open one, makes the test fail. Three entries are not triggered, and the
 suite says why: Exit, which closes the window, and the two Build Executable entries, which
 build for minutes in the background and are tested in <code>tests/test_release.py</code>.</p>
 <p>It checks that nothing breaks, not that the result is right: that is what the test suite
 and the self-test are for.</p>
+<p><strong>Random use.</strong> A <a href="https://hypothesis.readthedocs.io">hypothesis</a> state machine chooses what to
+do next, through the window as a person would, with the self-test's driver: a widget from the
+toolbox, a click or a drag on the page, arrow keys, a property typed in the panel, Edit and
+Arrange entries, undo and redo, pages, the code of a handler, save and open again. After every
+step it checks that the canvas shows the widgets of its page, that the Properties panel shows
+what is selected, that the <code>*</code> of the title says whether there is something to save, that the
+project is valid and that nothing raised. At the end, undo all must give the project of the
+start, and redo all must give it back.</p>
+<p>When a check fails, hypothesis shortens the sequence as far as it can and prints it, with the
+state of the last ten steps and a line to replay it; a short sequence becomes an ordinary test.
+<code>LMS_RANDOM_EXAMPLES</code> (default 25) and <code>LMS_RANDOM_STEPS</code> (default 30) make a run longer;
+<code>LMS_RANDOM_TRACE=1</code> prints the state after every step. On its first runs it found the
+Properties panel showing a widget that was not selected, in three ways: after New or Open,
+after Cut and Undo, and on another page.</p>
 <h3 id="board-tests">Board tests<a class="headerlink" href="#board-tests" title="Permanent link">&para;</a></h3>
 <p>Tests marked <code>board</code> run only with <code>--board PORT</code>, and only with the owner of the board
 present, because they write to it. None is written yet.</p>
@@ -1393,14 +1424,13 @@ present, because they write to it. None is written yet.</p>
 <li><strong>Whether the IDE is clear and pleasant to use.</strong> No check can say it.</li>
 <li><strong>How the IDE looks.</strong> The self-test and the suites check behaviour; nothing compares
   pictures of the IDE's own window yet.</li>
-<li><strong>Real boards.</strong> The board code is tested against fakes; touch, speed and the firmware's
+<li><strong>Real boards.</strong> The board code is tested against fakes and against a virtual board (<code>tests/virtual_board.py</code>: the runtime's MicroPython behind a pseudo-terminal, reached by the real <code>mpremote</code>, Linux only); touch, speed and the firmware's
   own behaviour are seen only on hardware.</li>
 <li><strong>The system around the IDE.</strong> The system's own file dialogs, dragging from the file
   manager, a real high-resolution screen, a window manager: the checks run without a
   display (<code>QT_QPA_PLATFORM=offscreen</code>) and with Qt's own dialogs.</li>
 <li><strong>Context menus</strong> of the canvas, the project tree and the Files panel are not in the
   suite of every action.</li>
-<li><strong>The Upload Files dialog</strong> is never opened by a test.</li>
 </ul>
 <p>How much of the code the checks run, measured on 17 November 2026 with coverage.py: 87 % of
 the lines of the user interface (<code>lvgl_mpy_studio/ui</code>) and 90 % of the whole package. The

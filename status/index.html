@@ -1281,7 +1281,7 @@ below as an open question, not as a formality.</p>
 </tr>
 <tr>
 <td>MicroPython generation, upload as bytecode</td>
-<td>yes</td>
+<td>yes: Upload and Run of an example on a virtual board, through the real <code>mpremote</code></td>
 <td></td>
 <td>ESP32-4848S040, STM32H7_CORE, Waveshare RP2350</td>
 <td></td>
@@ -1331,7 +1331,7 @@ below as an open question, not as a formality.</p>
 <tr>
 <td>Programs without pages in the simulator (Run Program)</td>
 <td>yes: the service while waiting for a key, Ctrl-C, the flash that cannot be left, reset, the IDE</td>
-<td></td>
+<td>yes: Run Program and typing in the terminal, on Linux</td>
 <td>the shell of <code>mpy-lvgl-boards</code> with <code>edit</code> and <code>vi</code>, driven by the tests of this work, not yet used by a person</td>
 <td>used by a person; Windows, not available</td>
 </tr>
@@ -1344,8 +1344,8 @@ below as an open question, not as a formality.</p>
 </tr>
 <tr>
 <td>Upload Files, Run File on Board</td>
-<td>yes, with a board simulated in memory and a fake serial port, also the question when a folder would hide a module</td>
-<td></td>
+<td>yes, with a board simulated in memory and a fake serial port, also the question when a folder would hide a module; on a virtual board with the real <code>mpremote</code>: no reset, Cancel, the cable pulled</td>
+<td>yes, with a board the self-test keeps in memory</td>
 <td>STM32H7_CORE V1.3 (over its USB) and ESP32-4848S040, 13 November 2026: the shell of <code>examples/shell</code> copied (6 files, 110 kB, about 32 s) and started, <code>pwd</code>, <code>ls</code>, <code>uname -a</code>, <code>cd</code>, <code>exit</code>. ESP32-4848S040, 14 November 2026, by the owner: Run on the Board of the shell asked about <code>shell</code> hiding <code>/shell.py</code>, No uploaded nothing, Yes uploaded and ran it; the folder deleted from the Files panel</td>
 <td>the editors on a board; the RP2350; used by a person</td>
 </tr>
@@ -1358,8 +1358,8 @@ below as an open question, not as a formality.</p>
 </tr>
 <tr>
 <td>Files panel and file tabs</td>
-<td>yes, with a board simulated in memory</td>
-<td></td>
+<td>yes, with a board simulated in memory; the board's files also on a virtual board with the real <code>mpremote</code></td>
+<td>yes: folder, tabs, New File and Rename from the menu; the files of a board kept in memory</td>
 <td>the board's files: the service on the STM32H7_CORE V1.3 (USB) and the ESP32-4848S040 (list, read, write, rename, folder, delete), and the panel driven through the IDE on the ESP32-4848S040 (list, open, edit, save, restore; Run on the Board with the shell: upload, start, <code>pwd</code>, <code>exit</code> in 38 s), 13 November 2026</td>
 <td>used by a person; the panel on the STM32H7</td>
 </tr>

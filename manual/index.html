@@ -2441,14 +2441,14 @@ lvgl-mpy-studio<span class="w"> </span><span class="nb">test</span><span class="
 </tbody>
 </table>
 <h3 id="self-test">Self-test<a class="headerlink" href="#self-test" title="Permanent link">&para;</a></h3>
-<p><code>lvgl-mpy-studio selftest</code> opens the IDE and uses it as a person would: it creates a project, takes widgets from the toolbox, sets their properties in the panel, types a handler, saves, starts the simulator and touches the screen. Other scenarios cover pages, resolution, pictures and fonts, Python modules, the Timer and the Buzzer, and errors. Each step is checked and written as <code>PASSED</code> or <code>FAILED</code>; the last line is <code>RESULT: PASSED</code> or <code>RESULT: FAILED</code>, and the command ends with 0 or 1.</p>
+<p><code>lvgl-mpy-studio selftest</code> opens the IDE and uses it as a person would: it creates a project, takes widgets from the toolbox, sets their properties in the panel, types a handler, saves, starts the simulator and touches the screen. Other scenarios cover pages, resolution, pictures and fonts, Python modules, the Timer and the Buzzer, errors, hardware blocks, the Files panel and its tabs, programs without pages and their terminal (on Linux), Project Settings and board profiles, and the files of a board with Upload Files and Run File on Board. Each step is checked and written as <code>PASSED</code> or <code>FAILED</code>; the last line is <code>RESULT: PASSED</code> or <code>RESULT: FAILED</code>, and the command ends with 0 or 1.</p>
 <ul>
 <li>Without options the IDE stays hidden and the run takes a few seconds. <code>--show</code> shows it at work, slowed down; <code>--slow 800</code> sets the pause after each action in milliseconds.</li>
 <li>The report goes to <code>lvgl-mpy-studio-selftest/&lt;date-time&gt;/</code> in the current folder, or to the folder given with <code>--output</code>: <code>report.txt</code>, <code>report.json</code>, the projects it saved under <code>work/</code>, and for each failed step a picture of the IDE and of the simulator.</li>
 <li><code>--list</code> shows the scenarios; naming one or more runs only those.</li>
 <li>Your settings, recent files and board profiles are not touched. Do not use the mouse or the keyboard on the IDE's window while <code>--show</code> runs.</li>
 </ul>
-<p>It checks that things work, not how they look, and it does not use boards.</p>
+<p>It checks that things work, not how they look. It never uses a real board: the board scenario talks to a board the self-test keeps in memory.</p>
 <h2 id="15-ai-agents">15. AI agents<a class="headerlink" href="#15-ai-agents" title="Permanent link">&para;</a></h2>
 <p>LVGL MPY Studio can be used by an AI agent, such as Claude or Kimi, through the <strong>Model Context Protocol</strong> (MCP). The agent creates projects, draws pages, writes the code, tries the game in the simulator by touching the screen, measures memory and, with you present, works on the board.</p>
 <p>The server is off until you turn it on from <strong>Settings → MCP Server for AI Agents</strong>. The <a href="../mcp/">MCP server guide</a> explains how to connect it to your agent and what it can do. Two practical rules:</p>
