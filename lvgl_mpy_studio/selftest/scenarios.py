@@ -630,7 +630,7 @@ def board_files(ide):
         folder = ide.directory / "game"
         folder.mkdir()
         (folder / "game.py").write_text('print("SELFTEST game")\n', encoding="utf-8")
-        (folder / "level.txt").write_text("1\n", encoding="utf-8")
+        (folder / "level.txt").write_bytes(b"1\n")  # bytes: write_text gives \r\n on Windows, and the upload copies bytes as they are
         listed = []
 
         def fill(dialog):
