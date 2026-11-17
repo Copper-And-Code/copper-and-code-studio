@@ -14,6 +14,7 @@ things to look at by hand.
 """
 import json
 import shutil
+import subprocess
 import time
 from pathlib import Path
 
@@ -224,6 +225,8 @@ class State:
         if window.sim_panel.running:
             window.stop_simulation()
             wait(lambda: not window.sim_panel.running, 10)
+        if window.sim_panel.running:
+            raise AssertionError(f"{self.name}: the simulator did not stop with Run → Stop")
         window.document.undo_stack.setClean()  # what an action left is not asked about
         self.build()
         self.base = window.document.undo_stack.index()
@@ -301,17 +304,21 @@ class Program(State):
 
 
 class Board(State):
+    """A board connected: the virtual board of tests/virtual_board.py (real mpremote), or a fake where there is none."""
+
     name = "board"
+    board = None
 
     def ready(self):
-        return State.ready(self) and self.window.device.port == "/dev/fake"
+        return State.ready(self) and self.window.device.port == self.port
 
     def build(self):
-        from tests.test_device import FakeRunner
+        from tests.virtual_board import ROOT, VirtualBoard, available
 
+        profile = next(profile for profile in builtin_profiles() if profile["id"].startswith("esp32_4848"))
         project = Project("board")
-        project.set_display_size(240, 240)
-        project.board = builtin_profiles()[0]
+        project.set_display_size(480, 480)
+        project.board = profile
         project.runTarget = {"kind": "board", "language": "micropython"}
         project.add_widget(project.pages[0], "button")
         project.add_widget(project.pages[0], "label")
@@ -321,10 +328,21 @@ class Board(State):
         self.open(path)
         window = self.window
         window.device.disconnect()
-        window.device = window.hardware.session(FakeRunner())
-        window.device.connect("/dev/fake", project.board)
-        window.selected_port = "/dev/fake"
+        if available():
+            if self.board is None:
+                files = {"/flash/display_driver.py": (ROOT / "runtime" / "program" / "display_driver.py").read_text(), "/flash/gt911.py": ""}
+                Board.board = VirtualBoard(self.tmp_path / "virtual-board", files, size=(480, 480))
+            window.device = window.hardware.virtual_session(self.board)
+            self.port = self.board.port
+        else:
+            from tests.test_device import FakeRunner
+
+            window.device = window.hardware.session(FakeRunner())
+            self.port = "/dev/fake"
+        window.device.connect(self.port, project.board)
+        window.selected_port = self.port
         window._update_device_actions()
+        wait(lambda: window._worker is None, 10)
         self.change_once()
         self.select_two()
 
@@ -369,10 +387,40 @@ def validation(project):
 
 
 class NoRealBoard:
-    """The only board the sweep may reach: none, or the fake of the board state. Anything else is recorded."""
+    """The only board the sweep may reach: none, or the virtual board of the board state. Anything else is recorded."""
 
-    def __init__(self):
+    def __init__(self, real_serial):
         self.attempts = []
+        self.allowed = set()                   # the port of the virtual board, once there is one
+        self._serial = real_serial
+
+    def serial_class(self):
+        """serial.Serial that opens only the virtual board: the port is checked when it is opened,
+        since mpremote makes the object first and sets the port after."""
+        guard = self
+
+        class Guarded(self._serial):
+            def open(self):
+                if self.port not in guard.allowed:
+                    guard.attempts.append(f"open {self.port}")
+                    raise OSError("the sweep never opens a real port")
+                return super().open()
+
+        return Guarded
+
+    def process(self, command, *arguments, **options):
+        """mpremote, only towards the virtual board."""
+        port = command[command.index("connect") + 1] if "connect" in command else None
+        if port in self.allowed:
+            return subprocess.Popen(command, *arguments, **options)
+        return self.forbidden(" ".join(map(str, command[-4:])))
+
+    def virtual_session(self, board):
+        self.allowed.add(board.port)
+        session = DeviceSession(process_factory=self.process, uart_factory=self.forbidden, interrupt=lambda port: None)
+        # The ports the IDE offers: the virtual board only, so that no dialog can choose a real one.
+        session.list_ports = lambda: [{"port": board.port, "id": "virtual", "usb": "0000:0000", "description": "Virtual board of the tests"}]
+        return session
 
     def runner(self, command, timeout, *rest):
         if command[-1:] == ["devs"]:
@@ -472,8 +520,8 @@ def test_every_action(qtbot, tmp_path, monkeypatch, files, state_class, answer):
     watcher = Watcher(files)
     import serial
 
-    hardware = NoRealBoard()
-    monkeypatch.setattr(serial, "Serial", hardware.forbidden)
+    hardware = NoRealBoard(serial.Serial)
+    monkeypatch.setattr(serial, "Serial", hardware.serial_class())
     window = MainWindow()
     qtbot.addWidget(window)
     window.hardware = hardware
@@ -510,6 +558,9 @@ def test_every_action(qtbot, tmp_path, monkeypatch, files, state_class, answer):
             tab.editor.document().setModified(False)
         window.device.disconnect()
         window.change_language("en")
+        if Board.board is not None:
+            Board.board.close()
+            Board.board = None
         watcher.stop()
         qInstallMessageHandler(previous_handler)
     changes = write_report(f"{state.name}-{answer}", results)

@@ -56,9 +56,12 @@ class RunMixin:
         return True
 
     def stop_simulation(self):
+        """Stop what runs: the simulator first, which a program without pages uses whatever the target; then the board."""
+        if self.sim_panel.running:
+            self.sim_panel.stop()
+            return True
         if self.run_target.is_board:
             return self.stop_board()
-        self.sim_panel.stop()
         return True
 
     def restart_project(self):

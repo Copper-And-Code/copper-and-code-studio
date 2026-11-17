@@ -4,6 +4,7 @@ import importlib.util
 import os
 from pathlib import Path
 import subprocess
+import sys
 import threading
 import time
 
@@ -299,4 +300,26 @@ def test_run_in_the_browser_asks_for_the_file_and_builds_the_page(qtbot, config,
     assert Path(window.settings.value("simulator/program")) == entry
     window._web_server.shutdown()
     window._web_server = None
+    window.document.undo_stack.setClean()
+
+
+@needs_runtime
+@pytest.mark.skipif(sys.platform.startswith("win"), reason="programs without pages run only in the Linux simulator")
+def test_run_stop_stops_a_program_while_the_target_is_a_board(qtbot, config, tmp_path):
+    """A program runs in the simulator whatever the target: Stop used to stop only the board, and was disabled."""
+    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from lvgl_mpy_studio.ui.run_target import board_target
+
+    entry = tmp_path / "loop" / "main.py"
+    entry.parent.mkdir()
+    entry.write_text("import time\nprint('ready')\nwhile True:\n    time.sleep(0.1)\n", encoding="utf-8")
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.new_project()
+    assert window.select_run_target(board_target("stm32h7_core_v1_3_1024x600"))
+    assert window.run_program(entry)
+    qtbot.waitUntil(lambda: "ready" in window.sim_panel.terminal.text(), timeout=10000)
+    assert window.stop_action.isEnabled()
+    window.stop_action.trigger()
+    qtbot.waitUntil(lambda: not window.sim_panel.running, timeout=5000)
     window.document.undo_stack.setClean()

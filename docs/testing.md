@@ -73,7 +73,7 @@ QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual/test_every_action.py 
 
 | Suite | Time | What it checks |
 |---|---|---|
-| `test_every_action.py` | about 8 minutes | every menu entry and toolbar button |
+| `test_every_action.py` | about 3 minutes | every menu entry and toolbar button |
 
 **Every action.** Every menu entry and toolbar button is triggered as choosing it does, in
 five states of the IDE:
@@ -82,7 +82,9 @@ five states of the IDE:
 - an example open, with two widgets selected and one change to undo;
 - the simulator running;
 - a program without pages running;
-- a fake board connected.
+- a board connected: on Linux the virtual board, reached with the real `mpremote`, so that
+  Upload and Run, Stop, Autostart, Upload Files and the rest of the Device menu go through the
+  real protocol; elsewhere a fake.
 
 Every dialog it opens is answered by a watcher, once with Cancel and once with OK:
 
@@ -105,8 +107,8 @@ the dialogs each action opened and how long it took. Each run prints what change
 last one: entries added or removed, other dialogs, a result that changed. That list is the
 place to start when trying the IDE by hand.
 
-The suite never reaches a real board: listing ports finds none, and anything that would run
-`mpremote` or open a port makes the test fail. Three entries are not triggered, and the
+The suite never reaches a real board: listing ports finds only the virtual board, and
+anything that would run `mpremote` towards another port, or open one, makes the test fail. Three entries are not triggered, and the
 suite says why: Exit, which closes the window, and the two Build Executable entries, which
 build for minutes in the background and are tested in `tests/test_release.py`.
 

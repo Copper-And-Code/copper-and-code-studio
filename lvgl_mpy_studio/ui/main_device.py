@@ -117,7 +117,7 @@ class DeviceMixin:
         self.run_selector.setText(self.run_selector.label())
         self.run_action.setEnabled(not busy and not running)
         self.run_action.setToolTip(tr("Run on: {target}", target=self.run_selector.label()))
-        self.stop_action.setEnabled(not busy and (running if not board else connected and self.device_app_active))
+        self.stop_action.setEnabled(not busy and (running or (board and connected and self.device_app_active)))
         self.board_stop_action.setEnabled(not busy and connected and self.device_app_active)
         self.restart_action.setEnabled(not board and not busy)
         self.run_program_action.setEnabled(not running)
