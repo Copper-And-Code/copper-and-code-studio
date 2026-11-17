@@ -74,6 +74,7 @@ QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual/test_every_action.py 
 | Suite | Time | What it checks |
 |---|---|---|
 | `test_every_action.py` | about 3 minutes | every menu entry and toolbar button |
+| `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
 
 **Every action.** Every menu entry and toolbar button is triggered as choosing it does, in
 five states of the IDE:
@@ -114,6 +115,22 @@ build for minutes in the background and are tested in `tests/test_release.py`.
 
 It checks that nothing breaks, not that the result is right: that is what the test suite
 and the self-test are for.
+
+**Random use.** A [hypothesis](https://hypothesis.readthedocs.io) state machine chooses what to
+do next, through the window as a person would, with the self-test's driver: a widget from the
+toolbox, a click or a drag on the page, arrow keys, a property typed in the panel, Edit and
+Arrange entries, undo and redo, pages, the code of a handler, save and open again. After every
+step it checks that the canvas shows the widgets of its page, that the Properties panel shows
+what is selected, that the `*` of the title says whether there is something to save, that the
+project is valid and that nothing raised. At the end, undo all must give the project of the
+start, and redo all must give it back.
+
+When a check fails, hypothesis shortens the sequence as far as it can and prints it, with the
+state of the last ten steps and a line to replay it; a short sequence becomes an ordinary test.
+`LMS_RANDOM_EXAMPLES` (default 25) and `LMS_RANDOM_STEPS` (default 30) make a run longer;
+`LMS_RANDOM_TRACE=1` prints the state after every step. On its first runs it found the
+Properties panel showing a widget that was not selected, in three ways: after New or Open,
+after Cut and Undo, and on another page.
 
 ### Board tests
 

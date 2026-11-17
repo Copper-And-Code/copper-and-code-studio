@@ -26,6 +26,7 @@ class FilesMixin:
         if not self._confirm_discard():
             return
         self.document.new(self._default_project())
+        self.properties.set_selection([])  # another project: nothing is selected in it, even where a name is the same
         self.tabs.setCurrentIndex(0)
         self.output.clear()
         self.errors.clear()
@@ -43,6 +44,7 @@ class FilesMixin:
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             QMessageBox.critical(self, tr("Open Error"), str(exc))
             return False
+        self.properties.set_selection([])
         self._add_recent(path)
         self.tabs.setCurrentIndex(0)
         self.output.clear()

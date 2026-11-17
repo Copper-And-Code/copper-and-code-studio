@@ -207,6 +207,8 @@ class PropertiesPanel(QWidget):
         return descriptors
 
     def rebuild(self):
+        # A widget deleted, cut or undone away is no longer selected: an Undo that brings it back must not show it as if it were.
+        self.names = [name for name in self.names if self.document.project.find_widget(name)]
         self._loading = True
         self.model.removeRows(0, self.model.rowCount())
         self.events_model.removeRows(0, self.events_model.rowCount())

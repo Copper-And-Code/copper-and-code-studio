@@ -359,3 +359,56 @@ def test_copy_name_is_free(qtbot, tmp_path):
     Project().save(first)
     second = window._copy_name()
     assert second != first and not second.exists() and second.parent == path.parent
+
+
+def test_new_and_open_leave_nothing_selected_in_the_properties_panel(qtbot, tmp_path):
+    """The panel kept the names of the old selection: a widget of the same name in the project opened was shown, not selected."""
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.new_project()
+    window.document.execute("Add", lambda project: project.add_widget(project.pages[0], "button"))
+    view = window.current_designer()
+    next(iter(view.designer_scene.widget_items.values())).setSelected(True)
+    qtbot.waitUntil(lambda: window.properties.names == ["button1"], timeout=2000)
+    path = tmp_path / "one.json"
+    window.document.save(path)
+    window.new_project()
+    assert window.properties.names == []
+    window.open_project(path)
+    qtbot.wait(50)
+    assert window.current_designer().designer_scene.selected_names() == [] and window.properties.names == []
+    window.document.undo_stack.setClean()
+
+
+def test_a_widget_cut_and_brought_back_by_undo_is_not_shown_as_selected(qtbot):
+    """Found by the random use suite: add a button, Cut; the panel kept it, and showed it again after Undo."""
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.new_project()
+    window.document.execute("Add", lambda project: project.add_widget(project.pages[0], "button"))
+    view = window.current_designer()
+    next(iter(view.designer_scene.widget_items.values())).setSelected(True)
+    qtbot.waitUntil(lambda: window.properties.names == ["button1"], timeout=2000)
+    window.cut_action.trigger()
+    qtbot.waitUntil(lambda: window.properties.names == [], timeout=2000)
+    window.undo_action.trigger()
+    qtbot.wait(50)
+    assert window.current_designer().designer_scene.selected_names() == window.properties.names
+    window.document.undo_stack.setClean()
+
+
+def test_the_properties_panel_shows_the_selection_of_the_page_in_front(qtbot):
+    """Found by the random use suite: on another page the panel still showed, and edited, a widget of the page behind."""
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.new_project()
+    window.add_page_action.trigger()
+    window.document.execute("Add", lambda project: project.add_widget(project.pages[0], "button"))
+    next(iter(window.current_designer().designer_scene.widget_items.values())).setSelected(True)
+    qtbot.waitUntil(lambda: window.properties.names == ["button1"], timeout=2000)
+    second = window.designers[window.document.project.pages[1].id][1]
+    window.tabs.setCurrentWidget(second)
+    assert window.properties.names == []
+    window.tabs.setCurrentIndex(window.tabs.indexOf(window.designers[window.document.project.pages[0].id][1]))
+    assert window.properties.names == ["button1"]   # back on its page: still selected there
+    window.document.undo_stack.setClean()

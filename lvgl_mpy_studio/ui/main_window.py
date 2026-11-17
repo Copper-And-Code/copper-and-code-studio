@@ -410,6 +410,14 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.tabs.currentChanged.connect(self._request_preview)
         self.tabs.currentChanged.connect(self._schedule_live)
         self.tabs.currentChanged.connect(self._fit_if_resized)
+        self.tabs.currentChanged.connect(self._page_shown)
+
+    def _page_shown(self, _index):
+        """The Properties panel shows what is selected on the page in front, not on a page behind it.
+        The Code and Simulator tabs keep it: the handler being written belongs to that widget."""
+        view = self.tabs.currentWidget()
+        if isinstance(view, DesignerView):
+            self.properties.set_selection(view.designer_scene.selected_names())
 
     def _sync_designers(self):
         pages = self.document.project.pages
