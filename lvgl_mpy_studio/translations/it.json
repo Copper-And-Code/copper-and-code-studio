@@ -721,6 +721,8 @@
   "Upload Files Here…": "Carica file qui…",
   "{name} is a file of the board: connect to the board to save it.": "{name} è un file della board: connettiti alla board per salvarlo.",
   "Saved {path} on the board": "Salvato {path} sulla board",
+  "{name} is being written on the board: the tab closes when it is done.": "{name} è in scrittura sulla board: la scheda si chiude quando ha finito.",
+  "Writing files on the board: the window closes when they are written.": "Scrittura dei file sulla board: la finestra si chiude quando sono scritti.",
   "{path} exists. Replace it?": "{path} esiste. Sostituirlo?",
   "Downloaded to {path}": "Scaricato in {path}",
   "Delete the folder {path} from the board, with everything in it?": "Eliminare dalla board la cartella {path}, con tutto quello che contiene?",

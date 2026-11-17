@@ -72,6 +72,20 @@ def test_a_folder_is_copied_as_it_is_and_nothing_else_changes(tmp_path):
     assert sent == sorted(sent) and reports[-1][:2] == (result["bytes"], result["bytes"])
 
 
+def test_a_file_copied_with_mpremote_does_not_reset_the_board(tmp_path):
+    """Without resume mpremote soft-resets the board before fs cp, and the app running there dies."""
+    commands = []
+    board = DeviceSession(runner=lambda command, timeout, *rest: commands.append((command, timeout)) or "")
+    board.port = "/dev/fake"
+    big = tmp_path / "big.bin"
+    big.write_bytes(bytes(1_000_000))
+    board._put(big, "/flash/big.bin")
+    command, timeout = commands[-1]
+    connect = command.index("connect")
+    assert command[connect:connect + 4] == ["connect", "/dev/fake", "resume", "fs"]
+    assert timeout > 200            # a megabyte on a slow link takes minutes, not the 30 s of a script
+
+
 def test_python_becomes_bytecode_except_main_and_boot(tmp_path):
     folder = program(tmp_path)
     reference = _bytecode_file(folder / "shell.py", tmp_path / "probe.mpy")

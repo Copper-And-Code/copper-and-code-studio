@@ -149,7 +149,7 @@ class DeviceMixin:
         else:
             self.device_status.setText(tr("Board not connected") if board else "")
 
-    def _device_task(self, operation, success=None, background=False):
+    def _device_task(self, operation, success=None, background=False, failed=None):
         """Run an operation on the board in a thread. One at a time: while a background one runs (the Files
         panel reading the board), an operation of the user waits for it instead of being refused."""
         if self._worker is not None:
@@ -163,6 +163,8 @@ class DeviceMixin:
         self._worker = worker
         worker.succeeded.connect(lambda result: self._device_succeeded(result, success))
         worker.failed.connect(self._device_failed)
+        if failed is not None:
+            worker.failed.connect(failed)
         worker.progress.connect(self._upload_reported)
         worker.finished.connect(self._device_finished)
         worker.finished.connect(worker.deleteLater)

@@ -57,6 +57,12 @@ APP_ROOT = "/lms_apps"
 
 
 RAW_REPL_FAILED = "could not enter raw repl"
+PUT_SLOWEST = 4096  # bytes per second of the slowest link seen, for the timeout of a copy
+
+
+def put_timeout(size):
+    """Seconds allowed to copy a file of size bytes: 30, plus what the slowest link needs."""
+    return 30 + size / PUT_SLOWEST
 
 
 def break_in(port, sleep=time.sleep):
@@ -224,12 +230,15 @@ class DeviceSession(AutostartMixin):
 
     def _put(self, source, destination, cancel=None, written=None):
         """Copy a file to the board. Over the serial adapter `written` follows the bytes; mpremote says nothing until the end."""
+        # resume: without it mpremote soft-resets the board first, and a running app dies.
+        timeout = put_timeout(Path(source).stat().st_size)
         if self._uart is None or written is None:
-            return self._execute(["connect", self.port, "fs", "cp", str(source), f":{destination}"], timeout=30)
+            options = {"cancel": cancel} if cancel is not None else {}
+            return self._execute(["connect", self.port, "resume", "fs", "cp", str(source), f":{destination}"], timeout=timeout, **options)
         self.stop_console()
         with self._lock:
             try:
-                return self._uart.put(str(source), destination, 30, cancel, written)
+                return self._uart.put(str(source), destination, timeout, cancel, written)
             except UartError as exc:
                 raise DeviceError(exc.code, exc.output) from exc
 

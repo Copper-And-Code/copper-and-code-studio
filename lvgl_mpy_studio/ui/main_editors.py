@@ -1,10 +1,12 @@
 from pathlib import Path
 import re
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtWidgets import QFileDialog, QInputDialog, QMessageBox, QTabBar, QToolButton
+from shiboken6 import isValid
 
 from lvgl_mpy_studio.core.i18n import tr
+from lvgl_mpy_studio.device.common import DeviceError
 from lvgl_mpy_studio.platform import config_dir
 from lvgl_mpy_studio.ui.device_files import folder_items
 from lvgl_mpy_studio.ui.files import FileTab, FilesPanel
@@ -30,6 +32,7 @@ class EditorTabsMixin:
         board.deleteRequested.connect(self.board_delete)
         board.runRequested.connect(lambda path: self.run_file_on_board(path))
         self._board_pending = []
+        self._close_when_written = False  # the window closes once the board has the files being written
         return self.files_panel
 
     def _files_shown(self, visible):
@@ -67,17 +70,26 @@ class EditorTabsMixin:
         return tab
 
     def close_file(self, tab):
+        """Close a tab, asking about unsaved changes. A file of the board closes when the board has it: False until then."""
+        if tab.board_writes:
+            tab.close_when_written = True
+            self.statusBar().showMessage(tr("{name} is being written on the board: the tab closes when it is done.", name=tab.path.name), 5000)
+            return False
         if tab.modified:
             answer = QMessageBox.question(self, tr("Unsaved Changes"), tr("Save changes to {name}?", name=tab.path.name), QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
             if answer == QMessageBox.Cancel:
                 return False
             if answer == QMessageBox.Save and not self._save_file(tab):
                 return False
+            if tab.board_writes:
+                tab.close_when_written = True
+                return False
         self.tabs.removeTab(self.tabs.indexOf(tab))
         tab.deleteLater()
         return True
 
     def _save_file(self, tab):
+        """Save a tab. A file of the board is written there in the background: True means it is on its way."""
         if tab.remote and not self.device.port:
             QMessageBox.warning(self, tr("Save"), tr("{name} is a file of the board: connect to the board to save it.", name=tab.path.name))
             return False
@@ -88,13 +100,39 @@ class EditorTabsMixin:
             return False
         if tab.remote:
             # The local copy is written; the tab stays modified until the board has the file.
-            tab.editor.document().setModified(True)
-            data = tab.path.read_bytes()
+            document = tab.editor.document()
+            document.setModified(True)
+            data, revision, remote = tab.path.read_bytes(), document.revision(), tab.remote
+            tab.board_writes += 1
+
             def saved(_result):
-                tab.editor.document().setModified(False)
-                self.statusBar().showMessage(tr("Saved {path} on the board", path=tab.remote), 3000)
-            self._board_task(lambda: self.device.write_file(tab.remote, data), saved)
+                self._board_write_done(tab, None)
+                if isValid(tab) and document.revision() == revision:  # nothing typed during the write
+                    document.setModified(False)
+                self.statusBar().showMessage(tr("Saved {path} on the board", path=remote), 3000)
+                if isValid(tab) and tab.close_when_written and not tab.board_writes:
+                    tab.close_when_written = False
+                    self.close_file(tab)
+
+            self._board_task(lambda: self.device.write_file(remote, data), saved, lambda error: self._board_write_done(tab, error))
         return True
+
+    def _board_write_done(self, tab, error):
+        if isValid(tab):
+            tab.board_writes = max(0, tab.board_writes - 1)
+            if error is not None:
+                tab.close_when_written = False  # the tab stays, with its changes, to try again
+        if error is not None:
+            self._close_when_written = False
+
+    def board_writes_pending(self):
+        return any(tab.board_writes for tab in self.file_tabs)
+
+    def _close_after_board_writes(self):
+        """Closing the window waits for the files of the board being written; it goes on when they are."""
+        if self._close_when_written and self._worker is None and not self.board_writes_pending():
+            self._close_when_written = False
+            QTimer.singleShot(0, self.close)
 
     def save_current(self):
         """Ctrl+S: the file of the current tab, or the project."""
@@ -117,13 +155,20 @@ class EditorTabsMixin:
     def confirm_files(self):
         """When the window closes: each modified file is saved, discarded, or the closing stops."""
         for tab in self.file_tabs:
-            if not tab.modified:
+            if not tab.modified or tab.board_writes:
                 continue
             self.tabs.setCurrentWidget(tab)
             answer = QMessageBox.question(self, tr("Unsaved Changes"), tr("Save changes to {name}?", name=tab.path.name), QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
             if answer == QMessageBox.Cancel or (answer == QMessageBox.Save and not self._save_file(tab)):
                 return False
+        if self.board_writes_pending():
+            self.wait_for_board_writes()
+            return False
         return True
+
+    def wait_for_board_writes(self):
+        self._close_when_written = True
+        self.statusBar().showMessage(tr("Writing files on the board: the window closes when they are written."))
 
     def current_python_file(self):
         """The .py file of the current tab, if any: Run Program and Run in the Browser offer it first."""
@@ -132,20 +177,28 @@ class EditorTabsMixin:
 
     # ---- Files of the board ----
 
-    def _board_task(self, operation, completed=None):
-        """One operation on the board, now or as soon as the board is free: the IDE does one at a time."""
+    def _board_task(self, operation, completed=None, failed=None):
+        """One operation on the board, now or as soon as the board is free: the IDE does one at a time.
+
+        failed(error) is called if it fails, or if the board goes away before it runs."""
         if not self.device.port:
             self.statusBar().showMessage(tr("Board not connected"), 3000)
+            if failed:
+                failed(DeviceError("device.absent", ""))
             return
-        if self._worker is not None or not self._device_task(operation, completed, background=True):
-            self._board_pending.append((operation, completed))
+        if self._worker is not None or not self._device_task(operation, completed, background=True, failed=failed):
+            self._board_pending.append((operation, completed, failed))
 
     def _run_board_pending(self):
         if self._board_pending and self._worker is None and self.device.port:
-            operation, completed = self._board_pending.pop(0)
-            self._device_task(operation, completed, background=True)
+            operation, completed, failed = self._board_pending.pop(0)
+            self._device_task(operation, completed, background=True, failed=failed)
         elif not self.device.port:
-            self._board_pending.clear()
+            pending, self._board_pending = self._board_pending, []
+            for _operation, _completed, failed in pending:
+                if failed:
+                    failed(DeviceError("device.absent", ""))
+        self._close_after_board_writes()
 
     def _board_list(self, path):
         self._board_task(lambda: self.device.list_dir(path), lambda entries: self.files_panel.board.show_listing(path, entries))

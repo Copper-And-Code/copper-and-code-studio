@@ -737,6 +737,10 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
             self.restoreGeometry(geometry)
 
     def closeEvent(self, event):
+        if self.board_writes_pending():  # not cancelled: the edits would not reach the board
+            self.wait_for_board_writes()
+            event.ignore()
+            return
         if self._worker is not None:
             self.cancel_device_operation()
             self.statusBar().showMessage(tr("Wait for the device operation to finish."))

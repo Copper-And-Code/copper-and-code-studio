@@ -76,6 +76,8 @@ class FileTab(QWidget):
         super().__init__(parent)
         self.path = Path(path).resolve()
         self.remote = remote  # the path on the board, for a file opened from the board: path is its local copy
+        self.board_writes = 0  # writes of this file on the board not finished yet
+        self.close_when_written = False
         self.editor = CodeEditor()
         self.editor.completion_provider = lvgl_completions if self.path.suffix == ".py" else (lambda _text: [])
         self.notice = QLabel()
@@ -373,6 +375,7 @@ class BoardFilesView(QWidget):
         self.connected = False
         # Set by the window from its dock: for docks grouped in tabs, isVisible() is true also behind the other tab.
         self.shown = False
+        self._asked = False  # the top folder was asked for on this connection: a failure is not asked again by itself
         self.title = QLabel(tr("Board"))
         self.refresh_button = QPushButton(tr("Refresh"))
         self.refresh_button.clicked.connect(self.refresh)
@@ -399,16 +402,19 @@ class BoardFilesView(QWidget):
         self.tree.setEnabled(connected)
         if changed:
             self.tree.clear()
+            self._asked = False
 
     def ensure_listed(self):
         """Read the board when the view is seen, not at every connection: reading occupies the board, and
-        an upload or a start asked meanwhile would be refused."""
-        if self.connected and self.shown and self.tree.topLevelItemCount() == 0:
+        an upload or a start asked meanwhile would be refused. Once per connection: if reading fails, or the
+        board is empty, Refresh asks again."""
+        if self.connected and self.shown and not self._asked:
             self.refresh()
 
     def refresh(self):
         """Read the top folder again; open folders are read again when opened."""
         if self.connected:
+            self._asked = True
             self.tree.clear()
             self.listRequested.emit("/")
 

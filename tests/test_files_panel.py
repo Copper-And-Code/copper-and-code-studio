@@ -279,3 +279,117 @@ def test_run_on_the_board_uploads_the_folder_then_runs_the_file(qtbot, tmp_path,
     assert b"".join(typed).startswith(b"\x03import os; os.chdir('/flash/shell'); exec(open('shell.py').read()")
     board.disconnect()
     ide.document.undo_stack.setClean()
+
+
+class SlowBoard(BoardFiles):
+    """Writes wait for release(), so that the test can act while the board is being written."""
+
+    def __init__(self, fail=False):
+        import threading
+
+        super().__init__()
+        self.gate = threading.Event()
+        self.fail = fail
+
+    def write_file(self, path, data):
+        self.gate.wait(5)
+        if self.fail:
+            raise DeviceError("device.timeout", "injected")
+        super().write_file(path, data)
+
+
+def board_tab(qtbot, tmp_path, monkeypatch, board):
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
+    ide = window(qtbot)
+    ide.device = board
+    ide.open_board_file("/flash/main.py")
+    qtbot.waitUntil(lambda: any(tab.remote == "/flash/main.py" for tab in ide.file_tabs), timeout=3000)
+    qtbot.waitUntil(lambda: ide._worker is None, timeout=3000)
+    tab = next(tab for tab in ide.file_tabs if tab.remote == "/flash/main.py")
+    tab.editor.appendPlainText("print(2)")
+    return ide, tab
+
+
+def test_what_is_typed_while_the_board_is_written_stays_unsaved(qtbot, tmp_path, monkeypatch):
+    board = SlowBoard()
+    ide, tab = board_tab(qtbot, tmp_path, monkeypatch, board)
+    ide.save_action.trigger()
+    tab.editor.appendPlainText("print(3)")      # typed while the write is on its way
+    board.gate.set()
+    qtbot.waitUntil(lambda: board.written == ["/flash/main.py"] and ide._worker is None, timeout=3000)
+    assert b"print(3)" not in board.files["/flash/main.py"]
+    assert tab.modified and tab.title().endswith("*")   # still to be saved: closing asks
+    tab.editor.document().setModified(False)
+    board.disconnect()
+    ide.document.undo_stack.setClean()
+
+
+def test_a_tab_of_the_board_closes_when_the_board_has_the_file(qtbot, tmp_path, monkeypatch):
+    board = SlowBoard()
+    ide, tab = board_tab(qtbot, tmp_path, monkeypatch, board)
+    monkeypatch.setattr(QMessageBox, "question", lambda *arguments: QMessageBox.Save)
+    assert not ide.close_file(tab)              # not yet: the board does not have it
+    assert tab in ide.file_tabs
+    board.gate.set()
+    qtbot.waitUntil(lambda: tab not in ide.file_tabs, timeout=3000)
+    assert board.files["/flash/main.py"] == b"print(1)\n\nprint(2)"
+    board.disconnect()
+    ide.document.undo_stack.setClean()
+
+
+def test_the_window_closes_after_the_board_files_are_written(qtbot, tmp_path, monkeypatch):
+    board = SlowBoard()
+    ide, tab = board_tab(qtbot, tmp_path, monkeypatch, board)
+    ide.document.undo_stack.setClean()
+    disconnected = []
+    monkeypatch.setattr(board, "disconnect", lambda: disconnected.append(True))
+    monkeypatch.setattr(QMessageBox, "question", lambda *arguments: QMessageBox.Save)
+    assert not ide.close()                       # waits for the write instead of dropping it
+    assert not disconnected and board.written == []
+    board.gate.set()
+    qtbot.waitUntil(lambda: bool(disconnected), timeout=3000)   # then the window closes by itself
+    assert board.files["/flash/main.py"] == b"print(1)\n\nprint(2)"
+
+
+def test_a_failed_write_keeps_the_tab_and_the_window(qtbot, tmp_path, monkeypatch):
+    board = SlowBoard(fail=True)
+    ide, tab = board_tab(qtbot, tmp_path, monkeypatch, board)
+    ide.document.undo_stack.setClean()
+    disconnected = []
+    monkeypatch.setattr(board, "disconnect", lambda: disconnected.append(True))
+    monkeypatch.setattr(QMessageBox, "question", lambda *arguments: QMessageBox.Save)
+    assert not ide.close()
+    board.gate.set()
+    qtbot.waitUntil(lambda: ide._worker is None and not tab.board_writes, timeout=3000)
+    qtbot.wait(50)
+    assert not disconnected and tab in ide.file_tabs and tab.modified   # the changes are there, to try again
+    assert not ide._close_when_written
+    tab.editor.document().setModified(False)
+    monkeypatch.undo()
+    board.disconnect()
+
+
+def test_a_board_that_cannot_be_listed_is_not_asked_again_and_again(qtbot, tmp_path, monkeypatch):
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
+    ide = window(qtbot)
+    board = BoardFiles()
+    asked = []
+
+    def list_dir(path):
+        asked.append(path)
+        raise DeviceError("device.timeout", "no answer")
+
+    board.list_dir = list_dir
+    ide.device = board
+    ide._update_device_actions()                 # the panel learns the board is connected
+    ide._files_shown(True)
+    qtbot.waitUntil(lambda: bool(asked), timeout=3000)
+    qtbot.wait(300)                              # the failed listing ends, the actions are updated
+    assert asked == ["/"] and ide._worker is None
+    ide.files_panel.board.refresh()              # Refresh asks again, once
+    qtbot.waitUntil(lambda: len(asked) == 2, timeout=3000)
+    qtbot.wait(300)
+    assert len(asked) == 2
+    ide.files_panel.board.shown = False
+    board.disconnect()
+    ide.document.undo_stack.setClean()
