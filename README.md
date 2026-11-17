@@ -32,7 +32,7 @@ A scripted replay of the real IDE, sped up: [more videos](https://copper-and-cod
 - **Design.** A drag and drop designer that shows the page as LVGL draws it, at the resolution of the board, with undo, alignment, and a resolution change that adapts the layout.
 - **Code.** Handlers and modules in Python, with completion, plain-language actions that insert the exact LVGL call, and errors that lead to the handler and line, also when they happen on the board.
 - **Run.** A simulator with touch, keyboard and sound; upload to a board as bytecode; changes to the design shown on the running board shortly after an edit.
-- **Boards.** ESP32-S3, RP2350 and STM32H743 boards with RGB panels, through firmware built in [a repository of its own](https://github.com/Copper-And-Code/mpy-lvgl-boards).
+- **Boards.** ESP32-S3, RP2350, STM32H743 and STM32MP135F boards, through firmware built in [a repository of its own](https://github.com/Copper-And-Code/mpy-lvgl-boards).
 - **Hardware blocks.** Components such as Digital Output and Digital Input, described by a folder of data and MicroPython code that [anyone can write](docs/blocks.md).
 - **Assets.** Pictures and TrueType fonts stored in the project and converted for LVGL by the IDE, kerning included, with no external tool.
 - **Distribute.** Single-file executables for Linux and Windows, a version that runs in the browser as WebAssembly, and portable C sources.

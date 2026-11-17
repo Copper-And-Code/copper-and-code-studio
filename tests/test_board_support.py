@@ -98,6 +98,15 @@ def test_profile_manager_cancel_and_apply(qtbot, tmp_path, monkeypatch):
     assert dialog.result() != QDialog.Accepted
 
 
+def test_stm32mp135_profile_is_available_with_linux_usb_repl():
+    profile = ProfileStore().get("stm32mp135f_dk_480x272")
+    assert profile["origin"] == "builtin"
+    assert profile["adapter"] == "stm32mp135_linux"
+    assert (profile["logicalWidth"], profile["logicalHeight"], profile["scale"]) == (480, 272, 1)
+    assert profile["firmware"] == {"microPython": "1.29.0", "lvgl": "9.5.0", "modules": ["lvgl", "display_driver"]}
+    assert profile["config"]["appRoot"] == "/lms_apps"
+
+
 def test_board_generation_uses_firmware_driver_only(tmp_path):
     project = Project("board")
     project.set_display_size(240, 240)

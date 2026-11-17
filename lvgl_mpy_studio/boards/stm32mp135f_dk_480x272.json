@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "stm32mp135f_dk_480x272",
+  "revision": 1,
+  "name": "STM32MP135F-DK (480×272)",
+  "adapter": "stm32mp135_linux",
+  "firmware": {
+    "microPython": "1.29.0",
+    "lvgl": "9.5.0",
+    "modules": ["lvgl", "display_driver"]
+  },
+  "physicalWidth": 480,
+  "physicalHeight": 272,
+  "logicalWidth": 480,
+  "logicalHeight": 272,
+  "scale": 1,
+  "colorFormat": "RGB565",
+  "fonts": [14, 16, 24, 32, 40],
+  "orientations": [0],
+  "config": {
+    "driver": "display_driver",
+    "buffers": "driver",
+    "eventLoop": "driver",
+    "appRoot": "/lms_apps",
+    "mainPath": "/main.py"
+  }
+}
