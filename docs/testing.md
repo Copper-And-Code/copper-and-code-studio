@@ -21,8 +21,12 @@ says what is checked, by what, how to run it, and what no automated check can se
 QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q
 ```
 
-The tests use a temporary configuration folder and never open serial ports: boards are
-replaced by fakes that answer as `mpremote` or the board's REPL would. Tests that need a
+The tests use a temporary configuration folder and never open a real board's port. Boards
+are replaced by fakes that answer as `mpremote` or the board's REPL would, and, on Linux, by a
+virtual board (`tests/virtual_board.py`): the MicroPython of the runtime behind a
+pseudo-terminal, which the IDE's board code reaches with the real `mpremote` and the real raw
+REPL. Its flash is a folder of the PC it cannot leave; it counts the soft resets, so a test can
+tell whether an operation restarted the board. Tests that need a
 built runtime, the Windows cross-compiler or a browser are skipped, and say why, when those
 are missing.
 
@@ -119,7 +123,7 @@ present, because they write to it. None is written yet.
 - **Whether the IDE is clear and pleasant to use.** No check can say it.
 - **How the IDE looks.** The self-test and the suites check behaviour; nothing compares
   pictures of the IDE's own window yet.
-- **Real boards.** The board code is tested against fakes; touch, speed and the firmware's
+- **Real boards.** The board code is tested against fakes and against a virtual board (`tests/virtual_board.py`: the runtime's MicroPython behind a pseudo-terminal, reached by the real `mpremote`, Linux only); touch, speed and the firmware's
   own behaviour are seen only on hardware.
 - **The system around the IDE.** The system's own file dialogs, dragging from the file
   manager, a real high-resolution screen, a window manager: the checks run without a

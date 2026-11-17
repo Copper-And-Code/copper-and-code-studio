@@ -5,6 +5,7 @@
 ### Added
 
 - **Videos** of the IDE building and running `eim-01`, `weather` and `snake`, on a new page of the website, and a short one at the top of the README. They are made by `tools/showreel`, which drives the real IDE offscreen through a storyboard (`examples/<name>/showreel.toml`) with comic-style balloons; they say they are a scripted replay, sped up.
+- **A virtual board for the tests** (`tests/virtual_board.py`): the MicroPython of the runtime behind a pseudo-terminal, with its flash in a folder it cannot leave. The IDE's board code talks to it with the real `mpremote`: connect, file operations, Upload and Run of an example, Cancel and a cable pulled during a copy. It counts soft resets, and catches the reset that copying files used to cause.
 - **Four scenarios of the self-test** (now 13 scenarios, 105 steps): the Files panel and its tabs; programs without pages and their terminal (Linux); Project Settings and board profiles; the files of a board with Upload Files and Run File on Board, on a board the self-test keeps in memory, so no real board is touched.
 - **Suites run by hand** (`tests/manual`, `pytest --manual`), for checks too long for every push. The first triggers every menu entry and toolbar button in five states of the IDE, answering every dialog with Cancel and with OK, and checks that nothing breaks. See [How it is tested](docs/testing.md), a new page of the documentation.
 
