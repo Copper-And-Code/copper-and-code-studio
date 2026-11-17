@@ -16,7 +16,7 @@
         <link rel="prev" href="../how-it-was-built/">
       
       
-        <link rel="next" href="../case-study-eim-01/">
+        <link rel="next" href="../testing/">
       
       
         
@@ -987,6 +987,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How it is tested
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../case-study-eim-01/" class="md-nav__link">
         
   
@@ -1204,7 +1232,11 @@ below as an open question, not as a formality.</p>
 <h2 id="how-each-area-was-checked">How each area was checked<a class="headerlink" href="#how-each-area-was-checked" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Tests</strong>: covered by the automated suite, more than 1250 tests.</li>
-<li><strong>Self-test</strong>: exercised in the real IDE window by <code>lvgl-mpy-studio selftest</code>.</li>
+<li><strong>Self-test</strong>: exercised in the real IDE window by <code>lvgl-mpy-studio selftest</code>.
+  Besides, a suite run by hand (<code>pytest tests/manual --manual</code>) triggers every menu entry and
+  toolbar button of the IDE in five states, with every dialog answered with Cancel and with
+  OK; it checks that nothing breaks, not that the result is right. It is not a person using
+  the IDE. <a href="../testing/">How it is tested</a> describes every check and what none of them sees.</li>
 <li><strong>Board</strong>: tried on real hardware, with the board named.</li>
 <li><strong>Not tried</strong>: written and tested by machine only, or not at all.</li>
 </ul>
