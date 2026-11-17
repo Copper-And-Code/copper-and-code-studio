@@ -88,7 +88,17 @@ The suite covers generation, fuzzing, the runtime, the GUI, the protocol, all 30
 .venv/bin/lvgl-mpy-studio selftest
 ```
 
-The self-test opens the real IDE and drives it through nine scenarios; see the [manual](manual.md#self-test).
+The self-test opens the real IDE and drives it through nine scenarios; see the [manual](manual.md#self-test). [How it is tested](testing.md) has the whole picture.
+
+### Suites run by hand
+
+`tests/manual` holds suites too long for every push, skipped unless pytest gets `--manual`:
+
+```bash
+QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual --manual
+```
+
+[How it is tested](testing.md) describes them, with the other checks and what none of them sees.
 
 ## Videos
 

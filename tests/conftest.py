@@ -47,3 +47,20 @@ def no_blocking_question(monkeypatch):
     except ImportError:
         return
     monkeypatch.setattr(QMessageBox, "question", lambda *arguments, **options: QMessageBox.Discard)
+
+
+# ---- Suites run by hand: tests/manual, see docs/development.md ----
+
+def pytest_addoption(parser):
+    parser.addoption("--manual", action="store_true", help="run the tests marked manual: long suites, run when someone decides to")
+    parser.addoption("--board", metavar="PORT", help="run the tests marked board on the real board at PORT; only with its owner present")
+
+
+def pytest_collection_modifyitems(config, items):
+    manual = config.getoption("--manual")
+    port = config.getoption("--board")
+    for item in items:
+        if item.get_closest_marker("manual") and not manual:
+            item.add_marker(pytest.mark.skip(reason="manual suite: run it with --manual"))
+        if item.get_closest_marker("board") and not port:
+            item.add_marker(pytest.mark.skip(reason="needs a real board: run it with --board PORT"))

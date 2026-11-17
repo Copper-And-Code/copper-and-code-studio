@@ -171,6 +171,20 @@ def test_run_file_on_board_types_at_the_prompt(qtbot, tmp_path):
     window.document.undo_stack.setClean()
 
 
+def test_the_menu_entry_asks_which_file_to_run(qtbot, monkeypatch):
+    """triggered passes checked to its slot: it once arrived as the text and the entry failed."""
+    from PySide6.QtWidgets import QInputDialog
+    from lvgl_mpy_studio.ui.main_window import MainWindow
+
+    asked = []
+    monkeypatch.setattr(QInputDialog, "getText", lambda *arguments, **options: asked.append(options.get("text")) or ("", False))
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.run_file_action.setEnabled(True)
+    window.run_file_action.trigger()
+    assert len(asked) == 1                  # it asks; what it offers is the last file run
+
+
 @pytest.mark.parametrize("answer", ["no", "yes"])
 def test_the_upload_asks_before_a_folder_hides_a_module(qtbot, tmp_path, monkeypatch, answer):
     from PySide6.QtWidgets import QMessageBox

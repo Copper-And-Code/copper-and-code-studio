@@ -36,6 +36,10 @@ include = ["lvgl_mpy_studio*"]
 testpaths = ["tests"]
 pythonpath = ["."]  # tests import tools/build_site.py
 addopts = "-ra"
+markers = [
+    "manual: a long suite run by hand with --manual (tests/manual), never in the CI",
+    "board: needs a real board, given with --board PORT",
+]
 
 [tool.ruff]
 line-length = 320

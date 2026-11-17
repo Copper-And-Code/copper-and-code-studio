@@ -108,7 +108,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.new_action = QAction(tr("New"), self, shortcut=QKeySequence.New, triggered=self.new_project)
         self.open_action = QAction(tr("Open…"), self, shortcut=QKeySequence.Open, triggered=self.open_project_dialog)
         self.save_action = QAction(tr("Save"), self, shortcut=QKeySequence.Save, triggered=self.save_current)
-        self.save_as_action = QAction(tr("Save As…"), self, shortcut=QKeySequence.SaveAs, triggered=self.save_project_as)
+        self.save_as_action = QAction(tr("Save As…"), self, shortcut=QKeySequence.SaveAs, triggered=lambda: self.save_project_as())
         self.exit_action = QAction(tr("Exit"), self, shortcut=QKeySequence.Quit, triggered=self.close)
         self.undo_action = self.document.undo_stack.createUndoAction(self, tr("Undo"))
         self.undo_action.setShortcut(QKeySequence.Undo)
@@ -151,7 +151,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.erase_flash_action = QAction(tr("Erase Program Flash…"), self, triggered=self.erase_program_flash)
         self.program_web_action = QAction(tr("Run in the Browser…"), self, triggered=lambda: self.program_in_browser())
         self.program_web_action.setToolTip(tr("Run a MicroPython file without pages in the browser, as a web page; the Output panel says where the folder to publish is"))
-        self.build_action = QAction(tr("Build Executable…"), self, triggered=self.build_executable)
+        self.build_action = QAction(tr("Build Executable…"), self, triggered=lambda: self.build_executable())
         self.single_file_action = QAction(tr("Build Single-File Executable…"), self, triggered=self.build_single_file)
         self.web_action = QAction(tr("Open in Browser"), self, triggered=self.open_in_browser)
         self._web_server = None
@@ -183,7 +183,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.board_stop_action = QAction(tr("Stop"), self, triggered=self.stop_board)
         self.upload_files_action = QAction(tr("Upload Files…"), self, triggered=self.upload_files)
         self.upload_files_action.setToolTip(tr("Copy files or folders of the PC to the board, outside the project: programs, data, binaries"))
-        self.run_file_action = QAction(tr("Run File on Board…"), self, triggered=self.run_file_on_board)
+        self.run_file_action = QAction(tr("Run File on Board…"), self, triggered=lambda: self.run_file_on_board())  # triggered passes checked: it is not the text
         self.run_file_action.setToolTip(tr("Run a file of the board, or a line of Python, from its prompt: the program takes the keys of the Device Console"))
         self.autostart_install_action = QAction(tr("Install Autostart…"), self, triggered=self.install_autostart)
         self.autostart_remove_action = QAction(tr("Remove Autostart…"), self, triggered=self.remove_autostart)
