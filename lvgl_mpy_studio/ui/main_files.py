@@ -49,7 +49,14 @@ class FilesMixin:
         self.tabs.setCurrentIndex(0)
         self.output.clear()
         self.errors.clear()
+        self._warn_board_not_in_catalog()
         return True
+
+    def _warn_board_not_in_catalog(self):
+        """A project keeps a copy of its board: it opens and works when the board was deleted, or imported elsewhere."""
+        board = self.document.project.board
+        if board and self.profile_store.get(board.get("id")) is None:
+            self.output.appendPlainText(tr("The board {name} of this project is not among the boards of the IDE: it was deleted, or imported on another computer. The project keeps its own copy of the board and works with it; import the board again to update it.", name=board.get("name") or board.get("id")))
 
     def save_project(self, overwrite_external=False):
         if not self.document.path:

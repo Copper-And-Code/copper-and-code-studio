@@ -18,7 +18,7 @@ from .build.compiler import CompileError
 from .build.preview import render_with_log
 from .build.visual import PASSED, UPDATED, baseline_dir, encode_png, rgb565_to_rgb, run_visual_tests, save_scenario as save_scenario_file
 from .core.actions import SCREEN_ACTIONS, actions_for
-from .core.boards import ProfileStore, profile_fonts, portable_profile
+from .core.boards import ProfileError, ProfileStore, portable_profile, profile_error_text, profile_fonts
 from .core.components import BLOCKS, COMPONENTS, block_for, is_component
 from .core.events import events_for
 from .core.i18n import device_error_text, set_language
@@ -635,7 +635,24 @@ def build(arguments):
 
 
 def list_boards(_arguments):
-    return [{"id": item["id"], "name": item.get("name"), "width": item["logicalWidth"], "height": item["logicalHeight"], "fonts": profile_fonts(item)} for item in ProfileStore().profiles()]
+    return [{"id": item["id"], "name": item.get("name"), "width": item["logicalWidth"], "height": item["logicalHeight"], "fonts": profile_fonts(item), "origin": item["origin"]} for item in ProfileStore().profiles()]
+
+
+def import_board(arguments):
+    store = ProfileStore()
+    try:
+        profile = store.import_profile(Path(arguments["file"]).expanduser(), replace=bool(arguments.get("replace")))
+    except ProfileError as exc:
+        raise ToolError(f"{exc.code}: {profile_error_text(exc)}") from None
+    return {"id": profile["id"], "name": profile["name"], "width": profile["logicalWidth"], "height": profile["logicalHeight"]}
+
+
+def delete_board(arguments):
+    store = ProfileStore()
+    board = _board(arguments["board"])
+    store.delete(board["id"])
+    store.save()
+    return {"deleted": board["id"], "hidden": board["origin"] == "builtin"}
 
 
 def _board(board_id):

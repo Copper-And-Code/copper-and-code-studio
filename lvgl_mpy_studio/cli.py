@@ -126,6 +126,33 @@ def _visual_tests(args, project):
     return 0 if all(result.status in (PASSED, UPDATED) for result in results) else 1
 
 
+def _board_command(args):
+    from .core.boards import ProfileError, ProfileStore, profile_error_text, write_profile_file
+
+    store = ProfileStore()
+    if args.board_command == "list":
+        for profile in store.profiles():
+            print(f"{profile['id']}\t{profile['logicalWidth']}x{profile['logicalHeight']}\t{profile['origin']}\t{profile['name']}")
+        return 0
+    if args.board_command == "import":
+        try:
+            profile = store.import_profile(args.file, replace=args.replace)
+        except ProfileError as exc:
+            raise ValueError(profile_error_text(exc) + (" " + tr("Use --replace to replace it.") if exc.code == "profile.import.exists" else "")) from None
+        print(profile["id"])
+        return 0
+    profile = store.get(args.board)
+    if profile is None:
+        raise ValueError(tr("Unknown board {board}: see `board list`.", board=args.board))
+    if args.board_command == "export":
+        print(write_profile_file(profile, args.file))
+        return 0
+    store.delete(profile["id"])
+    store.save()
+    print(tr("{board} hidden: the Board Profile Manager restores it.", board=profile["id"]) if profile["origin"] == "builtin" else tr("{board} deleted.", board=profile["id"]))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     arguments = list(sys.argv[1:] if argv is None else argv)
     if arguments[:1] == ["_mpremote"]:
@@ -175,6 +202,17 @@ def main(argv: list[str] | None = None) -> int:
     selftest.add_argument("--slow", type=int, default=None, metavar="MS", help=tr("Pause after each action, in milliseconds; 400 with --show"))
     selftest.add_argument("--output", type=Path, help=tr("Folder of the report"))
     selftest.add_argument("--list", action="store_true", help=tr("List the scenarios"))
+    boards = commands.add_parser("board", help=tr("Boards of the IDE: list, import from a file, export, delete"), description=tr("Boards of the IDE: list, import from a file, export, delete"))
+    board_commands = boards.add_subparsers(dest="board_command", required=True)
+    board_commands.add_parser("list")
+    board_import = board_commands.add_parser("import", help=tr("Add the board defined in a .json file"))
+    board_import.add_argument("file", type=Path)
+    board_import.add_argument("--replace", action="store_true", help=tr("Replace a board of the same id that is not built in"))
+    board_export = board_commands.add_parser("export", help=tr("Write a board to a .json file"))
+    board_export.add_argument("board")
+    board_export.add_argument("file", type=Path)
+    board_delete = board_commands.add_parser("delete", help=tr("Remove a board; a built-in one is hidden"))
+    board_delete.add_argument("board")
     device = commands.add_parser("device", help=tr("MicroPython board operations"), description=tr("MicroPython board operations"))
     device_commands = device.add_subparsers(dest="device_command", required=True)
     device_commands.add_parser("list")
@@ -211,6 +249,8 @@ def main(argv: list[str] | None = None) -> int:
         try:
             if args.command == "device":
                 return _device_command(args, parser)
+            if args.command == "board":
+                return _board_command(args)
             project = Project.load(args.project)
             base = args.project.resolve().parent
             if args.command == "test":

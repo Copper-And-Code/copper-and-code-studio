@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 
 from lvgl_mpy_studio.build.compiler import default_mpy_cross
-from lvgl_mpy_studio.core.boards import ADAPTERS, compatible, portable_profile, profile_fonts, validate_profile
+from lvgl_mpy_studio.core.boards import adapter_requirements, compatible, portable_profile, profile_fonts, validate_profile
 from lvgl_mpy_studio.core.i18n import tr
 from lvgl_mpy_studio.core.modules import module_files
 from lvgl_mpy_studio.core.validation import validate_project
@@ -162,7 +162,7 @@ def generate_board(project, profile, output_dir, fonts=None):
     warnings = validate_project(project) + design_warnings(project)
     profile = portable_profile(profile)
     validate_profile(profile)
-    if profile["adapter"] not in ADAPTERS:
+    if adapter_requirements(profile) is None:
         raise ValueError("device.adapter.unavailable")
     if not compatible(project, profile):
         raise ValueError(f"device.resolution:{profile['logicalWidth']}x{profile['logicalHeight']}")

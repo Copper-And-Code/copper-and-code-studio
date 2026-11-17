@@ -334,6 +334,21 @@ SPECS = {
         {},
         [],
     ),
+    "import_board": (
+        "Add a board to list_boards from a board definition: a .json file with the fields of a board profile (schemaVersion 1). A board of the same id that came from a file is replaced only with replace; a built-in board never.",
+        {
+            "file": {"type": "string", "description": "Path of the .json file"},
+            "replace": {"type": "boolean", "description": "Replace a board of the same id that is not built in"},
+        },
+        ["file"],
+    ),
+    "delete_board": (
+        "Remove a board from list_boards. A built-in board is hidden, and the Board Profile Manager restores it; any other is removed. Projects that use it keep their copy of the board.",
+        {
+            "board": {"type": "string", "description": "Board id, from list_boards"},
+        },
+        ["board"],
+    ),
     "set_board": (
         "Assign a board profile to the project, scaling its widgets to the board.",
         {

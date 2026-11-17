@@ -1,9 +1,11 @@
 import copy
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QComboBox, QDialog, QDialogButtonBox, QFormLayout, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QSpinBox, QTreeWidget, QTreeWidgetItem, QVBoxLayout
+from PySide6.QtWidgets import QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QSpinBox, QTreeWidget, QTreeWidgetItem, QVBoxLayout
 
-from lvgl_mpy_studio.core.boards import ADAPTERS, builtin_profiles, portable_profile, profile_diagnostics
+from lvgl_mpy_studio.core.boards import (
+    ADAPTERS, ProfileError, builtin_profiles, portable_profile, profile_diagnostics, profile_error_text, read_profile_file, write_profile_file,
+)
 from lvgl_mpy_studio.core.i18n import tr
 
 
@@ -50,9 +52,9 @@ class ProfileManagerDialog(QDialog):
         form.addRow("", QLabel(tr("Driver and buffers are fixed by the adapter firmware.")))
         layout.addLayout(form)
         buttons = QHBoxLayout()
-        for text, callback in ((tr("New"), self.new), (tr("Edit"), self.apply_edit), (tr("Duplicate"), self.duplicate), (tr("Delete"), self.delete), (tr("Restore Default"), self.restore_default), (tr("Restore Hidden Profiles"), self.restore_hidden)):
+        for text, callback in ((tr("New"), self.new), (tr("Edit"), self.apply_edit), (tr("Duplicate"), self.duplicate), (tr("Delete"), self.delete), (tr("Restore Default"), self.restore_default), (tr("Restore Hidden Profiles"), self.restore_hidden), (tr("Import…"), self.import_file), (tr("Export…"), self.export_file)):
             button = QPushButton(text)
-            button.clicked.connect(callback)
+            button.clicked.connect(lambda _checked=False, callback=callback: callback())   # not the checked state as an argument
             buttons.addWidget(button)
         layout.addLayout(buttons)
         self.buttons = QDialogButtonBox(QDialogButtonBox.Apply | QDialogButtonBox.Cancel)
@@ -67,7 +69,7 @@ class ProfileManagerDialog(QDialog):
         self.tree.clear()
         names = [profile["name"] for profile in self.profiles_data.values()]
         for profile in self.profiles_data.values():
-            origin = tr("Built-in") if profile.get("origin") == "builtin" else tr("Custom profile")
+            origin = {"builtin": tr("Built-in"), "imported": tr("Imported")}.get(profile.get("origin"), tr("Custom profile"))
             valid = not profile_diagnostics(profile)
             display_name = f"{profile['name']} [{profile['id']}]" if names.count(profile["name"]) > 1 else profile["name"]
             item = QTreeWidgetItem([display_name, origin, profile["adapter"], f"{profile['logicalWidth']}×{profile['logicalHeight']}", f"{profile['physicalWidth']}×{profile['physicalHeight']}", str(profile["revision"]), tr("Valid") if valid else tr("Invalid")])
@@ -89,6 +91,8 @@ class ProfileManagerDialog(QDialog):
         self._loading = True
         self.name.setText(profile["name"])
         self.identifier.setText(profile["id"])
+        if self.adapter.findText(profile["adapter"]) < 0:   # the adapter of a board from a file: kept when it is edited
+            self.adapter.addItem(profile["adapter"])
         self.adapter.setCurrentText(profile["adapter"])
         self.revision.setValue(profile["revision"])
         self.logical_width.setValue(profile["logicalWidth"])
@@ -117,7 +121,7 @@ class ProfileManagerDialog(QDialog):
         if not original:
             raise ValueError("profile.selection")
         profile = copy.deepcopy(original)
-        profile.update(name=self.name.text(), adapter=self.adapter.currentText(), revision=self.revision.value(), logicalWidth=self.logical_width.value(), logicalHeight=self.logical_height.value(), physicalWidth=self.physical_width.value(), physicalHeight=self.physical_height.value(), scale=self.scale.value(), origin="custom")
+        profile.update(name=self.name.text(), adapter=self.adapter.currentText(), revision=self.revision.value(), logicalWidth=self.logical_width.value(), logicalHeight=self.logical_height.value(), physicalWidth=self.physical_width.value(), physicalHeight=self.physical_height.value(), scale=self.scale.value(), origin="imported" if original.get("origin") == "imported" else "custom")
         return profile
 
     def new(self):
@@ -169,6 +173,47 @@ class ProfileManagerDialog(QDialog):
             self.profiles_data.setdefault(profile["id"], profile)
         self.refresh()
 
+    def import_file(self, path=None):
+        """A board definition from a .json file; it is kept with Apply, as every change here."""
+        if path is None:
+            path, _filter = QFileDialog.getOpenFileName(self, tr("Import Board"), "", tr("Board definitions (*.json)"))
+            if not path:
+                return None
+        try:
+            profile = read_profile_file(path)
+        except ProfileError as exc:
+            QMessageBox.warning(self, tr("Import Board"), profile_error_text(exc))
+            return None
+        except OSError as exc:
+            QMessageBox.warning(self, tr("Import Board"), str(exc))
+            return None
+        if profile["id"] in {item["id"] for item in builtin_profiles()}:
+            QMessageBox.warning(self, tr("Import Board"), profile_error_text(ProfileError("profile.import.builtin", id=profile["id"])))
+            return None
+        existing = self.profiles_data.get(profile["id"])
+        if existing is not None:
+            question = tr("A board with the id {id} is already there: {name}. Replace it with the one in the file?", id=profile["id"], name=existing["name"])
+            if QMessageBox.question(self, tr("Import Board"), question) != QMessageBox.Yes:
+                return None
+        profile["origin"] = "imported"
+        self.profiles_data[profile["id"]] = profile
+        self.refresh(profile["id"])
+        return profile
+
+    def export_file(self, path=None):
+        profile = self.selected()
+        if not profile:
+            return None
+        if path is None:
+            path, _filter = QFileDialog.getSaveFileName(self, tr("Export Board"), f"{profile['id']}.json", tr("Board definitions (*.json)"))
+            if not path:
+                return None
+        try:
+            return write_profile_file(profile, path)
+        except (OSError, ValueError) as exc:
+            QMessageBox.warning(self, tr("Export Board"), str(exc))
+            return None
+
     def _diagnostics(self):
         return [(profile, profile_diagnostics(profile)) for profile in self.profiles_data.values() if profile_diagnostics(profile)]
 
@@ -187,15 +232,16 @@ class ProfileManagerDialog(QDialog):
         self.accept()
 
     def apply_to_store(self):
-        custom = {}
+        custom, imported = {}, []
         for profile_id, profile in self.profiles_data.items():
-            if profile.get("origin") == "custom":
-                value = portable_profile(profile)
-                custom[profile_id] = value
+            if profile.get("origin") in ("custom", "imported"):
+                custom[profile_id] = portable_profile(profile)
+            if profile.get("origin") == "imported":
+                imported.append(profile_id)
         builtin_ids = {profile["id"] for profile in builtin_profiles()}
         hidden = [profile_id for profile_id in builtin_ids if profile_id not in self.profiles_data]
         previous = self.store.snapshot()
-        self.store.restore({"custom": custom, "hidden": hidden})
+        self.store.restore({"custom": custom, "hidden": hidden, "imported": imported})
         try:
             self.store.save()
         except Exception:
