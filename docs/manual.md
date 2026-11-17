@@ -352,7 +352,7 @@ Other entries of the **Device** menu:
 - **Run File on Board…** types at the board's prompt the line that runs a file of the board, such as `/flash/shell.py`, from its folder, or any line of Python. The program reads its keys from **Device Console**, as from PuTTY.
 - **Device Information**: firmware, LVGL version, memory, touch and compatibility with the profile.
 - **Install Autostart…**: the app starts on its own when the board powers up. **Remove Autostart…** restores the earlier launcher, saved by the IDE.
-- **Manage Board Profiles…**: profiles describe display, touch, buzzer and requirements of each board.
+- **Manage Board Profiles…**: profiles describe display, touch, buzzer and requirements of each board. **Import…** adds a board from a `.json` file and **Export…** writes one: see [Board definitions from a file](boards.md#board-definitions-from-a-file).
 
 Each project has its own identifier, so on the board it goes to a separate folder and does not overwrite other apps, even with the same name.
 

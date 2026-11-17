@@ -286,3 +286,12 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 - A separate repository keeps the desktop IDE's history, CI and releases as they are, and lets
   the web version follow a tag of this one instead of every commit.
 
+
+## Boards from a file (2026-11-17)
+
+- Until now a new board meant a change to the IDE: a profile in `lvgl_mpy_studio/boards/` and its adapter in the `ADAPTERS` table of `core/boards.py`, which the validation and the board generator checked. Boards in development, experimental ones, or boards of other people did not fit there, and a public repository is not the place for boards that are not ready.
+- The table added little. The modules a board needs are already in its profile (`firmware.modules`), every board works with the same `display_driver` contract, and the IDE reaches every board through `mpremote` except the STM32 over UART. So an adapter the IDE has no code for is now valid when it is an identifier (`[a-z0-9_]`, at most 64 characters), and its needs are read from the profile. The adapters of the table keep their own. The validation and the generator ask the same function, `adapter_requirements`, so they cannot disagree.
+- The file is a `.json` with the schema of the built-in profiles, not an archive. The profile is all the IDE needs to know about a board. A JSON file can be read, compared with a diff and written by hand, and it brings none of the risks of an archive: paths that leave the folder, archives that expand without end, executables. If one day a board has to bring more with it (firmware, images, documentation), the plan is a `.zip` with `board.json` at its root, read by the same import. Nothing of that is written.
+- The import refuses an id of a built-in board instead of replacing it: a file must not change a board the IDE ships under the same name. A board imported before is replaced after a question, or with `--replace`. Imported boards are kept with the customized ones in `board-profiles.json`, with the list of their ids under `imported`, so the Board Profile Manager can show them as such.
+- Deleting an imported board removes it; deleting a built-in one hides it, as before. A project keeps its own copy of its board, so it opens and works when the board is no longer there, with a notice in the Output panel and not an error.
+- The same functions serve the Board Profile Manager, the command line (`board list|import|export|delete`) and MCP (`import_board`, `delete_board`), so the three cannot accept different files.

@@ -6,7 +6,7 @@ says in which repository each layer lives.
 
 | Layer | What it does | Where |
 |---|---|---|
-| 7. Agents | An AI agent designs, runs and tests an application through 49 tools | this repository, `mcp_server.py` |
+| 7. Agents | An AI agent designs, runs and tests an application through 51 tools | this repository, `mcp_server.py` |
 | 6. IDE | Designer, code editor, generators, board upload | this repository |
 | 5. Simulator | The same MicroPython and LVGL on the PC, and in the browser as WebAssembly | this repository, `native/lvsim`, `runtime/` |
 | 4. Contract | What an application may assume of a board: `display_driver`, the board profile | both repositories |

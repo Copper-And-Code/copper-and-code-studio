@@ -352,7 +352,7 @@ Altre voci del menu **Dispositivo**:
 - **Esegui file sulla board…** scrive al prompt della board la riga che esegue un file della board, come `/flash/shell.py`, dalla sua cartella, o una qualsiasi riga di Python. Il programma legge i tasti da **Console dispositivo**, come da PuTTY.
 - **Informazioni dispositivo**: firmware, versione di LVGL, memoria, touch e compatibilità con il profilo.
 - **Installa avvio automatico…**: l'app parte da sola all'accensione della board. **Rimuovi avvio automatico…** ripristina il lanciatore di prima, salvato dall'IDE.
-- **Gestisci profili board…**: i profili descrivono display, touch, buzzer e requisiti di ogni board.
+- **Gestisci profili board…**: i profili descrivono display, touch, buzzer e requisiti di ogni board. **Importa…** aggiunge una board da un file `.json` ed **Esporta…** ne scrive una: vedi [Board definitions from a file](boards.md#board-definitions-from-a-file).
 
 Ogni progetto ha un identificativo suo, quindi sulla board finisce in una cartella separata e non sovrascrive altre app, anche se hanno lo stesso nome.
 

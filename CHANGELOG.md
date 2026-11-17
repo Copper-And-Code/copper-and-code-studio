@@ -10,6 +10,8 @@
 - **Random use** (`tests/manual/test_random_use.py`): random sequences of what a person does in the window, checked after every step, shortened to the fewest steps when a check fails.
 - **Suites run by hand** (`tests/manual`, `pytest --manual`), for checks too long for every push. The first triggers every menu entry and toolbar button in five states of the IDE, answering every dialog with Cancel and with OK, and checks that nothing breaks. See [How it is tested](docs/testing.md), a new page of the documentation.
 
+- **Boards from a file.** A board the IDE does not ship is added from a `.json` board definition, with no change to the IDE: **Import…** and **Export…** in the Board Profile Manager, `lvgl-mpy-studio board list|import|export|delete`, and the MCP tools `import_board` and `delete_board`. A board can name an adapter the IDE has no code for; it then needs what its profile lists. A project whose board was deleted keeps its copy and opens with a notice. See [Board definitions from a file](docs/boards.md#board-definitions-from-a-file).
+
 ### Fixed
 
 - `eim-01` and `eim-01-480` asked for font sizes their boards do not have (193 and 194 labels), so the Output panel filled with warnings at each Start. They now ask for the size that was drawn anyway, so they look the same; a test checks that no example has such warnings. The visual baselines of `eim-01` were still those before the em dash fix of 0.7.1, and are updated.

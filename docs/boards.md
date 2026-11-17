@@ -64,6 +64,42 @@ Ctrl+C returns status 130 for non-interactive commands. In the interactive REPL 
 
 **Settings → Language** switches Italian/English immediately and saves the preference without changing the project. **Device → Manage Board Profiles…** provides create, edit, duplicate, delete and restore operations. Changes persist only with **Apply**. Editing a built-in profile creates a user customization; deleting it hides it. Projects retain their portable copy and are updated only through **Update Project Profile**, with undo.
 
+### Board definitions from a file
+
+A board the IDE does not ship can be added from a file, with no change to the IDE. The file is a `.json` board definition with the same fields as the profiles in `lvgl_mpy_studio/boards/` (`schemaVersion` 1), at most 64 KiB, in UTF-8.
+
+```json
+{
+  "schemaVersion": 1,
+  "id": "my_board_320x240",
+  "revision": 1,
+  "name": "My board (320×240)",
+  "adapter": "my_board",
+  "firmware": {"microPython": "1.29.0", "lvgl": "9.5.0", "modules": ["lvgl", "display_driver"]},
+  "physicalWidth": 320, "physicalHeight": 240, "logicalWidth": 320, "logicalHeight": 240, "scale": 1,
+  "colorFormat": "RGB565",
+  "fonts": [14, 16, 24],
+  "orientations": [0],
+  "config": {"driver": "display_driver", "buffers": "driver", "eventLoop": "driver", "appRoot": "/lms_apps", "mainPath": "/main.py"}
+}
+```
+
+`adapter` names the firmware side of the board. An adapter the IDE has no code for is accepted when it is an identifier (`a-z`, `0-9` and `_`, up to 64 characters): the board then needs the modules of `firmware.modules` and the color format of the profile, and the IDE reaches it through `mpremote`, as every board except the STM32 over UART. The firmware must provide `display_driver` as the built-in boards do.
+
+- **Device → Manage Board Profiles… → Import…** reads the file and shows the board as *Imported*; **Apply** keeps it. A board with the id of a built-in one is refused; one with the id of a board already imported is replaced after a question. **Export…** writes the selected board to a file that imports back as the same board. **Delete** removes an imported board; a built-in one is hidden and can be restored.
+- From the command line:
+
+  ```bash
+  lvgl-mpy-studio board list
+  lvgl-mpy-studio board import my_board.json            # --replace to replace an imported board of the same id
+  lvgl-mpy-studio board export my_board_320x240 copy.json
+  lvgl-mpy-studio board delete my_board_320x240
+  ```
+
+- For agents, the MCP tools `import_board` and `delete_board`; `list_boards` shows imported boards with `"origin": "imported"`, and `set_board` selects them.
+
+Imported boards are kept in `board-profiles.json`, in the settings folder (`~/.config/lvgl-mpy-studio/` or `XDG_CONFIG_HOME`). A project keeps its own copy of its board: it still opens and works after the board is deleted, or on a computer where the board was never imported, and the Output panel says so.
+
 ### Fonts
 
 A profile can list the Montserrat sizes of its firmware in `fonts`, for example `"fonts": [14, 16, 24, 32, 40]`. Text asked in a size the board lacks is drawn in the nearest one, in the designer preview, in the simulator and on the board alike. A profile without the list is taken to have 14, 16 and 24; a project without a board uses the five sizes of the simulator, 14, 16, 24, 32 and 40.

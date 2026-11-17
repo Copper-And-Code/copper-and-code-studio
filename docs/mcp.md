@@ -16,7 +16,7 @@ There are no limits compared to the IDE. With the server on, an agent can run pr
 
 | Area | Tools |
 |---|---|
-| Project | `create_project`, `project_info`, `validate`, `set_resolution`, `adapt_page`, `list_boards`, `set_board` |
+| Project | `create_project`, `project_info`, `validate`, `set_resolution`, `adapt_page`, `list_boards`, `set_board`, `import_board`, `delete_board` |
 | Images and fonts | `add_image`, `remove_image`, `add_font`, `remove_font`; `project_info` lists them |
 | Design | `list_widget_types`, `list_blocks`, `add_page`, `rename_page`, `remove_page`, `add_widget`, `add_widgets`, `update_widget`, `move_widget`, `remove_widget` |
 | Code | `get_code`, `patch_code`, `set_handler`, `set_module_code`, `suggest_code` |
