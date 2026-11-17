@@ -187,7 +187,7 @@ def build_micropython_release(project, dist_root=None, profile="debug"):
     if IS_WINDOWS:
         sdl = runtime.parent / "SDL2.dll"
         if not sdl.exists():
-            raise FileNotFoundError(f"DLL SDL2 mancante: {sdl}")
+            raise FileNotFoundError(f"SDL2 DLL missing: {sdl}")
         shutil.copy2(sdl, output / "SDL2.dll")
         make_windows_gui(output / runtime_name)
     if profile == "debug":
@@ -218,7 +218,7 @@ def build_c_release(project, dist_root=None):
     if IS_WINDOWS:
         sdl = runtime_path().parent / "SDL2.dll"
         if not sdl.exists():
-            raise FileNotFoundError(f"DLL SDL2 mancante: {sdl}")
+            raise FileNotFoundError(f"SDL2 DLL missing: {sdl}")
         shutil.copy2(sdl, output / "SDL2.dll")
         make_windows_gui(output / app_name)
     shutil.rmtree(generated)

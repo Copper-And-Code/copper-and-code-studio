@@ -132,7 +132,7 @@ class ProjectDocument(QObject):
         """Save. On the open file refuse to erase an outside change, unless overwrite_external."""
         target = Path(path) if path else self.path
         if not target:
-            raise ValueError("Nessun percorso di salvataggio")
+            raise ValueError("No path to save the project to")
         same_file = self.path is not None and target.resolve() == self.path.resolve()
         state = self.external_change() if same_file and not overwrite_external else None
         if state:

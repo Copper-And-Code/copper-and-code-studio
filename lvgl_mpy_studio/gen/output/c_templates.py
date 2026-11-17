@@ -144,7 +144,7 @@ $(APP): $(APP_SOURCES) ui.h ui_events.h $(CACHE_DIR)/liblvgl.a
 
 ifeq ($(OS),Windows_NT)
 $(CACHE_DIR)/liblvgl.a:
-	@printf 'Libreria LVGL Windows mancante: %s\n' "$@" >&2
+	@printf 'Windows LVGL library missing: %s\n' "$@" >&2
 	@exit 1
 else
 $(CACHE_DIR)/liblvgl.a: $(LVGL_OBJECTS)

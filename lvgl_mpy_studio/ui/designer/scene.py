@@ -497,7 +497,7 @@ class DesignerScene(QGraphicsScene):
                 widget = project.find_widget(name)
                 widget.props["x"] = int(widget.props.get("x", 0)) + dx
                 widget.props["y"] = int(widget.props.get("y", 0)) + dy
-        self.document.execute("Sposta widget", mutate)
+        self.document.execute("Move Widgets", mutate)
 
     def copy_selected(self, cut=False):
         selected = set(self.selected_names())

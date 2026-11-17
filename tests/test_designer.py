@@ -194,3 +194,18 @@ def test_resize_handle_has_minimum_and_undo(qtbot):
     assert document.project.find_widget("button1").props["width"] == 150
     document.undo_stack.undo()
     assert document.project.find_widget("button1").props["width"] == 100
+
+
+def test_moving_with_the_keys_is_undone_by_an_english_name(qtbot):
+    """The undo entry of a move with the arrow keys was in Italian whatever the language."""
+    from lvgl_mpy_studio.ui.main_window import MainWindow
+
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.new_project()
+    window.document.execute("Add", lambda project: project.add_widget(project.pages[0], "button"))
+    scene = window.current_designer().designer_scene
+    next(iter(scene.widget_items.values())).setSelected(True)
+    scene.move_selected(1, 0)
+    assert window.document.undo_stack.undoText() == "Move Widgets"
+    window.document.undo_stack.setClean()

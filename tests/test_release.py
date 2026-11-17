@@ -132,7 +132,7 @@ def test_launcher_alone_explains_itself(tmp_path):
     assert result.returncode != 0 and "No app attached" in result.stdout + result.stderr
 
 
-needs_windows_onefile = pytest.mark.skipif(not (ROOT / "runtime/out-win64/lvsim-onefile.exe").exists() or shutil.which("wine") is None, reason="lanciatore Windows a file unico o Wine mancanti")
+needs_windows_onefile = pytest.mark.skipif(not (ROOT / "runtime/out-win64/lvsim-onefile.exe").exists() or shutil.which("wine") is None, reason="single-file Windows launcher or Wine not available")
 
 
 def test_windows_single_file_has_its_own_name_and_no_console(tmp_path, monkeypatch):
