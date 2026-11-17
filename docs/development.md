@@ -88,7 +88,7 @@ The suite covers generation, fuzzing, the runtime, the GUI, the protocol, all 30
 .venv/bin/lvgl-mpy-studio selftest
 ```
 
-The self-test opens the real IDE and drives it through nine scenarios; see the [manual](manual.md#self-test). [How it is tested](testing.md) has the whole picture.
+The self-test opens the real IDE and drives it through thirteen scenarios; see the [manual](manual.md#self-test). [How it is tested](testing.md) has the whole picture.
 
 ### Suites run by hand
 

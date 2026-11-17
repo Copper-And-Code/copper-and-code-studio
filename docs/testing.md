@@ -9,7 +9,7 @@ says what is checked, by what, how to run it, and what no automated check can se
 | Check | What it is | When it runs | Time |
 |---|---|---|---|
 | Test suite | more than 1,380 pytest tests: generation, fuzzing, the runtime, the GUI, the protocol with the board, all the widgets, MicroPython/C pixel parity | at each push, in the CI | about 11 minutes |
-| Self-test | the real IDE window driven as a person would, through 9 scenarios and 82 steps | at each push, in the CI, on Linux and Windows | under a minute |
+| Self-test | the real IDE window driven as a person would, through 13 scenarios and 105 steps | at each push, in the CI, on Linux and Windows | about 30 seconds |
 | Visual tests | the pages of a project compared pixel by pixel with stored pictures, also after touches | by hand, per project | seconds per page |
 | Suites run by hand | checks too long for every push, in `tests/manual` | when someone decides to | minutes each |
 | Board tests | tests on a real board | only with its owner present | |
@@ -39,7 +39,13 @@ the packages.
 
 It creates a project, takes widgets from the toolbox, sets properties, types a handler,
 saves, starts the simulator and touches the screen; other scenarios cover pages, resolution,
-pictures and fonts, Python modules, the Timer and the Buzzer, errors and hardware blocks.
+pictures and fonts, Python modules, the Timer and the Buzzer, errors and hardware blocks, the
+Files panel and its tabs (open a folder, edit, save, New File and Rename from the panel's
+menu), programs without pages (Run Program, typing in the terminal; Linux only), Project
+Settings and board profiles (a profile duplicated in the Profile Manager, then used by the
+project), and the files of a board (Connect, the board's files in the Files panel, Upload
+Files, Run File on Board). The board is one the self-test keeps in memory: it answers what
+the window asks, without the serial protocol, which the test suite covers with its own fakes.
 See the [manual](manual.md#self-test) for its options and report.
 
 ### Visual tests
@@ -120,7 +126,6 @@ present, because they write to it. None is written yet.
   display (`QT_QPA_PLATFORM=offscreen`) and with Qt's own dialogs.
 - **Context menus** of the canvas, the project tree and the Files panel are not in the
   suite of every action.
-- **The Upload Files dialog** is never opened by a test.
 
 How much of the code the checks run, measured on 17 November 2026 with coverage.py: 87 % of
 the lines of the user interface (`lvgl_mpy_studio/ui`) and 90 % of the whole package. The

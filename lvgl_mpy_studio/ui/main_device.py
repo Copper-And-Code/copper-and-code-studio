@@ -216,6 +216,10 @@ class DeviceMixin:
         self._update_device_actions()
         if following:
             following()
+            if self._worker is None and not self.device.console_live:
+                # What followed used the board without a task of its own (Connect does nothing more): the console starts now.
+                self._start_device_console()
+                self._update_device_actions()
         else:
             self._run_board_pending()  # what the Files panel asked while the board was busy
 

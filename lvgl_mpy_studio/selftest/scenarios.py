@@ -477,3 +477,246 @@ def blocks(ide):
         ide.check(f"{led}: off" in ide.output(), "the simulated output did not say it went off")
         ide.check(not ide.errors(), f"the Errors panel says: {ide.errors()}")
         ide.stop()
+
+
+def file_row(ide, name):
+    """The row of the Files panel for a file of its folder, or None until the panel has read it."""
+    panel = ide.window.files_panel
+    root = panel.tree.rootIndex()
+    return next((panel.proxy.index(row, 0, root) for row in range(panel.proxy.rowCount(root)) if panel.proxy.index(row, 0, root).data() == name), None)
+
+
+def files_shown(ide):
+    panel = ide.window.files_panel
+    root = panel.tree.rootIndex()
+    return sorted(panel.proxy.index(row, 0, root).data() for row in range(panel.proxy.rowCount(root)))
+
+
+@scenario("files", "Files panel and editor tabs")
+def files(ide):
+    from PySide6.QtCore import QPoint
+    from PySide6.QtTest import QTest
+    from PySide6.QtWidgets import QPushButton
+
+    folder = ide.directory / "prog"
+    folder.mkdir()
+    (folder / "main.py").write_text('print("SELFTEST main")\n', encoding="utf-8")
+    panel = ide.window.files_panel
+    with ide.step("Show the Files panel and open a folder with Open Folder…"):
+        ide.show_dock("filesDock")
+        button = next(button for button in panel.findChildren(QPushButton) if button.text() == "Open Folder…")
+        ide.answer_file_dialog(folder)
+        QTest.mouseClick(button, Qt.LeftButton)
+        ide.equal(panel.folder, folder.resolve(), "folder of the Files panel")
+        ide.wait(lambda: files_shown(ide) == ["main.py"], f"the panel to list main.py (it lists {files_shown(ide)})")
+    with ide.step("Double-click main.py: it opens in a tab of its own"):
+        ide.click_index(panel.tree, file_row(ide, "main.py"), double=True)
+        tab = ide.window._file_tab(folder / "main.py")
+        ide.check(tab is not None and ide.window.tabs.currentWidget() is tab, "main.py did not open in a tab in front")
+        ide.equal(tab.editor.toPlainText(), 'print("SELFTEST main")\n', "text of the tab")
+    with ide.step("Type a line, then Save: the file on disk has it and the tab is no longer marked"):
+        tab.editor.setFocus()
+        QTest.keyClick(tab.editor, Qt.Key_End, Qt.ControlModifier)
+        QTest.keyClicks(tab.editor, 'print("SELFTEST edited")')
+        QTest.keyClick(tab.editor, Qt.Key_Escape)
+        ide.check(tab.modified and ide.window.tabs.tabText(ide.window.tabs.indexOf(tab)).endswith("*"), "the tab is not marked as changed")
+        ide.choose(ide.window.save_action)
+        ide.equal((folder / "main.py").read_text(encoding="utf-8"), 'print("SELFTEST main")\nprint("SELFTEST edited")', "main.py on disk")
+        ide.check(not tab.modified, "the tab is still marked as changed after Save")
+        ide.check(ide.window.document.path is None, "Save saved the project instead of the file")
+    with ide.step("New File… from the menu of the panel: the file is made and opened"):
+        empty = QPoint(8, panel.tree.viewport().height() - 4)  # below the files: the folder itself
+        ide.answer_input("helper.py")
+        ide.context_menu(panel.tree, empty, "New File…")
+        ide.check((folder / "helper.py").is_file(), "helper.py was not made")
+        ide.check(ide.window._file_tab(folder / "helper.py") is not None, "helper.py did not open in a tab")
+        ide.wait(lambda: file_row(ide, "helper.py") is not None, "the panel to list helper.py")
+    with ide.step("Rename… from the menu of the panel"):
+        row = file_row(ide, "helper.py")
+        ide.answer_input("tools.py")
+        ide.context_menu(panel.tree, panel.tree.visualRect(row).center(), "Rename…")
+        ide.check((folder / "tools.py").is_file() and not (folder / "helper.py").exists(), "helper.py was not renamed tools.py")
+        ide.wait(lambda: files_shown(ide) == ["main.py", "tools.py"], f"the panel to list main.py and tools.py (it lists {files_shown(ide)})")
+    with ide.step("Close the tabs of the files"):
+        for tab in list(ide.window.file_tabs):
+            ide.check(ide.window.close_file(tab), f"the tab of {tab.path.name} did not close")
+        ide.equal(ide.window.file_tabs, [], "tabs of files left open")
+
+
+@scenario("program", "Programs without pages: Run Program and the terminal")
+def program(ide):
+    from PySide6.QtTest import QTest
+
+    from lvgl_mpy_studio.platform import IS_WINDOWS
+
+    if IS_WINDOWS:
+        with ide.step("Run → Run Program… says that programs without pages run only on Linux for now"):
+            ide.choose(ide.window.run_program_action)
+            ide.check(any("only in the Linux simulator" in message for _file, _line, message in ide.errors()) or "only in the Linux simulator" in ide.output(), f"no word about Windows: {ide.errors()}")
+            ide.check(not ide.window.sim_panel.running, "a program started on Windows")
+        return
+    folder = ide.directory / "greeter"
+    folder.mkdir()
+    entry = folder / "main.py"
+    entry.write_text('print("SELFTEST ready")\nname = input("Name? ")\nprint("SELFTEST hello", name)\n', encoding="utf-8")
+    panel = ide.window.sim_panel
+    with ide.step("Run → Run Program…: choose the file, it starts with a terminal"):
+        ide.answer_file_dialog(entry)
+        ide.choose(ide.window.run_program_action)
+        ide.wait(lambda: panel.running and panel.program, "the program to start in the simulator", 20000)
+        ide.check(panel.terminal.isVisible(), "the terminal is not shown")
+        ide.wait(lambda: "SELFTEST ready" in panel.terminal.text(), f"“SELFTEST ready” in the terminal (it shows {panel.terminal.text()[-200:]!r})", 20000)
+    with ide.step("Type in the terminal: the program reads it"):
+        panel.terminal.setFocus()
+        QTest.keyClicks(panel.terminal, "you")
+        QTest.keyClick(panel.terminal, Qt.Key_Return)
+        ide.wait(lambda: "SELFTEST hello you" in panel.terminal.text(), f"“SELFTEST hello you” in the terminal (it shows {panel.terminal.text()[-200:]!r})")
+        ide.check(not ide.errors(), f"the Errors panel says: {ide.errors()}")
+    with ide.step("The Files panel shows the folder of the program"):
+        ide.equal(ide.window.files_panel.folder, folder.resolve(), "folder of the Files panel")
+    with ide.step("Stop the program"):
+        if panel.running:
+            ide.stop()
+        ide.check(not panel.running, "the simulator is still running")
+
+
+@scenario("board", "Files of a board, Upload Files and Run File on Board (a board simulated by the self-test)")
+def board_files(ide):
+    from PySide6.QtTest import QTest
+    from PySide6.QtWidgets import QDialogButtonBox, QPushButton
+
+    from lvgl_mpy_studio.core.boards import builtin_profiles
+
+    from .fakeboard import PORT, FakeBoard
+
+    board = FakeBoard()
+    view = ide.window.files_panel.board
+    with ide.step("A new project for the STM32H7_CORE, chosen as target in the toolbar"):
+        ide.choose(ide.window.new_action)
+        ide.window.device = board  # what is plugged in: the board of the self-test, never a real one
+        profile = next(profile for profile in builtin_profiles() if profile["id"].startswith("stm32h7_core"))  # 1024×600, as a new project
+        ide.window.run_selector.rebuild()
+        target = next((action for action in ide.window.run_selector.target_actions() if action.data().profile_id == profile["id"]), None)
+        ide.check(target is not None, f"the toolbar offers no target {profile['id']}")
+        ide.choose(target)
+        ide.check(ide.window.run_target.is_board, "the target is not the board")
+    with ide.step("Device → Connect: the only port is chosen and the board answers"):
+        ide.choose(ide.window.connect_action)
+        ide.wait(lambda: board.port == PORT and ide.window._worker is None, "the connection to the board")
+        ide.check(board.console_live, "the console of the board is not open")
+    with ide.step("The Files panel lists the files of the board"):
+        ide.show_dock("filesDock")
+        ide.wait(lambda: view.tree.topLevelItemCount() == 1, "the panel to list the board")
+        flash = view.tree.topLevelItem(0)
+        ide.equal(flash.text(0), "flash/", "first folder of the board")
+        flash.setExpanded(True)
+        ide.wait(lambda: flash.childCount() == 2, "the panel to read /flash")
+        ide.equal(sorted(flash.child(row).text(0) for row in range(2)), ["boot.py", "main.py"], "files of /flash")
+    with ide.step("Open main.py of the board, change it and save it on the board"):
+        main = next(flash.child(row) for row in range(flash.childCount()) if flash.child(row).text(0) == "main.py")
+        ide.click_item(view.tree, main, double=True)
+        ide.wait(lambda: any(tab.remote == "/flash/main.py" for tab in ide.window.file_tabs), "main.py of the board in a tab")
+        tab = next(tab for tab in ide.window.file_tabs if tab.remote == "/flash/main.py")
+        ide.equal(ide.window.tabs.tabText(ide.window.tabs.indexOf(tab)), "main.py [board]", "title of the tab")
+        tab.editor.setFocus()
+        QTest.keyClick(tab.editor, Qt.Key_End, Qt.ControlModifier)
+        QTest.keyClicks(tab.editor, 'print("SELFTEST edited on the board")')
+        QTest.keyClick(tab.editor, Qt.Key_Escape)
+        ide.choose(ide.window.save_action)
+        ide.wait(lambda: not tab.modified, "the board to have the file")
+        ide.check(board.files["/flash/main.py"].endswith(b'print("SELFTEST edited on the board")'), f"main.py on the board: {board.files['/flash/main.py']!r}")
+        ide.check(ide.window.close_file(tab), "the tab did not close")
+    with ide.step("Device → Upload Files…: add a folder, upload it to /flash"):
+        folder = ide.directory / "game"
+        folder.mkdir()
+        (folder / "game.py").write_text('print("SELFTEST game")\n', encoding="utf-8")
+        (folder / "level.txt").write_text("1\n", encoding="utf-8")
+        listed = []
+
+        def fill(dialog):
+            add_folder = next(button for button in dialog.findChildren(QPushButton) if button.text() == "Add Folder…")
+            QTest.mouseClick(add_folder, Qt.LeftButton)  # its file dialog is answered by the watcher
+            listed.extend(dialog.list.item(row).data(Qt.UserRole) for row in range(dialog.list.count()))
+            ide.type_into(dialog.destination, "/flash")
+            QTest.mouseClick(dialog.buttons.button(QDialogButtonBox.Ok), Qt.LeftButton)
+
+        ide.answer_in_steps(fill)
+        ide.answer_file_dialog(folder)
+        ide.choose(ide.window.upload_files_action)
+        ide.wait(lambda: "/flash/game/game.py" in board.files and ide.window._worker is None, "the files on the board")
+        ide.equal(sorted(listed), ["game/game.py", "game/level.txt"], "files listed by the dialog")
+        ide.equal(board.files["/flash/game/level.txt"], b"1\n", "level.txt on the board")
+        ide.wait(lambda: any(flash.child(row).text(0) == "game/" for row in range(flash.childCount())), "the panel to show the new folder")
+    with ide.step("Device → Run File on Board…: the IDE types the command at the board's prompt"):
+        board.typed.clear()
+        ide.answer_input("/flash/game/game.py")
+        ide.choose(ide.window.run_file_action)
+        ide.wait(lambda: b"\r" in b"".join(board.typed), "the command typed at the prompt")
+        sent = b"".join(board.typed)
+        ide.check(b"os.chdir('/flash/game')" in sent and b"exec(open('game.py').read()" in sent, f"what was typed: {sent!r}")
+    with ide.step("Device → Disconnect: the panel forgets the board"):
+        ide.choose(ide.window.connect_action)
+        ide.check(board.port is None, "the board is still connected")
+        ide.check(not view.connected and view.tree.topLevelItemCount() == 0, "the panel still shows the board")
+
+
+@scenario("settings", "Project Settings and board profiles")
+def settings(ide):
+    from PySide6.QtTest import QTest
+    from PySide6.QtWidgets import QDialogButtonBox, QPushButton
+
+    def size():
+        return ide.project.display.width, ide.project.display.height
+
+    with ide.step("A new project with a button"):
+        ide.choose(ide.window.new_action)
+        placed_button(ide, "Settings")
+        board = (ide.project.board or {}).get("id")
+        start = size()
+    with ide.step("Device → Manage Board Profiles…: duplicate a profile as an 800×480 board"):
+        def duplicate(dialog):
+            tree = dialog.tree
+            source = next(tree.topLevelItem(row) for row in range(tree.topLevelItemCount()) if tree.topLevelItem(row).text(0).startswith("STM32H7"))
+            ide.click_item(tree, source)
+            QTest.mouseClick(next(button for button in dialog.findChildren(QPushButton) if button.text() == "Duplicate"), Qt.LeftButton)
+            ide.type_into(dialog.name, "Selftest 800x480")
+            QTest.keyClick(dialog.name, Qt.Key_Tab)
+            dialog.name.textEdited.emit(dialog.name.text())
+            for editor, value in ((dialog.logical_width, 800), (dialog.logical_height, 480), (dialog.physical_width, 800), (dialog.physical_height, 480), (dialog.scale, 1)):
+                ide.type_into(editor, value)
+                QTest.keyClick(editor, Qt.Key_Tab)
+            QTest.mouseClick(next(button for button in dialog.findChildren(QPushButton) if button.text() == "Edit"), Qt.LeftButton)
+            QTest.mouseClick(dialog.buttons.button(QDialogButtonBox.Apply), Qt.LeftButton)
+
+        ide.answer_in_steps(duplicate)
+        ide.choose(ide.window.profiles_action)
+        made = [profile for profile in ide.window.profile_store.profiles() if profile["name"] == "Selftest 800x480"]
+        ide.equal([(profile["logicalWidth"], profile["logicalHeight"]) for profile in made], [(800, 480)], "the new profile in the catalog")
+    with ide.step("Project → Project Settings…: choose the new profile, adapt the widgets"):
+        ide.answer_in_steps(lambda dialog: (ide.choose_item(dialog.profile, "Selftest 800x480"), QTest.mouseClick(dialog.buttons.button(QDialogButtonBox.Apply), Qt.LeftButton)))
+        ide.answer_resize("adapt")
+        ide.choose(ide.window.project_settings_action)
+        ide.wait(lambda: size() == (800, 480), f"the project to be 800×480 (it is {size()})")
+        ide.equal(ide.project.board["id"], made[0]["id"], "profile of the project")
+        ide.equal(ide.window.resolution_selector.text(), "800×480", "text of the resolution button")
+    with ide.step("Project → Update Project Profile: the project takes the profile of the catalog"):
+        ide.choose(ide.window.update_profile_action)
+        ide.equal(ide.project.board["id"], made[0]["id"], "profile of the project")
+        ide.check(not ide.errors(), f"the Errors panel says: {ide.errors()}")
+    with ide.step("Project Settings… without a profile, 640×480"):
+        def custom(dialog):
+            ide.choose_item(dialog.profile, "No Profile")
+            for editor, value in ((dialog.width, 640), (dialog.height, 480)):
+                ide.type_into(editor, value)
+                QTest.keyClick(editor, Qt.Key_Tab)
+            QTest.mouseClick(dialog.buttons.button(QDialogButtonBox.Apply), Qt.LeftButton)
+
+        ide.answer_in_steps(custom)
+        ide.answer_resize("adapt")
+        ide.choose(ide.window.project_settings_action)
+        ide.wait(lambda: size() == (640, 480), f"the project to be 640×480 (it is {size()})")
+        ide.equal(ide.project.board, None, "profile of the project")
+    with ide.step("Undo three times: the project is back to its board and size"):
+        for _ in range(3):
+            ide.choose(ide.window.undo_action)
+        ide.equal((size(), (ide.project.board or {}).get("id")), (start, board), "size and profile after undoing")

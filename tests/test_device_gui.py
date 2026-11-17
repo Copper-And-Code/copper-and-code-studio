@@ -999,3 +999,19 @@ def test_console_follows_the_connected_board_and_pauses_during_operations(qtbot,
     assert window.device_console.status.text() == "Board not connected"
     assert port.closed == 1
     window.document.undo_stack.setClean()
+
+
+def test_the_console_opens_after_device_connect(qtbot, tmp_path):
+    """Connect continues with nothing to do: the console used to wait for the next operation to open."""
+    from lvgl_mpy_studio.selftest.fakeboard import PORT, FakeBoard
+
+    window = board_window(qtbot, tmp_path)
+    window.selected_port = ""
+    board = FakeBoard()
+    window.device = board
+    window.connect_action.trigger()
+    qtbot.waitUntil(lambda: board.port == PORT and window._worker is None, timeout=3000)
+    qtbot.waitUntil(lambda: board.console_live, timeout=2000)
+    assert window.device_console.terminal.input_enabled
+    board.disconnect()
+    window.document.undo_stack.setClean()

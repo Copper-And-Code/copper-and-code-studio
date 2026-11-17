@@ -133,7 +133,7 @@ A package is not done until it has run.
 
 ```bash
 dist/LVGL_MPY_STUDIO-x86_64.AppImage --version
-dist/LVGL_MPY_STUDIO-x86_64.AppImage selftest          # RESULT: PASSED, 82 steps
+dist/LVGL_MPY_STUDIO-x86_64.AppImage selftest          # RESULT: PASSED, 105 steps
 ```
 
 **Windows.** Wine is not a check: it starts a program whose libraries lack functions, and

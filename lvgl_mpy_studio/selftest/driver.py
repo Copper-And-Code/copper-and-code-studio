@@ -11,7 +11,7 @@ from contextlib import contextmanager
 
 from PySide6.QtCore import QEventLoop, QPoint, QPointF, Qt, QTimer
 from PySide6.QtTest import QTest
-from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QComboBox, QDialogButtonBox, QFileDialog, QInputDialog, QLineEdit, QMessageBox, QPushButton
+from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QComboBox, QDialogButtonBox, QFileDialog, QInputDialog, QLineEdit, QMenu, QMessageBox, QPushButton
 
 from lvgl_mpy_studio.core.events import handler_name
 from lvgl_mpy_studio.ui.designer.scene import Toolbox
@@ -49,6 +49,7 @@ class Ide:
         self.slow_ms = slow_ms
         self._number = 0
         self._dialog_handlers = []
+        self._menu_handlers = []
         self._unexpected = []
         self._answered, self._patience = None, 0
         self.window = MainWindow()
@@ -77,14 +78,15 @@ class Ide:
                 raise StepFailed("the IDE raised an error:\n" + "\n".join(self._crashes))
             if self._unexpected:
                 raise StepFailed("a dialog nobody expected appeared: " + "; ".join(self._unexpected))
-            if self._dialog_handlers:
-                raise StepFailed("a dialog was expected and did not appear")
+            if self._dialog_handlers or self._menu_handlers:
+                raise StepFailed("a dialog or a menu was expected and did not appear")
         except Exception as exc:  # a defect of the IDE must be reported as a failed step, not stop the run
             detail = str(exc) if isinstance(exc, StepFailed) else f"{type(exc).__name__}: {exc}"
             pictures = self.pictures(f"{self._slug()}-{self._number:02}")
             self._unexpected.clear()
             self._crashes.clear()
             self._dialog_handlers.clear()
+            self._menu_handlers.clear()
             self.report.add(self.scenario, title, FAILED, time.monotonic() - started, detail, pictures)
             raise ScenarioStopped from exc
         self.report.add(self.scenario, title, PASSED, time.monotonic() - started)
@@ -125,6 +127,10 @@ class Ide:
     # --- dialogs
 
     def _watch_dialogs(self):
+        menu = QApplication.activePopupWidget()
+        if isinstance(menu, QMenu) and self._menu_handlers:
+            self._menu_handlers.pop(0)(menu)
+            return
         dialog = QApplication.activeModalWidget()
         if dialog is None or dialog is self.window:
             self._answered = None
@@ -134,16 +140,43 @@ class Ide:
             if self._patience > 0:
                 return
         elif self._dialog_handlers:
-            self._answered, self._patience = dialog, 10
-            self._dialog_handlers.pop(0)(dialog)
+            handler, self._patience = self._dialog_handlers.pop(0)
+            self._answered = dialog
+            handler(dialog)
             return
         self._unexpected.append(describe(dialog))
         dialog.grab().save(str(self.report.directory / f"{self._slug()}-{self._number:02}-dialog.png"))
         dialog.reject() if hasattr(dialog, "reject") else dialog.close()
 
-    def answer_next_dialog(self, handler):
-        """The next modal dialog is given to handler(dialog), which must close it."""
-        self._dialog_handlers.append(handler)
+    def answer_next_dialog(self, handler, patience=10):
+        """The next modal dialog is given to handler(dialog), which must close it within patience looks."""
+        self._dialog_handlers.append((handler, patience))
+
+    def answer_in_steps(self, handler, seconds=20):
+        """Like answer_next_dialog, for a dialog that opens dialogs of its own: handler(dialog) runs
+        outside the watcher, which stays free to answer them (they are queued after this one)."""
+        self.answer_next_dialog(lambda dialog: QTimer.singleShot(0, lambda: handler(dialog)), patience=int(seconds * 1000 / self._watcher.interval()))
+
+    def choose_in_menu(self, text):
+        """The next context menu that opens: choose its entry text."""
+        def handler(menu):
+            action = next((entry for entry in menu.actions() if entry.text().replace("&", "") == text), None)
+            if action is None or not action.isEnabled():
+                self._unexpected.append(f"menu without an entry “{text}”: " + ", ".join(entry.text() for entry in menu.actions() if entry.text()))
+                menu.close()
+                return
+            menu.setActiveAction(action)
+            # Outside the watcher: the entry may open a dialog, which the watcher must be free to answer.
+            QTimer.singleShot(0, lambda: QTest.keyClick(menu, Qt.Key_Return))
+
+        self._menu_handlers.append(handler)
+
+    def context_menu(self, view, point, text):
+        """Right click at point of an item view and choose the entry text of its menu."""
+        self.choose_in_menu(text)
+        view.customContextMenuRequested.emit(point)  # what a right click does: the menu opens and waits
+        sleep(0)
+        self.pause()
 
     def answer_message(self, button):
         def handler(dialog):
@@ -305,6 +338,58 @@ class Ide:
             QTest.mouseDClick(tree.viewport(), Qt.LeftButton, pos=centre)
         sleep(0)
         self.pause()
+
+    def show_dock(self, name):
+        """Show a panel from the View menu and bring it in front of the panels it shares a place with."""
+        from PySide6.QtWidgets import QDockWidget
+
+        dock = self.window.findChild(QDockWidget, name)
+        self.check(dock is not None, f"the window has no panel “{name}”")
+        if not dock.isVisible():
+            self.choose(dock.toggleViewAction())
+        dock.raise_()
+        sleep(0)
+        self.pause()
+        return dock
+
+    def click_index(self, view, index, double=False):
+        """Click, or double-click, a row of a list or tree view."""
+        view.scrollTo(index)
+        centre = view.visualRect(index).center()
+        QTest.mouseClick(view.viewport(), Qt.LeftButton, pos=centre)
+        if double:
+            QTest.mouseDClick(view.viewport(), Qt.LeftButton, pos=centre)
+        sleep(0)
+        self.pause()
+
+    def click_item(self, tree, item, double=False):
+        """Click, or double-click, an entry of a QTreeWidget."""
+        tree.scrollToItem(item)
+        centre = tree.visualItemRect(item).center()
+        QTest.mouseClick(tree.viewport(), Qt.LeftButton, pos=centre)
+        if double:
+            QTest.mouseDClick(tree.viewport(), Qt.LeftButton, pos=centre)
+        sleep(0)
+        self.pause()
+
+    def type_into(self, editor, text):
+        """Select what a field holds and type text over it, as a person does."""
+        editor.setFocus()
+        line = editor.lineEdit() if hasattr(editor, "lineEdit") and editor.lineEdit() is not None else editor
+        line.selectAll()
+        QTest.keyClicks(line, str(text))
+        self.pause()
+
+    def choose_item(self, combo, text):
+        """Choose the entry of a combo box that starts with text, as choosing it from the list does."""
+        index = next((row for row in range(combo.count()) if combo.itemText(row).startswith(text)), -1)
+        if index < 0:
+            self._unexpected.append(f"no entry “{text}” in a list: " + ", ".join(combo.itemText(row) for row in range(combo.count())))
+            return False
+        combo.setCurrentIndex(index)
+        combo.activated.emit(index)
+        self.pause()
+        return True
 
     def choose_resolution(self, text):
         """Open the resolution button of the toolbar and choose the entry that starts with text."""

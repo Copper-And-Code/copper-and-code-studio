@@ -5,6 +5,7 @@
 ### Added
 
 - **Videos** of the IDE building and running `eim-01`, `weather` and `snake`, on a new page of the website, and a short one at the top of the README. They are made by `tools/showreel`, which drives the real IDE offscreen through a storyboard (`examples/<name>/showreel.toml`) with comic-style balloons; they say they are a scripted replay, sped up.
+- **Four scenarios of the self-test** (now 13 scenarios, 105 steps): the Files panel and its tabs; programs without pages and their terminal (Linux); Project Settings and board profiles; the files of a board with Upload Files and Run File on Board, on a board the self-test keeps in memory, so no real board is touched.
 - **Suites run by hand** (`tests/manual`, `pytest --manual`), for checks too long for every push. The first triggers every menu entry and toolbar button in five states of the IDE, answering every dialog with Cancel and with OK, and checks that nothing breaks. See [How it is tested](docs/testing.md), a new page of the documentation.
 
 ### Fixed
@@ -12,6 +13,7 @@
 - `eim-01` and `eim-01-480` asked for font sizes their boards do not have (193 and 194 labels), so the Output panel filled with warnings at each Start. They now ask for the size that was drawn anyway, so they look the same; a test checks that no example has such warnings. The visual baselines of `eim-01` were still those before the em dash fix of 0.7.1, and are updated.
 - **Files copied to the board no longer restart it.** Uploading files, or saving a file of the board, went through `mpremote fs cp` without `resume`, so the board was soft-reset before each file and an app running there stopped while the IDE still showed it as active. Large files also had a fixed 30 s limit: the limit now grows with the size, and Cancel stops the copy.
 - **A file of the board is closed only when the board has it.** Saving a `[board]` tab writes it in the background; closing the tab or the window right after Save could lose the changes. The tab and the window now close when the write is done, and stay open with the changes if it fails. What is typed while the file is being written stays marked as unsaved.
+- **The console of the board opens after Device → Connect.** It stayed “Console not available” until another operation on the board ended. Found by the new board scenario of the self-test.
 - **Device → Run File on Board…** failed at once when chosen from the menu, without asking which file: the menu passed its checked state where the file was expected. Found by the new suite of every action.
 - **A board whose files cannot be read is not asked again and again.** If listing the board failed, or the board had no files, the Files panel asked again after each answer, without end, stopping the console every time. It now asks once per connection; Refresh asks again.
 
