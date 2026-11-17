@@ -24,11 +24,6 @@ ADAPTERS = {
         "modules": ["lvgl", "display_driver", "gt911"],
         "eventLoop": "driver",
     },
-    "stm32mp135_linux": {
-        "colorFormats": {"RGB565"},
-        "modules": ["lvgl", "display_driver"],
-        "eventLoop": "driver",
-    },
 }
 
 

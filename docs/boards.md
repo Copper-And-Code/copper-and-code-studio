@@ -30,12 +30,6 @@ The connection uses UART1 through a CH340 adapter at **115200 8N1**, normally `/
 
 The **ESP32-4848S040 (480×480)** profile uses native 480×480 RGB565 resolution, GT911 touch and 1× scaling. It requires MicroPython 1.29 or later, LVGL 9.5 or later, and the `display_driver` and `gt911` modules. Panel support is integrated into the display driver: a separate `rgbpanel` module is not required. The USB serial connection uses `mpremote`, normally on `/dev/ttyUSB0`; applications are installed under `/lms_apps/` without modifying `boot.py` or `main.py`.
 
-### STM32MP135F-DK
-
-The **STM32MP135F-DK (480×272)** profile uses the Linux MicroPython firmware from `mpy-lvgl-boards` and the standard `mpremote` transport. Select the USB CDC-ACM REPL port exposed by the board, normally `/dev/ttyACM2` on Linux; do not select the ST-LINK console. The same connection supports device information, file transfer and the interactive **Device Console**. The board also provides a TCP REPL at `socket://192.168.7.1:8266` for `mpremote`, but the Studio console currently requires the serial connection.
-
-MicroPython, LVGL and the REPL are available. The display driver is not yet installed, so **Device Information** reports `display_driver` and resolution as incompatible and project upload/run is not available yet. This is expected until the display integration is completed; it does not prevent use of the REPL or board files.
-
 ### Live editing
 
 While an application started from the IDE is running, **Device → Live Editing** sends design changes to the board about half a second after the last edit, with no restart. It rebuilds all pages off screen, shows the page open in the designer, and then deletes the old ones. Python module state survives, but widget state such as a typed text or a slider position returns to the design values. Code, Buzzer or Timer changes are not sent: the status bar asks you to press F5.
