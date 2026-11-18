@@ -39,7 +39,8 @@ SKIPPED = {
     "build_action": "builds in the background for minutes, without a dialog: tested in test_release",
     "single_file_action": "builds in the background for minutes, without a dialog: tested in test_release",
 }
-QT_NOISE = ("propagateSizeHints", "does not support raise()")   # the offscreen platform says them
+# Said by the offscreen platform, and by Qt Multimedia when the buzzer starts: not problems.
+QT_NOISE = ("propagateSizeHints", "does not support raise()", "does not support grabbing", "Using Qt multimedia with FFmpeg")
 
 
 # ---- The actions ----

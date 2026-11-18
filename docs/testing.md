@@ -88,6 +88,9 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_language.py` | seconds | Italian and back in each state: nothing left in the other language, nothing else changed |
 | `test_sizes_and_docks.py` | seconds | the window from 800×600 to 2560×1440; each dock floated, closed and brought back; the layout after a restart |
 | `test_soak.py` | about 1.5 minutes; longer with `LMS_SOAK_ROUNDS` | a long session in one window: nothing it holds may grow |
+| `test_every_property.py` | about 1.5 minutes | every property of every widget type, changed in the Properties panel |
+| `test_every_example.py` | about 2 minutes | every example started in the simulator and touched |
+| `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
 
@@ -201,6 +204,30 @@ processes (zombies included) and the temporary folders of the IDE must not grow,
 memory of the process may grow by 40 MB at most; the numbers of each round go to
 `build/manual/soak.json`. Linux only. The first run found every project opened keeping the
 pages of the one before: 24 Qt objects and about 1.7 MB a round.
+
+**Every property.** For each of the 30 widget types, a widget on an empty page is clicked on
+the canvas, then each of its properties is changed through its field in the Properties panel:
+a number, a text, a choice or a colour typed and confirmed with Enter, a check box toggled with
+the space bar, an image or a font given as a file. The widget must hold what was typed, with
+no exception, no Qt warning and no error in the panel; at the end the real runtime must draw
+the page, and undo must bring back the empty page. About 340 properties.
+
+**Every example.** Each example is started with Run → Start; the middle of each widget of its
+first page is touched on the simulated screen, a few seconds are left to its timers, then
+Stop. Nothing may reach the Errors panel, and the Output may hold no Python error.
+
+**Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
+clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
+at random. After every step it checks that nothing broke (no exception, no Qt warning, no
+dialog left open, the window answers) and what must hold whatever came before: the project
+valid, widget names unique, a tab for each page, each canvas drawing its page, the Properties
+panel showing widgets that exist, the `*` of the title saying whether there is something to
+save. Each step is written to
+`build/manual/monkey-<state>.log` before it is made, so a crash of the process can be followed;
+`LMS_MONKEY_SEED` replays a run. Its first runs found Add Page giving a new page the name of
+one already there, after a deletion. It finds by chance, so it pays to run it long:
+`tools/monkey_night.sh [hours] [steps]` runs it seed after seed, each run in its own process,
+and keeps the output and the steps of the runs that fail in `build/manual/monkey-night/`.
 
 **Faults.** Each one through the window, as it would happen to a person: the disk full
 during a save (the file on disk and the changes in the window are kept, no temporary file is
