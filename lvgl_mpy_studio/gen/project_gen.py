@@ -151,9 +151,11 @@ def generate_main(project, model, initial_page=0, expose_all=False, loop_module=
     width, height = data.get("display", {}).get("width", 800), data.get("display", {}).get("height", 480)
     lines = [f"import {loop_module}"] if loop_module else []
     loop = [f"        {loop_module}.step()"] if loop_module else []
-    # A font of the project is created when ui is imported, and LVGL must be initialised by then.
-    # display_driver.init initialises it again, which LVGL ignores.
-    early = ["lv.init()"] if (data.get("assets") or {}).get("fonts") else []
+    # LVGL is initialised before ui and app_events are imported: a font of the project is created
+    # when ui is imported, and the general code runs when app_events is, where a timer or a style
+    # needs LVGL, as on a board, whose driver starts it on import. display_driver.init initialises
+    # it again, which LVGL ignores.
+    early = ["lv.init()"]
     lines += ["import lvgl as lv", "import display_driver", *early, "import ui", "import app_events", "", "", "def main():", f"    display_driver.init({width}, {height})"]
     lines.extend(f"    {line}" for line in screen_statements(data, model, expose_all))
     lines.extend([f"    lv.screen_load(ui.screens[{initial_page}])", f"    ui.current_screen = {initial_page}", "", "    while display_driver.poll():", "        lv.tick_inc(display_driver.tick())", "        lv.timer_handler()", *loop, "        display_driver.wait(display_driver.idle_ms())", "", "", 'if __name__ == "__main__":', "    main()", ""])

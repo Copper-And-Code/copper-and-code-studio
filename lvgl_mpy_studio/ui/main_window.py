@@ -15,7 +15,7 @@ from lvgl_mpy_studio.ui.code.editor import CodePanel
 from lvgl_mpy_studio import mcp_server
 from lvgl_mpy_studio.ui.designer.preview import PreviewRenderer, frame_image
 from lvgl_mpy_studio.ui.designer.scene import ComponentTray, DesignerView, ToolboxPanel
-from lvgl_mpy_studio.ui.device_panel import DeviceConsole
+from lvgl_mpy_studio.ui.device_panel import DeviceConsole, OutputPump
 from lvgl_mpy_studio.ui.document import ProjectDocument
 from lvgl_mpy_studio.ui.gc_guard import install as install_gc_guard
 from lvgl_mpy_studio.ui.language import apply_language, install_qt_translation
@@ -79,6 +79,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self._device_mapped_traces = set()
         self._sim_trace = ""
         self.deviceOutput.connect(self._device_output)
+        self._console_pump = OutputPump(self._device_output, self._console_skipped, self)
         self.consoleClosed.connect(self._update_device_actions)
         self.setWindowTitle("LVGL MPY Studio")
         theme.fit_to_screen(self, 1400, 900)

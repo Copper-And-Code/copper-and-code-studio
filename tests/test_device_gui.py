@@ -1015,3 +1015,24 @@ def test_the_console_opens_after_device_connect(qtbot, tmp_path):
     assert window.device_console.terminal.input_enabled
     board.disconnect()
     window.document.undo_stack.setClean()
+
+
+def test_a_flood_of_board_output_reaches_the_window_in_pieces_and_is_cut_short(qtbot):
+    """A board printing without pause queued a signal for every few bytes: the window stopped
+    answering and showed old output long after Ctrl-C. The pump hands it over in bounded pieces."""
+    import threading
+
+    from lvgl_mpy_studio.ui.device_panel import OutputPump
+
+    pieces, skipped = [], []
+    pump = OutputPump(pieces.append, skipped.append)
+    lines = [f"line {number:06d}\n" for number in range(80000)]   # about 1 MB at once
+    writer = threading.Thread(target=lambda: [pump.push(line) for line in lines])
+    writer.start()
+    writer.join()
+    for _ in range(20):
+        pump.drain()
+    assert pieces and max(len(piece) for piece in pieces) <= OutputPump.PER_TURN
+    assert sum(skipped) > 0, "what could not be shown was not said"
+    shown = "".join(pieces)
+    assert shown.endswith(lines[-1]) and len(shown) + sum(skipped) == sum(map(len, lines))

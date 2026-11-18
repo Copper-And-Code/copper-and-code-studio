@@ -95,6 +95,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_save_and_reopen.py` | about 2 minutes | what is saved is what was in the window: examples and the monkey's work saved, opened in a new window, compared |
 | `test_hard_texts.py` | about 1 minute | long, quoted, escaped, foreign, right-to-left and emoji texts in every text property and as page names |
 | `test_foreign_drops.py` | seconds | files, folders and text dragged from outside, dropped anywhere: no harm |
+| `test_console_flood.py` | about 30 seconds | programs printing without pause into the terminal, the Output and the Device Console |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -261,6 +262,16 @@ application) is dropped on the canvas, the toolbox, the trees, the Properties pa
 editor, the terminals and the window. Nothing may raise or change the project; the code editor
 may take dropped text as text, which undo takes back. The canvas shows a pointer that accepts
 files, then does nothing with them.
+
+**Consoles under a flood.** A program without pages prints without pause into the terminal of the
+simulator, an app prints from an LVGL timer into the Output, a file of the virtual board prints
+into the Device Console. For eight seconds each the window must answer within half a second,
+the memory grow by less than 80 MB and the consoles keep a bounded history; then Ctrl-C, or
+Stop, must stop the printing. The virtual board turns Ctrl-C into the signal a terminal would
+send, since its MicroPython does not read its input while a program runs. The first run found
+three things: a timer created in the general code crashed the simulator; the terminal took
+over 100 MB for its history; and the Device Console fell behind a board printing fast, without
+answering, and went on showing old output long after Ctrl-C.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered

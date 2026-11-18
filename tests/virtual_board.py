@@ -13,6 +13,7 @@ Linux only (pseudo-terminals); the tests that use it skip elsewhere.
 """
 import os
 import select
+import signal
 import shutil
 import subprocess
 import sys
@@ -83,6 +84,7 @@ class VirtualBoard:
         self.process = subprocess.Popen([self.runtime, "-i", "-c", "import lms_board_boot"], cwd=self.boot, stdin=device, stdout=device, stderr=device, env=environment, close_fds=True)
         os.close(device)
         self._banner = bytearray()
+        self._tail = b""
 
     def _restart(self):
         """What a board does on a soft reset: the interpreter starts again, the files stay."""
@@ -123,16 +125,32 @@ class VirtualBoard:
                         os.write(self._board, data)
                     except OSError:
                         pass
+                    if b"\x03" in data and not self._at_prompt():
+                        self._interrupt()
             if self._board in ready:
                 try:
                     data = os.read(self._board, 4096)
                 except OSError:                        # the process ended: Ctrl-D, or machine.reset()
                     data = b""
                 if data:
+                    self._tail = (self._tail + data)[-16:]
                     os.write(self._host, data)
             if self.process.poll() is not None and not self._closing:
                 self._drain_board()
                 self._restart()
+
+    def _at_prompt(self):
+        """The board waits at the prompt of its REPL, raw or not: nothing runs to interrupt."""
+        return self._tail.endswith((b">>> ", b"\n>", b"... "))
+
+    def _interrupt(self):
+        """Ctrl-C while a program runs. A board's UART sees it at once and raises KeyboardInterrupt;
+        the MicroPython of the PC behind a raw pseudo-terminal does not read its input while it runs,
+        so the signal a terminal would send is sent here."""
+        try:
+            self.process.send_signal(signal.SIGINT)
+        except (OSError, ProcessLookupError):
+            pass
 
     def _drain_board(self):
         while True:

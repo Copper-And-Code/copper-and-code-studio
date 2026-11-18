@@ -201,3 +201,21 @@ def test_selection_is_copied_as_text(qtbot):
     assert view.selected_text().startswith("first line\nsecond")
     view.clear()
     assert view.text() == ""
+
+
+def test_a_full_history_stays_small():
+    """10,000 rows of 80 cells, each a new tuple, took over 100 MB: equal cells are now one tuple."""
+    import tracemalloc
+
+    from lvgl_mpy_studio.core.vt import Screen
+
+    tracemalloc.start()
+    try:
+        screen = Screen()
+        for number in range(12000):
+            screen.feed(f"line {number} " + "x" * 60 + "\r\n")
+        used, _peak = tracemalloc.get_traced_memory()
+    finally:
+        tracemalloc.stop()
+    assert len(screen.history) == screen.history.maxlen
+    assert used < 25 * 1024 * 1024, f"{used // 1024 // 1024} MB for a full history"

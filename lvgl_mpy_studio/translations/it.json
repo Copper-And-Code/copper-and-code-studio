@@ -754,5 +754,6 @@
   "The file is not a valid board definition: {errors}": "Il file non è una definizione di board valida: {errors}",
   "{id} is a built-in board: a board from a file cannot replace it. Give the board in the file another id.": "{id} è una board inclusa: una board da file non può sostituirla. Dai alla board del file un altro id.",
   "A board with the id {id} is already there.": "C'è già una board con l'id {id}.",
-  "A page name can be {count} characters at most": "Il nome di una pagina può avere al massimo {count} caratteri"
+  "A page name can be {count} characters at most": "Il nome di una pagina può avere al massimo {count} caratteri",
+  "{count} characters not shown: the board writes faster than the console can show": "{count} caratteri non mostrati: la board scrive più in fretta di quanto la console riesca a mostrare"
 }

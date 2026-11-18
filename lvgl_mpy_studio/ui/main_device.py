@@ -60,6 +60,9 @@ class DeviceMixin:
             self.statusBar().showMessage(tr("Board updated."), 3000)
         self._device_task(operation, completed)
 
+    def _console_skipped(self, count):
+        self.device_console.message(tr("{count} characters not shown: the board writes faster than the console can show", count=count))
+
     def _device_output(self, text):
         self.device_console.append(text)
         self._device_trace = (self._device_trace + text)[-20000:]
@@ -336,7 +339,7 @@ class DeviceMixin:
             return False
         self._console_problem = ""
         try:
-            return self.device.start_console(self.deviceOutput.emit, interactive=True, on_closed=self.consoleClosed.emit)
+            return self.device.start_console(self._console_pump.push, interactive=True, on_closed=self.consoleClosed.emit)
         except DeviceError as exc:
             self._console_problem = tr("Console not available: {error}", error=device_error_text(exc.code, exc.output))
             return False

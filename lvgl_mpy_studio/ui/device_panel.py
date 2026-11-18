@@ -1,10 +1,53 @@
+import threading
 import time
 
-from PySide6.QtCore import Qt, QThread, QTimer, Signal
+from PySide6.QtCore import QObject, Qt, QThread, QTimer, Signal
 from PySide6.QtWidgets import QComboBox, QDialog, QDialogButtonBox, QFormLayout, QHBoxLayout, QLabel, QProgressBar, QPushButton, QVBoxLayout, QWidget
 
 from lvgl_mpy_studio.core.i18n import tr
 from lvgl_mpy_studio.ui.terminal import TerminalView
+
+
+class OutputPump(QObject):
+    """What a board prints, from the thread that reads it to the window, in pieces the window can show.
+
+    The thread read a few bytes at a time and sent each piece as a signal; a board printing without
+    pause queued more pieces than the window could draw, which stopped answering, grew in memory and
+    went on showing old output long after Ctrl-C. The thread now only adds to a buffer; the window
+    takes at most PER_TURN characters every INTERVAL_MS. If more than KEEP characters wait, the oldest
+    are left out and skipped(count) says how many."""
+
+    INTERVAL_MS = 30
+    PER_TURN = 16 * 1024                      # the terminal draws about 1 MB a second: about 15 ms
+    KEEP = 64 * 1024
+
+    def __init__(self, deliver, skipped, parent=None):
+        super().__init__(parent)
+        self._deliver, self._skipped = deliver, skipped
+        self._lock = threading.Lock()
+        self._pending = ""
+        self._dropped = 0
+        self._timer = QTimer(self)
+        self._timer.setInterval(self.INTERVAL_MS)
+        self._timer.timeout.connect(self.drain)
+        self._timer.start()
+
+    def push(self, text):
+        """From any thread."""
+        with self._lock:
+            self._pending += text
+            if len(self._pending) > self.KEEP:
+                self._dropped += len(self._pending) - self.KEEP
+                self._pending = self._pending[-self.KEEP:]
+
+    def drain(self):
+        with self._lock:
+            text, self._pending = self._pending[:self.PER_TURN], self._pending[self.PER_TURN:]
+            dropped, self._dropped = self._dropped, 0
+        if dropped:
+            self._skipped(dropped)
+        if text:
+            self._deliver(text)
 
 
 class DeviceWorker(QThread):

@@ -23,10 +23,20 @@ class Screen:
         self.replies = bytearray()
         self.reset()
 
-    # A cell is (character, foreground, background, bold).
+    # A cell is (character, foreground, background, bold). Equal cells are one tuple, kept in
+    # _cells: the history holds 10,000 rows of 80 cells, a new tuple each took over 100 MB.
+
+    _cells = {}
+
+    def _cell(self, char, fg, bg, bold):
+        cell = (char, fg, bg, bold)
+        cells = Screen._cells
+        if len(cells) > 100000:               # a flood of different characters: start again
+            cells.clear()
+        return cells.setdefault(cell, cell)
 
     def _blank(self):
-        return (" ", self.fg, self.bg, False)
+        return self._cell(" ", self.fg, self.bg, False)
 
     def _row(self):
         return [self._blank() for _ in range(self.cols)]
@@ -116,7 +126,7 @@ class Screen:
             self.pending_wrap = False
             self.x = 0
             self._line_feed()
-        self.lines[self.y][self.x] = (char, self.fg, self.bg, self.bold)
+        self.lines[self.y][self.x] = self._cell(char, self.fg, self.bg, self.bold)
         if self.x < self.cols - 1:
             self.x += 1
         elif self.wrap:

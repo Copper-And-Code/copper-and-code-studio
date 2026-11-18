@@ -177,3 +177,30 @@ def test_stop_shows_no_traceback_and_keeps_what_the_app_printed(qtbot, tmp_path)
     text = "".join(messages)
     assert "BEFORE_STOP" in text
     assert "KeyboardInterrupt" not in text and "Traceback" not in text
+
+
+def test_the_general_code_can_create_a_timer_as_on_a_board(qtbot, tmp_path):
+    """The general code ran before LVGL was initialised in the simulator: lv.timer_create there
+    crashed the runtime, while on a board, whose driver starts LVGL on import, it works."""
+    project = Project("timer_at_start")
+    project.add_widget(project.pages[0], "label", name="label1")
+    project.code.module = 'def _tick(timer):\n    print("TIMER_TICKS")\n\nTICKER = lv.timer_create(_tick, 20, None)\n'
+    output = tmp_path / "generated"
+    generate_project(project, output)
+    compile_python(output)
+    document = ProjectDocument(project)
+    panel = SimPanel(document)
+    qtbot.addWidget(panel)
+    messages, errors = [], []
+    panel.output.connect(lambda text, error: messages.append(text))
+    panel.error.connect(errors.append)
+    try:
+        panel.start(output)
+        qtbot.waitUntil(lambda: "TIMER_TICKS" in "".join(messages) or not panel.running, timeout=5000)
+        assert "TIMER_TICKS" in "".join(messages), (errors, "".join(messages)[-300:])
+        assert panel.running
+        panel.stop()
+        with qtbot.waitSignal(panel.stopped, timeout=5000):
+            pass
+    finally:
+        panel.shutdown()
