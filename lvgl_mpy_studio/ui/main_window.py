@@ -426,6 +426,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
             if page_id not in ids:
                 self.tabs.removeTab(self.tabs.indexOf(view))
                 del self.designers[page_id]
+                view.deleteLater()  # removeTab only hides it: each project opened kept the pages of the last
         for position, page in enumerate(pages):
             if page.id not in self.designers:
                 view = DesignerView(self.document, page.id)

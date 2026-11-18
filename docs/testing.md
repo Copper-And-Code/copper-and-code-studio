@@ -87,6 +87,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_looks.py` | about 1 minute | pictures of the window and its panels against the last accepted ones |
 | `test_language.py` | seconds | Italian and back in each state: nothing left in the other language, nothing else changed |
 | `test_sizes_and_docks.py` | seconds | the window from 800×600 to 2560×1440; each dock floated, closed and brought back; the layout after a restart |
+| `test_soak.py` | about 1.5 minutes; longer with `LMS_SOAK_ROUNDS` | a long session in one window: nothing it holds may grow |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
 
@@ -192,6 +193,14 @@ dock is floated and docked again, then closed and opened again from its entry of
 must come back with its content. A layout changed by hand (a dock floated, one closed, another
 size) must be the same after the IDE is closed and opened again. It is worth running on a real
 display too: `tools/manual_on_x.sh 1366x768 tests/manual/test_sizes_and_docks.py`.
+
+**Soak.** In one window, round after round (30 by default): two examples opened in turn, a
+history of ten changes undone and redone three times, the simulator started and stopped.
+After five rounds to warm up, the Qt objects of the window, the visible windows, the child
+processes (zombies included) and the temporary folders of the IDE must not grow, and the
+memory of the process may grow by 40 MB at most; the numbers of each round go to
+`build/manual/soak.json`. Linux only. The first run found every project opened keeping the
+pages of the one before: 24 Qt objects and about 1.7 MB a round.
 
 **Faults.** Each one through the window, as it would happen to a person: the disk full
 during a save (the file on disk and the changes in the window are kept, no temporary file is

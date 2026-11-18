@@ -412,3 +412,25 @@ def test_the_properties_panel_shows_the_selection_of_the_page_in_front(qtbot):
     window.tabs.setCurrentIndex(window.tabs.indexOf(window.designers[window.document.project.pages[0].id][1]))
     assert window.properties.names == ["button1"]   # back on its page: still selected there
     window.document.undo_stack.setClean()
+
+
+def test_opening_projects_does_not_keep_the_pages_of_the_last(qtbot, tmp_path):
+    """removeTab only hides a page: each project opened kept the designers of the one before."""
+    import shutil
+
+    from PySide6.QtCore import QCoreApplication, QEvent
+
+    from lvgl_mpy_studio.ui.designer.scene import DesignerView
+
+    root = Path(__file__).parents[1] / "examples"
+    paths = []
+    for name in ("weather", "snake"):
+        shutil.copytree(root / name, tmp_path / name, ignore=shutil.ignore_patterns("build", "visual", "*.mp4"))
+        paths.append(tmp_path / name / "project.json")
+    window = MainWindow()
+    qtbot.addWidget(window)
+    for _ in range(3):
+        for path in paths:
+            assert window.open_project(path)
+            QCoreApplication.sendPostedEvents(None, QEvent.DeferredDelete)
+            assert len(window.findChildren(DesignerView)) == len(window.document.project.pages)
