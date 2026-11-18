@@ -97,6 +97,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_foreign_drops.py` | seconds | files, folders and text dragged from outside, dropped anywhere: no harm |
 | `test_console_flood.py` | about 30 seconds | programs printing without pause into the terminal, the Output and the Device Console |
 | `test_big_project.py` | about 15 seconds | a project of 30 pages and about 2000 widgets: opening, pages, selection, moves, undo, a property, save and Start, timed |
+| `test_mcp_and_window.py` | seconds | an agent changing the project through MCP while the window has it open |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -281,6 +282,15 @@ timed, each against a limit and against the last run on the PC (`build/manual/bi
 The first run found that such a project did not start: mpy-cross and the runtime of the
 simulator ran out of memory. A move, undo and redo take close to a second each on it, because
 each change keeps a copy of the whole project: that is the speed work of the plan, not done yet.
+
+**MCP and the window together.** An agent changes the project through MCP while the window has
+it open and a person works on it. The window finds out when it saves, and asks: Cancel keeps
+both versions where they are, Reload shows the agent's change, Save a Copy keeps the person's
+version in another file, Overwrite keeps the person's; after each the window agrees with its
+project. An agent writing with a revision older than the person's save is refused; a widget
+the agent removed is gone from the canvas and the Properties panel after Reload; Start after a
+change by the agent asks first. Nothing found; the window learns of the change only when it
+saves, which can be long after.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
