@@ -85,3 +85,38 @@ def test_every_schema_property_can_be_edited(qtbot, kind):
         assert actual == (2 if descriptor["type"] == "number" else True if descriptor["type"] == "boolean" else value)
         panel.set_selection([f"{kind}1"])
         items = {item.data(DESCRIPTOR_ROLE)["name"]: item for item in value_items(panel.model)}
+
+
+def test_a_field_left_as_it_opened_changes_nothing_on_several_widgets(qtbot):
+    """Two widgets at x 0 and 20: the cell is empty, the field opens on 0. Leaving it without
+    typing gave x 0 to both; typing a value still gives it to both."""
+    from PySide6.QtCore import Qt
+    from PySide6.QtTest import QTest
+    from PySide6.QtWidgets import QApplication, QSpinBox
+
+    document = ProjectDocument()
+    page = document.project.pages[0]
+    document.project.add_widget(page, "button", {"x": 0})
+    document.project.add_widget(page, "button", {"x": 20})
+    panel = PropertiesPanel(document)
+    qtbot.addWidget(panel)
+    panel.show()
+    panel.set_selection(["button1", "button2"])
+
+    def open_x():
+        item = next(item for item in value_items(panel.model) if item.data(DESCRIPTOR_ROLE)["name"] == "x")
+        panel.view.edit(item)
+        editor = next(child for child in panel.view.viewport().findChildren(QSpinBox) if child.isVisible())
+        return item, editor
+
+    item, editor = open_x()
+    assert item.data(Qt.DisplayRole) in ("", None)
+    panel.view.commitData(editor)                # what leaving the field does
+    QApplication.processEvents()
+    assert [widget.props["x"] for widget in page.widgets] == [0, 20]
+    assert document.undo_stack.count() == 0
+    item, editor = open_x()
+    editor.lineEdit().selectAll()
+    QTest.keyClicks(editor.lineEdit(), "0")
+    panel.view.commitData(editor)
+    assert [widget.props["x"] for widget in page.widgets] == [0, 0]

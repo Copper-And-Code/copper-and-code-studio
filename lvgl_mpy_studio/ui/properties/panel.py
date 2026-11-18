@@ -101,16 +101,30 @@ class PropertyDelegate(QStyledItemDelegate):
             editor.value.setText(value)
         else:
             editor.setText(value)
+        # What the field showed when it opened, and whether a key was typed in it since.
+        editor.setProperty("_lms_shown", self._editor_value(editor))
+        editor.setProperty("_lms_typed", False)
+        typing = editor.lineEdit() if isinstance(editor, (QSpinBox, QComboBox)) else editor.value if hasattr(editor, "value") else editor
+        if typing is not None and not editor.property("_lms_watched"):
+            typing.textEdited.connect(lambda _text, editor=editor: editor.setProperty("_lms_typed", True))
+            editor.setProperty("_lms_watched", True)
+
+    @staticmethod
+    def _editor_value(editor):
+        if isinstance(editor, QSpinBox):
+            return str(editor.value())
+        if isinstance(editor, QComboBox):
+            return editor.currentText()
+        if hasattr(editor, "value"):
+            return editor.value.text()
+        return editor.text()
 
     def setModelData(self, editor, model, index):
-        if isinstance(editor, QSpinBox):
-            value = str(editor.value())
-        elif isinstance(editor, QComboBox):
-            value = editor.currentText()
-        elif hasattr(editor, "value"):
-            value = editor.value.text()
-        else:
-            value = editor.text()
+        value = self._editor_value(editor)
+        # A field left as it opened changes nothing. With several widgets selected and different
+        # values, the field opens on one value (0 for a number): leaving it gave that value to all.
+        if not editor.property("_lms_typed") and value == editor.property("_lms_shown"):
+            return
         model.setData(index, value, Qt.EditRole)
 
     def updateEditorGeometry(self, editor, option, index):

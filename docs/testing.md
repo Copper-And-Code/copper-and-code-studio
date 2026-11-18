@@ -82,6 +82,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | Suite | Time | What it checks |
 |---|---|---|
 | `test_every_action.py` | about 10 minutes | every menu entry, toolbar button and context menu entry |
+| `test_every_shortcut.py` | about 1 minute | every keyboard shortcut, pressed with the focus in each place a person has it |
 | `test_every_dialog.py` | about 6 minutes | every dialog, in English and Italian: size, text cut off, Tab, Escape |
 | `test_looks.py` | about 1 minute | pictures of the window and its panels against the last accepted ones |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
@@ -138,6 +139,16 @@ build for minutes in the background and are tested in `tests/test_release.py`.
 
 It checks that nothing breaks, not that the result is right: that is what the test suite
 and the self-test are for.
+
+**Every shortcut.** Each shortcut of each enabled action is pressed as keys, with the focus
+in the canvas, the project tree, the Files panel, the code editor, a field of the Properties
+panel (opened with a click, as a person opens it) and the terminals, with an example open, a
+program running and a board connected. Where the focus is not a text, the shortcut must reach
+its action; a text field or a terminal may take it on purpose (Ctrl+C copies the text, or
+stops the program), which the report notes. An ambiguous shortcut shows as the Qt warning it
+causes. The first run found that leaving the field of a property shared by several selected
+widgets with different values, without typing, gave all of them the value the field opened
+on.
 
 **Every dialog.** The actions and context menus of an example and of a connected board are
 triggered again, in English and in Italian, and every dialog they open is looked at before it

@@ -239,9 +239,10 @@ class State:
 
     def select_two(self):
         """Two widgets selected on the canvas: Edit and Arrange act on a selection."""
-        view = self.window._active_designer()
+        view = self.window._active_designer() or next((view for _index, view in self.window.designers.values()), None)
         if view is None:
             return
+        self.window.tabs.setCurrentWidget(view)       # the code may be in front after the last entry
         items = list(view.designer_scene.widget_items.values())[:2]
         view.designer_scene.clearSelection()
         for item in items:
@@ -436,8 +437,10 @@ class NoRealBoard:
         return QuietPort()
 
 
-def run_action(window, watcher, qtbot, name, action, warnings):
-    """Trigger one action and check what it left. Returns (problems, dialogs, seconds)."""
+def run_action(window, watcher, qtbot, name, action, warnings, trigger=None):
+    """Trigger one action and check what it left. Returns (problems, dialogs, seconds).
+    trigger() does it another way than QAction.trigger(), such as pressing its shortcut."""
+    trigger = trigger or action.trigger
     document = window.document
     stack = document.undo_stack
     before, index, valid = snapshot(window), stack.index(), validation(document.project)
@@ -446,10 +449,10 @@ def run_action(window, watcher, qtbot, name, action, warnings):
     warnings.clear()
     started = time.monotonic()
     with qtbot.capture_exceptions() as exceptions:
-        action.trigger()
+        trigger()
         if action.isCheckable():
             settle(window)
-            action.trigger()                   # back as it was
+            trigger()                          # back as it was
         settle(window)
     seconds = time.monotonic() - started
     problems = list(watcher.problems)
