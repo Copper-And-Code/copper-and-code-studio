@@ -150,3 +150,30 @@ def test_unicode_project_path_start_and_stop(qtbot, tmp_path):
     finally:
         panel.shutdown()
     assert not panel.running
+
+
+def test_stop_shows_no_traceback_and_keeps_what_the_app_printed(qtbot, tmp_path):
+    """Stop interrupts the app as Ctrl-C does on a board: its KeyboardInterrupt is not an error to show."""
+    project = Project("stop_quietly")
+    project.add_widget(project.pages[0], "label", name="label1")
+    project.code.module = 'print("BEFORE_STOP")'
+    output = tmp_path / "generated"
+    generate_project(project, output)
+    compile_python(output)
+    document = ProjectDocument(project)
+    panel = SimPanel(document)
+    qtbot.addWidget(panel)
+    messages = []
+    panel.output.connect(lambda text, error: messages.append(text))
+    try:
+        panel.start(output)
+        qtbot.waitUntil(lambda: "BEFORE_STOP" in "".join(messages), timeout=5000)
+        qtbot.wait(300)                        # the app is in its loop
+        panel.stop()
+        with qtbot.waitSignal(panel.stopped, timeout=5000):
+            pass
+    finally:
+        panel.shutdown()
+    text = "".join(messages)
+    assert "BEFORE_STOP" in text
+    assert "KeyboardInterrupt" not in text and "Traceback" not in text

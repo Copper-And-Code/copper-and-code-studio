@@ -19,6 +19,8 @@ from lvgl_mpy_studio.sim.protocol import Decoder, MessageType, encode_key, encod
 
 
 TONE_LINE = re.compile(r"\x1bLVSIM_TONE (\d+) (\d+)\r?\n")
+# What Stop makes the app print, as Ctrl-C on a board: not an error of the app, so not shown.
+STOP_TRACEBACK = re.compile(r"Traceback \(most recent call last\):\n(?:[ \t].*\n)*KeyboardInterrupt:?[^\n]*\n?")
 TONE_PREFIX = "\x1b"
 
 
@@ -147,6 +149,7 @@ class SimPanel(QWidget):
         self.started_at = 0.0
         self.first_frame_ms = None
         self._stdout_tail = ""
+        self._held = None
         self._new_decoders()
         self.tone_player = TonePlayer(self)
         self.tone.connect(self.tone_player.play)
@@ -198,6 +201,7 @@ class SimPanel(QWidget):
         self.decoder = Decoder()
         self._new_decoders()
         self._stdout_tail = ""
+        self._held = None                      # after Stop: what the app prints, until it ends
         self._frames = 0
         self._fps_started = time.monotonic()
         self.first_frame_ms = None
@@ -329,14 +333,33 @@ class SimPanel(QWidget):
         if text and self.program:
             self.terminal.feed_serial(text)
         elif text:
-            self.output.emit(text, False)
+            self._emit_output(text, False)
 
     def _stderr(self):
         text = self._stderr_decoder.decode(bytes(self.process.readAllStandardError()))
         if self.program:
             self.terminal.feed_serial(text)
         else:
-            self.output.emit(text.replace("\r\n", "\n"), True)
+            self._emit_output(text.replace("\r\n", "\n"), True)
+
+    def _emit_output(self, text, error):
+        if self._held is not None:
+            self._held[error] += text
+        else:
+            self.output.emit(text, error)
+
+    def _read_rest(self):
+        """What the process wrote just before it ended, still in the pipes."""
+        self._stdout()
+        self._stderr()
+
+    def _release_held(self):
+        """At the end of a stopped app: what it printed, less the traceback of the stop itself."""
+        held, self._held = self._held, None
+        for error, text in sorted((held or {}).items()):
+            text = STOP_TRACEBACK.sub("", text)
+            if text.strip():
+                self.output.emit(text, error)
 
     def _process_error(self, error):
         self.error.emit(self.process.errorString())
@@ -348,6 +371,8 @@ class SimPanel(QWidget):
             self.stopped.emit(-1)
 
     def _finished(self, code, status):
+        self._read_rest()
+        self._release_held()
         self._quit_timer.stop()
         self._kill_timer.stop()
         self.tone_player.stop()
@@ -366,6 +391,8 @@ class SimPanel(QWidget):
             if self.document:
                 self.document.read_only = False
             return
+        if not self.program:                   # a program's terminal shows it, as a board's does
+            self._held = {False: "", True: ""}
         self._send(encode_stop())
         self.status.setText(tr("Stopping simulator…"))
         self._quit_timer.start(500)

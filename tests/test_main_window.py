@@ -434,3 +434,20 @@ def test_opening_projects_does_not_keep_the_pages_of_the_last(qtbot, tmp_path):
             assert window.open_project(path)
             QCoreApplication.sendPostedEvents(None, QEvent.DeferredDelete)
             assert len(window.findChildren(DesignerView)) == len(window.document.project.pages)
+
+
+def test_a_page_added_after_a_deletion_does_not_take_a_name_in_use(qtbot):
+    """Pages main, page2, page3; page2 deleted; Add Page counted three pages and made a second page3."""
+    from lvgl_mpy_studio.core.validation import validate_project
+
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.add_page()
+    window.add_page()
+    assert [page.name for page in window.document.project.pages][1:] == ["page2", "page3"]
+    window.document.execute("Delete Page", lambda project: project.pages.pop(1))
+    window.add_page()
+    names = [page.name for page in window.document.project.pages]
+    assert len(names) == len(set(names)), names
+    validate_project(window.document.project)
+    window.document.undo_stack.setClean()

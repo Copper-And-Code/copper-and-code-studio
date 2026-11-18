@@ -196,7 +196,12 @@ class ProjectTreeMixin:
         return True
 
     def add_page(self):
-        name = f"page{len(self.document.project.pages) + 1}"
+        # The first free name: after a page was deleted, the count names one that is still there.
+        used = {page.name for page in self.document.project.pages}
+        number = len(self.document.project.pages) + 1
+        while f"page{number}" in used:
+            number += 1
+        name = f"page{number}"
         self.document.execute(tr("Add Page"), lambda project: project.pages.append(project.new_page(name)))
 
     def _selected_page(self):
