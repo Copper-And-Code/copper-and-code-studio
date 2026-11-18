@@ -106,13 +106,16 @@ def choose(chance, menu, skipped, log):
 
 
 class StepLog(list):
-    """The steps, also written to build/manual/monkey-<state>.log as they are made: a crash of
-    the process loses the test's output, not this file."""
+    """The steps, also written to build/manual/monkey-<state>-<run>.log as they are made: a
+    crash of the process loses the test's output, not this file. One file per process, so that
+    two monkeys at the same time do not write in each other's."""
 
-    def __init__(self, name):
+    def __init__(self, name, seed):
         super().__init__()
         REPORTS.mkdir(parents=True, exist_ok=True)
-        self._file = open(REPORTS / f"monkey-{name}.log", "w", encoding="utf-8")
+        run = os.environ.get("LMS_MONKEY_RUN") or str(os.getpid())   # tools/monkey_night.sh names its runs
+        self._file = open(REPORTS / f"monkey-{name}-{run}.log", "w", encoding="utf-8")
+        self._file.write(f"# state {name}, seed {seed} (LMS_MONKEY_SEED={seed - MONKEY_STATES.index(next(state for state in MONKEY_STATES if state.name == name))})\n")
 
     def append(self, line):
         super().append(line)
@@ -157,7 +160,7 @@ def test_the_monkey(qtbot, tmp_path, monkeypatch, state_class):
     seed = SEED + MONKEY_STATES.index(state_class)
     chance = random.Random(seed)
     print(f"\nmonkey: state {state_class.name}, seed {seed}, {STEPS} steps (LMS_MONKEY_SEED={SEED} to replay)")
-    log, problems = StepLog(state_class.name), []
+    log, problems = StepLog(state_class.name, seed), []
     with Sweep(qtbot, monkeypatch, tmp_path, state_class) as sweep:
         window = sweep.window
         skipped = {id(getattr(window, attribute)) for attribute in SKIPPED}

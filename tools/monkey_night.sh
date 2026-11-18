@@ -22,7 +22,7 @@ echo "monkey for ${hours} h, ${steps} steps a run; reports in ${folder}"
 while [ "$(date +%s)" -lt "$end" ]; do
     runs=$((runs + 1))
     output="$folder/run.out"
-    LMS_MONKEY_SEED="$seed" LMS_MONKEY_STEPS="$steps" QT_QPA_PLATFORM=offscreen \
+    LMS_MONKEY_RUN="night$seed" LMS_MONKEY_SEED="$seed" LMS_MONKEY_STEPS="$steps" QT_QPA_PLATFORM=offscreen \
         timeout $(( steps * 3 + 600 )) .venv/bin/python -X faulthandler -m pytest -q -s -p no:faulthandler \
         tests/manual/test_monkey.py --manual >"$output" 2>&1
     code=$?
@@ -33,10 +33,11 @@ while [ "$(date +%s)" -lt "$end" ]; do
         kept="$folder/seed-${seed}"
         mkdir -p "$kept"
         mv "$output" "$kept/pytest.out"
-        cp build/manual/monkey-*.log "$kept/" 2>/dev/null || true
+        mv build/manual/monkey-*-night"$seed".log "$kept/" 2>/dev/null || true
         reason=$(grep -m1 -E "Fatal Python error|^E   +step|^E +AssertionError" "$kept/pytest.out" | cut -c1-160)
         echo "seed ${seed}: FAILED (exit ${code}) ${reason}" | tee -a "$folder/summary.txt"
     fi
+    rm -f build/manual/monkey-*-night"$seed".log
     seed=$((seed + 10))
 done
 rm -f "$folder/run.out"
