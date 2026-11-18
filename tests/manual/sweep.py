@@ -39,7 +39,7 @@ SKIPPED = {
     "build_action": "builds in the background for minutes, without a dialog: tested in test_release",
     "single_file_action": "builds in the background for minutes, without a dialog: tested in test_release",
 }
-QT_NOISE = ("propagateSizeHints",)             # the offscreen platform says it at each window
+QT_NOISE = ("propagateSizeHints", "does not support raise()")   # the offscreen platform says them
 
 
 # ---- The actions ----

@@ -30,6 +30,7 @@ trap cleanup EXIT
 for _ in $(seq 50); do [ -e "/tmp/.X11-unix/X${display}" ] && break; sleep 0.1; done
 
 export DISPLAY=":${display}" QT_QPA_PLATFORM=xcb
+export LIBGL_ALWAYS_SOFTWARE=1                 # Xvfb has no GPU: no driver messages
 unset WAYLAND_DISPLAY
 if [ -n "${LMS_SCREEN_SCALE:-}" ]; then
     export QT_SCALE_FACTOR="$LMS_SCREEN_SCALE"

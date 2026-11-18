@@ -86,6 +86,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_every_dialog.py` | about 6 minutes | every dialog, in English and Italian: size, text cut off, Tab, Escape |
 | `test_looks.py` | about 1 minute | pictures of the window and its panels against the last accepted ones |
 | `test_language.py` | seconds | Italian and back in each state: nothing left in the other language, nothing else changed |
+| `test_sizes_and_docks.py` | seconds | the window from 800×600 to 2560×1440; each dock floated, closed and brought back; the layout after a restart |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
 
@@ -184,6 +185,13 @@ run, or `LMS_LOOKS_ACCEPT=1`, makes the reference. The checks that need no refer
 cut off, widgets covering each other, contrast) fail it. The dark theme needs a real display:
 offscreen skips it. The first run found the message of the Files panel without a folder cut
 in half when the panel is narrow.
+
+**Sizes and docks.** With an example open, the window at 800×600, 1024×700, 1366×768,
+1920×1080 and 2560×1440: no text cut off, no widgets covering each other, no Qt warning. Each
+dock is floated and docked again, then closed and opened again from its entry of View, and
+must come back with its content. A layout changed by hand (a dock floated, one closed, another
+size) must be the same after the IDE is closed and opened again. It is worth running on a real
+display too: `tools/manual_on_x.sh 1366x768 tests/manual/test_sizes_and_docks.py`.
 
 **Faults.** Each one through the window, as it would happen to a person: the disk full
 during a save (the file on disk and the changes in the window are kept, no temporary file is
