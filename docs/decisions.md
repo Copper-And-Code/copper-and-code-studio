@@ -295,3 +295,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 - The import refuses an id of a built-in board instead of replacing it: a file must not change a board the IDE ships under the same name. A board imported before is replaced after a question, or with `--replace`. Imported boards are kept with the customized ones in `board-profiles.json`, with the list of their ids under `imported`, so the Board Profile Manager can show them as such.
 - Deleting an imported board removes it; deleting a built-in one hides it, as before. A project keeps its own copy of its board, so it opens and works when the board is no longer there, with a notice in the Output panel and not an error.
 - The same functions serve the Board Profile Manager, the command line (`board list|import|export|delete`) and MCP (`import_board`, `delete_board`), so the three cannot accept different files.
+- Projects with pages run in the simulator with the same 32 MB heap as programs without pages
+  (`RUNTIME_HEAP`, `-X heapsize`), and mpy-cross with 64 MB (2026-11-18): with the default
+  2 MB a project of about 2000 widgets did not start, while the boards with a display have far
+  more. The memory budget measures what the app allocates, not the heap, so it does not change.

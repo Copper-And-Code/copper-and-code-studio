@@ -10,11 +10,9 @@ import os
 from pathlib import Path
 import shutil
 
-from lvgl_mpy_studio.platform import config_dir, root_dir
+from lvgl_mpy_studio.platform import RUNTIME_HEAP, config_dir, root_dir
 
-# The heap of the unix port is 2 MB by default; boards with a display have far more (28 MB on the STM32H7_CORE),
-# and a terminal on the display keeps copies of the framebuffer.
-HEAP = "32M"
+HEAP = RUNTIME_HEAP  # see platform.py
 PROGRAM_ENTRY = ["-X", f"heapsize={HEAP}", "-c", "import lms_program_boot"]
 RESET_EXIT_CODE = 75  # machine.reset() in the simulator: see runtime/program/machine.py
 SKIPPED = {"__pycache__", ".git", ".hg", ".svn", ".venv", "node_modules"}

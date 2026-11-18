@@ -14,9 +14,13 @@ def exe_name(name):
     return name if not IS_WINDOWS or name.lower().endswith(".exe") else name + ".exe"
 
 
+# The heap of the unix port is 2 MB by default; boards with a display have far more (28 MB on the
+# STM32H7_CORE): a project of 2000 widgets ran out of memory in the simulator, a terminal on the
+# display keeps copies of the framebuffer. Projects and programs get the same.
+RUNTIME_HEAP = "32M"
 # With main.py as a script MicroPython puts the absolute folder in sys.path: on Windows it
 # arrives in ANSI, is not valid UTF-8 and imports fail if the path has accented letters.
-RUNTIME_ENTRY = ["-c", "import main; main.main()"]
+RUNTIME_ENTRY = ["-X", f"heapsize={RUNTIME_HEAP}", "-c", "import main; main.main()"]
 
 
 LVSIM_VARIABLES = ("LVSIM_SOCKET", "LVSIM_CONNECT", "LVSIM_TOKEN", "LVSIM_HEADLESS", "LVSIM_DUMP", "LVSIM_FRAMES", "LVSIM_TICK_MS",

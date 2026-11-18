@@ -1,6 +1,8 @@
+import pytest
+
 import ast
 
-from lvgl_mpy_studio.core.model import Project
+from lvgl_mpy_studio.core.model import Project, widget_definitions
 from lvgl_mpy_studio.core.boards import builtin_profiles
 from lvgl_mpy_studio.gen.board_gen import generate_board
 from lvgl_mpy_studio.gen.gen_c import generate_c
@@ -172,3 +174,25 @@ def test_old_project_profile_still_gets_the_board_buzzer(tmp_path):
     result = generate_board(project, project.board, tmp_path)
     assert "import audio" in (tmp_path / "lms_buzzer.py").read_text()
     assert not any("buzzer" in warning for warning in result["warnings"])
+
+
+def test_a_project_of_2000_widgets_compiles_and_gets_a_heap_for_it(tmp_path):
+    """mpy-cross said MemoryError on the ui.py of 2000 widgets (838 KB), and the runtime ran out of
+    its 2 MB heap: both now have room."""
+    from lvgl_mpy_studio.build.compiler import compile_python
+    from lvgl_mpy_studio.core.components import is_component
+    from lvgl_mpy_studio.platform import RUNTIME_ENTRY, runtime_path
+
+    if not runtime_path().exists():
+        pytest.skip("mpy-cross not built")
+    project = Project("big")
+    types = [widget_type for widget_type in sorted(widget_definitions()) if not is_component(widget_type)]
+    for number in range(30):
+        page = project.pages[0] if number == 0 else project.new_page(f"page{number + 1}")
+        if number:
+            project.pages.append(page)
+        for index in range(66):
+            project.add_widget(page, types[index % len(types)], {"x": index % 8 * 80, "y": index // 8 * 60})
+    generate_project(project, tmp_path / "big")
+    assert compile_python(tmp_path / "big")
+    assert "-X" in RUNTIME_ENTRY and any(argument.startswith("heapsize=") for argument in RUNTIME_ENTRY)

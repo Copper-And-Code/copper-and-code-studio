@@ -16,7 +16,7 @@ from PySide6.QtWidgets import (
     QTreeWidgetItem, QVBoxLayout, QWidget,
 )
 
-from lvgl_mpy_studio.build.compiler import default_mpy_cross, parse_compiler_errors
+from lvgl_mpy_studio.build.compiler import default_mpy_cross, mpy_cross_command, parse_compiler_errors
 from lvgl_mpy_studio.core.i18n import tr
 from lvgl_mpy_studio.platform import CREATE_NO_WINDOW
 from lvgl_mpy_studio.ui.code.editor import CodeEditor
@@ -47,7 +47,7 @@ def syntax_errors(text, name="file.py"):
     with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-file-") as directory:
         source = Path(directory) / Path(name).name
         source.write_text(text, encoding="utf-8", newline="\n")
-        result = subprocess.run([str(compiler), "-o", str(source.with_suffix(".mpy")), source.name], capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=directory, creationflags=CREATE_NO_WINDOW)
+        result = subprocess.run(mpy_cross_command(compiler, "-o", source.with_suffix(".mpy"), source.name), capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=directory, creationflags=CREATE_NO_WINDOW)
         if result.returncode == 0:
             return []
         return [{"line": error["line"], "message": error.get("detail") or error["message"]} for error in parse_compiler_errors(result.stderr + result.stdout, directory)]

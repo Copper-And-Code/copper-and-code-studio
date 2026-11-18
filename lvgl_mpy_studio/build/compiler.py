@@ -20,12 +20,22 @@ def default_mpy_cross():
     return mpy_cross_path()
 
 
+# The heap of mpy-cross is too small for the ui.py of a large project (838 KB for 2000 widgets):
+# it said MemoryError. On the PC a larger one costs nothing.
+MPY_CROSS_HEAP = "64M"
+
+
+def mpy_cross_command(executable, *arguments):
+    """The command line of mpy-cross, with the heap a large project needs."""
+    return [str(executable), "-X", f"heapsize={MPY_CROSS_HEAP}", *map(str, arguments)]
+
+
 def compile_python(directory, mpy_cross=None):
     directory = Path(directory).resolve()
     executable = Path(mpy_cross).resolve() if mpy_cross else default_mpy_cross()
     errors = []
     for path in sorted(directory.glob("*.py")):
-        result = subprocess.run([str(executable), str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=directory, creationflags=CREATE_NO_WINDOW)
+        result = subprocess.run(mpy_cross_command(executable, path), capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=directory, creationflags=CREATE_NO_WINDOW)
         if result.returncode:
             errors.extend(parse_compiler_errors(result.stderr + result.stdout, directory))
     if errors:

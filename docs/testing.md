@@ -96,6 +96,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_hard_texts.py` | about 1 minute | long, quoted, escaped, foreign, right-to-left and emoji texts in every text property and as page names |
 | `test_foreign_drops.py` | seconds | files, folders and text dragged from outside, dropped anywhere: no harm |
 | `test_console_flood.py` | about 30 seconds | programs printing without pause into the terminal, the Output and the Device Console |
+| `test_big_project.py` | about 15 seconds | a project of 30 pages and about 2000 widgets: opening, pages, selection, moves, undo, a property, save and Start, timed |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -272,6 +273,14 @@ send, since its MicroPython does not read its input while a program runs. The fi
 three things: a timer created in the general code crashed the simulator; the terminal took
 over 100 MB for its history; and the Device Console fell behind a board printing fast, without
 answering, and went on showing old output long after Ctrl-C.
+
+**A large project.** A project of 30 pages and about 2000 widgets, some inside panels, with a
+handler for every button, is opened in the window; opening it, showing each page, Select All,
+a move with an arrow key, undo and redo, a property typed in the panel, Save and Start are
+timed, each against a limit and against the last run on the PC (`build/manual/big-project.json`).
+The first run found that such a project did not start: mpy-cross and the runtime of the
+simulator ran out of memory. A move, undo and redo take close to a second each on it, because
+each change keeps a copy of the whole project: that is the speed work of the plan, not done yet.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
