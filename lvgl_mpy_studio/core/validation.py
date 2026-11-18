@@ -3,7 +3,12 @@ from .components import COMPONENTS, register_project_blocks
 from .i18n import tr
 from .events import EVENTS
 from .modules import validate_module_name
-from .names import validate_name
+from .names import MAX_NAME_LENGTH, validate_name
+
+
+def _constant_length(name):
+    """Length of the ui.PAGE_… constant of a page (core.model.page_constant, without importing the model)."""
+    return len("PAGE_") + len(name)
 
 
 def _dimensions(value, path, errors):
@@ -68,6 +73,8 @@ def validate_project(project):
             errors.append(f"{page_path}.name: missing page name")
         elif page_name in page_names:
             errors.append(f"{page_path}.name: duplicate page name {page_name!r}")
+        elif _constant_length(page_name) > MAX_NAME_LENGTH:
+            errors.append(f"{page_path}.name: longer than {MAX_NAME_LENGTH} characters")
         else:
             page_names.add(page_name)
         size = page["canvasSize"] if "canvasSize" in page else {"width": 800, "height": 480}

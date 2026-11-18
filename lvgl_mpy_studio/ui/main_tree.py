@@ -6,6 +6,7 @@ from lvgl_mpy_studio.core.components import is_component
 from lvgl_mpy_studio.core.events import events_for
 from lvgl_mpy_studio.core.i18n import tr
 from lvgl_mpy_studio.core.model import page_constant
+from lvgl_mpy_studio.core.names import MAX_NAME_LENGTH
 from lvgl_mpy_studio.core.modules import ModuleError, create_module, delete_module, module_references, rename_module, validate_module_name
 from lvgl_mpy_studio.ui.designer.scene import DesignerView
 
@@ -219,6 +220,9 @@ class ProjectTreeMixin:
             return
         if any(page_constant(item.name) == page_constant(name) for item in self.document.project.pages if item.id != page.id):
             self.append_error(tr("A page named {name} already exists", name=name))
+            return
+        if len(page_constant(name)) > MAX_NAME_LENGTH:  # its constant ui.PAGE_… must be a name MicroPython takes
+            self.append_error(tr("A page name can be {count} characters at most", count=MAX_NAME_LENGTH))
             return
         warnings = []
         self.document.execute(tr("Rename Page"), lambda project: warnings.extend(project.rename_page(next(item for item in project.pages if item.id == page.id), name)))

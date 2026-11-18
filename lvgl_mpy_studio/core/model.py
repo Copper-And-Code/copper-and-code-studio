@@ -13,7 +13,7 @@ from uuid import uuid4
 from .components import COMPONENTS, block_for, is_component, register_project_blocks
 from .events import EVENTS, PAGE_EVENTS, default_event, events_for, handler_name
 from .i18n import tr
-from .names import allocate_name, validate_name
+from .names import MAX_NAME_LENGTH, allocate_name, validate_name
 from lvgl_mpy_studio.gen.identifiers import sanitize_identifier
 
 
@@ -565,6 +565,8 @@ class Project:
         old_name = page.name
         if not new_name:
             raise ValueError("The page name is empty")
+        if len(page_constant(new_name)) > MAX_NAME_LENGTH:
+            raise ValueError(f"The page name is longer than {MAX_NAME_LENGTH} characters")
         if any(page_constant(item.name) == page_constant(new_name) for item in self.pages if item is not page):
             raise ValueError(f"Page {new_name!r} already exists, or has the same constant {page_constant(new_name)}")
         page.name = new_name

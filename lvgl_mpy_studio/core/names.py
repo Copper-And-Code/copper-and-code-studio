@@ -6,11 +6,16 @@ from lvgl_mpy_studio.gen.identifiers import C_KEYWORDS, PYTHON_BUILTINS, TEMPLAT
 IDENTIFIER_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 RESERVED = C_KEYWORDS | PYTHON_BUILTINS | TEMPLATE_NAMES | set(keyword.kwlist)
 RESERVED.update(("ui", "lv", "main", "app_events", "display_driver", "time", "self", "cls"))
+# MicroPython refuses names longer than 255 bytes ("name too long"); a widget's name also makes
+# its handlers' names (name_value_changed) and C symbols, so it stays well below.
+MAX_NAME_LENGTH = 200
 
 
 def validate_name(name, existing=()):
     if not isinstance(name, str) or not IDENTIFIER_RE.fullmatch(name):
         return "The name must match [A-Za-z_][A-Za-z0-9_]*"
+    if len(name) > MAX_NAME_LENGTH:
+        return f"The name is longer than {MAX_NAME_LENGTH} characters"
     if keyword.iskeyword(name) or name in C_KEYWORDS or name in RESERVED:
         return f"The name {name!r} is reserved"
     if name.startswith(("lv_", "LV_")):

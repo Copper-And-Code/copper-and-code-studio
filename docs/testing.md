@@ -93,6 +93,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_canvas_mouse.py` | seconds | widgets dropped, moved at three zooms, resized from each handle, selected with the mouse |
 | `test_typing_code.py` | seconds | typing in the code editor: indents, suggestions, errors, the lists, read-only while running, random keys |
 | `test_save_and_reopen.py` | about 2 minutes | what is saved is what was in the window: examples and the monkey's work saved, opened in a new window, compared |
+| `test_hard_texts.py` | about 1 minute | long, quoted, escaped, foreign, right-to-left and emoji texts in every text property and as page names |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -244,6 +245,14 @@ project, and a second save must not change the file by a byte. Then, round after
 monkey works on a project for a while; it is saved and opened in a second window, and the
 project and the canvas of each page (without the grid and the real preview, which are choices
 of the window) must be the same.
+
+**Hard texts.** Every text property of every widget type gets, pasted through the Properties
+panel, a text of 600 letters, quotes of every kind, backslashes and escapes, accents and other
+alphabets, Arabic, emoji, `{name}` and `%s` placeholders, spaces only; pages are renamed with
+the same texts. Each time the IDE must keep the text or refuse it with a message, and the
+MicroPython code must compile, the runtime must draw the pages and the C code must be
+generated. The first run found that a page or a widget could get a name longer than
+MicroPython takes ("name too long"), so that the project no longer started.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered

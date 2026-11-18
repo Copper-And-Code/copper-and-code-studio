@@ -195,3 +195,29 @@ def test_invalid_widget_type_cli_and_gui_are_controlled(qtbot, tmp_path, monkeyp
     assert window.document.project is original
     assert window.document.project.to_dict() == before
     assert not window.document.undo_stack.canUndo()
+
+
+def test_a_name_too_long_for_micropython_is_refused():
+    """A 600-letter name was accepted, and MicroPython refused the code with "name too long"."""
+    from lvgl_mpy_studio.core.names import MAX_NAME_LENGTH, validate_name
+
+    assert validate_name("w" * MAX_NAME_LENGTH) is None
+    assert "longer than" in validate_name("w" * (MAX_NAME_LENGTH + 1))
+    project = Project("long")
+    with pytest.raises(ValueError):
+        project.add_widget(project.pages[0], "label", name="w" * 600)
+
+
+def test_a_page_name_too_long_for_micropython_is_refused():
+    """A page of 600 letters gave a constant ui.PAGE_… that MicroPython refused: "name too long"."""
+    from lvgl_mpy_studio.core.names import MAX_NAME_LENGTH
+
+    project = Project("long")
+    project.pages.append(project.new_page("second"))
+    with pytest.raises(ValueError, match="longer than"):
+        project.rename_page(project.pages[1], "w" * 600)
+    project.rename_page(project.pages[1], "w" * (MAX_NAME_LENGTH - len("PAGE_")))
+    validate_project(project)
+    project.pages[1].name = "w" * 600
+    with pytest.raises(ValueError, match="longer than"):
+        validate_project(project)
