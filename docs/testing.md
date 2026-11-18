@@ -90,6 +90,8 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_soak.py` | about 1.5 minutes; longer with `LMS_SOAK_ROUNDS` | a long session in one window: nothing it holds may grow |
 | `test_every_property.py` | about 1.5 minutes | every property of every widget type, changed in the Properties panel |
 | `test_every_example.py` | about 2 minutes | every example started in the simulator and touched |
+| `test_canvas_mouse.py` | seconds | widgets dropped, moved at three zooms, resized from each handle, selected with the mouse |
+| `test_typing_code.py` | seconds | typing in the code editor: indents, suggestions, errors, the lists, read-only while running, random keys |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -215,6 +217,25 @@ the page, and undo must bring back the empty page. About 340 properties.
 **Every example.** Each example is started with Run → Start; the middle of each widget of its
 first page is touched on the simulated screen, a few seconds are left to its timers, then
 Stop. Nothing may reach the Errors panel, and the Output may hold no Python error.
+
+**The canvas under the mouse.** In the real window: every widget type dropped from the
+toolbox must land where the pointer was, selected, and go away with one undo; every type
+dragged at zoom 1, 2 and 0.5 must move by what the pointer moved, keeping its size, as one
+undo step; each of the eight handles must resize as it should and never below the least size;
+a rubber band, Ctrl+click and a click on the empty page must select what they should, with
+the Properties panel following; the grid and the arrow keys must move as they say; a widget
+dropped on a panel must go inside it and move with it. The first run found a thin line
+growing to 8 pixels high when moved, or when pulled sideways by a handle.
+
+**The code editor.** With an example open, through keys and clicks: a double click on a widget
+opens its handler, lines are indented after a colon and Tab writes four spaces, the handler
+holds what the editor shows, and undo gives the old code back; suggestions come after `lv.`,
+`ui.` and with Ctrl+Space, the arrows move in them and Enter writes the one chosen; a syntax
+error is underlined and said under the editor, Start lists it in the Errors panel and a double
+click there opens its line; every object and event of the two lists shows its stored code
+without changing the project; while the simulator runs keys change nothing and Stop and Edit
+gives the code back; 400 random keys (accents and emoji too) leave the editor and the project
+in agreement, and undo all gives the code of the start.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
