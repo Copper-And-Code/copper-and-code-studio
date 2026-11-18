@@ -87,7 +87,9 @@ class ResizeHandle(QGraphicsRectItem):
         painter.drawRect(self.rect())
 
     def mousePressEvent(self, event):
-        self._origin = (event.scenePos(), QRectF(self.owner.rect()), QPointF(self.owner.pos()))
+        # The widget's own size, not the drawn one: a line 5 px high is drawn 8 px high to be grabbed.
+        _x, _y, width, height = self.owner.geometry()
+        self._origin = (event.scenePos(), QRectF(0, 0, width, height), QPointF(self.owner.pos()))
         event.accept()
 
     def mouseMoveEvent(self, event):
@@ -101,7 +103,10 @@ class ResizeHandle(QGraphicsRectItem):
         top, bottom = self.index in (0, 1, 2), self.index in (4, 5, 6)
         width = rect.width() - dx if left else rect.width() + dx if right else rect.width()
         height = rect.height() - dy if top else rect.height() + dy if bottom else rect.height()
-        width, height = max(MINIMUM_SIZE, width), max(MINIMUM_SIZE, height)
+        # A handle never makes a widget smaller than the least size, nor larger only to reach it:
+        # a line 5 px high stays 5 px high under a corner handle pulled sideways.
+        width = max(min(MINIMUM_SIZE, rect.width()), width)
+        height = max(min(MINIMUM_SIZE, rect.height()), height)
         x = pos.x() + rect.width() - width if left else pos.x()
         y = pos.y() + rect.height() - height if top else pos.y()
         self.owner.set_geometry(x, y, width, height)
@@ -269,8 +274,8 @@ class WidgetItem(QGraphicsItem):
         grid = self.designer_scene.grid_size
         delta = event.scenePos() - start
         for item, position in positions.items():
-            rect = item.rect()
-            item.set_geometry(snapped(position.x() + delta.x(), grid), snapped(position.y() + delta.y(), grid), rect.width(), rect.height())
+            _x, _y, width, height = item.geometry()   # its own size: the drawn one has a least size
+            item.set_geometry(snapped(position.x() + delta.x(), grid), snapped(position.y() + delta.y(), grid), width, height)
         self.designer_scene.widgetsReshaped.emit()
         event.accept()
 

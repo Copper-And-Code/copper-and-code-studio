@@ -1,5 +1,5 @@
 import pytest
-from PySide6.QtCore import QEvent, QMimeData, QPointF, Qt
+from PySide6.QtCore import QEvent, QMimeData, QPoint, QPointF, Qt
 from PySide6.QtGui import QDragEnterEvent, QDragLeaveEvent, QDragMoveEvent, QDropEvent, QMouseEvent
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
@@ -209,3 +209,33 @@ def test_moving_with_the_keys_is_undone_by_an_english_name(qtbot):
     scene.move_selected(1, 0)
     assert window.document.undo_stack.undoText() == "Move Widgets"
     window.document.undo_stack.setClean()
+
+
+def test_a_thin_line_keeps_its_height_when_moved_or_stretched(qtbot):
+    """A line 5 px high is drawn 8 px high to be grabbed: a move took the 8, and so did the right handle."""
+    from lvgl_mpy_studio.ui.designer.scene import ResizeHandle
+
+    document = ProjectDocument()
+    document.execute("Add", lambda project: project.add_widget(project.pages[0], "line", {"x": 20, "y": 30, "width": 200, "height": 5}))
+    view = DesignerView(document)
+    qtbot.addWidget(view)
+    view.resize(800, 600)
+    view.show()
+
+    def drag(start, end):
+        QTest.mousePress(view.viewport(), Qt.LeftButton, pos=start)
+        QApplication.sendEvent(view.viewport(), QMouseEvent(QEvent.MouseMove, QPointF(end), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier))
+        QTest.mouseRelease(view.viewport(), Qt.LeftButton, pos=end)
+
+    item = next(iter(view.designer_scene.widget_items.values()))
+    start = view.mapFromScene(item.mapToScene(QPointF(50, 2)))
+    drag(start, start + QPoint(30, 10))
+    line = document.project.pages[0].widgets[0]
+    assert (line.props["x"], line.props["y"], line.props["width"], line.props["height"]) == (50, 40, 200, 5)
+    item = next(iter(view.designer_scene.widget_items.values()))
+    item.setSelected(True)
+    right = next(handle for handle in item.childItems() if isinstance(handle, ResizeHandle) and handle.index == 3)
+    start = view.mapFromScene(right.scenePos())
+    drag(start, start + QPoint(40, 0))
+    line = document.project.pages[0].widgets[0]
+    assert (line.props["width"], line.props["height"]) == (240, 5)
