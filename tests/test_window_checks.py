@@ -4,7 +4,7 @@ import pytest
 from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtWidgets import QApplication, QMenu
 
-from looks import cut_off, overlapping
+from looks import cut_off, english_left, overlapping
 
 
 @pytest.fixture(params=["en", "it"])
@@ -55,53 +55,14 @@ def test_no_text_is_cut_off_at_1280_by_800(window):
     assert overlapping(window) == []
 
 
-def visible_texts(window):
-    """(where, text) of what the window shows or tells: labels, buttons, menus, docks, tabs,
-    column titles, placeholders and tooltips."""
-    from PySide6.QtWidgets import QAbstractButton, QDockWidget, QLabel, QLineEdit, QTabWidget, QTreeWidget, QWidget
-
-    found = set()
-
-    def add(where, text):
-        text = (text or "").replace("&", "").strip()
-        if text:
-            found.add((where, text))
-
-    for widget in window.findChildren(QWidget):
-        if isinstance(widget, (QAbstractButton, QLabel)):
-            add(type(widget).__name__, widget.text())
-        if isinstance(widget, QDockWidget):
-            add("dock", widget.windowTitle())
-        if isinstance(widget, QTabWidget):
-            for index in range(widget.count()):
-                add("tab", widget.tabText(index))
-        if isinstance(widget, QTreeWidget):
-            header = widget.headerItem()
-            for index in range(header.columnCount()):
-                add("column", header.text(index))
-        if isinstance(widget, QLineEdit):
-            add("placeholder", widget.placeholderText())
-        add("tooltip", widget.toolTip())
-    for menu in window.findChildren(QMenu):
-        add("menu", menu.title())
-        for action in menu.actions():
-            add("menu entry", action.text())
-            add("tooltip", action.toolTip())
-    return found
-
-
 def test_nothing_stays_in_english_after_switching_to_italian(qtbot):
-    import json
-    from pathlib import Path
-
     from lvgl_mpy_studio.ui.main_window import MainWindow
 
-    catalog = json.loads((Path(__file__).parents[1] / "lvgl_mpy_studio" / "translations" / "it.json").read_text(encoding="utf-8"))
     window = MainWindow()
     qtbot.addWidget(window)
     window.change_language("it")
     try:
-        english = sorted((where, text) for where, text in visible_texts(window) if catalog.get(text, text) != text)
+        english = english_left(window)
     finally:
         window.change_language("en")
     assert english == []
@@ -120,3 +81,24 @@ def test_a_text_the_ide_changed_is_kept_when_the_language_changes(qtbot, tmp_pat
     window.change_language("en")
     assert window.files_panel.folder_label.text() == "second"
     assert window.files_panel.folder_label.toolTip() == str((tmp_path / "second").resolve())
+
+
+def test_the_standard_buttons_follow_the_language(qtbot):
+    """Save, Cancel and Close come from Qt's own translation, which the IDE loads."""
+    from PySide6.QtWidgets import QMessageBox
+
+    from lvgl_mpy_studio.ui.main_window import MainWindow
+
+    window = MainWindow()
+    qtbot.addWidget(window)
+
+    def buttons():
+        box = QMessageBox(QMessageBox.Question, "", "", QMessageBox.Save | QMessageBox.Cancel)
+        return sorted(button.text().replace("&", "") for button in box.buttons())
+
+    window.change_language("it")
+    try:
+        assert buttons() == ["Annulla", "Salva"]
+    finally:
+        window.change_language("en")
+    assert buttons() == ["Cancel", "Save"]

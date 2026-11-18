@@ -112,3 +112,60 @@ def low_contrast(root, least=3.0):
         if ratio < least:
             found.append(f"label “{plain(label.text())}”: contrast {ratio:.1f}, text {text.name()} on {background.name()}")
     return found
+
+
+def visible_texts(root):
+    """(where, text) of what root shows or tells: labels, buttons, menus, docks, tabs, column
+    titles, placeholders and tooltips."""
+    from PySide6.QtWidgets import QAbstractButton, QDockWidget, QLabel, QLineEdit, QMenu, QTabWidget, QTreeWidget
+
+    found = set()
+
+    def add(where, text):
+        text = (text or "").replace("&", "").strip()
+        if text:
+            found.add((where, text))
+
+    for widget in [root] + root.findChildren(QWidget):
+        if isinstance(widget, (QAbstractButton, QLabel)):
+            add(type(widget).__name__, widget.text())
+        if isinstance(widget, QDockWidget):
+            add("dock", widget.windowTitle())
+        if isinstance(widget, QTabWidget):
+            for index in range(widget.count()):
+                add("tab", widget.tabText(index))
+        if isinstance(widget, QTreeWidget):
+            header = widget.headerItem()
+            for index in range(header.columnCount()):
+                add("column", header.text(index))
+        if isinstance(widget, QLineEdit):
+            add("placeholder", widget.placeholderText())
+        add("tooltip", widget.toolTip())
+    for menu in root.findChildren(QMenu):
+        add("menu", menu.title())
+        for action in menu.actions():
+            add("menu entry", action.text())
+            add("tooltip", action.toolTip())
+    if root.isWindow():
+        add("title", root.windowTitle())
+    return found
+
+
+def _catalog():
+    import json
+    from pathlib import Path
+
+    return json.loads((Path(__file__).parents[1] / "lvgl_mpy_studio" / "translations" / "it.json").read_text(encoding="utf-8"))
+
+
+def english_left(root):
+    """Texts root shows in English that have an Italian translation: to call with Italian chosen."""
+    catalog = _catalog()
+    return sorted((where, text) for where, text in visible_texts(root) if catalog.get(text, text) != text)
+
+
+def italian_left(root):
+    """Texts root shows in Italian that come from an English one: to call with English chosen."""
+    catalog = _catalog()
+    english = {value: key for key, value in catalog.items() if value != key and value not in catalog}
+    return sorted((where, text) for where, text in visible_texts(root) if text in english)

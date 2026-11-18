@@ -9,7 +9,8 @@ dialog they open is, before it is closed:
 - checked for widgets that cover each other or stick out, and for text with too little contrast;
 - checked to fit its screen, and to need no more than a screen of 1024×700;
 - walked with Tab: every field that takes the focus is reached, and the focus stays inside;
-- closed with Escape, as a person closes it; a dialog that stays open is a problem.
+- closed with Escape, as a person closes it; a dialog that stays open is a problem;
+- in Italian, checked for texts left in English.
 
 Qt's own file, print and input dialogs are photographed but not checked: their layout is Qt's.
 """
@@ -24,7 +25,7 @@ from PySide6.QtWidgets import (
     QMessageBox, QPlainTextEdit, QRadioButton, QTextEdit, QTreeView, QWidget,
 )
 
-from looks import cut_off, low_contrast, name_of, overlapping
+from looks import cut_off, english_left, low_contrast, name_of, overlapping
 from sweep import REPORTS, STATES, Sweep, Watcher, describe
 
 pytestmark = pytest.mark.manual
@@ -103,6 +104,8 @@ class Inspector(Watcher):
         self.problems += [f"{title}: cut off: {text}" for text in cut_off(dialog)]
         self.problems += [f"{title}: {text}" for text in overlapping(dialog)]
         self.problems += [f"{title}: low contrast: {text}" for text in low_contrast(dialog)]
+        if self.language == "it":
+            self.problems += [f"{title}: still in English: {where} “{text}”" for where, text in english_left(dialog)]
         missing, left = tab_walk(dialog)
         if missing:
             self.problems.append(f"{title}: Tab never reaches {', '.join(missing[:5])}")

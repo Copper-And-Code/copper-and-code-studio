@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 )
 
 from lvgl_mpy_studio.core.boards import builtin_profiles
+from lvgl_mpy_studio.core.i18n import language
 from lvgl_mpy_studio.core.model import Project
 from lvgl_mpy_studio.core.validation import validate_project
 from lvgl_mpy_studio.device.service import DeviceSession
@@ -636,6 +637,8 @@ class Sweep:
                 self.failures.append(f"{name}: " + " | ".join(problems))
             if window.isHidden():
                 window.show()                  # an action that closes the window would hide the rest
+            if language() != self.language:    # View → Language: the rest goes on in the language asked
+                window.change_language(self.language)
 
     def report(self, suite, name):
         """Write the report; print what changed since the last run; fail on the problems found."""

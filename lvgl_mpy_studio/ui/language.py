@@ -74,8 +74,34 @@ def retranslate_widget(root):
                 item.setText(index, tr(source))
 
 
+_qt_translator = None
+
+
+def install_qt_translation(language):
+    """Qt's own texts in the language: the standard buttons (Save, Cancel, Close) and Qt's dialogs.
+    PySide carries them; English needs none."""
+    global _qt_translator
+    from PySide6.QtCore import QCoreApplication, QLibraryInfo, QTranslator
+
+    app = QCoreApplication.instance()
+    if app is None:
+        return False
+    if _qt_translator is not None:
+        app.removeTranslator(_qt_translator)
+        _qt_translator = None
+    if language == "en":
+        return True
+    translator = QTranslator(app)
+    if not translator.load(f"qtbase_{language}", QLibraryInfo.path(QLibraryInfo.TranslationsPath)):
+        return False
+    app.installTranslator(translator)
+    _qt_translator = translator
+    return True
+
+
 def apply_language(root, language):
     selected = set_language(language)
     QSettings("CopperAndCode", "LVGL MPY Studio").setValue("language", selected)
+    install_qt_translation(selected)
     retranslate_widget(root)
     return selected

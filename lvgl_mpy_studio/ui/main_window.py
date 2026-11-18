@@ -18,7 +18,7 @@ from lvgl_mpy_studio.ui.designer.scene import ComponentTray, DesignerView, Toolb
 from lvgl_mpy_studio.ui.device_panel import DeviceConsole
 from lvgl_mpy_studio.ui.document import ProjectDocument
 from lvgl_mpy_studio.ui.gc_guard import install as install_gc_guard
-from lvgl_mpy_studio.ui.language import apply_language
+from lvgl_mpy_studio.ui.language import apply_language, install_qt_translation
 from lvgl_mpy_studio.ui.resolution import ResolutionSelector
 from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
 from lvgl_mpy_studio.ui.run_target import SIMULATOR_MICROPYTHON, RunTargetSelector, board_target
@@ -54,7 +54,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         if not self.settings.allKeys():
             for key in old_settings.allKeys():
                 self.settings.setValue(key, old_settings.value(key))
-        set_language(self.settings.value("language", DEFAULT_LANGUAGE))
+        install_qt_translation(set_language(self.settings.value("language", DEFAULT_LANGUAGE)))
         self.profile_store = ProfileStore.tolerant()  # a broken profile file must not stop the start
         self.document = ProjectDocument(self._default_project())
         self.device = DeviceSession()

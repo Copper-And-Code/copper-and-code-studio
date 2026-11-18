@@ -85,6 +85,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_every_shortcut.py` | about 1 minute | every keyboard shortcut, pressed with the focus in each place a person has it |
 | `test_every_dialog.py` | about 6 minutes | every dialog, in English and Italian: size, text cut off, Tab, Escape |
 | `test_looks.py` | about 1 minute | pictures of the window and its panels against the last accepted ones |
+| `test_language.py` | seconds | Italian and back in each state: nothing left in the other language, nothing else changed |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
 
@@ -160,11 +161,19 @@ is closed with Escape:
   stick out; no label may have a contrast below 3:1 on what is behind it;
 - Tab must reach every field and stay inside the dialog (in a group of radio buttons, the
   chosen one);
-- Escape must close it.
+- Escape must close it;
+- in Italian, no text may be left in English.
 
 Qt's own file, print and input dialogs are photographed but not checked. The first run found
 the Board Profile Manager wider than a small screen, with its columns cutting the names of
 the boards and, in Italian, a row of buttons wider than 800 pixels.
+
+**Language.** In each of the five states, Italian and back, twice: after the change to
+Italian nothing that has a translation may show in English, after the change back nothing
+may stay in Italian, and the project, the undo history, the selection and what runs are the
+same. The suite of every dialog also looks for English in the dialogs opened in Italian: it
+found Save, Cancel and Close in English everywhere, since the IDE did not load Qt's own
+translation.
 
 **Looks.** The window with an example open, then each panel and tab, in light and dark
 theme, English and Italian, at 1024×700 and 1920×1080. The pictures go to
