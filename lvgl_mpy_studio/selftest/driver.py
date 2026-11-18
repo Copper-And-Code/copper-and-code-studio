@@ -52,6 +52,10 @@ class Ide:
         self._menu_handlers = []
         self._unexpected = []
         self._answered, self._patience = None, 0
+        # Dialogs given to a handler that may still be at work on them, with the looks left: a
+        # handler that opens a dialog of its own (Add Folder… in Upload Files) comes back to its
+        # dialog after the inner one is answered, and that dialog is not unexpected.
+        self._in_hand = []
         self.window = MainWindow()
         self.window.resize(1280, 800)
         self.window.show()
@@ -87,6 +91,7 @@ class Ide:
             self._crashes.clear()
             self._dialog_handlers.clear()
             self._menu_handlers.clear()
+            self._in_hand.clear()
             self.report.add(self.scenario, title, FAILED, time.monotonic() - started, detail, pictures)
             raise ScenarioStopped from exc
         self.report.add(self.scenario, title, PASSED, time.monotonic() - started)
@@ -134,14 +139,23 @@ class Ide:
         dialog = QApplication.activeModalWidget()
         if dialog is None or dialog is self.window:
             self._answered = None
+            self._in_hand.clear()
             return
         if dialog is self._answered:  # answered at the last look: it is closing
             self._patience -= 1
             if self._patience > 0:
                 return
+        elif any(dialog is held for held, _patience in self._in_hand):
+            index = next(index for index, (held, _patience) in enumerate(self._in_hand) if held is dialog)
+            held, patience = self._in_hand[index]
+            self._in_hand[index] = (held, patience - 1)
+            self._answered, self._patience = dialog, patience - 1
+            if patience - 1 > 0:
+                return
         elif self._dialog_handlers:
             handler, self._patience = self._dialog_handlers.pop(0)
             self._answered = dialog
+            self._in_hand.append((dialog, self._patience))
             handler(dialog)
             return
         self._unexpected.append(describe(dialog))

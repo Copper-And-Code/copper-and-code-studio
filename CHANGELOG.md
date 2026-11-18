@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- **The self-test no longer fails at random at Upload Files.** Its watcher of dialogs took the Upload Files dialog for an unexpected one when the dialog it opens, to choose a folder, had just closed: on a slow computer, as in the CI, the step failed now and then. The self-test of the 0.7.2 package has this fault.
+
 ## 0.7.2 — 2026-11-18
 
 Board definitions from a file, and fixes found by new automated tests of the user interface: a property of several widgets changed by looking at it, a crash dragging a tab of the Output panel, a simulator crash with a timer in the general code, large projects that did not start, files of the Files panel half written after a failed save, and more. The Windows package is that of 0.7.1.
