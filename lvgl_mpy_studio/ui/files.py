@@ -5,6 +5,7 @@ editor widget: highlighting, line numbers, completion of `lv.`, a syntax check w
 """
 
 import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -65,6 +66,28 @@ def lvgl_completions(qualified):
     if _API is None:
         _API = json.loads((Path(__file__).parents[1] / "gen" / "completion.json").read_text(encoding="utf-8"))
     return sorted({*_API["constants"], *_API["functions"], *_API["objects"]})
+
+
+def write_whole(path, text):
+    """Write the file whole or not at all: a copy next to it, then a rename over it.
+
+    Opening the file for writing empties it: a full disk, a crash or a power cut before the end
+    left a program empty or cut. The copy keeps the permissions of the file it replaces."""
+    path = Path(path)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="", dir=path.parent, prefix=f".{path.name}.", suffix=".tmp", delete=False) as stream:
+            temporary = Path(stream.name)
+            stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if path.exists():
+            os.chmod(temporary, path.stat().st_mode & 0o7777)
+        os.replace(temporary, path)
+    except BaseException:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+        raise
 
 
 class FileTab(QWidget):
@@ -142,8 +165,7 @@ class FileTab(QWidget):
     def save(self):
         self._watcher.removePath(str(self.path))  # our own write is not an outside change
         try:
-            with open(self.path, "w", encoding="utf-8", newline="") as stream:
-                stream.write(self.editor.toPlainText().replace("\n", self._newline))
+            write_whole(self.path, self.editor.toPlainText().replace("\n", self._newline))
         finally:
             self._watcher.addPath(str(self.path))
         self._mtime = self.path.stat().st_mtime_ns

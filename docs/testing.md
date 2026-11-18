@@ -98,6 +98,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_console_flood.py` | about 30 seconds | programs printing without pause into the terminal, the Output and the Device Console |
 | `test_big_project.py` | about 15 seconds | a project of 30 pages and about 2000 widgets: opening, pages, selection, moves, undo, a property, save and Start, timed |
 | `test_mcp_and_window.py` | seconds | an agent changing the project through MCP while the window has it open |
+| `test_killed_while_saving.py` | about 3 minutes | the IDE killed at random while it saves a project, a program and the board profiles |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -291,6 +292,13 @@ project. An agent writing with a revision older than the person's save is refuse
 the agent removed is gone from the canvas and the Properties panel after Reload; Start after a
 change by the agent asks first. Nothing found; the window learns of the change only when it
 saves, which can be long after.
+
+**Killed while saving.** A second process runs the window and saves without pause a large
+project, a program open in a tab and the board profiles; it is killed with SIGKILL at a random
+moment, forty times. Each time the project must open and validate, the program must be one of
+the versions written whole, and the profiles must load. The project and the profiles were
+already written through a copy and a rename; the tabs of the Files panel were not, and a
+failed write left the program empty: they are now written the same way.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered

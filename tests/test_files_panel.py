@@ -490,3 +490,48 @@ def test_a_board_that_cannot_be_listed_is_not_asked_again_and_again(qtbot, tmp_p
     ide.files_panel.board.shown = False
     board.disconnect()
     ide.document.undo_stack.setClean()
+
+
+def test_a_failed_save_of_a_tab_keeps_the_file_as_it_was(qtbot, tmp_path, monkeypatch):
+    """Save opened the file for writing, which empties it, then wrote: a full disk, a crash or a
+    power cut in between left the program empty or cut. It now writes a copy and replaces."""
+    import errno
+    import os
+
+    path = tmp_path / "main.py"
+    path.write_text("print('kept')\n", encoding="utf-8")
+    os.chmod(path, 0o640)
+    tab = FileTab(path)
+    qtbot.addWidget(tab)
+    tab.editor.setPlainText("print('new')\n" * 1000)
+    tab.editor.document().setModified(True)   # as typing does; setPlainText says unmodified
+
+    import builtins
+
+    from lvgl_mpy_studio.ui import files
+
+    real_fsync, real_open = os.fsync, builtins.open
+
+    def full(*_arguments):
+        raise OSError(errno.ENOSPC, os.strerror(errno.ENOSPC))
+
+    def opened_then_full(file, mode="r", *arguments, **options):
+        """Opening for writing empties the file, then the disk is full."""
+        stream = real_open(file, mode, *arguments, **options)
+        if "w" in mode:
+            stream.close()
+            full()
+        return stream
+
+    monkeypatch.setattr(os, "fsync", full)
+    monkeypatch.setattr(files, "open", opened_then_full, raising=False)
+    with pytest.raises(OSError):
+        tab.save()
+    monkeypatch.setattr(files, "open", real_open, raising=False)
+    assert path.read_text(encoding="utf-8") == "print('kept')\n"
+    assert [item.name for item in tmp_path.iterdir()] == ["main.py"], "a temporary file was left"
+    assert tab.editor.document().isModified()
+    monkeypatch.setattr(os, "fsync", real_fsync)
+    assert tab.save()
+    assert path.read_text(encoding="utf-8") == "print('new')\n" * 1000
+    assert oct(path.stat().st_mode & 0o777) == oct(0o640), "the permissions of the file changed"
