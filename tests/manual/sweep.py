@@ -483,10 +483,20 @@ def run_action(window, watcher, qtbot, name, action, warnings, trigger=None):
         if stack.count() < index:
             notes.append("the undo history was cleared")   # New, Open: another project, not a change to undo
         elif stack.index() != index:
+            done, done_index = snapshot(window), stack.index()
             stack.setIndex(index)
             QApplication.processEvents()
             if snapshot(window) != before:
                 problems.append("undo does not bring the project back")
+            # Redo must do again exactly what the action did, then undo once more.
+            stack.setIndex(done_index)
+            QApplication.processEvents()
+            if snapshot(window) != done:
+                problems.append("redo does not do again what the action did")
+            stack.setIndex(index)
+            QApplication.processEvents()
+            if snapshot(window) != before:
+                problems.append("undo after redo does not bring the project back")
     return problems, notes, list(watcher.seen), seconds
 
 

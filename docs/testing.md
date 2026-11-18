@@ -123,7 +123,8 @@ After each action the suite checks:
 - no dialog left open;
 - the window still answers;
 - the project is still valid;
-- undo brings it back to where it was.
+- undo brings it back to where it was, redo does again exactly what the action did, and undo
+  after redo brings it back once more.
 
 A new menu entry is tested without writing a test for it.
 
