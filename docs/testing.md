@@ -94,6 +94,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_typing_code.py` | seconds | typing in the code editor: indents, suggestions, errors, the lists, read-only while running, random keys |
 | `test_save_and_reopen.py` | about 2 minutes | what is saved is what was in the window: examples and the monkey's work saved, opened in a new window, compared |
 | `test_hard_texts.py` | about 1 minute | long, quoted, escaped, foreign, right-to-left and emoji texts in every text property and as page names |
+| `test_foreign_drops.py` | seconds | files, folders and text dragged from outside, dropped anywhere: no harm |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -253,6 +254,13 @@ the same texts. Each time the IDE must keep the text or refuse it with a message
 MicroPython code must compile, the runtime must draw the pages and the C code must be
 generated. The first run found that a page or a widget could get a name longer than
 MicroPython takes ("name too long"), so that the project no longer started.
+
+**Drops from outside.** The IDE takes no files from the file manager; what is dragged there by
+mistake (an image, a font, a project, a program, a folder, two files, text from another
+application) is dropped on the canvas, the toolbox, the trees, the Properties panel, the code
+editor, the terminals and the window. Nothing may raise or change the project; the code editor
+may take dropped text as text, which undo takes back. The canvas shows a pointer that accepts
+files, then does nothing with them.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
