@@ -14,7 +14,7 @@ Un IDE desktop per progettare interfacce [LVGL](https://lvgl.io) 9.5 per board M
 
 Una riproduzione automatica dell'IDE vero, accelerata: [altri video](https://copper-and-code.github.io/lvgl-mpy-studio/videos/).
 
-> **Stato: 0.7.1 ([scarica](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest)).** I test automatici sono molti e le prove fatte da persone sono poche: molto è stato scritto e verificato dalle macchine, e poco è stato usato davvero. [Cosa è verificato, e come](docs/status.md) lo dice area per area.
+> **Stato: 0.7.2 ([scarica](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest)).** I test automatici sono molti e le prove fatte da persone sono poche: molto è stato scritto e verificato dalle macchine, e poco è stato usato davvero. [Cosa è verificato, e come](docs/status.md) lo dice area per area.
 
 ## Se stai valutando questo progetto
 

@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.7.2 — 2026-11-18
+
+Board definitions from a file, and fixes found by new automated tests of the user interface: a property of several widgets changed by looking at it, a crash dragging a tab of the Output panel, a simulator crash with a timer in the general code, large projects that did not start, files of the Files panel half written after a failed save, and more. The Windows package is that of 0.7.1.
 
 ### Added
 
