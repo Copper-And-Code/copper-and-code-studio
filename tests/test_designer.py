@@ -239,3 +239,38 @@ def test_a_thin_line_keeps_its_height_when_moved_or_stretched(qtbot):
     drag(start, start + QPoint(40, 0))
     line = document.project.pages[0].widgets[0]
     assert (line.props["width"], line.props["height"]) == (240, 5)
+
+
+def test_ctrl_click_adds_and_a_selected_container_moves_its_children_once(qtbot):
+    """Found blind by tools/mutation_probe.py: Ctrl+click adding to the selection, and a child
+    selected with its container that must not move twice."""
+    document = ProjectDocument()
+    scene = DesignerScene(document)
+    scene.add_widget("panel", QPointF(20, 20))
+    panel = document.project.find_widget("panel1")
+    scene.add_widget("button", QPointF(60, 70))
+    button = document.project.find_widget("button1")
+    assert button.parentId == panel.id
+    scene.add_widget("label", QPointF(400, 300))
+    view = DesignerView(document)
+    qtbot.addWidget(view)
+    view.resize(800, 600)
+    view.show()
+    scene = view.designer_scene
+    items = scene.widget_items
+
+    def click(widget, modifiers=Qt.NoModifier):
+        QTest.mouseClick(view.viewport(), Qt.LeftButton, modifiers, view.mapFromScene(items[widget.id].mapToScene(QPointF(3, 3))))
+
+    label = document.project.find_widget("label1")
+    click(label)
+    click(document.project.find_widget("panel1"), Qt.ControlModifier)
+    assert sorted(scene.selected_names()) == ["label1", "panel1"]
+    items[button.id].setSelected(True)
+    assert sorted(item.name for item in scene.drag_group(items[panel.id])) == ["label1", "panel1"]
+    start = view.mapFromScene(items[panel.id].mapToScene(QPointF(3, 3)))
+    QTest.mousePress(view.viewport(), Qt.LeftButton, pos=start)
+    QApplication.sendEvent(view.viewport(), QMouseEvent(QEvent.MouseMove, QPointF(start + QPoint(30, 20)), Qt.LeftButton, Qt.LeftButton, Qt.NoModifier))
+    QTest.mouseRelease(view.viewport(), Qt.LeftButton, pos=start + QPoint(30, 20))
+    moved_button = document.project.find_widget("button1")
+    assert (moved_button.props["x"], moved_button.props["y"]) == (button.props["x"], button.props["y"]), "the child moved inside its container too"

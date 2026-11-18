@@ -451,3 +451,27 @@ def test_a_page_added_after_a_deletion_does_not_take_a_name_in_use(qtbot):
     assert len(names) == len(set(names)), names
     validate_project(window.document.project)
     window.document.undo_stack.setClean()
+
+
+def test_rename_page_refuses_a_twin_constant_a_long_name_and_ignores_the_same_name(qtbot, monkeypatch):
+    """Found blind by tools/mutation_probe.py: the checks of Rename Page had no test."""
+    from PySide6.QtWidgets import QInputDialog
+
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.add_page()
+    pages = window.document.project.pages
+    second = pages[1]
+    window.project_tree.setCurrentItem(next(item for item in window.project_tree.findItems("*", Qt.MatchWildcard | Qt.MatchRecursive) if item.data(0, Qt.UserRole) == ("page", second.id)))
+    answers = iter(["Main", "x" * 300, second.name, "settings"])
+    monkeypatch.setattr(QInputDialog, "getText", staticmethod(lambda *arguments, **options: (next(answers), True)))
+    count = window.document.undo_stack.count()
+    window.rename_page()                      # PAGE_MAIN is the constant of "main" too
+    assert second.name == "page2" and "already exists" in window.output.toPlainText()
+    window.rename_page()
+    assert second.name == "page2" and "at most" in window.output.toPlainText()
+    window.rename_page()                      # the same name: nothing to do, nothing to undo
+    assert window.document.undo_stack.count() == count
+    window.rename_page()
+    assert window.document.project.pages[1].name == "settings"
+    window.document.undo_stack.setClean()

@@ -309,6 +309,16 @@ Every button, field and list must have a name a screen reader can say: the first
 the toolbox, the trees, the Properties panel, the Output and the code editor without one. The
 CI checks the names too, in English and Italian.
 
+**Where the tests are blind.** `tools/mutation_probe.py [module] [count]` makes small changes
+to a module, one at a time (a comparison turned around, `and` for `or`, a `not` dropped, a
+constant or a returned value changed), and runs the tests of that module for each: a change
+no test notices marks a line nobody checks. It works in a copy of the repository and writes
+`build/manual/mutation/<module>.txt`. Its first run, 25 changes in each of seven modules, found
+untested the checks of Rename Page, the names refused by New File, the check boxes of the
+Properties panel, Ctrl+click on the canvas, a container moved with its children, the tab stops
+and the background colours of the terminal; each now has a test, and the second run notices
+those changes. Most of what is still not noticed is drawing: margins, sizes, colours.
+
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
 at random. After every step it checks that nothing broke (no exception, no Qt warning, no

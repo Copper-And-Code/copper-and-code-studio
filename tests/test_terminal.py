@@ -219,3 +219,17 @@ def test_a_full_history_stays_small():
         tracemalloc.stop()
     assert len(screen.history) == screen.history.maxlen
     assert used < 25 * 1024 * 1024, f"{used // 1024 // 1024} MB for a full history"
+
+
+def test_tab_stops_and_background_colours():
+    """Found blind by tools/mutation_probe.py: a tab goes to the next column of 8, and SGR 40-47 set the background."""
+    from lvgl_mpy_studio.core.vt import Screen
+
+    screen = Screen()
+    screen.feed("ab\tc")
+    assert screen.lines[0][8][0] == "c"
+    screen.feed("\t\t")
+    assert screen.x == 24
+    screen.feed("\r\n\x1b[41mR\x1b[47mW\x1b[49mD")
+    row = screen.lines[1]
+    assert row[0][2] != row[1][2] and row[0][2] != row[2][2] and row[1][2] != row[2][2]

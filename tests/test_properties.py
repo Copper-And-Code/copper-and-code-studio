@@ -120,3 +120,21 @@ def test_a_field_left_as_it_opened_changes_nothing_on_several_widgets(qtbot):
     QTest.keyClicks(editor.lineEdit(), "0")
     panel.view.commitData(editor)
     assert [widget.props["x"] for widget in page.widgets] == [0, 0]
+
+
+def test_a_check_box_property_follows_its_box(qtbot):
+    """Found blind by tools/mutation_probe.py: a boolean property is changed by its check box."""
+    from PySide6.QtCore import Qt
+
+    document = ProjectDocument()
+    document.project.add_widget(document.project.pages[0], "switch", name="switch1")
+    panel = PropertiesPanel(document)
+    qtbot.addWidget(panel)
+    panel.set_selection(["switch1"])
+    booleans = [item for item in value_items(panel.model) if item.data(DESCRIPTOR_ROLE)["type"] == "boolean"]
+    assert booleans, "a switch has no boolean property"
+    name = booleans[0].data(DESCRIPTOR_ROLE)["name"]
+    before = bool(document.project.find_widget("switch1").props.get(name))
+    item = panel.model.itemFromIndex(booleans[0])
+    item.setCheckState(Qt.Unchecked if before else Qt.Checked)
+    assert document.project.find_widget("switch1").props.get(name) is (not before)

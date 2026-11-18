@@ -535,3 +535,21 @@ def test_a_failed_save_of_a_tab_keeps_the_file_as_it_was(qtbot, tmp_path, monkey
     assert tab.save()
     assert path.read_text(encoding="utf-8") == "print('new')\n" * 1000
     assert oct(path.stat().st_mode & 0o777) == oct(0o640), "the permissions of the file changed"
+
+
+@pytest.mark.parametrize("name", ["a/b.py", "a\\b.py", "..", "."])
+def test_a_name_with_a_slash_or_a_dot_folder_is_refused(qtbot, tmp_path, monkeypatch, name):
+    """Found blind by tools/mutation_probe.py: the check of the names of New File had no test."""
+    from lvgl_mpy_studio.ui.files import FilesPanel
+    from PySide6.QtCore import QSettings
+
+    warnings = []
+    monkeypatch.setattr(QInputDialog, "getText", staticmethod(lambda *arguments, **options: (name, True)))
+    monkeypatch.setattr(QMessageBox, "warning", staticmethod(lambda *arguments: warnings.append(arguments[2])))
+    panel = FilesPanel(QSettings(str(tmp_path / "settings.ini"), QSettings.IniFormat))
+    qtbot.addWidget(panel)
+    panel.set_folder(tmp_path)
+    before = sorted(path.name for path in tmp_path.iterdir())
+    assert panel.new_file(tmp_path) is None
+    assert warnings and "/" in warnings[0]
+    assert sorted(path.name for path in tmp_path.iterdir()) == before
