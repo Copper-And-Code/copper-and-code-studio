@@ -141,6 +141,7 @@ def visible_texts(root):
         if isinstance(widget, QLineEdit):
             add("placeholder", widget.placeholderText())
         add("tooltip", widget.toolTip())
+        add("accessible name", widget.accessibleName())
     for menu in root.findChildren(QMenu):
         add("menu", menu.title())
         for action in menu.actions():
@@ -169,3 +170,25 @@ def italian_left(root):
     catalog = _catalog()
     english = {value: key for key, value in catalog.items() if value != key and value not in catalog}
     return sorted((where, text) for where, text in visible_texts(root) if text in english)
+
+
+def nameless(root):
+    """Buttons, fields and lists without a name for a screen reader: no text, tooltip or accessible name."""
+    from PySide6.QtWidgets import QAbstractButton, QAbstractItemView, QAbstractSpinBox, QComboBox, QHeaderView, QLineEdit, QPlainTextEdit, QTabBar, QToolButton
+
+    found = []
+    for widget in root.findChildren(QWidget):
+        if not widget.isVisibleTo(root) or not widget.isEnabled() or isinstance(widget.parentWidget(), QTabBar) or isinstance(widget, QHeaderView):
+            continue                           # a header is part of its list, and its columns have their texts
+        interactive = isinstance(widget, (QAbstractButton, QLineEdit, QComboBox, QAbstractSpinBox, QAbstractItemView, QPlainTextEdit))
+        if not interactive or widget.objectName().startswith("qt_"):
+            continue
+        text = widget.text() if isinstance(widget, QAbstractButton) else ""
+        named = (text or "").replace("&", "").strip() or widget.toolTip().strip() or widget.accessibleName().strip()
+        if isinstance(widget, QLineEdit):
+            named = named or widget.placeholderText().strip()
+        if isinstance(widget, QToolButton) and widget.defaultAction() is not None:
+            named = named or widget.defaultAction().text().strip()
+        if not named:
+            found.append(f"{type(widget).__name__} in {type(widget.parentWidget()).__name__}" + (f" ({widget.objectName()})" if widget.objectName() else ""))
+    return found

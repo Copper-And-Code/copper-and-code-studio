@@ -153,11 +153,13 @@ class PropertiesPanel(QWidget):
         properties_layout = QVBoxLayout(properties_page)
         properties_layout.setContentsMargins(0, 0, 0, 0)
         self.order = QComboBox()
+        self.order.setAccessibleName(tr("Order of the properties"))
         self.order.addItems((tr("By Category"), tr("Alphabetical")))
         properties_layout.addWidget(self.order)
         self.model = QStandardItemModel(0, 2)
         self.model.setHorizontalHeaderLabels((tr("Properties"), tr("Value")))
         self.view = QTreeView()
+        self.view.setAccessibleName(tr("Properties"))
         self.view.setModel(self.model)
         delegate = PropertyDelegate(self.view)
         delegate.project_fonts = lambda: [item["name"] for item in fonts(self.document.project)]

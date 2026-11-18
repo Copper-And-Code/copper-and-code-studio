@@ -119,3 +119,14 @@ def test_no_old_tab_bar_of_the_docks_is_left_on_the_screen(qtbot):
     docks = [{bar.tabData(index) for index in range(bar.count())} for bar in bars]
     shown_twice = [[bar.tabText(index) for index in range(bar.count())] for bar, mine in zip(bars, docks) if any(mine < other for other in docks)]
     assert shown_twice == []
+
+
+def test_every_control_has_a_name_for_a_screen_reader(window):
+    """A list or a field without text, tooltip or accessible name is read as "list" or "text":
+    the toolbox, the trees, the Properties panel and the Output had no name."""
+    from looks import nameless
+
+    window.resize(1400, 900)
+    window.show()
+    QApplication.processEvents()
+    assert nameless(window) == []

@@ -161,6 +161,7 @@ class SimPanel(QWidget):
         status_row.addWidget(self.status, 1)
         status_row.addWidget(self.physical_pixels)
         self.terminal = TerminalView()  # the serial port of a program without pages
+        self.terminal.setAccessibleName(tr("Terminal"))
         self.terminal.typed.connect(self.write_keys)
         self.terminal.setVisible(False)
         self.program = False

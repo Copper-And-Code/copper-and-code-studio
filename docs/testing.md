@@ -99,6 +99,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_big_project.py` | about 15 seconds | a project of 30 pages and about 2000 widgets: opening, pages, selection, moves, undo, a property, save and Start, timed |
 | `test_mcp_and_window.py` | seconds | an agent changing the project through MCP while the window has it open |
 | `test_killed_while_saving.py` | about 3 minutes | the IDE killed at random while it saves a project, a program and the board profiles |
+| `test_keyboard_only.py` | seconds | the IDE without a mouse: Tab, Alt and the letters of the menus, Ctrl+Tab; a name for every control |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -299,6 +300,14 @@ moment, forty times. Each time the project must open and validate, the program m
 the versions written whole, and the profiles must load. The project and the profiles were
 already written through a copy and a rename; the tabs of the Files panel were not, and a
 failed write left the program empty: they are now written the same way.
+
+**Keyboard only.** Tab from the canvas must reach the toolbox, the project tree and the
+Properties panel, and the code editor from its lists; Shift+Tab goes back; the focus is caught
+nowhere, except in a terminal, where Tab belongs to the program as in every terminal. Each
+menu must open with Alt and its underlined letter, and Ctrl+Tab must go through the tabs.
+Every button, field and list must have a name a screen reader can say: the first run found
+the toolbox, the trees, the Properties panel, the Output and the code editor without one. The
+CI checks the names too, in English and Italian.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered

@@ -185,6 +185,7 @@ class DeviceConsole(QWidget):
         self.status.setVisible(False)
         layout.addWidget(self.status)
         self.terminal = TerminalView()
+        self.terminal.setAccessibleName(tr("Device Console"))
         self.terminal.typed.connect(self.keysTyped)
         layout.addWidget(self.terminal, 1)
         row = QHBoxLayout()

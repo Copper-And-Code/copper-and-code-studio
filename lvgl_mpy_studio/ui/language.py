@@ -40,6 +40,7 @@ def retranslate_widget(root):
             _translate_property(obj, "text", obj.setText)
         if isinstance(obj, QWidget):
             _translate_property(obj, "toolTip", obj.setToolTip)
+            _translate_property(obj, "accessibleName", obj.setAccessibleName)
         if isinstance(obj, (QLineEdit, QPlainTextEdit)):
             _translate_property(obj, "placeholderText", obj.setPlaceholderText)
         if isinstance(obj, QDockWidget):

@@ -245,6 +245,7 @@ class FilesPanel(QWidget):
         # The model reads folders in a thread: until it has, the proxy has no row for the folder.
         self.model.directoryLoaded.connect(self._root_loaded)
         self.tree = QTreeView()
+        self.tree.setAccessibleName(tr("Files of the PC"))
         self.tree.setModel(self.proxy)
         for column in (1, 2, 3):
             self.tree.hideColumn(column)
@@ -452,6 +453,7 @@ class BoardFilesView(QWidget):
         top.addWidget(self.title, 1)
         top.addWidget(self.refresh_button)
         self.tree = QTreeWidget()
+        self.tree.setAccessibleName(tr("Files of the board"))
         self.tree.setHeaderHidden(True)
         self.tree.itemExpanded.connect(self._expanded)
         self.tree.itemDoubleClicked.connect(self._activated)
