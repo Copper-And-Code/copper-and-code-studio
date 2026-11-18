@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
 )
 
 from lvgl_mpy_studio.core.i18n import tr
+from lvgl_mpy_studio.ui.theme import fit_to_screen
 
 DESTINATIONS = ("/flash", "/sd", "/sd/bin", "/flash/bin", "/")
 SKIPPED = {"__pycache__", ".git", ".hg", ".svn", ".venv"}
@@ -72,7 +73,7 @@ class UploadFilesDialog(QDialog):
         super().__init__(parent)
         self.settings = settings
         self.setWindowTitle(tr("Upload Files"))
-        self.resize(560, 420)
+        fit_to_screen(self, 560, 420)
         self.items = []
         self.list = QListWidget()
         self.list.setSelectionMode(QListWidget.ExtendedSelection)

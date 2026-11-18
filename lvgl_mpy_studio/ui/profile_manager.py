@@ -1,12 +1,13 @@
 import copy
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QSpinBox, QTreeWidget, QTreeWidgetItem, QVBoxLayout
+from PySide6.QtWidgets import QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QHBoxLayout, QHeaderView, QLabel, QLineEdit, QMessageBox, QPushButton, QSpinBox, QTreeWidget, QTreeWidgetItem, QVBoxLayout
 
 from lvgl_mpy_studio.core.boards import (
     ADAPTERS, ProfileError, builtin_profiles, portable_profile, profile_diagnostics, profile_error_text, read_profile_file, write_profile_file,
 )
 from lvgl_mpy_studio.core.i18n import tr
+from lvgl_mpy_studio.ui.theme import fit_to_screen
 
 
 class ProfileManagerDialog(QDialog):
@@ -17,7 +18,7 @@ class ProfileManagerDialog(QDialog):
         self.profiles_data = {profile["id"]: profile for profile in store.profiles()}
         self._loading = False
         self.setWindowTitle(tr("Board Profile Manager"))
-        self.resize(1050, 600)
+        fit_to_screen(self, 1050, 600)
         layout = QVBoxLayout(self)
         self.tree = QTreeWidget()
         self.tree.setHeaderLabels([tr("Name"), tr("Origin"), tr("Adapter"), tr("Logical"), tr("Physical"), tr("Revision"), tr("Status")])
@@ -51,12 +52,19 @@ class ProfileManagerDialog(QDialog):
         form.addRow(tr("Scale"), self.scale)
         form.addRow("", QLabel(tr("Driver and buffers are fixed by the adapter firmware.")))
         layout.addLayout(form)
-        buttons = QHBoxLayout()
-        for text, callback in ((tr("New"), self.new), (tr("Edit"), self.apply_edit), (tr("Duplicate"), self.duplicate), (tr("Delete"), self.delete), (tr("Restore Default"), self.restore_default), (tr("Restore Hidden Profiles"), self.restore_hidden), (tr("Import…"), self.import_file), (tr("Export…"), self.export_file)):
-            button = QPushButton(text)
-            button.clicked.connect(lambda _checked=False, callback=callback: callback())   # not the checked state as an argument
-            buttons.addWidget(button)
-        layout.addLayout(buttons)
+        # Two rows: in one, the eight buttons need more than a small screen in Italian.
+        rows = (
+            ((tr("New"), self.new), (tr("Edit"), self.apply_edit), (tr("Duplicate"), self.duplicate), (tr("Delete"), self.delete)),
+            ((tr("Restore Default"), self.restore_default), (tr("Restore Hidden Profiles"), self.restore_hidden), (tr("Import…"), self.import_file), (tr("Export…"), self.export_file)),
+        )
+        for row in rows:
+            buttons = QHBoxLayout()
+            for text, callback in row:
+                button = QPushButton(text)
+                button.clicked.connect(lambda _checked=False, callback=callback: callback())   # not the checked state as an argument
+                buttons.addWidget(button)
+            buttons.addStretch(1)
+            layout.addLayout(buttons)
         self.buttons = QDialogButtonBox(QDialogButtonBox.Apply | QDialogButtonBox.Cancel)
         self.buttons.button(QDialogButtonBox.Apply).setText(tr("Apply"))
         self.buttons.button(QDialogButtonBox.Cancel).setText(tr("Cancel"))
@@ -79,6 +87,7 @@ class ProfileManagerDialog(QDialog):
                 self.tree.setCurrentItem(item)
         if self.tree.currentItem() is None and self.tree.topLevelItemCount():
             self.tree.setCurrentItem(self.tree.topLevelItem(0))
+        self.tree.header().resizeSections(QHeaderView.ResizeToContents)   # names and adapters are long
 
     def selected(self):
         items = self.tree.selectedItems()

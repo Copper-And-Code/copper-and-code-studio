@@ -237,7 +237,7 @@ class FilesPanel(QWidget):
         top = QHBoxLayout()
         top.addWidget(self.folder_label, 1)
         top.addWidget(choose)
-        local = QWidget()
+        local = self._local = QWidget()
         local_layout = QVBoxLayout(local)
         local_layout.setContentsMargins(0, 0, 0, 0)
         local_layout.addLayout(top)
@@ -256,6 +256,17 @@ class FilesPanel(QWidget):
         else:
             self.folder_label.setText(tr("No folder: open one, or run a program."))
             self.tree.setVisible(False)  # without a root it would show the whole disk
+            self._fit_top()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._fit_top()
+
+    def _fit_top(self):
+        """The splitter does not ask a wrapped label for its height: in a narrow panel the folder's
+        name, or the message without a folder, would have one line for two and be cut."""
+        layout = self._local.layout()
+        self._local.setMinimumHeight(layout.totalHeightForWidth(self._local.width()) if layout.hasHeightForWidth() else 0)
 
     def set_folder(self, folder):
         self.folder = Path(folder).resolve()
@@ -266,6 +277,7 @@ class FilesPanel(QWidget):
         self.model.setRootPath(str(self.folder))
         self._root_loaded(str(self.folder))
         self.tree.setVisible(True)
+        self._fit_top()
 
     def _root_loaded(self, path):
         if self.folder is not None and Path(path) == self.folder:

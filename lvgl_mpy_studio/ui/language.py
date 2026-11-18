@@ -1,19 +1,30 @@
 from PySide6.QtCore import QSettings
-from PySide6.QtWidgets import QAbstractButton, QComboBox, QDockWidget, QGroupBox, QLabel, QLineEdit, QMenu, QPlainTextEdit, QTabWidget, QTreeWidget
+from PySide6.QtWidgets import QAbstractButton, QComboBox, QDockWidget, QGroupBox, QLabel, QLineEdit, QMenu, QPlainTextEdit, QTabWidget, QTreeWidget, QWidget
 from PySide6.QtGui import QAction
 
 from lvgl_mpy_studio.core.i18n import set_language, tr
 
 
 def _translate_property(obj, prop, setter, value=None):
-    key = f"_lvgl_source_{prop}"
+    """Translate a text from the one it was made from. A text the IDE changed since the last
+    translation (a folder's name, a status) is taken as it is now, not put back as it was:
+    tr() finds the English of a text already translated."""
+    key, shown_key = f"_lvgl_source_{prop}", f"_lvgl_shown_{prop}"
+    current = getattr(obj, prop)() if value is None else value
     source = obj.property(key)
-    if source is None:
-        source = getattr(obj, prop)() if value is None else value
-        if not source:
+    # The & of an underlined letter is not a change: the window places it after each translation.
+    if source is None or _bare(current) not in (_bare(obj.property(shown_key)), _bare(source)):
+        if not current:
             return
+        source = current
         obj.setProperty(key, source)
-    setter(tr(source))
+    shown = tr(source)
+    obj.setProperty(shown_key, shown)
+    setter(shown)
+
+
+def _bare(text):
+    return (text or "").replace("&", "")
 
 
 def retranslate_widget(root):
@@ -27,6 +38,8 @@ def retranslate_widget(root):
             _translate_property(obj, "statusTip", obj.setStatusTip)
         if isinstance(obj, (QAbstractButton, QLabel)):
             _translate_property(obj, "text", obj.setText)
+        if isinstance(obj, QWidget):
+            _translate_property(obj, "toolTip", obj.setToolTip)
         if isinstance(obj, (QLineEdit, QPlainTextEdit)):
             _translate_property(obj, "placeholderText", obj.setPlaceholderText)
         if isinstance(obj, QDockWidget):

@@ -49,6 +49,16 @@ def error_color():
     return "#FF8A80" if is_dark() else ERROR
 
 
+def fit_to_screen(widget, width, height):
+    """Resize to width × height, or to what the screen has room for: on a small or scaled screen the
+    whole window must show, with its buttons."""
+    screen = widget.screen() or QGuiApplication.primaryScreen()
+    if screen is not None:
+        room = screen.availableGeometry()
+        width, height = min(width, room.width() * 95 // 100), min(height, room.height() * 90 // 100)
+    widget.resize(width, height)
+
+
 def frame_margins(platform):
     """Window border: left, top, right, bottom.
 

@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QDialog, QDialogButtonBox, QFileDialog, QHBoxLayou
 from lvgl_mpy_studio.core import blocks, components
 from lvgl_mpy_studio.core.blocks import BlockError
 from lvgl_mpy_studio.core.i18n import tr
+from lvgl_mpy_studio.ui.theme import fit_to_screen
 
 ORIGINS = {"standard": "Shipped with the IDE", "user": "Installed by you", "project": "Only inside this project"}
 
@@ -31,7 +32,7 @@ class BlocksDialog(QDialog):
         super().__init__(parent)
         self.document = document
         self.setWindowTitle(tr("Block Manager"))
-        self.resize(820, 560)
+        fit_to_screen(self, 820, 560)
         layout = QVBoxLayout(self)
         intro = QLabel(tr("Blocks add components to the toolbox: a folder with a description and MicroPython modules. The simulator runs the code of a block on this computer, as it runs the code of a project: install blocks from people you trust."))
         intro.setWordWrap(True)

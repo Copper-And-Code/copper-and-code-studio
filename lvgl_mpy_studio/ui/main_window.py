@@ -81,7 +81,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.deviceOutput.connect(self._device_output)
         self.consoleClosed.connect(self._update_device_actions)
         self.setWindowTitle("LVGL MPY Studio")
-        self.resize(1400, 900)
+        theme.fit_to_screen(self, 1400, 900)
         self.tabs = QTabWidget()
         self.tabs.setTabsClosable(False)
         self.setCentralWidget(self.tabs)
