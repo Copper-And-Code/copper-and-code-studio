@@ -96,6 +96,7 @@ The self-test opens the real IDE and drives it through thirteen scenarios; see t
 
 ```bash
 QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual --manual
+tools/manual_on_x.sh          # the same, and the self-test, on a real X display (Xvfb)
 ```
 
 [How it is tested](testing.md) describes them, with the other checks and what none of them sees.

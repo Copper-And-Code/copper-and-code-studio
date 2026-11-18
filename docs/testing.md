@@ -11,7 +11,7 @@ says what is checked, by what, how to run it, and what no automated check can se
 | Test suite | more than 1,380 pytest tests: generation, fuzzing, the runtime, the GUI, the protocol with the board, all the widgets, MicroPython/C pixel parity | at each push, in the CI | about 11 minutes |
 | Self-test | the real IDE window driven as a person would, through 13 scenarios and 105 steps | at each push, in the CI, on Linux and Windows | about 30 seconds |
 | Visual tests | the pages of a project compared pixel by pixel with stored pictures, also after touches | by hand, per project | seconds per page |
-| Suites run by hand | checks too long for every push, in `tests/manual` | when someone decides to | minutes each |
+| Suites run by hand | every action and context menu, every dialog, the looks, faults, random use, in `tests/manual` | when someone decides to | minutes each |
 | Board tests | tests on a real board | only with its owner present | |
 | Use by a person | the author, now and then | | |
 
@@ -29,6 +29,12 @@ REPL. Its flash is a folder of the PC it cannot leave; it counts the soft resets
 tell whether an operation restarted the board. Tests that need a
 built runtime, the Windows cross-compiler or a browser are skipped, and say why, when those
 are missing.
+
+Some cheap checks of the looks run here too, in English and in Italian
+(`tests/test_window_checks.py`, `tests/test_fit_screen.py`): no shortcut used twice, no menu
+with two entries on the same underlined letter, no text cut off and no widgets covering each
+other in the main window at 1280×800, the window and the large dialogs no larger than the
+screen, and no text, tooltip or menu entry left in English after switching to Italian.
 
 The CI (`.github/workflows/ci.yml`) runs at each push to `main` and on pull requests. On Linux
 it runs the whole suite and the self-test; on Windows the parts that depend on the system
@@ -69,12 +75,21 @@ The reference pictures live next to the project, in `visual/<width>x<height>/`. 
 ```bash
 QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual --manual
 QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q tests/manual/test_every_action.py --manual
+LMS_PROGRESS=1 QT_QPA_PLATFORM=offscreen .venv/bin/pytest -q -s tests/manual/test_every_action.py --manual   # a line per entry
+tools/manual_on_x.sh                         # the self-test and every suite on a real X display
 ```
 
 | Suite | Time | What it checks |
 |---|---|---|
-| `test_every_action.py` | about 3 minutes | every menu entry and toolbar button |
+| `test_every_action.py` | about 10 minutes | every menu entry, toolbar button and context menu entry |
+| `test_every_dialog.py` | about 6 minutes | every dialog, in English and Italian: size, text cut off, Tab, Escape |
+| `test_looks.py` | about 1 minute | pictures of the window and its panels against the last accepted ones |
+| `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
+
+What the suites share (the window, its states, the watcher that answers dialogs, the guard
+against real boards) is in `tests/manual/sweep.py`; the checks of the looks are in
+`tests/looks.py`, also used by the CI.
 
 **Every action.** Every menu entry and toolbar button is triggered as choosing it does, in
 five states of the IDE:
@@ -103,6 +118,14 @@ After each action the suite checks:
 
 A new menu entry is tested without writing a test for it.
 
+The context menus are swept the same way: those of the canvas (on a widget and on the empty
+page), the project tree (a page, a widget, the Python Modules branch, a module), the Files
+panel (a program, a text file, a folder, the empty space), the board's files, the terminals
+and the code editor. Each menu is opened as a right click opens it, and opened again before
+each of its entries, since an entry can change what is under the pointer. Delete… of the Files
+panel moves files to a folder of the test, never to the trash of the PC. A menu that does not
+open is a problem, unless its widget is disabled, as the canvas is while the simulator runs.
+
 The report is written to `build/manual/every-action/`, one file per state and answer, with
 the dialogs each action opened and how long it took. Each run prints what changed since the
 last one: entries added or removed, other dialogs, a result that changed. That list is the
@@ -115,6 +138,47 @@ build for minutes in the background and are tested in `tests/test_release.py`.
 
 It checks that nothing breaks, not that the result is right: that is what the test suite
 and the self-test are for.
+
+**Every dialog.** The actions and context menus of an example and of a connected board are
+triggered again, in English and in Italian, and every dialog they open is looked at before it
+is closed with Escape:
+
+- a picture of it goes to `build/manual/every-dialog/<language>/`, to look through by hand;
+- it must fit its screen, and need no more than 1024×700;
+- no label, button or column of a list may cut its text; no widgets may cover each other or
+  stick out; no label may have a contrast below 3:1 on what is behind it;
+- Tab must reach every field and stay inside the dialog (in a group of radio buttons, the
+  chosen one);
+- Escape must close it.
+
+Qt's own file, print and input dialogs are photographed but not checked. The first run found
+the Board Profile Manager wider than a small screen, with its columns cutting the names of
+the boards and, in Italian, a row of buttons wider than 800 pixels.
+
+**Looks.** The window with an example open, then each panel and tab, in light and dark
+theme, English and Italian, at 1024×700 and 1920×1080. The pictures go to
+`build/manual/looks/now/`; the reference is `build/manual/looks/accepted/`, kept on the PC
+that makes it, since fonts differ between machines. A picture that changed is listed with
+its share of changed pixels, as something to look at, and does not fail the test; the first
+run, or `LMS_LOOKS_ACCEPT=1`, makes the reference. The checks that need no reference (text
+cut off, widgets covering each other, contrast) fail it. The dark theme needs a real display:
+offscreen skips it. The first run found the message of the Files panel without a folder cut
+in half when the panel is narrow.
+
+**Faults.** Each one through the window, as it would happen to a person: the disk full
+during a save (the file on disk and the changes in the window are kept, no temporary file is
+left), a read-only project folder (Save, Start and New File… say so), a build folder that
+cannot be written, the runtime killed (the project is editable again and Start works), the
+runtime hanging (Stop ends it within seconds), the project changed outside (nothing is
+overwritten without a choice), broken project files (the open project stays), the board
+pulled out during an upload (an error, not a hang).
+
+**On a real display.** `tools/manual_on_x.sh [WIDTHxHEIGHT] [suites]` runs the self-test and
+the suites on Xvfb with the xcb platform instead of offscreen, so that real fonts, window
+activation and the dark theme are there; nothing appears on the screen of the PC. When a
+window manager is installed (openbox, fluxbox, icewm, xfwm4 or metacity) it starts it, and
+the sweeps also check that the window gets the focus back after each action.
+`LMS_SCREEN_SCALE=2` scales Qt twice, as on a high-resolution screen.
 
 **Random use.** A [hypothesis](https://hypothesis.readthedocs.io) state machine chooses what to
 do next, through the window as a person would, with the self-test's driver: a widget from the
@@ -140,15 +204,13 @@ present, because they write to it. None is written yet.
 ## What the automated checks do not see
 
 - **Whether the IDE is clear and pleasant to use.** No check can say it.
-- **How the IDE looks.** The self-test and the suites check behaviour; nothing compares
-  pictures of the IDE's own window yet.
+- **Whether the IDE looks right.** The suites compare its pictures with the last accepted
+  ones and check sizes, cut text and contrast; whether a picture is good is for a person.
 - **Real boards.** The board code is tested against fakes and against a virtual board (`tests/virtual_board.py`: the runtime's MicroPython behind a pseudo-terminal, reached by the real `mpremote`, Linux only); touch, speed and the firmware's
   own behaviour are seen only on hardware.
 - **The system around the IDE.** The system's own file dialogs, dragging from the file
-  manager, a real high-resolution screen, a window manager: the checks run without a
-  display (`QT_QPA_PLATFORM=offscreen`) and with Qt's own dialogs.
-- **Context menus** of the canvas, the project tree and the Files panel are not in the
-  suite of every action.
+  manager, a real high-resolution screen: the checks run with Qt's own dialogs, offscreen or
+  on Xvfb, where a window manager is used only if one is installed.
 
 How much of the code the checks run, measured on 17 November 2026 with coverage.py: 87 % of
 the lines of the user interface (`lvgl_mpy_studio/ui`) and 90 % of the whole package. The

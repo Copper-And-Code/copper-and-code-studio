@@ -16,10 +16,11 @@ below as an open question, not as a formality.
 
 - **Tests**: covered by the automated suite, more than 1250 tests.
 - **Self-test**: exercised in the real IDE window by `lvgl-mpy-studio selftest`.
-  Besides, a suite run by hand (`pytest tests/manual --manual`) triggers every menu entry and
-  toolbar button of the IDE in five states, with every dialog answered with Cancel and with
-  OK; it checks that nothing breaks, not that the result is right. It is not a person using
-  the IDE. [How it is tested](testing.md) describes every check and what none of them sees.
+  Besides, suites run by hand (`pytest tests/manual --manual`) trigger every menu entry,
+  toolbar button and context menu entry of the IDE in five states, with every dialog answered
+  with Cancel and with OK, look at every dialog in English and Italian, compare pictures of the
+  window, and cause faults such as a full disk or a board pulled out; they check that nothing
+  breaks, not that the result is right. They are not a person using the IDE. [How it is tested](testing.md) describes every check and what none of them sees.
 - **Board**: tried on real hardware, with the board named.
 - **Not tried**: written and tested by machine only, or not at all.
 
