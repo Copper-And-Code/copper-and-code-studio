@@ -92,6 +92,7 @@ tools/manual_on_x.sh                         # the self-test and every suite on 
 | `test_every_example.py` | about 2 minutes | every example started in the simulator and touched |
 | `test_canvas_mouse.py` | seconds | widgets dropped, moved at three zooms, resized from each handle, selected with the mouse |
 | `test_typing_code.py` | seconds | typing in the code editor: indents, suggestions, errors, the lists, read-only while running, random keys |
+| `test_save_and_reopen.py` | about 2 minutes | what is saved is what was in the window: examples and the monkey's work saved, opened in a new window, compared |
 | `test_monkey.py` | about 5 minutes a state; longer with `LMS_MONKEY_STEPS` | clicks, drags, keys and menus at random anywhere in the window |
 | `test_faults.py` | seconds | the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out |
 | `test_random_use.py` | about 1 minute; longer with `LMS_RANDOM_EXAMPLES` | random sequences of what a person does |
@@ -237,6 +238,12 @@ click there opens its line; every object and event of the two lists shows its st
 without changing the project; while the simulator runs keys change nothing and Stop and Edit
 gives the code back; 400 random keys (accents and emoji too) leave the editor and the project
 in agreement, and undo all gives the code of the start.
+
+**Save and open again.** Each example saved from the IDE and opened again must give the same
+project, and a second save must not change the file by a byte. Then, round after round, the
+monkey works on a project for a while; it is saved and opened in a second window, and the
+project and the canvas of each page (without the grid and the real preview, which are choices
+of the window) must be the same.
 
 **Monkey.** Thousands of events a person could cause, anywhere in the window: clicks, double
 clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
