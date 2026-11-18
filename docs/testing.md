@@ -271,7 +271,8 @@ panel showing widgets that exist, the `*` of the title saying whether there is s
 save. Each step is written to
 `build/manual/monkey-<state>.log` before it is made, so a crash of the process can be followed;
 `LMS_MONKEY_SEED` replays a run. Its first runs found Add Page giving a new page the name of
-one already there, after a deletion. It finds by chance, so it pays to run it long:
+one already there, after a deletion; its night runs found a crash when a tab of an old tab bar
+that Qt leaves over the Output panel was dragged. It finds by chance, so it pays to run it long:
 `tools/monkey_night.sh [hours] [steps]` runs it seed after seed, each run in its own process,
 and keeps the output and the steps of the runs that fail in `build/manual/monkey-night/`.
 

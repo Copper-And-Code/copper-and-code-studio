@@ -102,3 +102,20 @@ def test_the_standard_buttons_follow_the_language(qtbot):
     finally:
         window.change_language("en")
     assert buttons() == ["Cancel", "Save"]
+
+
+def test_no_old_tab_bar_of_the_docks_is_left_on_the_screen(qtbot):
+    """Qt 6.12 left "Output | Errors" over the Output panel, a second bar for docks that the real
+    one shows; dragging its tabs crashed Qt."""
+    from PySide6.QtWidgets import QTabBar
+
+    from lvgl_mpy_studio.ui.main_window import MainWindow
+
+    window = MainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    QApplication.processEvents()
+    bars = [bar for bar in window.findChildren(QTabBar) if bar.parent() is window and bar.isVisible()]
+    docks = [{bar.tabData(index) for index in range(bar.count())} for bar in bars]
+    shown_twice = [[bar.tabText(index) for index in range(bar.count())] for bar, mine in zip(bars, docks) if any(mine < other for other in docks)]
+    assert shown_twice == []

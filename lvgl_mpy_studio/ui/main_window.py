@@ -3,7 +3,7 @@ import json
 
 from PySide6.QtCore import QRectF, QSettings, QSize, Qt, QTimer, QUrl, Signal
 from PySide6.QtGui import QAction, QDesktopServices, QKeySequence, QPainter
-from PySide6.QtWidgets import QApplication, QDockWidget, QLabel, QLineEdit, QMainWindow, QMenu, QMessageBox, QPlainTextEdit, QSizePolicy, QTabWidget, QToolBar, QToolButton, QTreeWidget, QWidget
+from PySide6.QtWidgets import QApplication, QDockWidget, QLabel, QLineEdit, QMainWindow, QMenu, QMessageBox, QPlainTextEdit, QSizePolicy, QTabBar, QTabWidget, QToolBar, QToolButton, QTreeWidget, QWidget
 
 from lvgl_mpy_studio import WEBSITE, __version__
 from lvgl_mpy_studio.core.boards import ProfileStore, portable_profile, validate_profile
@@ -350,6 +350,9 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         dock.setObjectName(object_name)
         dock.setWidget(widget)
         self.addDockWidget(area, dock)
+        # A dock moved or floated by hand can make a new group of tabs: see _hide_stale_tab_bars.
+        dock.dockLocationChanged.connect(lambda _area: QTimer.singleShot(0, self._hide_stale_tab_bars))
+        dock.topLevelChanged.connect(lambda _floating: QTimer.singleShot(0, self._hide_stale_tab_bars))
         self.view_menu.addAction(dock.toggleViewAction())
         return dock
 
@@ -744,6 +747,18 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
             self.restoreState(state, self.LAYOUT_VERSION)
         if geometry:
             self.restoreGeometry(geometry)
+        self._hide_stale_tab_bars()
+
+    def _hide_stale_tab_bars(self):
+        """Qt 6.12 leaves on the screen an old tab bar of a group of docks when a second group is
+        made: at the start it shows "Output | Errors" over the Output panel, and dragging one of
+        its tabs crashes Qt. A bar whose docks another bar shows all of is hidden, not deleted:
+        Qt keeps it, and shows it again if it uses it."""
+        bars = [bar for bar in self.findChildren(QTabBar) if bar.parent() is self and not bar.isHidden()]
+        docks = {bar: {bar.tabData(index) for index in range(bar.count())} for bar in bars}
+        for bar in bars:
+            if docks[bar] and any(other is not bar and docks[bar] < docks[other] for other in bars):
+                bar.hide()
 
     def closeEvent(self, event):
         if self.board_writes_pending():  # not cancelled: the edits would not reach the board
