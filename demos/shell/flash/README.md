@@ -3,7 +3,7 @@
 A program without pages: a shell with `ls`, `cd`, `cp`, `rm`, `grep`, pipes, redirections,
 history and Tab completion, an ANSI terminal drawn on the display, and two full-screen
 editors, `edit` and `vi`. It runs on the boards of `mpy-lvgl-boards` and in the simulator of
-LVGL MPY Studio.
+Copper and Code Studio.
 
 | File | What it is |
 |---|---|

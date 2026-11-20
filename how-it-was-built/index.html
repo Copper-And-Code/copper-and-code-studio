@@ -6,17 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/how-it-was-built/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/how-it-was-built/">
       
       
         <link rel="prev" href="../stack/">
       
       
-        <link rel="next" href="../status/">
+        <link rel="next" href="../renamed/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>How it was built - LVGL MPY Studio</title>
+        <title>How it was built - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -937,6 +937,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1178,7 +1206,7 @@
 <h1 id="how-this-project-was-built">How this project was built<a class="headerlink" href="#how-this-project-was-built" title="Permanent link">&para;</a></h1>
 <p>This page says who did what, so that a reader can judge the project for what it is.</p>
 <h2 id="in-short">In short<a class="headerlink" href="#in-short" title="Permanent link">&para;</a></h2>
-<p>LVGL MPY Studio was designed and directed by one person, Nunzio Raciti, and written for the
+<p>Copper and Code Studio, called LVGL MPY Studio up to 0.7, was designed and directed by one person, Nunzio Raciti, and written for the
 most part by AI coding agents working under his direction. It is not a hand-written code base
 with an assistant's help, and it is not an unattended output either: it is an experiment in how
 far one engineer can take a whole product by directing agents, and a statement of the method
@@ -1209,7 +1237,7 @@ the 162 commits of the first two weeks, 139 carry that line.</p>
 <li><strong>Decisions are written down</strong> with their date and reason, in <a href="../decisions/">decisions.md</a>.</li>
 <li><strong>Every change comes with tests</strong>: more than 1250 automated tests, among them pixel
   comparisons between the MicroPython and the C output of the same project.</li>
-<li><strong>The IDE tests itself</strong>: <code>lvgl-mpy-studio selftest</code> drives the real window with mouse and
+<li><strong>The IDE tests itself</strong>: <code>copper-and-code-studio selftest</code> drives the real window with mouse and
   keyboard through thirteen scenarios and reports each step. It found real defects that the unit
   tests had missed.</li>
 <li><strong>Each push is checked on other machines</strong>: the suite and the self-test run on Linux and on

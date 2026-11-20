@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/stack/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/stack/">
       
       
         <link rel="prev" href="../videos/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>The stack - LVGL MPY Studio</title>
+        <title>The stack - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -965,6 +965,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1232,7 +1260,7 @@
 
 
 <h1 id="the-stack-from-the-display-controller-to-the-agent">The stack, from the display controller to the agent<a class="headerlink" href="#the-stack-from-the-display-controller-to-the-agent" title="Permanent link">&para;</a></h1>
-<p>LVGL MPY Studio is the top of a stack that goes down to the registers of the display
+<p>Copper and Code Studio is the top of a stack that goes down to the registers of the display
 controller. This page follows one frame from the silicon to the tool an AI agent calls, and
 says in which repository each layer lives.</p>
 <table>
@@ -1246,7 +1274,7 @@ says in which repository each layer lives.</p>
 <tbody>
 <tr>
 <td>7. Agents</td>
-<td>An AI agent designs, runs and tests an application through 49 tools</td>
+<td>An AI agent designs, runs and tests an application through 51 tools</td>
 <td>this repository, <code>mcp_server.py</code></td>
 </tr>
 <tr>
@@ -1362,7 +1390,7 @@ memory pools on ports without <code>multi_heap</code>.</p>
   bytecode version, the built-in font sizes, whether fonts can be loaded at run time, free
   RAM and free space.</li>
 </ul>
-<p>A board profile, a JSON file in <code>lvgl_mpy_studio/boards/</code>, holds what cannot be read: the
+<p>A board profile, a JSON file in <code>copper_and_code_studio/boards/</code>, holds what cannot be read: the
 name, the resolution, the adapter, the serial protocol. When the board and the profile
 disagree, for example on the font sizes, the board wins and the IDE says so.</p>
 <h2 id="layers-5-and-6-this-repository">Layers 5 and 6: this repository<a class="headerlink" href="#layers-5-and-6-this-repository" title="Permanent link">&para;</a></h2>
@@ -1376,15 +1404,15 @@ disagree, for example on the font sizes, the board wins and the IDE says so.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>lvgl_mpy_studio/device/uart.py</code></td>
+<td><code>copper_and_code_studio/device/uart.py</code></td>
 <td>A raw-REPL transport written for the STM32H7 boards, reached through a UART adapter: chunked writes that stay inside the raw REPL</td>
 </tr>
 <tr>
-<td><code>lvgl_mpy_studio/device/service.py</code></td>
+<td><code>copper_and_code_studio/device/service.py</code></td>
 <td>Upload as a transaction: staging folder, size check, rename, rollback</td>
 </tr>
 <tr>
-<td><code>lvgl_mpy_studio/gen/binfont.py</code>, <code>fontconv.py</code></td>
+<td><code>copper_and_code_studio/gen/binfont.py</code>, <code>fontconv.py</code></td>
 <td>A TrueType to LVGL binary font converter, kerning included, compared in the tests with LVGL's own Montserrat</td>
 </tr>
 <tr>
@@ -1392,15 +1420,15 @@ disagree, for example on the font sizes, the board wins and the IDE says so.</p>
 <td>The C side of the simulator and its protocol, shared by the MicroPython and the C targets</td>
 </tr>
 <tr>
-<td><code>lvgl_mpy_studio/gen/</code></td>
+<td><code>copper_and_code_studio/gen/</code></td>
 <td>The generators: one project, MicroPython and C, compared pixel by pixel in the tests</td>
 </tr>
 <tr>
-<td><code>lvgl_mpy_studio/core/blocks.py</code></td>
+<td><code>copper_and_code_studio/core/blocks.py</code></td>
 <td>Blocks: hardware components described by data, read without ever running their code</td>
 </tr>
 <tr>
-<td><code>lvgl_mpy_studio/selftest/</code></td>
+<td><code>copper_and_code_studio/selftest/</code></td>
 <td>The IDE driving itself with mouse and keyboard</td>
 </tr>
 </tbody>

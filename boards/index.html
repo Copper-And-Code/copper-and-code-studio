@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/boards/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/boards/">
       
       
         <link rel="prev" href="../pc-programs/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Boards - LVGL MPY Studio</title>
+        <title>Boards - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -552,6 +552,17 @@
     <span class="md-ellipsis">
       
         Language and profiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#board-definitions-from-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board definitions from a file
       
     </span>
   </a>
@@ -970,6 +981,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1214,6 +1253,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#board-definitions-from-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board definitions from a file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fonts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1242,7 +1292,7 @@
 
 
 <h1 id="micropython-boards">MicroPython boards<a class="headerlink" href="#micropython-boards" title="Permanent link">&para;</a></h1>
-<p><a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/boards.it.md">Italiano</a></p>
+<p><a href="https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/boards.it.md">Italiano</a></p>
 <h3 id="requirements-and-first-run">Requirements and first run<a class="headerlink" href="#requirements-and-first-run" title="Permanent link">&para;</a></h3>
 <p>The first profile is <strong>Waveshare RP2350-Touch-LCD-4</strong>: 480×480 ST7701S panel, 240×240 RGB565 LVGL UI, GT911 touch and 2× hardware scaling. You need a MicroPython firmware with LVGL and the <code>display_driver</code>, <code>rgbpanel</code> and <code>gt911</code> modules already installed. Copying files to generic MicroPython does not install LVGL or its drivers. The IDE does not flash firmware or modify <code>boot.py</code>.</p>
 <ol>
@@ -1265,23 +1315,53 @@
 <p>While an application started from the IDE is running, <strong>Device → Live Editing</strong> sends design changes to the board about half a second after the last edit, with no restart. It rebuilds all pages off screen, shows the page open in the designer, and then deletes the old ones. Python module state survives, but widget state such as a typed text or a slider position returns to the design values. Code, Buzzer or Timer changes are not sent: the status bar asks you to press F5.</p>
 <h3 id="console-stop-and-autostart">Console, Stop and autostart<a class="headerlink" href="#console-stop-and-autostart" title="Permanent link">&para;</a></h3>
 <p>The <strong>Device Console</strong> incrementally shows output and tracebacks produced after bootstrap and accepts REPL commands while the session is ready. The continuous reader pauses during commands that need the port, ensuring a single serial owner. <strong>Cancel operation</strong> interrupts a blocked command. <strong>Stop</strong> in the Device menu always targets the board, even when the simulator is selected; F5 and Shift+F5 use the selected destination. Stop removes application modules from the import cache and calls <code>display_driver.stop()</code>. The last image may remain visible because scan-out continues after the timer stops. Every new run performs a soft reset to avoid stale timers and modules.</p>
-<p><strong>Install Autostart…</strong> is separate from F5. It replaces <code>/main.py</code> with a recognizable launcher and backs up an existing <code>main.py</code> under <code>~/.config/lvgl-mpy-studio/autostart-backups/&lt;board-id&gt;/&lt;app&gt;/&lt;transaction&gt;/</code> (or <code>XDG_CONFIG_HOME</code>). Identity uses <code>machine.unique_id()</code>, not the USB port. Every transaction verifies launcher and backup hashes; manual edits, invalid manifests or missing backups block restoration without overwriting files. <strong>Remove Autostart…</strong> only acts on the current transaction launcher for the selected app.</p>
+<p><strong>Install Autostart…</strong> is separate from F5. It replaces <code>/main.py</code> with a recognizable launcher and backs up an existing <code>main.py</code> under <code>~/.config/copper-and-code-studio/autostart-backups/&lt;board-id&gt;/&lt;app&gt;/&lt;transaction&gt;/</code> (or <code>XDG_CONFIG_HOME</code>). Identity uses <code>machine.unique_id()</code>, not the USB port. Every transaction verifies launcher and backup hashes; manual edits, invalid manifests or missing backups block restoration without overwriting files. <strong>Remove Autostart…</strong> only acts on the current transaction launcher for the selected app.</p>
 <p>If an autostart application becomes unresponsive, use the safe/recovery mode provided by the board firmware, or power it down, open another MicroPython tool and remove only the recognizable <code>/main.py</code> launcher. Do not format the filesystem: application files remain under <code>/lms_apps/</code>.</p>
 <h3 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>device<span class="w"> </span>list
-lvgl-mpy-studio<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>device<span class="w"> </span>info<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>upload<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>run<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>stop<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>reset<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>repl<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>autostart-install<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
-lvgl-mpy-studio<span class="w"> </span>device<span class="w"> </span>autostart-remove<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>device<span class="w"> </span>list
+copper-and-code-studio<span class="w"> </span>--language<span class="w"> </span>en<span class="w"> </span>device<span class="w"> </span>info<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>upload<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>run<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>stop<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>reset<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>repl<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>autostart-install<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
+copper-and-code-studio<span class="w"> </span>device<span class="w"> </span>autostart-remove<span class="w"> </span>project.json<span class="w"> </span>--port<span class="w"> </span>/dev/ttyACM0
 </code></pre></div>
 <p>Subcommand and option names are always in English. If a project has no embedded profile, add <code>--board-profile &lt;id&gt;</code>. <code>upload</code> and <code>run</code> accept <code>--output &lt;directory&gt;</code>. Projects contain a portable profile copy and can be opened without the corresponding local catalog entry.</p>
 <p>Ctrl+C returns status 130 for non-interactive commands. In the interactive REPL it interrupts the remote program; leave the REPL with Ctrl+] as documented by <code>mpremote</code>. The port is released when the command exits. Do not open the IDE, a REPL and another serial monitor on the same port at once.</p>
 <h3 id="language-and-profiles">Language and profiles<a class="headerlink" href="#language-and-profiles" title="Permanent link">&para;</a></h3>
 <p><strong>Settings → Language</strong> switches Italian/English immediately and saves the preference without changing the project. <strong>Device → Manage Board Profiles…</strong> provides create, edit, duplicate, delete and restore operations. Changes persist only with <strong>Apply</strong>. Editing a built-in profile creates a user customization; deleting it hides it. Projects retain their portable copy and are updated only through <strong>Update Project Profile</strong>, with undo.</p>
+<h3 id="board-definitions-from-a-file">Board definitions from a file<a class="headerlink" href="#board-definitions-from-a-file" title="Permanent link">&para;</a></h3>
+<p>A board the IDE does not ship can be added from a file, with no change to the IDE. The file is a <code>.json</code> board definition with the same fields as the profiles in <code>copper_and_code_studio/boards/</code> (<code>schemaVersion</code> 1), at most 64 KiB, in UTF-8.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_board_320x240"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My board (320×240)"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"adapter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_board"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"firmware"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"microPython"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.29.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"lvgl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.5.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"modules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"lvgl"</span><span class="p">,</span><span class="w"> </span><span class="s2">"display_driver"</span><span class="p">]},</span>
+<span class="w">  </span><span class="nt">"physicalWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="nt">"physicalHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">,</span><span class="w"> </span><span class="nt">"logicalWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="nt">"logicalHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">240</span><span class="p">,</span><span class="w"> </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"colorFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RGB565"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"fonts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"orientations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"display_driver"</span><span class="p">,</span><span class="w"> </span><span class="nt">"buffers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"driver"</span><span class="p">,</span><span class="w"> </span><span class="nt">"eventLoop"</span><span class="p">:</span><span class="w"> </span><span class="s2">"driver"</span><span class="p">,</span><span class="w"> </span><span class="nt">"appRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/lms_apps"</span><span class="p">,</span><span class="w"> </span><span class="nt">"mainPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/main.py"</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>adapter</code> names the firmware side of the board. An adapter the IDE has no code for is accepted when it is an identifier (<code>a-z</code>, <code>0-9</code> and <code>_</code>, up to 64 characters): the board then needs the modules of <code>firmware.modules</code> and the color format of the profile, and the IDE reaches it through <code>mpremote</code>, as every board except the STM32 over UART. The firmware must provide <code>display_driver</code> as the built-in boards do.</p>
+<ul>
+<li><strong>Device → Manage Board Profiles… → Import…</strong> reads the file and shows the board as <em>Imported</em>; <strong>Apply</strong> keeps it. A board with the id of a built-in one is refused; one with the id of a board already imported is replaced after a question. <strong>Export…</strong> writes the selected board to a file that imports back as the same board. <strong>Delete</strong> removes an imported board; a built-in one is hidden and can be restored.</li>
+<li>From the command line:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span>board<span class="w"> </span>list
+copper-and-code-studio<span class="w"> </span>board<span class="w"> </span>import<span class="w"> </span>my_board.json<span class="w">            </span><span class="c1"># --replace to replace an imported board of the same id</span>
+copper-and-code-studio<span class="w"> </span>board<span class="w"> </span><span class="nb">export</span><span class="w"> </span>my_board_320x240<span class="w"> </span>copy.json
+copper-and-code-studio<span class="w"> </span>board<span class="w"> </span>delete<span class="w"> </span>my_board_320x240
+</code></pre></div>
+<ul>
+<li>For agents, the MCP tools <code>import_board</code> and <code>delete_board</code>; <code>list_boards</code> shows imported boards with <code>"origin": "imported"</code>, and <code>set_board</code> selects them.</li>
+</ul>
+<p>Imported boards are kept in <code>board-profiles.json</code>, in the settings folder (<code>~/.config/copper-and-code-studio/</code> or <code>XDG_CONFIG_HOME</code>). A project keeps its own copy of its board: it still opens and works after the board is deleted, or on a computer where the board was never imported, and the Output panel says so.</p>
 <h3 id="fonts">Fonts<a class="headerlink" href="#fonts" title="Permanent link">&para;</a></h3>
 <p>A profile can list the Montserrat sizes of its firmware in <code>fonts</code>, for example <code>"fonts": [14, 16, 24, 32, 40]</code>. Text asked in a size the board lacks is drawn in the nearest one, in the designer preview, in the simulator and on the board alike. A profile without the list is taken to have 14, 16 and 24; a project without a board uses the five sizes of the simulator, 14, 16, 24, 32 and 40.</p>
 <p>On every upload the IDE reads the fonts the firmware really has. If they differ from the profile, the code is generated for the fonts of the board and a notice says so: add the list to the profile to see the same text in the preview. <strong>Device → Device Information</strong> shows the list as <code>fonts</code>.</p>

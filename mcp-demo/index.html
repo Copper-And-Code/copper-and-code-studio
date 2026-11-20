@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/mcp-demo/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/mcp-demo/">
       
       
         <link rel="prev" href="../mcp/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>From a prompt to an app - LVGL MPY Studio</title>
+        <title>From a prompt to an app - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -926,6 +926,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1154,7 +1182,7 @@
 
 
 <h1 id="from-a-prompt-to-an-app">From a prompt to an app<a class="headerlink" href="#from-a-prompt-to-an-app" title="Permanent link">&para;</a></h1>
-<p>This is a complete session of an AI agent building an app with LVGL MPY Studio through the <a href="../mcp/">MCP server</a>, starting from one sentence. It is recorded so that it can be replayed: the calls are in <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-session.json"><code>examples/weather/mcp-session.json</code></a> and the result is <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-result.json"><code>examples/weather/mcp-result.json</code></a>. A test replays the session at every run of the suite and checks that it still builds the same app.</p>
+<p>This is a complete session of an AI agent building an app with Copper and Code Studio through the <a href="../mcp/">MCP server</a>, starting from one sentence. It is recorded so that it can be replayed: the calls are in <a href="https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/examples/weather/mcp-session.json"><code>examples/weather/mcp-session.json</code></a> and the result is <a href="https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/examples/weather/mcp-result.json"><code>examples/weather/mcp-result.json</code></a>. A test replays the session at every run of the suite and checks that it still builds the same app.</p>
 <p>The Weather demo on the website and <code>examples/weather/project.json</code> are that result reworked later by another agent, while preparing the site: weather icons and a new layout. They are not what this session produced.</p>
 <h2 id="the-prompt">The prompt<a class="headerlink" href="#the-prompt" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -1207,9 +1235,9 @@
 <div class="highlight"><pre><span></span><code><span class="nv">QT_QPA_PLATFORM</span><span class="o">=</span>offscreen<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>tests/test_mcp_demo.py
 </code></pre></div>
 <p>To open the result of the session, load <code>examples/weather/mcp-result.json</code> in the IDE and press F5, or run:</p>
-<div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span>run<span class="w"> </span>examples/weather/mcp-result.json
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span>run<span class="w"> </span>examples/weather/mcp-result.json
 </code></pre></div>
-<p><code>lvgl-mpy-studio test examples/weather/project.json</code> runs the visual tests of the reworked version.</p>
+<p><code>copper-and-code-studio test examples/weather/project.json</code> runs the visual tests of the reworked version.</p>
 
 
 

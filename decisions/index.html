@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/decisions/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/decisions/">
       
       
         <link rel="prev" href="../case-study-eim-01/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Decisions - LVGL MPY Studio</title>
+        <title>Decisions - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -835,6 +835,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1363,6 +1391,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#boards-from-a-file-2026-11-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boards from a file (2026-11-17)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-heap-of-the-simulator-2026-11-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The heap of the simulator (2026-11-18)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1818,6 +1868,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#boards-from-a-file-2026-11-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boards from a file (2026-11-17)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-heap-of-the-simulator-2026-11-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The heap of the simulator (2026-11-18)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1854,7 +1926,7 @@
 <li>The simulator transport is TCP on <code>127.0.0.1</code> with a session token on both systems, avoiding the divergence between Unix sockets and named pipes.</li>
 <li>User code is stopped with the protocol's <code>STOP</code> message and <code>KeyboardInterrupt</code>, not POSIX signals.</li>
 <li>The LVGL tick uses the monotonic <code>lvsim.ticks_ms()</code> (<code>CLOCK_MONOTONIC</code>/<code>QueryPerformanceCounter</code>), not the Windows port's system clock.</li>
-<li>Python platform differences are centralized in <code>lvgl_mpy_studio/platform.py</code>; the core forbids POSIX APIs and writes UTF-8 text with explicit LF newlines.</li>
+<li>Python platform differences are centralized in <code>copper_and_code_studio/platform.py</code>; the core forbids POSIX APIs and writes UTF-8 text with explicit LF newlines.</li>
 <li>Standalone Windows apps do not open a console: GUI PE subsystem, with stdout and stderr in <code>&lt;project&gt;.log</code>.</li>
 <li>For the C target on Windows, only existing MSYS2/w64devkit installations are detected; no portable toolchain is included or installed automatically, and a guide is shown if it is missing.</li>
 <li>The Windows distribution includes both a portable ZIP and a per-user Inno Setup installer in <code>%LOCALAPPDATA%</code>; there is no code signing in v1.1.</li>
@@ -1871,7 +1943,7 @@
 </ul>
 <h2 id="non-visual-components-2026-11-06">Non-visual components (2026-11-06)<a class="headerlink" href="#non-visual-components-2026-11-06" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Buzzer and Timer live in <code>lvgl_mpy_studio/core/components.py</code>, outside <code>widgets.json</code>: they are not LVGL objects and the C generator ignores them with a warning.</li>
+<li>Buzzer and Timer live in <code>copper_and_code_studio/core/components.py</code>, outside <code>widgets.json</code>: they are not LVGL objects and the C generator ignores them with a warning.</li>
 <li><code>ui.buzzer1</code> is the <code>lms_buzzer</code> module, generated only when the component is present, so there are no extra classes or objects. <code>ui.timer1</code> is an <code>lv.timer</code>, created only if it has a handler or code uses it; its handler receives the timer as the <code>e</code> argument.</li>
 <li>In the simulator the buzzer writes a line <code>ESC LVSIM_TONE frequency milliseconds</code> to stdout, which the IDE intercepts and plays: this avoids changing the native protocol and rebuilding the runtimes. Outside the IDE the module stays silent.</li>
 <li>The pin is in the optional <code>buzzer</code> key of the board profile (<code>pin</code> or <code>audio</code>). QtMultimedia is loaded only on the first sound.</li>
@@ -1886,7 +1958,7 @@
 <ul>
 <li>C leaves the selector: it does not run handlers and serves for exporting, so it becomes <strong>Project → Export C Code…</strong>. The export writes only the four portable files to <code>export_c/</code> next to the project; <code>main.c</code> and <code>Makefile</code> are tied to the simulator and are needed only to compile. A project saved with a C destination opens on the Simulator; the CLI keeps <code>--target c</code>.</li>
 <li>Suggestions are a child widget of the editor, not a popup: on Wayland the <code>QCompleter</code> popup is rejected and does not appear.</li>
-<li>The suggested actions live in <code>lvgl_mpy_studio/core/actions.py</code>, and <code>tests/test_actions.py</code> runs them all on the real runtime, so the IDE cannot suggest calls that do not exist.</li>
+<li>The suggested actions live in <code>copper_and_code_studio/core/actions.py</code>, and <code>tests/test_actions.py</code> runs them all on the real runtime, so the IDE cannot suggest calls that do not exist.</li>
 </ul>
 <h2 id="lvgl-preview-in-the-designer-2026-11-06">LVGL preview in the designer (2026-11-06)<a class="headerlink" href="#lvgl-preview-in-the-designer-2026-11-06" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1896,12 +1968,12 @@
 </ul>
 <h2 id="garbage-collector-in-the-main-thread-2026-11-06">Garbage collector in the main thread (2026-11-06)<a class="headerlink" href="#garbage-collector-in-the-main-thread-2026-11-06" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Budget and preview work in Python threads, and the garbage collector runs in the thread that allocates: a Qt object in a reference cycle could be destroyed outside the main thread, causing rare segfaults in the event loop. <code>lvgl_mpy_studio/ui/gc_guard.py</code> turns off automatic collection and runs it from a main-thread timer.</li>
+<li>Budget and preview work in Python threads, and the garbage collector runs in the thread that allocates: a Qt object in a reference cycle could be destroyed outside the main thread, causing rare segfaults in the event loop. <code>copper_and_code_studio/ui/gc_guard.py</code> turns off automatic collection and runs it from a main-thread timer.</li>
 </ul>
 <h2 id="licenses-2026-11-06">Licenses (2026-11-06)<a class="headerlink" href="#licenses-2026-11-06" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The IDE is GPL-3.0-or-later, copyright Nunzio Raciti. Generated code is MIT, so users' products do not inherit the GPL.</li>
-<li>The parts that end up in projects or executables are also MIT: <code>lvgl_mpy_studio/gen/output/</code>, <code>native/lvsim/</code> and <code>runtime/display_driver.py</code>. A dependency with a more restrictive license must not enter these parts. See <code>LICENSING.md</code>.</li>
+<li>The parts that end up in projects or executables are also MIT: <code>copper_and_code_studio/gen/output/</code>, <code>native/lvsim/</code> and <code>runtime/display_driver.py</code>. A dependency with a more restrictive license must not enter these parts. See <code>LICENSING.md</code>.</li>
 </ul>
 <h2 id="interface-2026-11-06">Interface (2026-11-06)<a class="headerlink" href="#interface-2026-11-06" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1941,16 +2013,16 @@
 </ul>
 <h2 id="visual-tests-2026-11-07">Visual tests (2026-11-07)<a class="headerlink" href="#visual-tests-2026-11-07" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>lvgl-mpy-studio test</code> uses the same headless render as the designer preview, but runs the project code by default: the screen a user sees also depends on it. A Python traceback is an error even if a frame was drawn.</li>
-<li>Baselines are PNG files, readable in any viewer and in Git, written by a small encoder in <code>lvgl_mpy_studio/build/visual.py</code> so the core does not import Qt. The reader accepts only that format.</li>
+<li><code>copper-and-code-studio test</code> uses the same headless render as the designer preview, but runs the project code by default: the screen a user sees also depends on it. A Python traceback is an error even if a frame was drawn.</li>
+<li>Baselines are PNG files, readable in any viewer and in Git, written by a small encoder in <code>copper_and_code_studio/build/visual.py</code> so the core does not import Qt. The reader accepts only that format.</li>
 <li>Outside <code>--update</code>, a missing baseline fails, so a passing run always means a real comparison. <code>--update</code> renders twice and refuses unstable pages.</li>
 <li>Version 1 captured each page once after loading. Scenarios with touch input came once the virtual clock made runs identical: see below.</li>
 </ul>
 <h2 id="mcp-server-2026-11-07">MCP server (2026-11-07)<a class="headerlink" href="#mcp-server-2026-11-07" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>lvgl-mpy-studio mcp</code> is a separate stdio process with hand-written JSON-RPC, tested with the official Python client. The tool subset is small and the SDK would add many packages to the executables. The IDE gains only a menu switch, so the server costs nothing while it is unused.</li>
+<li><code>copper-and-code-studio mcp</code> is a separate stdio process with hand-written JSON-RPC, tested with the official Python client. The tool subset is small and the SDK would add many packages to the executables. The IDE gains only a menu switch, so the server costs nothing while it is unused.</li>
 <li>By the owner's decision the agent has no limits compared to the IDE, board and autostart included, because a person supervises it. The only gate is the menu switch, off by default and read on every call. An unreadable setting counts as off.</li>
-<li><code>simulate</code> drives the runtime over the existing lvsim protocol, acting as a small headless IDE in <code>lvgl_mpy_studio/sim/session.py</code>. The runtime needs no change, and the app behaves as it does in the IDE panel. The clock was real at first; it is virtual by default since the next entry, and real only with <code>clock: "real"</code>.</li>
+<li><code>simulate</code> drives the runtime over the existing lvsim protocol, acting as a small headless IDE in <code>copper_and_code_studio/sim/session.py</code>. The runtime needs no change, and the app behaves as it does in the IDE panel. The clock was real at first; it is virtual by default since the next entry, and real only with <code>clock: "real"</code>.</li>
 <li>The server works on files, not on the open IDE, so version 1 has no shared undo and needs the project closed in the IDE.</li>
 </ul>
 <h2 id="micropython-export-2026-11-07">MicroPython export (2026-11-07)<a class="headerlink" href="#micropython-export-2026-11-07" title="Permanent link">&para;</a></h2>
@@ -1989,7 +2061,7 @@
 </ul>
 <h2 id="scenarios-in-visual-tests-2026-11-08">Scenarios in visual tests (2026-11-08)<a class="headerlink" href="#scenarios-in-visual-tests-2026-11-08" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A scenario is a script of <code>simulate</code> steps with a name, a page and a seed, played on the virtual clock. Its screenshots and final screen are compared like pages. The step runner moved from the MCP server to <code>lvgl_mpy_studio/sim/script.py</code>, so the test command and the agent share it.</li>
+<li>A scenario is a script of <code>simulate</code> steps with a name, a page and a seed, played on the virtual clock. Its screenshots and final screen are compared like pages. The step runner moved from the MCP server to <code>copper_and_code_studio/sim/script.py</code>, so the test command and the agent share it.</li>
 <li>Scenarios live in <code>scenarios.json</code> next to the baselines of each resolution, because touch coordinates depend on it. The MCP <code>save_scenario</code> tool writes that file, so an agent can turn a tried <code>simulate</code> run into a test.</li>
 <li><code>--update</code> plays a scenario twice and refuses it if the two runs differ, as for pages. Simulated time starts on a fixed date, 1 January 2026, and <code>localtime()</code> follows it in UTC, so a clock on screen does not break a baseline, whatever the time zone of the computer. Steps are checked for shape before a scenario is saved or run.</li>
 </ul>
@@ -2010,7 +2082,7 @@
 <li>The MicroPython WebAssembly port builds unchanged with our user C modules: the PyDevices LVGL 9.5 bindings, which were the main risk, compiled with Emscripten 7.0 at the first try, and <code>lvsim</code> draws through the Emscripten SDL2 on a canvas. Bytecode is the same format as on the desktop, so the game is the <code>.mpy</code> files the IDE already compiles, loaded into the in-memory file system.</li>
 <li>The port already builds with ASYNCIFY. <code>lvsim_sleep_ms</code> calls <code>emscripten_sleep</code>, and the page starts the game with an asynchronous <code>ccall</code>, so the unchanged <code>while display_driver.poll()</code> loop gives the browser back control between frames. The default ASYNCIFY stack of 4 KB was too small for an LVGL game; it is 1 MB.</li>
 <li><code>display_driver.py</code> and the simulator buzzer tolerate the missing <code>os.getenv</code>. The buzzer prints its tone markers on WebAssembly too, and the page plays them with Web Audio after the first gesture, which browsers require.</li>
-<li>The page needs an HTTP server because browsers do not load JavaScript modules from <code>file://</code>. The IDE serves the folder on 127.0.0.1 while it is open; <code>lvgl-mpy-studio web</code> does the same from the command line.</li>
+<li>The page needs an HTTP server because browsers do not load JavaScript modules from <code>file://</code>. The IDE serves the folder on 127.0.0.1 while it is open; <code>copper-and-code-studio web</code> does the same from the command line.</li>
 <li>The runtime is about 6 MB and shared by every game. It is built by <code>runtime/build_web.sh</code> and not by <code>runtime/build.sh</code>, because it needs the Emscripten SDK, about 1 GB, which the CI does not install.</li>
 </ul>
 <h2 id="changes-made-outside-the-ide-2026-11-10">Changes made outside the IDE (2026-11-10)<a class="headerlink" href="#changes-made-outside-the-ide-2026-11-10" title="Permanent link">&para;</a></h2>
@@ -2030,7 +2102,7 @@
 <li>version 3: 0.3 refuses it at once, in the GUI, the CLI and every MCP tool, with "Versione progetto non supportata: 3".
   A clear refusal is better than a project that opens and then fails at run time, and keeping version 2 for projects without modules means 0.3 users lose nothing they could open before. A <code>requiredFeatures</code> key would not have helped: 0.3 does not read it.</li>
 <li>Module names are the import name and the file name: lowercase letters, digits and <code>_</code>, at most 31 characters, at the root of the app only. That rules out paths, <code>..</code> and names that differ only by case, which collide on FAT, the file system of some boards (MicroPython documentation, not tested on our boards). The 31-character limit is a deliberate margin, not a measured file-system limit.</li>
-<li>Refused names: files the IDE generates, anything starting with <code>lvgl_mpy_studio</code>, MicroPython modules with their <code>u</code> aliases, Python keywords and the names the IDE already reserves, <code>__</code> names and handler names. On the simulator runtime, a <code>time.py</code>, <code>json.py</code>, <code>random.py</code>, <code>asyncio.py</code> or <code>machine.py</code> next to the app replaces the built-in module, while <code>lvgl</code> cannot be replaced (tested). A module named after a built-in would break the clock or the game.</li>
+<li>Refused names: files the IDE generates, anything starting with <code>copper_and_code_studio</code>, MicroPython modules with their <code>u</code> aliases, Python keywords and the names the IDE already reserves, <code>__</code> names and handler names. On the simulator runtime, a <code>time.py</code>, <code>json.py</code>, <code>random.py</code>, <code>asyncio.py</code> or <code>machine.py</code> next to the app replaces the built-in module, while <code>lvgl</code> cannot be replaced (tested). A module named after a built-in would break the clock or the game.</li>
 <li>Renaming or deleting a module never rewrites code. It returns the imports still using the old name, as renaming a widget does.</li>
 </ul>
 <h2 id="user-modules-in-every-pipeline-2026-11-10">User modules in every pipeline (2026-11-10)<a class="headerlink" href="#user-modules-in-every-pipeline-2026-11-10" title="Permanent link">&para;</a></h2>
@@ -2120,6 +2192,22 @@
   owner's decision.</li>
 <li>A separate repository keeps the desktop IDE's history, CI and releases as they are, and lets
   the web version follow a tag of this one instead of every commit.</li>
+</ul>
+<h2 id="boards-from-a-file-2026-11-17">Boards from a file (2026-11-17)<a class="headerlink" href="#boards-from-a-file-2026-11-17" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Until now a new board meant a change to the IDE: a profile in <code>copper_and_code_studio/boards/</code> and its adapter in the <code>ADAPTERS</code> table of <code>core/boards.py</code>, which the validation and the board generator checked. Boards in development, experimental ones, or boards of other people did not fit there, and a public repository is not the place for boards that are not ready.</li>
+<li>The table added little. The modules a board needs are already in its profile (<code>firmware.modules</code>), every board works with the same <code>display_driver</code> contract, and the IDE reaches every board through <code>mpremote</code> except the STM32 over UART. So an adapter the IDE has no code for is now valid when it is an identifier (<code>[a-z0-9_]</code>, at most 64 characters), and its needs are read from the profile. The adapters of the table keep their own. The validation and the generator ask the same function, <code>adapter_requirements</code>, so they cannot disagree.</li>
+<li>The file is a <code>.json</code> with the schema of the built-in profiles, not an archive. The profile is all the IDE needs to know about a board. A JSON file can be read, compared with a diff and written by hand, and it brings none of the risks of an archive: paths that leave the folder, archives that expand without end, executables. If one day a board has to bring more with it (firmware, images, documentation), the plan is a <code>.zip</code> with <code>board.json</code> at its root, read by the same import. Nothing of that is written.</li>
+<li>The import refuses an id of a built-in board instead of replacing it: a file must not change a board the IDE ships under the same name. A board imported before is replaced after a question, or with <code>--replace</code>. Imported boards are kept with the customized ones in <code>board-profiles.json</code>, with the list of their ids under <code>imported</code>, so the Board Profile Manager can show them as such.</li>
+<li>Deleting an imported board removes it; deleting a built-in one hides it, as before. A project keeps its own copy of its board, so it opens and works when the board is no longer there, with a notice in the Output panel and not an error.</li>
+<li>The same functions serve the Board Profile Manager, the command line (<code>board list|import|export|delete</code>) and MCP (<code>import_board</code>, <code>delete_board</code>), so the three cannot accept different files.</li>
+</ul>
+<h2 id="the-heap-of-the-simulator-2026-11-18">The heap of the simulator (2026-11-18)<a class="headerlink" href="#the-heap-of-the-simulator-2026-11-18" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Projects with pages run in the simulator with the same 32 MB heap as programs without pages
+  (<code>RUNTIME_HEAP</code>, <code>-X heapsize</code>), and mpy-cross with 64 MB (2026-11-18): with the default
+  2 MB a project of about 2000 widgets did not start, while the boards with a display have far
+  more. The memory budget measures what the app allocates, not the heap, so it does not change.</li>
 </ul>
 
 

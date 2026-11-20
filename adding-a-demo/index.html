@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/adding-a-demo/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/adding-a-demo/">
       
       
         <link rel="prev" href="../mcp-demo/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Adding a demo - LVGL MPY Studio</title>
+        <title>Adding a demo - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -943,6 +943,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1224,7 +1252,7 @@
 .venv/bin/python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-q<span class="w"> </span>tests/test_site.py
 </code></pre></div>
 <p>The build requires the simulator and the browser runtime. If the latter is missing, build it separately with <code>runtime/build_web.sh</code>; the site build never downloads or builds it automatically.</p>
-<p>Serve <code>build/site/</code> below a subpath such as <code>/lvgl-mpy-studio/</code> and try the gallery and the new demo at desktop and phone widths. The browser tests check this layout, every demo, one interaction, internal links, and the absence of external network requests. They need the Playwright Chromium browser.</p>
+<p>Serve <code>build/site/</code> below a subpath such as <code>/copper-and-code-studio/</code> and try the gallery and the new demo at desktop and phone widths. The browser tests check this layout, every demo, one interaction, internal links, and the absence of external network requests. They need the Playwright Chromium browser.</p>
 <h2 id="4-ask-before-publishing">4. Ask before publishing<a class="headerlink" href="#4-ask-before-publishing" title="Permanent link">&para;</a></h2>
 <p>Show the result to the project owner. Ask separately for any commit, for <code>tools/publish_site.sh</code>, for every push of <code>gh-pages</code>, and for enabling or changing GitHub Pages. The build and test commands do not send anything or change Git history.</p>
 

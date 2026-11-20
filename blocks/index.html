@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/blocks/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/blocks/">
       
       
         <link rel="prev" href="../publish-web/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Writing a block - LVGL MPY Studio</title>
+        <title>Writing a block - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -987,6 +987,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1276,7 +1304,7 @@
 
 
 <h1 id="writing-a-block">Writing a block<a class="headerlink" href="#writing-a-block" title="Permanent link">&para;</a></h1>
-<p>A block adds a component to LVGL MPY Studio: something the application uses from code and that
+<p>A block adds a component to Copper and Code Studio: something the application uses from code and that
 is not drawn on the page, such as an output pin, a sensor or a bus. This guide builds one from
 nothing. The finished example is in <code>examples/blocks/blinker</code>.</p>
 <p>You need a text editor and some MicroPython. The IDE itself needs no change.</p>
@@ -1519,7 +1547,7 @@ so once in the Output panel. The project still starts in the simulator.</p>
 <li>After changing the files, install the folder again: the manager asks to replace the block.
    <strong>Reload</strong> is enough when you edit the files inside the blocks folder itself.</li>
 </ol>
-<p><code>lvgl-mpy-studio selftest</code> does not cover your block; try it on the board too.</p>
+<p><code>copper-and-code-studio selftest</code> does not cover your block; try it on the board too.</p>
 <h2 id="more-than-one-board">More than one board<a class="headerlink" href="#more-than-one-board" title="Permanent link">&para;</a></h2>
 <p><code>board</code> is a list of variants, tried in order. The first that applies gives the module:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">"board"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>

@@ -55,7 +55,7 @@ def _read(_indev, data):
     data.state = lv.INDEV_STATE.PRESSED if _state[2] else lv.INDEV_STATE.RELEASED
 
 
-lvsim.open(WIDTH, HEIGHT, "LVGL MPY Studio")
+lvsim.open(WIDTH, HEIGHT, "Copper and Code Studio")
 lv.init()
 display = lv.display_create(WIDTH, HEIGHT)
 display.set_color_format(lv.COLOR_FORMAT.RGB565)

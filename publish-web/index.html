@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/publish-web/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/publish-web/">
       
       
         <link rel="prev" href="../boards/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Publishing on the web - LVGL MPY Studio</title>
+        <title>Publishing on the web - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -987,6 +987,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1276,8 +1304,8 @@
 
 
 <h1 id="publishing-games-on-the-web">Publishing games on the web<a class="headerlink" href="#publishing-games-on-the-web" title="Permanent link">&para;</a></h1>
-<p><a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/publish-web.it.md">Italiano</a></p>
-<p>This guide explains how to put online one or more games made with LVGL MPY Studio, so that anyone can play them in the browser from a link, also on a phone. The example uses <strong>Hostinger</strong>, but the steps apply to any web host: it is only a matter of copying files.</p>
+<p><a href="https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/publish-web.it.md">Italiano</a></p>
+<p>This guide explains how to put online one or more games made with Copper and Code Studio, so that anyone can play them in the browser from a link, also on a phone. The example uses <strong>Hostinger</strong>, but the steps apply to any web host: it is only a matter of copying files.</p>
 <p>No special server or database is needed: the web version of a game is a folder of static files.</p>
 <h2 id="1-building-the-web-version">1. Building the web version<a class="headerlink" href="#1-building-the-web-version" title="Permanent link">&para;</a></h2>
 <p>For each game:</p>
@@ -1286,7 +1314,7 @@
 <li>Choose <strong>Run → Open in Browser</strong>. The IDE creates the folder <code>dist/&lt;game&gt;-web/</code> next to the project and opens it in the browser: try it there before publishing.</li>
 </ol>
 <p>Or, from a terminal:</p>
-<div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span>build<span class="w"> </span>project.json<span class="w"> </span>--web
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span>build<span class="w"> </span>project.json<span class="w"> </span>--web
 </code></pre></div>
 <p>The folder holds:</p>
 <table>

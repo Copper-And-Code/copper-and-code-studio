@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/mcp/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/mcp/">
       
       
         <link rel="prev" href="../blocks/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>MCP server - LVGL MPY Studio</title>
+        <title>MCP server - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -926,6 +926,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1154,10 +1182,10 @@
 
 
 <h1 id="mcp-server-for-ai-agents">MCP server for AI agents<a class="headerlink" href="#mcp-server-for-ai-agents" title="Permanent link">&para;</a></h1>
-<p><code>lvgl-mpy-studio mcp</code> lets an AI agent work on LVGL MPY Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.</p>
+<p><code>copper-and-code-studio mcp</code> lets an AI agent work on Copper and Code Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.</p>
 <p><a href="../mcp-demo/">From a prompt to an app</a> shows a complete recorded session: an agent builds a weather station in 24 calls.</p>
 <h2 id="turning-it-on">Turning it on<a class="headerlink" href="#turning-it-on" title="Permanent link">&para;</a></h2>
-<p>The server is off by default. Turn it on under <strong>Settings → MCP Server for AI Agents</strong>. While it is off, <code>lvgl-mpy-studio mcp</code> refuses to start, and a running server answers every tool call with an error. The choice is stored in <code>lvgl-mpy-studio/mcp.json</code> in your configuration folder.</p>
+<p>The server is off by default. Turn it on under <strong>Settings → MCP Server for AI Agents</strong>. While it is off, <code>copper-and-code-studio mcp</code> refuses to start, and a running server answers every tool call with an error. The choice is stored in <code>copper-and-code-studio/mcp.json</code> in your configuration folder.</p>
 <p>This switch controls the MCP server only. It does not restrict the CLI.</p>
 <h2 id="what-the-agent-can-do">What the agent can do<a class="headerlink" href="#what-the-agent-can-do" title="Permanent link">&para;</a></h2>
 <p>There are no limits compared to the IDE. With the server on, an agent can run project code on your computer, upload and run code on a board, execute MicroPython on it and install autostart. Stay in control of the session, especially with projects you did not write: text inside a project can try to steer an agent.</p>
@@ -1171,7 +1199,7 @@
 <tbody>
 <tr>
 <td>Project</td>
-<td><code>create_project</code>, <code>project_info</code>, <code>validate</code>, <code>set_resolution</code>, <code>adapt_page</code>, <code>list_boards</code>, <code>set_board</code></td>
+<td><code>create_project</code>, <code>project_info</code>, <code>validate</code>, <code>set_resolution</code>, <code>adapt_page</code>, <code>list_boards</code>, <code>set_board</code>, <code>import_board</code>, <code>delete_board</code></td>
 </tr>
 <tr>
 <td>Images and fonts</td>
@@ -1231,16 +1259,17 @@
 <p>The redraw statistics say how many pixels the app redraws per frame and per second. A step <code>reset_redraw</code> starts the count later, to skip the start-up frames. They show the relative cost of a design, not the frame rate of a board, because a board can redraw differently.</p>
 <p>Points come from <code>x</code> and <code>y</code>, or from <code>widget</code> for the centre of a widget. <code>widget</code> uses the project coordinates, so it is wrong for widgets that the code moves at runtime, as the adaptive examples do. Use a screenshot and <code>x</code>, <code>y</code> for those.</p>
 <h2 id="client-configuration">Client configuration<a class="headerlink" href="#client-configuration" title="Permanent link">&para;</a></h2>
-<p>Most clients accept this form. Use the path of your installed <code>lvgl-mpy-studio</code> or AppImage:</p>
+<p>Most clients accept this form. Use the path of your installed <code>copper-and-code-studio</code> or AppImage:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">"lvgl-mpy-studio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/lvgl-mpy-studio"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"copper-and-code-studio"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/copper-and-code-studio"</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"mcp"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>A configuration written for an earlier version, with the command <code>lvgl-mpy-studio</code> and that server name, still works: the old command is kept as an alias. Only the name the server gives itself in <code>serverInfo</code> changed.</p>
 <h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The server edits project files. If the same project is open in the IDE, the IDE notices the agent's changes when it saves and asks whether to reload, save a copy or overwrite; it does not watch the file, so it shows them only after a reload. The server itself refuses to write over a save it has not read, except in the brief race described above.</li>

@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/testing/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/testing/">
       
       
         <link rel="prev" href="../status/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>How it is tested - LVGL MPY Studio</title>
+        <title>How it is tested - Copper and Code Studio</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-lvgl-mpy-studio-is-tested" class="md-skip">
+        <a href="#how-copper-and-code-studio-is-tested" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -835,6 +835,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1253,7 +1281,7 @@
 
 
 
-<h1 id="how-lvgl-mpy-studio-is-tested">How LVGL MPY Studio is tested<a class="headerlink" href="#how-lvgl-mpy-studio-is-tested" title="Permanent link">&para;</a></h1>
+<h1 id="how-copper-and-code-studio-is-tested">How Copper and Code Studio is tested<a class="headerlink" href="#how-copper-and-code-studio-is-tested" title="Permanent link">&para;</a></h1>
 <p>Few people have used the IDE so far, so most of the checking is done by machine. This page
 says what is checked, by what, how to run it, and what no automated check can see.
 <a href="../status/">What is verified</a> says, area by area, which of these checks it has had.</p>
@@ -1288,7 +1316,7 @@ says what is checked, by what, how to run it, and what no automated check can se
 </tr>
 <tr>
 <td>Suites run by hand</td>
-<td>checks too long for every push, in <code>tests/manual</code></td>
+<td>every action and context menu, every dialog, the looks, faults, random use, in <code>tests/manual</code></td>
 <td>when someone decides to</td>
 <td>minutes each</td>
 </tr>
@@ -1317,12 +1345,17 @@ REPL. Its flash is a folder of the PC it cannot leave; it counts the soft resets
 tell whether an operation restarted the board. Tests that need a
 built runtime, the Windows cross-compiler or a browser are skipped, and say why, when those
 are missing.</p>
+<p>Some cheap checks of the looks run here too, in English and in Italian
+(<code>tests/test_window_checks.py</code>, <code>tests/test_fit_screen.py</code>): no shortcut used twice, no menu
+with two entries on the same underlined letter, no text cut off and no widgets covering each
+other in the main window at 1280×800, the window and the large dialogs no larger than the
+screen, and no text, tooltip or menu entry left in English after switching to Italian.</p>
 <p>The CI (<code>.github/workflows/ci.yml</code>) runs at each push to <code>main</code> and on pull requests. On Linux
 it runs the whole suite and the self-test; on Windows the parts that depend on the system
 (the core, the Windows runtime and packages, the GUI) and the self-test. It does not build
 the packages.</p>
 <h3 id="self-test">Self-test<a class="headerlink" href="#self-test" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>.venv/bin/lvgl-mpy-studio<span class="w"> </span>selftest
+<div class="highlight"><pre><span></span><code>.venv/bin/copper-and-code-studio<span class="w"> </span>selftest
 </code></pre></div>
 <p>It creates a project, takes widgets from the toolbox, sets properties, types a handler,
 saves, starts the simulator and touches the screen; other scenarios cover pages, resolution,
@@ -1335,7 +1368,7 @@ Files, Run File on Board). The board is one the self-test keeps in memory: it an
 the window asks, without the serial protocol, which the test suite covers with its own fakes.
 See the <a href="../manual/#self-test">manual</a> for its options and report.</p>
 <h3 id="visual-tests">Visual tests<a class="headerlink" href="#visual-tests" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span><span class="nb">test</span><span class="w"> </span>project.json
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span><span class="nb">test</span><span class="w"> </span>project.json
 </code></pre></div>
 <p>The reference pictures live next to the project, in <code>visual/&lt;width&gt;x&lt;height&gt;/</code>. The examples
 <code>eim-01</code> and <code>weather</code> have them. See the <a href="../manual/#13-visual-tests">manual</a>.</p>
@@ -1344,6 +1377,8 @@ See the <a href="../manual/#self-test">manual</a> for its options and report.</p
 <code>--manual</code>, and the CI never runs them:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">QT_QPA_PLATFORM</span><span class="o">=</span>offscreen<span class="w"> </span>.venv/bin/pytest<span class="w"> </span>-q<span class="w"> </span>tests/manual<span class="w"> </span>--manual
 <span class="nv">QT_QPA_PLATFORM</span><span class="o">=</span>offscreen<span class="w"> </span>.venv/bin/pytest<span class="w"> </span>-q<span class="w"> </span>tests/manual/test_every_action.py<span class="w"> </span>--manual
+<span class="nv">LMS_PROGRESS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">QT_QPA_PLATFORM</span><span class="o">=</span>offscreen<span class="w"> </span>.venv/bin/pytest<span class="w"> </span>-q<span class="w"> </span>-s<span class="w"> </span>tests/manual/test_every_action.py<span class="w"> </span>--manual<span class="w">   </span><span class="c1"># a line per entry</span>
+tools/manual_on_x.sh<span class="w">                         </span><span class="c1"># the self-test and every suite on a real X display</span>
 </code></pre></div>
 <table>
 <thead>
@@ -1356,8 +1391,108 @@ See the <a href="../manual/#self-test">manual</a> for its options and report.</p
 <tbody>
 <tr>
 <td><code>test_every_action.py</code></td>
+<td>about 10 minutes</td>
+<td>every menu entry, toolbar button and context menu entry</td>
+</tr>
+<tr>
+<td><code>test_every_shortcut.py</code></td>
+<td>about 1 minute</td>
+<td>every keyboard shortcut, pressed with the focus in each place a person has it</td>
+</tr>
+<tr>
+<td><code>test_every_dialog.py</code></td>
+<td>about 6 minutes</td>
+<td>every dialog, in English and Italian: size, text cut off, Tab, Escape</td>
+</tr>
+<tr>
+<td><code>test_looks.py</code></td>
+<td>about 1 minute</td>
+<td>pictures of the window and its panels against the last accepted ones</td>
+</tr>
+<tr>
+<td><code>test_language.py</code></td>
+<td>seconds</td>
+<td>Italian and back in each state: nothing left in the other language, nothing else changed</td>
+</tr>
+<tr>
+<td><code>test_sizes_and_docks.py</code></td>
+<td>seconds</td>
+<td>the window from 800×600 to 2560×1440; each dock floated, closed and brought back; the layout after a restart</td>
+</tr>
+<tr>
+<td><code>test_soak.py</code></td>
+<td>about 1.5 minutes; longer with <code>LMS_SOAK_ROUNDS</code></td>
+<td>a long session in one window: nothing it holds may grow</td>
+</tr>
+<tr>
+<td><code>test_every_property.py</code></td>
+<td>about 1.5 minutes</td>
+<td>every property of every widget type, changed in the Properties panel</td>
+</tr>
+<tr>
+<td><code>test_every_example.py</code></td>
+<td>about 2 minutes</td>
+<td>every example started in the simulator and touched</td>
+</tr>
+<tr>
+<td><code>test_canvas_mouse.py</code></td>
+<td>seconds</td>
+<td>widgets dropped, moved at three zooms, resized from each handle, selected with the mouse</td>
+</tr>
+<tr>
+<td><code>test_typing_code.py</code></td>
+<td>seconds</td>
+<td>typing in the code editor: indents, suggestions, errors, the lists, read-only while running, random keys</td>
+</tr>
+<tr>
+<td><code>test_save_and_reopen.py</code></td>
+<td>about 2 minutes</td>
+<td>what is saved is what was in the window: examples and the monkey's work saved, opened in a new window, compared</td>
+</tr>
+<tr>
+<td><code>test_hard_texts.py</code></td>
+<td>about 1 minute</td>
+<td>long, quoted, escaped, foreign, right-to-left and emoji texts in every text property and as page names</td>
+</tr>
+<tr>
+<td><code>test_foreign_drops.py</code></td>
+<td>seconds</td>
+<td>files, folders and text dragged from outside, dropped anywhere: no harm</td>
+</tr>
+<tr>
+<td><code>test_console_flood.py</code></td>
+<td>about 30 seconds</td>
+<td>programs printing without pause into the terminal, the Output and the Device Console</td>
+</tr>
+<tr>
+<td><code>test_big_project.py</code></td>
+<td>about 15 seconds</td>
+<td>a project of 30 pages and about 2000 widgets: opening, pages, selection, moves, undo, a property, save and Start, timed</td>
+</tr>
+<tr>
+<td><code>test_mcp_and_window.py</code></td>
+<td>seconds</td>
+<td>an agent changing the project through MCP while the window has it open</td>
+</tr>
+<tr>
+<td><code>test_killed_while_saving.py</code></td>
 <td>about 3 minutes</td>
-<td>every menu entry and toolbar button</td>
+<td>the IDE killed at random while it saves a project, a program and the board profiles</td>
+</tr>
+<tr>
+<td><code>test_keyboard_only.py</code></td>
+<td>seconds</td>
+<td>the IDE without a mouse: Tab, Alt and the letters of the menus, Ctrl+Tab; a name for every control</td>
+</tr>
+<tr>
+<td><code>test_monkey.py</code></td>
+<td>about 5 minutes a state; longer with <code>LMS_MONKEY_STEPS</code></td>
+<td>clicks, drags, keys and menus at random anywhere in the window</td>
+</tr>
+<tr>
+<td><code>test_faults.py</code></td>
+<td>seconds</td>
+<td>the disk full, read-only folders, the runtime killed or hanging, a broken project, a board pulled out</td>
 </tr>
 <tr>
 <td><code>test_random_use.py</code></td>
@@ -1366,6 +1501,9 @@ See the <a href="../manual/#self-test">manual</a> for its options and report.</p
 </tr>
 </tbody>
 </table>
+<p>What the suites share (the window, its states, the watcher that answers dialogs, the guard
+against real boards) is in <code>tests/manual/sweep.py</code>; the checks of the looks are in
+<code>tests/looks.py</code>, also used by the CI.</p>
 <p><strong>Every action.</strong> Every menu entry and toolbar button is triggered as choosing it does, in
 five states of the IDE:</p>
 <ul>
@@ -1389,9 +1527,17 @@ five states of the IDE:</p>
 <li>no dialog left open;</li>
 <li>the window still answers;</li>
 <li>the project is still valid;</li>
-<li>undo brings it back to where it was.</li>
+<li>undo brings it back to where it was, redo does again exactly what the action did, and undo
+  after redo brings it back once more.</li>
 </ul>
 <p>A new menu entry is tested without writing a test for it.</p>
+<p>The context menus are swept the same way: those of the canvas (on a widget and on the empty
+page), the project tree (a page, a widget, the Python Modules branch, a module), the Files
+panel (a program, a text file, a folder, the empty space), the board's files, the terminals
+and the code editor. Each menu is opened as a right click opens it, and opened again before
+each of its entries, since an entry can change what is under the pointer. Delete… of the Files
+panel moves files to a folder of the test, never to the trash of the PC. A menu that does not
+open is a problem, unless its widget is disabled, as the canvas is while the simulator runs.</p>
 <p>The report is written to <code>build/manual/every-action/</code>, one file per state and answer, with
 the dialogs each action opened and how long it took. Each run prints what changed since the
 last one: entries added or removed, other dialogs, a result that changed. That list is the
@@ -1402,6 +1548,175 @@ suite says why: Exit, which closes the window, and the two Build Executable entr
 build for minutes in the background and are tested in <code>tests/test_release.py</code>.</p>
 <p>It checks that nothing breaks, not that the result is right: that is what the test suite
 and the self-test are for.</p>
+<p><strong>Every shortcut.</strong> Each shortcut of each enabled action is pressed as keys, with the focus
+in the canvas, the project tree, the Files panel, the code editor, a field of the Properties
+panel (opened with a click, as a person opens it) and the terminals, with an example open, a
+program running and a board connected. Where the focus is not a text, the shortcut must reach
+its action; a text field or a terminal may take it on purpose (Ctrl+C copies the text, or
+stops the program), which the report notes. An ambiguous shortcut shows as the Qt warning it
+causes. The first run found that leaving the field of a property shared by several selected
+widgets with different values, without typing, gave all of them the value the field opened
+on.</p>
+<p><strong>Every dialog.</strong> The actions and context menus of an example and of a connected board are
+triggered again, in English and in Italian, and every dialog they open is looked at before it
+is closed with Escape:</p>
+<ul>
+<li>a picture of it goes to <code>build/manual/every-dialog/&lt;language&gt;/</code>, to look through by hand;</li>
+<li>it must fit its screen, and need no more than 1024×700;</li>
+<li>no label, button or column of a list may cut its text; no widgets may cover each other or
+  stick out; no label may have a contrast below 3:1 on what is behind it;</li>
+<li>Tab must reach every field and stay inside the dialog (in a group of radio buttons, the
+  chosen one);</li>
+<li>Escape must close it;</li>
+<li>in Italian, no text may be left in English.</li>
+</ul>
+<p>Qt's own file, print and input dialogs are photographed but not checked. The first run found
+the Board Profile Manager wider than a small screen, with its columns cutting the names of
+the boards and, in Italian, a row of buttons wider than 800 pixels.</p>
+<p><strong>Language.</strong> In each of the five states, Italian and back, twice: after the change to
+Italian nothing that has a translation may show in English, after the change back nothing
+may stay in Italian, and the project, the undo history, the selection and what runs are the
+same. The suite of every dialog also looks for English in the dialogs opened in Italian: it
+found Save, Cancel and Close in English everywhere, since the IDE did not load Qt's own
+translation.</p>
+<p><strong>Looks.</strong> The window with an example open, then each panel and tab, in light and dark
+theme, English and Italian, at 1024×700 and 1920×1080. The pictures go to
+<code>build/manual/looks/now/</code>; the reference is <code>build/manual/looks/accepted/</code>, kept on the PC
+that makes it, since fonts differ between machines. A picture that changed is listed with
+its share of changed pixels, as something to look at, and does not fail the test; the first
+run, or <code>LMS_LOOKS_ACCEPT=1</code>, makes the reference. The checks that need no reference (text
+cut off, widgets covering each other, contrast) fail it. The dark theme needs a real display:
+offscreen skips it. The first run found the message of the Files panel without a folder cut
+in half when the panel is narrow.</p>
+<p><strong>Sizes and docks.</strong> With an example open, the window at 800×600, 1024×700, 1366×768,
+1920×1080 and 2560×1440: no text cut off, no widgets covering each other, no Qt warning. Each
+dock is floated and docked again, then closed and opened again from its entry of View, and
+must come back with its content. A layout changed by hand (a dock floated, one closed, another
+size) must be the same after the IDE is closed and opened again. It is worth running on a real
+display too: <code>tools/manual_on_x.sh 1366x768 tests/manual/test_sizes_and_docks.py</code>.</p>
+<p><strong>Soak.</strong> In one window, round after round (30 by default): two examples opened in turn, a
+history of ten changes undone and redone three times, the simulator started and stopped.
+After five rounds to warm up, the Qt objects of the window, the visible windows, the child
+processes (zombies included) and the temporary folders of the IDE must not grow, and the
+memory of the process may grow by 40 MB at most; the numbers of each round go to
+<code>build/manual/soak.json</code>. Linux only. The first run found every project opened keeping the
+pages of the one before: 24 Qt objects and about 1.7 MB a round.</p>
+<p><strong>Every property.</strong> For each of the 30 widget types, a widget on an empty page is clicked on
+the canvas, then each of its properties is changed through its field in the Properties panel:
+a number, a text, a choice or a colour typed and confirmed with Enter, a check box toggled with
+the space bar, an image or a font given as a file. The widget must hold what was typed, with
+no exception, no Qt warning and no error in the panel; at the end the real runtime must draw
+the page, and undo must bring back the empty page. About 340 properties.</p>
+<p><strong>Every example.</strong> Each example is started with Run → Start; the middle of each widget of its
+first page is touched on the simulated screen, a few seconds are left to its timers, then
+Stop. Nothing may reach the Errors panel, and the Output may hold no Python error.</p>
+<p><strong>The canvas under the mouse.</strong> In the real window: every widget type dropped from the
+toolbox must land where the pointer was, selected, and go away with one undo; every type
+dragged at zoom 1, 2 and 0.5 must move by what the pointer moved, keeping its size, as one
+undo step; each of the eight handles must resize as it should and never below the least size;
+a rubber band, Ctrl+click and a click on the empty page must select what they should, with
+the Properties panel following; the grid and the arrow keys must move as they say; a widget
+dropped on a panel must go inside it and move with it. The first run found a thin line
+growing to 8 pixels high when moved, or when pulled sideways by a handle.</p>
+<p><strong>The code editor.</strong> With an example open, through keys and clicks: a double click on a widget
+opens its handler, lines are indented after a colon and Tab writes four spaces, the handler
+holds what the editor shows, and undo gives the old code back; suggestions come after <code>lv.</code>,
+<code>ui.</code> and with Ctrl+Space, the arrows move in them and Enter writes the one chosen; a syntax
+error is underlined and said under the editor, Start lists it in the Errors panel and a double
+click there opens its line; every object and event of the two lists shows its stored code
+without changing the project; while the simulator runs keys change nothing and Stop and Edit
+gives the code back; 400 random keys (accents and emoji too) leave the editor and the project
+in agreement, and undo all gives the code of the start.</p>
+<p><strong>Save and open again.</strong> Each example saved from the IDE and opened again must give the same
+project, and a second save must not change the file by a byte. Then, round after round, the
+monkey works on a project for a while; it is saved and opened in a second window, and the
+project and the canvas of each page (without the grid and the real preview, which are choices
+of the window) must be the same.</p>
+<p><strong>Hard texts.</strong> Every text property of every widget type gets, pasted through the Properties
+panel, a text of 600 letters, quotes of every kind, backslashes and escapes, accents and other
+alphabets, Arabic, emoji, <code>{name}</code> and <code>%s</code> placeholders, spaces only; pages are renamed with
+the same texts. Each time the IDE must keep the text or refuse it with a message, and the
+MicroPython code must compile, the runtime must draw the pages and the C code must be
+generated. The first run found that a page or a widget could get a name longer than
+MicroPython takes ("name too long"), so that the project no longer started.</p>
+<p><strong>Drops from outside.</strong> The IDE takes no files from the file manager; what is dragged there by
+mistake (an image, a font, a project, a program, a folder, two files, text from another
+application) is dropped on the canvas, the toolbox, the trees, the Properties panel, the code
+editor, the terminals and the window. Nothing may raise or change the project; the code editor
+may take dropped text as text, which undo takes back. The canvas shows a pointer that accepts
+files, then does nothing with them.</p>
+<p><strong>Consoles under a flood.</strong> A program without pages prints without pause into the terminal of the
+simulator, an app prints from an LVGL timer into the Output, a file of the virtual board prints
+into the Device Console. For eight seconds each the window must answer within half a second,
+the memory grow by less than 80 MB and the consoles keep a bounded history; then Ctrl-C, or
+Stop, must stop the printing. The virtual board turns Ctrl-C into the signal a terminal would
+send, since its MicroPython does not read its input while a program runs. The first run found
+three things: a timer created in the general code crashed the simulator; the terminal took
+over 100 MB for its history; and the Device Console fell behind a board printing fast, without
+answering, and went on showing old output long after Ctrl-C.</p>
+<p><strong>A large project.</strong> A project of 30 pages and about 2000 widgets, some inside panels, with a
+handler for every button, is opened in the window; opening it, showing each page, Select All,
+a move with an arrow key, undo and redo, a property typed in the panel, Save and Start are
+timed, each against a limit and against the last run on the PC (<code>build/manual/big-project.json</code>).
+The first run found that such a project did not start: mpy-cross and the runtime of the
+simulator ran out of memory. A move, undo and redo take close to a second each on it, because
+each change keeps a copy of the whole project: that is the speed work of the plan, not done yet.</p>
+<p><strong>MCP and the window together.</strong> An agent changes the project through MCP while the window has
+it open and a person works on it. The window finds out when it saves, and asks: Cancel keeps
+both versions where they are, Reload shows the agent's change, Save a Copy keeps the person's
+version in another file, Overwrite keeps the person's; after each the window agrees with its
+project. An agent writing with a revision older than the person's save is refused; a widget
+the agent removed is gone from the canvas and the Properties panel after Reload; Start after a
+change by the agent asks first. Nothing found; the window learns of the change only when it
+saves, which can be long after.</p>
+<p><strong>Killed while saving.</strong> A second process runs the window and saves without pause a large
+project, a program open in a tab and the board profiles; it is killed with SIGKILL at a random
+moment, forty times. Each time the project must open and validate, the program must be one of
+the versions written whole, and the profiles must load. The project and the profiles were
+already written through a copy and a rename; the tabs of the Files panel were not, and a
+failed write left the program empty: they are now written the same way.</p>
+<p><strong>Keyboard only.</strong> Tab from the canvas must reach the toolbox, the project tree and the
+Properties panel, and the code editor from its lists; Shift+Tab goes back; the focus is caught
+nowhere, except in a terminal, where Tab belongs to the program as in every terminal. Each
+menu must open with Alt and its underlined letter, and Ctrl+Tab must go through the tabs.
+Every button, field and list must have a name a screen reader can say: the first run found
+the toolbox, the trees, the Properties panel, the Output and the code editor without one. The
+CI checks the names too, in English and Italian.</p>
+<p><strong>Where the tests are blind.</strong> <code>tools/mutation_probe.py [module] [count]</code> makes small changes
+to a module, one at a time (a comparison turned around, <code>and</code> for <code>or</code>, a <code>not</code> dropped, a
+constant or a returned value changed), and runs the tests of that module for each: a change
+no test notices marks a line nobody checks. It works in a copy of the repository and writes
+<code>build/manual/mutation/&lt;module&gt;.txt</code>. Its first run, 25 changes in each of seven modules, found
+untested the checks of Rename Page, the names refused by New File, the check boxes of the
+Properties panel, Ctrl+click on the canvas, a container moved with its children, the tab stops
+and the background colours of the terminal; each now has a test, and the second run notices
+those changes. Most of what is still not noticed is drawing: margins, sizes, colours.</p>
+<p><strong>Monkey.</strong> Thousands of events a person could cause, anywhere in the window: clicks, double
+clicks, right clicks, drags, the wheel, keys, and entries of the menus, with dialogs answered
+at random. After every step it checks that nothing broke (no exception, no Qt warning, no
+dialog left open, the window answers) and what must hold whatever came before: the project
+valid, widget names unique, a tab for each page, each canvas drawing its page, the Properties
+panel showing widgets that exist, the <code>*</code> of the title saying whether there is something to
+save. Each step is written to
+<code>build/manual/monkey-&lt;state&gt;.log</code> before it is made, so a crash of the process can be followed;
+<code>LMS_MONKEY_SEED</code> replays a run. Its first runs found Add Page giving a new page the name of
+one already there, after a deletion; its night runs found a crash when a tab of an old tab bar
+that Qt leaves over the Output panel was dragged. It finds by chance, so it pays to run it long:
+<code>tools/monkey_night.sh [hours] [steps]</code> runs it seed after seed, each run in its own process,
+and keeps the output and the steps of the runs that fail in <code>build/manual/monkey-night/</code>.</p>
+<p><strong>Faults.</strong> Each one through the window, as it would happen to a person: the disk full
+during a save (the file on disk and the changes in the window are kept, no temporary file is
+left), a read-only project folder (Save, Start and New File… say so), a build folder that
+cannot be written, the runtime killed (the project is editable again and Start works), the
+runtime hanging (Stop ends it within seconds), the project changed outside (nothing is
+overwritten without a choice), broken project files (the open project stays), the board
+pulled out during an upload (an error, not a hang).</p>
+<p><strong>On a real display.</strong> <code>tools/manual_on_x.sh [WIDTHxHEIGHT] [suites]</code> runs the self-test and
+the suites on Xvfb with the xcb platform instead of offscreen, so that real fonts, window
+activation and the dark theme are there; nothing appears on the screen of the PC. When a
+window manager is installed (openbox, fluxbox, icewm, xfwm4 or metacity) it starts it, and
+the sweeps also check that the window gets the focus back after each action.
+<code>LMS_SCREEN_SCALE=2</code> scales Qt twice, as on a high-resolution screen.</p>
 <p><strong>Random use.</strong> A <a href="https://hypothesis.readthedocs.io">hypothesis</a> state machine chooses what to
 do next, through the window as a person would, with the self-test's driver: a widget from the
 toolbox, a click or a drag on the page, arrow keys, a property typed in the panel, Edit and
@@ -1422,18 +1737,16 @@ present, because they write to it. None is written yet.</p>
 <h2 id="what-the-automated-checks-do-not-see">What the automated checks do not see<a class="headerlink" href="#what-the-automated-checks-do-not-see" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Whether the IDE is clear and pleasant to use.</strong> No check can say it.</li>
-<li><strong>How the IDE looks.</strong> The self-test and the suites check behaviour; nothing compares
-  pictures of the IDE's own window yet.</li>
+<li><strong>Whether the IDE looks right.</strong> The suites compare its pictures with the last accepted
+  ones and check sizes, cut text and contrast; whether a picture is good is for a person.</li>
 <li><strong>Real boards.</strong> The board code is tested against fakes and against a virtual board (<code>tests/virtual_board.py</code>: the runtime's MicroPython behind a pseudo-terminal, reached by the real <code>mpremote</code>, Linux only); touch, speed and the firmware's
   own behaviour are seen only on hardware.</li>
 <li><strong>The system around the IDE.</strong> The system's own file dialogs, dragging from the file
-  manager, a real high-resolution screen, a window manager: the checks run without a
-  display (<code>QT_QPA_PLATFORM=offscreen</code>) and with Qt's own dialogs.</li>
-<li><strong>Context menus</strong> of the canvas, the project tree and the Files panel are not in the
-  suite of every action.</li>
+  manager, a real high-resolution screen: the checks run with Qt's own dialogs, offscreen or
+  on Xvfb, where a window manager is used only if one is installed.</li>
 </ul>
 <p>How much of the code the checks run, measured on 17 November 2026 with coverage.py: 87 % of
-the lines of the user interface (<code>lvgl_mpy_studio/ui</code>) and 90 % of the whole package. The
+the lines of the user interface (<code>copper_and_code_studio/ui</code>) and 90 % of the whole package. The
 number says less than it seems. The bugs fixed on that day were in lines the tests ran: they
 came from order and timing, such as closing a window while a file was still being written to
 the board. This is why the suites run by hand drive the IDE through sequences of real

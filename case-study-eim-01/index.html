@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/case-study-eim-01/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/case-study-eim-01/">
       
       
         <link rel="prev" href="../testing/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Case study EIM-01 - LVGL MPY Studio</title>
+        <title>Case study EIM-01 - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -835,6 +835,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1176,7 +1204,7 @@
 
 
 <h1 id="case-study-eim-01-an-industrial-monitor">Case study: EIM-01, an industrial monitor<a class="headerlink" href="#case-study-eim-01-an-industrial-monitor" title="Permanent link">&para;</a></h1>
-<p>EIM-01 is the largest application built with LVGL MPY Studio so far: an operator panel that
+<p>EIM-01 is the largest application built with Copper and Code Studio so far: an operator panel that
 watches a temperature and controls a fan. It is in <code>examples/eim-01</code>, for a 1024×600 display,
 and in <code>examples/eim-01-480</code> with a layout of its own for 480×480.</p>
 <p><strong>It was built by an AI agent, from a prompt, through the <a href="../mcp/">MCP server</a></strong>: the agent
@@ -1247,7 +1275,7 @@ samples, validation of each value received, the alarm states, the fan ramp.</p>
 <li><strong>By visual tests</strong> that anyone can repeat. Three scenarios are stored with the project and
   replayed on a simulated clock, so that every run is the same:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>lvgl-mpy-studio<span class="w"> </span><span class="nb">test</span><span class="w"> </span>examples/eim-01/project.json
+<div class="highlight"><pre><span></span><code>copper-and-code-studio<span class="w"> </span><span class="nb">test</span><span class="w"> </span>examples/eim-01/project.json
 </code></pre></div>
 <p>It makes 17 comparisons between pages and scenarios, to the pixel.
 - <strong>By generating</strong> the application for the STM32H7_CORE board and, in the 480×480 version,
@@ -1276,7 +1304,7 @@ left visible:</p>
 <li><strong>A real temperature and a real fan.</strong> The data source can be set to TCP, serial or BLE in
    the interface, but only the simulation is implemented.</li>
 <li><strong>Blocks for the hardware.</strong> A temperature sensor on I2C and a fan on PWM are the blocks
-   planned for LVGL MPY Studio and not written yet; this example is their first user.</li>
+   planned for Copper and Code Studio and not written yet; this example is their first user.</li>
 <li><strong>Settings that survive a restart</strong>: today they are kept in RAM only.</li>
 </ol>
 

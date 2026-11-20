@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/pc-programs/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/pc-programs/">
       
       
         <link rel="prev" href="../chromebook/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Files, commands and the network on the PC - LVGL MPY Studio</title>
+        <title>Files, commands and the network on the PC - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -948,6 +948,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1198,14 +1226,14 @@
 
 
 <h1 id="micropython-on-the-pc-files-commands-and-the-network">MicroPython on the PC: files, commands and the network<a class="headerlink" href="#micropython-on-the-pc-files-commands-and-the-network" title="Permanent link">&para;</a></h1>
-<p>MicroPython was made for boards, but on the PC LVGL MPY Studio runs it as the <strong>unix port</strong>, a
+<p>MicroPython was made for boards, but on the PC Copper and Code Studio runs it as the <strong>unix port</strong>, a
 real program of the operating system. An application or a program without pages can therefore
 do on the PC what it cannot do on a board: run commands, read and write any file, open network
 connections, start threads, call the C functions of a system library.</p>
 <p>That makes the simulator and the executables more than a preview: a kiosk on a Linux PC, a
 test bench that drives instruments from an LVGL panel, a dashboard that reads a log, or the PC
 side of a board project, written in the same MicroPython.</p>
-<p>The example <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/tree/main/examples/sysmon"><code>examples/sysmon</code></a>
+<p>The example <a href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/sysmon"><code>examples/sysmon</code></a>
 is such a dashboard: CPU, memory and disk read from <code>/proc</code>, a chart, and the busiest processes
 from <code>ps</code> run through <code>os.system</code>. On a board the same project shows what MicroPython knows there.</p>
 <p><img alt="System Monitor in the simulator" src="../images/sysmon.png" /></p>
@@ -1337,7 +1365,7 @@ the API of a library of your own.</p>
     <span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">client</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s2">"HTTP/1.0 200 OK</span><span class="se">\r\n\r\n</span><span class="s2">hello from LVGL MPY Studio</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s2">"HTTP/1.0 200 OK</span><span class="se">\r\n\r\n</span><span class="s2">hello from Copper and Code Studio</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">)</span>
         <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="n">_thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">serve</span><span class="p">,</span> <span class="p">())</span>

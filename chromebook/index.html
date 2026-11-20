@@ -6,11 +6,11 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export">
+        <meta name="description" content="A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio">
       
       
       
-        <link rel="canonical" href="https://copper-and-code.github.io/lvgl-mpy-studio/chromebook/">
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-studio/chromebook/">
       
       
         <link rel="prev" href="../manual/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Running on a Chromebook - LVGL MPY Studio</title>
+        <title>Running on a Chromebook - Copper and Code Studio</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="LVGL MPY Studio" class="md-header__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-header__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
@@ -103,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            LVGL MPY Studio
+            Copper and Code Studio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -218,12 +218,12 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="LVGL MPY Studio" class="md-nav__button md-logo" aria-label="LVGL MPY Studio" data-md-component="logo">
+    <a href=".." title="Copper and Code Studio" class="md-nav__button md-logo" aria-label="Copper and Code Studio" data-md-component="logo">
       
   <img src="../images/logo.svg" alt="logo">
 
     </a>
-    LVGL MPY Studio
+    Copper and Code Studio
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -926,6 +926,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../renamed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The new name
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         
   
@@ -1154,7 +1182,7 @@
 
 
 <h1 id="running-on-a-chromebook">Running on a Chromebook<a class="headerlink" href="#running-on-a-chromebook" title="Permanent link">&para;</a></h1>
-<p>A Chromebook can run the Linux AppImage of LVGL MPY Studio inside the Linux development
+<p>A Chromebook can run the Linux AppImage of Copper and Code Studio inside the Linux development
 environment of ChromeOS. No change to ChromeOS itself is needed.</p>
 <h2 id="what-is-needed">What is needed<a class="headerlink" href="#what-is-needed" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1172,20 +1200,20 @@ environment of ChromeOS. No change to ChromeOS itself is needed.</p>
 <div class="highlight"><pre><span></span><code>grep<span class="w"> </span>PRETTY<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="w"> </span>ldd<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
 </code></pre></div>
 <p>It should say Debian 13 and glibc 2.38 or later. On Debian 12, upgrade the container to
-   Debian 13 first, or run the IDE <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/development.md">from the sources</a> with Python 3.12.
-3. Download <code>LVGL_MPY_STUDIO-x86_64.AppImage</code> from the
-   <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest">latest release</a> and, in the
+   Debian 13 first, or run the IDE <a href="https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/development.md">from the sources</a> with Python 3.12.
+3. Download <code>Copper_and_Code_Studio-x86_64.AppImage</code> from the
+   <a href="https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest">latest release</a> and, in the
    Files app, move it from <strong>Downloads</strong> to <strong>Linux files</strong>.
 4. Make it executable and start it, in the terminal:</p>
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>LVGL_MPY_STUDIO-x86_64.AppImage
-./LVGL_MPY_STUDIO-x86_64.AppImage
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>Copper_and_Code_Studio-x86_64.AppImage
+./Copper_and_Code_Studio-x86_64.AppImage
 </code></pre></div>
 <p>If it stops with an error about <code>libfuse.so.2</code>, either install FUSE 2 with
    <code>sudo apt install libfuse2t64</code>, or start it without FUSE:
-   <code>./LVGL_MPY_STUDIO-x86_64.AppImage --appimage-extract-and-run</code>.
+   <code>./Copper_and_Code_Studio-x86_64.AppImage --appimage-extract-and-run</code>.
 5. To check the installation, run the self-test: the IDE drives itself and ends with
    <code>RESULT: PASSED</code>.</p>
-<div class="highlight"><pre><span></span><code>./LVGL_MPY_STUDIO-x86_64.AppImage<span class="w"> </span>selftest
+<div class="highlight"><pre><span></span><code>./Copper_and_Code_Studio-x86_64.AppImage<span class="w"> </span>selftest
 </code></pre></div>
 <h2 id="a-board-over-usb">A board over USB<a class="headerlink" href="#a-board-over-usb" title="Permanent link">&para;</a></h2>
 <p>The Linux container does not see USB devices until ChromeOS shares them: plug in the board, then
