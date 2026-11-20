@@ -106,14 +106,14 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## Visual tests (2026-11-07)
 
-- `lvgl-mpy-studio test` uses the same headless render as the designer preview, but runs the project code by default: the screen a user sees also depends on it. A Python traceback is an error even if a frame was drawn.
+- `copper-and-code-studio test` uses the same headless render as the designer preview, but runs the project code by default: the screen a user sees also depends on it. A Python traceback is an error even if a frame was drawn.
 - Baselines are PNG files, readable in any viewer and in Git, written by a small encoder in `lvgl_mpy_studio/build/visual.py` so the core does not import Qt. The reader accepts only that format.
 - Outside `--update`, a missing baseline fails, so a passing run always means a real comparison. `--update` renders twice and refuses unstable pages.
 - Version 1 captured each page once after loading. Scenarios with touch input came once the virtual clock made runs identical: see below.
 
 ## MCP server (2026-11-07)
 
-- `lvgl-mpy-studio mcp` is a separate stdio process with hand-written JSON-RPC, tested with the official Python client. The tool subset is small and the SDK would add many packages to the executables. The IDE gains only a menu switch, so the server costs nothing while it is unused.
+- `copper-and-code-studio mcp` is a separate stdio process with hand-written JSON-RPC, tested with the official Python client. The tool subset is small and the SDK would add many packages to the executables. The IDE gains only a menu switch, so the server costs nothing while it is unused.
 - By the owner's decision the agent has no limits compared to the IDE, board and autostart included, because a person supervises it. The only gate is the menu switch, off by default and read on every call. An unreadable setting counts as off.
 - `simulate` drives the runtime over the existing lvsim protocol, acting as a small headless IDE in `lvgl_mpy_studio/sim/session.py`. The runtime needs no change, and the app behaves as it does in the IDE panel. The clock was real at first; it is virtual by default since the next entry, and real only with `clock: "real"`.
 - The server works on files, not on the open IDE, so version 1 has no shared undo and needs the project closed in the IDE.
@@ -175,7 +175,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 - The MicroPython WebAssembly port builds unchanged with our user C modules: the PyDevices LVGL 9.5 bindings, which were the main risk, compiled with Emscripten 7.0 at the first try, and `lvsim` draws through the Emscripten SDL2 on a canvas. Bytecode is the same format as on the desktop, so the game is the `.mpy` files the IDE already compiles, loaded into the in-memory file system.
 - The port already builds with ASYNCIFY. `lvsim_sleep_ms` calls `emscripten_sleep`, and the page starts the game with an asynchronous `ccall`, so the unchanged `while display_driver.poll()` loop gives the browser back control between frames. The default ASYNCIFY stack of 4 KB was too small for an LVGL game; it is 1 MB.
 - `display_driver.py` and the simulator buzzer tolerate the missing `os.getenv`. The buzzer prints its tone markers on WebAssembly too, and the page plays them with Web Audio after the first gesture, which browsers require.
-- The page needs an HTTP server because browsers do not load JavaScript modules from `file://`. The IDE serves the folder on 127.0.0.1 while it is open; `lvgl-mpy-studio web` does the same from the command line.
+- The page needs an HTTP server because browsers do not load JavaScript modules from `file://`. The IDE serves the folder on 127.0.0.1 while it is open; `copper-and-code-studio web` does the same from the command line.
 - The runtime is about 6 MB and shared by every game. It is built by `runtime/build_web.sh` and not by `runtime/build.sh`, because it needs the Emscripten SDK, about 1 GB, which the CI does not install.
 
 ## Changes made outside the IDE (2026-11-10)

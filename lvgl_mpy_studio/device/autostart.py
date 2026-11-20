@@ -30,11 +30,11 @@ class AutostartMixin:
             return self.device_id
         probe = """import machine,binascii,json
 try:
- print('LVGL_MPY_STUDIO_IDENTITY='+binascii.hexlify(machine.unique_id()).decode())
+ print('LMS_IDENTITY='+binascii.hexlify(machine.unique_id()).decode())
 except Exception:
- print('LVGL_MPY_STUDIO_IDENTITY=')"""
+ print('LMS_IDENTITY=')"""
         output = self._exec(probe, 15)
-        identity = (marked(output, "LVGL_MPY_STUDIO_IDENTITY") or "").strip()
+        identity = (marked(output, "LMS_IDENTITY") or "").strip()
         if not identity or not re.fullmatch(r"[0-9A-Fa-f]+", identity):
             raise DeviceError("device.identity.unavailable")
         self.device_id = identity.lower()
@@ -76,11 +76,11 @@ except Exception:
         return directory, manifest, launcher
 
     def _read_remote_text(self, path):
-        output = self._exec(f"import json\ntry:\n print('LVGL_MPY_STUDIO_FILE='+json.dumps(open({path!r}).read()))\nexcept OSError:\n print('LVGL_MPY_STUDIO_FILE=null')", 15)
-        return marked_json(output, "LVGL_MPY_STUDIO_FILE")
+        output = self._exec(f"import json\ntry:\n print('LMS_FILE='+json.dumps(open({path!r}).read()))\nexcept OSError:\n print('LMS_FILE=null')", 15)
+        return marked_json(output, "LMS_FILE")
 
     def _write_remote_text(self, path, content):
-        with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-launcher-") as directory:
+        with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-launcher-") as directory:
             local = Path(directory) / Path(path).name
             local.write_text(content, encoding="utf-8")
             self._execute(["connect", self.port, "fs", "cp", str(local), f":{path}"], timeout=20)

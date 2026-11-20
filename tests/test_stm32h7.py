@@ -79,10 +79,10 @@ class FakeSerial:
             chunk = re.search(rb"a2b_base64\((['\"].*?['\"])", code).group(1).decode()
             current = next(reversed(self.remote.values()))
             current.extend(base64.b64decode(eval(chunk)))
-        elif b"LVGL_MPY_STUDIO_CHUNK=" in code:
+        elif b"LMS_CHUNK=" in code:
             path = re.search(rb"f=open\((['\"].*?['\"])", code).group(1).decode()
             data = bytes(self.remote[eval(path)])
-            output = b"LVGL_MPY_STUDIO_CHUNK=" + base64.b64encode(data) + b"\r\nLVGL_MPY_STUDIO_EOF=1\r\n"
+            output = b"LMS_CHUNK=" + base64.b64encode(data) + b"\r\nLMS_EOF=1\r\n"
             return b"OK" + output + b"\x04\x04>"
         return b"OK\x04\x04>"
 
@@ -212,7 +212,7 @@ def test_stm32_session_reuses_uart_for_upload_run_and_disconnect(tmp_path):
     assert "app_main.py" in names and len(sent) > 2 * (len(names) - 1)  # the serial adapter reports inside each file
     assert transports[0].closed == 0
     assert transports[0].runner.resets == 2
-    assert all("rgbpanel" not in call[0][-1] for call, _timeout in transports[0].runner.calls if "LVGL_MPY_STUDIO_INFO=" in call[0][-1])
+    assert all("rgbpanel" not in call[0][-1] for call, _timeout in transports[0].runner.calls if "LMS_INFO=" in call[0][-1])
     session.disconnect()
     assert transports[0].closed == 1
 
@@ -227,9 +227,9 @@ def test_stm32_autostart_uses_flash_main_and_restores_it(tmp_path, monkeypatch, 
             self.remote = {"/flash/main.py": found}
 
         def execute(self, source, timeout=20, cancel=None):
-            if "LVGL_MPY_STUDIO_FILE=" in source:
+            if "LMS_FILE=" in source:
                 path = eval(re.search(r"open\((['\"].*?['\"])\)", source).group(1))
-                return "LVGL_MPY_STUDIO_FILE=" + json.dumps(self.remote.get(path)) + "\n"
+                return "LMS_FILE=" + json.dumps(self.remote.get(path)) + "\n"
             if "os.stat" in source:
                 path = eval(source.split("os.stat(", 1)[1].split(")", 1)[0])
                 return "YES\n" if path in self.remote or path.endswith("/app_main.py") else "NO\n"

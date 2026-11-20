@@ -34,15 +34,15 @@ class FakeBoard(DeviceSession):
             written(len(data))
 
     def _exec(self, source, timeout=20, cancel=None):
-        if "LVGL_MPY_STUDIO_FREE" in source:
+        if "LMS_FREE" in source:
             self.folders.update(re.search(r"for d in (\[.*?\]):", source).group(1).strip("[]").replace("'", "").split(", "))
-            return f"LVGL_MPY_STUDIO_FREE={self.free}\n"
+            return f"LMS_FREE={self.free}\n"
         name = re.search(r"n='(.*?)'", source).group(1)
         size = int(re.search(r"\[6\]!=(\d+)", source).group(1))
         if len(self.files.get(name + ".lms-part", b"")) != size:
             raise DeviceError("device.command", "OSError: incomplete")
         self.files[name] = self.files.pop(name + ".lms-part")
-        return "LVGL_MPY_STUDIO_DONE=1\n"
+        return "LMS_DONE=1\n"
 
 
 def program(tmp_path):

@@ -16,7 +16,7 @@ Per ogni gioco:
 In alternativa, da terminale:
 
 ```bash
-lvgl-mpy-studio build project.json --web
+copper-and-code-studio build project.json --web
 ```
 
 La cartella contiene:

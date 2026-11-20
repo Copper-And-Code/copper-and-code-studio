@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Copper and Code Studio
+Comment=A visual GUI builder for MicroPython and LVGL
+Exec=copper-and-code-studio
+Icon=copper-and-code-studio
+Terminal=false
+Categories=Development;IDE;

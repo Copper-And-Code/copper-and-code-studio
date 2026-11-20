@@ -11,7 +11,7 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 # language, layout), custom board profiles, MCP and autostart backups follow XDG_CONFIG_HOME.
 # It must be set before Qt reads the path, that is before any QSettings. On Windows
 # QSettings uses the registry and this is not enough.
-_config = tempfile.mkdtemp(prefix="lvgl-mpy-studio-tests-config-")
+_config = tempfile.mkdtemp(prefix="copper-and-code-studio-tests-config-")
 os.environ["XDG_CONFIG_HOME"] = _config
 atexit.register(shutil.rmtree, _config, ignore_errors=True)
 
@@ -31,11 +31,11 @@ def no_real_serial_ports(monkeypatch):
 def default_language():
     """A test that switches language leaves English, the default, for the next one."""
     try:  # the tests of the core run also where Qt is not installed
-        from PySide6.QtCore import QSettings
+        from lvgl_mpy_studio.ui.app_settings import app_settings
     except ImportError:
         pass
     else:
-        QSettings("CopperAndCode", "LVGL MPY Studio").remove("language")
+        app_settings().remove("language")
     set_language("en")
 
 

@@ -367,7 +367,7 @@ def test_board_actions_upload_console_stop_and_failure(qtbot, tmp_path, monkeypa
     assert "pronto ü" in window.device_console.text()
     assert window.stop_action.isEnabled()
 
-    monkeypatch.setattr(window.device, "stop", lambda: "LVGL_MPY_STUDIO_STOPPED\n")
+    monkeypatch.setattr(window.device, "stop", lambda: "LMS_STOPPED\n")
     window.stop_action.trigger()
     wait_worker(qtbot, window)
     assert not window.device_app_active
@@ -494,7 +494,7 @@ def test_about_shows_ide_firmware_versions_and_credits(qtbot, tmp_path, monkeypa
     text = messages[-1][2]
     assert __version__ == "0.7.2"
     assert f"IDE version:</b> {__version__}" in text
-    assert "https://copper-and-code.github.io/lvgl-mpy-studio/" in text
+    assert "https://copper-and-code.github.io/copper-and-code-studio/" in text
 
     assert "<b>MicroPython:</b> 1.29.0<br>" in text
     assert "<b>LVGL:</b> 9.5.0" in text
@@ -515,10 +515,10 @@ def test_help_opens_the_pages_of_the_project(qtbot, monkeypatch):
     help_menu = window.menuBar().actions()[-1].menu()
     assert help_menu.actions()[0] is window.website_action and help_menu.actions()[-1] is window.about_action
     window.website_action.trigger()
-    assert opened == ["https://copper-and-code.github.io/lvgl-mpy-studio/"]
+    assert opened == ["https://copper-and-code.github.io/copper-and-code-studio/"]
     monkeypatch.setattr(QDesktopServices, "openUrl", lambda url: False)  # no browser: the address is shown instead
     window.website_action.trigger()
-    assert window.statusBar().currentMessage() == "https://copper-and-code.github.io/lvgl-mpy-studio/"
+    assert window.statusBar().currentMessage() == "https://copper-and-code.github.io/copper-and-code-studio/"
 
 
 def test_device_console_preserves_utf8_and_sends_keys_only_when_ready(qtbot):

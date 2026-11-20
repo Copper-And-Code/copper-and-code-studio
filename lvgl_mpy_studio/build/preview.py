@@ -46,7 +46,7 @@ def render_with_log(project, page_index, design_only=True):
     """Pixels of the page and output of the runtime. With design_only=False the project code runs too."""
     if not runtime_path().exists():
         return None, "runtime not built"
-    with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-preview-", ignore_cleanup_errors=True) as temporary:
+    with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-preview-", ignore_cleanup_errors=True) as temporary:
         directory = Path(temporary)
         try:
             prepare_page(project, page_index, directory, design_only)

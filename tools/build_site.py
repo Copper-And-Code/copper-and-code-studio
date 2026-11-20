@@ -25,7 +25,7 @@ from lvgl_mpy_studio.core.model import Project
 from lvgl_mpy_studio.platform import runtime_path
 
 ROOT = Path(__file__).parents[1]
-REPOSITORY = "https://github.com/Copper-And-Code/lvgl-mpy-studio"
+REPOSITORY = "https://github.com/Copper-And-Code/copper-and-code-studio"
 FIELDS = {"id", "name", "description", "kind", "page", "prompt", "prompt_note", "order"}
 PROGRAM_FIELDS = FIELDS | {"entry"}  # a program without pages: the file to run, in the same folder
 
@@ -266,7 +266,7 @@ def showreel_files(root):
 def videos_page(demo_ids):
     parts = ["# Videos\n",
              "Short videos of the IDE building an example and running it. Each is a scripted replay: "
-             "[a tool of the repository](https://github.com/Copper-And-Code/lvgl-mpy-studio/tree/main/tools/showreel) "
+             "[a tool of the repository](https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/tools/showreel) "
              "drives the real IDE, adds the widgets, types the code and plays touches in the simulator. "
              "The design part is sped up; the run is in real time. They are not recordings of a person at work.\n"]
     for identifier, title, text in VIDEOS:
@@ -305,7 +305,7 @@ def build_documentation(root, output, gallery_markdown, videos=None):
         environment["NO_MKDOCS_2_WARNING"] = "1"
         subprocess.run([sys.executable, "-m", "mkdocs", "build", "--strict", "--config-file", str(config_path)], cwd=root, env=environment, check=True)
     not_found = output / "404.html"
-    not_found.write_text(not_found.read_text(encoding="utf-8").replace("/lvgl-mpy-studio/", "./"), encoding="utf-8", newline="\n")
+    not_found.write_text(not_found.read_text(encoding="utf-8").replace("/copper-and-code-studio/", "./"), encoding="utf-8", newline="\n")
 
 
 class Links(HTMLParser):

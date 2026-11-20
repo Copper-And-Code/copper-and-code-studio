@@ -1,6 +1,6 @@
 # Building the C target on Windows
 
-MicroPython Debug needs no toolchain. The C target needs `gcc`, `ar` and `make` for Windows x86-64; the IDE finds them automatically in `PATH`, in MSYS2 or in the directory set by `LVGL_MPY_STUDIO_TOOLCHAIN`.
+MicroPython Debug needs no toolchain. The C target needs `gcc`, `ar` and `make` for Windows x86-64; the IDE finds them automatically in `PATH`, in MSYS2 or in the directory set by `LMS_TOOLCHAIN`.
 
 ## MSYS2 MinGW64
 
@@ -17,7 +17,7 @@ MicroPython Debug needs no toolchain. The C target needs `gcc`, `ar` and `make` 
 
 1. Download w64devkit from the official project: <https://github.com/skeeto/w64devkit>.
 2. Extract the archive and add its `bin` directory to `PATH`.
-3. Alternatively, set `LVGL_MPY_STUDIO_TOOLCHAIN` to the w64devkit root directory.
+3. Alternatively, set `LMS_TOOLCHAIN` to the w64devkit root directory.
 
 From `cmd`, check:
 

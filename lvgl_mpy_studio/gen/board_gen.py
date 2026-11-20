@@ -39,7 +39,7 @@ def _board_main(project, model, profile):
         f"lv.screen_load(ui.screens[{initial}])",
         f"ui.current_screen = {initial}",
         "display_driver.start()",
-        "print('LVGL_MPY_STUDIO_APP_READY buffers=%s touch=%s' % (display_driver.BUFFERS, display_driver.indev is not None))",
+        "print('LMS_APP_READY buffers=%s touch=%s' % (display_driver.BUFFERS, display_driver.indev is not None))",
         "",
     ])
     return "\n".join(lines)
@@ -83,7 +83,7 @@ def _validate_sources(files, sourcemap):
     compiler = default_mpy_cross()
     if not compiler.is_file():
         return
-    with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-syntax-") as directory:
+    with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-syntax-") as directory:
         for name, source in files.items():
             if not name.endswith(".py"):
                 continue

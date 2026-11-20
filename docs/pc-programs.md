@@ -9,7 +9,7 @@ That makes the simulator and the executables more than a preview: a kiosk on a L
 test bench that drives instruments from an LVGL panel, a dashboard that reads a log, or the PC
 side of a board project, written in the same MicroPython.
 
-The example [`examples/sysmon`](https://github.com/Copper-And-Code/lvgl-mpy-studio/tree/main/examples/sysmon)
+The example [`examples/sysmon`](https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/sysmon)
 is such a dashboard: CPU, memory and disk read from `/proc`, a chart, and the busiest processes
 from `ps` run through `os.system`. On a board the same project shows what MicroPython knows there.
 

@@ -118,12 +118,12 @@ class RemoteRunner:
                 self.remote[destination[1:]] = Path(source).read_text(encoding="utf-8")
             return ""
         script = args[-1] if args else ""
-        if "LVGL_MPY_STUDIO_IDENTITY=" in script:
-            return f"LVGL_MPY_STUDIO_IDENTITY={self.identity}\n"
-        if "LVGL_MPY_STUDIO_FILE=" in script:
+        if "LMS_IDENTITY=" in script:
+            return f"LMS_IDENTITY={self.identity}\n"
+        if "LMS_FILE=" in script:
             path = re.search(r"open\((['\"].*?['\"])\)", script).group(1)
             path = eval(path)
-            return "LVGL_MPY_STUDIO_FILE=" + json.dumps(self.remote.get(path)) + "\n"
+            return "LMS_FILE=" + json.dumps(self.remote.get(path)) + "\n"
         if "os.stat" in script:
             path = eval(script.split("os.stat(", 1)[1].split(")", 1)[0])
             return "YES\n" if path in self.remote or path.endswith("/app_main.py") else "NO\n"
@@ -160,7 +160,7 @@ def test_autostart_two_boards_reconnection_and_app_chain(tmp_path, monkeypatch):
     assert board_b.remote["/main.py"] == "print('original B')\n"
     reconnected = remote_session(board_a, "/dev/another-port")
     reconnected.install_autostart(current)
-    assert "aa01" in str(Path(tmp_path / "lvgl-mpy-studio" / "autostart-backups" / "aa01"))
+    assert "aa01" in str(Path(tmp_path / "copper-and-code-studio" / "autostart-backups" / "aa01"))
 
 
 def test_autostart_modified_backup_and_manifest_never_overwrite(tmp_path, monkeypatch):
@@ -196,7 +196,7 @@ def test_autostart_copy_failure_is_not_success(tmp_path, monkeypatch):
     with pytest.raises(DeviceError):
         session.install_autostart(project())
     assert "/main.py" not in runner.remote
-    assert not (tmp_path / "lvgl-mpy-studio" / "autostart-backups" / "aa01" / "current.json").exists()
+    assert not (tmp_path / "copper-and-code-studio" / "autostart-backups" / "aa01" / "current.json").exists()
 
 
 class ConsolePort:

@@ -44,7 +44,7 @@ the packages.
 ### Self-test
 
 ```bash
-.venv/bin/lvgl-mpy-studio selftest
+.venv/bin/copper-and-code-studio selftest
 ```
 
 It creates a project, takes widgets from the toolbox, sets properties, types a handler,
@@ -61,7 +61,7 @@ See the [manual](manual.md#self-test) for its options and report.
 ### Visual tests
 
 ```bash
-lvgl-mpy-studio test project.json
+copper-and-code-studio test project.json
 ```
 
 The reference pictures live next to the project, in `visual/<width>x<height>/`. The examples

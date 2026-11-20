@@ -2,23 +2,23 @@
 
 **Copper and Code Studio** — a visual GUI builder for MicroPython and LVGL.
 
-Formerly LVGL MPY Studio.
+Formerly Copper and Code Studio.
 
-[![CI](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml)
+[![CI](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml)
 
 [Italiano](README.it.md)
 
-### [Project website](https://copper-and-code.github.io/lvgl-mpy-studio/) · [Try the demos in your browser](https://copper-and-code.github.io/lvgl-mpy-studio/demos/) · [Open the IDE in your browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
+### [Project website](https://copper-and-code.github.io/copper-and-code-studio/) · [Try the demos in your browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Open the IDE in your browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
 
 The website has the documentation; the demos are games and a shell made with Copper and Code Studio, running in WebAssembly, with nothing to install. The IDE in the browser is experimental: see below.
 
 A desktop IDE for designing [LVGL](https://lvgl.io) 9.5 interfaces for MicroPython boards: you draw the pages, write the handlers in Python, run the application in a simulator that uses the real LVGL, and upload it to a board. An AI agent can do the same through an MCP server.
 
-[![The IDE building an industrial monitor: widgets dragged onto the page, a property changed, a handler typed, then the app touched in the simulator](https://copper-and-code.github.io/lvgl-mpy-studio/media/showreel/eim-01-short.gif)](https://copper-and-code.github.io/lvgl-mpy-studio/videos/)
+[![The IDE building an industrial monitor: widgets dragged onto the page, a property changed, a handler typed, then the app touched in the simulator](https://copper-and-code.github.io/copper-and-code-studio/media/showreel/eim-01-short.gif)](https://copper-and-code.github.io/copper-and-code-studio/videos/)
 
-A scripted replay of the real IDE, sped up: [more videos](https://copper-and-code.github.io/lvgl-mpy-studio/videos/).
+A scripted replay of the real IDE, sped up: [more videos](https://copper-and-code.github.io/copper-and-code-studio/videos/).
 
-> **Status: 0.7.2 ([download](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest)).** The automated tests are many and human testing is scarce: much has been written and checked by machine, and little has been used by people. [What is verified, and how](docs/status.md) says it area by area.
+> **Status: 0.7.2 ([download](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest)).** The automated tests are many and human testing is scarce: much has been written and checked by machine, and little has been used by people. [What is verified, and how](docs/status.md) says it area by area.
 
 ## If you are evaluating this project
 
@@ -49,7 +49,7 @@ A scripted replay of the real IDE, sped up: [more videos](https://copper-and-cod
 
 ## Try it
 
-The AppImage of the [release](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest) needs glibc 2.38 or later: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer.
+The AppImage of the [release](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest) needs glibc 2.38 or later: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer.
 
 Linux, from the sources, with Python 3.12 or later:
 
@@ -57,7 +57,7 @@ Linux, from the sources, with Python 3.12 or later:
 python3 -m venv .venv
 .venv/bin/pip install -e '.[dev]'
 ./runtime/build.sh
-.venv/bin/lvgl-mpy-studio
+.venv/bin/copper-and-code-studio
 ```
 
 Then **File → Open** and `examples/eim-01/project.json`, and F5. Requirements, Windows, packages and the test suite are in [Building, testing and packaging](docs/development.md).
@@ -65,7 +65,7 @@ Then **File → Open** and `examples/eim-01/project.json`, and F5. Requirements,
 To see the IDE use itself, with a report of each step:
 
 ```bash
-.venv/bin/lvgl-mpy-studio selftest --show
+.venv/bin/copper-and-code-studio selftest --show
 ```
 
 ## Documentation

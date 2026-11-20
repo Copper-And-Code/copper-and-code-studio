@@ -45,7 +45,7 @@ def syntax_errors(text, name="file.py"):
     compiler = default_mpy_cross()
     if not compiler.is_file():
         return []
-    with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-file-") as directory:
+    with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-file-") as directory:
         source = Path(directory) / Path(name).name
         source.write_text(text, encoding="utf-8", newline="\n")
         result = subprocess.run(mpy_cross_command(compiler, "-o", source.with_suffix(".mpy"), source.name), capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=directory, creationflags=CREATE_NO_WINDOW)

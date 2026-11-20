@@ -554,9 +554,9 @@ class Sweep:
         monkeypatch.setattr(serial, "Serial", self.hardware.serial_class())
         # The settings of the tests last the whole run: the port of a virtual board of an earlier
         # test would be tried again, as the port a person used last.
-        from PySide6.QtCore import QSettings
+        from lvgl_mpy_studio.ui.app_settings import app_settings
 
-        QSettings("CopperAndCode", "LVGL MPY Studio").remove("device/ports")
+        app_settings().remove("device/ports")
         window = self.window = MainWindow()
         self.qtbot.addWidget(window)
         window.hardware = self.hardware

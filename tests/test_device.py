@@ -56,20 +56,20 @@ class FakeRunner:
             self.resets += 1
             return "reset\n"
         script = command[-1] if command else ""
-        if "LVGL_MPY_STUDIO_INFO=" in script:
-            return "noise before\nLVGL_MPY_STUDIO_INFO=" + json.dumps(self.info) + "\n"
-        if "LVGL_MPY_STUDIO_SIZES=" in script:
+        if "LMS_INFO=" in script:
+            return "noise before\nLMS_INFO=" + json.dumps(self.info) + "\n"
+        if "LMS_SIZES=" in script:
             if self.incomplete:
-                return "LVGL_MPY_STUDIO_SIZES=" + json.dumps({"broken": -1})
+                return "LMS_SIZES=" + json.dumps({"broken": -1})
             sizes = {Path(source).name: Path(source).stat().st_size for source, destination in self.copies if destination.startswith(":") and "/lms_apps/" in destination}
-            return "LVGL_MPY_STUDIO_SIZES=" + json.dumps(sizes)
+            return "LMS_SIZES=" + json.dumps(sizes)
         if "os.rename" in script and ".uploading" in script:
             self.activations += 1
             return ""
         if "import app_main" in script:
             return self.output
-        if "LVGL_MPY_STUDIO_STOPPED" in script:
-            return "interrupted\nLVGL_MPY_STUDIO_STOPPED\n"
+        if "LMS_STOPPED" in script:
+            return "interrupted\nLMS_STOPPED\n"
         return ""
 
 
@@ -157,7 +157,7 @@ def test_missing_prerequisites_and_cancel_do_not_copy(tmp_path):
 def test_stop_restart_evaluate_and_disconnect():
     runner = FakeRunner()
     session = connected(runner)
-    assert "LVGL_MPY_STUDIO_STOPPED" in session.stop()
+    assert "LMS_STOPPED" in session.stop()
     assert session.evaluate("print('ciao')") == ""
     assert "reset" in session.restart()
     session.disconnect()
@@ -198,8 +198,8 @@ def test_autostart_backup_restore_and_ownership(tmp_path, monkeypatch):
             path = script.split("os.stat(", 1)[1].split(")", 1)[0]
             path = eval(path)
             return "YES\n" if path in remote or path.endswith("/app_main.py") else "NO\n"
-        if "LVGL_MPY_STUDIO_FILE=" in script:
-            return "LVGL_MPY_STUDIO_FILE=" + json.dumps(remote.get("/main.py"))
+        if "LMS_FILE=" in script:
+            return "LMS_FILE=" + json.dumps(remote.get("/main.py"))
         if "os.remove('/main.py')" in script:
             remote.pop("/main.py", None)
         return ""
@@ -295,7 +295,7 @@ def test_upload_sends_the_user_modules_and_stop_forgets_them(tmp_path):
     assert {"utils.mpy", "helpers.mpy"} <= set(result["files"])
     session.stop()
     script = runner.calls[-1][0][-1]
-    assert "startswith('/lms_apps/')" in script and "LVGL_MPY_STUDIO_STOPPED" in script
+    assert "startswith('/lms_apps/')" in script and "LMS_STOPPED" in script
 
 
 class ShellRunner(FakeRunner):

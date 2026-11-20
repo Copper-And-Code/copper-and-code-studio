@@ -52,8 +52,9 @@ def mpy_cross_path(root=None):
     return base / "runtime" / output / exe_name("mpy-cross")
 
 
-CONFIG_NAME = "lvgl-mpy-studio"
-OLD_CONFIG_NAME = "lvgl-ide"  # the name up to 0.4: the folder is copied on first start
+CONFIG_NAME = "copper-and-code-studio"
+# the names up to 0.7 and up to 0.4, newest first: the first one found is copied on first start
+OLD_CONFIG_NAMES = ("lvgl-mpy-studio", "lvgl-ide")
 
 
 def config_dir():
@@ -65,7 +66,7 @@ def config_dir():
     explicit = os.environ.get("XDG_CONFIG_HOME")
     if explicit:
         base = Path(explicit)
-    elif IS_WINDOWS and os.environ.get("APPDATA") and not any((Path.home() / ".config" / name).exists() for name in (CONFIG_NAME, OLD_CONFIG_NAME)):
+    elif IS_WINDOWS and os.environ.get("APPDATA") and not any((Path.home() / ".config" / name).exists() for name in (CONFIG_NAME, *OLD_CONFIG_NAMES)):
         base = Path(os.environ["APPDATA"])
     else:
         base = Path.home() / ".config"
@@ -73,19 +74,24 @@ def config_dir():
 
 
 def adopt_old_config(base):
-    """The configuration folder under base; if only the one with the old name exists, copy it.
+    """The configuration folder under base; if only one with an old name exists, copy the newest.
 
     Copy, not move: the autostart backups in there are needed to restore the main.py of the
     boards, and an earlier version of the IDE must still be able to find them.
     """
     import shutil
 
-    current, old = Path(base) / CONFIG_NAME, Path(base) / OLD_CONFIG_NAME
-    if not current.exists() and old.is_dir():
-        try:
-            shutil.copytree(old, current)
-        except OSError:
-            return old  # it cannot be copied: real files under the old name are better than an empty folder
+    current = Path(base) / CONFIG_NAME
+    if current.exists():
+        return current
+    for name in OLD_CONFIG_NAMES:
+        old = Path(base) / name
+        if old.is_dir():
+            try:
+                shutil.copytree(old, current)
+            except OSError:
+                return old  # it cannot be copied: real files under the old name are better than an empty folder
+            break
     return current
 
 

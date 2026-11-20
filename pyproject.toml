@@ -3,9 +3,9 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lvgl-mpy-studio"
+name = "copper-and-code-studio"
 dynamic = ["version"]
-description = "Visual IDE for LVGL 9.5 on MicroPython, with C export"
+description = "A visual GUI builder for MicroPython and LVGL"
 license = "GPL-3.0-or-later AND MIT"
 license-files = ["LICENSE", "LICENSE-MIT.txt", "LICENSING.md", "native/lvsim/LICENSE"]
 authors = [{name = "Nunzio Raciti"}]
@@ -18,7 +18,8 @@ packaging = ["pyinstaller==6.22.3"]
 site = ["mkdocs-material==9.8.1", "mkdocs-include-markdown-plugin==7.3.1"]
 
 [project.scripts]
-lvgl-mpy-studio = "lvgl_mpy_studio.cli:main"
+copper-and-code-studio = "lvgl_mpy_studio.cli:main"
+lvgl-mpy-studio = "lvgl_mpy_studio.cli:main"  # the name of the command up to 0.7
 lvgl-ide = "lvgl_mpy_studio.cli:main"  # the name of the command up to 0.4
 
 [tool.setuptools.dynamic]

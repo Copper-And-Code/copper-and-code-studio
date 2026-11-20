@@ -1,7 +1,7 @@
 # Showreel
 
 A video of the real IDE building an example and running it, with comic-style balloons that say
-what happens. The videos of the [Videos page](https://copper-and-code.github.io/lvgl-mpy-studio/videos/)
+what happens. The videos of the [Videos page](https://copper-and-code.github.io/copper-and-code-studio/videos/)
 and the GIF at the top of the README are made with it.
 
 ```bash

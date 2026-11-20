@@ -1,6 +1,6 @@
 # From a prompt to an app
 
-This is a complete session of an AI agent building an app with Copper and Code Studio through the [MCP server](mcp.md), starting from one sentence. It is recorded so that it can be replayed: the calls are in [`examples/weather/mcp-session.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-session.json) and the result is [`examples/weather/mcp-result.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-result.json). A test replays the session at every run of the suite and checks that it still builds the same app.
+This is a complete session of an AI agent building an app with Copper and Code Studio through the [MCP server](mcp.md), starting from one sentence. It is recorded so that it can be replayed: the calls are in [`examples/weather/mcp-session.json`](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/examples/weather/mcp-session.json) and the result is [`examples/weather/mcp-result.json`](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/examples/weather/mcp-result.json). A test replays the session at every run of the suite and checks that it still builds the same app.
 
 The Weather demo on the website and `examples/weather/project.json` are that result reworked later by another agent, while preparing the site: weather icons and a new layout. They are not what this session produced.
 
@@ -41,7 +41,7 @@ QT_QPA_PLATFORM=offscreen python -m pytest tests/test_mcp_demo.py
 To open the result of the session, load `examples/weather/mcp-result.json` in the IDE and press F5, or run:
 
 ```bash
-lvgl-mpy-studio run examples/weather/mcp-result.json
+copper-and-code-studio run examples/weather/mcp-result.json
 ```
 
-`lvgl-mpy-studio test examples/weather/project.json` runs the visual tests of the reworked version.
+`copper-and-code-studio test examples/weather/project.json` runs the visual tests of the reworked version.

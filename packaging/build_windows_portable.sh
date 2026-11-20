@@ -4,7 +4,7 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 CACHE="$ROOT/cache/windows-portable"
 WHEELS="$CACHE/wheels"
 BUILD="$ROOT/build/windows-portable"
-OUT="$BUILD/LVGL_MPY_STUDIO"
+OUT="$BUILD/Copper_and_Code_Studio"
 PYTHON_VERSION=3.12.10
 PYTHON_ARCHIVE="$CACHE/python-$PYTHON_VERSION-embed-amd64.zip"
 VC_REDIST="$CACHE/vc_redist.x64.exe"
@@ -93,16 +93,16 @@ cp "$ROOT"/packaging/licenses/* "$ROOT"/lvgl_mpy_studio/gen/output/licenses/* "$
 # The icon of the .exe: Explorer shows the first icon resource of the file.
 x86_64-w64-mingw32-windres -I "$ROOT/lvgl_mpy_studio" "$ROOT/packaging/windows_launcher.rc" -O coff -o "$BUILD/windows_launcher_icon.o"
 x86_64-w64-mingw32-gcc -O2 -Wall -Wextra -Werror -mwindows -municode -static-libgcc \
-    "$ROOT/packaging/windows_launcher.c" "$BUILD/windows_launcher_icon.o" -o "$OUT/LVGL_MPY_STUDIO.exe"
-printf '@echo off\r\n"%%~dp0python\\python.exe" -m lvgl_mpy_studio %%*\r\n' > "$OUT/LVGL_MPY_STUDIO_console.bat"
-printf '%s\r\n' 'LVGL MPY Studio - portable Windows x86-64 version' '' \
-    'Start LVGL_MPY_STUDIO.exe. Do not move files out of this folder.' \
-    'For terminal diagnostics use LVGL_MPY_STUDIO_console.bat.' \
+    "$ROOT/packaging/windows_launcher.c" "$BUILD/windows_launcher_icon.o" -o "$OUT/Copper_and_Code_Studio.exe"
+printf '@echo off\r\n"%%~dp0python\\python.exe" -m lvgl_mpy_studio %%*\r\n' > "$OUT/Copper_and_Code_Studio_console.bat"
+printf '%s\r\n' 'Copper and Code Studio - portable Windows x86-64 version' '' \
+    'Start Copper_and_Code_Studio.exe. Do not move files out of this folder.' \
+    'For terminal diagnostics use Copper_and_Code_Studio_console.bat.' \
     'The MicroPython Debug target needs no toolchain.' \
     'For the C target see docs/windows-c.md.' > "$OUT/README.txt"
 
 mkdir -p "$ROOT/dist"
-ARCHIVE="$ROOT/dist/LVGL_MPY_STUDIO-$IDE_VERSION-portable-win64"
+ARCHIVE="$ROOT/dist/Copper_and_Code_Studio-$IDE_VERSION-portable-win64"
 rm -f "$ARCHIVE.zip"
-"$HOST_PYTHON" -c 'import shutil, sys; shutil.make_archive(sys.argv[1], "zip", root_dir=sys.argv[2], base_dir="LVGL_MPY_STUDIO")' "$ARCHIVE" "$BUILD"
+"$HOST_PYTHON" -c 'import shutil, sys; shutil.make_archive(sys.argv[1], "zip", root_dir=sys.argv[2], base_dir="Copper_and_Code_Studio")' "$ARCHIVE" "$BUILD"
 printf 'Portable package: %s.zip\n' "$ARCHIVE"

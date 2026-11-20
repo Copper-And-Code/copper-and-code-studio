@@ -16,7 +16,7 @@ SHADOW = QColor(0, 0, 0, 70)
 CARD_TEXT = QColor("#ffffff")
 CARD_SOFT = QColor("#c9d1e0")
 CAPTION = "Scripted replay, sped up"
-URL = "github.com/Copper-And-Code/lvgl-mpy-studio"
+URL = "github.com/Copper-And-Code/copper-and-code-studio"
 
 FADE_FRAMES = 6
 BALLOON_FONT = 20                     # pixels

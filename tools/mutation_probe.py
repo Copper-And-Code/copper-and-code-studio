@@ -88,7 +88,7 @@ def mutate(source, index):
 
 
 def copy_repository(target):
-    ignore = shutil.ignore_patterns(".venv", "build", "dist", "cache", ".git", "__pycache__", "*.mp4", "out-*", "lvgl-mpy-studio-selftest", ".reference")
+    ignore = shutil.ignore_patterns(".venv", "build", "dist", "cache", ".git", "__pycache__", "*.mp4", "out-*", "copper-and-code-studio-selftest", ".reference")
     shutil.copytree(ROOT, target, ignore=ignore, symlinks=True)
     for heavy in ("runtime/out", ".reference"):
         source = ROOT / heavy

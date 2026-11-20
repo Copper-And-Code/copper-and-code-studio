@@ -15,7 +15,7 @@ below as an open question, not as a formality.
 ## How each area was checked
 
 - **Tests**: covered by the automated suite, more than 1250 tests.
-- **Self-test**: exercised in the real IDE window by `lvgl-mpy-studio selftest`.
+- **Self-test**: exercised in the real IDE window by `copper-and-code-studio selftest`.
   Besides, suites run by hand (`pytest tests/manual --manual`) trigger every menu entry,
   toolbar button and context menu entry of the IDE in five states, with every dialog answered
   with Cancel and with OK, look at every dialog in English and Italian, compare pictures of the
@@ -63,7 +63,7 @@ below as an open question, not as a formality.
 ## Project website
 
 The English documentation and six browser demos are published at
-<https://copper-and-code.github.io/lvgl-mpy-studio/> from the `gh-pages` branch. On 12 November
+<https://copper-and-code.github.io/copper-and-code-studio/> from the `gh-pages` branch. On 12 November
 2026, the public home, manual, gallery, and the five demos of that day were checked in Chromium. Each demo
 reported a running WebAssembly application and a non-black canvas; a simulated touch changed the
 Fifteen screen, and no requests went to external domains. The IDE test for **Help → Online
@@ -114,7 +114,7 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
 - C on boards: only MicroPython is uploaded. The C export is source code for another project.
 - An online catalogue of blocks, and blocks that depend on other blocks.
 - Extensions that run inside the IDE: blocks are data and MicroPython code, nothing more.
-- Blocks for PWM, ADC, I2C, SPI and UART: planned in [the plan](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/plugins-plan.md), not written.
+- Blocks for PWM, ADC, I2C, SPI and UART: planned in [the plan](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/plugins-plan.md), not written.
 - A debugger. Errors are reported with file and line; there are no breakpoints.
 - macOS.
 
@@ -122,7 +122,7 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
 
 ```bash
 .venv/bin/python -m pytest -q        # the whole suite, about ten minutes
-.venv/bin/lvgl-mpy-studio selftest   # the IDE uses itself, about twenty seconds
+.venv/bin/copper-and-code-studio selftest   # the IDE uses itself, about twenty seconds
 ```
 
 The self-test writes `report.txt` with one line for each step. A step that fails is a defect

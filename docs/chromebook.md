@@ -21,25 +21,25 @@ environment of ChromeOS. No change to ChromeOS itself is needed.
    ```
 
    It should say Debian 13 and glibc 2.38 or later. On Debian 12, upgrade the container to
-   Debian 13 first, or run the IDE [from the sources](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/development.md) with Python 3.12.
-3. Download `LVGL_MPY_STUDIO-x86_64.AppImage` from the
-   [latest release](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest) and, in the
+   Debian 13 first, or run the IDE [from the sources](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/development.md) with Python 3.12.
+3. Download `Copper_and_Code_Studio-x86_64.AppImage` from the
+   [latest release](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest) and, in the
    Files app, move it from **Downloads** to **Linux files**.
 4. Make it executable and start it, in the terminal:
 
    ```bash
-   chmod +x LVGL_MPY_STUDIO-x86_64.AppImage
-   ./LVGL_MPY_STUDIO-x86_64.AppImage
+   chmod +x Copper_and_Code_Studio-x86_64.AppImage
+   ./Copper_and_Code_Studio-x86_64.AppImage
    ```
 
    If it stops with an error about `libfuse.so.2`, either install FUSE 2 with
    `sudo apt install libfuse2t64`, or start it without FUSE:
-   `./LVGL_MPY_STUDIO-x86_64.AppImage --appimage-extract-and-run`.
+   `./Copper_and_Code_Studio-x86_64.AppImage --appimage-extract-and-run`.
 5. To check the installation, run the self-test: the IDE drives itself and ends with
    `RESULT: PASSED`.
 
    ```bash
-   ./LVGL_MPY_STUDIO-x86_64.AppImage selftest
+   ./Copper_and_Code_Studio-x86_64.AppImage selftest
    ```
 
 ## A board over USB

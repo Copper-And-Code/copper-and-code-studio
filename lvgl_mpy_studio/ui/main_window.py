@@ -1,7 +1,7 @@
 import copy
 import json
 
-from PySide6.QtCore import QRectF, QSettings, QSize, Qt, QTimer, QUrl, Signal
+from PySide6.QtCore import QRectF, QSize, Qt, QTimer, QUrl, Signal
 from PySide6.QtGui import QAction, QDesktopServices, QKeySequence, QPainter
 from PySide6.QtWidgets import QApplication, QDockWidget, QLabel, QLineEdit, QMainWindow, QMenu, QMessageBox, QPlainTextEdit, QSizePolicy, QTabBar, QTabWidget, QToolBar, QToolButton, QTreeWidget, QWidget
 
@@ -18,6 +18,7 @@ from lvgl_mpy_studio.ui.designer.scene import ComponentTray, DesignerView, Toolb
 from lvgl_mpy_studio.ui.device_panel import DeviceConsole, OutputPump
 from lvgl_mpy_studio.ui.document import ProjectDocument
 from lvgl_mpy_studio.ui.gc_guard import install as install_gc_guard
+from lvgl_mpy_studio.ui.app_settings import adopt_old_settings
 from lvgl_mpy_studio.ui.language import apply_language, install_qt_translation
 from lvgl_mpy_studio.ui.resolution import ResolutionSelector
 from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
@@ -49,11 +50,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         install_gc_guard()
         theme.install(QApplication.instance()).changed.connect(self._theme_changed)
         self.setContentsMargins(*theme.frame_margins(QApplication.platformName()))
-        self.settings = QSettings("CopperAndCode", "LVGL MPY Studio")
-        old_settings = QSettings("CopperAndCode", "LVGL IDE")  # the name up to 0.4
-        if not self.settings.allKeys():
-            for key in old_settings.allKeys():
-                self.settings.setValue(key, old_settings.value(key))
+        self.settings = adopt_old_settings()
         install_qt_translation(set_language(self.settings.value("language", DEFAULT_LANGUAGE)))
         self.profile_store = ProfileStore.tolerant()  # a broken profile file must not stop the start
         self.document = ProjectDocument(self._default_project())
@@ -175,7 +172,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.device_info_action = QAction(tr("Device Information"), self, triggered=self.show_device_info)
         self.mcp_action = QAction(tr("MCP Server for AI Agents"), self, checkable=True, triggered=self._toggle_mcp)
         self.mcp_action.setChecked(mcp_server.is_enabled())
-        self.mcp_action.setToolTip(tr("Lets an AI agent use the IDE through the lvgl-mpy-studio mcp command, including uploading and running code on the board. Off by default."))
+        self.mcp_action.setToolTip(tr("Lets an AI agent use the IDE through the copper-and-code-studio mcp command, including uploading and running code on the board. Off by default."))
         self.live_action = QAction(tr("Live Editing"), self, checkable=True, triggered=self._toggle_live)
         self.live_action.setChecked(self.settings.value("device/live", True, bool))
         self.upload_action = QAction(tr("Upload Project"), self, triggered=lambda: self.upload_board(False))
@@ -505,7 +502,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
             self.mcp_action.setChecked(not enabled)
             self.append_error(str(exc))
             return
-        self.statusBar().showMessage(tr("MCP server on: agents can use lvgl-mpy-studio mcp.") if enabled else tr("MCP server off."), 5000)
+        self.statusBar().showMessage(tr("MCP server on: agents can use copper-and-code-studio mcp.") if enabled else tr("MCP server off."), 5000)
 
     def _on_scene(self, method, *arguments):
         view = self._active_designer()

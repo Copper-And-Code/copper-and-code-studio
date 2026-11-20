@@ -11,8 +11,8 @@ from lvgl_mpy_studio.core.boards import profile_fonts
 from .fonts import convert_fonts
 from .project_gen import code_usage, legacy_data, screen_statements
 
-LIVE_OK = "LVGL_MPY_STUDIO_LIVE_OK"
-LIVE_FAILED = "LVGL_MPY_STUDIO_LIVE_FAILED"
+LIVE_OK = "LMS_LIVE_OK"
+LIVE_FAILED = "LMS_LIVE_FAILED"
 
 
 def upload_key(project):

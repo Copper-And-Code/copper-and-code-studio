@@ -1,12 +1,12 @@
 # MCP server for AI agents
 
-`lvgl-mpy-studio mcp` lets an AI agent work on Copper and Code Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.
+`copper-and-code-studio mcp` lets an AI agent work on Copper and Code Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.
 
 [From a prompt to an app](mcp-demo.md) shows a complete recorded session: an agent builds a weather station in 24 calls.
 
 ## Turning it on
 
-The server is off by default. Turn it on under **Settings → MCP Server for AI Agents**. While it is off, `lvgl-mpy-studio mcp` refuses to start, and a running server answers every tool call with an error. The choice is stored in `lvgl-mpy-studio/mcp.json` in your configuration folder.
+The server is off by default. Turn it on under **Settings → MCP Server for AI Agents**. While it is off, `copper-and-code-studio mcp` refuses to start, and a running server answers every tool call with an error. The choice is stored in `copper-and-code-studio/mcp.json` in your configuration folder.
 
 This switch controls the MCP server only. It does not restrict the CLI.
 
@@ -68,18 +68,20 @@ Points come from `x` and `y`, or from `widget` for the centre of a widget. `widg
 
 ## Client configuration
 
-Most clients accept this form. Use the path of your installed `lvgl-mpy-studio` or AppImage:
+Most clients accept this form. Use the path of your installed `copper-and-code-studio` or AppImage:
 
 ```json
 {
   "mcpServers": {
-    "lvgl-mpy-studio": {
-      "command": "/path/to/lvgl-mpy-studio",
+    "copper-and-code-studio": {
+      "command": "/path/to/copper-and-code-studio",
       "args": ["mcp"]
     }
   }
 }
 ```
+
+A configuration written for an earlier version, with the command `lvgl-mpy-studio` and that server name, still works: the old command is kept as an alias. Only the name the server gives itself in `serverInfo` changed.
 
 ## Limits
 

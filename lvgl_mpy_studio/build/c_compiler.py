@@ -28,7 +28,7 @@ def parse_c_errors(output, directory=None):
 
 def windows_toolchain():
     directories = []
-    configured = os.environ.get("LVGL_MPY_STUDIO_TOOLCHAIN")
+    configured = os.environ.get("LMS_TOOLCHAIN") or os.environ.get("LVGL_MPY_STUDIO_TOOLCHAIN")  # the old name up to 0.7
     if configured:
         root = Path(configured)
         directories.extend((root, root / "bin"))

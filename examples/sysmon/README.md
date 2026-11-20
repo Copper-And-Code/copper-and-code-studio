@@ -13,7 +13,7 @@ MicroPython of Copper and Code Studio is a program of the operating system
 - The same project runs on a board, the STM32H7_CORE V1.3 at 1024×600 of its profile: there
   `sys.platform` is not `"linux"`, so the CPU shows `n/a`, the memory is MicroPython's heap,
   the disk is the flash, and **Processes** says that it needs the PC.
-- In the [demo gallery](https://copper-and-code.github.io/lvgl-mpy-studio/demos/) it runs in the
+- In the [demo gallery](https://copper-and-code.github.io/copper-and-code-studio/demos/) it runs in the
   browser, which has no operating system either: MicroPython's heap, and `n/a` for CPU and disk.
 
 Open `project.json` in the IDE and press F5, on Linux. It was built by an AI agent through the

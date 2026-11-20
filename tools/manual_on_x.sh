@@ -53,7 +53,7 @@ fi
 
 status=0
 if [ ${#targets[@]} -eq 0 ]; then
-    .venv/bin/lvgl-mpy-studio selftest || status=1
+    .venv/bin/copper-and-code-studio selftest || status=1
     targets=(tests/manual)
 fi
 .venv/bin/pytest -q tests/test_fit_screen.py "${targets[@]}" --manual || status=1

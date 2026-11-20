@@ -12,7 +12,7 @@ from lvgl_mpy_studio.platform import CREATE_NO_WINDOW, mpy_cross_path, root_dir
 def cache_root():
     if getattr(sys, "frozen", False):
         base = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache"))
-        return base / "lvgl-mpy-studio"
+        return base / "copper-and-code-studio"
     return root_dir() / "cache"
 
 

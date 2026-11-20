@@ -12,17 +12,17 @@ ONEFILE_GLIBC=$(objdump -T "$ROOT/runtime/out/lvsim-onefile" | grep -o 'GLIBC_[0
 if [ "$(printf '%s\n' "$ONEFILE_GLIBC" GLIBC_2.34 | sort -V | tail -1)" != GLIBC_2.34 ]; then
     echo "Warning: single-file games will need $ONEFILE_GLIBC. To ship them to older systems too, run runtime/build_onefile_portable.sh." >&2
 fi
-"$PYTHON" -m PyInstaller --noconfirm --clean --distpath "$ROOT/dist" --workpath "$ROOT/build/pyinstaller" "$ROOT/packaging/lvgl-mpy-studio.spec"
+"$PYTHON" -m PyInstaller --noconfirm --clean --distpath "$ROOT/dist" --workpath "$ROOT/build/pyinstaller" "$ROOT/packaging/copper-and-code-studio.spec"
 APPDIR="$ROOT/build/AppDir"
 rm -rf "$APPDIR"
 mkdir -p "$APPDIR/usr/bin" "$APPDIR/usr/share/applications" "$APPDIR/usr/share/icons/hicolor/scalable/apps"
-cp -a "$ROOT/dist/lvgl-mpy-studio" "$APPDIR/usr/bin/"
+cp -a "$ROOT/dist/copper-and-code-studio" "$APPDIR/usr/bin/"
 cp "$ROOT/packaging/AppRun" "$APPDIR/AppRun"
 chmod +x "$APPDIR/AppRun"
-cp "$ROOT/packaging/lvgl-mpy-studio.desktop" "$APPDIR/lvgl-mpy-studio.desktop"
-cp "$ROOT/packaging/lvgl-mpy-studio.desktop" "$APPDIR/usr/share/applications/"
-cp "$ROOT/packaging/lvgl-mpy-studio.svg" "$APPDIR/lvgl-mpy-studio.svg"
-cp "$ROOT/packaging/lvgl-mpy-studio.svg" "$APPDIR/usr/share/icons/hicolor/scalable/apps/"
+cp "$ROOT/packaging/copper-and-code-studio.desktop" "$APPDIR/copper-and-code-studio.desktop"
+cp "$ROOT/packaging/copper-and-code-studio.desktop" "$APPDIR/usr/share/applications/"
+cp "$ROOT/packaging/copper-and-code-studio.svg" "$APPDIR/copper-and-code-studio.svg"
+cp "$ROOT/packaging/copper-and-code-studio.svg" "$APPDIR/usr/share/icons/hicolor/scalable/apps/"
 if command -v appimagetool >/dev/null; then
     TOOL=$(command -v appimagetool)
 else
@@ -33,4 +33,4 @@ else
         chmod +x "$TOOL"
     fi
 fi
-ARCH=x86_64 "$TOOL" --appimage-extract-and-run "$APPDIR" "$ROOT/dist/LVGL_MPY_STUDIO-x86_64.AppImage"
+ARCH=x86_64 "$TOOL" --appimage-extract-and-run "$APPDIR" "$ROOT/dist/Copper_and_Code_Studio-x86_64.AppImage"

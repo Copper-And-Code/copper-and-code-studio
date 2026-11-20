@@ -57,13 +57,13 @@ def test_third_party_license_texts_are_shipped():
 
 
 def test_packages_include_the_license_folders():
-    for name in ("lvgl-mpy-studio.spec", "lvgl-mpy-studio-windows.spec"):
+    for name in ("copper-and-code-studio.spec", "copper-and-code-studio-windows.spec"):
         spec = (ROOT / "packaging" / name).read_text(encoding="utf-8")
         assert "packaging/licenses" in spec and "lvgl_mpy_studio/gen/output/licenses" in spec and "LICENSE" in spec
 
 
 def test_packages_carry_only_the_licensed_icon_font():
-    for name in ("lvgl-mpy-studio.spec", "lvgl-mpy-studio-windows.spec"):
+    for name in ("copper-and-code-studio.spec", "copper-and-code-studio-windows.spec"):
         spec = (ROOT / "packaging" / name).read_text(encoding="utf-8")
         assert '"materialdesignicons6" in item[0]' in spec and "analysis.datas = " in spec
     portable = (ROOT / "packaging/build_windows_portable.sh").read_text(encoding="utf-8")
@@ -72,7 +72,7 @@ def test_packages_carry_only_the_licensed_icon_font():
 
 
 def test_packages_keep_the_lvgl_license_but_not_its_tests():
-    for name in ("lvgl-mpy-studio.spec", "lvgl-mpy-studio-windows.spec"):
+    for name in ("copper-and-code-studio.spec", "copper-and-code-studio-windows.spec"):
         spec = (ROOT / "packaging" / name).read_text(encoding="utf-8")
         assert '"LICENCE.txt"' in spec and '"COPYRIGHTS.md"' in spec
         assert 'lvgl-bindings/lvgl"), ".reference' not in spec

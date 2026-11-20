@@ -199,7 +199,7 @@ so once in the Output panel. The project still starts in the simulator.
 4. After changing the files, install the folder again: the manager asks to replace the block.
    **Reload** is enough when you edit the files inside the blocks folder itself.
 
-`lvgl-mpy-studio selftest` does not cover your block; try it on the board too.
+`copper-and-code-studio selftest` does not cover your block; try it on the board too.
 
 ## More than one board
 

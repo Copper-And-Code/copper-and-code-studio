@@ -9,8 +9,8 @@ package, because a package needs runtimes it does not compile.
 With the runtimes already built, as on a computer where packages were made before:
 
 ```bash
-./packaging/build.sh                     # dist/LVGL_MPY_STUDIO-x86_64.AppImage
-./packaging/build_windows_portable.sh    # dist/LVGL_MPY_STUDIO-<version>-portable-win64.zip
+./packaging/build.sh                     # dist/Copper_and_Code_Studio-x86_64.AppImage
+./packaging/build_windows_portable.sh    # dist/Copper_and_Code_Studio-<version>-portable-win64.zip
 ```
 
 Then check them, see [Checking a package](#checking-a-package).
@@ -92,9 +92,9 @@ objdump -T runtime/out/lvsim-onefile | grep -o 'GLIBC_[0-9.]*' | sort -Vu | tail
 ./packaging/build.sh
 ```
 
-About half a minute. It runs PyInstaller with `packaging/lvgl-mpy-studio.spec`, assembles
+About half a minute. It runs PyInstaller with `packaging/copper-and-code-studio.spec`, assembles
 the AppDir and calls `appimagetool`, downloaded to `cache/` the first time. It stops with a
-message if a runtime is missing. Output: `dist/LVGL_MPY_STUDIO-x86_64.AppImage`, about 95 MB.
+message if a runtime is missing. Output: `dist/Copper_and_Code_Studio-x86_64.AppImage`, about 95 MB.
 
 ## The portable package for Windows
 
@@ -104,11 +104,11 @@ message if a runtime is missing. Output: `dist/LVGL_MPY_STUDIO-x86_64.AppImage`,
 
 Under a minute after the first time, when it downloads to `cache/windows-portable/` the
 embeddable Python 3.12.10, the Windows wheels of the pinned dependencies and Microsoft's
-Visual C++ runtime. It compiles `LVGL_MPY_STUDIO.exe`, a small launcher with the icon, with
-MinGW. Output: `dist/LVGL_MPY_STUDIO-<version>-portable-win64.zip`, about 280 MB.
+Visual C++ runtime. It compiles `Copper_and_Code_Studio.exe`, a small launcher with the icon, with
+MinGW. Output: `dist/Copper_and_Code_Studio-<version>-portable-win64.zip`, about 280 MB.
 
-The archive is extracted whole and started with `LVGL_MPY_STUDIO.exe`; Python need not be
-installed. `LVGL_MPY_STUDIO_console.bat` starts the same program with a console, for the
+The archive is extracted whole and started with `Copper_and_Code_Studio.exe`; Python need not be
+installed. `Copper_and_Code_Studio_console.bat` starts the same program with a console, for the
 command line and for diagnostics.
 
 **Do not add ICU to this package.** Qt uses the `icuuc.dll` of Windows; a copy next to Qt hides
@@ -132,19 +132,19 @@ A package is not done until it has run.
 **Linux.** From an empty folder, so that nothing comes from the sources:
 
 ```bash
-dist/LVGL_MPY_STUDIO-x86_64.AppImage --version
-dist/LVGL_MPY_STUDIO-x86_64.AppImage selftest          # RESULT: PASSED, 105 steps
+dist/Copper_and_Code_Studio-x86_64.AppImage --version
+dist/Copper_and_Code_Studio-x86_64.AppImage selftest          # RESULT: PASSED, 105 steps
 ```
 
 **Windows.** Wine is not a check: it starts a program whose libraries lack functions, and
 has hidden real faults. On a real Windows, after extracting the archive:
 
 ```
-LVGL_MPY_STUDIO_console.bat --version
-LVGL_MPY_STUDIO_console.bat selftest
+Copper_and_Code_Studio_console.bat --version
+Copper_and_Code_Studio_console.bat selftest
 ```
 
-then start `LVGL_MPY_STUDIO.exe` by double click: the IDE opens, the file and the taskbar show
+then start `Copper_and_Code_Studio.exe` by double click: the IDE opens, the file and the taskbar show
 the icon, and no console window flashes while working.
 
 What to look at before giving a package out:
@@ -156,7 +156,7 @@ What to look at before giving a package out:
 | The Linux launcher is the portable one | the `objdump` line above, on `runtime/out/lvsim-onefile` |
 | No ICU in the Windows archive | `unzip -l dist/*.zip \| grep -ci 'icu.*dll'` gives 0 |
 | A game built by the package starts | `build project.json --profile release --single-file`, then the game with `--selftest` |
-| The checksum is recorded | `sha256sum dist/LVGL_MPY_STUDIO-*` |
+| The checksum is recorded | `sha256sum dist/Copper_and_Code_Studio-*` |
 
 Record in [the status page](status.md) what was checked and on which system.
 

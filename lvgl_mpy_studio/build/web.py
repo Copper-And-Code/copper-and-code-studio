@@ -13,7 +13,8 @@ from .compiler import compile_python, root_dir
 from .release import THIRD_PARTY_LICENSES, project_name
 
 RUNTIME_FILES = ("micropython.mjs", "micropython.wasm")
-MARKER = ".lvgl-mpy-studio-web"  # only a folder created here can be replaced
+MARKER = ".copper-and-code-studio-web"  # only a folder created here can be replaced
+OLD_MARKERS = (".lvgl-mpy-studio-web",)  # written up to 0.7
 # For hosting on Apache or LiteSpeed, such as Hostinger: without the right types the browser
 # refuses the JavaScript module and the WebAssembly. Elsewhere the file is ignored.
 HTACCESS = """<IfModule mod_mime.c>
@@ -25,6 +26,11 @@ HTACCESS = """<IfModule mod_mime.c>
     AddOutputFilterByType DEFLATE application/wasm text/javascript application/json
 </IfModule>
 """
+
+
+def _ours(target):
+    """A folder written by this function, under this name or an old one."""
+    return any((target / name).exists() for name in (MARKER, *OLD_MARKERS))
 
 
 def web_runtime():
@@ -43,7 +49,7 @@ def build_web(project, dist_root=None):
         raise FileNotFoundError("Browser runtime not found: run runtime/build_web.sh")
     dist_root = Path(dist_root) if dist_root else root_dir() / "dist"
     target = dist_root / f"{project_name(project)}-web"
-    if target.exists() and not (target / MARKER).exists():
+    if target.exists() and not _ours(target):
         raise ValueError(f"{target} already exists and is not a web build made by this IDE: move or rename it")
     staging = dist_root / f".{target.name}.tmp"
     generated = dist_root / f".{target.name}-generated"
@@ -125,7 +131,7 @@ def build_program_web(entry, dist_root=None, width=1024, height=600, board="stm3
     entry = Path(entry).resolve()
     dist_root = Path(dist_root) if dist_root else root_dir() / "dist"
     target = dist_root / f"{entry.parent.name}-web"
-    if target.exists() and not (target / MARKER).exists():
+    if target.exists() and not _ours(target):
         raise ValueError(f"{target} already exists and is not a web build made by this IDE: move or rename it")
     staging = dist_root / f".{target.name}.tmp"
     shutil.rmtree(staging, ignore_errors=True)

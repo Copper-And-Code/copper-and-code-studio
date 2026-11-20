@@ -1,8 +1,8 @@
-from PySide6.QtCore import QSettings
 from PySide6.QtWidgets import QAbstractButton, QComboBox, QDockWidget, QGroupBox, QLabel, QLineEdit, QMenu, QPlainTextEdit, QTabWidget, QTreeWidget, QWidget
 from PySide6.QtGui import QAction
 
 from lvgl_mpy_studio.core.i18n import set_language, tr
+from lvgl_mpy_studio.ui.app_settings import app_settings
 
 
 def _translate_property(obj, prop, setter, value=None):
@@ -102,7 +102,7 @@ def install_qt_translation(language):
 
 def apply_language(root, language):
     selected = set_language(language)
-    QSettings("CopperAndCode", "LVGL MPY Studio").setValue("language", selected)
+    app_settings().setValue("language", selected)
     install_qt_translation(selected)
     retranslate_widget(root)
     return selected

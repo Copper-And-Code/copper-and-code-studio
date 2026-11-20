@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
-QT_QPA_PLATFORM=offscreen "${PYTHON:-$ROOT/.venv/bin/python}" - "$ROOT/packaging/lvgl-mpy-studio.svg" "$WORK" <<'PY'
+QT_QPA_PLATFORM=offscreen "${PYTHON:-$ROOT/.venv/bin/python}" - "$ROOT/packaging/copper-and-code-studio.svg" "$WORK" <<'PY'
 import sys
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QGuiApplication, QImage, QPainter

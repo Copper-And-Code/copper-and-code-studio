@@ -32,7 +32,7 @@ class Ide:
 
         from lvgl_mpy_studio.ui import theme
 
-        self.app = QApplication.instance() or QApplication(["lvgl-mpy-studio-showreel"])
+        self.app = QApplication.instance() or QApplication(["copper-and-code-studio-showreel"])
         self.app.setWindowIcon(theme.app_icon())
         # Nothing must wait for an answer that nobody can give offscreen.
         self._question = QMessageBox.question

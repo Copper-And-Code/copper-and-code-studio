@@ -88,7 +88,7 @@ default_interrupt = break_in  # tests replace it: they must never write to a rea
 
 
 def mpremote_command():
-    override = os.environ.get("LVGL_MPY_STUDIO_MPREMOTE")
+    override = os.environ.get("LMS_MPREMOTE") or os.environ.get("LVGL_MPY_STUDIO_MPREMOTE")  # the old name up to 0.7
     if override:
         return [override]
     if getattr(sys, "frozen", False):
@@ -143,7 +143,7 @@ def stop_script(app_root):
         "import sys\n"
         "for name in ('app_main','app_events','ui'):\n sys.modules.pop(name,None)\n"
         f"for name,module in list(sys.modules.items()):\n if str(getattr(module,'__file__','')).startswith({app_root + '/'!r}):\n  sys.modules.pop(name,None)\n"
-        "import display_driver\ndisplay_driver.stop()\nprint('LVGL_MPY_STUDIO_STOPPED')"
+        "import display_driver\ndisplay_driver.stop()\nprint('LMS_STOPPED')"
     )
 
 
@@ -308,7 +308,7 @@ class DeviceSession(AutostartMixin):
                 if on_closed:
                     on_closed()
 
-        self._console_thread = threading.Thread(target=read_output, name="lvgl-mpy-studio-console", daemon=True)
+        self._console_thread = threading.Thread(target=read_output, name="copper-and-code-studio-console", daemon=True)
         self._console_thread.start()
         return True
 
@@ -436,9 +436,9 @@ gc.collect();r['memoryFree']=gc.mem_free()
 try:
  s=os.statvfs(@ROOT@);r['filesystemFree']=s[0]*s[3]
 except Exception as e:r['filesystemError']=str(e)
-print('LVGL_MPY_STUDIO_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace("@ROOT@", repr(self._app_root(self.profile or {}).rsplit("/", 1)[0] or "/"))  # the filesystem apps are written to
+print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace("@ROOT@", repr(self._app_root(self.profile or {}).rsplit("/", 1)[0] or "/"))  # the filesystem apps are written to
         output = self._exec(probe, 25)
-        info = marked_json(output, "LVGL_MPY_STUDIO_INFO")
+        info = marked_json(output, "LMS_INFO")
         profile = copy.deepcopy(profile or self.profile)
         required = profile.get("firmware", {}).get("modules", []) if profile else []
         missing = [name for name in required if not info.get("modules", {}).get(name)]
@@ -512,7 +512,7 @@ print('LVGL_MPY_STUDIO_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(module
             validate_profile(profile)
             if not compatible(project, profile):
                 raise DeviceError("device.resolution", f"{profile['logicalWidth']}x{profile['logicalHeight']}")
-            temporary = tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-board-")
+            temporary = tempfile.TemporaryDirectory(prefix="copper-and-code-studio-board-")
             try:
                 output = Path(output_dir) if output_dir else Path(temporary.name)
                 try:
@@ -560,9 +560,9 @@ print('LVGL_MPY_STUDIO_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(module
                     sent += size
                 if progress:
                     progress(total, total, "", 0)
-                script = "import os,json\nr={}\nfor n in %r:\n try:r[n]=os.stat('%s/'+n)[6]\n except OSError:r[n]=-1\nprint('LVGL_MPY_STUDIO_SIZES='+json.dumps(r))" % (list(checks), staging)
+                script = "import os,json\nr={}\nfor n in %r:\n try:r[n]=os.stat('%s/'+n)[6]\n except OSError:r[n]=-1\nprint('LMS_SIZES='+json.dumps(r))" % (list(checks), staging)
                 result = self._exec(script, 20)
-                actual = marked_json(result, "LVGL_MPY_STUDIO_SIZES", missing={})
+                actual = marked_json(result, "LMS_SIZES", missing={})
                 if actual != checks:
                     raise DeviceError("device.transfer.incomplete", json.dumps({"expected": checks, "actual": actual}))
                 self._check_cancel(cancel)
@@ -606,7 +606,7 @@ except OSError:
         destination = "/" + destination.strip().strip("/") if destination.strip().strip("/") else "/"
         if not destination.startswith("/") or ".." in destination.split("/"):
             raise DeviceError("device.command", destination)
-        with self._operation, tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-files-") as temporary:
+        with self._operation, tempfile.TemporaryDirectory(prefix="copper-and-code-studio-files-") as temporary:
             warnings, files = [], []
             mpy = self._info(self.profile).get("mpy") if compile_python else None
             for local, name in items:
@@ -625,8 +625,8 @@ except OSError:
             folders = sorted({destination} | {f"{destination}/{name}".replace("//", "/").rsplit("/", 1)[0] for _local, name, _size in files} - {""})
             self.state = "transferring"
             try:
-                make = "import os\nfor d in %r:\n p=''\n for part in d.split('/')[1:]:\n  p+='/'+part\n  try:os.mkdir(p)\n  except OSError:pass\ns=os.statvfs(%r)\nprint('LVGL_MPY_STUDIO_FREE=%%d'%%(s[0]*s[3]))" % (folders, destination)
-                free = marked_json(self._exec(make, 20), "LVGL_MPY_STUDIO_FREE", missing=None)
+                make = "import os\nfor d in %r:\n p=''\n for part in d.split('/')[1:]:\n  p+='/'+part\n  try:os.mkdir(p)\n  except OSError:pass\ns=os.statvfs(%r)\nprint('LMS_FREE=%%d'%%(s[0]*s[3]))" % (folders, destination)
+                free = marked_json(self._exec(make, 20), "LMS_FREE", missing=None)
                 if isinstance(free, int) and total > free:
                     raise DeviceError("device.space", tr("{needed} bytes to write, {free} free in {folder}", needed=total, free=free, folder=destination))
                 sent = 0
@@ -636,8 +636,8 @@ except OSError:
                     if progress:
                         progress(sent, total, name, size)
                     self._put(local, remote + ".lms-part", cancel, (lambda done, sent=sent, name=name, size=size: progress(sent + done, total, name, size)) if progress else None)
-                    swap = "import os\nn=%r\nif os.stat(n+'.lms-part')[6]!=%d:raise OSError('incomplete')\ntry:os.remove(n)\nexcept OSError:pass\nos.rename(n+'.lms-part',n)\nprint('LVGL_MPY_STUDIO_DONE=1')" % (remote, size)
-                    if "LVGL_MPY_STUDIO_DONE=1" not in self._exec(swap, 20):
+                    swap = "import os\nn=%r\nif os.stat(n+'.lms-part')[6]!=%d:raise OSError('incomplete')\ntry:os.remove(n)\nexcept OSError:pass\nos.rename(n+'.lms-part',n)\nprint('LMS_DONE=1')" % (remote, size)
+                    if "LMS_DONE=1" not in self._exec(swap, 20):
                         raise DeviceError("device.transfer.incomplete", remote)
                     sent += size
                 if progress:
@@ -660,9 +660,9 @@ except OSError:
         """The entries of a folder of the board: [{"name", "dir", "size"}], folders first."""
         self._require()
         path = self._board_path(path)
-        script = "import os,json\nr=[]\nfor e in os.ilistdir(%r):\n r.append([e[0],e[1]&0x4000!=0,e[3] if len(e)>3 else -1])\nprint('LVGL_MPY_STUDIO_LIST='+json.dumps(r))" % path
+        script = "import os,json\nr=[]\nfor e in os.ilistdir(%r):\n r.append([e[0],e[1]&0x4000!=0,e[3] if len(e)>3 else -1])\nprint('LMS_LIST='+json.dumps(r))" % path
         with self._operation:
-            entries = marked_json(self._exec(script, 20), "LVGL_MPY_STUDIO_LIST")
+            entries = marked_json(self._exec(script, 20), "LMS_LIST")
         return sorted(({"name": name, "dir": bool(folder), "size": size} for name, folder, size in entries), key=lambda entry: (not entry["dir"], entry["name"].lower()))
 
     def read_file(self, path, local):
@@ -677,7 +677,7 @@ except OSError:
         """Write data to a file of the board with the safe write of upload_files: the old file stays until the new one is complete."""
         path = self._board_path(path)
         folder, name = path.rsplit("/", 1)
-        with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-write-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-write-") as temporary:
             local = Path(temporary) / name
             local.write_bytes(data)
             return self.upload_files([(local, name)], folder or "/")
@@ -700,9 +700,9 @@ except OSError:
         path = self._board_path(path)
         if path in ("/", "/flash", "/sd"):
             raise DeviceError("device.command", tr("{path} is the root of a filesystem: it is not removed.", path=path))
-        script = "import os\ndef rm(p):\n if os.stat(p)[0]&0x4000:\n  for n in os.listdir(p):rm(p+'/'+n)\n  os.rmdir(p)\n else:os.remove(p)\nrm(%r)\nprint('LVGL_MPY_STUDIO_DONE=1')" % path
+        script = "import os\ndef rm(p):\n if os.stat(p)[0]&0x4000:\n  for n in os.listdir(p):rm(p+'/'+n)\n  os.rmdir(p)\n else:os.remove(p)\nrm(%r)\nprint('LMS_DONE=1')" % path
         with self._operation:
-            if "LVGL_MPY_STUDIO_DONE=1" not in self._exec(script, 60):
+            if "LMS_DONE=1" not in self._exec(script, 60):
                 raise DeviceError("device.protocol", path)
 
     def run(self, project=None, output_dir=None, _uploaded=False, progress=None, cancel=None, _generated=None):
@@ -727,7 +727,7 @@ except OSError:
         with self._operation:
             self.state = "stopping"
             output = self._exec(stop_script(self._app_root(self.profile or {})), 20)
-            if "LVGL_MPY_STUDIO_STOPPED" not in output:
+            if "LMS_STOPPED" not in output:
                 raise DeviceError("device.protocol", output)
             self.state = "ready"
             return output
@@ -753,7 +753,7 @@ except OSError:
                 output = self._exec(script, 30, cancel)
             else:
                 # On Windows a command line cannot hold a large UI.
-                with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-live-") as temporary:
+                with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-live-") as temporary:
                     path = Path(temporary) / "live.py"
                     path.write_text(script, encoding="utf-8", newline="\n")
                     output = self._execute(["connect", self.port, "resume", "run", str(path)], timeout=30, cancel=cancel)

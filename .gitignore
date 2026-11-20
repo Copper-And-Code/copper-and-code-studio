@@ -30,4 +30,5 @@ runtime/modules/lvsim
 # Local working notes
 prompts/
 export_py/
+/copper-and-code-studio-selftest/
 /lvgl-mpy-studio-selftest/

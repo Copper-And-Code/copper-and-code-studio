@@ -162,9 +162,9 @@ def generate_c(project, output_dir, root_dir=None, portable=False):
     root = Path(root_dir) if root_dir else Path(__file__).parents[2]
     nodes = [node for page in model["model"]["pages"] for node in page["nodes"]]
     widget_names = sorted({node["widget"]["name"] for node in nodes})
-    header = ["#ifndef LVGL_MPY_STUDIO_UI_H", "#define LVGL_MPY_STUDIO_UI_H", "", "#include <stdbool.h>", "#include <stdint.h>", '#include "lvgl.h"', "", *[f"extern lv_obj_t * ui_{name};" for name in widget_names], "", "void ui_create(void);", f"void {base}_load_page(int page_index);", "", "#endif", ""]
+    header = ["#ifndef LMS_UI_H", "#define LMS_UI_H", "", "#include <stdbool.h>", "#include <stdint.h>", '#include "lvgl.h"', "", *[f"extern lv_obj_t * ui_{name};" for name in widget_names], "", "void ui_create(void);", f"void {base}_load_page(int page_index);", "", "#endif", ""]
     (output / "ui.h").write_text("\n".join(header), encoding="utf-8", newline="\n")
-    event_header = ["#ifndef LVGL_MPY_STUDIO_UI_EVENTS_H", "#define LVGL_MPY_STUDIO_UI_EVENTS_H", "", '#include "lvgl.h"', ""]
+    event_header = ["#ifndef LMS_UI_EVENTS_H", "#define LMS_UI_EVENTS_H", "", '#include "lvgl.h"', ""]
     event_header += [f"void {name}(lv_event_t * e);" for name in list(handlers) + [item["name"] for item in model["eventCallbacks"]]]
     event_header += ["", "#endif", ""]
     (output / "ui_events.h").write_text("\n".join(event_header), encoding="utf-8", newline="\n")

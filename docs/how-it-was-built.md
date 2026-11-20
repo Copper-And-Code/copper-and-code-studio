@@ -38,7 +38,7 @@ the 162 commits of the first two weeks, 139 carry that line.
 - **Decisions are written down** with their date and reason, in [decisions.md](decisions.md).
 - **Every change comes with tests**: more than 1250 automated tests, among them pixel
   comparisons between the MicroPython and the C output of the same project.
-- **The IDE tests itself**: `lvgl-mpy-studio selftest` drives the real window with mouse and
+- **The IDE tests itself**: `copper-and-code-studio selftest` drives the real window with mouse and
   keyboard through thirteen scenarios and reports each step. It found real defects that the unit
   tests had missed.
 - **Each push is checked on other machines**: the suite and the self-test run on Linux and on

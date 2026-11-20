@@ -51,7 +51,7 @@ def children():
 
 
 def temporary_folders():
-    return sorted(path.name for path in Path(tempfile.gettempdir()).glob("lvgl-mpy-studio-*") if "selftest" not in path.name)
+    return sorted(path.name for path in Path(tempfile.gettempdir()).glob("copper-and-code-studio-*") if "selftest" not in path.name)
 
 
 def measure(window):

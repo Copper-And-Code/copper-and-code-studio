@@ -58,7 +58,7 @@ samples, validation of each value received, the alarm states, the fan ramp.
   replayed on a simulated clock, so that every run is the same:
 
   ```bash
-  lvgl-mpy-studio test examples/eim-01/project.json
+  copper-and-code-studio test examples/eim-01/project.json
   ```
 
   It makes 17 comparisons between pages and scenarios, to the pixel.

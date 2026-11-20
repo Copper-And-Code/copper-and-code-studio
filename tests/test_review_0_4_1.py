@@ -209,7 +209,7 @@ def test_a_profile_without_minimum_versions_accepts_any(monkeypatch):
     profile = builtin_profiles()[0]
     profile["firmware"] = {"modules": profile["firmware"]["modules"]}
     reply = {"implementation": "micropython", "implementationVersion": [1, 20, 0], "lvglVersion": "9.1.0", "modules": {name: True for name in profile["firmware"]["modules"]}, "width": profile["logicalWidth"], "height": profile["logicalHeight"], "touch": True, "apis": {}}
-    session = service.DeviceSession(runner=lambda command, timeout: "LVGL_MPY_STUDIO_INFO=" + json.dumps(reply))
+    session = service.DeviceSession(runner=lambda command, timeout: "LMS_INFO=" + json.dumps(reply))
     session.port, session.profile = "/dev/null", profile
     info = session.info()
     assert "microPython" not in info["missingRequirements"] and "lvgl" not in info["missingRequirements"]
@@ -233,26 +233,42 @@ def test_a_line_that_looks_like_a_probe_answer_is_plain_output():
     assert PROBE_LINE.search(b"\x1bLVSIM_PROBE 3 ok not-json")  # the reader must cope with it
 
 
-def test_the_old_configuration_folder_is_copied_once(tmp_path, monkeypatch):
+@pytest.mark.parametrize("old_name", ("lvgl-mpy-studio", "lvgl-ide"))
+def test_the_old_configuration_folder_is_copied_once(tmp_path, monkeypatch, old_name):
     from lvgl_mpy_studio import platform
 
-    old = tmp_path / "lvgl-ide"
+    old = tmp_path / old_name
     (old / "autostart-backups").mkdir(parents=True)
     (old / "board-profiles.json").write_text("{}")
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
     current = platform.config_dir()
-    assert current == tmp_path / "lvgl-mpy-studio" and (current / "board-profiles.json").read_text() == "{}"
+    assert current == tmp_path / "copper-and-code-studio" and (current / "board-profiles.json").read_text() == "{}"
     assert (old / "board-profiles.json").exists()  # an older IDE still finds its files
     (current / "board-profiles.json").write_text("new")
     assert (platform.config_dir() / "board-profiles.json").read_text() == "new"
 
 
-def test_settings_saved_under_the_old_name_are_kept(qtbot):
+def test_of_two_old_configuration_folders_the_newest_is_copied(tmp_path, monkeypatch):
+    from lvgl_mpy_studio import platform
+
+    for name, text in (("lvgl-ide", "0.4"), ("lvgl-mpy-studio", "0.7")):
+        (tmp_path / name).mkdir()
+        (tmp_path / name / "board-profiles.json").write_text(text)
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
+    assert (platform.config_dir() / "board-profiles.json").read_text() == "0.7"
+
+
+@pytest.mark.parametrize("old_name", ("LVGL MPY Studio", "LVGL IDE"))
+def test_settings_saved_under_an_old_name_are_kept(qtbot, old_name):
     from PySide6.QtCore import QSettings
+    from lvgl_mpy_studio.ui.app_settings import app_settings
     from lvgl_mpy_studio.ui.main_window import MainWindow
 
-    QSettings("CopperAndCode", "LVGL MPY Studio").clear()
-    old = QSettings("CopperAndCode", "LVGL IDE")
+    names = ("LVGL MPY Studio", "LVGL IDE")
+    for name in names:
+        QSettings("CopperAndCode", name).clear()
+    app_settings().clear()
+    old = QSettings("CopperAndCode", old_name)
     old.setValue("recentFiles", ["/tmp/old.json"])
     old.sync()
     try:
@@ -260,9 +276,33 @@ def test_settings_saved_under_the_old_name_are_kept(qtbot):
         qtbot.addWidget(window)
         assert window.settings.value("recentFiles", [], list) == ["/tmp/old.json"]
         assert window.windowTitle().endswith("Copper and Code Studio")
+        assert QSettings("CopperAndCode", old_name).value("recentFiles", [], list) == ["/tmp/old.json"]  # left for an older IDE
+        old.setValue("recentFiles", ["/tmp/changed.json"])
+        old.sync()
+        second = MainWindow()  # copied once: what the old IDE writes later is not taken again
+        qtbot.addWidget(second)
+        assert second.settings.value("recentFiles", [], list) == ["/tmp/old.json"]
     finally:
-        old.clear()
-        QSettings("CopperAndCode", "LVGL MPY Studio").clear()
+        for name in names:
+            QSettings("CopperAndCode", name).clear()
+        app_settings().clear()
+
+
+def test_of_two_old_settings_the_newest_are_kept(qtbot):
+    from PySide6.QtCore import QSettings
+    from lvgl_mpy_studio.ui.app_settings import adopt_old_settings, app_settings
+
+    app_settings().clear()
+    try:
+        for name, value in (("LVGL IDE", "0.4"), ("LVGL MPY Studio", "0.7")):
+            old = QSettings("CopperAndCode", name)
+            old.setValue("language", value)
+            old.sync()
+        assert adopt_old_settings().value("language") == "0.7"
+    finally:
+        for name in ("LVGL MPY Studio", "LVGL IDE"):
+            QSettings("CopperAndCode", name).clear()
+        app_settings().clear()
 
 
 def font_project(board=None):

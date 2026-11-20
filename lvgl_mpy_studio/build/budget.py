@@ -58,7 +58,7 @@ def _measure_flash(project, simulator_dir, directory, board_mpy):
 
 def measure_budget(project, board_mpy=None):
     """Return {"flash": bytes, "ram": bytes or None}; None if the project does not compile."""
-    with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-budget-", ignore_cleanup_errors=True) as temporary:
+    with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-budget-", ignore_cleanup_errors=True) as temporary:
         simulator = Path(temporary) / "simulator"
         try:
             generate_project(project, simulator)

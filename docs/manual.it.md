@@ -28,22 +28,22 @@ Questo manuale descrive la versione 0.4 ed è disponibile anche [in inglese](man
 
 ### Linux
 
-Scarica `LVGL_MPY_STUDIO-x86_64.AppImage`, rendilo eseguibile e avvialo:
+Scarica `Copper_and_Code_Studio-x86_64.AppImage`, rendilo eseguibile e avvialo:
 
 ```bash
-chmod +x LVGL_MPY_STUDIO-x86_64.AppImage
-./LVGL_MPY_STUDIO-x86_64.AppImage
+chmod +x Copper_and_Code_Studio-x86_64.AppImage
+./Copper_and_Code_Studio-x86_64.AppImage
 ```
 
 Non serve installare altro: Python, Qt, il simulatore e il compilatore di MicroPython sono dentro il file. Richiede glibc 2.38 o successiva: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 o più recenti. Su sistemi più vecchi, come Ubuntu 22.04 o Debian 12, avvialo dai sorgenti. Su un Chromebook gira nell'ambiente di sviluppo Linux: vedi [Running on a Chromebook](chromebook.md).
 
 ### Windows
 
-Estrai **tutta** la cartella `LVGL_MPY_STUDIO-<versione>-portable-win64.zip` e apri `LVGL_MPY_STUDIO.exe`. Python non va installato. Se l'IDE non parte, `LVGL_MPY_STUDIO_console.bat` lo avvia con una console che mostra gli errori.
+Estrai **tutta** la cartella `Copper_and_Code_Studio-<versione>-portable-win64.zip` e apri `Copper_and_Code_Studio.exe`. Python non va installato. Se l'IDE non parte, `Copper_and_Code_Studio_console.bat` lo avvia con una console che mostra gli errori.
 
 Gli eseguibili non sono firmati: al primo avvio Windows SmartScreen può mostrare un avviso. Scegli **Ulteriori informazioni → Esegui comunque**.
 
-Esiste anche un installer (`LVGL_MPY_STUDIO-<versione>-Setup-win64.exe`) che installa in `%LOCALAPPDATA%` senza permessi di amministratore.
+Esiste anche un installer (`Copper_and_Code_Studio-<versione>-Setup-win64.exe`) che installa in `%LOCALAPPDATA%` senza permessi di amministratore.
 
 ### Lingua e tema
 
@@ -398,8 +398,8 @@ Per condividere il gioco con un link, copia tutta la cartella su un hosting, per
 I test visivi controllano che le pagine restino uguali mentre il progetto cambia.
 
 ```bash
-lvgl-mpy-studio test project.json --update   # la prima volta: scrive le immagini di riferimento
-lvgl-mpy-studio test project.json            # le volte dopo: confronta pixel per pixel
+copper-and-code-studio test project.json --update   # la prima volta: scrive le immagini di riferimento
+copper-and-code-studio test project.json            # le volte dopo: confronta pixel per pixel
 ```
 
 Le immagini di riferimento stanno in `visual/<larghezza>x<altezza>/` accanto al progetto. Se una pagina cambia, il comando fallisce e scrive `<pagina>.diff.png` con i pixel cambiati in rosso.
@@ -418,27 +418,27 @@ Uno scenario gira con un orologio simulato, quindi ogni esecuzione è identica, 
 
 ## 14. Riga di comando
 
-L'IDE ha anche una riga di comando, `lvgl-mpy-studio` (con l'AppImage: `./LVGL_MPY_STUDIO-x86_64.AppImage <comando>`).
+L'IDE ha anche una riga di comando, `copper-and-code-studio` (con l'AppImage: `./Copper_and_Code_Studio-x86_64.AppImage <comando>`).
 
 | Comando | Cosa fa |
 |---|---|
-| `lvgl-mpy-studio` | apre l'IDE; il progetto si apre poi da **File → Apri** o da **File → File recenti** |
-| `lvgl-mpy-studio run project.json` | avvia il progetto nel simulatore |
-| `lvgl-mpy-studio generate project.json` | genera il codice (`--target micropython`, `c` o `board`) |
-| `lvgl-mpy-studio build project.json` | crea l'eseguibile; `--profile release --single-file` per il file unico, `--for windows` o `--for linux` per l'altro sistema, `--web` per la versione per il browser |
-| `lvgl-mpy-studio web project.json` | crea la versione per il browser, la serve e la apre; Ctrl+C la ferma |
-| `lvgl-mpy-studio test project.json` | test visivi; `--update`, `--page`, `--scenario`, `--threshold` |
-| `lvgl-mpy-studio device list` | elenca le board collegate; `info`, `upload`, `run`, `stop`, `reset`, `repl`, `autostart-install`, `autostart-remove` operano su una board con `--port` |
-| `lvgl-mpy-studio mcp` | avvia il server per gli agenti AI |
-| `lvgl-mpy-studio selftest` | l'IDE si usa da solo e riferisce cosa funziona; vedi sotto |
-| `lvgl-mpy-studio --version` | mostra la versione |
+| `copper-and-code-studio` | apre l'IDE; il progetto si apre poi da **File → Apri** o da **File → File recenti** |
+| `copper-and-code-studio run project.json` | avvia il progetto nel simulatore |
+| `copper-and-code-studio generate project.json` | genera il codice (`--target micropython`, `c` o `board`) |
+| `copper-and-code-studio build project.json` | crea l'eseguibile; `--profile release --single-file` per il file unico, `--for windows` o `--for linux` per l'altro sistema, `--web` per la versione per il browser |
+| `copper-and-code-studio web project.json` | crea la versione per il browser, la serve e la apre; Ctrl+C la ferma |
+| `copper-and-code-studio test project.json` | test visivi; `--update`, `--page`, `--scenario`, `--threshold` |
+| `copper-and-code-studio device list` | elenca le board collegate; `info`, `upload`, `run`, `stop`, `reset`, `repl`, `autostart-install`, `autostart-remove` operano su una board con `--port` |
+| `copper-and-code-studio mcp` | avvia il server per gli agenti AI |
+| `copper-and-code-studio selftest` | l'IDE si usa da solo e riferisce cosa funziona; vedi sotto |
+| `copper-and-code-studio --version` | mostra la versione |
 
 ### Collaudo automatico
 
-`lvgl-mpy-studio selftest` apre l'IDE e lo usa come farebbe una persona: crea un progetto, prende i widget dalla casella, ne imposta le proprietà nel pannello, scrive un gestore, salva, avvia il simulatore e tocca lo schermo. Altri scenari coprono pagine, risoluzione, immagini e font, moduli Python, Timer e Buzzer, errori, blocchi hardware, il pannello File e le sue schede, i programmi senza pagine e il loro terminale (su Linux), Impostazioni del progetto e profili delle board, e i file di una board con Upload Files e Run File on Board. Ogni passo è verificato e scritto come `PASSED` o `FAILED`; l'ultima riga è `RESULT: PASSED` o `RESULT: FAILED`, e il comando termina con 0 o 1. Il rapporto è in inglese.
+`copper-and-code-studio selftest` apre l'IDE e lo usa come farebbe una persona: crea un progetto, prende i widget dalla casella, ne imposta le proprietà nel pannello, scrive un gestore, salva, avvia il simulatore e tocca lo schermo. Altri scenari coprono pagine, risoluzione, immagini e font, moduli Python, Timer e Buzzer, errori, blocchi hardware, il pannello File e le sue schede, i programmi senza pagine e il loro terminale (su Linux), Impostazioni del progetto e profili delle board, e i file di una board con Upload Files e Run File on Board. Ogni passo è verificato e scritto come `PASSED` o `FAILED`; l'ultima riga è `RESULT: PASSED` o `RESULT: FAILED`, e il comando termina con 0 o 1. Il rapporto è in inglese.
 
 - Senza opzioni l'IDE resta nascosto e servono pochi secondi. `--show` lo mostra al lavoro, rallentato; `--slow 800` imposta la pausa dopo ogni azione, in millisecondi.
-- Il rapporto va in `lvgl-mpy-studio-selftest/<data-ora>/` nella cartella corrente, o nella cartella indicata con `--output`: `report.txt`, `report.json`, i progetti salvati in `work/`, e per ogni passo fallito un'immagine dell'IDE e del simulatore.
+- Il rapporto va in `copper-and-code-studio-selftest/<data-ora>/` nella cartella corrente, o nella cartella indicata con `--output`: `report.txt`, `report.json`, i progetti salvati in `work/`, e per ogni passo fallito un'immagine dell'IDE e del simulatore.
 - `--list` elenca gli scenari; indicandone uno o più si eseguono solo quelli.
 - Impostazioni, file recenti e profili delle board non vengono toccati. Non usare mouse e tastiera sulla finestra dell'IDE mentre gira con `--show`.
 

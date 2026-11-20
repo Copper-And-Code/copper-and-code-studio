@@ -49,6 +49,16 @@ def test_web_build_replaces_only_its_own_folder(tmp_path):
         web.build_web(project("Altro"), tmp_path)
 
 
+@needs_web_runtime
+def test_web_build_replaces_a_folder_written_under_the_old_name(tmp_path):
+    old = tmp_path / f"{web.project_name(project())}-web"
+    old.mkdir()
+    (old / ".lvgl-mpy-studio-web").write_text("", encoding="utf-8")
+    (old / "vecchio.txt").write_text("x", encoding="utf-8")
+    folder = web.build_web(project(), tmp_path)
+    assert folder == old and not (folder / "vecchio.txt").exists() and (folder / web.MARKER).exists()
+
+
 def test_web_build_without_runtime_says_how_to_get_it(tmp_path, monkeypatch):
     monkeypatch.setattr(web, "web_runtime", lambda: tmp_path / "missing")
     with pytest.raises(FileNotFoundError, match="build_web.sh"):

@@ -803,7 +803,7 @@ def _initialize(params):
     return {
         "protocolVersion": requested if requested in PROTOCOL_VERSIONS else PROTOCOL_VERSIONS[0],
         "capabilities": {"tools": {}},
-        "serverInfo": {"name": "lvgl-mpy-studio", "version": __version__},
+        "serverInfo": {"name": "copper-and-code-studio", "version": __version__},
         "instructions": INSTRUCTIONS,
     }
 

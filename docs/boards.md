@@ -1,6 +1,6 @@
 # MicroPython boards
 
-[Italiano](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/boards.it.md)
+[Italiano](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/boards.it.md)
 
 ### Requirements and first run
 
@@ -38,22 +38,22 @@ While an application started from the IDE is running, **Device → Live Editing*
 
 The **Device Console** incrementally shows output and tracebacks produced after bootstrap and accepts REPL commands while the session is ready. The continuous reader pauses during commands that need the port, ensuring a single serial owner. **Cancel operation** interrupts a blocked command. **Stop** in the Device menu always targets the board, even when the simulator is selected; F5 and Shift+F5 use the selected destination. Stop removes application modules from the import cache and calls `display_driver.stop()`. The last image may remain visible because scan-out continues after the timer stops. Every new run performs a soft reset to avoid stale timers and modules.
 
-**Install Autostart…** is separate from F5. It replaces `/main.py` with a recognizable launcher and backs up an existing `main.py` under `~/.config/lvgl-mpy-studio/autostart-backups/<board-id>/<app>/<transaction>/` (or `XDG_CONFIG_HOME`). Identity uses `machine.unique_id()`, not the USB port. Every transaction verifies launcher and backup hashes; manual edits, invalid manifests or missing backups block restoration without overwriting files. **Remove Autostart…** only acts on the current transaction launcher for the selected app.
+**Install Autostart…** is separate from F5. It replaces `/main.py` with a recognizable launcher and backs up an existing `main.py` under `~/.config/copper-and-code-studio/autostart-backups/<board-id>/<app>/<transaction>/` (or `XDG_CONFIG_HOME`). Identity uses `machine.unique_id()`, not the USB port. Every transaction verifies launcher and backup hashes; manual edits, invalid manifests or missing backups block restoration without overwriting files. **Remove Autostart…** only acts on the current transaction launcher for the selected app.
 
 If an autostart application becomes unresponsive, use the safe/recovery mode provided by the board firmware, or power it down, open another MicroPython tool and remove only the recognizable `/main.py` launcher. Do not format the filesystem: application files remain under `/lms_apps/`.
 
 ### CLI
 
 ```bash
-lvgl-mpy-studio --language en device list
-lvgl-mpy-studio --language en device info --port /dev/ttyACM0
-lvgl-mpy-studio device upload project.json --port /dev/ttyACM0
-lvgl-mpy-studio device run project.json --port /dev/ttyACM0
-lvgl-mpy-studio device stop --port /dev/ttyACM0
-lvgl-mpy-studio device reset --port /dev/ttyACM0
-lvgl-mpy-studio device repl --port /dev/ttyACM0
-lvgl-mpy-studio device autostart-install project.json --port /dev/ttyACM0
-lvgl-mpy-studio device autostart-remove project.json --port /dev/ttyACM0
+copper-and-code-studio --language en device list
+copper-and-code-studio --language en device info --port /dev/ttyACM0
+copper-and-code-studio device upload project.json --port /dev/ttyACM0
+copper-and-code-studio device run project.json --port /dev/ttyACM0
+copper-and-code-studio device stop --port /dev/ttyACM0
+copper-and-code-studio device reset --port /dev/ttyACM0
+copper-and-code-studio device repl --port /dev/ttyACM0
+copper-and-code-studio device autostart-install project.json --port /dev/ttyACM0
+copper-and-code-studio device autostart-remove project.json --port /dev/ttyACM0
 ```
 
 Subcommand and option names are always in English. If a project has no embedded profile, add `--board-profile <id>`. `upload` and `run` accept `--output <directory>`. Projects contain a portable profile copy and can be opened without the corresponding local catalog entry.
@@ -90,15 +90,15 @@ A board the IDE does not ship can be added from a file, with no change to the ID
 - From the command line:
 
   ```bash
-  lvgl-mpy-studio board list
-  lvgl-mpy-studio board import my_board.json            # --replace to replace an imported board of the same id
-  lvgl-mpy-studio board export my_board_320x240 copy.json
-  lvgl-mpy-studio board delete my_board_320x240
+  copper-and-code-studio board list
+  copper-and-code-studio board import my_board.json            # --replace to replace an imported board of the same id
+  copper-and-code-studio board export my_board_320x240 copy.json
+  copper-and-code-studio board delete my_board_320x240
   ```
 
 - For agents, the MCP tools `import_board` and `delete_board`; `list_boards` shows imported boards with `"origin": "imported"`, and `set_board` selects them.
 
-Imported boards are kept in `board-profiles.json`, in the settings folder (`~/.config/lvgl-mpy-studio/` or `XDG_CONFIG_HOME`). A project keeps its own copy of its board: it still opens and works after the board is deleted, or on a computer where the board was never imported, and the Output panel says so.
+Imported boards are kept in `board-profiles.json`, in the settings folder (`~/.config/copper-and-code-studio/` or `XDG_CONFIG_HOME`). A project keeps its own copy of its board: it still opens and works after the board is deleted, or on a computer where the board was never imported, and the Output panel says so.
 
 ### Fonts
 

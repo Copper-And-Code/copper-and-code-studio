@@ -384,7 +384,7 @@ def test_stop_script_forgets_the_modules_of_the_app():
 
     script = stop_script("/lms_apps")
     compile(script, "stop", "exec")
-    assert "'/lms_apps/'" in script and "LVGL_MPY_STUDIO_STOPPED" in script
+    assert "'/lms_apps/'" in script and "LMS_STOPPED" in script
     assert "sys.modules.pop(name,None)" in script
 
 

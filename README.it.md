@@ -2,23 +2,23 @@
 
 **Copper and Code Studio** — un costruttore visuale di interfacce grafiche per MicroPython e LVGL.
 
-In precedenza LVGL MPY Studio.
+In precedenza Copper and Code Studio.
 
-[![CI](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml)
+[![CI](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml)
 
 [English](README.md)
 
-### [Sito del progetto](https://copper-and-code.github.io/lvgl-mpy-studio/) · [Prova le demo nel browser](https://copper-and-code.github.io/lvgl-mpy-studio/demos/) · [Apri l'IDE nel browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
+### [Sito del progetto](https://copper-and-code.github.io/copper-and-code-studio/) · [Prova le demo nel browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Apri l'IDE nel browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
 
 Il sito ha la documentazione (in inglese); le demo sono giochi e una shell fatti con Copper and Code Studio, che girano in WebAssembly senza installare nulla. L'IDE nel browser è sperimentale: vedi più sotto.
 
 Un IDE desktop per progettare interfacce [LVGL](https://lvgl.io) 9.5 per board MicroPython: disegni le pagine, scrivi i gestori in Python, esegui l'applicazione in un simulatore che usa la vera LVGL e la carichi su una board. Un agente AI può fare lo stesso attraverso un server MCP.
 
-[![L'IDE che costruisce un monitor industriale: widget trascinati sulla pagina, una proprietà cambiata, un gestore scritto, poi l'app toccata nel simulatore](https://copper-and-code.github.io/lvgl-mpy-studio/media/showreel/eim-01-short.gif)](https://copper-and-code.github.io/lvgl-mpy-studio/videos/)
+[![L'IDE che costruisce un monitor industriale: widget trascinati sulla pagina, una proprietà cambiata, un gestore scritto, poi l'app toccata nel simulatore](https://copper-and-code.github.io/copper-and-code-studio/media/showreel/eim-01-short.gif)](https://copper-and-code.github.io/copper-and-code-studio/videos/)
 
-Una riproduzione automatica dell'IDE vero, accelerata: [altri video](https://copper-and-code.github.io/lvgl-mpy-studio/videos/).
+Una riproduzione automatica dell'IDE vero, accelerata: [altri video](https://copper-and-code.github.io/copper-and-code-studio/videos/).
 
-> **Stato: 0.7.2 ([scarica](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest)).** I test automatici sono molti e le prove fatte da persone sono poche: molto è stato scritto e verificato dalle macchine, e poco è stato usato davvero. [Cosa è verificato, e come](docs/status.md) lo dice area per area.
+> **Stato: 0.7.2 ([scarica](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest)).** I test automatici sono molti e le prove fatte da persone sono poche: molto è stato scritto e verificato dalle macchine, e poco è stato usato davvero. [Cosa è verificato, e come](docs/status.md) lo dice area per area.
 
 ## Se stai valutando questo progetto
 
@@ -51,7 +51,7 @@ Queste pagine sono in inglese.
 
 ## Provalo
 
-L'AppImage della [release](https://github.com/Copper-And-Code/lvgl-mpy-studio/releases/latest) richiede glibc 2.38 o successiva: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 o più recenti.
+L'AppImage della [release](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest) richiede glibc 2.38 o successiva: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 o più recenti.
 
 Linux, dai sorgenti, con Python 3.12 o successivo:
 
@@ -59,7 +59,7 @@ Linux, dai sorgenti, con Python 3.12 o successivo:
 python3 -m venv .venv
 .venv/bin/pip install -e '.[dev]'
 ./runtime/build.sh
-.venv/bin/lvgl-mpy-studio
+.venv/bin/copper-and-code-studio
 ```
 
 Poi **File → Apri** e `examples/eim-01/project.json`, e F5. La lingua si cambia da **Impostazioni → Lingua**. Requisiti, Windows, pacchetti e suite di test sono in [Building, testing and packaging](docs/development.md).
@@ -67,7 +67,7 @@ Poi **File → Apri** e `examples/eim-01/project.json`, e F5. La lingua si cambi
 Per vedere l'IDE usarsi da solo, con il rapporto di ogni passo:
 
 ```bash
-.venv/bin/lvgl-mpy-studio selftest --show
+.venv/bin/copper-and-code-studio selftest --show
 ```
 
 ## Documentazione

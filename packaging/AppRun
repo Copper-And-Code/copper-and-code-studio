@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-exec "$HERE/usr/bin/lvgl-mpy-studio/lvgl-mpy-studio" "$@"
+exec "$HERE/usr/bin/copper-and-code-studio/copper-and-code-studio" "$@"

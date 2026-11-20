@@ -66,7 +66,7 @@ def read_png(path):
         if kind == b"IHDR":
             width, height, depth, color, _compression, _filter, interlace = struct.unpack(">IIBBBBB", body)
             if (depth, color, interlace) != (8, 2, 0):
-                raise PngError(f"{path}: only 8-bit RGB images written by lvgl-mpy-studio are supported")
+                raise PngError(f"{path}: only 8-bit RGB images written by copper-and-code-studio are supported")
         elif kind == b"IDAT":
             compressed += body
     try:
@@ -75,7 +75,7 @@ def read_png(path):
         raise PngError(f"{path}: {exc}") from exc
     stride = width * 3 + 1
     if not width or len(rows) != stride * height or any(rows[row * stride] for row in range(height)):
-        raise PngError(f"{path}: only images written by lvgl-mpy-studio are supported")
+        raise PngError(f"{path}: only images written by copper-and-code-studio are supported")
     return b"".join(rows[row * stride + 1:(row + 1) * stride] for row in range(height)), width, height
 
 

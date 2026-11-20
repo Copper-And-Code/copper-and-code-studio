@@ -8,15 +8,15 @@
 On Linux you need Python 3.12 or later (with Python 3.11 PySide6 6.12.0 crashes), a C compiler, CMake, `pkg-config`, SDL2 development headers, and `xvfb` for headless simulator windows. The first runtime build also downloads the pinned SDL2 sources.
 
 ```bash
-git clone https://github.com/Copper-And-Code/lvgl-mpy-studio.git
-cd lvgl-mpy-studio
+git clone https://github.com/Copper-And-Code/copper-and-code-studio.git
+cd copper-and-code-studio
 python3 -m venv .venv
 .venv/bin/pip install -e '.[dev]'
 ./runtime/build.sh
-.venv/bin/lvgl-mpy-studio
+.venv/bin/copper-and-code-studio
 ```
 
-The full requirements and the Windows and packaging instructions are in [Building and testing](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/development.md) on GitHub.
+The full requirements and the Windows and packaging instructions are in [Building and testing](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/development.md) on GitHub.
 
 ## Open a complete project
 

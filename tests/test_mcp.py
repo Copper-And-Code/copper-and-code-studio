@@ -218,11 +218,11 @@ class FakeDevice:
 
     def stop(self):
         self.calls.append(("stop",))
-        return "LVGL_MPY_STUDIO_STOPPED"
+        return "LMS_STOPPED"
 
     def live_update(self, script):
         self.calls.append(("live", "exec(" in script))
-        return "LVGL_MPY_STUDIO_LIVE_OK"
+        return "LMS_LIVE_OK"
 
     def start_console(self, on_output):
         on_output("riga\n")

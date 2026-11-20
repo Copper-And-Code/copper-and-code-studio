@@ -2,7 +2,7 @@
 
 Copper and Code Studio is a visual environment for building graphical interfaces with [LVGL](https://lvgl.io) and MicroPython, in the style of Visual Basic: you draw pages by dragging controls, write a few lines of Python for their events and try everything in a simulator that uses the same LVGL as the board. When you are ready you upload the app to a board, build an executable to send to others, or export the code.
 
-This manual describes version 0.4. For details on boards see the [board guide](boards.md), for AI agents the [MCP server guide](mcp.md). The manual is also available [in Italian](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/manual.it.md).
+This manual describes version 0.4. For details on boards see the [board guide](boards.md), for AI agents the [MCP server guide](mcp.md). The manual is also available [in Italian](https://github.com/Copper-And-Code/copper-and-code-studio/blob/main/docs/manual.it.md).
 
 ## Contents
 
@@ -28,22 +28,22 @@ This manual describes version 0.4. For details on boards see the [board guide](b
 
 ### Linux
 
-Download `LVGL_MPY_STUDIO-x86_64.AppImage`, make it executable and start it:
+Download `Copper_and_Code_Studio-x86_64.AppImage`, make it executable and start it:
 
 ```bash
-chmod +x LVGL_MPY_STUDIO-x86_64.AppImage
-./LVGL_MPY_STUDIO-x86_64.AppImage
+chmod +x Copper_and_Code_Studio-x86_64.AppImage
+./Copper_and_Code_Studio-x86_64.AppImage
 ```
 
 Nothing else needs installing: Python, Qt, the simulator and the MicroPython compiler are inside the file. It needs glibc 2.38 or later: Ubuntu 24.04, Debian 13, Fedora 39, Linux Mint 22 or newer. On older systems, such as Ubuntu 22.04 or Debian 12, run it from the sources. On a Chromebook it runs in the Linux development environment: see [Running on a Chromebook](chromebook.md).
 
 ### Windows
 
-Extract the **whole** folder `LVGL_MPY_STUDIO-<version>-portable-win64.zip` and open `LVGL_MPY_STUDIO.exe`. Python does not need installing. If the IDE does not start, `LVGL_MPY_STUDIO_console.bat` starts it with a console that shows the errors.
+Extract the **whole** folder `Copper_and_Code_Studio-<version>-portable-win64.zip` and open `Copper_and_Code_Studio.exe`. Python does not need installing. If the IDE does not start, `Copper_and_Code_Studio_console.bat` starts it with a console that shows the errors.
 
 The executables are not signed: at the first start Windows SmartScreen may show a warning. Choose **More info → Run anyway**.
 
-There is also an installer (`LVGL_MPY_STUDIO-<version>-Setup-win64.exe`) that installs to `%LOCALAPPDATA%` without administrator rights.
+There is also an installer (`Copper_and_Code_Studio-<version>-Setup-win64.exe`) that installs to `%LOCALAPPDATA%` without administrator rights.
 
 ### Language and theme
 
@@ -398,8 +398,8 @@ To share the game with a link, copy the whole folder to a host, for example Host
 Visual tests check that pages stay the same while the project changes.
 
 ```bash
-lvgl-mpy-studio test project.json --update   # the first time: writes the reference images
-lvgl-mpy-studio test project.json            # afterwards: compares pixel by pixel
+copper-and-code-studio test project.json --update   # the first time: writes the reference images
+copper-and-code-studio test project.json            # afterwards: compares pixel by pixel
 ```
 
 The reference images are in `visual/<width>x<height>/` next to the project. If a page changes, the command fails and writes `<page>.diff.png` with the changed pixels in red.
@@ -418,27 +418,27 @@ A scenario runs on a simulated clock, so every run is identical, dates included.
 
 ## 14. Command line
 
-The IDE also has a command line, `lvgl-mpy-studio` (with the AppImage: `./LVGL_MPY_STUDIO-x86_64.AppImage <command>`). Messages are in English; `--language it` switches to Italian.
+The IDE also has a command line, `copper-and-code-studio` (with the AppImage: `./Copper_and_Code_Studio-x86_64.AppImage <command>`). Messages are in English; `--language it` switches to Italian.
 
 | Command | What it does |
 |---|---|
-| `lvgl-mpy-studio` | opens the IDE; the project is then opened from **File → Open** or **File → Recent Files** |
-| `lvgl-mpy-studio run project.json` | starts the project in the simulator |
-| `lvgl-mpy-studio generate project.json` | generates the code (`--target micropython`, `c` or `board`) |
-| `lvgl-mpy-studio build project.json` | builds the executable in `dist/` next to the project; `--profile release --single-file` for the single file, `--for windows` or `--for linux` for the other system, `--web` for the browser version |
-| `lvgl-mpy-studio web project.json` | builds the browser version, serves it and opens it; Ctrl+C stops it |
-| `lvgl-mpy-studio test project.json` | visual tests; `--update`, `--page`, `--scenario`, `--threshold` |
-| `lvgl-mpy-studio device list` | lists the connected boards; `info`, `upload`, `run`, `stop`, `reset`, `repl`, `autostart-install`, `autostart-remove` act on a board with `--port` |
-| `lvgl-mpy-studio mcp` | starts the server for AI agents |
-| `lvgl-mpy-studio selftest` | the IDE uses itself and reports what works; see below |
-| `lvgl-mpy-studio --version` | shows the version |
+| `copper-and-code-studio` | opens the IDE; the project is then opened from **File → Open** or **File → Recent Files** |
+| `copper-and-code-studio run project.json` | starts the project in the simulator |
+| `copper-and-code-studio generate project.json` | generates the code (`--target micropython`, `c` or `board`) |
+| `copper-and-code-studio build project.json` | builds the executable in `dist/` next to the project; `--profile release --single-file` for the single file, `--for windows` or `--for linux` for the other system, `--web` for the browser version |
+| `copper-and-code-studio web project.json` | builds the browser version, serves it and opens it; Ctrl+C stops it |
+| `copper-and-code-studio test project.json` | visual tests; `--update`, `--page`, `--scenario`, `--threshold` |
+| `copper-and-code-studio device list` | lists the connected boards; `info`, `upload`, `run`, `stop`, `reset`, `repl`, `autostart-install`, `autostart-remove` act on a board with `--port` |
+| `copper-and-code-studio mcp` | starts the server for AI agents |
+| `copper-and-code-studio selftest` | the IDE uses itself and reports what works; see below |
+| `copper-and-code-studio --version` | shows the version |
 
 ### Self-test
 
-`lvgl-mpy-studio selftest` opens the IDE and uses it as a person would: it creates a project, takes widgets from the toolbox, sets their properties in the panel, types a handler, saves, starts the simulator and touches the screen. Other scenarios cover pages, resolution, pictures and fonts, Python modules, the Timer and the Buzzer, errors, hardware blocks, the Files panel and its tabs, programs without pages and their terminal (on Linux), Project Settings and board profiles, and the files of a board with Upload Files and Run File on Board. Each step is checked and written as `PASSED` or `FAILED`; the last line is `RESULT: PASSED` or `RESULT: FAILED`, and the command ends with 0 or 1.
+`copper-and-code-studio selftest` opens the IDE and uses it as a person would: it creates a project, takes widgets from the toolbox, sets their properties in the panel, types a handler, saves, starts the simulator and touches the screen. Other scenarios cover pages, resolution, pictures and fonts, Python modules, the Timer and the Buzzer, errors, hardware blocks, the Files panel and its tabs, programs without pages and their terminal (on Linux), Project Settings and board profiles, and the files of a board with Upload Files and Run File on Board. Each step is checked and written as `PASSED` or `FAILED`; the last line is `RESULT: PASSED` or `RESULT: FAILED`, and the command ends with 0 or 1.
 
 - Without options the IDE stays hidden and the run takes a few seconds. `--show` shows it at work, slowed down; `--slow 800` sets the pause after each action in milliseconds.
-- The report goes to `lvgl-mpy-studio-selftest/<date-time>/` in the current folder, or to the folder given with `--output`: `report.txt`, `report.json`, the projects it saved under `work/`, and for each failed step a picture of the IDE and of the simulator.
+- The report goes to `copper-and-code-studio-selftest/<date-time>/` in the current folder, or to the folder given with `--output`: `report.txt`, `report.json`, the projects it saved under `work/`, and for each failed step a picture of the IDE and of the simulator.
 - `--list` shows the scenarios; naming one or more runs only those.
 - Your settings, recent files and board profiles are not touched. Do not use the mouse or the keyboard on the IDE's window while `--show` runs.
 

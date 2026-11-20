@@ -38,22 +38,22 @@ Mentre un'applicazione avviata dall'IDE è in esecuzione, **Dispositivo → Modi
 
 La **Console dispositivo** mostra incrementalmente anche stampe e traceback prodotti dopo il bootstrap e accetta comandi REPL quando la sessione è pronta. Il lettore continuo viene sospeso durante i comandi che richiedono la porta, così esiste un solo proprietario della seriale. **Annulla operazione** interrompe un comando bloccato. **Interrompi** nel menu Dispositivo ferma sempre la board, anche quando è selezionato il simulatore; F5 e Shift+F5 usano invece la destinazione selezionata. Stop rimuove i moduli dell'app dalla cache e chiama `display_driver.stop()`. L'ultima immagine può restare sul display: lo scan-out continua anche quando il timer è fermo. Ogni nuova esecuzione effettua un soft reset per evitare timer e moduli obsoleti.
 
-**Installa avvio automatico…** è un'azione separata da F5. Sostituisce `/main.py` con un launcher riconoscibile e salva un eventuale `main.py` precedente in `~/.config/lvgl-mpy-studio/autostart-backups/<id-board>/<app>/<transazione>/` (o sotto `XDG_CONFIG_HOME`). L'identità usa `machine.unique_id()`, non la porta USB. Ogni transazione verifica hash del launcher e backup; una modifica manuale, un manifest invalido o un backup mancante blocca il ripristino senza sovrascrivere file. **Rimuovi avvio automatico…** agisce solo sul launcher della transazione corrente e dell'app selezionata.
+**Installa avvio automatico…** è un'azione separata da F5. Sostituisce `/main.py` con un launcher riconoscibile e salva un eventuale `main.py` precedente in `~/.config/copper-and-code-studio/autostart-backups/<id-board>/<app>/<transazione>/` (o sotto `XDG_CONFIG_HOME`). L'identità usa `machine.unique_id()`, non la porta USB. Ogni transazione verifica hash del launcher e backup; una modifica manuale, un manifest invalido o un backup mancante blocca il ripristino senza sovrascrivere file. **Rimuovi avvio automatico…** agisce solo sul launcher della transazione corrente e dell'app selezionata.
 
 Se un'app in avvio automatico non risponde, usa la modalità sicura/recupero prevista dal firmware della board oppure scollega l'alimentazione, apri un altro strumento MicroPython e rimuovi soltanto il launcher `/main.py` riconoscibile. Non formattare il filesystem: i file dell'app restano in `/lms_apps/`.
 
 ### CLI
 
 ```bash
-lvgl-mpy-studio --language it device list
-lvgl-mpy-studio --language it device info --port /dev/ttyACM0
-lvgl-mpy-studio device upload progetto.json --port /dev/ttyACM0
-lvgl-mpy-studio device run progetto.json --port /dev/ttyACM0
-lvgl-mpy-studio device stop --port /dev/ttyACM0
-lvgl-mpy-studio device reset --port /dev/ttyACM0
-lvgl-mpy-studio device repl --port /dev/ttyACM0
-lvgl-mpy-studio device autostart-install progetto.json --port /dev/ttyACM0
-lvgl-mpy-studio device autostart-remove progetto.json --port /dev/ttyACM0
+copper-and-code-studio --language it device list
+copper-and-code-studio --language it device info --port /dev/ttyACM0
+copper-and-code-studio device upload progetto.json --port /dev/ttyACM0
+copper-and-code-studio device run progetto.json --port /dev/ttyACM0
+copper-and-code-studio device stop --port /dev/ttyACM0
+copper-and-code-studio device reset --port /dev/ttyACM0
+copper-and-code-studio device repl --port /dev/ttyACM0
+copper-and-code-studio device autostart-install progetto.json --port /dev/ttyACM0
+copper-and-code-studio device autostart-remove progetto.json --port /dev/ttyACM0
 ```
 
 Per un progetto senza profilo incorporato, aggiungi `--board-profile <id>`. `upload` e `run` accettano `--output <directory>`. Il progetto salva una copia portabile del profilo, quindi resta apribile anche se quel profilo non è presente nel catalogo locale.

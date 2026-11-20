@@ -46,9 +46,9 @@ def built_site():
 @needs_browser
 def test_gallery_and_demos_in_chromium_under_a_subpath(built_site, tmp_path):
     sync_playwright = pytest.importorskip("playwright.sync_api").sync_playwright
-    (tmp_path / "lvgl-mpy-studio").symlink_to(built_site, target_is_directory=True)
+    (tmp_path / "copper-and-code-studio").symlink_to(built_site, target_is_directory=True)
     server, server_url = serve(tmp_path)
-    base_url = server_url + "lvgl-mpy-studio/"
+    base_url = server_url + "copper-and-code-studio/"
     external_requests = []
     try:
         with sync_playwright() as playwright:

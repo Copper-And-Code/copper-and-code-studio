@@ -263,7 +263,7 @@ def test_board_paths_are_checked_before_anything_is_sent():
 def test_list_dir_reads_the_board_listing():
     board = DeviceSession(runner=lambda command, timeout: "")
     board.port = "/dev/fake"
-    board._exec = lambda source, timeout=20, cancel=None: 'LVGL_MPY_STUDIO_LIST=[["b.py", false, 10], ["lib", true, 0], ["A.txt", false, -1]]\n'
+    board._exec = lambda source, timeout=20, cancel=None: 'LMS_LIST=[["b.py", false, 10], ["lib", true, 0], ["A.txt", false, -1]]\n'
     assert board.list_dir("/flash") == [{"name": "lib", "dir": True, "size": 0}, {"name": "A.txt", "dir": False, "size": -1}, {"name": "b.py", "dir": False, "size": 10}]
 
 

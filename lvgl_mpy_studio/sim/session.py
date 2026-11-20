@@ -247,7 +247,7 @@ class Session:
     def __enter__(self):
         if not runtime_path().exists():
             raise SimulationError("runtime not built")
-        self._temporary = tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-session-")
+        self._temporary = tempfile.TemporaryDirectory(prefix="copper-and-code-studio-session-")
         try:
             self._start(Path(self._temporary.name))
         except BaseException:

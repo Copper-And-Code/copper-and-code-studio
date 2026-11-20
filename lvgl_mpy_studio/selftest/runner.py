@@ -33,7 +33,7 @@ def main(names=(), show=False, slow_ms=0, output=None, list_only=False, echo=pri
         return 2
     if not show:
         os.environ["QT_QPA_PLATFORM"] = "offscreen"
-    settings = Path(tempfile.mkdtemp(prefix="lvgl-mpy-studio-selftest-"))
+    settings = Path(tempfile.mkdtemp(prefix="copper-and-code-studio-selftest-"))
     isolate_settings(settings)
 
     from PySide6.QtCore import Qt, qInstallMessageHandler, qVersion
@@ -53,7 +53,7 @@ def main(names=(), show=False, slow_ms=0, output=None, list_only=False, echo=pri
     app = QApplication.instance() or QApplication(sys.argv[:1])
     set_language("en")
     # Absolute: the projects are saved through the file dialog, which reads a relative path from its own folder.
-    directory = (Path(output) if output else Path.cwd() / "lvgl-mpy-studio-selftest" / datetime.now().strftime("%Y%m%d-%H%M%S")).resolve()
+    directory = (Path(output) if output else Path.cwd() / "copper-and-code-studio-selftest" / datetime.now().strftime("%Y%m%d-%H%M%S")).resolve()
     report = Report(directory, echo)
     header = [
         f"Copper and Code Studio {__version__} self-test, {datetime.now().isoformat(timespec='seconds')}",

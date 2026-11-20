@@ -149,19 +149,19 @@ class UartTransport:
 
     def get(self, remote, local, timeout=30, cancel=None):
         output = self.execute(
-            f"import binascii\nf=open({remote!r},'rb')\nwhile True:\n data=f.read(384)\n if not data:break\n print('LVGL_MPY_STUDIO_CHUNK='+binascii.b2a_base64(data,newline=False).decode())\nf.close()\nprint('LVGL_MPY_STUDIO_EOF=1')",
+            f"import binascii\nf=open({remote!r},'rb')\nwhile True:\n data=f.read(384)\n if not data:break\n print('LMS_CHUNK='+binascii.b2a_base64(data,newline=False).decode())\nf.close()\nprint('LMS_EOF=1')",
             timeout,
             cancel,
         )
         chunks = []
         complete = False
         for line in output.splitlines():
-            if line.startswith("LVGL_MPY_STUDIO_CHUNK="):
+            if line.startswith("LMS_CHUNK="):
                 try:
-                    chunks.append(base64.b64decode(line.removeprefix("LVGL_MPY_STUDIO_CHUNK="), validate=True))
+                    chunks.append(base64.b64decode(line.removeprefix("LMS_CHUNK="), validate=True))
                 except ValueError as exc:
                     raise UartError("device.protocol", output) from exc
-            elif line.strip() == "LVGL_MPY_STUDIO_EOF=1":
+            elif line.strip() == "LMS_EOF=1":
                 complete = True
         if not complete:
             raise UartError("device.protocol", output)

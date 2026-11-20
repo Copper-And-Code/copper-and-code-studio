@@ -51,7 +51,7 @@ Install the site and development dependencies, then build:
 
 The build requires the simulator and the browser runtime. If the latter is missing, build it separately with `runtime/build_web.sh`; the site build never downloads or builds it automatically.
 
-Serve `build/site/` below a subpath such as `/lvgl-mpy-studio/` and try the gallery and the new demo at desktop and phone widths. The browser tests check this layout, every demo, one interaction, internal links, and the absence of external network requests. They need the Playwright Chromium browser.
+Serve `build/site/` below a subpath such as `/copper-and-code-studio/` and try the gallery and the new demo at desktop and phone widths. The browser tests check this layout, every demo, one interaction, internal links, and the absence of external network requests. They need the Playwright Chromium browser.
 
 ## 4. Ask before publishing
 

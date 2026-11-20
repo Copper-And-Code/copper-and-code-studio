@@ -5,6 +5,8 @@
 ### Changed
 
 - **Renamed from LVGL MPY Studio to Copper and Code Studio**, a visual GUI builder for MicroPython and LVGL. The old name began with the name of somebody else's project. A user has nothing to do: settings and projects are kept, and the old command still works.
+- **New names for the command, the packages and the settings.** The command is `copper-and-code-studio` (`lvgl-mpy-studio` and `lvgl-ide` still work), the packages are `Copper_and_Code_Studio-x86_64.AppImage` and `Copper_and_Code_Studio-<version>-Setup-win64.exe`, and the MCP server calls itself `copper-and-code-studio`. Settings and the configuration folder are copied once from the old name. The Windows installer upgrades an installation of LVGL MPY Studio.
+- **The lines the IDE reads back from a board begin with `LMS_`**, as everything else it puts on a board, instead of `LVGL_MPY_STUDIO_`; so do the environment variables `LMS_TOOLCHAIN` and `LMS_MPREMOTE` (the old names are still read) and the include guards of the exported C headers. [The new name](https://copper-and-code.github.io/copper-and-code-studio/renamed/) lists every change.
 
 ### Fixed
 

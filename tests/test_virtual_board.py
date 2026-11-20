@@ -134,7 +134,7 @@ def test_upload_and_run_puts_the_app_on_the_board_and_starts_it(esp32, tmp_path)
     again = session.upload(_weather(), tmp_path / "out", run=True)  # a second upload keeps the first as .previous
     assert again["appPath"] == result["appPath"]
     assert (esp32.flash / (result["appPath"].lstrip("/") + ".previous")).is_dir()
-    assert "LVGL_MPY_STUDIO_STOPPED" in session.stop()
+    assert "LMS_STOPPED" in session.stop()
     session.disconnect()
 
 

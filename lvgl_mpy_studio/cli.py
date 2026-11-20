@@ -164,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
     language_parser.add_argument("--language", choices=tuple(LANGUAGES), default=DEFAULT_LANGUAGE)
     language_args, _remaining = language_parser.parse_known_args(arguments)
     set_language(language_args.language)
-    parser = argparse.ArgumentParser(prog="lvgl-mpy-studio", description=tr("Visual IDE for LVGL, simulator and MicroPython boards"))
+    parser = argparse.ArgumentParser(prog="copper-and-code-studio", description=tr("Visual IDE for LVGL, simulator and MicroPython boards"))
     parser.add_argument("--language", choices=tuple(LANGUAGES), default=DEFAULT_LANGUAGE, help=tr("Message language"))
     parser.add_argument("--version", action="store_true")
     commands = parser.add_subparsers(dest="command")
@@ -240,7 +240,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "mcp":
         from .mcp_server import is_enabled, serve
         if not is_enabled():
-            parser.exit(1, "lvgl-mpy-studio: " + tr("The MCP server is off: turn it on under Settings → MCP Server for AI Agents.") + "\n")
+            parser.exit(1, "copper-and-code-studio: " + tr("The MCP server is off: turn it on under Settings → MCP Server for AI Agents.") + "\n")
         return serve()
     if args.command:
         from .build.compiler import CompileError
@@ -281,9 +281,9 @@ def main(argv: list[str] | None = None) -> int:
         except KeyboardInterrupt:
             return 130
         except DeviceError as exc:
-            parser.exit(1, f"lvgl-mpy-studio: {device_error_text(exc.code, exc.output)}\n" + "".join(f"warning: {warning}\n" for warning in exc.warnings))
+            parser.exit(1, f"copper-and-code-studio: {device_error_text(exc.code, exc.output)}\n" + "".join(f"warning: {warning}\n" for warning in exc.warnings))
         except (OSError, ValueError, RuntimeError, CompileError) as exc:  # RuntimeError: manifest, simulator, Release build
-            parser.exit(1, f"lvgl-mpy-studio: {exc}\n")
+            parser.exit(1, f"copper-and-code-studio: {exc}\n")
 
     from PySide6.QtWidgets import QApplication
     from .ui import theme
@@ -293,7 +293,7 @@ def main(argv: list[str] | None = None) -> int:
         # Without its own identity the taskbar shows the icon of pythonw.exe, which hosts the IDE.
         import ctypes
 
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("CopperAndCode.LvglMpyStudio")
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("CopperAndCode.CopperAndCodeStudio")
     app = QApplication.instance() or QApplication(sys.argv[:1])
     app.setWindowIcon(theme.app_icon())
     window = MainWindow()

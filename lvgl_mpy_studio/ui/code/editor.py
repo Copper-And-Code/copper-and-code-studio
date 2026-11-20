@@ -716,7 +716,7 @@ class CodePanel(QWidget):
     def check_syntax(self):
         if not self.document.project:
             return
-        with tempfile.TemporaryDirectory(prefix="lvgl-mpy-studio-check-") as directory:
+        with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-check-") as directory:
             generate_project(self.document.project, directory)
             try:
                 compile_python(directory)
