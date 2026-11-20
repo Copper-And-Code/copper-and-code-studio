@@ -1,9 +1,9 @@
 from PySide6.QtCore import QPointF, Qt
 
-from lvgl_mpy_studio.ui.designer.scene import DesignerView
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
+from copper_and_code_studio.ui.designer.scene import DesignerView
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui.properties.panel import PropertiesPanel
 from helpers import find_item
 
 

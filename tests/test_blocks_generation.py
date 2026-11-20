@@ -6,16 +6,16 @@ import types
 
 import pytest
 
-from lvgl_mpy_studio.core import components
-from lvgl_mpy_studio.core.blocks import Block
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.events import EVENTS, events_for
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.validation import validate_project
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.gen.components import block_files
-from lvgl_mpy_studio.gen.live import upload_key
-from lvgl_mpy_studio.gen.project_gen import generate_project
+from copper_and_code_studio.core import components
+from copper_and_code_studio.core.blocks import Block
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.events import EVENTS, events_for
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.validation import validate_project
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.gen.components import block_files
+from copper_and_code_studio.gen.live import upload_key
+from copper_and_code_studio.gen.project_gen import generate_project
 
 RELAY = {
     "schemaVersion": 1, "id": "relay", "version": "1.0.0", "name": "Relay", "description": "A relay.", "author": "Someone", "license": "MIT",
@@ -227,7 +227,7 @@ def test_a_broken_block_inside_a_project_is_reported_not_fatal(relay):
 
 
 def test_blocks_are_a_module_or_a_class_never_both():
-    from lvgl_mpy_studio.core.blocks import validate
+    from copper_and_code_studio.core.blocks import validate
 
     errors = validate({**RELAY, "instances": "one"}, {"board.py"})
     assert any("cannot have properties or events" in error for error in errors)
@@ -237,7 +237,7 @@ def test_blocks_are_a_module_or_a_class_never_both():
 
 
 def test_what_do_you_want_to_do_offers_the_methods_of_a_block_not_the_lvgl_ones(relay):
-    from lvgl_mpy_studio.core.actions import COMMON, actions_for, method_entries
+    from copper_and_code_studio.core.actions import COMMON, actions_for, method_entries
 
     offered = actions_for("digital_input", "key")
     assert offered == [("True while the input is active.", "ui.key.value()"), ("Behave as if the input had become active (True) or not (False): for the simulator and for tests.", "ui.key.simulate(§)")]
@@ -252,7 +252,7 @@ def test_what_do_you_want_to_do_offers_the_methods_of_a_block_not_the_lvgl_ones(
 
 
 def test_a_pin_is_a_number_or_the_name_the_firmware_uses(monkeypatch, tmp_path):
-    from lvgl_mpy_studio.core.blocks import is_pin, parse_pin, validate
+    from copper_and_code_studio.core.blocks import is_pin, parse_pin, validate
 
     assert [parse_pin(text) for text in ("25", " 0 ", "PA5", "GP25", "LED", "", "   ")] == [25, 0, "PA5", "GP25", "LED", None, None]
     for text in ("256", "-1", "PA 5", "5A", "P.A5", "PA5; import os", "x" * 17, "3.3"):
@@ -279,7 +279,7 @@ def test_a_pin_is_a_number_or_the_name_the_firmware_uses(monkeypatch, tmp_path):
 def test_the_properties_panel_takes_a_pin_by_number_or_by_name(qtbot):
     from helpers import find_item
 
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)

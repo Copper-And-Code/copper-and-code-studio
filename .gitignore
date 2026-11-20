@@ -5,8 +5,8 @@ __pycache__/
 .pytest_cache/
 .hypothesis/
 build/
-!lvgl_mpy_studio/build/
-!lvgl_mpy_studio/build/*.py
+!copper_and_code_studio/build/
+!copper_and_code_studio/build/*.py
 /dist/
 /cache/
 runtime/out/

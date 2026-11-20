@@ -18,4 +18,4 @@ The notices distributed with the application are in `packaging/NOTICE.txt`.
 
 MSYS2 and w64devkit are detected but neither included nor installed automatically. Pinned versions are in `docs/target.md` and `pyproject.toml`.
 
-Full texts are in `packaging/licenses/` and `lvgl_mpy_studio/gen/output/licenses/`. The latter are also copied into executables built with the IDE, because those contain LVGL, MicroPython and SDL2. A single-file executable links SDL2 statically and carries the same texts inside, printed by `--licenses`.
+Full texts are in `packaging/licenses/` and `copper_and_code_studio/gen/output/licenses/`. The latter are also copied into executables built with the IDE, because those contain LVGL, MicroPython and SDL2. A single-file executable links SDL2 statically and carries the same texts inside, printed by `--licenses`.

@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.build.visual import ERROR, FAILED, MISSING, PASSED, UPDATED, PngError, compare, load_scenarios, read_png, rgb565_to_rgb, run_visual_tests, save_scenario, write_png
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.build.visual import ERROR, FAILED, MISSING, PASSED, UPDATED, PngError, compare, load_scenarios, read_png, rgb565_to_rgb, run_visual_tests, save_scenario, write_png
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.platform import runtime_path
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
 

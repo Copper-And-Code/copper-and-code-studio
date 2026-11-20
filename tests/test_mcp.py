@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import DeviceError
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import DeviceError
+from copper_and_code_studio.platform import runtime_path
 from helpers import call, payload
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
@@ -282,7 +282,7 @@ def test_visual_test_round_trip(project):
 
 
 def test_menu_switch_is_off_by_default_and_saves(qtbot, tmp_path, monkeypatch):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
     monkeypatch.setenv("APPDATA", str(tmp_path))

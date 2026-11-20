@@ -4,12 +4,12 @@ import json
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.platform import runtime_path
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
 
@@ -110,8 +110,8 @@ def test_mcp_remove_reports_everything_removed(tmp_path, enabled):
 
 
 def test_copy_and_cut_take_the_children_of_a_container(qtbot):
-    from lvgl_mpy_studio.ui.designer.scene import DesignerView
-    from lvgl_mpy_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.designer.scene import DesignerView
+    from copper_and_code_studio.ui.document import ProjectDocument
 
     document = ProjectDocument(nested())
     view = DesignerView(document)
@@ -135,8 +135,8 @@ def test_copy_and_cut_take_the_children_of_a_container(qtbot):
 
 
 def test_the_default_language_is_english(monkeypatch, capsys):
-    from lvgl_mpy_studio import cli
-    from lvgl_mpy_studio.core import i18n
+    from copper_and_code_studio import cli
+    from copper_and_code_studio.core import i18n
 
     assert i18n.DEFAULT_LANGUAGE == "en"
     assert i18n.set_language("xx") == "en"
@@ -149,7 +149,7 @@ def test_the_default_language_is_english(monkeypatch, capsys):
 
 def test_mcp_answers_in_english_and_survives_an_unexpected_error(tmp_path, enabled, monkeypatch):
     import io
-    from lvgl_mpy_studio.core import i18n
+    from copper_and_code_studio.core import i18n
 
     path = tmp_path / "p.json"
     nested().save(path)
@@ -178,7 +178,7 @@ def test_a_malformed_v1_project_says_what_is_wrong(tmp_path):
 
 
 def test_port_errors_are_not_read_from_the_output_of_the_app():
-    from lvgl_mpy_studio.device.service import _port_error
+    from copper_and_code_studio.device.service import _port_error
 
     trace = 'Traceback (most recent call last):\n  File "<stdin>", line 1, in <module>\nOSError: resource not found, busy\n'
     assert _port_error(trace) == "device.command"
@@ -188,7 +188,7 @@ def test_port_errors_are_not_read_from_the_output_of_the_app():
 
 
 def test_an_unexpected_error_does_not_leave_the_session_transferring(monkeypatch):
-    from lvgl_mpy_studio.device import service
+    from copper_and_code_studio.device import service
 
     profile = builtin_profiles()[0]
     project = Project()
@@ -204,7 +204,7 @@ def test_an_unexpected_error_does_not_leave_the_session_transferring(monkeypatch
 
 
 def test_a_profile_without_minimum_versions_accepts_any(monkeypatch):
-    from lvgl_mpy_studio.device import service
+    from copper_and_code_studio.device import service
 
     profile = builtin_profiles()[0]
     profile["firmware"] = {"modules": profile["firmware"]["modules"]}
@@ -216,7 +216,7 @@ def test_a_profile_without_minimum_versions_accepts_any(monkeypatch):
 
 
 def test_a_broken_profile_file_keeps_the_builtin_profiles_and_is_not_overwritten(tmp_path):
-    from lvgl_mpy_studio.core.boards import ProfileStore
+    from copper_and_code_studio.core.boards import ProfileStore
 
     path = tmp_path / "board-profiles.json"
     path.write_text("{not json")
@@ -228,14 +228,14 @@ def test_a_broken_profile_file_keeps_the_builtin_profiles_and_is_not_overwritten
 
 
 def test_a_line_that_looks_like_a_probe_answer_is_plain_output():
-    from lvgl_mpy_studio.sim.session import PROBE_LINE
+    from copper_and_code_studio.sim.session import PROBE_LINE
 
     assert PROBE_LINE.search(b"\x1bLVSIM_PROBE 3 ok not-json")  # the reader must cope with it
 
 
 @pytest.mark.parametrize("old_name", ("lvgl-mpy-studio", "lvgl-ide"))
 def test_the_old_configuration_folder_is_copied_once(tmp_path, monkeypatch, old_name):
-    from lvgl_mpy_studio import platform
+    from copper_and_code_studio import platform
 
     old = tmp_path / old_name
     (old / "autostart-backups").mkdir(parents=True)
@@ -249,7 +249,7 @@ def test_the_old_configuration_folder_is_copied_once(tmp_path, monkeypatch, old_
 
 
 def test_of_two_old_configuration_folders_the_newest_is_copied(tmp_path, monkeypatch):
-    from lvgl_mpy_studio import platform
+    from copper_and_code_studio import platform
 
     for name, text in (("lvgl-ide", "0.4"), ("lvgl-mpy-studio", "0.7")):
         (tmp_path / name).mkdir()
@@ -261,8 +261,8 @@ def test_of_two_old_configuration_folders_the_newest_is_copied(tmp_path, monkeyp
 @pytest.mark.parametrize("old_name", ("LVGL MPY Studio", "LVGL IDE"))
 def test_settings_saved_under_an_old_name_are_kept(qtbot, old_name):
     from PySide6.QtCore import QSettings
-    from lvgl_mpy_studio.ui.app_settings import app_settings
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.app_settings import app_settings
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     names = ("LVGL MPY Studio", "LVGL IDE")
     for name in names:
@@ -290,7 +290,7 @@ def test_settings_saved_under_an_old_name_are_kept(qtbot, old_name):
 
 def test_of_two_old_settings_the_newest_are_kept(qtbot):
     from PySide6.QtCore import QSettings
-    from lvgl_mpy_studio.ui.app_settings import adopt_old_settings, app_settings
+    from copper_and_code_studio.ui.app_settings import adopt_old_settings, app_settings
 
     app_settings().clear()
     try:
@@ -315,7 +315,7 @@ def font_project(board=None):
 
 
 def test_text_uses_the_fonts_the_target_has(tmp_path):
-    from lvgl_mpy_studio.core.boards import profile_fonts
+    from copper_and_code_studio.core.boards import profile_fonts
 
     profiles = {profile["id"]: profile for profile in builtin_profiles()}
     waveshare, stm32 = profiles["waveshare_rp2350_touch_lcd_4_240"], profiles["stm32h7_core_v1_3_1024x600"]
@@ -334,7 +334,7 @@ def test_text_uses_the_fonts_the_target_has(tmp_path):
 
 
 def test_a_profile_with_a_bad_font_list_is_refused():
-    from lvgl_mpy_studio.core.boards import profile_diagnostics
+    from copper_and_code_studio.core.boards import profile_diagnostics
 
     profile = builtin_profiles()[0]
     profile["fonts"] = [14, "big"]

@@ -3,12 +3,12 @@ from PySide6.QtCore import QEvent, QPoint, QPointF, Qt
 from PySide6.QtGui import QMouseEvent
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.ui.background import run_in_background
-from lvgl_mpy_studio.ui.designer.scene import DesignerView
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.ui.sim_panel import SimPanel
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.ui.background import run_in_background
+from copper_and_code_studio.ui.designer.scene import DesignerView
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui.sim_panel import SimPanel
 
 
 def saved_project(tmp_path, count=2):
@@ -198,7 +198,7 @@ def test_typing_code_does_not_rebuild_the_canvas(qtbot, tmp_path):
 def test_build_runs_in_background_and_reports_the_result(qtbot, tmp_path, monkeypatch):
     window = window_with(qtbot, tmp_path)
     runner = tmp_path / "dist" / "run.sh"
-    release = pytest.importorskip("lvgl_mpy_studio.build.release")
+    release = pytest.importorskip("copper_and_code_studio.build.release")
     monkeypatch.setattr(release, "build_release", lambda project, target, output: runner)
     assert window.build_executable() is True
     assert not window.build_action.isEnabled()
@@ -209,7 +209,7 @@ def test_build_runs_in_background_and_reports_the_result(qtbot, tmp_path, monkey
 
 def test_build_failure_is_reported(qtbot, tmp_path, monkeypatch):
     window = window_with(qtbot, tmp_path)
-    release = pytest.importorskip("lvgl_mpy_studio.build.release")
+    release = pytest.importorskip("copper_and_code_studio.build.release")
     def fail(project, target, output):
         raise OSError("disco pieno")
     monkeypatch.setattr(release, "build_release", fail)
@@ -228,7 +228,7 @@ def test_background_helper_returns_in_the_main_thread(qtbot):
 def test_single_file_build_asks_for_release_and_a_single_file(qtbot, tmp_path, monkeypatch):
     window = window_with(qtbot, tmp_path)
     executable = tmp_path / "dist" / "gioco"
-    release = pytest.importorskip("lvgl_mpy_studio.build.release")
+    release = pytest.importorskip("copper_and_code_studio.build.release")
     calls = []
     def build(project, target, output, profile="debug", single_file=False):
         calls.append((target, profile, single_file))
@@ -243,7 +243,7 @@ def test_single_file_build_asks_for_release_and_a_single_file(qtbot, tmp_path, m
 
 def test_open_in_browser_builds_serves_and_opens(qtbot, tmp_path, monkeypatch):
     window = window_with(qtbot, tmp_path)
-    web = pytest.importorskip("lvgl_mpy_studio.build.web")
+    web = pytest.importorskip("copper_and_code_studio.build.web")
     folder = tmp_path / "dist" / "gioco-web"
     folder.mkdir(parents=True)
     (folder / "index.html").write_text("<html></html>", encoding="utf-8")

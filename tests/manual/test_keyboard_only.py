@@ -17,7 +17,7 @@ from PySide6.QtWidgets import (
     QApplication, QDockWidget, QPlainTextEdit,
 )
 
-from lvgl_mpy_studio.ui.terminal import TerminalView
+from copper_and_code_studio.ui.terminal import TerminalView
 from looks import nameless
 from sweep import Example, Sweep, wait
 

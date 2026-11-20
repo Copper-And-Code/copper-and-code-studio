@@ -96,7 +96,7 @@ def one_round(window, projects, round_number):
 
 
 def test_a_long_session_does_not_grow(qtbot, tmp_path, monkeypatch):
-    from lvgl_mpy_studio.platform import runtime_path
+    from copper_and_code_studio.platform import runtime_path
 
     if not runtime_path().exists():
         pytest.skip("runtime not built")

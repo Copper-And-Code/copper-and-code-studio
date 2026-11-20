@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuilds lvgl_mpy_studio/icon.ico from the SVG. Run it after changing the drawing.
+# Rebuilds copper_and_code_studio/icon.ico from the SVG. Run it after changing the drawing.
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 WORK=$(mktemp -d)
@@ -20,4 +20,4 @@ for size in (16, 24, 32, 48, 64, 128, 256):
     painter.end()
     image.save(f"{sys.argv[2]}/{size:03}.png")
 PY
-convert "$WORK"/*.png "$ROOT/lvgl_mpy_studio/icon.ico"
+convert "$WORK"/*.png "$ROOT/copper_and_code_studio/icon.ico"

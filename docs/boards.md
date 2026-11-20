@@ -66,7 +66,7 @@ Ctrl+C returns status 130 for non-interactive commands. In the interactive REPL 
 
 ### Board definitions from a file
 
-A board the IDE does not ship can be added from a file, with no change to the IDE. The file is a `.json` board definition with the same fields as the profiles in `lvgl_mpy_studio/boards/` (`schemaVersion` 1), at most 64 KiB, in UTF-8.
+A board the IDE does not ship can be added from a file, with no change to the IDE. The file is a `.json` board definition with the same fields as the profiles in `copper_and_code_studio/boards/` (`schemaVersion` 1), at most 64 KiB, in UTF-8.
 
 ```json
 {

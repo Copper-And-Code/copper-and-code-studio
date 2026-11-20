@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / ".reference" / "lvgl-bindings" / "generated" / "api.json"
-TARGET = ROOT / "lvgl_mpy_studio" / "gen" / "completion.json"
+TARGET = ROOT / "copper_and_code_studio" / "gen" / "completion.json"
 
 
 def extract(api):

@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS = ROOT / "build" / "manual" / "mutation"
-# module (under lvgl_mpy_studio) → the tests that should notice a change in it
+# module (under copper_and_code_studio) → the tests that should notice a change in it
 TARGETS = {
     "ui/files.py": ["tests/test_files_panel.py"],
     "ui/properties/panel.py": ["tests/test_properties.py"],
@@ -112,7 +112,7 @@ def probe(module, count, chance):
     with tempfile.TemporaryDirectory(prefix="lms-mutation-") as folder:
         copy = Path(folder) / "repo"
         copy_repository(copy)
-        path = copy / "lvgl_mpy_studio" / module
+        path = copy / "copper_and_code_studio" / module
         original = path.read_text(encoding="utf-8")
         if run_tests(copy, tests) != "survived":
             return [f"{module}: the tests fail without any change; nothing measured"]

@@ -20,7 +20,7 @@ jobs:
       - run: ./runtime/build.sh
       - run: QT_QPA_PLATFORM=offscreen pytest -q
       - name: Self-test of the IDE
-        run: QT_QPA_PLATFORM=offscreen python -m lvgl_mpy_studio selftest --output selftest-report
+        run: QT_QPA_PLATFORM=offscreen python -m copper_and_code_studio selftest --output selftest-report
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -105,7 +105,7 @@ jobs:
       - run: python -m pip install -e '.[dev]'
       - run: $env:QT_QPA_PLATFORM = "offscreen"; python -m pytest -q tests/test_sim_panel.py tests/test_main_window.py tests/test_document.py tests/test_code_editor.py tests/test_properties.py tests/test_designer.py tests/test_board_support.py tests/test_device_gui.py
       - name: Self-test of the IDE
-        run: python -m lvgl_mpy_studio selftest --output selftest-report
+        run: python -m copper_and_code_studio selftest --output selftest-report
       - uses: actions/upload-artifact@v4
         if: always()
         with:

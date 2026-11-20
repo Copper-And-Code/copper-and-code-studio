@@ -3,12 +3,12 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.core.actions import SCREEN_ACTIONS, COMMON, COMPONENT_ACTIONS, CURSOR, SPECIFIC, actions_for, method_entries, page_actions
-from lvgl_mpy_studio.core.i18n import catalog, language, set_language
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.gen.gen_python import page_constant
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.core.actions import SCREEN_ACTIONS, COMMON, COMPONENT_ACTIONS, CURSOR, SPECIFIC, actions_for, method_entries, page_actions
+from copper_and_code_studio.core.i18n import catalog, language, set_language
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.gen.gen_python import page_constant
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import runtime_path
 
 
 @pytest.mark.skipif(not runtime_path().exists(), reason="native runtime not built")
@@ -75,8 +75,8 @@ def test_suggestions_follow_the_language():
 
 
 def test_helper_panel_is_translated(qtbot):
-    from lvgl_mpy_studio.ui.code.editor import ActionHelper
-    from lvgl_mpy_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.code.editor import ActionHelper
+    from copper_and_code_studio.ui.document import ProjectDocument
 
     previous = language()
     set_language("en")

@@ -17,8 +17,8 @@ from PySide6.QtGui import QColor, QImage
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QComboBox, QLineEdit, QSpinBox
 
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.ui.properties.panel import DESCRIPTOR_ROLE
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.ui.properties.panel import DESCRIPTOR_ROLE
 from sweep import QT_NOISE, ROOT, Empty, Sweep, settle, wait
 
 pytestmark = pytest.mark.manual
@@ -116,7 +116,7 @@ def files(tmp_path):
 
 @pytest.mark.parametrize("widget_type", sorted(widget_definitions()))
 def test_every_property_through_the_panel(qtbot, tmp_path, monkeypatch, files, widget_type):
-    from lvgl_mpy_studio.build.preview import render_with_log
+    from copper_and_code_studio.build.preview import render_with_log
 
     problems, changed = [], []
     with Sweep(qtbot, monkeypatch, tmp_path, Empty) as sweep:

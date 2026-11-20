@@ -5,9 +5,9 @@ import pytest
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QFileDialog, QMessageBox
 
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.platform import runtime_path
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.ui.main_window import MainWindow
 
 ROOT = Path(__file__).parents[1]
 
@@ -114,9 +114,9 @@ def test_normal_open_asks_for_confirmation_once(qtbot, tmp_path, monkeypatch):
 
 
 def test_delete_initial_page_round_trip_generation_and_undo(qtbot, tmp_path):
-    from lvgl_mpy_studio.core.validation import validate_project
-    from lvgl_mpy_studio.gen.gen_c import generate_c
-    from lvgl_mpy_studio.gen.project_gen import generate_project
+    from copper_and_code_studio.core.validation import validate_project
+    from copper_and_code_studio.gen.gen_c import generate_c
+    from copper_and_code_studio.gen.project_gen import generate_project
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -160,7 +160,7 @@ def test_delete_non_initial_and_last_page(qtbot):
 
 
 def test_recreating_widget_reattaches_orphan_from_code_editor(qtbot, tmp_path):
-    from lvgl_mpy_studio.gen.project_gen import generate_project
+    from copper_and_code_studio.gen.project_gen import generate_project
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -266,7 +266,7 @@ def test_external_change_dialog_maps_buttons_to_choices(qtbot, tmp_path, monkeyp
     assert window.open_project(path)
 
     def click(box):
-        from lvgl_mpy_studio.core.i18n import tr
+        from copper_and_code_studio.core.i18n import tr
 
         next(button for button in box.buttons() if button.text() == tr(label)).click()  # another test may have changed the language
 
@@ -300,7 +300,7 @@ def test_save_asks_before_recreating_a_deleted_file(qtbot, tmp_path, monkeypatch
 
 @pytest.mark.parametrize("label, expected", [("Recreate the file", "overwrite"), ("Save a copy…", "copy")])
 def test_deleted_file_dialog_offers_no_reload(qtbot, tmp_path, monkeypatch, label, expected):
-    from lvgl_mpy_studio.core.i18n import tr
+    from copper_and_code_studio.core.i18n import tr
 
     path = tmp_path / "project.json"
     Project().save(path)
@@ -420,7 +420,7 @@ def test_opening_projects_does_not_keep_the_pages_of_the_last(qtbot, tmp_path):
 
     from PySide6.QtCore import QCoreApplication, QEvent
 
-    from lvgl_mpy_studio.ui.designer.scene import DesignerView
+    from copper_and_code_studio.ui.designer.scene import DesignerView
 
     root = Path(__file__).parents[1] / "examples"
     paths = []
@@ -438,7 +438,7 @@ def test_opening_projects_does_not_keep_the_pages_of_the_last(qtbot, tmp_path):
 
 def test_a_page_added_after_a_deletion_does_not_take_a_name_in_use(qtbot):
     """Pages main, page2, page3; page2 deleted; Add Page counted three pages and made a second page3."""
-    from lvgl_mpy_studio.core.validation import validate_project
+    from copper_and_code_studio.core.validation import validate_project
 
     window = MainWindow()
     qtbot.addWidget(window)

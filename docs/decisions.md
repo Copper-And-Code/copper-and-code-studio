@@ -17,7 +17,7 @@
 - The simulator transport is TCP on `127.0.0.1` with a session token on both systems, avoiding the divergence between Unix sockets and named pipes.
 - User code is stopped with the protocol's `STOP` message and `KeyboardInterrupt`, not POSIX signals.
 - The LVGL tick uses the monotonic `lvsim.ticks_ms()` (`CLOCK_MONOTONIC`/`QueryPerformanceCounter`), not the Windows port's system clock.
-- Python platform differences are centralized in `lvgl_mpy_studio/platform.py`; the core forbids POSIX APIs and writes UTF-8 text with explicit LF newlines.
+- Python platform differences are centralized in `copper_and_code_studio/platform.py`; the core forbids POSIX APIs and writes UTF-8 text with explicit LF newlines.
 - Standalone Windows apps do not open a console: GUI PE subsystem, with stdout and stderr in `<project>.log`.
 - For the C target on Windows, only existing MSYS2/w64devkit installations are detected; no portable toolchain is included or installed automatically, and a guide is shown if it is missing.
 - The Windows distribution includes both a portable ZIP and a per-user Inno Setup installer in `%LOCALAPPDATA%`; there is no code signing in v1.1.
@@ -36,7 +36,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## Non-visual components (2026-11-06)
 
-- Buzzer and Timer live in `lvgl_mpy_studio/core/components.py`, outside `widgets.json`: they are not LVGL objects and the C generator ignores them with a warning.
+- Buzzer and Timer live in `copper_and_code_studio/core/components.py`, outside `widgets.json`: they are not LVGL objects and the C generator ignores them with a warning.
 - `ui.buzzer1` is the `lms_buzzer` module, generated only when the component is present, so there are no extra classes or objects. `ui.timer1` is an `lv.timer`, created only if it has a handler or code uses it; its handler receives the timer as the `e` argument.
 - In the simulator the buzzer writes a line `ESC LVSIM_TONE frequency milliseconds` to stdout, which the IDE intercepts and plays: this avoids changing the native protocol and rebuilding the runtimes. Outside the IDE the module stays silent.
 - The pin is in the optional `buzzer` key of the board profile (`pin` or `audio`). QtMultimedia is loaded only on the first sound.
@@ -51,7 +51,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 - C leaves the selector: it does not run handlers and serves for exporting, so it becomes **Project → Export C Code…**. The export writes only the four portable files to `export_c/` next to the project; `main.c` and `Makefile` are tied to the simulator and are needed only to compile. A project saved with a C destination opens on the Simulator; the CLI keeps `--target c`.
 - Suggestions are a child widget of the editor, not a popup: on Wayland the `QCompleter` popup is rejected and does not appear.
-- The suggested actions live in `lvgl_mpy_studio/core/actions.py`, and `tests/test_actions.py` runs them all on the real runtime, so the IDE cannot suggest calls that do not exist.
+- The suggested actions live in `copper_and_code_studio/core/actions.py`, and `tests/test_actions.py` runs them all on the real runtime, so the IDE cannot suggest calls that do not exist.
 
 ## LVGL preview in the designer (2026-11-06)
 
@@ -61,12 +61,12 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## Garbage collector in the main thread (2026-11-06)
 
-- Budget and preview work in Python threads, and the garbage collector runs in the thread that allocates: a Qt object in a reference cycle could be destroyed outside the main thread, causing rare segfaults in the event loop. `lvgl_mpy_studio/ui/gc_guard.py` turns off automatic collection and runs it from a main-thread timer.
+- Budget and preview work in Python threads, and the garbage collector runs in the thread that allocates: a Qt object in a reference cycle could be destroyed outside the main thread, causing rare segfaults in the event loop. `copper_and_code_studio/ui/gc_guard.py` turns off automatic collection and runs it from a main-thread timer.
 
 ## Licenses (2026-11-06)
 
 - The IDE is GPL-3.0-or-later, copyright Nunzio Raciti. Generated code is MIT, so users' products do not inherit the GPL.
-- The parts that end up in projects or executables are also MIT: `lvgl_mpy_studio/gen/output/`, `native/lvsim/` and `runtime/display_driver.py`. A dependency with a more restrictive license must not enter these parts. See `LICENSING.md`.
+- The parts that end up in projects or executables are also MIT: `copper_and_code_studio/gen/output/`, `native/lvsim/` and `runtime/display_driver.py`. A dependency with a more restrictive license must not enter these parts. See `LICENSING.md`.
 
 ## Interface (2026-11-06)
 
@@ -107,7 +107,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 ## Visual tests (2026-11-07)
 
 - `copper-and-code-studio test` uses the same headless render as the designer preview, but runs the project code by default: the screen a user sees also depends on it. A Python traceback is an error even if a frame was drawn.
-- Baselines are PNG files, readable in any viewer and in Git, written by a small encoder in `lvgl_mpy_studio/build/visual.py` so the core does not import Qt. The reader accepts only that format.
+- Baselines are PNG files, readable in any viewer and in Git, written by a small encoder in `copper_and_code_studio/build/visual.py` so the core does not import Qt. The reader accepts only that format.
 - Outside `--update`, a missing baseline fails, so a passing run always means a real comparison. `--update` renders twice and refuses unstable pages.
 - Version 1 captured each page once after loading. Scenarios with touch input came once the virtual clock made runs identical: see below.
 
@@ -115,7 +115,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 - `copper-and-code-studio mcp` is a separate stdio process with hand-written JSON-RPC, tested with the official Python client. The tool subset is small and the SDK would add many packages to the executables. The IDE gains only a menu switch, so the server costs nothing while it is unused.
 - By the owner's decision the agent has no limits compared to the IDE, board and autostart included, because a person supervises it. The only gate is the menu switch, off by default and read on every call. An unreadable setting counts as off.
-- `simulate` drives the runtime over the existing lvsim protocol, acting as a small headless IDE in `lvgl_mpy_studio/sim/session.py`. The runtime needs no change, and the app behaves as it does in the IDE panel. The clock was real at first; it is virtual by default since the next entry, and real only with `clock: "real"`.
+- `simulate` drives the runtime over the existing lvsim protocol, acting as a small headless IDE in `copper_and_code_studio/sim/session.py`. The runtime needs no change, and the app behaves as it does in the IDE panel. The clock was real at first; it is virtual by default since the next entry, and real only with `clock: "real"`.
 - The server works on files, not on the open IDE, so version 1 has no shared undo and needs the project closed in the IDE.
 
 ## MicroPython export (2026-11-07)
@@ -154,7 +154,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## Scenarios in visual tests (2026-11-08)
 
-- A scenario is a script of `simulate` steps with a name, a page and a seed, played on the virtual clock. Its screenshots and final screen are compared like pages. The step runner moved from the MCP server to `lvgl_mpy_studio/sim/script.py`, so the test command and the agent share it.
+- A scenario is a script of `simulate` steps with a name, a page and a seed, played on the virtual clock. Its screenshots and final screen are compared like pages. The step runner moved from the MCP server to `copper_and_code_studio/sim/script.py`, so the test command and the agent share it.
 - Scenarios live in `scenarios.json` next to the baselines of each resolution, because touch coordinates depend on it. The MCP `save_scenario` tool writes that file, so an agent can turn a tried `simulate` run into a test.
 - `--update` plays a scenario twice and refuses it if the two runs differ, as for pages. Simulated time starts on a fixed date, 1 January 2026, and `localtime()` follows it in UTC, so a clock on screen does not break a baseline, whatever the time zone of the computer. Steps are checked for shape before a scenario is saved or run.
 
@@ -195,7 +195,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
   - version 3: 0.3 refuses it at once, in the GUI, the CLI and every MCP tool, with "Versione progetto non supportata: 3".
   A clear refusal is better than a project that opens and then fails at run time, and keeping version 2 for projects without modules means 0.3 users lose nothing they could open before. A `requiredFeatures` key would not have helped: 0.3 does not read it.
 - Module names are the import name and the file name: lowercase letters, digits and `_`, at most 31 characters, at the root of the app only. That rules out paths, `..` and names that differ only by case, which collide on FAT, the file system of some boards (MicroPython documentation, not tested on our boards). The 31-character limit is a deliberate margin, not a measured file-system limit.
-- Refused names: files the IDE generates, anything starting with `lvgl_mpy_studio`, MicroPython modules with their `u` aliases, Python keywords and the names the IDE already reserves, `__` names and handler names. On the simulator runtime, a `time.py`, `json.py`, `random.py`, `asyncio.py` or `machine.py` next to the app replaces the built-in module, while `lvgl` cannot be replaced (tested). A module named after a built-in would break the clock or the game.
+- Refused names: files the IDE generates, anything starting with `copper_and_code_studio`, MicroPython modules with their `u` aliases, Python keywords and the names the IDE already reserves, `__` names and handler names. On the simulator runtime, a `time.py`, `json.py`, `random.py`, `asyncio.py` or `machine.py` next to the app replaces the built-in module, while `lvgl` cannot be replaced (tested). A module named after a built-in would break the clock or the game.
 - Renaming or deleting a module never rewrites code. It returns the imports still using the old name, as renaming a widget does.
 
 ## User modules in every pipeline (2026-11-10)
@@ -289,7 +289,7 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## Boards from a file (2026-11-17)
 
-- Until now a new board meant a change to the IDE: a profile in `lvgl_mpy_studio/boards/` and its adapter in the `ADAPTERS` table of `core/boards.py`, which the validation and the board generator checked. Boards in development, experimental ones, or boards of other people did not fit there, and a public repository is not the place for boards that are not ready.
+- Until now a new board meant a change to the IDE: a profile in `copper_and_code_studio/boards/` and its adapter in the `ADAPTERS` table of `core/boards.py`, which the validation and the board generator checked. Boards in development, experimental ones, or boards of other people did not fit there, and a public repository is not the place for boards that are not ready.
 - The table added little. The modules a board needs are already in its profile (`firmware.modules`), every board works with the same `display_driver` contract, and the IDE reaches every board through `mpremote` except the STM32 over UART. So an adapter the IDE has no code for is now valid when it is an identifier (`[a-z0-9_]`, at most 64 characters), and its needs are read from the profile. The adapters of the table keep their own. The validation and the generator ask the same function, `adapter_requirements`, so they cannot disagree.
 - The file is a `.json` with the schema of the built-in profiles, not an archive. The profile is all the IDE needs to know about a board. A JSON file can be read, compared with a diff and written by hand, and it brings none of the risks of an archive: paths that leave the folder, archives that expand without end, executables. If one day a board has to bring more with it (firmware, images, documentation), the plan is a `.zip` with `board.json` at its root, read by the same import. Nothing of that is written.
 - The import refuses an id of a built-in board instead of replacing it: a file must not change a board the IDE ships under the same name. A board imported before is replaced after a question, or with `--replace`. Imported boards are kept with the customized ones in `board-profiles.json`, with the list of their ids under `imported`, so the Board Profile Manager can show them as such.

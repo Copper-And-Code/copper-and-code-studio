@@ -15,7 +15,7 @@ import time
 import pytest
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.platform import IS_WINDOWS
+from copper_and_code_studio.platform import IS_WINDOWS
 from sweep import Board, Example, Simulating, Sweep, settle, wait
 
 pytestmark = pytest.mark.manual
@@ -55,7 +55,7 @@ def test_the_disk_full_during_a_save_keeps_the_file_and_the_changes(qtbot, tmp_p
         def full(_descriptor):
             raise OSError(errno.ENOSPC, os.strerror(errno.ENOSPC))
 
-        monkeypatch.setattr("lvgl_mpy_studio.core.model.os.fsync", full)
+        monkeypatch.setattr("copper_and_code_studio.core.model.os.fsync", full)
         saved, dialogs, exceptions = through(sweep, window.save_project)
         assert not exceptions
         assert saved is False
@@ -65,7 +65,7 @@ def test_the_disk_full_during_a_save_keeps_the_file_and_the_changes(qtbot, tmp_p
         assert window.document.modified, "the changes are no longer marked as unsaved"
         assert "*" in window.windowTitle()
         monkeypatch.undo()                     # the disk has room again
-        sweep.monkeypatch.setattr("lvgl_mpy_studio.core.model.os.fsync", os.fsync)
+        sweep.monkeypatch.setattr("copper_and_code_studio.core.model.os.fsync", os.fsync)
         assert window.save_project()
         assert not window.document.modified and path.read_bytes() != before
 

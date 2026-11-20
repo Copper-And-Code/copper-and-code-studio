@@ -6,8 +6,8 @@ import sys
 
 import pytest
 
-from lvgl_mpy_studio.build.web import serve
-from lvgl_mpy_studio.gen.project_gen import generate_project
+from copper_and_code_studio.build.web import serve
+from copper_and_code_studio.gen.project_gen import generate_project
 from tools.build_site import check_internal_links, load_demos
 
 ROOT = Path(__file__).parents[1]

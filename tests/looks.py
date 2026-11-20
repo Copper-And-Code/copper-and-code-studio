@@ -156,7 +156,7 @@ def _catalog():
     import json
     from pathlib import Path
 
-    return json.loads((Path(__file__).parents[1] / "lvgl_mpy_studio" / "translations" / "it.json").read_text(encoding="utf-8"))
+    return json.loads((Path(__file__).parents[1] / "copper_and_code_studio" / "translations" / "it.json").read_text(encoding="utf-8"))
 
 
 def english_left(root):

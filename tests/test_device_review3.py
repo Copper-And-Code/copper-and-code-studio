@@ -8,9 +8,9 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Handler
-from lvgl_mpy_studio.device.service import DeviceError, DeviceSession
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Handler
+from copper_and_code_studio.device.service import DeviceError, DeviceSession
 from test_device import FakeRunner, connected, project
 
 

@@ -1,5 +1,5 @@
 """Windows and dialogs open no larger than the screen has room for."""
-from lvgl_mpy_studio.core.boards import ProfileStore
+from copper_and_code_studio.core.boards import ProfileStore
 
 
 def fits(widget):
@@ -10,11 +10,11 @@ def fits(widget):
 def test_the_main_window_and_the_large_dialogs_fit_the_screen(qtbot, tmp_path):
     from PySide6.QtCore import QSettings
 
-    from lvgl_mpy_studio.ui.blocks_manager import BlocksDialog
-    from lvgl_mpy_studio.ui.device_files import UploadFilesDialog
-    from lvgl_mpy_studio.ui.document import ProjectDocument
-    from lvgl_mpy_studio.ui.main_window import MainWindow
-    from lvgl_mpy_studio.ui.profile_manager import ProfileManagerDialog
+    from copper_and_code_studio.ui.blocks_manager import BlocksDialog
+    from copper_and_code_studio.ui.device_files import UploadFilesDialog
+    from copper_and_code_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.profile_manager import ProfileManagerDialog
 
     window = MainWindow()
     qtbot.addWidget(window)

@@ -5,16 +5,16 @@ import json
 import pytest
 from PySide6.QtGui import QColor, QImage, QPainter
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.build.preview import render_with_log
-from lvgl_mpy_studio.build.visual import rgb565_to_rgb
-from lvgl_mpy_studio.core import assets
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.build.preview import render_with_log
+from copper_and_code_studio.build.visual import rgb565_to_rgb
+from copper_and_code_studio.core import assets
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import runtime_path
 from helpers import find_item
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
@@ -94,8 +94,8 @@ def test_a_large_image_says_what_it_costs(tmp_path):
 
 
 def test_choosing_a_picture_in_the_properties_adds_it_to_the_project(qtbot, tmp_path):
-    from lvgl_mpy_studio.ui.document import ProjectDocument
-    from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
+    from copper_and_code_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.properties.panel import PropertiesPanel
 
     project = Project()
     project.set_display_size(240, 160)
@@ -148,8 +148,8 @@ def test_a_picture_too_heavy_as_png_is_refused_with_a_message(qtbot, tmp_path):
     """A photo the size of the screen stays above the limit once converted: nothing must change, and no exception escape."""
     import random
 
-    from lvgl_mpy_studio.ui.document import ProjectDocument
-    from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
+    from copper_and_code_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.properties.panel import PropertiesPanel
 
     noise = QImage(bytes(random.Random(1).randbytes(800 * 480 * 4)), 800, 480, QImage.Format_RGBA8888)
     noise.save(str(tmp_path / "photo.png"))

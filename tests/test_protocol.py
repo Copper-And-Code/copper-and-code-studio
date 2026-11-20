@@ -1,6 +1,6 @@
 from hypothesis import given, strategies as st
 
-from lvgl_mpy_studio.sim.protocol import Decoder, MessageType, encode_hello, encode_key, encode_pointer, encode_present, encode_quit, encode_rect, encode_stop, encode_wheel
+from copper_and_code_studio.sim.protocol import Decoder, MessageType, encode_hello, encode_key, encode_pointer, encode_present, encode_quit, encode_rect, encode_stop, encode_wheel
 
 
 def round_trip(kind, payload):

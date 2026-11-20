@@ -1,5 +1,5 @@
 import json
-from lvgl_mpy_studio.core.model import Project
+from copper_and_code_studio.core.model import Project
 
 
 def project_with(props, widget_type="button"):

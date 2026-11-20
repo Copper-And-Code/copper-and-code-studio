@@ -2,11 +2,11 @@ import pytest
 
 import ast
 
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_app_events, generate_project
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_app_events, generate_project
 
 
 def test_generated_files_and_sourcemap(tmp_path):
@@ -179,9 +179,9 @@ def test_old_project_profile_still_gets_the_board_buzzer(tmp_path):
 def test_a_project_of_2000_widgets_compiles_and_gets_a_heap_for_it(tmp_path):
     """mpy-cross said MemoryError on the ui.py of 2000 widgets (838 KB), and the runtime ran out of
     its 2 MB heap: both now have room."""
-    from lvgl_mpy_studio.build.compiler import compile_python
-    from lvgl_mpy_studio.core.components import is_component
-    from lvgl_mpy_studio.platform import RUNTIME_ENTRY, runtime_path
+    from copper_and_code_studio.build.compiler import compile_python
+    from copper_and_code_studio.core.components import is_component
+    from copper_and_code_studio.platform import RUNTIME_ENTRY, runtime_path
 
     if not runtime_path().exists():
         pytest.skip("mpy-cross not built")

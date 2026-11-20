@@ -1,5 +1,5 @@
-from lvgl_mpy_studio.core import i18n
-from lvgl_mpy_studio.core.i18n import catalog, set_language, tr
+from copper_and_code_studio.core import i18n
+from copper_and_code_studio.core.i18n import catalog, set_language, tr
 
 
 def test_every_english_text_stays_itself_in_english():

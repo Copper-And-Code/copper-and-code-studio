@@ -26,7 +26,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR arguments, int
     while (*original == L' ') original++;
 
     wchar_t command[65536];
-    if (swprintf(command, 65536, L"\"%ls\\python\\pythonw.exe\" -m lvgl_mpy_studio %ls", directory, original) < 0) return 2;
+    if (swprintf(command, 65536, L"\"%ls\\python\\pythonw.exe\" -m copper_and_code_studio %ls", directory, original) < 0) return 2;
     STARTUPINFOW startup = {0};
     startup.cb = sizeof(startup);
     PROCESS_INFORMATION process = {0};

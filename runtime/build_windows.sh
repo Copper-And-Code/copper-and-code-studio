@@ -49,7 +49,7 @@ if [ ! -d "$SDL_DIR" ]; then
     tar -xzf "$SDL_ARCHIVE" -C "$SDL_CACHE"
 fi
 
-IDE_VERSION=$(python3 -c 'import re, pathlib, sys; print(re.search(r"__version__ = \"([^\"]+)", (pathlib.Path(sys.argv[1]) / "lvgl_mpy_studio/__init__.py").read_text(encoding="utf-8")).group(1))' "$ROOT")
+IDE_VERSION=$(python3 -c 'import re, pathlib, sys; print(re.search(r"__version__ = \"([^\"]+)", (pathlib.Path(sys.argv[1]) / "copper_and_code_studio/__init__.py").read_text(encoding="utf-8")).group(1))' "$ROOT")
 IDE_COMMIT=$(git -C "$ROOT" rev-parse --short HEAD)
 IDE_FILEVERSION=$(python3 -c 'import sys; print(",".join((sys.argv[1].split(".") + ["0", "0", "0"])[:4]))' "$IDE_VERSION")
 sed -e "s/@IDE_VERSION@/$IDE_VERSION/g" -e "s/@IDE_COMMIT@/$IDE_COMMIT/g" -e "s/@IDE_FILEVERSION@/$IDE_FILEVERSION/g" \

@@ -1,8 +1,8 @@
 import copy
 
-from lvgl_mpy_studio.core.boards import ADAPTERS, builtin_profiles, validate_profile
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.board_gen import generate_board
+from copper_and_code_studio.core.boards import ADAPTERS, builtin_profiles, validate_profile
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.board_gen import generate_board
 
 
 def esp32_profile():

@@ -3,9 +3,9 @@ from pathlib import Path
 
 from hypothesis import given, strategies as st
 
-from lvgl_mpy_studio.core.events import default_event, handler_name
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.names import validate_name
+from copper_and_code_studio.core.events import default_event, handler_name
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.names import validate_name
 
 
 def sample_project():

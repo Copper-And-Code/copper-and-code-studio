@@ -17,12 +17,12 @@ from PySide6.QtWidgets import (
     QApplication, QDialog, QDialogButtonBox, QDockWidget, QFileDialog, QInputDialog, QLineEdit, QMenu, QMessageBox, QToolBar,
 )
 
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.i18n import language
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.validation import validate_project
-from lvgl_mpy_studio.device.service import DeviceSession
-from lvgl_mpy_studio.platform import IS_WINDOWS, runtime_path
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.i18n import language
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.validation import validate_project
+from copper_and_code_studio.device.service import DeviceSession
+from copper_and_code_studio.platform import IS_WINDOWS, runtime_path
 
 pytestmark = pytest.mark.manual
 ROOT = Path(__file__).parents[2]
@@ -423,7 +423,7 @@ class NoRealBoard:
         if command[-1:] == ["devs"]:
             return ""                          # no board attached
         self.attempts.append(" ".join(map(str, command[-4:])))
-        from lvgl_mpy_studio.device.common import DeviceError
+        from copper_and_code_studio.device.common import DeviceError
         raise DeviceError("device.absent", "the sweep never reaches a real board")
 
     def forbidden(self, *arguments, **options):
@@ -534,7 +534,7 @@ class Sweep:
             pytest.skip("runtime not built")
         if self.state_class is Program and IS_WINDOWS:
             pytest.skip("programs without pages run only in the Linux simulator")
-        from lvgl_mpy_studio.ui.main_window import MainWindow
+        from copper_and_code_studio.ui.main_window import MainWindow
 
         monkeypatch, tmp_path = self.monkeypatch, self.tmp_path
         QApplication.setAttribute(Qt.AA_DontUseNativeDialogs)
@@ -554,7 +554,7 @@ class Sweep:
         monkeypatch.setattr(serial, "Serial", self.hardware.serial_class())
         # The settings of the tests last the whole run: the port of a virtual board of an earlier
         # test would be tried again, as the port a person used last.
-        from lvgl_mpy_studio.ui.app_settings import app_settings
+        from copper_and_code_studio.ui.app_settings import app_settings
 
         app_settings().remove("device/ports")
         window = self.window = MainWindow()

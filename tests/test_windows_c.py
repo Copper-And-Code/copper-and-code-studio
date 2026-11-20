@@ -5,13 +5,13 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio import platform
-from lvgl_mpy_studio.build import c_compiler
-from lvgl_mpy_studio.build.c_compiler import compile_c, parse_c_errors
-from lvgl_mpy_studio.build.compiler import compile_python
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_project
+from copper_and_code_studio import platform
+from copper_and_code_studio.build import c_compiler
+from copper_and_code_studio.build.c_compiler import compile_c, parse_c_errors
+from copper_and_code_studio.build.compiler import compile_python
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_project
 
 ROOT = Path(__file__).parents[1]
 CROSS_CC = shutil.which("x86_64-w64-mingw32-gcc") or ROOT / "cache/w0-mingw/sysroot/usr/bin/x86_64-w64-mingw32-gcc"

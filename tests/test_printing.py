@@ -2,9 +2,9 @@ from PySide6.QtCore import QRectF
 from PySide6.QtGui import QImage, QKeySequence
 from PySide6.QtPrintSupport import QPrinter
 
-from lvgl_mpy_studio.core.model import Handler, Project, UserModule
-from lvgl_mpy_studio.ui import printing
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.core.model import Handler, Project, UserModule
+from copper_and_code_studio.ui import printing
+from copper_and_code_studio.ui.main_window import MainWindow
 
 
 def project():

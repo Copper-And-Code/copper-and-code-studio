@@ -2,7 +2,7 @@ import ast
 
 from hypothesis import example, given, strategies as st
 
-from lvgl_mpy_studio.gen.escaping import c_comment_lines, python_string
+from copper_and_code_studio.gen.escaping import c_comment_lines, python_string
 
 
 @given(st.text())

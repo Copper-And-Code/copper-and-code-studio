@@ -4,13 +4,13 @@ from PySide6.QtCore import QPoint, Qt
 from PySide6.QtNetwork import QHostAddress, QTcpSocket
 from PySide6.QtTest import QTest
 
-from lvgl_mpy_studio.build.compiler import compile_python
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import runtime_path
-from lvgl_mpy_studio.sim.protocol import encode_hello
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.sim_panel import SimPanel, SimScreen
+from copper_and_code_studio.build.compiler import compile_python
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.sim.protocol import encode_hello
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.sim_panel import SimPanel, SimScreen
 
 pytestmark = pytest.mark.skipif(not runtime_path().exists(), reason="native runtime not built")
 
@@ -117,7 +117,7 @@ def test_physical_pixel_scaling_uses_device_pixel_ratio(qtbot):
 
 
 def test_screen_grows_by_whole_multiples_and_shrinks_smoothly(qtbot):
-    from lvgl_mpy_studio.ui.sim_panel import SimScreen
+    from copper_and_code_studio.ui.sim_panel import SimScreen
 
     screen = SimScreen()  # 800x480
     qtbot.addWidget(screen)

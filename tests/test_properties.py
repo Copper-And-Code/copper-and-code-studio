@@ -2,9 +2,9 @@ import copy
 
 import pytest
 
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.ui.properties.panel import DESCRIPTOR_ROLE, PropertiesPanel
-from lvgl_mpy_studio.ui.document import ProjectDocument
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.ui.properties.panel import DESCRIPTOR_ROLE, PropertiesPanel
+from copper_and_code_studio.ui.document import ProjectDocument
 
 
 def value_items(model):

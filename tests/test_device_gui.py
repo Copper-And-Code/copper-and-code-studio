@@ -5,17 +5,17 @@ import pytest
 from PySide6.QtCore import QSettings, Qt
 from PySide6.QtWidgets import QDialog, QMessageBox
 
-from lvgl_mpy_studio import __version__
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import DeviceError
-from lvgl_mpy_studio.gen.components import BUZZER_MODULE
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.ui.device_panel import DeviceConsole, UploadProgress
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.ui.project_settings import ProjectSettingsDialog
-from lvgl_mpy_studio.ui.run_target import SIMULATOR_MICROPYTHON, board_target
+from copper_and_code_studio import __version__
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import DeviceError
+from copper_and_code_studio.gen.components import BUZZER_MODULE
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.ui.device_panel import DeviceConsole, UploadProgress
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui.project_settings import ProjectSettingsDialog
+from copper_and_code_studio.ui.run_target import SIMULATOR_MICROPYTHON, board_target
 
 
 def board_window(qtbot, tmp_path):
@@ -59,7 +59,7 @@ def fake_connect(window, calls=None):
 
 
 def test_selecting_board_sets_profile_and_resolution_with_undo(qtbot, tmp_path, monkeypatch):
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
     window = MainWindow()
     qtbot.addWidget(window)
     path = tmp_path / "project.json"
@@ -99,7 +99,7 @@ def test_run_asks_port_when_several_and_stops_on_cancel(qtbot, tmp_path, monkeyp
     ports = [{"port": name, "id": "1", "usb": "1:1", "description": "x"} for name in ("/dev/a", "/dev/b")]
     monkeypatch.setattr(window.device, "list_ports", lambda: ports)
     monkeypatch.setattr(window.device, "connect", fake_connect(window, connects))
-    monkeypatch.setattr("lvgl_mpy_studio.ui.device_panel.SelectDeviceDialog.exec", lambda self: QDialog.Rejected)
+    monkeypatch.setattr("copper_and_code_studio.ui.device_panel.SelectDeviceDialog.exec", lambda self: QDialog.Rejected)
     window.run_action.trigger()
     wait_worker(qtbot, window)
     assert connects == []
@@ -154,7 +154,7 @@ def test_opening_project_with_other_profile_closes_session(qtbot, tmp_path, monk
 
 
 def test_run_target_travels_with_project_file(qtbot, tmp_path, monkeypatch):
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
     window = MainWindow()
     qtbot.addWidget(window)
     path = tmp_path / "portable.json"
@@ -242,8 +242,8 @@ def test_changing_port_while_connected_closes_old_session(qtbot, tmp_path, monke
     wait_worker(qtbot, window)
     remembered = []
     monkeypatch.setattr(window, "_remember_port", remembered.append)
-    monkeypatch.setattr("lvgl_mpy_studio.ui.device_panel.SelectDeviceDialog.exec", lambda self: QDialog.Accepted)
-    monkeypatch.setattr("lvgl_mpy_studio.ui.device_panel.SelectDeviceDialog.selected_port", lambda self: "/dev/new")
+    monkeypatch.setattr("copper_and_code_studio.ui.device_panel.SelectDeviceDialog.exec", lambda self: QDialog.Accepted)
+    monkeypatch.setattr("copper_and_code_studio.ui.device_panel.SelectDeviceDialog.selected_port", lambda self: "/dev/new")
     window._choose_port([])
     assert remembered == ["/dev/new"]
     assert window.device.port is None
@@ -557,7 +557,7 @@ def test_cli_upload_uses_embedded_project_profile(tmp_path, monkeypatch, capsys)
             calls.append(("upload", project.projectName, output_dir))
             return {"appPath": "/lms_apps/app_test", "files": ["app_main.py"], "warnings": []}
 
-    monkeypatch.setattr("lvgl_mpy_studio.device.service.DeviceSession", Session)
+    monkeypatch.setattr("copper_and_code_studio.device.service.DeviceSession", Session)
     output = tmp_path / "build"
     assert main(["--language", "en", "device", "upload", str(path), "--port", "/dev/fake", "--output", str(output)]) == 0
     assert calls == [("connect", "/dev/fake", current.board["id"]), ("upload", "cli-board", output)]
@@ -801,7 +801,7 @@ def resolution_window(qtbot, tmp_path, monkeypatch, mode="adapt", accept=True):
         asked.append(dialog)
         dialog.options[mode].setChecked(True)
         return QDialog.Accepted if accept else QDialog.Rejected
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.ResizeDialog.exec", answer)
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.ResizeDialog.exec", answer)
     window = MainWindow()
     qtbot.addWidget(window)
     window.settings.remove("resolution/mode")
@@ -851,7 +851,7 @@ def test_keep_then_adapt_the_page_later(qtbot, tmp_path, monkeypatch):
     assert page.designSize == (480, 480) and window.document.project.find_widget("cerchio").props["width"] == 200
     window._update_adapt_page_action()
     assert window.adapt_page_action.isEnabled()
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.ResizeDialog.exec", lambda dialog: (dialog.options["adapt"].setChecked(True), QDialog.Accepted)[1])
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.ResizeDialog.exec", lambda dialog: (dialog.options["adapt"].setChecked(True), QDialog.Accepted)[1])
     assert window.adapt_current_page()
     assert window.document.project.pages[0].designSize is None
     assert window.document.project.find_widget("cerchio").props["width"] == 100
@@ -911,7 +911,7 @@ def test_custom_size_from_the_menu_opens_the_dialog(qtbot, tmp_path, monkeypatch
         dialog.height.setValue(600)
         sizes.append(dialog.size())
         return QDialog.Accepted
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.CustomSizeDialog.exec", answer)
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.CustomSizeDialog.exec", answer)
     window.resolution_selector.rebuild()
     custom = window.resolution_selector.menu().actions()[-1]
     custom.trigger()
@@ -953,7 +953,7 @@ def test_every_entry_of_the_destination_menu_reaches_its_handler(qtbot, tmp_path
 def test_no_signal_is_handed_over_as_a_menu_callback():
     import re
     from pathlib import Path
-    root = Path(__file__).parents[1] / "lvgl_mpy_studio" / "ui"
+    root = Path(__file__).parents[1] / "copper_and_code_studio" / "ui"
     sources = {path: path.read_text(encoding="utf-8") for path in root.rglob("*.py")}
     signals = {match for text in sources.values() for match in re.findall(r"^\s*(\w+) = Signal\(", text, re.M)}
     offenders = [f"{path.name}:{number}" for path, text in sources.items() for number, line in enumerate(text.splitlines(), 1)
@@ -962,7 +962,7 @@ def test_no_signal_is_handed_over_as_a_menu_callback():
 
 
 def test_console_follows_the_connected_board_and_pauses_during_operations(qtbot, tmp_path):
-    from lvgl_mpy_studio.device.service import DeviceSession
+    from copper_and_code_studio.device.service import DeviceSession
 
     class Port:
         def __init__(self):
@@ -1003,7 +1003,7 @@ def test_console_follows_the_connected_board_and_pauses_during_operations(qtbot,
 
 def test_the_console_opens_after_device_connect(qtbot, tmp_path):
     """Connect continues with nothing to do: the console used to wait for the next operation to open."""
-    from lvgl_mpy_studio.selftest.fakeboard import PORT, FakeBoard
+    from copper_and_code_studio.selftest.fakeboard import PORT, FakeBoard
 
     window = board_window(qtbot, tmp_path)
     window.selected_port = ""
@@ -1022,7 +1022,7 @@ def test_a_flood_of_board_output_reaches_the_window_in_pieces_and_is_cut_short(q
     answering and showed old output long after Ctrl-C. The pump hands it over in bounded pieces."""
     import threading
 
-    from lvgl_mpy_studio.ui.device_panel import OutputPump
+    from copper_and_code_studio.ui.device_panel import OutputPump
 
     pieces, skipped = [], []
     pump = OutputPump(pieces.append, skipped.append)

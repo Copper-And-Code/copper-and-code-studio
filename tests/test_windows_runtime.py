@@ -7,12 +7,12 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.platform import RUNTIME_ENTRY
+from copper_and_code_studio.platform import RUNTIME_ENTRY
 
-from lvgl_mpy_studio.build.compiler import compile_python
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.sim.protocol import Decoder, MessageType, encode_pointer, encode_quit, encode_stop
+from copper_and_code_studio.build.compiler import compile_python
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.sim.protocol import Decoder, MessageType, encode_pointer, encode_quit, encode_stop
 
 ROOT = Path(__file__).parents[1]
 LINUX_RUNTIME = ROOT / "runtime/out/lvsim-runtime"

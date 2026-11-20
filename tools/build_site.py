@@ -15,14 +15,14 @@ from urllib.parse import unquote, urlsplit
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QImage
 
-from lvgl_mpy_studio.build.budget import measure_budget
-from lvgl_mpy_studio.build.preview import render_with_log
-from lvgl_mpy_studio.build.release import THIRD_PARTY_LICENSES
-from lvgl_mpy_studio.build.visual import rgb565_to_rgb, write_png
-from lvgl_mpy_studio.build.program import prepare_program, program_board
-from lvgl_mpy_studio.build.web import RUNTIME_FILES, build_web, copy_program_files, copy_program_runtime, web_runtime, web_template
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.build.budget import measure_budget
+from copper_and_code_studio.build.preview import render_with_log
+from copper_and_code_studio.build.release import THIRD_PARTY_LICENSES
+from copper_and_code_studio.build.visual import rgb565_to_rgb, write_png
+from copper_and_code_studio.build.program import prepare_program, program_board
+from copper_and_code_studio.build.web import RUNTIME_FILES, build_web, copy_program_files, copy_program_runtime, web_runtime, web_template
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.platform import runtime_path
 
 ROOT = Path(__file__).parents[1]
 REPOSITORY = "https://github.com/Copper-And-Code/copper-and-code-studio"

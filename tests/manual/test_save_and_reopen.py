@@ -59,7 +59,7 @@ def without_preview(window):
 
 
 def reopened(qtbot, path):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     other = MainWindow()
     qtbot.addWidget(other)

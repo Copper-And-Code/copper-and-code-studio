@@ -15,8 +15,8 @@ import pytest
 from PySide6.QtCore import QPoint, Qt
 from PySide6.QtTest import QTest
 
-from lvgl_mpy_studio.core.model import is_component
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.core.model import is_component
+from copper_and_code_studio.platform import runtime_path
 from sweep import QT_NOISE, ROOT, Empty, Sweep, wait
 
 pytestmark = pytest.mark.manual

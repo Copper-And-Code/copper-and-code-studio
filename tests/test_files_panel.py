@@ -6,8 +6,8 @@ import pytest
 from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QInputDialog, QMessageBox
 
-from lvgl_mpy_studio.build.compiler import default_mpy_cross
-from lvgl_mpy_studio.ui.files import FileTab, lvgl_completions, readable_text, syntax_errors
+from copper_and_code_studio.build.compiler import default_mpy_cross
+from copper_and_code_studio.ui.files import FileTab, lvgl_completions, readable_text, syntax_errors
 
 
 def test_only_text_files_are_opened(tmp_path):
@@ -51,7 +51,7 @@ def test_a_tab_saves_with_the_file_line_endings_and_follows_changes_on_disk(qtbo
 
 
 def window(qtbot):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -204,8 +204,8 @@ def test_a_binary_file_is_not_opened(qtbot, tmp_path, monkeypatch):
 
 # ---- Files of the board ----
 
-from lvgl_mpy_studio.device.common import DeviceError  # noqa: E402
-from lvgl_mpy_studio.device.service import DeviceSession  # noqa: E402
+from copper_and_code_studio.device.common import DeviceError  # noqa: E402
+from copper_and_code_studio.device.service import DeviceSession  # noqa: E402
 
 
 class BoardFiles(DeviceSession):
@@ -358,7 +358,7 @@ def test_run_on_the_board_uploads_the_folder_then_runs_the_file(qtbot, tmp_path,
 def test_run_on_the_board_refuses_a_folder_that_is_not_a_program(qtbot, tmp_path, monkeypatch):
     from PySide6.QtWidgets import QMessageBox
 
-    from lvgl_mpy_studio.build import program
+    from copper_and_code_studio.build import program
 
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
     monkeypatch.setattr(program, "MAX_FILES", 5)
@@ -508,7 +508,7 @@ def test_a_failed_save_of_a_tab_keeps_the_file_as_it_was(qtbot, tmp_path, monkey
 
     import builtins
 
-    from lvgl_mpy_studio.ui import files
+    from copper_and_code_studio.ui import files
 
     real_fsync, real_open = os.fsync, builtins.open
 
@@ -540,7 +540,7 @@ def test_a_failed_save_of_a_tab_keeps_the_file_as_it_was(qtbot, tmp_path, monkey
 @pytest.mark.parametrize("name", ["a/b.py", "a\\b.py", "..", "."])
 def test_a_name_with_a_slash_or_a_dot_folder_is_refused(qtbot, tmp_path, monkeypatch, name):
     """Found blind by tools/mutation_probe.py: the check of the names of New File had no test."""
-    from lvgl_mpy_studio.ui.files import FilesPanel
+    from copper_and_code_studio.ui.files import FilesPanel
     from PySide6.QtCore import QSettings
 
     warnings = []

@@ -5,10 +5,10 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.live import LIVE_OK, live_script
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import RUNTIME_ENTRY, runtime_path
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.live import LIVE_OK, live_script
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import RUNTIME_ENTRY, runtime_path
 
 ROOT = Path(__file__).parents[1] / "examples"
 GAMES = ("tictactoe", "simon", "snake", "breakout")

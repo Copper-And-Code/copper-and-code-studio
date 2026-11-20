@@ -3,12 +3,12 @@ import json
 import pytest
 from PySide6.QtWidgets import QMessageBox
 
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.validation import validate_project
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.validation import validate_project
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.ui.main_window import MainWindow
 
 
 def project_with_child():
@@ -199,7 +199,7 @@ def test_invalid_widget_type_cli_and_gui_are_controlled(qtbot, tmp_path, monkeyp
 
 def test_a_name_too_long_for_micropython_is_refused():
     """A 600-letter name was accepted, and MicroPython refused the code with "name too long"."""
-    from lvgl_mpy_studio.core.names import MAX_NAME_LENGTH, validate_name
+    from copper_and_code_studio.core.names import MAX_NAME_LENGTH, validate_name
 
     assert validate_name("w" * MAX_NAME_LENGTH) is None
     assert "longer than" in validate_name("w" * (MAX_NAME_LENGTH + 1))
@@ -210,7 +210,7 @@ def test_a_name_too_long_for_micropython_is_refused():
 
 def test_a_page_name_too_long_for_micropython_is_refused():
     """A page of 600 letters gave a constant ui.PAGE_… that MicroPython refused: "name too long"."""
-    from lvgl_mpy_studio.core.names import MAX_NAME_LENGTH
+    from copper_and_code_studio.core.names import MAX_NAME_LENGTH
 
     project = Project("long")
     project.pages.append(project.new_page("second"))

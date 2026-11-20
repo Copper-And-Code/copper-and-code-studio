@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.core.vt import DEFAULT_BG, DEFAULT_FG, Screen
+from copper_and_code_studio.core.vt import DEFAULT_BG, DEFAULT_FG, Screen
 
 
 def rows(screen):
@@ -142,7 +142,7 @@ def test_a_long_output_is_fast():
 def test_keys_become_the_bytes_of_xterm(qtbot):
     from PySide6.QtCore import Qt
 
-    from lvgl_mpy_studio.ui.terminal import TerminalView
+    from copper_and_code_studio.ui.terminal import TerminalView
 
     view = TerminalView()
     qtbot.addWidget(view)
@@ -170,7 +170,7 @@ def test_keys_become_the_bytes_of_xterm(qtbot):
 def test_reports_are_answered_and_paste_ends_lines_with_enter(qtbot):
     from PySide6.QtGui import QGuiApplication
 
-    from lvgl_mpy_studio.ui.terminal import TerminalView, paste_bytes
+    from copper_and_code_studio.ui.terminal import TerminalView, paste_bytes
 
     view = TerminalView()
     qtbot.addWidget(view)
@@ -188,7 +188,7 @@ def test_reports_are_answered_and_paste_ends_lines_with_enter(qtbot):
 
 
 def test_selection_is_copied_as_text(qtbot):
-    from lvgl_mpy_studio.ui.terminal import TerminalView
+    from copper_and_code_studio.ui.terminal import TerminalView
 
     view = TerminalView()
     qtbot.addWidget(view)
@@ -207,7 +207,7 @@ def test_a_full_history_stays_small():
     """10,000 rows of 80 cells, each a new tuple, took over 100 MB: equal cells are now one tuple."""
     import tracemalloc
 
-    from lvgl_mpy_studio.core.vt import Screen
+    from copper_and_code_studio.core.vt import Screen
 
     tracemalloc.start()
     try:
@@ -223,7 +223,7 @@ def test_a_full_history_stays_small():
 
 def test_tab_stops_and_background_colours():
     """Found blind by tools/mutation_probe.py: a tab goes to the next column of 8, and SGR 40-47 set the background."""
-    from lvgl_mpy_studio.core.vt import Screen
+    from copper_and_code_studio.core.vt import Screen
 
     screen = Screen()
     screen.feed("ab\tc")

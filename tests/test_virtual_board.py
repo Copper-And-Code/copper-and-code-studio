@@ -1,9 +1,9 @@
 """The IDE's board code against a virtual board: the real protocol, no hardware. See virtual_board.py."""
 import pytest
 
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.device.common import DeviceError
-from lvgl_mpy_studio.device.service import DeviceSession
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.device.common import DeviceError
+from copper_and_code_studio.device.service import DeviceSession
 
 from virtual_board import VirtualBoard, available
 
@@ -115,7 +115,7 @@ def test_a_board_without_the_touch_module_is_named(tmp_path):
 
 
 def _weather():
-    from lvgl_mpy_studio.core.model import Project
+    from copper_and_code_studio.core.model import Project
     from virtual_board import ROOT
 
     project = Project.load(ROOT / "examples" / "weather" / "project.json")

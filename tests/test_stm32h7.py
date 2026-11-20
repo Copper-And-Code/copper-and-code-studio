@@ -8,11 +8,11 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.core.boards import builtin_profiles, validate_profile
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import DeviceError, DeviceSession
-from lvgl_mpy_studio.device.uart import UartError, UartTransport
-from lvgl_mpy_studio.gen.board_gen import generate_board
+from copper_and_code_studio.core.boards import builtin_profiles, validate_profile
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import DeviceError, DeviceSession
+from copper_and_code_studio.device.uart import UartError, UartTransport
+from copper_and_code_studio.gen.board_gen import generate_board
 from test_device import FakeRunner
 
 
@@ -307,7 +307,7 @@ def test_uart_console_does_not_close_or_reopen_port():
 
 
 def test_interactive_uart_console_leaves_the_raw_repl_once():
-    from lvgl_mpy_studio.device.uart import UartTransport
+    from copper_and_code_studio.device.uart import UartTransport
 
     class FakeSerial:
         def __init__(self):

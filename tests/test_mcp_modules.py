@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server, mcp_tools
-from lvgl_mpy_studio.core.model import Project, file_revision
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio import mcp_server, mcp_tools
+from copper_and_code_studio.core.model import Project, file_revision
+from copper_and_code_studio.platform import runtime_path
 from helpers import call, payload, error
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")

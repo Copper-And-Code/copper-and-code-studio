@@ -381,7 +381,7 @@ present, because they write to it. None is written yet.
   on Xvfb, where a window manager is used only if one is installed.
 
 How much of the code the checks run, measured on 17 November 2026 with coverage.py: 87 % of
-the lines of the user interface (`lvgl_mpy_studio/ui`) and 90 % of the whole package. The
+the lines of the user interface (`copper_and_code_studio/ui`) and 90 % of the whole package. The
 number says less than it seems. The bugs fixed on that day were in lines the tests ran: they
 came from order and timing, such as closing a window while a file was still being written to
 the board. This is why the suites run by hand drive the IDE through sequences of real

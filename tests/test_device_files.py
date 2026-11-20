@@ -6,10 +6,10 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.device.common import DeviceError
-from lvgl_mpy_studio.device.service import DeviceSession
-from lvgl_mpy_studio.gen.board_gen import _bytecode_file
-from lvgl_mpy_studio.ui.device_files import folder_items, protected_targets, run_line, shadowed_modules
+from copper_and_code_studio.device.common import DeviceError
+from copper_and_code_studio.device.service import DeviceSession
+from copper_and_code_studio.gen.board_gen import _bytecode_file
+from copper_and_code_studio.ui.device_files import folder_items, protected_targets, run_line, shadowed_modules
 
 
 class FakeBoard(DeviceSession):
@@ -146,7 +146,7 @@ def test_run_line_runs_a_file_from_its_folder_or_types_code():
 
 
 def test_run_file_on_board_types_at_the_prompt(qtbot, tmp_path):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     class Port:
         def __init__(self):
@@ -176,7 +176,7 @@ def test_run_file_on_board_types_at_the_prompt(qtbot, tmp_path):
 def test_the_menu_entry_asks_which_file_to_run(qtbot, monkeypatch):
     """triggered passes checked to its slot: it once arrived as the text and the entry failed."""
     from PySide6.QtWidgets import QInputDialog
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     asked = []
     monkeypatch.setattr(QInputDialog, "getText", lambda *arguments, **options: asked.append(options.get("text")) or ("", False))
@@ -190,7 +190,7 @@ def test_the_menu_entry_asks_which_file_to_run(qtbot, monkeypatch):
 @pytest.mark.parametrize("answer", ["no", "yes"])
 def test_the_upload_asks_before_a_folder_hides_a_module(qtbot, tmp_path, monkeypatch, answer):
     from PySide6.QtWidgets import QMessageBox
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     class Board(FakeBoard):
         def list_dir(self, path):

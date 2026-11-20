@@ -4,9 +4,9 @@ from PySide6.QtGui import QDragEnterEvent, QDragLeaveEvent, QDragMoveEvent, QDro
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.ui.designer.scene import WIDGET_MIME, DesignerScene, DesignerView, Toolbox
-from lvgl_mpy_studio.ui.document import ProjectDocument
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.ui.designer.scene import WIDGET_MIME, DesignerScene, DesignerView, Toolbox
+from copper_and_code_studio.ui.document import ProjectDocument
 
 
 def test_toolbox_contains_all_types_and_drop_adds_defaults(qtbot):
@@ -112,7 +112,7 @@ def test_toolbox_drag_carries_chip_beside_cursor(qtbot, monkeypatch):
         def exec(self, action):
             self.action = action
 
-    monkeypatch.setattr("lvgl_mpy_studio.ui.designer.scene.QDrag", FakeDrag)
+    monkeypatch.setattr("copper_and_code_studio.ui.designer.scene.QDrag", FakeDrag)
     toolbox.startDrag(Qt.CopyAction)
     drag = drags[0]
     assert not drag.pixmap.isNull()
@@ -198,7 +198,7 @@ def test_resize_handle_has_minimum_and_undo(qtbot):
 
 def test_moving_with_the_keys_is_undone_by_an_english_name(qtbot):
     """The undo entry of a move with the arrow keys was in Italian whatever the language."""
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -213,7 +213,7 @@ def test_moving_with_the_keys_is_undone_by_an_english_name(qtbot):
 
 def test_a_thin_line_keeps_its_height_when_moved_or_stretched(qtbot):
     """A line 5 px high is drawn 8 px high to be grabbed: a move took the 8, and so did the right handle."""
-    from lvgl_mpy_studio.ui.designer.scene import ResizeHandle
+    from copper_and_code_studio.ui.designer.scene import ResizeHandle
 
     document = ProjectDocument()
     document.execute("Add", lambda project: project.add_widget(project.pages[0], "line", {"x": 20, "y": 30, "width": 200, "height": 5}))

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.gen.gen_python import generate_python
+from copper_and_code_studio.gen.gen_python import generate_python
 
 CORPUS = Path(__file__).parents[1] / "reference" / "corpus"
 CASES = sorted(CORPUS.glob("*.json"))

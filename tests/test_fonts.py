@@ -11,17 +11,17 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.build.preview import render_with_log
-from lvgl_mpy_studio.core import assets
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.fontconv import convert, rasterise
-from lvgl_mpy_studio.gen.binfont import write_binfont
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import design_warnings, generate_project
-from lvgl_mpy_studio.platform import runtime_environment, runtime_path
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.build.preview import render_with_log
+from copper_and_code_studio.core import assets
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.fontconv import convert, rasterise
+from copper_and_code_studio.gen.binfont import write_binfont
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import design_warnings, generate_project
+from copper_and_code_studio.platform import runtime_environment, runtime_path
 
 LVGL = Path(__file__).parents[1] / ".reference" / "lvgl-bindings" / "lvgl"
 MONTSERRAT = LVGL / "scripts" / "built_in_font" / "Montserrat-Medium.ttf"
@@ -193,8 +193,8 @@ def test_fonts_are_listed_removed_and_reported(tmp_path):
 
 
 def test_choosing_a_font_file_in_the_properties_adds_it(qtbot):
-    from lvgl_mpy_studio.ui.document import ProjectDocument
-    from lvgl_mpy_studio.ui.properties.panel import PropertiesPanel
+    from copper_and_code_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.properties.panel import PropertiesPanel
     from test_images import find_item
 
     project = Project()
@@ -236,8 +236,8 @@ def test_an_agent_adds_a_font_and_uses_it(tmp_path, monkeypatch):
 
 @needs_runtime
 def test_the_c_export_draws_the_project_font_like_python(tmp_path):
-    from lvgl_mpy_studio.build.c_compiler import compile_c
-    from lvgl_mpy_studio.build.compiler import compile_python
+    from copper_and_code_studio.build.c_compiler import compile_c
+    from copper_and_code_studio.build.compiler import compile_python
 
     project, _name = with_font(size=31, text="AVATAR Type 21")
     project.set_display_size(800, 480)
@@ -258,8 +258,8 @@ def test_the_c_export_draws_the_project_font_like_python(tmp_path):
 
 
 def test_fonts_too_heavy_for_the_board_are_reported():
-    from lvgl_mpy_studio.gen.fonts import font_memory_warning
-    from lvgl_mpy_studio.gen.project_gen import legacy_data
+    from copper_and_code_studio.gen.fonts import font_memory_warning
+    from copper_and_code_studio.gen.project_gen import legacy_data
 
     project, _name = with_font(size=60)
     data = legacy_data(project)
@@ -273,8 +273,8 @@ def test_fonts_too_heavy_for_the_board_are_reported():
 def test_memory_is_measured_after_the_reset_and_the_warning_survives_a_failed_start(tmp_path):
     from test_device import FakeRunner
 
-    from lvgl_mpy_studio.core.boards import builtin_profiles
-    from lvgl_mpy_studio.device.service import DeviceError, DeviceSession
+    from copper_and_code_studio.core.boards import builtin_profiles
+    from copper_and_code_studio.device.service import DeviceError, DeviceSession
 
     class Runner(FakeRunner):
         free = 0

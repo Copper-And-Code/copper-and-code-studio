@@ -1,8 +1,8 @@
 from PySide6.QtCore import Qt
 from PySide6.QtTest import QTest
 
-from lvgl_mpy_studio.ui.code.editor import CodePanel, PythonHighlighter
-from lvgl_mpy_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.code.editor import CodePanel, PythonHighlighter
+from copper_and_code_studio.ui.document import ProjectDocument
 
 
 def make_panel(qtbot):

@@ -200,7 +200,7 @@ def test_every_object_and_event_opens_without_changing_the_project(ide):
 def test_the_code_is_read_only_while_the_simulator_runs(ide):
     window = ide.window
     panel = window.code_panel
-    from lvgl_mpy_studio.platform import runtime_path
+    from copper_and_code_studio.platform import runtime_path
 
     if not runtime_path().exists():
         pytest.skip("runtime not built")

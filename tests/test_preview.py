@@ -3,13 +3,13 @@ from PySide6.QtCore import QEvent, QPointF, QSettings, Qt
 from PySide6.QtGui import QColor, QImage, QMouseEvent
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.build.preview import design_key, render_page
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.platform import runtime_path
-from lvgl_mpy_studio.ui.designer.preview import PreviewRenderer, frame_image
-from lvgl_mpy_studio.ui.designer.scene import DesignerView
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.build.preview import design_key, render_page
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.ui.designer.preview import PreviewRenderer, frame_image
+from copper_and_code_studio.ui.designer.scene import DesignerView
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.main_window import MainWindow
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="native runtime not built")
 

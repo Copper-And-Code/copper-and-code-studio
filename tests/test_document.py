@@ -1,5 +1,5 @@
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.ui.document import ProjectDocument
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.ui.document import ProjectDocument
 
 
 def test_add_undo_redo_and_save_round_trip(qtbot, tmp_path):
@@ -41,7 +41,7 @@ def test_atomic_save_failure_preserves_file_document_and_undo(qtbot, tmp_path, m
     def fail_replace(source, target):
         raise OSError("sostituzione non riuscita")
 
-    monkeypatch.setattr("lvgl_mpy_studio.core.model.os.replace", fail_replace)
+    monkeypatch.setattr("copper_and_code_studio.core.model.os.replace", fail_replace)
     with pytest.raises(OSError, match="sostituzione non riuscita"):
         document.save()
     assert path.read_bytes() == original_bytes
@@ -81,7 +81,7 @@ def _external_save(path, name):
 
 def test_save_refuses_to_overwrite_an_external_change_on_a_clean_document(qtbot, tmp_path):
     import pytest
-    from lvgl_mpy_studio.ui.document import ExternalChangeError
+    from copper_and_code_studio.ui.document import ExternalChangeError
 
     path = tmp_path / "project.json"
     Project().save(path)
@@ -102,7 +102,7 @@ def test_save_refuses_to_overwrite_an_external_change_on_a_clean_document(qtbot,
 
 def test_local_changes_survive_an_external_change_until_the_user_chooses(qtbot, tmp_path):
     import pytest
-    from lvgl_mpy_studio.ui.document import ExternalChangeError
+    from copper_and_code_studio.ui.document import ExternalChangeError
 
     path = tmp_path / "project.json"
     Project().save(path)
@@ -138,7 +138,7 @@ def test_save_a_copy_leaves_the_external_version_untouched(qtbot, tmp_path):
 def test_reload_of_a_malformed_file_keeps_the_local_state(qtbot, tmp_path):
     import json
     import pytest
-    from lvgl_mpy_studio.ui.document import ExternalChangeError
+    from copper_and_code_studio.ui.document import ExternalChangeError
 
     path = tmp_path / "project.json"
     Project().save(path)
@@ -158,7 +158,7 @@ def test_reload_of_a_malformed_file_keeps_the_local_state(qtbot, tmp_path):
 def test_deleted_or_recreated_file_is_a_conflict(qtbot, tmp_path):
     import os
     import pytest
-    from lvgl_mpy_studio.ui.document import ExternalChangeError
+    from copper_and_code_studio.ui.document import ExternalChangeError
 
     path = tmp_path / "project.json"
     Project().save(path)
@@ -223,7 +223,7 @@ def test_undo_history_is_cleared_after_reload(qtbot, tmp_path):
 
 
 def test_save_returns_the_revision_of_the_written_bytes(tmp_path):
-    from lvgl_mpy_studio.core.model import file_revision
+    from copper_and_code_studio.core.model import file_revision
 
     path = tmp_path / "project.json"
     revision = Project().save(path)

@@ -4,15 +4,15 @@ import json
 import pytest
 from PySide6.QtWidgets import QDialog
 
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.boards import ProfileStore, builtin_profiles
-from lvgl_mpy_studio.core.i18n import set_language, tr
-from lvgl_mpy_studio.gen.board_gen import generate_board
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.ui.profile_manager import ProfileManagerDialog
-from lvgl_mpy_studio.ui.project_settings import ProjectSettingsDialog
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.boards import ProfileStore, builtin_profiles
+from copper_and_code_studio.core.i18n import set_language, tr
+from copper_and_code_studio.gen.board_gen import generate_board
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui.profile_manager import ProfileManagerDialog
+from copper_and_code_studio.ui.project_settings import ProjectSettingsDialog
 
 
 def test_resolution_roundtrip_new_pages_and_single_undo(tmp_path):
@@ -93,7 +93,7 @@ def test_profile_manager_cancel_and_apply(qtbot, tmp_path, monkeypatch):
     store.save()
     assert ProfileStore(store.path).profiles()[0]["name"] == "Persisted"
     monkeypatch.setattr(store, "save", lambda: (_ for _ in ()).throw(OSError("read only")))
-    monkeypatch.setattr("lvgl_mpy_studio.ui.profile_manager.QMessageBox.critical", lambda *args: None)
+    monkeypatch.setattr("copper_and_code_studio.ui.profile_manager.QMessageBox.critical", lambda *args: None)
     dialog._apply()
     assert dialog.result() != QDialog.Accepted
 
@@ -142,9 +142,9 @@ def test_catalog_is_complete_for_literal_gui_strings():
     import ast
     from pathlib import Path
 
-    catalog = json.loads((Path("lvgl_mpy_studio/translations/it.json")).read_text())
+    catalog = json.loads((Path("copper_and_code_studio/translations/it.json")).read_text())
     missing = set()
-    for path in Path("lvgl_mpy_studio").rglob("*.py"):
+    for path in Path("copper_and_code_studio").rglob("*.py"):
         for node in ast.walk(ast.parse(path.read_text())):
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "tr" and node.args and isinstance(node.args[0], ast.Constant):
                 text = node.args[0].value
@@ -161,7 +161,7 @@ def test_cli_language_and_device_list(monkeypatch, capsys):
         def list_ports(self):
             return [{"port": "/dev/fake", "id": "serial", "usb": "1:2", "description": "Fake"}]
 
-    monkeypatch.setattr("lvgl_mpy_studio.device.service.DeviceSession", Session)
+    monkeypatch.setattr("copper_and_code_studio.device.service.DeviceSession", Session)
     assert main(["--language", "en", "device", "list"]) == 0
     assert "/dev/fake" in capsys.readouterr().out
     with pytest.raises(SystemExit) as result:
@@ -206,7 +206,7 @@ def test_profile_manager_apply_captures_fields_and_rolls_back(qtbot, tmp_path, m
     qtbot.addWidget(dialog)
     dialog.name.setText("Must roll back")
     monkeypatch.setattr(store, "save", lambda: (_ for _ in ()).throw(OSError("read only")))
-    monkeypatch.setattr("lvgl_mpy_studio.ui.profile_manager.QMessageBox.critical", lambda *args: None)
+    monkeypatch.setattr("copper_and_code_studio.ui.profile_manager.QMessageBox.critical", lambda *args: None)
     dialog._apply()
     assert store.snapshot() == before
 

@@ -16,10 +16,10 @@ from PySide6.QtCore import Qt
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication, QInputDialog
 
-from lvgl_mpy_studio.build.compiler import CompileError, compile_python
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_project
+from copper_and_code_studio.build.compiler import CompileError, compile_python
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_project
 from sweep import Empty, Sweep, settle
 from test_every_property import open_field, typing_field, value_item
 
@@ -53,7 +53,7 @@ def paste_into(editor, text):
 
 def build_problems(project):
     """Generate, compile, draw and export in C; the problems found."""
-    from lvgl_mpy_studio.build.preview import render_with_log
+    from copper_and_code_studio.build.preview import render_with_log
 
     problems = []
     with tempfile.TemporaryDirectory(prefix="lms-hard-") as folder:
@@ -138,7 +138,7 @@ def test_a_page_renamed_with_a_hard_text(qtbot, tmp_path, monkeypatch, label):
         if renamed == text:
             # The other page refers to it through its constant: the code must still compile and run.
             def go(project):
-                from lvgl_mpy_studio.core.model import page_constant
+                from copper_and_code_studio.core.model import page_constant
 
                 project.code.module = f"PAGE = ui.{page_constant(project.pages[1].name)}\n"
             document.execute("Code", go)

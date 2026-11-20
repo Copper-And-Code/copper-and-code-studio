@@ -6,12 +6,12 @@ root = Path(SPECPATH).parent
 runtime = root / "runtime/out-win64"
 
 datas = [
-    (str(root / "lvgl_mpy_studio/gen/widgets.json"), "lvgl_mpy_studio/gen"),
-    (str(root / "lvgl_mpy_studio/gen/completion.json"), "lvgl_mpy_studio/gen"),
-    (str(root / "lvgl_mpy_studio/translations"), "lvgl_mpy_studio/translations"),
-    (str(root / "lvgl_mpy_studio/boards"), "lvgl_mpy_studio/boards"),
-    (str(root / "lvgl_mpy_studio/blocks"), "lvgl_mpy_studio/blocks"),
-    (str(root / "lvgl_mpy_studio/icon.ico"), "lvgl_mpy_studio"),
+    (str(root / "copper_and_code_studio/gen/widgets.json"), "copper_and_code_studio/gen"),
+    (str(root / "copper_and_code_studio/gen/completion.json"), "copper_and_code_studio/gen"),
+    (str(root / "copper_and_code_studio/translations"), "copper_and_code_studio/translations"),
+    (str(root / "copper_and_code_studio/boards"), "copper_and_code_studio/boards"),
+    (str(root / "copper_and_code_studio/blocks"), "copper_and_code_studio/blocks"),
+    (str(root / "copper_and_code_studio/icon.ico"), "copper_and_code_studio"),
     (str(root / "runtime/display_driver.py"), "runtime"),
     (str(root / "runtime/program"), "runtime/program"),  # programs without pages
     (str(root / "native/lvsim"), "native/lvsim"),
@@ -28,7 +28,7 @@ datas = [
     (str(root / "LICENSE-MIT.txt"), "share/doc/copper-and-code-studio"),
     (str(root / "LICENSING.md"), "share/doc/copper-and-code-studio"),
     (str(root / "packaging/licenses"), "share/doc/copper-and-code-studio/licenses"),
-    (str(root / "lvgl_mpy_studio/gen/output/licenses"), "lvgl_mpy_studio/gen/output/licenses"),
+    (str(root / "copper_and_code_studio/gen/output/licenses"), "copper_and_code_studio/gen/output/licenses"),
     (str(root / "THIRD_PARTY.md"), "share/doc/copper-and-code-studio"),
 ]
 for name in ("lvsim-runtime.exe", "lvsim-standalone.exe", "lvsim-onefile.exe", "mpy-cross.exe", "SDL2.dll", "liblvgl.a"):
@@ -53,5 +53,5 @@ analysis = Analysis(
 # The PyInstaller hook adds every QtAwesome font: the others have different licences and are not needed.
 analysis.datas = [item for item in analysis.datas if "qtawesome/fonts" not in item[0].replace("\\", "/") or "materialdesignicons6" in item[0]]
 pyz = PYZ(analysis.pure)
-exe = EXE(pyz, analysis.scripts, [], exclude_binaries=True, name="Copper_and_Code_Studio", console=False, icon=str(root / "lvgl_mpy_studio/icon.ico"))
+exe = EXE(pyz, analysis.scripts, [], exclude_binaries=True, name="Copper_and_Code_Studio", console=False, icon=str(root / "copper_and_code_studio/icon.ico"))
 collection = COLLECT(exe, analysis.binaries, analysis.datas, name="Copper_and_Code_Studio")

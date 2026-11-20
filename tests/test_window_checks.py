@@ -9,7 +9,7 @@ from looks import cut_off, english_left, overlapping
 
 @pytest.fixture(params=["en", "it"])
 def window(qtbot, request):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -56,7 +56,7 @@ def test_no_text_is_cut_off_at_1280_by_800(window):
 
 
 def test_nothing_stays_in_english_after_switching_to_italian(qtbot):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -69,7 +69,7 @@ def test_nothing_stays_in_english_after_switching_to_italian(qtbot):
 
 
 def test_a_text_the_ide_changed_is_kept_when_the_language_changes(qtbot, tmp_path):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -87,7 +87,7 @@ def test_the_standard_buttons_follow_the_language(qtbot):
     """Save, Cancel and Close come from Qt's own translation, which the IDE loads."""
     from PySide6.QtWidgets import QMessageBox
 
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -109,7 +109,7 @@ def test_no_old_tab_bar_of_the_docks_is_left_on_the_screen(qtbot):
     one shows; dragging its tabs crashed Qt."""
     from PySide6.QtWidgets import QTabBar
 
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)

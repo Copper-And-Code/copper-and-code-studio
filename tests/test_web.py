@@ -6,9 +6,9 @@ import urllib.request
 
 import pytest
 
-from lvgl_mpy_studio.build import web
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.model import Project
+from copper_and_code_studio.build import web
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.model import Project
 
 ROOT = Path(__file__).parents[1]
 needs_web_runtime = pytest.mark.skipif(not (ROOT / "runtime/out-web/micropython.wasm").exists(), reason="browser runtime not built: runtime/build_web.sh")
@@ -108,7 +108,7 @@ def test_game_draws_in_a_real_browser(tmp_path):
 def test_a_program_without_pages_builds_for_the_browser(tmp_path):
     import json
 
-    from lvgl_mpy_studio.build.web import RUNTIME_FILES, build_program_web, web_runtime
+    from copper_and_code_studio.build.web import RUNTIME_FILES, build_program_web, web_runtime
 
     if not all((web_runtime() / name).exists() for name in RUNTIME_FILES):
         pytest.skip("browser runtime not built")

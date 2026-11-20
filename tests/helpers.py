@@ -2,7 +2,7 @@
 
 import json
 
-from lvgl_mpy_studio import mcp_server
+from copper_and_code_studio import mcp_server
 
 
 def call(tool, /, **arguments):
@@ -24,7 +24,7 @@ def error(result):
 
 def find_item(panel, name):
     """The value item of the property name in a properties panel, inside any group."""
-    from lvgl_mpy_studio.ui.properties.panel import DESCRIPTOR_ROLE
+    from copper_and_code_studio.ui.properties.panel import DESCRIPTOR_ROLE
 
     def visit(parent):
         for row in range(parent.rowCount()):

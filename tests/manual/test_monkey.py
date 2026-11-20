@@ -125,7 +125,7 @@ class StepLog(list):
 
 def broken_rules(window):
     """What must hold after any step, whatever came before."""
-    from lvgl_mpy_studio.core.components import is_component
+    from copper_and_code_studio.core.components import is_component
 
     found = []
     project, document = window.document.project, window.document

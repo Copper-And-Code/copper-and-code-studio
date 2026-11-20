@@ -124,7 +124,7 @@ time it is called. The project still runs in the simulator; it does not fail on 
 
 ## Where blocks live
 
-1. **Standard blocks**: inside the package, `lvgl_mpy_studio/blocks/<id>/`.
+1. **Standard blocks**: inside the package, `copper_and_code_studio/blocks/<id>/`.
 2. **User blocks**: `<config folder>/blocks/<id>/`, next to the board profiles. **Tools →
    Open the blocks folder** opens it; blocks are read again when the IDE starts and from
    **Tools → Reload blocks**.

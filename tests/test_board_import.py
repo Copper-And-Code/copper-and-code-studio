@@ -6,13 +6,13 @@ import json
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.boards import (
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.boards import (
     ProfileError, ProfileStore, adapter_requirements, builtin_profiles, profile_diagnostics, read_profile_file, write_profile_file,
 )
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.board_gen import generate_board
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.board_gen import generate_board
 from helpers import call, payload
 
 
@@ -148,7 +148,7 @@ def test_delete_removes_an_imported_board_and_hides_a_built_in_one(config):
 
 
 def test_a_project_whose_board_was_deleted_opens_with_a_warning(qtbot, config):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     project = Project("linux")
     project.set_display_size(320, 240)
@@ -171,7 +171,7 @@ def test_a_project_whose_board_was_deleted_opens_with_a_warning(qtbot, config):
 def test_the_manager_imports_keeps_the_adapter_when_edited_exports_and_deletes(qtbot, config, monkeypatch):
     from PySide6.QtWidgets import QMessageBox
 
-    from lvgl_mpy_studio.ui.profile_manager import ProfileManagerDialog
+    from copper_and_code_studio.ui.profile_manager import ProfileManagerDialog
 
     questions, warnings = [], []
     monkeypatch.setattr(QMessageBox, "question", lambda parent, title, text: questions.append(text) or QMessageBox.Yes)
@@ -205,7 +205,7 @@ def test_the_manager_imports_keeps_the_adapter_when_edited_exports_and_deletes(q
 def test_the_import_and_export_buttons_ask_for_a_file(qtbot, config, monkeypatch):
     from PySide6.QtWidgets import QFileDialog, QPushButton
 
-    from lvgl_mpy_studio.ui.profile_manager import ProfileManagerDialog
+    from copper_and_code_studio.ui.profile_manager import ProfileManagerDialog
 
     path = board_file(config)
     asked = []

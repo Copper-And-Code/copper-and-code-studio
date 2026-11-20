@@ -6,12 +6,12 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.build.compiler import CompileError, compile_python, default_mpy_cross, traceback_errors
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.modules import create_module, delete_module, rename_module, set_module_source
-from lvgl_mpy_studio.gen.project_gen import ManifestError, app_modules, code_usage, generate_project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.build.compiler import CompileError, compile_python, default_mpy_cross, traceback_errors
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.modules import create_module, delete_module, rename_module, set_module_source
+from copper_and_code_studio.gen.project_gen import ManifestError, app_modules, code_usage, generate_project
+from copper_and_code_studio.platform import runtime_path
 
 ROOT = Path(__file__).parents[1]
 needs_runtime = pytest.mark.skipif(not runtime_path().exists() or not default_mpy_cross().exists(), reason="runtime not built")
@@ -122,7 +122,7 @@ def test_code_usage_without_modules_is_unchanged():
 
 
 def test_c_export_warns_about_modules(tmp_path):
-    from lvgl_mpy_studio.gen.gen_c import generate_c
+    from copper_and_code_studio.gen.gen_c import generate_c
 
     result = generate_c(modular_project(), tmp_path / "c", portable=True)
     assert any("utils" in warning and "helpers" in warning for warning in result["warnings"])
@@ -134,7 +134,7 @@ def test_c_export_warns_about_modules(tmp_path):
 
 @needs_runtime
 def test_handler_module_module_in_the_simulator_with_the_virtual_clock():
-    from lvgl_mpy_studio.sim.script import play
+    from copper_and_code_studio.sim.script import play
 
     steps = [
         {"action": "wait", "ms": 300},
@@ -157,7 +157,7 @@ def test_handler_module_module_in_the_simulator_with_the_virtual_clock():
 
 @needs_runtime
 def test_traceback_from_a_module_points_to_its_file_and_line():
-    from lvgl_mpy_studio.sim.script import play
+    from copper_and_code_studio.sim.script import play
 
     project = modular_project()
     project.code.handlers[next(iter(project.code.handlers))].body = "utils.boom()"
@@ -197,7 +197,7 @@ def test_compile_error_in_a_module_keeps_file_and_line(tmp_path):
 
 
 def test_simulator_console_errors_name_the_module(qtbot, tmp_path):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -211,8 +211,8 @@ def test_simulator_console_errors_name_the_module(qtbot, tmp_path):
 # --- keys ----------------------------------------------------------------------------------------
 
 def test_module_change_invalidates_the_upload_but_not_the_designer_preview():
-    from lvgl_mpy_studio.build import preview
-    from lvgl_mpy_studio.gen import live
+    from copper_and_code_studio.build import preview
+    from copper_and_code_studio.gen import live
 
     project = modular_project()
     upload, design, live_design = live.upload_key(project), preview.design_key(project, 0), live.design_key(project, 0)
@@ -226,7 +226,7 @@ def test_module_change_invalidates_the_upload_but_not_the_designer_preview():
 
 def test_first_and_last_module_do_not_change_the_preview_key():
     """The schemaVersion step 2 → 3 → 2 must not redraw the canvas."""
-    from lvgl_mpy_studio.build import preview
+    from copper_and_code_studio.build import preview
 
     project = plain_project()
     key = preview.design_key(project, 0)
@@ -244,7 +244,7 @@ def _selftest(command, cwd):
 
 @needs_runtime
 def test_debug_build_runs_modules_and_drops_stale_bytecode(tmp_path):
-    from lvgl_mpy_studio.build.release import build_micropython_release
+    from copper_and_code_studio.build.release import build_micropython_release
 
     project = modular_project()
     runner = build_micropython_release(project, tmp_path, "debug")
@@ -262,7 +262,7 @@ def test_debug_build_runs_modules_and_drops_stale_bytecode(tmp_path):
 
 @needs_runtime
 def test_debug_build_without_modules_has_the_same_files(tmp_path):
-    from lvgl_mpy_studio.build.release import build_micropython_release
+    from copper_and_code_studio.build.release import build_micropython_release
 
     output = build_micropython_release(plain_project(), tmp_path, "debug").parent
     assert sorted(path.name for path in output.glob("*.mpy")) == ["app_events.mpy", "display_driver.mpy", "main.mpy", "ui.mpy"]
@@ -275,7 +275,7 @@ def _release_toolchain():
 @needs_runtime
 @pytest.mark.skipif(not _release_toolchain(), reason="MicroPython sources for the Release build not available")
 def test_release_build_freezes_the_modules(tmp_path):
-    from lvgl_mpy_studio.build.release import build_micropython_release
+    from copper_and_code_studio.build.release import build_micropython_release
 
     runner = build_micropython_release(modular_project(), tmp_path, "release")
     output = runner.parent
@@ -286,7 +286,7 @@ def test_release_build_freezes_the_modules(tmp_path):
 
 @pytest.mark.skipif(not (ROOT / "runtime/out/lvsim-onefile").exists() or not default_mpy_cross().exists(), reason="single-file launcher not built")
 def test_single_file_contains_the_modules(tmp_path):
-    from lvgl_mpy_studio.build.release import build_single_file
+    from copper_and_code_studio.build.release import build_single_file
 
     executable = build_single_file(modular_project(), tmp_path / "dist")
     elsewhere = tmp_path / "elsewhere"
@@ -300,7 +300,7 @@ def test_single_file_contains_the_modules(tmp_path):
 
 @needs_runtime
 def test_budget_counts_the_modules():
-    from lvgl_mpy_studio.build.budget import measure_budget
+    from copper_and_code_studio.build.budget import measure_budget
 
     project = modular_project()
     with_modules = measure_budget(project)
@@ -322,7 +322,7 @@ def _board_project():
 def test_board_package_and_manifest_contain_the_modules(tmp_path):
     import hashlib
 
-    from lvgl_mpy_studio.gen.board_gen import generate_board
+    from copper_and_code_studio.gen.board_gen import generate_board
 
     project = _board_project()
     profile = dict(project.board)
@@ -338,7 +338,7 @@ def test_board_package_and_manifest_contain_the_modules(tmp_path):
 def test_board_precompiles_the_modules_too(tmp_path):
     if not default_mpy_cross().exists():
         pytest.skip("mpy-cross not built")
-    from lvgl_mpy_studio.gen.board_gen import generate_board, precompile_board
+    from copper_and_code_studio.gen.board_gen import generate_board, precompile_board
 
     project = _board_project()
     profile = dict(project.board)
@@ -353,7 +353,7 @@ def test_board_precompiles_the_modules_too(tmp_path):
 
 
 def test_board_export_removes_a_deleted_module(tmp_path):
-    from lvgl_mpy_studio.gen.board_gen import export_board
+    from copper_and_code_studio.gen.board_gen import export_board
 
     project = _board_project()
     profile = dict(project.board)
@@ -367,7 +367,7 @@ def test_board_export_removes_a_deleted_module(tmp_path):
 
 
 def test_board_syntax_error_in_a_module_names_the_module(tmp_path):
-    from lvgl_mpy_studio.gen.board_gen import BoardSyntaxError, generate_board
+    from copper_and_code_studio.gen.board_gen import BoardSyntaxError, generate_board
 
     project = _board_project()
     set_module_source(project, "helpers", "X = 1\nY = (\n")
@@ -380,7 +380,7 @@ def test_board_syntax_error_in_a_module_names_the_module(tmp_path):
 
 
 def test_stop_script_forgets_the_modules_of_the_app():
-    from lvgl_mpy_studio.device.service import stop_script
+    from copper_and_code_studio.device.service import stop_script
 
     script = stop_script("/lms_apps")
     compile(script, "stop", "exec")
@@ -418,7 +418,7 @@ def test_a_broken_manifest_does_not_stop_the_next_generation(tmp_path):
 
 
 def test_a_frozen_build_stops_on_a_manifest_that_names_a_missing_file(tmp_path, monkeypatch):
-    from lvgl_mpy_studio.build import release
+    from copper_and_code_studio.build import release
 
     (tmp_path / "manifest.json").write_text('{"modules": ["main", "utils"], "files": {}}', encoding="utf-8")
     (tmp_path / "main.py").write_text("", encoding="utf-8")

@@ -30,14 +30,14 @@ class Ide:
     def __init__(self, size=(1600, 1000)):
         from PySide6.QtWidgets import QApplication, QMessageBox
 
-        from lvgl_mpy_studio.ui import theme
+        from copper_and_code_studio.ui import theme
 
         self.app = QApplication.instance() or QApplication(["copper-and-code-studio-showreel"])
         self.app.setWindowIcon(theme.app_icon())
         # Nothing must wait for an answer that nobody can give offscreen.
         self._question = QMessageBox.question
         QMessageBox.question = staticmethod(lambda *arguments, **options: QMessageBox.Discard)
-        from lvgl_mpy_studio.ui.main_window import MainWindow
+        from copper_and_code_studio.ui.main_window import MainWindow
 
         self.window = MainWindow()
         self.window.resize(*size)
@@ -80,8 +80,8 @@ class Ide:
 
     def settle(self, timeout=5.0):
         """Wait until the canvas of the current page shows the project as it is now."""
-        from lvgl_mpy_studio.build.preview import design_key
-        from lvgl_mpy_studio.ui.designer.scene import DesignerView
+        from copper_and_code_studio.build.preview import design_key
+        from copper_and_code_studio.ui.designer.scene import DesignerView
 
         self.app.processEvents()
         view = self.window.tabs.currentWidget()
@@ -115,7 +115,7 @@ class Ide:
         Code and modules are kept, except what the storyboard types later: the handlers named
         in handlers, and the lines (first, last) of the general code in module_lines.
         """
-        from lvgl_mpy_studio.core.model import Project
+        from copper_and_code_studio.core.model import Project
 
         source = Path(example)
         if source.is_dir():
@@ -253,7 +253,7 @@ class Ide:
         return QRect(widget.mapTo(self.window, rect.topLeft()), rect.size())
 
     def _designer(self):
-        from lvgl_mpy_studio.ui.designer.scene import DesignerView
+        from copper_and_code_studio.ui.designer.scene import DesignerView
 
         view = self.window.tabs.currentWidget()
         return view if isinstance(view, DesignerView) else None
@@ -451,7 +451,7 @@ class Ide:
 
     def property_row(self, prop):
         """(value item, rect) of a property of the selected widget in the Properties tab."""
-        from lvgl_mpy_studio.ui.properties.panel import DESCRIPTOR_ROLE
+        from copper_and_code_studio.ui.properties.panel import DESCRIPTOR_ROLE
 
         panel = self.window.properties
         model = panel.model

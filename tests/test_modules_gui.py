@@ -8,12 +8,12 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QTextCursor
 from PySide6.QtWidgets import QDockWidget, QInputDialog, QMessageBox
 
-from lvgl_mpy_studio.build.compiler import default_mpy_cross
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.modules import create_module
-from lvgl_mpy_studio.platform import runtime_path
-from lvgl_mpy_studio.ui.main_tree import NEW_MODULE_SOURCE
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.build.compiler import default_mpy_cross
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.modules import create_module
+from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.ui.main_tree import NEW_MODULE_SOURCE
+from copper_and_code_studio.ui.main_window import MainWindow
 
 ROOT = Path(__file__).parents[1]
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
@@ -133,7 +133,7 @@ def test_a_new_module_starts_with_the_imports_and_the_editor_explains_them(qtbot
 @needs_runtime
 def test_a_function_of_a_new_module_can_use_ui(qtbot, tmp_path, answers):
     """The reported case: a module that writes to a label, called by the handler of a button."""
-    from lvgl_mpy_studio.sim.script import play
+    from copper_and_code_studio.sim.script import play
 
     project = Project("ui_nel_modulo")
     button = project.add_widget(project.pages[0], "button", {"x": 20, "y": 20, "width": 120, "height": 50})
@@ -351,8 +351,8 @@ def traceback_project():
 
 @needs_runtime
 def test_traceback_from_a_module_opens_the_module_at_its_line(qtbot, tmp_path):
-    from lvgl_mpy_studio.gen.project_gen import generate_project
-    from lvgl_mpy_studio.sim.script import play
+    from copper_and_code_studio.gen.project_gen import generate_project
+    from copper_and_code_studio.sim.script import play
 
     project, button, handler = traceback_project()
     window, path = window_with(qtbot, tmp_path, project)
@@ -377,7 +377,7 @@ def test_traceback_from_a_module_opens_the_module_at_its_line(qtbot, tmp_path):
 
 @needs_runtime
 def test_a_module_imported_by_an_lvgl_handler_runs_on_a_tap(qtbot, tmp_path, answers):
-    from lvgl_mpy_studio.sim.script import play
+    from copper_and_code_studio.sim.script import play
 
     project = Project("gestore_modulo")
     button = project.add_widget(project.pages[0], "button", {"x": 20, "y": 20, "width": 120, "height": 50})
@@ -479,8 +479,8 @@ def test_projects_without_modules_look_and_save_as_before(qtbot, tmp_path):
 
 def test_the_tree_is_translated(qtbot, tmp_path):
     """Without change_language, which would save the language in the real settings of the user."""
-    from lvgl_mpy_studio.core.i18n import set_language
-    from lvgl_mpy_studio.ui.language import retranslate_widget
+    from copper_and_code_studio.core.i18n import set_language
+    from copper_and_code_studio.ui.language import retranslate_widget
 
     window, _path = window_with(qtbot, tmp_path)
     try:

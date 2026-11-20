@@ -17,9 +17,9 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.core.boards import ProfileStore
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.core.validation import validate_project
+from copper_and_code_studio.core.boards import ProfileStore
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.core.validation import validate_project
 from sweep import ROOT
 
 pytestmark = [pytest.mark.manual, pytest.mark.skipif(sys.platform != "linux", reason="SIGKILL and /proc: Linux")]
@@ -33,8 +33,8 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, ROOT + "/tests/manual")
 from PySide6.QtWidgets import QApplication
 app = QApplication([])
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.core.boards import ProfileStore
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.core.boards import ProfileStore
 from test_big_project import big_project
 folder = sys.argv[1]
 project = big_project()

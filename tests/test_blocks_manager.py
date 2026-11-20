@@ -3,11 +3,11 @@ import json
 import pytest
 from PySide6.QtWidgets import QMessageBox
 
-from lvgl_mpy_studio.core import blocks, components
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.ui.blocks_manager import BlocksDialog
-from lvgl_mpy_studio.ui.designer.scene import Toolbox
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.core import blocks, components
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.ui.blocks_manager import BlocksDialog
+from copper_and_code_studio.ui.designer.scene import Toolbox
+from copper_and_code_studio.ui.main_window import MainWindow
 
 RELAY = {
     "schemaVersion": 1, "id": "relay", "version": "1.0.0", "name": "Relay", "description": "A relay.", "author": "Someone", "license": "MIT",
@@ -123,7 +123,7 @@ def test_reload_reports_folders_that_are_not_blocks(qtbot, tmp_path, user_folder
 def test_mcp_lists_the_blocks_and_says_which_the_project_uses(tmp_path, monkeypatch):
     from helpers import call, payload
 
-    from lvgl_mpy_studio import mcp_server
+    from copper_and_code_studio import mcp_server
 
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
     monkeypatch.setenv("APPDATA", str(tmp_path / "config"))

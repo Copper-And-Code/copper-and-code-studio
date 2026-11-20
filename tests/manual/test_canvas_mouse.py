@@ -21,9 +21,9 @@ from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent, QMouseEve
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.core.components import is_component
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.ui.designer.scene import MINIMUM_SIZE, WIDGET_MIME, ResizeHandle
+from copper_and_code_studio.core.components import is_component
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.ui.designer.scene import MINIMUM_SIZE, WIDGET_MIME, ResizeHandle
 from sweep import Empty, Sweep, wait
 
 pytestmark = pytest.mark.manual

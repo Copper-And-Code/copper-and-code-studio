@@ -5,12 +5,12 @@ from PyInstaller.utils.hooks import collect_submodules
 root = Path(SPECPATH).parent
 
 datas = [
-    (str(root / "lvgl_mpy_studio/gen/widgets.json"), "lvgl_mpy_studio/gen"),
-    (str(root / "lvgl_mpy_studio/gen/completion.json"), "lvgl_mpy_studio/gen"),
-    (str(root / "lvgl_mpy_studio/translations"), "lvgl_mpy_studio/translations"),
-    (str(root / "lvgl_mpy_studio/boards"), "lvgl_mpy_studio/boards"),
-    (str(root / "lvgl_mpy_studio/blocks"), "lvgl_mpy_studio/blocks"),
-    (str(root / "lvgl_mpy_studio/icon.ico"), "lvgl_mpy_studio"),
+    (str(root / "copper_and_code_studio/gen/widgets.json"), "copper_and_code_studio/gen"),
+    (str(root / "copper_and_code_studio/gen/completion.json"), "copper_and_code_studio/gen"),
+    (str(root / "copper_and_code_studio/translations"), "copper_and_code_studio/translations"),
+    (str(root / "copper_and_code_studio/boards"), "copper_and_code_studio/boards"),
+    (str(root / "copper_and_code_studio/blocks"), "copper_and_code_studio/blocks"),
+    (str(root / "copper_and_code_studio/icon.ico"), "copper_and_code_studio"),
     (str(root / "runtime/out/lvsim-runtime"), "runtime/out"),
     (str(root / "runtime/out/mpy-cross"), "runtime/out"),
     (str(root / "runtime/out-web/micropython.mjs"), "runtime/out-web"),
@@ -33,7 +33,7 @@ datas = [
     (str(root / "LICENSE-MIT.txt"), "share/doc/copper-and-code-studio"),
     (str(root / "LICENSING.md"), "share/doc/copper-and-code-studio"),
     (str(root / "packaging/licenses"), "share/doc/copper-and-code-studio/licenses"),
-    (str(root / "lvgl_mpy_studio/gen/output/licenses"), "lvgl_mpy_studio/gen/output/licenses"),
+    (str(root / "copper_and_code_studio/gen/output/licenses"), "copper_and_code_studio/gen/output/licenses"),
     (str(root / "THIRD_PARTY.md"), "share/doc/copper-and-code-studio"),
 ]
 

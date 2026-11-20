@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.core import blocks
-from lvgl_mpy_studio.core.blocks import Block, BlockError, discover, load_block, standard_blocks, validate, with_constants
-from lvgl_mpy_studio.core.components import BUZZER_METHODS, COMPONENTS
+from copper_and_code_studio.core import blocks
+from copper_and_code_studio.core.blocks import Block, BlockError, discover, load_block, standard_blocks, validate, with_constants
+from copper_and_code_studio.core.components import BUZZER_METHODS, COMPONENTS
 
 MANIFEST = {
     "schemaVersion": 1, "id": "relay", "version": "1.0.0", "name": "Relay", "description": "A pin driven high or low.", "author": "Someone", "license": "MIT",
@@ -142,7 +142,7 @@ def test_constants_go_after_the_leading_comments():
 
 def test_standard_blocks_have_italian_texts():
     """The texts of a block are shown through tr(): those of the blocks shipped with the IDE are translated."""
-    catalog = json.loads(Path("lvgl_mpy_studio/translations/it.json").read_text(encoding="utf-8"))
+    catalog = json.loads(Path("copper_and_code_studio/translations/it.json").read_text(encoding="utf-8"))
     missing = []
     for block in standard_blocks().values():
         manifest = block.manifest
@@ -153,9 +153,9 @@ def test_standard_blocks_have_italian_texts():
 
 
 def test_the_example_of_the_guide_is_a_block_that_installs_and_generates(tmp_path, monkeypatch):
-    from lvgl_mpy_studio.core import components
-    from lvgl_mpy_studio.core.model import Project
-    from lvgl_mpy_studio.gen.project_gen import generate_project
+    from copper_and_code_studio.core import components
+    from copper_and_code_studio.core.model import Project
+    from copper_and_code_studio.gen.project_gen import generate_project
 
     monkeypatch.setattr(blocks, "config_dir", lambda: tmp_path / "config")
     installed = blocks.install_block("examples/blocks/blinker")

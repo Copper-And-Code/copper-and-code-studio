@@ -1,11 +1,11 @@
 from PySide6.QtCore import QPointF, Qt
 
-from lvgl_mpy_studio.core.events import events_for
-from lvgl_mpy_studio.ui.designer.scene import ComponentTray, DesignerView
-from lvgl_mpy_studio.ui.document import ProjectDocument
-from lvgl_mpy_studio.ui.main_window import MainWindow
-from lvgl_mpy_studio.ui.sim_audio import SAMPLE_RATE, TonePlayer, square_wave
-from lvgl_mpy_studio.ui.sim_panel import SimPanel
+from copper_and_code_studio.core.events import events_for
+from copper_and_code_studio.ui.designer.scene import ComponentTray, DesignerView
+from copper_and_code_studio.ui.document import ProjectDocument
+from copper_and_code_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui.sim_audio import SAMPLE_RATE, TonePlayer, square_wave
+from copper_and_code_studio.ui.sim_panel import SimPanel
 
 
 def test_component_is_not_drawn_on_canvas(qtbot):

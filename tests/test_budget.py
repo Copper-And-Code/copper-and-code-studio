@@ -3,14 +3,14 @@ import gc
 import pytest
 from PySide6.QtCore import QSettings
 
-from lvgl_mpy_studio.build.budget import _instrument, measure_budget
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import runtime_path
-from lvgl_mpy_studio.ui import gc_guard, theme
-from lvgl_mpy_studio.ui.budget import BudgetMonitor, budget_level, budget_text, format_size
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.build.budget import _instrument, measure_budget
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.ui import gc_guard, theme
+from copper_and_code_studio.ui.budget import BudgetMonitor, budget_level, budget_text, format_size
+from copper_and_code_studio.ui.main_window import MainWindow
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="native runtime not built")
 

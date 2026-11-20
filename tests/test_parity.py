@@ -4,11 +4,11 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.build.c_compiler import compile_c
-from lvgl_mpy_studio.build.compiler import compile_python
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.gen.gen_c import generate_c
-from lvgl_mpy_studio.gen.project_gen import generate_project
+from copper_and_code_studio.build.c_compiler import compile_c
+from copper_and_code_studio.build.compiler import compile_python
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.gen.gen_c import generate_c
+from copper_and_code_studio.gen.project_gen import generate_project
 
 ROOT = Path(__file__).parents[1]
 RUNTIME = ROOT / "runtime/out/lvsim-runtime"

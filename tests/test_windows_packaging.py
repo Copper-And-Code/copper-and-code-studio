@@ -35,7 +35,7 @@ def test_packages_carry_the_application_icon():
     assert "windres" in portable and "windows_launcher_icon.o" in portable
     assert (ROOT / "packaging/windows_launcher.rc").read_text(encoding="utf-8").startswith('1 ICON "icon.ico"')
     for name in ("copper-and-code-studio.spec", "copper-and-code-studio-windows.spec"):
-        assert "lvgl_mpy_studio/icon.ico" in (ROOT / "packaging" / name).read_text(encoding="utf-8")
+        assert "copper_and_code_studio/icon.ico" in (ROOT / "packaging" / name).read_text(encoding="utf-8")
     assert "SetupIconFile" in (ROOT / "packaging/copper-and-code-studio.iss").read_text(encoding="utf-8")
 
 

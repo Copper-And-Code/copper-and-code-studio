@@ -3,12 +3,12 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.build.compiler import default_mpy_cross
-from lvgl_mpy_studio.gen.board_gen import generate_board, precompile_board
+from copper_and_code_studio.build.compiler import default_mpy_cross
+from copper_and_code_studio.gen.board_gen import generate_board, precompile_board
 
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import AUTOSTART_MARKER_V2, DeviceError, DeviceSession
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import AUTOSTART_MARKER_V2, DeviceError, DeviceSession
 
 
 INFO = {
@@ -279,7 +279,7 @@ def test_upload_reports_bytes_at_each_file(tmp_path):
 
 
 def test_upload_sends_the_user_modules_and_stop_forgets_them(tmp_path):
-    from lvgl_mpy_studio.core.modules import create_module
+    from copper_and_code_studio.core.modules import create_module
 
     runner = FakeRunner()
     runner.info["mpy"] = 0xB06
@@ -350,7 +350,7 @@ def test_the_retry_happens_once_and_only_for_the_raw_repl_error():
 def test_break_in_sends_ctrl_c_with_pauses(monkeypatch):
     import serial
 
-    from lvgl_mpy_studio.device import service
+    from copper_and_code_studio.device import service
 
     written, pauses = [], []
 

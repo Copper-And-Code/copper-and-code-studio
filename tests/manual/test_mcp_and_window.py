@@ -15,7 +15,7 @@ without a choice. Each case mixes the two and checks that nothing is lost withou
 import json
 
 import pytest
-from lvgl_mpy_studio import mcp_server
+from copper_and_code_studio import mcp_server
 from helpers import call, payload
 from sweep import Example, Sweep, settle, wait
 from test_monkey import broken_rules
@@ -25,7 +25,7 @@ pytestmark = pytest.mark.manual
 
 def answer_external_change(monkeypatch, choice):
     """The person's answer to "changed by another program": reload, copy, overwrite or None."""
-    monkeypatch.setattr("lvgl_mpy_studio.ui.main_files.FilesMixin._ask_external_change", lambda self, deleted=False: choice)
+    monkeypatch.setattr("copper_and_code_studio.ui.main_files.FilesMixin._ask_external_change", lambda self, deleted=False: choice)
 
 
 def on_disk(path):

@@ -5,9 +5,9 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.build.release import build_c_release, build_micropython_release
-from lvgl_mpy_studio.cli import main
-from lvgl_mpy_studio.core.model import Project
+from copper_and_code_studio.build.release import build_c_release, build_micropython_release
+from copper_and_code_studio.cli import main
+from copper_and_code_studio.core.model import Project
 
 ROOT = Path(__file__).parents[1]
 pytestmark = pytest.mark.skipif(not (ROOT / "runtime/out/lvsim-runtime").exists(), reason="native runtime not built")
@@ -51,7 +51,7 @@ def test_frozen_release_selftest(tmp_path):
 
 
 def test_frozen_build_refuses_missing_runtime_modules(tmp_path, monkeypatch):
-    from lvgl_mpy_studio.build import release
+    from copper_and_code_studio.build import release
 
     monkeypatch.setattr(release, "root_dir", lambda: tmp_path)
     monkeypatch.setattr(release, "cache_root", lambda: tmp_path / "cache")
@@ -68,7 +68,7 @@ needs_onefile = pytest.mark.skipif(not (ROOT / "runtime/out/lvsim-onefile").exis
 
 
 def test_single_file_needs_release_and_micropython(tmp_path):
-    from lvgl_mpy_studio.build.release import build_release
+    from copper_and_code_studio.build.release import build_release
 
     with pytest.raises(ValueError, match="Release"):
         build_release(project(), "micropython", tmp_path, "debug", single_file=True)
@@ -77,7 +77,7 @@ def test_single_file_needs_release_and_micropython(tmp_path):
 
 
 def test_single_file_without_launcher_says_how_to_get_it(tmp_path, monkeypatch):
-    from lvgl_mpy_studio.build import release
+    from copper_and_code_studio.build import release
 
     monkeypatch.setattr(release, "onefile_runtime", lambda windows: tmp_path / "missing")
     with pytest.raises(FileNotFoundError, match="build_onefile.sh"):
@@ -88,7 +88,7 @@ def test_single_file_without_launcher_says_how_to_get_it(tmp_path, monkeypatch):
 
 @needs_onefile
 def test_single_file_does_not_replace_a_folder(tmp_path):
-    from lvgl_mpy_studio.build.release import build_single_file
+    from copper_and_code_studio.build.release import build_single_file
 
     (tmp_path / "dist" / "release_test").mkdir(parents=True)
     with pytest.raises(ValueError, match="release_test"):
@@ -136,7 +136,7 @@ needs_windows_onefile = pytest.mark.skipif(not (ROOT / "runtime/out-win64/lvsim-
 
 
 def test_windows_single_file_has_its_own_name_and_no_console(tmp_path, monkeypatch):
-    from lvgl_mpy_studio.build import release
+    from copper_and_code_studio.build import release
 
     stub = tmp_path / "stub.exe"
     stub.write_bytes(windows_stub())
@@ -175,7 +175,7 @@ def test_windows_single_file_runs_under_wine(tmp_path):
 
 def test_a_linux_game_built_on_windows_keeps_its_execute_permission(tmp_path, monkeypatch):
     import tarfile
-    from lvgl_mpy_studio.build import release
+    from copper_and_code_studio.build import release
 
     stub = tmp_path / "stub"
     stub.write_bytes(b"\x7fELF stub")

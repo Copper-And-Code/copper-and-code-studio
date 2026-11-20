@@ -105,7 +105,7 @@ The IDE does not know a board's pins. It relies on two things the firmware provi
   bytecode version, the built-in font sizes, whether fonts can be loaded at run time, free
   RAM and free space.
 
-A board profile, a JSON file in `lvgl_mpy_studio/boards/`, holds what cannot be read: the
+A board profile, a JSON file in `copper_and_code_studio/boards/`, holds what cannot be read: the
 name, the resolution, the adapter, the serial protocol. When the board and the profile
 disagree, for example on the font sizes, the board wins and the IDE says so.
 
@@ -115,13 +115,13 @@ Places worth reading first:
 
 | File | Why |
 |---|---|
-| `lvgl_mpy_studio/device/uart.py` | A raw-REPL transport written for the STM32H7 boards, reached through a UART adapter: chunked writes that stay inside the raw REPL |
-| `lvgl_mpy_studio/device/service.py` | Upload as a transaction: staging folder, size check, rename, rollback |
-| `lvgl_mpy_studio/gen/binfont.py`, `fontconv.py` | A TrueType to LVGL binary font converter, kerning included, compared in the tests with LVGL's own Montserrat |
+| `copper_and_code_studio/device/uart.py` | A raw-REPL transport written for the STM32H7 boards, reached through a UART adapter: chunked writes that stay inside the raw REPL |
+| `copper_and_code_studio/device/service.py` | Upload as a transaction: staging folder, size check, rename, rollback |
+| `copper_and_code_studio/gen/binfont.py`, `fontconv.py` | A TrueType to LVGL binary font converter, kerning included, compared in the tests with LVGL's own Montserrat |
 | `native/lvsim/` | The C side of the simulator and its protocol, shared by the MicroPython and the C targets |
-| `lvgl_mpy_studio/gen/` | The generators: one project, MicroPython and C, compared pixel by pixel in the tests |
-| `lvgl_mpy_studio/core/blocks.py` | Blocks: hardware components described by data, read without ever running their code |
-| `lvgl_mpy_studio/selftest/` | The IDE driving itself with mouse and keyboard |
+| `copper_and_code_studio/gen/` | The generators: one project, MicroPython and C, compared pixel by pixel in the tests |
+| `copper_and_code_studio/core/blocks.py` | Blocks: hardware components described by data, read without ever running their code |
+| `copper_and_code_studio/selftest/` | The IDE driving itself with mouse and keyboard |
 
 ## Layer 7: agents
 

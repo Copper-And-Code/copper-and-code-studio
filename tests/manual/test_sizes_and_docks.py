@@ -87,7 +87,7 @@ def test_every_dock_floats_closes_and_comes_back(qtbot, tmp_path, monkeypatch):
 
 
 def test_a_layout_changed_by_hand_comes_back_after_a_restart(qtbot, tmp_path, monkeypatch):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     with Sweep(qtbot, monkeypatch, tmp_path, Example) as sweep:
         window = sweep.window

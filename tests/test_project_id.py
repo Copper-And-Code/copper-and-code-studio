@@ -2,10 +2,10 @@ import json
 
 import pytest
 
-from lvgl_mpy_studio.core.boards import builtin_profiles
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import DeviceSession
-from lvgl_mpy_studio.ui.document import ProjectDocument
+from copper_and_code_studio.core.boards import builtin_profiles
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import DeviceSession
+from copper_and_code_studio.ui.document import ProjectDocument
 
 PROFILE = next(item for item in builtin_profiles() if item["id"] == "esp32_4848s040_480")
 

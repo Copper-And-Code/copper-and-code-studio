@@ -17,9 +17,9 @@ from PySide6.QtCore import Qt
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
 
-from lvgl_mpy_studio.core.components import is_component
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.core.components import is_component
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.platform import runtime_path
 from sweep import REPORTS, Empty, Sweep, settle, wait
 
 pytestmark = pytest.mark.manual

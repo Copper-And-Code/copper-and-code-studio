@@ -10,8 +10,8 @@ import time
 
 import pytest
 
-from lvgl_mpy_studio.build import program
-from lvgl_mpy_studio.platform import root_dir, runtime_path
+from copper_and_code_studio.build import program
+from copper_and_code_studio.platform import root_dir, runtime_path
 
 PROGRAM_DIR = root_dir() / "runtime" / "program"
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
@@ -241,7 +241,7 @@ def test_machine_reset_ends_with_the_restart_code(config):
 
 @needs_runtime
 def test_run_program_in_the_ide_takes_keys_and_restarts_on_reset(qtbot, config):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     entry = write(config / "prog" / "main.py", """
 import sys, machine
@@ -299,8 +299,8 @@ def test_run_in_the_browser_asks_for_the_file_and_builds_the_page(qtbot, config,
     from PySide6.QtGui import QDesktopServices
     from PySide6.QtWidgets import QFileDialog
 
-    from lvgl_mpy_studio.build.web import RUNTIME_FILES, web_runtime
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.build.web import RUNTIME_FILES, web_runtime
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     if not all((web_runtime() / name).exists() for name in RUNTIME_FILES):
         pytest.skip("browser runtime not built")
@@ -327,8 +327,8 @@ def test_run_in_the_browser_asks_for_the_file_and_builds_the_page(qtbot, config,
 @pytest.mark.skipif(sys.platform.startswith("win"), reason="programs without pages run only in the Linux simulator")
 def test_run_stop_stops_a_program_while_the_target_is_a_board(qtbot, config, tmp_path):
     """A program runs in the simulator whatever the target: Stop used to stop only the board, and was disabled."""
-    from lvgl_mpy_studio.ui.main_window import MainWindow
-    from lvgl_mpy_studio.ui.run_target import board_target
+    from copper_and_code_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.run_target import board_target
 
     entry = tmp_path / "loop" / "main.py"
     entry.parent.mkdir()

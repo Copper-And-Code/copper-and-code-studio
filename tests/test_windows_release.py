@@ -6,9 +6,9 @@ import zipfile
 
 import pytest
 
-from lvgl_mpy_studio.build import release
-from lvgl_mpy_studio.build.compiler import compile_python
-from lvgl_mpy_studio.core.model import Project
+from copper_and_code_studio.build import release
+from copper_and_code_studio.build.compiler import compile_python
+from copper_and_code_studio.core.model import Project
 
 ROOT = Path(__file__).parents[1]
 STANDALONE = ROOT / "runtime/out-win64/lvsim-standalone.exe"

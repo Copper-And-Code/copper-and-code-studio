@@ -4,9 +4,9 @@ from pathlib import Path
 
 from hypothesis import HealthCheck, given, settings, strategies as st
 
-from lvgl_mpy_studio.gen.gen_python import generate_python
+from copper_and_code_studio.gen.gen_python import generate_python
 
-DEFINITIONS = json.loads((Path(__file__).parents[1] / "lvgl_mpy_studio/gen/widgets.json").read_text(encoding="utf-8"))
+DEFINITIONS = json.loads((Path(__file__).parents[1] / "copper_and_code_studio/gen/widgets.json").read_text(encoding="utf-8"))
 TEXT = st.text(max_size=80)
 PROPS = st.fixed_dictionaries({
     "x": st.integers(-1000, 1000), "y": st.integers(-1000, 1000),

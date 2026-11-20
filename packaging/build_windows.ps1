@@ -9,7 +9,7 @@ $Python = if ($env:PYTHON) { $env:PYTHON } else { "python" }
 & $Python -m PyInstaller --noconfirm --clean --distpath "$Root/dist" --workpath "$Root/build/pyinstaller-windows" "$Root/packaging/copper-and-code-studio-windows.spec"
 if ($LASTEXITCODE -ne 0) { throw "PyInstaller returned $LASTEXITCODE" }
 
-$Version = & $Python -c "from lvgl_mpy_studio import __version__; print(__version__)"
+$Version = & $Python -c "from copper_and_code_studio import __version__; print(__version__)"
 $Archive = "$Root/dist/Copper_and_Code_Studio-$Version-win64.zip"
 Remove-Item $Archive -Force -ErrorAction SilentlyContinue
 Compress-Archive -Path "$Root/dist/Copper_and_Code_Studio" -DestinationPath $Archive -CompressionLevel Optimal

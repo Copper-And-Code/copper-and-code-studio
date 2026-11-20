@@ -3,10 +3,10 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.core import modules
-from lvgl_mpy_studio.core.model import Project, UserModule
-from lvgl_mpy_studio.core.modules import ModuleError, create_module, delete_module, module_files, patch_module, rename_module, set_module_source, validate_module_name
-from lvgl_mpy_studio.core.validation import validate_project
+from copper_and_code_studio.core import modules
+from copper_and_code_studio.core.model import Project, UserModule
+from copper_and_code_studio.core.modules import ModuleError, create_module, delete_module, module_files, patch_module, rename_module, set_module_source, validate_module_name
+from copper_and_code_studio.core.validation import validate_project
 
 ROOT = Path(__file__).parents[1]
 
@@ -90,7 +90,7 @@ def test_unknown_future_version_is_still_refused():
 @pytest.mark.parametrize("name", [
     "", "Utils", "utils.py", "../utils", "a/b", "a\\b", "/etc/passwd", "1utils", "util-s", "util s", "x" * 32, "è",
     "ui", "main", "app_events", "app_main", "display_driver", "board_adapter", "board_profile", "manifest", "sourcemap", "boot",
-    "lms_buzzer", "lms_probe", "lvgl_idea", "lvgl_mpy_studio_x",
+    "lms_buzzer", "lms_probe", "lvgl_idea", "copper_and_code_studio_x",
     "time", "json", "random", "asyncio", "machine", "lvgl", "lv", "os", "sys", "gc", "network", "esp32", "rp2", "utime", "ujson",
     "class", "import", "print", "len", "self", "__init__", "__main__",
 ])
@@ -214,7 +214,7 @@ def test_from_dict_tolerates_malformed_modules_without_validation():
 
 
 def test_undo_and_redo_restore_modules(qtbot):
-    from lvgl_mpy_studio.ui.document import ProjectDocument
+    from copper_and_code_studio.ui.document import ProjectDocument
 
     document = ProjectDocument()
     document.execute("New Module", lambda project: create_module(project, "utils", "A = 1\n"))
@@ -233,7 +233,7 @@ def test_core_modules_do_not_import_qt():
     import subprocess
     import sys
 
-    code = "import sys, lvgl_mpy_studio.core.modules, lvgl_mpy_studio.core.model, lvgl_mpy_studio.core.validation; print(any(name.startswith('PySide6') for name in sys.modules))"
+    code = "import sys, copper_and_code_studio.core.modules, copper_and_code_studio.core.model, copper_and_code_studio.core.validation; print(any(name.startswith('PySide6') for name in sys.modules))"
     result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, cwd=ROOT, check=True)
     assert result.stdout.strip() == "False"
 
@@ -275,7 +275,7 @@ def test_version_3_file_keeps_widget_events_and_handlers(tmp_path):
 
 
 def test_module_actions_read_functions_classes_and_constants_without_running():
-    from lvgl_mpy_studio.core.actions import CURSOR, module_actions
+    from copper_and_code_studio.core.actions import CURSOR, module_actions
 
     module = UserModule("game", "import ui\nSPEED = 3\n_HIDDEN = 1\nlower = 2\n\ndef start():\n    raise SystemExit\n\nasync def tick(dt):\n    pass\n\nclass Ball:\n    pass\n\ndef _helper():\n    pass\n")
     assert module_actions(module) == [
@@ -289,7 +289,7 @@ def test_module_actions_read_functions_classes_and_constants_without_running():
 
 
 def test_module_actions_inside_the_module_itself_have_no_prefix_and_no_import():
-    from lvgl_mpy_studio.core.actions import CURSOR, module_actions
+    from copper_and_code_studio.core.actions import CURSOR, module_actions
 
     module = UserModule("game", "SPEED = 3\n\ndef start():\n    pass\n\ndef move(dx):\n    pass\n")
     assert module_actions(module, own=True) == [("SPEED", "SPEED"), ("start()", "start()"), ("move(dx)", f"move({CURSOR})")]

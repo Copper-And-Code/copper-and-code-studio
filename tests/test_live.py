@@ -4,12 +4,12 @@ import subprocess
 
 import pytest
 
-from lvgl_mpy_studio.build.preview import render_page
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.device.service import DeviceError, DeviceSession
-from lvgl_mpy_studio.gen.live import LIVE_FAILED, LIVE_OK, design_key, live_script, upload_key
-from lvgl_mpy_studio.gen.project_gen import generate_project
-from lvgl_mpy_studio.platform import RUNTIME_ENTRY, runtime_path
+from copper_and_code_studio.build.preview import render_page
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.device.service import DeviceError, DeviceSession
+from copper_and_code_studio.gen.live import LIVE_FAILED, LIVE_OK, design_key, live_script, upload_key
+from copper_and_code_studio.gen.project_gen import generate_project
+from copper_and_code_studio.platform import RUNTIME_ENTRY, runtime_path
 
 needs_runtime = pytest.mark.skipif(not runtime_path().exists(), reason="runtime not built")
 
@@ -162,7 +162,7 @@ class FakeDevice(DeviceSession):
 
 
 def running_window(qtbot, monkeypatch):
-    from lvgl_mpy_studio.ui.main_window import MainWindow
+    from copper_and_code_studio.ui.main_window import MainWindow
 
     window = MainWindow()
     qtbot.addWidget(window)
@@ -205,7 +205,7 @@ def test_live_can_be_turned_off(qtbot, monkeypatch):
 
 
 def test_labels_are_italian_in_the_properties_panel():
-    from lvgl_mpy_studio.core import i18n
+    from copper_and_code_studio.core import i18n
 
     i18n.set_language("it")
     assert i18n.tr("Text Color") == "Colore testo"

@@ -33,7 +33,7 @@ sys.path[:] = ["", "/lib", "/flash", "/flash/lib"]
 
 
 def available():
-    from lvgl_mpy_studio.platform import runtime_path
+    from copper_and_code_studio.platform import runtime_path
 
     return sys.platform.startswith("linux") and runtime_path().exists()
 
@@ -43,7 +43,7 @@ class VirtualBoard:
         import pty
         import tty
 
-        from lvgl_mpy_studio.platform import runtime_path
+        from copper_and_code_studio.platform import runtime_path
 
         self.folder = Path(folder)
         self.flash = self.folder / "flash"             # the root filesystem of the board

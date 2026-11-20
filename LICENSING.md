@@ -4,9 +4,9 @@ Copper and Code Studio uses two licenses, so the IDE stays free and users can do
 
 | Part | License |
 |---|---|
-| The IDE: `lvgl_mpy_studio/` except as noted below, tests and packaging scripts | GPL-3.0-or-later, text in `LICENSE` |
+| The IDE: `copper_and_code_studio/` except as noted below, tests and packaging scripts | GPL-3.0-or-later, text in `LICENSE` |
 | Code the IDE generates for your projects | MIT, text in `LICENSE-MIT.txt` |
-| What the IDE embeds in projects and executables: `lvgl_mpy_studio/gen/output/`, `native/lvsim/`, `runtime/display_driver.py` | MIT |
+| What the IDE embeds in projects and executables: `copper_and_code_studio/gen/output/`, `native/lvsim/`, `runtime/display_driver.py` | MIT |
 
 ## Generated code
 
@@ -26,9 +26,9 @@ Copper and Code Studio usa due licenze, così l'IDE resta libero e chi lo usa pu
 
 | Parte | Licenza |
 |---|---|
-| L'IDE: `lvgl_mpy_studio/`, salvo quanto indicato sotto, test e script di pacchetto | GPL-3.0-or-later, testo in `LICENSE` |
+| L'IDE: `copper_and_code_studio/`, salvo quanto indicato sotto, test e script di pacchetto | GPL-3.0-or-later, testo in `LICENSE` |
 | Il codice generato dall'IDE per i tuoi progetti | MIT, testo in `LICENSE-MIT.txt` |
-| Ciò che l'IDE incorpora nei progetti e negli eseguibili: `lvgl_mpy_studio/gen/output/`, `native/lvsim/`, `runtime/display_driver.py` | MIT |
+| Ciò che l'IDE incorpora nei progetti e negli eseguibili: `copper_and_code_studio/gen/output/`, `native/lvsim/`, `runtime/display_driver.py` | MIT |
 
 ## Il codice generato
 

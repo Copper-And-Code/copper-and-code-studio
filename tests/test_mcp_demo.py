@@ -9,9 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio import mcp_server
-from lvgl_mpy_studio.core.model import Project
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio import mcp_server
+from copper_and_code_studio.core.model import Project
+from copper_and_code_studio.platform import runtime_path
 
 EXAMPLE = Path(__file__).parents[1] / "examples" / "weather"
 
@@ -57,7 +57,7 @@ def test_the_recorded_session_builds_the_weather_example(tmp_path, monkeypatch):
 
 
 def test_the_weather_example_matches_its_reference_images():
-    from lvgl_mpy_studio.build.visual import PASSED, baseline_dir, run_visual_tests
+    from copper_and_code_studio.build.visual import PASSED, baseline_dir, run_visual_tests
 
     project = Project.load(EXAMPLE / "project.json")
     results = run_visual_tests(project, baseline_dir((EXAMPLE / "project.json").resolve(), project))

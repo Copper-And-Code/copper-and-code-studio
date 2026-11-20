@@ -16,7 +16,7 @@ from PySide6.QtGui import QAction, QKeySequence
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QLineEdit
 
-from lvgl_mpy_studio.ui.properties.panel import DESCRIPTOR_ROLE
+from copper_and_code_studio.ui.properties.panel import DESCRIPTOR_ROLE
 
 from sweep import PROGRESS, SKIPPED, Board, Example, Program, Sweep, pc_folder, raise_dock, run_action
 

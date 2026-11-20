@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from lvgl_mpy_studio.platform import runtime_path
+from copper_and_code_studio.platform import runtime_path
 from tools.showreel import storyboard
 
 ROOT = Path(__file__).parents[1]

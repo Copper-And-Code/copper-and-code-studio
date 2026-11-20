@@ -2,7 +2,7 @@ import json
 import subprocess
 import sys
 
-from lvgl_mpy_studio.selftest.report import FAILED, PASSED, SKIPPED, Report
+from copper_and_code_studio.selftest.report import FAILED, PASSED, SKIPPED, Report
 
 
 def test_report_counts_and_fails_when_a_step_failed(tmp_path):
@@ -27,7 +27,7 @@ def test_report_counts_and_fails_when_a_step_failed(tmp_path):
 
 
 def run(tmp_path, *arguments):
-    return subprocess.run([sys.executable, "-m", "lvgl_mpy_studio", "selftest", *arguments], cwd=tmp_path, capture_output=True, text=True, timeout=180)
+    return subprocess.run([sys.executable, "-m", "copper_and_code_studio", "selftest", *arguments], cwd=tmp_path, capture_output=True, text=True, timeout=180)
 
 
 def test_selftest_lists_and_refuses_unknown_scenarios(tmp_path):

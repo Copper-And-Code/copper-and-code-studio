@@ -5,9 +5,9 @@ import tempfile
 
 from hypothesis import given, settings, strategies as st
 
-from lvgl_mpy_studio.build.c_compiler import compile_c
-from lvgl_mpy_studio.core.model import Project, widget_definitions
-from lvgl_mpy_studio.gen.gen_c import NEW_HANDLERS_BEGIN, NEW_HANDLERS_END, generate_c
+from copper_and_code_studio.build.c_compiler import compile_c
+from copper_and_code_studio.core.model import Project, widget_definitions
+from copper_and_code_studio.gen.gen_c import NEW_HANDLERS_BEGIN, NEW_HANDLERS_END, generate_c
 
 
 def make_project(kind="button"):
@@ -133,7 +133,7 @@ def test_public_widget_names_remain_distinct_at_runtime(tmp_path):
 
 
 def test_deferred_page_callbacks_and_screen_loaded_at_runtime(tmp_path):
-    from lvgl_mpy_studio.core.model import Page
+    from copper_and_code_studio.core.model import Page
 
     project = Project("pages")
     project.pages.append(Page("second"))

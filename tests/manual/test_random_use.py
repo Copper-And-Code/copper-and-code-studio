@@ -22,7 +22,7 @@ from hypothesis import HealthCheck, settings
 from hypothesis import strategies as st
 from hypothesis.stateful import RuleBasedStateMachine, invariant, precondition, rule, run_state_machine_as_test
 
-from lvgl_mpy_studio.core.validation import validate_project
+from copper_and_code_studio.core.validation import validate_project
 
 pytestmark = pytest.mark.manual
 
@@ -44,8 +44,8 @@ def make_machine(directory):
     from PySide6.QtCore import QPoint, QPointF, Qt
     from PySide6.QtTest import QTest
 
-    from lvgl_mpy_studio.selftest.driver import Ide, StepFailed, sleep
-    from lvgl_mpy_studio.selftest.report import Report
+    from copper_and_code_studio.selftest.driver import Ide, StepFailed, sleep
+    from copper_and_code_studio.selftest.report import Report
 
     class RandomUse(RuleBasedStateMachine):
         def __init__(self):
@@ -222,7 +222,7 @@ def make_machine(directory):
         def the_canvas_shows_its_page(self):
             if not self.designer_shown():
                 return
-            from lvgl_mpy_studio.gen.components import is_component
+            from copper_and_code_studio.gen.components import is_component
 
             scene = self.view().designer_scene
             drawn = set(scene.widget_items)

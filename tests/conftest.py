@@ -15,13 +15,13 @@ _config = tempfile.mkdtemp(prefix="copper-and-code-studio-tests-config-")
 os.environ["XDG_CONFIG_HOME"] = _config
 atexit.register(shutil.rmtree, _config, ignore_errors=True)
 
-from lvgl_mpy_studio.core.i18n import set_language  # noqa: E402
+from copper_and_code_studio.core.i18n import set_language  # noqa: E402
 
 @pytest.fixture(autouse=True)
 def no_real_serial_ports(monkeypatch):
     """This PC may have real boards attached: a test DeviceSession must never open their ports."""
     try:
-        from lvgl_mpy_studio.device import service
+        from copper_and_code_studio.device import service
     except ImportError:  # without pyserial nothing can open a port
         return
     monkeypatch.setattr(service, "default_interrupt", lambda port: None)
@@ -31,7 +31,7 @@ def no_real_serial_ports(monkeypatch):
 def default_language():
     """A test that switches language leaves English, the default, for the next one."""
     try:  # the tests of the core run also where Qt is not installed
-        from lvgl_mpy_studio.ui.app_settings import app_settings
+        from copper_and_code_studio.ui.app_settings import app_settings
     except ImportError:
         pass
     else:

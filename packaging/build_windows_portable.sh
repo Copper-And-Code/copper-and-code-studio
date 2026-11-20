@@ -10,7 +10,7 @@ PYTHON_ARCHIVE="$CACHE/python-$PYTHON_VERSION-embed-amd64.zip"
 VC_REDIST="$CACHE/vc_redist.x64.exe"
 VC_URL="https://aka.ms/vs/17/release/vc_redist.x64.exe"
 HOST_PYTHON=${PYTHON:-"$ROOT/.venv/bin/python"}
-IDE_VERSION=$("$HOST_PYTHON" -c 'from lvgl_mpy_studio import __version__; print(__version__)' | tail -n 1)
+IDE_VERSION=$("$HOST_PYTHON" -c 'from copper_and_code_studio import __version__; print(__version__)' | tail -n 1)
 
 mkdir -p "$WHEELS"
 if [ ! -f "$PYTHON_ARCHIVE" ]; then
@@ -63,7 +63,7 @@ find "$OUT/python/Lib/site-packages/qtawesome/fonts" -type f ! -name 'materialde
 # icuuc.dll of Windows. A copy next to Qt hides that one, and the redistributable
 # builds only export versioned names (ucnv_open_72), so Qt would not load.
 
-tar -C "$ROOT" --exclude=__pycache__ --exclude='*.pyc' -cf - lvgl_mpy_studio | tar -xf - -C "$OUT"
+tar -C "$ROOT" --exclude=__pycache__ --exclude='*.pyc' -cf - copper_and_code_studio | tar -xf - -C "$OUT"
 cp "$ROOT/packaging/launcher.py" "$OUT/"
 for name in lvsim-runtime.exe lvsim-standalone.exe lvsim-onefile.exe mpy-cross.exe SDL2.dll liblvgl.a; do
     cp "$ROOT/runtime/out-win64/$name" "$OUT/runtime/out-win64/"
@@ -88,13 +88,13 @@ cp "$ROOT/.reference/lvgl-bindings/lv_conf.h" "$OUT/.reference/lvgl-bindings/"
 cp "$ROOT/docs/target.md" "$ROOT/docs/boards.md" "$ROOT/docs/boards.it.md" "$ROOT/docs/windows-c.md" "$OUT/docs/"
 cp "$ROOT/packaging/NOTICE.txt" "$ROOT/THIRD_PARTY.md" "$ROOT/README.md" "$ROOT/LICENSE" "$ROOT/LICENSE-MIT.txt" "$ROOT/LICENSING.md" "$OUT/"
 mkdir -p "$OUT/licenses"
-cp "$ROOT"/packaging/licenses/* "$ROOT"/lvgl_mpy_studio/gen/output/licenses/* "$OUT/licenses/"
+cp "$ROOT"/packaging/licenses/* "$ROOT"/copper_and_code_studio/gen/output/licenses/* "$OUT/licenses/"
 
 # The icon of the .exe: Explorer shows the first icon resource of the file.
-x86_64-w64-mingw32-windres -I "$ROOT/lvgl_mpy_studio" "$ROOT/packaging/windows_launcher.rc" -O coff -o "$BUILD/windows_launcher_icon.o"
+x86_64-w64-mingw32-windres -I "$ROOT/copper_and_code_studio" "$ROOT/packaging/windows_launcher.rc" -O coff -o "$BUILD/windows_launcher_icon.o"
 x86_64-w64-mingw32-gcc -O2 -Wall -Wextra -Werror -mwindows -municode -static-libgcc \
     "$ROOT/packaging/windows_launcher.c" "$BUILD/windows_launcher_icon.o" -o "$OUT/Copper_and_Code_Studio.exe"
-printf '@echo off\r\n"%%~dp0python\\python.exe" -m lvgl_mpy_studio %%*\r\n' > "$OUT/Copper_and_Code_Studio_console.bat"
+printf '@echo off\r\n"%%~dp0python\\python.exe" -m copper_and_code_studio %%*\r\n' > "$OUT/Copper_and_Code_Studio_console.bat"
 printf '%s\r\n' 'Copper and Code Studio - portable Windows x86-64 version' '' \
     'Start Copper_and_Code_Studio.exe. Do not move files out of this folder.' \
     'For terminal diagnostics use Copper_and_Code_Studio_console.bat.' \

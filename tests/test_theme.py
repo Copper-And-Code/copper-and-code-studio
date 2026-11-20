@@ -3,11 +3,11 @@ from PySide6.QtGui import QColor, QTextCharFormat
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QDialog, QDockWidget, QToolBar
 
-from lvgl_mpy_studio.ui import theme
-from lvgl_mpy_studio.ui.code.editor import PythonHighlighter
-from lvgl_mpy_studio.ui.designer.scene import COMPONENTS, Toolbox, WIDGET_ICONS, ToolboxPanel
-from lvgl_mpy_studio.core.model import widget_definitions
-from lvgl_mpy_studio.ui.main_window import MainWindow
+from copper_and_code_studio.ui import theme
+from copper_and_code_studio.ui.code.editor import PythonHighlighter
+from copper_and_code_studio.ui.designer.scene import COMPONENTS, Toolbox, WIDGET_ICONS, ToolboxPanel
+from copper_and_code_studio.core.model import widget_definitions
+from copper_and_code_studio.ui.main_window import MainWindow
 
 
 def window_for(qtbot):
@@ -17,8 +17,8 @@ def window_for(qtbot):
 
 
 def test_every_widget_type_has_an_icon(qapp):
-    from lvgl_mpy_studio.core.components import BLOCKS
-    from lvgl_mpy_studio.ui.designer.scene import widget_icon
+    from copper_and_code_studio.core.components import BLOCKS
+    from copper_and_code_studio.ui.designer.scene import widget_icon
 
     assert (set(widget_definitions()) | set(COMPONENTS)) - set(BLOCKS) | {"buzzer"} == set(WIDGET_ICONS)
     assert not [name for name in WIDGET_ICONS.values() if theme.icon(name).isNull()]
@@ -112,7 +112,7 @@ def test_a_new_resolution_fits_the_page_again(qtbot, monkeypatch):
     window.resize(1200, 800)
     window.show()
     qtbot.waitExposed(window)
-    monkeypatch.setattr("lvgl_mpy_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
+    monkeypatch.setattr("copper_and_code_studio.ui.resolution.ResizeDialog.exec", lambda self: QDialog.Accepted)
     window.document.execute("page", lambda project: project.pages.append(project.new_page("Second")))
     first, second = (window.designers[page.id][1] for page in window.document.project.pages)
     window.tabs.setCurrentWidget(first)

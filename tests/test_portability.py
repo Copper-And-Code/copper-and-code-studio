@@ -2,7 +2,7 @@ import ast
 import os
 from pathlib import Path
 
-from lvgl_mpy_studio import platform
+from copper_and_code_studio import platform
 
 
 ROOT = Path(__file__).parents[1]
@@ -31,7 +31,7 @@ def is_binary_mode(node):
 def portability_errors():
     errors = []
     for directory in CORE_DIRS:
-        for path in sorted((ROOT / "lvgl_mpy_studio" / directory).rglob("*.py")):
+        for path in sorted((ROOT / "copper_and_code_studio" / directory).rglob("*.py")):
             tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
             for node in ast.walk(tree):
                 location = f"{path.relative_to(ROOT)}:{getattr(node, 'lineno', 1)}"
@@ -89,7 +89,7 @@ def test_background_processes_are_stopped_before_the_program_leaves(tmp_path):
     import threading
     import time
 
-    from lvgl_mpy_studio import platform
+    from copper_and_code_studio import platform
 
     done = platform.run_background([sys.executable, "-c", "print('out'); import sys; print('err', file=sys.stderr)"], 20, text=True)
     assert (done.returncode, done.stdout.strip(), done.stderr.strip()) == (0, "out", "err") and not platform._background
@@ -120,7 +120,7 @@ def test_programs_run_with_captured_output_open_no_console_window():
     from pathlib import Path
 
     missing = []
-    for path in sorted(Path("lvgl_mpy_studio").rglob("*.py")):
+    for path in sorted(Path("copper_and_code_studio").rglob("*.py")):
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             starts = re.search(r"subprocess\.(run|Popen|check_output)\(|_process_factory\(", line) and "def " not in line
             captured = "capture_output=True" in line or "subprocess.PIPE" in line
