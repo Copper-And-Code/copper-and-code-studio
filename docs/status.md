@@ -93,6 +93,19 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   With a package built on 13 November 2026 from the branch `programs-without-pages`, the author
   used a board on a COM port; the window's icon and pinning it to the taskbar did not work.
   Not looked into yet.
+- **The new name, Copper and Code Studio, is not released yet.** What was tried, on the author's
+  computer, 20 November 2026: the whole suite, the self-test and the suites run by hand (the
+  monkey in `test_save_and_reopen.py` crashes the IDE, as it already did with the code before the
+  new name, and one long random sequence of `test_random_use.py` failed once, but not when it
+  was replayed on its own); an
+  AppImage built under the new name, `--version` and the self-test from an empty folder (105
+  steps passed); the settings and a project written by the code of 0.7.2, read by the renamed IDE
+  (language, layout of the panels, recent files and the configuration folder kept, the project
+  saved again byte for byte the same); the three commands. Not tried: the lines the IDE reads back
+  from a board, now beginning with `LMS_`, on a real board (only on the virtual board and the boards
+  kept in memory by the tests); the Windows packages under the new name, and the installer over
+  an installation of LVGL MPY Studio; the project website at its new address. See
+  [The new name](renamed.md).
 - **The IDE does not know the pins of a board.** A block takes the pin the user types, a
   number or a name such as `PA5`, and nothing warns when it is one the display or the memory
   already uses.

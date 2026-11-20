@@ -1,6 +1,6 @@
 # Copper and Code Studio
 
-**Copper and Code Studio** — a visual GUI builder for MicroPython and LVGL. Formerly Copper and Code Studio.
+**Copper and Code Studio** — a visual GUI builder for MicroPython and LVGL. Formerly LVGL MPY Studio.
 
 Copper and Code Studio is a desktop IDE for building graphical interfaces with LVGL 9.5 and MicroPython. Design pages visually, write event handlers in Python, and run the application in a simulator that uses the real LVGL library.
 

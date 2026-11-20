@@ -1,5 +1,5 @@
 site_name: Copper and Code Studio
-site_description: A visual GUI builder for MicroPython and LVGL — formerly Copper and Code Studio
+site_description: A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio
 site_url: https://copper-and-code.github.io/copper-and-code-studio/
 # Keep the repository link in content: Material's repository widget calls the GitHub API.
 repo_url: ""

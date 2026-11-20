@@ -2,7 +2,7 @@
 
 **Copper and Code Studio** — a visual GUI builder for MicroPython and LVGL.
 
-Formerly Copper and Code Studio.
+Formerly LVGL MPY Studio.
 
 [![CI](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/copper-and-code-studio/actions/workflows/ci.yml)
 
