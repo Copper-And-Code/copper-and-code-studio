@@ -1,7 +1,7 @@
 # Status: what is verified, and how
 
-Version 0.7.2 is published as a GitHub release, with an AppImage for Linux; the portable package for
-Windows is that of 0.7.1. This page separates what has been
+Version 0.8.0, the first under the name Copper and Code Studio, is published as a GitHub release, with
+an AppImage for Linux; the portable package for Windows is that of 0.7.1, under the old name. This page separates what has been
 checked from what has only been written.
 
 ## Read this first
@@ -55,8 +55,8 @@ below as an open question, not as a formality.
 | Visual tests | yes | | used on the EIM-01 example | |
 | Print Sources | yes | | a PDF, read | a real printer |
 | Self-test, visible mode (`--show`) | | | | never run |
-| AppImage for Linux | | yes, run from inside the package | the package of 0.7.2, released: `--version`, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with `--selftest`, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB ([Running on a Chromebook](chromebook.md)). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version | on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system |
-| Portable Windows package | | | the package of 0.6.0: contents inspected (no bundled ICU, the icon in the program file, the blocks) and started by the author on a real Windows. The package of 0.6.1, released: contents inspected, started by the author on Windows, no console windows flashing | the packages of 0.7.0 and 0.7.1 (0.7.2 has no package of its own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built |
+| AppImage for Linux | | yes, run from inside the package | the package of 0.8.0, released, built from a clean clone of the tag: `--version`, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with `--selftest`, on the author's computer. The package of 0.7.2, released: `--version`, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with `--selftest`, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB ([Running on a Chromebook](chromebook.md)). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version | on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system |
+| Portable Windows package | | | the package of 0.6.0: contents inspected (no bundled ICU, the icon in the program file, the blocks) and started by the author on a real Windows. The package of 0.6.1, released: contents inspected, started by the author on Windows, no console windows flashing | the packages of 0.7.0 and 0.7.1 (0.7.2 and 0.8.0 have no package of their own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built |
 
 "Author's use" means the author uses it while developing; it is not a test plan.
 
@@ -93,7 +93,7 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   With a package built on 13 November 2026 from the branch `programs-without-pages`, the author
   used a board on a COM port; the window's icon and pinning it to the taskbar did not work.
   Not looked into yet.
-- **The new name, Copper and Code Studio, is not released yet.** What was tried, on the author's
+- **The new name, Copper and Code Studio, came with 0.8.0.** What was tried, on the author's
   computer, 20 November 2026: the whole suite, the self-test and the suites run by hand (the
   monkey in `test_save_and_reopen.py` crashes the IDE, as it already did with the code before the
   new name, and one long random sequence of `test_random_use.py` failed once, but not when it

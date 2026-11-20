@@ -18,7 +18,7 @@ A desktop IDE for designing [LVGL](https://lvgl.io) 9.5 interfaces for MicroPyth
 
 A scripted replay of the real IDE, sped up: [more videos](https://copper-and-code.github.io/copper-and-code-studio/videos/).
 
-> **Status: 0.7.2 ([download](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest)).** The automated tests are many and human testing is scarce: much has been written and checked by machine, and little has been used by people. [What is verified, and how](docs/status.md) says it area by area.
+> **Status: 0.8.0 ([download](https://github.com/Copper-And-Code/copper-and-code-studio/releases/latest)).** The automated tests are many and human testing is scarce: much has been written and checked by machine, and little has been used by people. [What is verified, and how](docs/status.md) says it area by area.
 
 ## If you are evaluating this project
 

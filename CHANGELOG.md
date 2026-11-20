@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.8.0 — 2026-11-20
+
+Renamed from LVGL MPY Studio to Copper and Code Studio. Settings, the configuration folder and projects are kept, and the old commands still work. The Windows package is that of 0.7.1, under the old name.
 
 ### Changed
 
