@@ -35,16 +35,16 @@ from .sim.script import check_script, play
 
 PROTOCOL_VERSIONS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 INSTRUCTIONS = (
-    "Work on LVGL MPY Studio projects. Read a project with project_info, change it with the widget and code tools, "
+    "Work on Copper and Code Studio projects. Read a project with project_info, change it with the widget and code tools, "
     "and check the result with render_page, which returns the real LVGL rendering with the project code running. "
 "Use simulate to try behaviour: it runs the app in real time and plays touch input, so games and handlers can be tested without a board. "
     "Python modules of the project are files the code imports: list_modules, create_module, rename_module, delete_module, and get_code or patch_code with module. "
     "project_info and get_code return the file revision; pass it as expected_revision to a tool that changes the project, "
     "so that a file changed in the meantime is reported as revision_conflict and left untouched: read it again before repeating the change. "
     "The device_ tools act on real hardware: connect first, then upload, run and read the console. "
-    "The LVGL MPY Studio must not hold the same serial port."
+    "Copper and Code Studio must not hold the same serial port."
 )
-DISABLED = "The MCP server is off. Turn it on in LVGL MPY Studio under Settings → MCP Server for AI Agents."
+DISABLED = "The MCP server is off. Turn it on in Copper and Code Studio under Settings → MCP Server for AI Agents."
 COLOR = re.compile(r"#[0-9A-Fa-f]{6}")
 
 

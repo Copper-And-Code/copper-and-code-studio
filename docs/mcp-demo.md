@@ -1,6 +1,6 @@
 # From a prompt to an app
 
-This is a complete session of an AI agent building an app with LVGL MPY Studio through the [MCP server](mcp.md), starting from one sentence. It is recorded so that it can be replayed: the calls are in [`examples/weather/mcp-session.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-session.json) and the result is [`examples/weather/mcp-result.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-result.json). A test replays the session at every run of the suite and checks that it still builds the same app.
+This is a complete session of an AI agent building an app with Copper and Code Studio through the [MCP server](mcp.md), starting from one sentence. It is recorded so that it can be replayed: the calls are in [`examples/weather/mcp-session.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-session.json) and the result is [`examples/weather/mcp-result.json`](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/examples/weather/mcp-result.json). A test replays the session at every run of the suite and checks that it still builds the same app.
 
 The Weather demo on the website and `examples/weather/project.json` are that result reworked later by another agent, while preparing the site: weather icons and a new layout. They are not what this session produced.
 

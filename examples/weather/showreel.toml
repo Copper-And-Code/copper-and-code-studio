@@ -1,7 +1,7 @@
 # The showreel of Weather: python -m tools.showreel examples/weather
 [video]
 title = "Weather"
-subtitle = "Built and run in LVGL MPY Studio"
+subtitle = "Built and run in Copper and Code Studio"
 gif = { from = "start", seconds = 12 }
 
 [[step]]

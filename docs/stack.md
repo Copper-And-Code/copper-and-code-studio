@@ -1,6 +1,6 @@
 # The stack, from the display controller to the agent
 
-LVGL MPY Studio is the top of a stack that goes down to the registers of the display
+Copper and Code Studio is the top of a stack that goes down to the registers of the display
 controller. This page follows one frame from the silicon to the tool an AI agent calls, and
 says in which repository each layer lives.
 

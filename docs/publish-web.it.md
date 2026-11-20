@@ -2,7 +2,7 @@
 
 [English](publish-web.md)
 
-Questa guida spiega come mettere online uno o più giochi creati con LVGL MPY Studio, in modo che chiunque possa giocarli dal browser con un link, anche da telefono. L'esempio usa **Hostinger**, ma i passi valgono per qualsiasi hosting web: si tratta solo di copiare file.
+Questa guida spiega come mettere online uno o più giochi creati con Copper and Code Studio, in modo che chiunque possa giocarli dal browser con un link, anche da telefono. L'esempio usa **Hostinger**, ma i passi valgono per qualsiasi hosting web: si tratta solo di copiare file.
 
 Non serve un server particolare né un database: la versione web di un gioco è una cartella di file statici.
 

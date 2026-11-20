@@ -2,7 +2,7 @@
 
 An LVGL dashboard of the computer it runs on: CPU, memory and disk as gauges, the CPU of the
 last 60 seconds as a chart, and the busiest processes on request. It shows that on a PC the
-MicroPython of LVGL MPY Studio is a program of the operating system
+MicroPython of Copper and Code Studio is a program of the operating system
 ([Files, commands and the network on the PC](../../docs/pc-programs.md)).
 
 ![System Monitor in the simulator](../../docs/images/sysmon.png)

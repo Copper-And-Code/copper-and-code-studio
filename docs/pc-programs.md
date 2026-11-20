@@ -1,6 +1,6 @@
 # MicroPython on the PC: files, commands and the network
 
-MicroPython was made for boards, but on the PC LVGL MPY Studio runs it as the **unix port**, a
+MicroPython was made for boards, but on the PC Copper and Code Studio runs it as the **unix port**, a
 real program of the operating system. An application or a program without pages can therefore
 do on the PC what it cannot do on a board: run commands, read and write any file, open network
 connections, start threads, call the C functions of a system library.
@@ -102,7 +102,7 @@ def serve():
     server.listen(1)
     while True:
         client, _ = server.accept()
-        client.send(b"HTTP/1.0 200 OK\r\n\r\nhello from LVGL MPY Studio\r\n")
+        client.send(b"HTTP/1.0 200 OK\r\n\r\nhello from Copper and Code Studio\r\n")
         client.close()
 
 _thread.start_new_thread(serve, ())

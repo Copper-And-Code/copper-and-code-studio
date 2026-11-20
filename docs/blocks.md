@@ -1,6 +1,6 @@
 # Writing a block
 
-A block adds a component to LVGL MPY Studio: something the application uses from code and that
+A block adds a component to Copper and Code Studio: something the application uses from code and that
 is not drawn on the page, such as an output pin, a sensor or a bus. This guide builds one from
 nothing. The finished example is in `examples/blocks/blinker`.
 

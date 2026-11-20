@@ -13,7 +13,7 @@ def _image():
         stream.seek(-16, 2)
         trailer = stream.read(16)
         if trailer[8:] != MAGIC:
-            raise SystemExit("No app attached to this runtime: build it with LVGL MPY Studio")
+            raise SystemExit("No app attached to this runtime: build it with Copper and Code Studio")
         size = int.from_bytes(trailer[:8], "little")
         stream.seek(-16 - size, 2)
         return stream.read(size)

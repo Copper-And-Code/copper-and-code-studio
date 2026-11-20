@@ -4,7 +4,7 @@ Status: phases 1 and 2 done on 2026-11-12, in version 0.6.0, with phase 3; phase
 
 ## Goal
 
-Let people other than the authors add features to LVGL MPY Studio. The first need is hardware:
+Let people other than the authors add features to Copper and Code Studio. The first need is hardware:
 blocks that make SPI, UART, PWM, I2C and similar MicroPython peripherals as easy to use as a
 widget. Later the same mechanism must be able to carry other kinds of extension.
 
@@ -48,7 +48,7 @@ i2c_bus/
   "version": "1.0.0",
   "name": "I2C Bus",
   "description": "An I2C bus in controller mode.",
-  "author": "LVGL MPY Studio",
+  "author": "Copper and Code Studio",
   "license": "MIT",
   "icon": "mdi6.chip",
   "category": "Hardware",

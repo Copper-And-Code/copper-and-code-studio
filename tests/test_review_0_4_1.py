@@ -259,7 +259,7 @@ def test_settings_saved_under_the_old_name_are_kept(qtbot):
         window = MainWindow()
         qtbot.addWidget(window)
         assert window.settings.value("recentFiles", [], list) == ["/tmp/old.json"]
-        assert window.windowTitle().endswith("LVGL MPY Studio")
+        assert window.windowTitle().endswith("Copper and Code Studio")
     finally:
         old.clear()
         QSettings("CopperAndCode", "LVGL MPY Studio").clear()

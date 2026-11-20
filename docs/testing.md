@@ -1,4 +1,4 @@
-# How LVGL MPY Studio is tested
+# How Copper and Code Studio is tested
 
 Few people have used the IDE so far, so most of the checking is done by machine. This page
 says what is checked, by what, how to run it, and what no automated check can see.

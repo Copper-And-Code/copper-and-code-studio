@@ -1,6 +1,6 @@
 # Running on a Chromebook
 
-A Chromebook can run the Linux AppImage of LVGL MPY Studio inside the Linux development
+A Chromebook can run the Linux AppImage of Copper and Code Studio inside the Linux development
 environment of ChromeOS. No change to ChromeOS itself is needed.
 
 ## What is needed

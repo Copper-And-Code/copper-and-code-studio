@@ -189,7 +189,7 @@ class Player:
         self.overlay.cursor.pos = None
         if self.base is None:
             self.base = self.ide.grab()
-        lines = [step.get("text") or "Made with LVGL MPY Studio", URL, CAPTION]
+        lines = [step.get("text") or "Made with Copper and Code Studio", URL, CAPTION]
         card = self.overlay.card(self.base, self.video["title"], "", lines)
         last = self.overlay.draw(self.base)
         for frame in range(1, CROSSFADE + 1):

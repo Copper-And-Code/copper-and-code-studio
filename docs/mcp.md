@@ -1,6 +1,6 @@
 # MCP server for AI agents
 
-`lvgl-mpy-studio mcp` lets an AI agent work on LVGL MPY Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.
+`lvgl-mpy-studio mcp` lets an AI agent work on Copper and Code Studio projects through the Model Context Protocol, over stdio. The agent can create and edit projects, see pages rendered by the real LVGL runtime, run tests, build, and work on a connected board.
 
 [From a prompt to an app](mcp-demo.md) shows a complete recorded session: an agent builds a weather station in 24 calls.
 

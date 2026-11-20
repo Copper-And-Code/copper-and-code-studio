@@ -1,6 +1,6 @@
-# Manuale di LVGL MPY Studio
+# Manuale di Copper and Code Studio
 
-LVGL MPY Studio è un ambiente visuale per creare interfacce grafiche con [LVGL](https://lvgl.io) e MicroPython, nello stile di Visual Basic: disegni le pagine trascinando i controlli, scrivi poche righe di Python per i loro eventi e provi tutto in un simulatore che usa lo stesso LVGL della board. Quando sei pronto carichi l'app su una board, ne crei un eseguibile da mandare agli altri o ne esporti il codice.
+Copper and Code Studio è un ambiente visuale per creare interfacce grafiche con [LVGL](https://lvgl.io) e MicroPython, nello stile di Visual Basic: disegni le pagine trascinando i controlli, scrivi poche righe di Python per i loro eventi e provi tutto in un simulatore che usa lo stesso LVGL della board. Quando sei pronto carichi l'app su una board, ne crei un eseguibile da mandare agli altri o ne esporti il codice.
 
 Questo manuale descrive la versione 0.4 ed è disponibile anche [in inglese](manual.md). Per i dettagli sulle board vedi la [guida alle board](boards.it.md), per gli agenti AI la [guida al server MCP](mcp.md).
 
@@ -446,7 +446,7 @@ Verifica che le cose funzionino, non il loro aspetto. Non usa mai una board vera
 
 ## 15. Agenti AI
 
-LVGL MPY Studio può essere usato da un agente AI, come Claude o Kimi, tramite il **Model Context Protocol** (MCP). L'agente crea progetti, disegna pagine, scrive il codice, prova il gioco nel simulatore toccando lo schermo, misura la memoria e, con te presente, lavora sulla board.
+Copper and Code Studio può essere usato da un agente AI, come Claude o Kimi, tramite il **Model Context Protocol** (MCP). L'agente crea progetti, disegna pagine, scrive il codice, prova il gioco nel simulatore toccando lo schermo, misura la memoria e, con te presente, lavora sulla board.
 
 Il server è spento finché non lo accendi da **Impostazioni → Server MCP per agenti AI**. La [guida al server MCP](mcp.md) spiega come collegarlo al tuo agente e cosa può fare. Due regole pratiche:
 

@@ -1,6 +1,8 @@
-# LVGL MPY Studio
+# Copper and Code Studio
 
-LVGL MPY Studio is a desktop IDE for building graphical interfaces with LVGL 9.5 and MicroPython. Design pages visually, write event handlers in Python, and run the application in a simulator that uses the real LVGL library.
+**Copper and Code Studio** — a visual GUI builder for MicroPython and LVGL. Formerly LVGL MPY Studio.
+
+Copper and Code Studio is a desktop IDE for building graphical interfaces with LVGL 9.5 and MicroPython. Design pages visually, write event handlers in Python, and run the application in a simulator that uses the real LVGL library.
 
 The same project can be uploaded to a supported board, exported as portable C sources, built as a standalone application, or published in the browser through WebAssembly. AI agents can perform the complete workflow through the MCP server.
 
@@ -27,7 +29,7 @@ Install the IDE, create the first project, and learn how to publish it.
 
 ## Browser demos
 
-Try applications and games built with LVGL MPY Studio, running on a shared WebAssembly runtime.
+Try applications and games built with Copper and Code Studio, running on a shared WebAssembly runtime.
 
 [Open the gallery](demos.md){ .md-button .md-button--primary }
 

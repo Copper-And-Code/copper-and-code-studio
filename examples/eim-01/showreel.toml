@@ -1,7 +1,7 @@
 # The showreel of EIM-01: python -m tools.showreel examples/eim-01
 [video]
 title = "EIM-01 industrial monitor"
-subtitle = "Built and run in LVGL MPY Studio"
+subtitle = "Built and run in Copper and Code Studio"
 gif = { from = "start", seconds = 12 }
 
 [[step]]

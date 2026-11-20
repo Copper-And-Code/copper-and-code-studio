@@ -6,6 +6,6 @@
   "entry": "shell.py",
   "page": null,
   "prompt": null,
-  "prompt_note": "Not created from a prompt in LVGL MPY Studio: it comes from the examples of mpy-lvgl-boards, where it runs on the boards.",
+  "prompt_note": "Not created from a prompt in Copper and Code Studio: it comes from the examples of mpy-lvgl-boards, where it runs on the boards.",
   "order": 60
 }

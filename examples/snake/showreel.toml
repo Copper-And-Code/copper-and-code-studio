@@ -1,7 +1,7 @@
 # The showreel of Snake: python -m tools.showreel examples/snake
 [video]
 title = "Snake"
-subtitle = "A game in MicroPython and LVGL, built in LVGL MPY Studio"
+subtitle = "A game in MicroPython and LVGL, built in Copper and Code Studio"
 gif = { from = "start", seconds = 10 }
 poster = "wait"
 

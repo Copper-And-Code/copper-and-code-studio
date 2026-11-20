@@ -183,7 +183,7 @@ _Uname = namedtuple("uname_result", ("sysname", "nodename", "release", "version"
 def _uname():
     board = getattr(lms_board, "BOARD", "board")
     release = ".".join(str(part) for part in _sys.implementation.version[:3])
-    return _Uname("browser", "browser", release, "v" + release + " LVGL MPY Studio in the browser", board + " (browser)")
+    return _Uname("browser", "browser", release, "v" + release + " Copper and Code Studio in the browser", board + " (browser)")
 
 
 _stdin, _stdout = _Stdin(), _Stdout()

@@ -185,7 +185,7 @@ def demo_page(metadata, project):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — LVGL MPY Studio</title>
+<title>{title} — Copper and Code Studio</title>
 <style>
   :root {{ color-scheme: dark; }}
   html, body {{ margin: 0; min-height: 100%; background: #101318; color: #d8dde6; font: 14px system-ui, sans-serif; }}
@@ -223,7 +223,7 @@ def program_demo_page(metadata, program):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — LVGL MPY Studio</title>
+<title>{title} — Copper and Code Studio</title>
 <style>
   :root {{ color-scheme: dark; }}
   html, body {{ margin: 0; min-height: 100%; background: #101318; color: #d8dde6; font: 14px system-ui, sans-serif; }}

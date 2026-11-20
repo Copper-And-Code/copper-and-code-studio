@@ -4,7 +4,7 @@ This page says who did what, so that a reader can judge the project for what it 
 
 ## In short
 
-LVGL MPY Studio was designed and directed by one person, Nunzio Raciti, and written for the
+Copper and Code Studio, called LVGL MPY Studio up to 0.7, was designed and directed by one person, Nunzio Raciti, and written for the
 most part by AI coding agents working under his direction. It is not a hand-written code base
 with an assistant's help, and it is not an unattended output either: it is an experiment in how
 far one engineer can take a whole product by directing agents, and a statement of the method

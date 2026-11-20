@@ -2,7 +2,7 @@
 # python -m tools.showreel examples/eim-01 --storyboard examples/eim-01/showreel-short.toml --name eim-01-short
 [video]
 title = "EIM-01 industrial monitor"
-subtitle = "Built and run in LVGL MPY Studio"
+subtitle = "Built and run in Copper and Code Studio"
 gif = { from = 0, fps = 10, width = 800 }
 
 [[step]]

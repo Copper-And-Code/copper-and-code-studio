@@ -51,7 +51,7 @@ pages, Start, four seconds of the run, end card. `--print-storyboard` writes it 
 ```toml
 [video]
 title = "Weather"
-subtitle = "Built and run in LVGL MPY Studio"
+subtitle = "Built and run in Copper and Code Studio"
 window = [1600, 1000]
 fps = 25
 gif = { from = "start", seconds = 12, fps = 12, width = 960 }   # the cut for the GIF

@@ -25,7 +25,7 @@ _dupterm = dupterm  # noqa: F405
 def uname():
     board = getenv("LMS_BOARD") or "board"  # noqa: F405
     release = ".".join(str(part) for part in sys.implementation.version[:3])
-    return _uname("simulator", "simulator", release, "v" + release + " LVGL MPY Studio simulator", board + " (simulator)")
+    return _uname("simulator", "simulator", release, "v" + release + " Copper and Code Studio simulator", board + " (simulator)")
 
 
 class _Cooked(io.IOBase):

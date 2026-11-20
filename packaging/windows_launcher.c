@@ -33,7 +33,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR arguments, int
     if (!CreateProcessW(NULL, command, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, directory, &startup, &process)) {
         wchar_t message[512];
         swprintf(message, 512, L"The bundled Python could not be started.\nWindows error: %lu", GetLastError());
-        MessageBoxW(NULL, message, L"LVGL MPY Studio", MB_ICONERROR | MB_OK);
+        MessageBoxW(NULL, message, L"Copper and Code Studio", MB_ICONERROR | MB_OK);
         return 1;
     }
     WaitForSingleObject(process.hProcess, INFINITE);

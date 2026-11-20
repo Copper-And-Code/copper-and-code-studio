@@ -56,7 +56,7 @@ def main(names=(), show=False, slow_ms=0, output=None, list_only=False, echo=pri
     directory = (Path(output) if output else Path.cwd() / "lvgl-mpy-studio-selftest" / datetime.now().strftime("%Y%m%d-%H%M%S")).resolve()
     report = Report(directory, echo)
     header = [
-        f"LVGL MPY Studio {__version__} self-test, {datetime.now().isoformat(timespec='seconds')}",
+        f"Copper and Code Studio {__version__} self-test, {datetime.now().isoformat(timespec='seconds')}",
         f"{platform.platform()}, Python {platform.python_version()}, Qt {qVersion()}, " + ("on screen" if show else "hidden") + (f", slowed by {slow_ms} ms" if slow_ms else ""),
     ]
     for line in header:

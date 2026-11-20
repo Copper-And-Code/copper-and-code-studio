@@ -1,6 +1,6 @@
 # Building, testing and packaging
 
-Reference for whoever works on LVGL MPY Studio. The [user manual](manual.md) describes the IDE itself.
+Reference for whoever works on Copper and Code Studio. The [user manual](manual.md) describes the IDE itself.
 
 ## From the sources
 

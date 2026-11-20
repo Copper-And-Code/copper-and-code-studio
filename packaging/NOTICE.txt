@@ -1,11 +1,11 @@
-LVGL MPY Studio
+Copper and Code Studio
 Copyright (c) 2026 Nunzio Raciti
 
 The IDE is licensed under GPL-3.0-or-later; see LICENSE. Generated code and the
 components embedded in projects are under MIT; see LICENSING.md.
 This software comes with absolutely no warranty.
 
-LVGL MPY Studio - third-party notices
+Copper and Code Studio - third-party notices
 
 PySide6 and Qt are distributed as separate shared libraries in the package.
 PySide6: LGPL-3.0-only, https://www.pyside.org and https://code.qt.io/cgit/pyside/pyside-setup.git/

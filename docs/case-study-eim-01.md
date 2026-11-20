@@ -1,6 +1,6 @@
 # Case study: EIM-01, an industrial monitor
 
-EIM-01 is the largest application built with LVGL MPY Studio so far: an operator panel that
+EIM-01 is the largest application built with Copper and Code Studio so far: an operator panel that
 watches a temperature and controls a fan. It is in `examples/eim-01`, for a 1024×600 display,
 and in `examples/eim-01-480` with a layout of its own for 480×480.
 
@@ -87,5 +87,5 @@ left visible:
 2. **A real temperature and a real fan.** The data source can be set to TCP, serial or BLE in
    the interface, but only the simulation is implemented.
 3. **Blocks for the hardware.** A temperature sensor on I2C and a fan on PWM are the blocks
-   planned for LVGL MPY Studio and not written yet; this example is their first user.
+   planned for Copper and Code Studio and not written yet; this example is their first user.
 4. **Settings that survive a restart**: today they are kept in RAM only.

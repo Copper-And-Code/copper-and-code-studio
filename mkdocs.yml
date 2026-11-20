@@ -1,5 +1,5 @@
-site_name: LVGL MPY Studio
-site_description: Visual IDE for LVGL 9.5 on MicroPython, with simulator, board upload and WebAssembly export
+site_name: Copper and Code Studio
+site_description: A visual GUI builder for MicroPython and LVGL — formerly LVGL MPY Studio
 site_url: https://copper-and-code.github.io/lvgl-mpy-studio/
 # Keep the repository link in content: Material's repository widget calls the GitHub API.
 repo_url: ""

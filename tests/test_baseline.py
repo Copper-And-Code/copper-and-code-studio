@@ -27,4 +27,4 @@ def test_main_window_opens(qtbot):
     qtbot.addWidget(window)
     window.show()
     assert window.isVisible()
-    assert window.windowTitle() == "Untitled — LVGL MPY Studio"
+    assert window.windowTitle() == "Untitled — Copper and Code Studio"

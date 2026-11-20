@@ -8,7 +8,7 @@ from pathlib import Path
 
 VIDEO = {
     "title": "",
-    "subtitle": "Built and run in LVGL MPY Studio",
+    "subtitle": "Built and run in Copper and Code Studio",
     "window": [1600, 1000],
     "fps": 25,
     "gif": {"from": "start", "seconds": 10},
@@ -131,7 +131,7 @@ def default(project):
         {"do": "wait", "seconds": 4},
         {"do": "end", "seconds": 3},
     ]
-    video = dict(VIDEO, title=project.get("projectName") or "LVGL MPY Studio")
+    video = dict(VIDEO, title=project.get("projectName") or "Copper and Code Studio")
     return check({"video": video, "step": steps}, "default storyboard")
 
 

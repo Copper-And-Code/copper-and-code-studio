@@ -230,7 +230,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(arguments)
     if args.version:
         from . import __version__
-        print(__version__)
+        print(f"Copper and Code Studio {__version__}")
         return 0
     if args.command == "selftest":
         from .selftest import main as selftest_main

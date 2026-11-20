@@ -33,7 +33,7 @@ def _read(_indev, data):
     data.state = lv.INDEV_STATE.PRESSED if _state[2] else lv.INDEV_STATE.RELEASED
 
 
-def init(width, height, title="LVGL MPY Studio"):
+def init(width, height, title="Copper and Code Studio"):
     global _width, _height, _buffer, _display, _pointer
     _width, _height = width, height
     lvsim.open(width, height, title)

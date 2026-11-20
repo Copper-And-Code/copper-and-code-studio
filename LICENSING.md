@@ -1,6 +1,6 @@
 # Licensing
 
-LVGL MPY Studio uses two licenses, so the IDE stays free and users can do what they want with their own products.
+Copper and Code Studio uses two licenses, so the IDE stays free and users can do what they want with their own products.
 
 | Part | License |
 |---|---|
@@ -22,7 +22,7 @@ This document summarizes the licenses and is not legal advice.
 
 # Licenze
 
-LVGL MPY Studio usa due licenze, così l'IDE resta libero e chi lo usa può fare ciò che vuole con i propri prodotti.
+Copper and Code Studio usa due licenze, così l'IDE resta libero e chi lo usa può fare ciò che vuole con i propri prodotti.
 
 | Parte | Licenza |
 |---|---|

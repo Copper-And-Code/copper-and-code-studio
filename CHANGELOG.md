@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- **Renamed from LVGL MPY Studio to Copper and Code Studio**, a visual GUI builder for MicroPython and LVGL. The old name began with the name of somebody else's project. A user has nothing to do: settings and projects are kept, and the old command still works.
+
 ### Fixed
 
 - **The self-test no longer fails at random at Upload Files.** Its watcher of dialogs took the Upload Files dialog for an unexpected one when the dialog it opens, to choose a folder, had just closed: on a slow computer, as in the CI, the step failed now and then. The self-test of the 0.7.2 package has this fault.

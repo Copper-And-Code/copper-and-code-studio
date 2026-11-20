@@ -174,7 +174,7 @@ class FilesMixin:
     def _update_title(self):
         marker = "*" if self.document.modified else ""
         name = self.document.path.name if self.document.path else self.document.project.projectName
-        self.setWindowTitle(f"{marker}{name} — LVGL MPY Studio")
+        self.setWindowTitle(f"{marker}{name} — Copper and Code Studio")
 
     def build_executable(self, single_file=False):
         if self._building or not self.save_project():

@@ -1,4 +1,8 @@
-# LVGL MPY Studio
+# Copper and Code Studio
+
+**Copper and Code Studio** — un costruttore visuale di interfacce grafiche per MicroPython e LVGL.
+
+In precedenza LVGL MPY Studio.
 
 [![CI](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/Copper-And-Code/lvgl-mpy-studio/actions/workflows/ci.yml)
 
@@ -6,7 +10,7 @@
 
 ### [Sito del progetto](https://copper-and-code.github.io/lvgl-mpy-studio/) · [Prova le demo nel browser](https://copper-and-code.github.io/lvgl-mpy-studio/demos/) · [Apri l'IDE nel browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
 
-Il sito ha la documentazione (in inglese); le demo sono giochi e una shell fatti con LVGL MPY Studio, che girano in WebAssembly senza installare nulla. L'IDE nel browser è sperimentale: vedi più sotto.
+Il sito ha la documentazione (in inglese); le demo sono giochi e una shell fatti con Copper and Code Studio, che girano in WebAssembly senza installare nulla. L'IDE nel browser è sperimentale: vedi più sotto.
 
 Un IDE desktop per progettare interfacce [LVGL](https://lvgl.io) 9.5 per board MicroPython: disegni le pagine, scrivi i gestori in Python, esegui l'applicazione in un simulatore che usa la vera LVGL e la carichi su una board. Un agente AI può fare lo stesso attraverso un server MCP.
 
@@ -80,4 +84,4 @@ Solo Linux e Windows x86-64. Il codice utente è Python: il C viene esportato co
 
 L'IDE è distribuito con licenza GPL-3.0-or-later. Il codice generato per i tuoi progetti e i componenti che l'IDE vi include sono sotto MIT, quindi i tuoi prodotti non diventano GPL. Vedi [LICENSING.md](LICENSING.md).
 
-LVGL MPY Studio è un progetto indipendente, non affiliato a LVGL né da essa approvato. LVGL è un nome dei rispettivi titolari.
+Copper and Code Studio è un progetto personale, non affiliato a LVGL o MicroPython né da essi approvato; i loro nomi appartengono ai rispettivi titolari.

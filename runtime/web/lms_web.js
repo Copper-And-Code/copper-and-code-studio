@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 Nunzio Raciti
-// Start of an LVGL MPY Studio game in the browser: MicroPython in WebAssembly, LVGL draws on the canvas.
+// Start of a Copper and Code Studio game in the browser: MicroPython in WebAssembly, LVGL draws on the canvas.
 import "./micropython.mjs";
 
 const TONE = "\x1bLVSIM_TONE ";

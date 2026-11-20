@@ -1,6 +1,6 @@
-# LVGL MPY Studio manual
+# Copper and Code Studio manual
 
-LVGL MPY Studio is a visual environment for building graphical interfaces with [LVGL](https://lvgl.io) and MicroPython, in the style of Visual Basic: you draw pages by dragging controls, write a few lines of Python for their events and try everything in a simulator that uses the same LVGL as the board. When you are ready you upload the app to a board, build an executable to send to others, or export the code.
+Copper and Code Studio is a visual environment for building graphical interfaces with [LVGL](https://lvgl.io) and MicroPython, in the style of Visual Basic: you draw pages by dragging controls, write a few lines of Python for their events and try everything in a simulator that uses the same LVGL as the board. When you are ready you upload the app to a board, build an executable to send to others, or export the code.
 
 This manual describes version 0.4. For details on boards see the [board guide](boards.md), for AI agents the [MCP server guide](mcp.md). The manual is also available [in Italian](https://github.com/Copper-And-Code/lvgl-mpy-studio/blob/main/docs/manual.it.md).
 
@@ -446,7 +446,7 @@ It checks that things work, not how they look. It never uses a real board: the b
 
 ## 15. AI agents
 
-LVGL MPY Studio can be used by an AI agent, such as Claude or Kimi, through the **Model Context Protocol** (MCP). The agent creates projects, draws pages, writes the code, tries the game in the simulator by touching the screen, measures memory and, with you present, works on the board.
+Copper and Code Studio can be used by an AI agent, such as Claude or Kimi, through the **Model Context Protocol** (MCP). The agent creates projects, draws pages, writes the code, tries the game in the simulator by touching the screen, measures memory and, with you present, works on the board.
 
 The server is off until you turn it on from **Settings → MCP Server for AI Agents**. The [MCP server guide](mcp.md) explains how to connect it to your agent and what it can do. Two practical rules:
 

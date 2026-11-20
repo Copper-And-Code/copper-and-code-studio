@@ -81,7 +81,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.deviceOutput.connect(self._device_output)
         self._console_pump = OutputPump(self._device_output, self._console_skipped, self)
         self.consoleClosed.connect(self._update_device_actions)
-        self.setWindowTitle("LVGL MPY Studio")
+        self.setWindowTitle("Copper and Code Studio")
         theme.fit_to_screen(self, 1400, 900)
         self.tabs = QTabWidget()
         self.tabs.setTabsClosable(False)
@@ -191,7 +191,7 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         self.blocks_action = QAction(tr("Manage Blocks…"), self, triggered=self.manage_blocks)
         self.print_action = QAction(tr("Print Sources…"), self, shortcut=QKeySequence.Print, triggered=self.print_sources)
         self.website_action = QAction(tr("Online Documentation"), self, shortcut=QKeySequence.HelpContents, triggered=self.open_website)
-        self.about_action = QAction(tr("About LVGL MPY Studio"), self, triggered=self.show_about)
+        self.about_action = QAction(tr("About Copper and Code Studio"), self, triggered=self.show_about)
 
     def _make_menus(self):
         file_menu = self.menuBar().addMenu(tr("File"))
@@ -736,8 +736,9 @@ class MainWindow(DeviceMixin, ProjectTreeMixin, FilesMixin, EditorTabsMixin, Res
         lvgl_version = info.get("lvglVersion") or missing
         QMessageBox.about(
             self,
-            tr("About LVGL MPY Studio"),
-            f"<h2>LVGL MPY Studio</h2>"
+            tr("About Copper and Code Studio"),
+            f"<h2>Copper and Code Studio</h2>"
+            f"<p>{tr('A visual GUI builder for MicroPython and LVGL.')}</p>"
             f"<p><b>{tr('IDE version')}:</b> {__version__}<br>"
             f"<b>MicroPython:</b> {micro_version}<br>"
             f"<b>LVGL:</b> {lvgl_version}</p>"
