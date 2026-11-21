@@ -5,6 +5,7 @@
 ### Added
 
 - **Five more examples:** the games Frog, Orbit and Sandwich Tower for a 480×480 touch screen, a touch C64 Keyboard that sends the key matrix on a UART, and Forecast, a weather station for the ESP32-4848S040 over WiFi. Each has a README.
+- **Settings, the WiFi networks of a board kept once for every app.** The Settings example keeps up to five networks in `cac_settings.json` in the flash; `cac_settings.py` connects to the best one in range, and a `boot.py` does it at power-on. Forecast uses it instead of its own network page.
 
 ## 0.8.0 — 2026-11-20
 
