@@ -274,8 +274,8 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
 
 ## The IDE in the browser, in a repository of its own (2026-11-14)
 
-- The whole IDE is ported to the browser in [lvgl-mpy-studio-web](https://github.com/Copper-And-Code/lvgl-mpy-studio-web), published at
-  <https://copper-and-code.github.io/lvgl-mpy-studio-web/>, alongside the desktop IDE and not in its place: for GitHub Pages, Chromebooks
+- The whole IDE is ported to the browser in [copper-and-code-studio-web](https://github.com/Copper-And-Code/copper-and-code-studio-web), published at
+  <https://copper-and-code.github.io/copper-and-code-studio-web/>, alongside the desktop IDE and not in its place: for GitHub Pages, Chromebooks
   and, later, phones.
 - That repository holds this one as a git submodule at a tag. It runs `core/`, `gen/` and
   `build/` unchanged in Pyodide, with an interface in TypeScript and Lit, the simulator on the
