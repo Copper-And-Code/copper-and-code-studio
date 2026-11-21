@@ -2,9 +2,10 @@
 #
 # One file, cac_settings.json, in the flash: /flash/cac_settings.json on boards with a /flash
 # folder (STM32), /cac_settings.json on the others (ESP32, RP2350). The Settings app writes it;
-# boot.py and the other apps read it. Today it holds up to five WiFi networks:
+# boot.py, the home menu of the board and the other apps read it. It holds up to five WiFi
+# networks, and sections of other settings, such as the brightness of the display:
 #
-#     {"version": 1, "wifi": [{"ssid": "Home", "password": "..."}, ...]}
+#     {"version": 1, "wifi": [{"ssid": "Home", "password": "..."}, ...], "display": {"brightness": 70}}
 #
 # The networks are kept from the most recently used. Passwords are in clear text, like in
 # MicroPython's own examples: whoever can read the flash can read them.
@@ -64,6 +65,19 @@ def save(data):
     except OSError:
         pass
     os.rename(temporary, name)
+
+
+def section(name):
+    """One section of other settings, such as "display": a dict, empty when there is none."""
+    value = load().get(name)
+    return value if isinstance(value, dict) else {}
+
+
+def set_section(name, value):
+    """Replace one section; the networks and the other sections stay."""
+    data = load()
+    data[name] = value
+    save(data)
 
 
 def networks():

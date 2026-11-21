@@ -64,7 +64,7 @@
           "props": {
             "x": 20,
             "y": 16,
-            "width": 440,
+            "width": 300,
             "height": 32,
             "text": "WiFi networks",
             "textColor": "#F2F5F9",
@@ -284,6 +284,27 @@
           "events": {},
           "customStyles": {},
           "animations": []
+        },
+        {
+          "id": "f8b71a6eec3a425b970239d616ec0b0e",
+          "name": "btn_display",
+          "type": "button",
+          "props": {
+            "x": 356,
+            "y": 10,
+            "width": 104,
+            "height": 40,
+            "text": "Display",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_display_clicked"
+          },
+          "customStyles": {},
+          "animations": []
         }
       ]
     },
@@ -488,10 +509,155 @@
           "animations": []
         }
       ]
+    },
+    {
+      "id": "3238069f00bd4442888694ca3060fef9",
+      "name": "Display",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "1c934aaad8af4ba5be45634cacf70036",
+          "name": "disp_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "624e5f94b3dc4955a099d7f8482fffc0",
+          "name": "disp_title",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 14,
+            "width": 300,
+            "height": 32,
+            "text": "Display",
+            "textColor": "#F2F5F9",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3958155c317a481eb853aa67a0508a86",
+          "name": "btn_disp_back",
+          "type": "button",
+          "props": {
+            "x": 356,
+            "y": 10,
+            "width": 104,
+            "height": 40,
+            "text": "Back",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_disp_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f4cb4cd896104f579b4d3196e983f119",
+          "name": "bright_text",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 90,
+            "width": 440,
+            "height": 26,
+            "text": "Brightness 70%",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "45d4d28d65814a51bcd3377ba697301f",
+          "name": "bright",
+          "type": "slider",
+          "props": {
+            "x": 30,
+            "y": 136,
+            "width": 420,
+            "height": 20,
+            "min": 5,
+            "max": 100,
+            "value": 70,
+            "bgColor": "#1B2838",
+            "indicatorColor": "#4FA3FF",
+            "knobColor": "#4FA3FF",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "bright_value_changed",
+            "RELEASED": "bright_released"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "29d7282bd08349b7a2cb296cddf1b377",
+          "name": "disp_hint",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 184,
+            "width": 440,
+            "height": 60,
+            "text": "The home menu of the board sets it before every app; an app can change it while it runs.",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
     }
   ],
   "code": {
-    "module": "# SETTINGS: the WiFi networks that every Copper and Code app on this board uses.\n#\n# Up to five networks are kept by cac_settings in cac_settings.json in the flash, from the most\n# recently used. boot.py connects to the best one in range at power-on; the other apps call\n# cac_settings.connect() when they need the network. Here they are added, chosen, tried and\n# forgotten. Scanning and connecting take seconds, so a touch only asks for them and the timer\n# runs them on its next tick, after the screen has shown \"Connecting...\".\nimport cac_settings\n\nUNSELECTED = 0x1B2838\nSELECTED = 0x4FA3FF\n\nsta = cac_settings.station()\njob = None\nselected = None             # the saved network chosen on Networks\npicked = None               # the network chosen on Add\n\n\ndef row_buttons():\n    return (ui.net1, ui.net2, ui.net3, ui.net4, ui.net5)\n\n\ndef button_text(button, text):\n    button.get_child(0).set_text(text)\n\n\ndef saved_names():\n    return [n[\"ssid\"] for n in cac_settings.networks()]\n\n\ndef show_networks():\n    global selected\n    saved = saved_names()\n    if selected not in saved:\n        selected = saved[0] if saved else None\n    current = cac_settings.connected_ssid(sta)\n    for i, button in enumerate(row_buttons()):\n        if i < len(saved):\n            name = saved[i]\n            button_text(button, name + (\"   connected\" if name == current else \"\"))\n            button.set_style_bg_color(lv.color_hex(SELECTED if name == selected else UNSELECTED), 0)\n            button.remove_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            button.add_flag(lv.obj.FLAG.HIDDEN)\n    if not saved:\n        ui.status.set_text(\"No network saved: touch Add\")\n    elif sta is None:\n        ui.status.set_text(\"No WiFi in the simulator: networks are saved only\")\n    elif current:\n        ui.status.set_text(\"Connected to \" + current)\n    else:\n        ui.status.set_text(\"Not connected\")\n\n\ndef choose_row(index):\n    global selected\n    saved = saved_names()\n    if index < len(saved):\n        selected = saved[index]\n        show_networks()\n\n\ndef forget_selected():\n    global selected\n    if selected:\n        cac_settings.forget(selected)\n        selected = None\n    show_networks()\n\n\ndef start_connect():\n    global job\n    if not selected:\n        return\n    if sta is None:\n        ui.status.set_text(\"No WiFi in the simulator\")\n        return\n    ui.status.set_text(\"Connecting to \" + selected + \"...\")\n    job = \"connect\"\n\n\ndef do_connect():\n    secret = cac_settings.password(selected)\n    if cac_settings.join(selected, secret, sta):\n        cac_settings.remember(selected, secret)\n        show_networks()\n    else:\n        ui.status.set_text(\"Could not connect to \" + selected)\n\n\ndef open_add():\n    global picked, job\n    picked = None\n    ui.password.set_text(\"\")\n    ui.keyboard.set_textarea(ui.password)\n    ui.keyboard.set_align(lv.ALIGN.TOP_LEFT)    # a keyboard is aligned to the bottom by LVGL\n    ui.keyboard.set_pos(0, lv.screen_active().get_height() - ui.keyboard.get_height())\n    ui.scan_list.clean()\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef start_scan():\n    global job\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef pick(name):\n    global picked\n    picked = name\n    secret = cac_settings.password(name)\n    ui.password.set_text(secret or \"\")\n    ui.add_status.set_text(name + (\": saved, password filled in\" if secret is not None else \": type the password\"))\n\n\ndef do_scan():\n    try:\n        found = cac_settings.scan(sta)\n    except OSError as e:\n        print(\"scan:\", repr(e))\n        ui.add_status.set_text(\"WiFi not available\")\n        return\n    saved = saved_names()\n    box = ui.scan_list\n    box.clean()\n    for name, rssi in found:\n        b = lv.button(box)                     # the list lays its children out in a column\n        b.set_size(lv.pct(100), 38)\n        b.set_style_radius(4, 0)\n        b.set_style_bg_color(lv.color_hex(UNSELECTED), 0)\n        label = lv.label(b)\n        label.set_text(name + (\"   saved\" if name in saved else \"\"))\n        label.set_style_text_color(lv.color_hex(0xF2F5F9), 0)\n        label.center()\n        b.add_event_cb(lambda e, n=name: pick(n), lv.EVENT.CLICKED, None)\n    ui.add_status.set_text(\"Touch a network\" if found else \"No network in range\")\n\n\ndef start_save():\n    global job\n    if not picked:\n        ui.add_status.set_text(\"Touch a network first\")\n        return\n    ui.add_status.set_text(\"Connecting to \" + picked + \"...\")\n    job = \"save\"\n\n\ndef do_save():\n    global selected\n    secret = ui.password.get_text()\n    if sta is not None and not cac_settings.join(picked, secret, sta):\n        ui.add_status.set_text(\"Could not connect: check the password\")\n        return\n    cac_settings.remember(picked, secret)\n    selected = picked\n    ui.load_page(ui.PAGE_NETWORKS)\n\n\ndef on_tick():\n    global job\n    current, job = job, None\n    if current == \"connect\":\n        do_connect()\n    elif current == \"scan\":\n        do_scan()\n    elif current == \"save\":\n        do_save()\n",
+    "module": "# SETTINGS: the WiFi networks that every Copper and Code app on this board uses.\n#\n# Up to five networks are kept by cac_settings in cac_settings.json in the flash, from the most\n# recently used. boot.py connects to the best one in range at power-on; the other apps call\n# cac_settings.connect() when they need the network. Here they are added, chosen, tried and\n# forgotten. Scanning and connecting take seconds, so a touch only asks for them and the timer\n# runs them on its next tick, after the screen has shown \"Connecting...\".\nimport cac_settings\n\nUNSELECTED = 0x1B2838\nSELECTED = 0x4FA3FF\nDEFAULT_BRIGHTNESS = 70\n\nsta = cac_settings.station()\njob = None\nselected = None             # the saved network chosen on Networks\npicked = None               # the network chosen on Add\n\n\ndef row_buttons():\n    return (ui.net1, ui.net2, ui.net3, ui.net4, ui.net5)\n\n\ndef button_text(button, text):\n    button.get_child(0).set_text(text)\n\n\ndef saved_names():\n    return [n[\"ssid\"] for n in cac_settings.networks()]\n\n\ndef show_networks():\n    global selected\n    saved = saved_names()\n    if selected not in saved:\n        selected = saved[0] if saved else None\n    current = cac_settings.connected_ssid(sta)\n    for i, button in enumerate(row_buttons()):\n        if i < len(saved):\n            name = saved[i]\n            button_text(button, name + (\"   connected\" if name == current else \"\"))\n            button.set_style_bg_color(lv.color_hex(SELECTED if name == selected else UNSELECTED), 0)\n            button.remove_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            button.add_flag(lv.obj.FLAG.HIDDEN)\n    if not saved:\n        ui.status.set_text(\"No network saved: touch Add\")\n    elif sta is None:\n        ui.status.set_text(\"No WiFi in the simulator: networks are saved only\")\n    elif current:\n        ui.status.set_text(\"Connected to \" + current)\n    else:\n        ui.status.set_text(\"Not connected\")\n\n\ndef choose_row(index):\n    global selected\n    saved = saved_names()\n    if index < len(saved):\n        selected = saved[index]\n        show_networks()\n\n\ndef forget_selected():\n    global selected\n    if selected:\n        cac_settings.forget(selected)\n        selected = None\n    show_networks()\n\n\ndef start_connect():\n    global job\n    if not selected:\n        return\n    if sta is None:\n        ui.status.set_text(\"No WiFi in the simulator\")\n        return\n    ui.status.set_text(\"Connecting to \" + selected + \"...\")\n    job = \"connect\"\n\n\ndef do_connect():\n    secret = cac_settings.password(selected)\n    if cac_settings.join(selected, secret, sta):\n        cac_settings.remember(selected, secret)\n        show_networks()\n    else:\n        ui.status.set_text(\"Could not connect to \" + selected)\n\n\ndef open_add():\n    global picked, job\n    picked = None\n    ui.password.set_text(\"\")\n    ui.keyboard.set_textarea(ui.password)\n    ui.keyboard.set_align(lv.ALIGN.TOP_LEFT)    # a keyboard is aligned to the bottom by LVGL\n    ui.keyboard.set_pos(0, lv.screen_active().get_height() - ui.keyboard.get_height())\n    ui.scan_list.clean()\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef start_scan():\n    global job\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef pick(name):\n    global picked\n    picked = name\n    secret = cac_settings.password(name)\n    ui.password.set_text(secret or \"\")\n    ui.add_status.set_text(name + (\": saved, password filled in\" if secret is not None else \": type the password\"))\n\n\ndef do_scan():\n    try:\n        found = cac_settings.scan(sta)\n    except OSError as e:\n        print(\"scan:\", repr(e))\n        ui.add_status.set_text(\"WiFi not available\")\n        return\n    saved = saved_names()\n    box = ui.scan_list\n    box.clean()\n    for name, rssi in found:\n        b = lv.button(box)                     # the list lays its children out in a column\n        b.set_size(lv.pct(100), 38)\n        b.set_style_radius(4, 0)\n        b.set_style_bg_color(lv.color_hex(UNSELECTED), 0)\n        label = lv.label(b)\n        label.set_text(name + (\"   saved\" if name in saved else \"\"))\n        label.set_style_text_color(lv.color_hex(0xF2F5F9), 0)\n        label.center()\n        b.add_event_cb(lambda e, n=name: pick(n), lv.EVENT.CLICKED, None)\n    ui.add_status.set_text(\"Touch a network\" if found else \"No network in range\")\n\n\ndef start_save():\n    global job\n    if not picked:\n        ui.add_status.set_text(\"Touch a network first\")\n        return\n    ui.add_status.set_text(\"Connecting to \" + picked + \"...\")\n    job = \"save\"\n\n\ndef do_save():\n    global selected\n    secret = ui.password.get_text()\n    if sta is not None and not cac_settings.join(picked, secret, sta):\n        ui.add_status.set_text(\"Could not connect: check the password\")\n        return\n    cac_settings.remember(picked, secret)\n    selected = picked\n    ui.load_page(ui.PAGE_NETWORKS)\n\n\ndef backlight(level):\n    try:\n        import display_driver\n    except ImportError:\n        return\n    if hasattr(display_driver, \"backlight\"):          # the simulator has no backlight\n        display_driver.backlight(level)\n\n\ndef show_brightness(level):\n    ui.bright_text.set_text(\"Brightness %d%%\" % level)\n\n\ndef open_display():\n    level = cac_settings.section(\"display\").get(\"brightness\", DEFAULT_BRIGHTNESS)\n    ui.bright.set_style_bg_color(lv.color_hex(UNSELECTED), lv.PART.MAIN)    # the track, visible\n    ui.bright.set_style_bg_opa(lv.OPA.COVER, lv.PART.MAIN)\n    ui.bright.set_value(level, False)\n    show_brightness(level)\n\n\ndef change_brightness():\n    level = ui.bright.get_value()\n    show_brightness(level)\n    backlight(level)\n\n\ndef save_brightness():\n    \"\"\"Written when the finger leaves the slider, not at every step: the flash wears out.\"\"\"\n    display = cac_settings.section(\"display\")\n    display[\"brightness\"] = ui.bright.get_value()\n    cac_settings.set_section(\"display\", display)\n\n\ndef on_tick():\n    global job\n    current, job = job, None\n    if current == \"connect\":\n        do_connect()\n    elif current == \"scan\":\n        do_scan()\n    elif current == \"save\":\n        do_save()\n",
     "handlers": {
       "Networks_screen_loaded": {
         "widget": "Networks",
@@ -567,6 +733,31 @@
         "widget": "keyboard",
         "event": "READY",
         "body": "start_save()"
+      },
+      "Display_screen_loaded": {
+        "widget": "Display",
+        "event": "SCREEN_LOADED",
+        "body": "open_display()"
+      },
+      "bright_value_changed": {
+        "widget": "bright",
+        "event": "VALUE_CHANGED",
+        "body": "change_brightness()"
+      },
+      "bright_released": {
+        "widget": "bright",
+        "event": "RELEASED",
+        "body": "save_brightness()"
+      },
+      "btn_display_clicked": {
+        "widget": "btn_display",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_DISPLAY)"
+      },
+      "btn_disp_back_clicked": {
+        "widget": "btn_disp_back",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_NETWORKS)"
       }
     }
   },
@@ -609,7 +800,7 @@
     {
       "id": "b53d5fc0cf5547599c3cbf3294ee7b4f",
       "name": "cac_settings",
-      "source": "# cac_settings: the settings that every Copper and Code app on a board shares.\n#\n# One file, cac_settings.json, in the flash: /flash/cac_settings.json on boards with a /flash\n# folder (STM32), /cac_settings.json on the others (ESP32, RP2350). The Settings app writes it;\n# boot.py and the other apps read it. Today it holds up to five WiFi networks:\n#\n#     {\"version\": 1, \"wifi\": [{\"ssid\": \"Home\", \"password\": \"...\"}, ...]}\n#\n# The networks are kept from the most recently used. Passwords are in clear text, like in\n# MicroPython's own examples: whoever can read the flash can read them.\n#\n# Copy the same file into every app that uses it (in the IDE: a Python module of the project).\nimport json\nimport os\nimport sys\nimport time\n\ntry:\n    import network\nexcept ImportError:                        # the simulator and the PC have no WiFi\n    network = None\n\nVERSION = 1\nMAX_NETWORKS = 5\nTIMEOUT_S = 10                             # for each network tried\nDEMO_SCAN = ((\"Home\", -48), (\"Office\", -61), (\"Guest\", -75))\n\n\ndef path():\n    \"\"\"Where the file is: in the flash of a board; next to the program on a PC or in the simulator.\"\"\"\n    if sys.platform in (\"linux\", \"darwin\", \"win32\"):\n        return \"cac_settings.json\"\n    try:\n        if \"flash\" in os.listdir(\"/\"):\n            return \"/flash/cac_settings.json\"\n    except OSError:\n        pass\n    return \"/cac_settings.json\"\n\n\ndef load():\n    \"\"\"The settings, or empty ones when the file is missing or broken.\"\"\"\n    try:\n        with open(path()) as f:\n            data = json.load(f)\n    except (OSError, ValueError):\n        data = {}\n    if not isinstance(data, dict):\n        data = {}\n    networks = [n for n in data.get(\"wifi\", []) if isinstance(n, dict) and n.get(\"ssid\")]\n    data[\"wifi\"] = networks[:MAX_NETWORKS]\n    data[\"version\"] = VERSION\n    return data\n\n\ndef save(data):\n    \"\"\"Write the settings whole: first a new file, then the rename, so a reset never leaves half.\"\"\"\n    name = path()\n    temporary = name + \".new\"\n    with open(temporary, \"w\") as f:\n        json.dump(data, f)\n    try:\n        os.remove(name)\n    except OSError:\n        pass\n    os.rename(temporary, name)\n\n\ndef networks():\n    \"\"\"The saved networks, from the most recently used: a list of {\"ssid\", \"password\"}.\"\"\"\n    return load()[\"wifi\"]\n\n\ndef password(ssid):\n    for item in networks():\n        if item[\"ssid\"] == ssid:\n            return item[\"password\"]\n    return None\n\n\ndef remember(ssid, password):\n    \"\"\"Save a network, or its new password, as the most recently used; the oldest goes when full.\"\"\"\n    data = load()\n    others = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    data[\"wifi\"] = ([{\"ssid\": ssid, \"password\": password}] + others)[:MAX_NETWORKS]\n    save(data)\n\n\ndef forget(ssid):\n    data = load()\n    data[\"wifi\"] = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    save(data)\n\n\ndef station():\n    \"\"\"The WiFi station interface, active, or None without WiFi hardware.\"\"\"\n    if network is None:\n        return None\n    try:\n        sta = network.WLAN(network.STA_IF)\n        sta.active(True)\n        return sta\n    except (AttributeError, OSError):\n        return None\n\n\ndef scan(sta=None):\n    \"\"\"The networks in range, strongest first, as (ssid, rssi); demo names without WiFi hardware.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return list(DEMO_SCAN)\n    best = {}\n    for entry in sta.scan():\n        try:\n            name = entry[0].decode()\n        except ValueError:\n            continue\n        if name and (name not in best or entry[3] > best[name]):\n            best[name] = entry[3]\n    return sorted(best.items(), key=lambda item: -item[1])\n\n\ndef connected_ssid(sta=None):\n    sta = sta or station()\n    if sta is None or not sta.isconnected():\n        return None\n    try:\n        return sta.config(\"essid\")\n    except (OSError, ValueError):\n        return \"?\"\n\n\ndef join(ssid, password, sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to one network; True when connected within timeout_s.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return False\n    try:\n        sta.disconnect()\n    except OSError:\n        pass\n    try:\n        sta.connect(ssid, password)\n    except OSError as e:\n        print(\"cac_settings: connect\", ssid, repr(e))\n        return False\n    start = time.ticks_ms()\n    while not sta.isconnected():\n        if time.ticks_diff(time.ticks_ms(), start) > timeout_s * 1000:\n            try:\n                sta.disconnect()\n            except OSError:\n                pass\n            return False\n        time.sleep_ms(100)\n    return True\n\n\ndef connect(sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to the best saved network in range and return its name, or None.\n\n    Already connected: nothing to do. Otherwise the saved networks found by a scan are tried, the\n    most recently used first and then by signal; the one that works becomes the most recent.\n    Networks that do not answer the scan are not tried: hidden networks are not supported.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return None\n    current = connected_ssid(sta)\n    if current:\n        return current\n    saved = networks()\n    if not saved:\n        return None\n    try:\n        visible = dict(scan(sta))\n    except OSError as e:\n        print(\"cac_settings: scan\", repr(e))\n        return None\n    candidates = [n for n in saved if n[\"ssid\"] in visible]\n    if len(candidates) > 1:\n        first, rest = candidates[0], candidates[1:]\n        candidates = [first] + sorted(rest, key=lambda n: -visible[n[\"ssid\"]])\n    for item in candidates:\n        if join(item[\"ssid\"], item[\"password\"], sta, timeout_s):\n            if item is not saved[0]:\n                remember(item[\"ssid\"], item[\"password\"])\n            print(\"cac_settings: connected to\", item[\"ssid\"], sta.ifconfig()[0])\n            return item[\"ssid\"]\n    return None\n"
+      "source": "# cac_settings: the settings that every Copper and Code app on a board shares.\n#\n# One file, cac_settings.json, in the flash: /flash/cac_settings.json on boards with a /flash\n# folder (STM32), /cac_settings.json on the others (ESP32, RP2350). The Settings app writes it;\n# boot.py, the home menu of the board and the other apps read it. It holds up to five WiFi\n# networks, and sections of other settings, such as the brightness of the display:\n#\n#     {\"version\": 1, \"wifi\": [{\"ssid\": \"Home\", \"password\": \"...\"}, ...], \"display\": {\"brightness\": 70}}\n#\n# The networks are kept from the most recently used. Passwords are in clear text, like in\n# MicroPython's own examples: whoever can read the flash can read them.\n#\n# Copy the same file into every app that uses it (in the IDE: a Python module of the project).\nimport json\nimport os\nimport sys\nimport time\n\ntry:\n    import network\nexcept ImportError:                        # the simulator and the PC have no WiFi\n    network = None\n\nVERSION = 1\nMAX_NETWORKS = 5\nTIMEOUT_S = 10                             # for each network tried\nDEMO_SCAN = ((\"Home\", -48), (\"Office\", -61), (\"Guest\", -75))\n\n\ndef path():\n    \"\"\"Where the file is: in the flash of a board; next to the program on a PC or in the simulator.\"\"\"\n    if sys.platform in (\"linux\", \"darwin\", \"win32\"):\n        return \"cac_settings.json\"\n    try:\n        if \"flash\" in os.listdir(\"/\"):\n            return \"/flash/cac_settings.json\"\n    except OSError:\n        pass\n    return \"/cac_settings.json\"\n\n\ndef load():\n    \"\"\"The settings, or empty ones when the file is missing or broken.\"\"\"\n    try:\n        with open(path()) as f:\n            data = json.load(f)\n    except (OSError, ValueError):\n        data = {}\n    if not isinstance(data, dict):\n        data = {}\n    networks = [n for n in data.get(\"wifi\", []) if isinstance(n, dict) and n.get(\"ssid\")]\n    data[\"wifi\"] = networks[:MAX_NETWORKS]\n    data[\"version\"] = VERSION\n    return data\n\n\ndef save(data):\n    \"\"\"Write the settings whole: first a new file, then the rename, so a reset never leaves half.\"\"\"\n    name = path()\n    temporary = name + \".new\"\n    with open(temporary, \"w\") as f:\n        json.dump(data, f)\n    try:\n        os.remove(name)\n    except OSError:\n        pass\n    os.rename(temporary, name)\n\n\ndef section(name):\n    \"\"\"One section of other settings, such as \"display\": a dict, empty when there is none.\"\"\"\n    value = load().get(name)\n    return value if isinstance(value, dict) else {}\n\n\ndef set_section(name, value):\n    \"\"\"Replace one section; the networks and the other sections stay.\"\"\"\n    data = load()\n    data[name] = value\n    save(data)\n\n\ndef networks():\n    \"\"\"The saved networks, from the most recently used: a list of {\"ssid\", \"password\"}.\"\"\"\n    return load()[\"wifi\"]\n\n\ndef password(ssid):\n    for item in networks():\n        if item[\"ssid\"] == ssid:\n            return item[\"password\"]\n    return None\n\n\ndef remember(ssid, password):\n    \"\"\"Save a network, or its new password, as the most recently used; the oldest goes when full.\"\"\"\n    data = load()\n    others = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    data[\"wifi\"] = ([{\"ssid\": ssid, \"password\": password}] + others)[:MAX_NETWORKS]\n    save(data)\n\n\ndef forget(ssid):\n    data = load()\n    data[\"wifi\"] = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    save(data)\n\n\ndef station():\n    \"\"\"The WiFi station interface, active, or None without WiFi hardware.\"\"\"\n    if network is None:\n        return None\n    try:\n        sta = network.WLAN(network.STA_IF)\n        sta.active(True)\n        return sta\n    except (AttributeError, OSError):\n        return None\n\n\ndef scan(sta=None):\n    \"\"\"The networks in range, strongest first, as (ssid, rssi); demo names without WiFi hardware.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return list(DEMO_SCAN)\n    best = {}\n    for entry in sta.scan():\n        try:\n            name = entry[0].decode()\n        except ValueError:\n            continue\n        if name and (name not in best or entry[3] > best[name]):\n            best[name] = entry[3]\n    return sorted(best.items(), key=lambda item: -item[1])\n\n\ndef connected_ssid(sta=None):\n    sta = sta or station()\n    if sta is None or not sta.isconnected():\n        return None\n    try:\n        return sta.config(\"essid\")\n    except (OSError, ValueError):\n        return \"?\"\n\n\ndef join(ssid, password, sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to one network; True when connected within timeout_s.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return False\n    try:\n        sta.disconnect()\n    except OSError:\n        pass\n    try:\n        sta.connect(ssid, password)\n    except OSError as e:\n        print(\"cac_settings: connect\", ssid, repr(e))\n        return False\n    start = time.ticks_ms()\n    while not sta.isconnected():\n        if time.ticks_diff(time.ticks_ms(), start) > timeout_s * 1000:\n            try:\n                sta.disconnect()\n            except OSError:\n                pass\n            return False\n        time.sleep_ms(100)\n    return True\n\n\ndef connect(sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to the best saved network in range and return its name, or None.\n\n    Already connected: nothing to do. Otherwise the saved networks found by a scan are tried, the\n    most recently used first and then by signal; the one that works becomes the most recent.\n    Networks that do not answer the scan are not tried: hidden networks are not supported.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return None\n    current = connected_ssid(sta)\n    if current:\n        return current\n    saved = networks()\n    if not saved:\n        return None\n    try:\n        visible = dict(scan(sta))\n    except OSError as e:\n        print(\"cac_settings: scan\", repr(e))\n        return None\n    candidates = [n for n in saved if n[\"ssid\"] in visible]\n    if len(candidates) > 1:\n        first, rest = candidates[0], candidates[1:]\n        candidates = [first] + sorted(rest, key=lambda n: -visible[n[\"ssid\"]])\n    for item in candidates:\n        if join(item[\"ssid\"], item[\"password\"], sta, timeout_s):\n            if item is not saved[0]:\n                remember(item[\"ssid\"], item[\"password\"])\n            print(\"cac_settings: connected to\", item[\"ssid\"], sta.ifconfig()[0])\n            return item[\"ssid\"]\n    return None\n"
     }
   ]
 }

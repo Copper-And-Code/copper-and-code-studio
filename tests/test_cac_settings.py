@@ -118,3 +118,14 @@ def test_without_wifi_hardware_nothing_connects_and_the_scan_is_a_demo(settings)
     assert settings.station() is None
     assert settings.connect() is None
     assert [name for name, _rssi in settings.scan()] == ["Home", "Office", "Guest"]
+
+
+def test_a_section_is_kept_apart_from_the_networks(settings):
+    assert settings.section("display") == {}
+    settings.remember("Home", "secret")
+    settings.set_section("display", {"brightness": 60})
+    settings.remember("Office", "other")
+    assert settings.section("display") == {"brightness": 60}
+    assert [n["ssid"] for n in settings.networks()] == ["Office", "Home"]
+    settings.set_section("display", "not a dict")
+    assert settings.section("display") == {}
