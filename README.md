@@ -8,7 +8,7 @@ Formerly LVGL MPY Studio.
 
 [Italiano](README.it.md)
 
-### [Project website](https://copper-and-code.github.io/copper-and-code-studio/) · [Try the demos in your browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Open the IDE in your browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
+### [Project website](https://copper-and-code.github.io/copper-and-code-studio/) · [Try the demos in your browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Open the IDE in your browser](https://copper-and-code.github.io/copper-and-code-studio-web/)
 
 The website has the documentation; the demos are games and a shell made with Copper and Code Studio, running in WebAssembly, with nothing to install. The IDE in the browser is experimental: see below.
 
@@ -41,7 +41,7 @@ A scripted replay of the real IDE, sped up: [more videos](https://copper-and-cod
 - **Assets.** Pictures and TrueType fonts stored in the project and converted for LVGL by the IDE, kerning included, with no external tool.
 - **Distribute.** Single-file executables for Linux and Windows, a version that runs in the browser as WebAssembly, and portable C sources.
 - **Agents.** An [MCP server](docs/mcp.md) with 51 tools: an agent designs, renders, simulates and uploads. [From a prompt to an app](docs/mcp-demo.md) is a recorded session.
-- **The whole IDE in the browser** (work in progress, experimental but already usable): [open it](https://copper-and-code.github.io/lvgl-mpy-studio-web/), nothing to install. It is built in [a repository of its own](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) that reuses the core of this one through Pyodide.
+- **The whole IDE in the browser** (work in progress, experimental but already usable): [open it](https://copper-and-code.github.io/copper-and-code-studio-web/), nothing to install. It is built in [a repository of its own](https://github.com/Copper-And-Code/copper-and-code-studio-web) that reuses the core of this one through Pyodide.
 - **More than a preview on the PC.** In the simulator and in the executables MicroPython is a program of the operating system: an LVGL application can run commands, read and write any file, open sockets, start threads and call C libraries through `ffi`. A kiosk, a test bench or a dashboard on a Linux PC, in the same MicroPython as the board ([how](docs/pc-programs.md)).
 - **Testing.** Visual tests of a project on a simulated clock, and a [self-test](docs/manual.md#self-test) in which the IDE drives itself with mouse and keyboard.
 

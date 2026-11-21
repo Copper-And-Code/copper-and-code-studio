@@ -73,9 +73,9 @@ Firefox, Safari, and a real phone with touch and sound have not been tried.
 
 ## The IDE in the browser
 
-The whole IDE in the browser is built in [lvgl-mpy-studio-web](https://github.com/Copper-And-Code/lvgl-mpy-studio-web), a repository of its own
+The whole IDE in the browser is built in [copper-and-code-studio-web](https://github.com/Copper-And-Code/copper-and-code-studio-web), a repository of its own
 that holds this one as a git submodule at a tag and runs its `core/`, `gen/` and `build/` in
-Pyodide. It is published at <https://copper-and-code.github.io/lvgl-mpy-studio-web/>. It is a work in progress: experimental, but already
+Pyodide. It is published at <https://copper-and-code.github.io/copper-and-code-studio-web/>. It is a work in progress: experimental, but already
 usable, in the author's judgement. Its checks are recorded in that repository, not here.
 
 ## Known defects and open points

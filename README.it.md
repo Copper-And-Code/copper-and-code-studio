@@ -8,7 +8,7 @@ In precedenza LVGL MPY Studio.
 
 [English](README.md)
 
-### [Sito del progetto](https://copper-and-code.github.io/copper-and-code-studio/) · [Prova le demo nel browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Apri l'IDE nel browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/)
+### [Sito del progetto](https://copper-and-code.github.io/copper-and-code-studio/) · [Prova le demo nel browser](https://copper-and-code.github.io/copper-and-code-studio/demos/) · [Apri l'IDE nel browser](https://copper-and-code.github.io/copper-and-code-studio-web/)
 
 Il sito ha la documentazione (in inglese); le demo sono giochi e una shell fatti con Copper and Code Studio, che girano in WebAssembly senza installare nulla. L'IDE nel browser è sperimentale: vedi più sotto.
 
@@ -42,7 +42,7 @@ Queste pagine sono in inglese.
 - **Blocchi hardware.** Componenti come Uscita digitale e Ingresso digitale, descritti da una cartella di dati e codice MicroPython che [chiunque può scrivere](docs/blocks.md).
 - **Risorse.** Immagini e font TrueType conservati nel progetto e convertiti per LVGL dall'IDE, kerning compreso, senza strumenti esterni.
 - **Distribuzione.** Eseguibili a file unico per Linux e Windows, una versione che gira nel browser in WebAssembly, e sorgenti C portabili.
-- **Tutto l'IDE nel browser** (in lavorazione, sperimentale ma già usabile): [aprilo](https://copper-and-code.github.io/lvgl-mpy-studio-web/), senza installare niente. È sviluppato in [un repository a parte](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) che riusa il nucleo di questo tramite Pyodide.
+- **Tutto l'IDE nel browser** (in lavorazione, sperimentale ma già usabile): [aprilo](https://copper-and-code.github.io/copper-and-code-studio-web/), senza installare niente. È sviluppato in [un repository a parte](https://github.com/Copper-And-Code/copper-and-code-studio-web) che riusa il nucleo di questo tramite Pyodide.
 - **Più di un'anteprima sul PC.** Nel simulatore e negli eseguibili MicroPython è un programma del sistema operativo: un'applicazione LVGL può lanciare comandi, leggere e scrivere qualsiasi file, aprire socket, avviare thread e chiamare librerie C con `ffi`. Un chiosco, un banco di collaudo o una dashboard su un PC Linux, nello stesso MicroPython della board ([come](docs/pc-programs.md)).
 - **Agenti.** Un [server MCP](docs/mcp.md) con 49 strumenti: un agente disegna, renderizza, simula e carica. [Da un prompt a un'app](docs/mcp-demo.md) è una sessione registrata.
 - **Verifica.** Test visivi di un progetto su un orologio simulato, e un [collaudo automatico](docs/manual.it.md#collaudo-automatico) in cui l'IDE si usa da solo con mouse e tastiera.

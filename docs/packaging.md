@@ -162,7 +162,7 @@ Record in [the status page](status.md) what was checked and on which system.
 
 ## The files for the IDE in the browser
 
-The [IDE in the browser](https://github.com/Copper-And-Code/lvgl-mpy-studio-web) holds this
+The [IDE in the browser](https://github.com/Copper-And-Code/copper-and-code-studio-web) holds this
 repository as a submodule at a tag, and downloads two files from the release of that tag instead
 of building Emscripten itself:
 
