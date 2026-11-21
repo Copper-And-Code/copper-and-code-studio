@@ -29,6 +29,7 @@ are not touched: their format did not change.
 | Environment variable for the Windows C toolchain | `LVGL_MPY_STUDIO_TOOLCHAIN` | `LMS_TOOLCHAIN`; the old name is still read |
 | Environment variable for another `mpremote` | `LVGL_MPY_STUDIO_MPREMOTE` | `LMS_MPREMOTE`; the old name is still read |
 | Marker of a folder written by **Build for the Web** | `.lvgl-mpy-studio-web` | `.copper-and-code-studio-web`; a folder with the old one is still replaced |
+| Address of the IDE in the browser | `copper-and-code.github.io/lvgl-mpy-studio-web/` | [copper-and-code.github.io/copper-and-code-studio-web/](https://copper-and-code.github.io/copper-and-code-studio-web/); an app installed from the old address is installed again from the new one, and keeps its projects and settings |
 | Include guards of the exported C header files | `LVGL_MPY_STUDIO_UI_H`, `LVGL_MPY_STUDIO_UI_EVENTS_H` | `LMS_UI_H`, `LMS_UI_EVENTS_H` |
 | Windows taskbar identity | `CopperAndCode.LvglMpyStudio` | `CopperAndCode.CopperAndCodeStudio`: a pinned icon is pinned again once |
 

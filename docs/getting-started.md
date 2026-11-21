@@ -1,7 +1,7 @@
 # Getting started
 
 !!! tip "Try it without installing"
-    [The IDE in the browser](https://copper-and-code.github.io/lvgl-mpy-studio-web/) opens with nothing to install. It is a work in progress, experimental but already usable: projects are kept in the browser, and a board is reached over Web Serial, which Chrome and Edge have and Firefox and Safari do not. The rest of this page is about the IDE on the PC.
+    [The IDE in the browser](https://copper-and-code.github.io/copper-and-code-studio-web/) opens with nothing to install. It is a work in progress, experimental but already usable: projects are kept in the browser, and a board is reached over Web Serial, which Chrome and Edge have and Firefox and Safari do not. The rest of this page is about the IDE on the PC.
 
 ## Install from the sources
 

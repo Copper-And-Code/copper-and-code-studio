@@ -72,7 +72,7 @@ nav:
       - Adding a demo: adding-a-demo.md
   - Demos: demos.md
   - Videos: videos.md
-  - IDE in the browser: https://copper-and-code.github.io/lvgl-mpy-studio-web/
+  - IDE in the browser: https://copper-and-code.github.io/copper-and-code-studio-web/
   - About the project:
       - The stack: stack.md
       - How it was built: how-it-was-built.md
