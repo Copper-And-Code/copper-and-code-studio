@@ -703,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://copper-and-code.github.io/lvgl-mpy-studio-web/" class="md-nav__link">
+      <a href="https://copper-and-code.github.io/copper-and-code-studio-web/" class="md-nav__link">
         
   
   
@@ -1248,8 +1248,8 @@
 
 
 <h1 id="status-what-is-verified-and-how">Status: what is verified, and how<a class="headerlink" href="#status-what-is-verified-and-how" title="Permanent link">&para;</a></h1>
-<p>Version 0.7.2 is published as a GitHub release, with an AppImage for Linux; the portable package for
-Windows is that of 0.7.1. This page separates what has been
+<p>Version 0.8.0, the first under the name Copper and Code Studio, is published as a GitHub release, with
+an AppImage for Linux; the portable package for Windows is that of 0.7.1, under the old name. This page separates what has been
 checked from what has only been written.</p>
 <h2 id="read-this-first">Read this first<a class="headerlink" href="#read-this-first" title="Permanent link">&para;</a></h2>
 <p>The project was built broad on purpose: features expected to be useful were included from the
@@ -1487,7 +1487,7 @@ below as an open question, not as a formality.</p>
 <td>AppImage for Linux</td>
 <td></td>
 <td>yes, run from inside the package</td>
-<td>the package of 0.7.2, released: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB (<a href="../chromebook/">Running on a Chromebook</a>). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
+<td>the package of 0.8.0, released, built from a clean clone of the tag: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.2, released: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB (<a href="../chromebook/">Running on a Chromebook</a>). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
 <td>on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system</td>
 </tr>
 <tr>
@@ -1495,7 +1495,7 @@ below as an open question, not as a formality.</p>
 <td></td>
 <td></td>
 <td>the package of 0.6.0: contents inspected (no bundled ICU, the icon in the program file, the blocks) and started by the author on a real Windows. The package of 0.6.1, released: contents inspected, started by the author on Windows, no console windows flashing</td>
-<td>the packages of 0.7.0 and 0.7.1 (0.7.2 has no package of its own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built</td>
+<td>the packages of 0.7.0 and 0.7.1 (0.7.2 and 0.8.0 have no package of their own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built</td>
 </tr>
 </tbody>
 </table>
@@ -1509,9 +1509,9 @@ Fifteen screen, and no requests went to external domains. The IDE test for <stro
 Documentation</strong> also passed and opens the same public address.</p>
 <p>Firefox, Safari, and a real phone with touch and sound have not been tried.</p>
 <h2 id="the-ide-in-the-browser">The IDE in the browser<a class="headerlink" href="#the-ide-in-the-browser" title="Permanent link">&para;</a></h2>
-<p>The whole IDE in the browser is built in <a href="https://github.com/Copper-And-Code/lvgl-mpy-studio-web">lvgl-mpy-studio-web</a>, a repository of its own
+<p>The whole IDE in the browser is built in <a href="https://github.com/Copper-And-Code/copper-and-code-studio-web">copper-and-code-studio-web</a>, a repository of its own
 that holds this one as a git submodule at a tag and runs its <code>core/</code>, <code>gen/</code> and <code>build/</code> in
-Pyodide. It is published at <a href="https://copper-and-code.github.io/lvgl-mpy-studio-web/">https://copper-and-code.github.io/lvgl-mpy-studio-web/</a>. It is a work in progress: experimental, but already
+Pyodide. It is published at <a href="https://copper-and-code.github.io/copper-and-code-studio-web/">https://copper-and-code.github.io/copper-and-code-studio-web/</a>. It is a work in progress: experimental, but already
 usable, in the author's judgement. Its checks are recorded in that repository, not here.</p>
 <h2 id="known-defects-and-open-points">Known defects and open points<a class="headerlink" href="#known-defects-and-open-points" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1528,7 +1528,7 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   With a package built on 13 November 2026 from the branch <code>programs-without-pages</code>, the author
   used a board on a COM port; the window's icon and pinning it to the taskbar did not work.
   Not looked into yet.</li>
-<li><strong>The new name, Copper and Code Studio, is not released yet.</strong> What was tried, on the author's
+<li><strong>The new name, Copper and Code Studio, came with 0.8.0.</strong> What was tried, on the author's
   computer, 20 November 2026: the whole suite, the self-test and the suites run by hand (the
   monkey in <code>test_save_and_reopen.py</code> crashes the IDE, as it already did with the code before the
   new name, and one long random sequence of <code>test_random_use.py</code> failed once, but not when it
