@@ -1,0 +1,2212 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Forecast",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "d63a0a00c2a34ad1b71ec5950e584b16",
+      "name": "Forecast",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "60afa486c0d14f7785a80ada237d838a",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 1000,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "71bda722ae804de1ae99bd4dcb99058e",
+          "name": "bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e289e0540b424443a6c763245ed5bd3d",
+          "name": "place_name",
+          "type": "label",
+          "props": {
+            "x": 82,
+            "y": 11,
+            "width": 219,
+            "height": 34,
+            "text": "Rome",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e9e33d27352a4496ba0ee163762ac729",
+          "name": "btn_setup",
+          "type": "button",
+          "props": {
+            "x": 440,
+            "y": 8,
+            "width": 30,
+            "height": 44,
+            "text": "SET",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 5
+          },
+          "events": {
+            "CLICKED": "btn_setup_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5eca71e6bf7d40e2a365f400957fe159",
+          "name": "status",
+          "type": "label",
+          "props": {
+            "x": 88,
+            "y": 44,
+            "width": 193,
+            "height": 20,
+            "text": "Upd. 12:00",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "14b4d085684d4cc38ac70088a0a388b9",
+          "name": "storage",
+          "type": "label",
+          "props": {
+            "x": 384,
+            "y": 22,
+            "width": 12,
+            "height": 20,
+            "text": "F",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6d142f39c7b64c41b25c766e8e5f6d48",
+          "name": "hero",
+          "type": "panel",
+          "props": {
+            "x": 6,
+            "y": 68,
+            "width": 469,
+            "height": 176,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 9,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {
+            "CLICKED": "hero_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "59885e3a1c55499484eb60b398b939ba",
+          "name": "temperature",
+          "type": "label",
+          "props": {
+            "x": 254,
+            "y": 94,
+            "width": 105,
+            "height": 62,
+            "text": "18°C",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6ada3035395347ffb43c51169a009742",
+          "name": "description",
+          "type": "label",
+          "props": {
+            "x": 249,
+            "y": 161,
+            "width": 156,
+            "height": 34,
+            "text": "Clear",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "dc197490f33e4f5fa7f46f5e08d27073",
+          "name": "feels_like",
+          "type": "label",
+          "props": {
+            "x": 254,
+            "y": 204,
+            "width": 146,
+            "height": 24,
+            "text": "Feels like 17°C",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6ace1d95adaf419b9bc31559920f95f8",
+          "name": "wind_card",
+          "type": "panel",
+          "props": {
+            "x": 6,
+            "y": 252,
+            "width": 469,
+            "height": 96,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 9,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2603e31020c34ac3893b0fff4ec89571",
+          "name": "wind_now",
+          "type": "label",
+          "props": {
+            "x": 184,
+            "y": 263,
+            "width": 119,
+            "height": 34,
+            "text": "12 km/h SW",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b408324e7671459397eab214810f3f58",
+          "name": "gusts",
+          "type": "label",
+          "props": {
+            "x": 153,
+            "y": 308,
+            "width": 108,
+            "height": 24,
+            "text": "Gusts 20 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2228a2715a3c45a9aae065a2d177447d",
+          "name": "humidity",
+          "type": "label",
+          "props": {
+            "x": 301,
+            "y": 270,
+            "width": 88,
+            "height": 24,
+            "text": "Humidity 65%",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ba1fe11f36fa4dcc9042e17950e3b12e",
+          "name": "rain",
+          "type": "label",
+          "props": {
+            "x": 381,
+            "y": 308,
+            "width": 88,
+            "height": 24,
+            "text": "Rain 10%",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e7d1228475d54091b49453cb92d72d16",
+          "name": "day1",
+          "type": "panel",
+          "props": {
+            "x": 6,
+            "y": 356,
+            "width": 51,
+            "height": 116,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "01ade9061cf745dab93b204a51297c5e",
+          "name": "dayname1",
+          "type": "label",
+          "props": {
+            "x": 6,
+            "y": 360,
+            "width": 51,
+            "height": 22,
+            "text": "Mon",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a3288de1dd044aacb3cbb7adc82119e4",
+          "name": "temp1",
+          "type": "label",
+          "props": {
+            "x": 6,
+            "y": 430,
+            "width": 51,
+            "height": 24,
+            "text": "20 / 11",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "52acc08544bd4129a6a8c4acae1d0255",
+          "name": "wind1",
+          "type": "label",
+          "props": {
+            "x": 6,
+            "y": 452,
+            "width": 51,
+            "height": 20,
+            "text": "14 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9f101120a79740b894f74f979ed1b158",
+          "name": "day2",
+          "type": "panel",
+          "props": {
+            "x": 60,
+            "y": 356,
+            "width": 51,
+            "height": 116,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1d0a6d08712940ca87f15f72982a5bac",
+          "name": "dayname2",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 360,
+            "width": 51,
+            "height": 22,
+            "text": "Tue",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a2231417d78b457d930f3e1c66555b1a",
+          "name": "temp2",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 430,
+            "width": 51,
+            "height": 24,
+            "text": "19 / 10",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8298a2703fd84352afb1d963ca03f31d",
+          "name": "wind2",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 452,
+            "width": 51,
+            "height": 20,
+            "text": "18 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c792e178a80544499f3cf458dfe34519",
+          "name": "day3",
+          "type": "panel",
+          "props": {
+            "x": 114,
+            "y": 356,
+            "width": 51,
+            "height": 116,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "49a29f3699684b348a5e176799529c8c",
+          "name": "dayname3",
+          "type": "label",
+          "props": {
+            "x": 114,
+            "y": 360,
+            "width": 51,
+            "height": 22,
+            "text": "Wed",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b803b0c8d71943a59a615fe506d5a219",
+          "name": "temp3",
+          "type": "label",
+          "props": {
+            "x": 114,
+            "y": 430,
+            "width": 51,
+            "height": 24,
+            "text": "17 / 9",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d003d3324c024614baaca3916fc6facd",
+          "name": "wind3",
+          "type": "label",
+          "props": {
+            "x": 114,
+            "y": 452,
+            "width": 51,
+            "height": 20,
+            "text": "22 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5715d7e5ebf3440c9c845bab14fe630f",
+          "name": "day4",
+          "type": "panel",
+          "props": {
+            "x": 169,
+            "y": 356,
+            "width": 51,
+            "height": 116,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5527c7b70a7d42519bb0d458b484e61d",
+          "name": "dayname4",
+          "type": "label",
+          "props": {
+            "x": 169,
+            "y": 360,
+            "width": 51,
+            "height": 22,
+            "text": "Thu",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7f34f320d4f04160ae3f34ad475beba2",
+          "name": "temp4",
+          "type": "label",
+          "props": {
+            "x": 169,
+            "y": 430,
+            "width": 51,
+            "height": 24,
+            "text": "18 / 10",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "96cb0006e66f486994a2e6be8e06198e",
+          "name": "wind4",
+          "type": "label",
+          "props": {
+            "x": 169,
+            "y": 452,
+            "width": 51,
+            "height": 20,
+            "text": "16 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a6bec60445ec4747a9a8d3416458e869",
+          "name": "day5",
+          "type": "panel",
+          "props": {
+            "x": 224,
+            "y": 356,
+            "width": 51,
+            "height": 116,
+            "bgColor": "#1B2838",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "cea60423ed5f4ddb8ca3d8ceb53adb45",
+          "name": "dayname5",
+          "type": "label",
+          "props": {
+            "x": 224,
+            "y": 360,
+            "width": 51,
+            "height": 22,
+            "text": "Fri",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "656b113329334196b970c431ace3be21",
+          "name": "temp5",
+          "type": "label",
+          "props": {
+            "x": 224,
+            "y": 430,
+            "width": 51,
+            "height": 24,
+            "text": "21 / 12",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e3a890aa4d1f4c99bb957cf4037aab49",
+          "name": "wind5",
+          "type": "label",
+          "props": {
+            "x": 224,
+            "y": 452,
+            "width": 51,
+            "height": 20,
+            "text": "12 km/h",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "20c5be4669b848b99c9480d1a4da906e",
+          "name": "place_page",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 20,
+            "width": 66,
+            "height": 22,
+            "text": "Place 1/5",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "c32f8f4e437f40e4b44a0d6672d4027e",
+      "name": "Network",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "ccba8c1d13fb4539989f6ddc0ce1bd38",
+          "name": "net_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c2e51c0cb24d431788eda7ef917abf9a",
+          "name": "net_title",
+          "type": "label",
+          "props": {
+            "x": 6,
+            "y": 13,
+            "width": 106,
+            "height": 34,
+            "text": "WiFi network",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a22e1f346f7846ba923fa69d21ce278d",
+          "name": "net_step",
+          "type": "label",
+          "props": {
+            "x": 9,
+            "y": 46,
+            "width": 26,
+            "height": 20,
+            "text": "1/4",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "18b7006b1b4e4a9bbb01145dc53d4f8a",
+          "name": "net_status",
+          "type": "label",
+          "props": {
+            "x": 35,
+            "y": 46,
+            "width": 146,
+            "height": 20,
+            "text": "Touch Scan",
+            "textColor": "#4FA3FF",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "533c4bc213a148eab7caeb28f6a21e0e",
+          "name": "btn_net_close",
+          "type": "button",
+          "props": {
+            "x": 107,
+            "y": 12,
+            "width": 33,
+            "height": 44,
+            "text": "X",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_net_close_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ddb50e66234d4593a3b5677d88392f80",
+          "name": "btn_scan",
+          "type": "button",
+          "props": {
+            "x": 146,
+            "y": 12,
+            "width": 59,
+            "height": 44,
+            "text": "Scan",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_scan_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5efa57a06c2e4e5993b34ce5cc1f5fa1",
+          "name": "btn_net_next",
+          "type": "button",
+          "props": {
+            "x": 211,
+            "y": 12,
+            "width": 61,
+            "height": 44,
+            "text": "Next",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_net_next_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "33409fe68522419c9860258817125950",
+          "name": "net_list",
+          "type": "list",
+          "props": {
+            "x": 6,
+            "y": 66,
+            "width": 469,
+            "height": 134,
+            "items": "",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "selectedColor": "#4FA3FF",
+            "fontSize": 14
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ceb7703609fc48e896b26edf8a75484c",
+          "name": "net_password",
+          "type": "textarea",
+          "props": {
+            "x": 6,
+            "y": 206,
+            "width": 469,
+            "height": 46,
+            "text": "",
+            "placeholder": "Password",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "oneLine": true,
+            "password": true,
+            "maxLength": 64,
+            "acceptedChars": ""
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d62d0a8f30704a4f89026df0ab3c37cc",
+          "name": "net_keyboard",
+          "type": "keyboard",
+          "props": {
+            "x": 0,
+            "y": 260,
+            "width": 480,
+            "height": 220,
+            "mode": "text_lower",
+            "textarea": "",
+            "popover": false
+          },
+          "events": {
+            "READY": "net_keyboard_ready"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "c9d03d72429f4d609bbfc4415ec3236c",
+      "name": "Place",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "9dd5121e31be41e68ff597687de236fe",
+          "name": "place_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c075c43877c04427b2eaf1cf92def443",
+          "name": "place_title",
+          "type": "label",
+          "props": {
+            "x": 6,
+            "y": 13,
+            "width": 106,
+            "height": 34,
+            "text": "Place",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "288a91b883ef4eb4b794ba48a28f447f",
+          "name": "place_step",
+          "type": "label",
+          "props": {
+            "x": 9,
+            "y": 46,
+            "width": 26,
+            "height": 20,
+            "text": "2/4",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "68983a646bda4b95b17dfbd254cab614",
+          "name": "place_status",
+          "type": "label",
+          "props": {
+            "x": 35,
+            "y": 46,
+            "width": 146,
+            "height": 20,
+            "text": "",
+            "textColor": "#4FA3FF",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0944ff27e2a642fa8f485782b852c14f",
+          "name": "btn_place_close",
+          "type": "button",
+          "props": {
+            "x": 107,
+            "y": 12,
+            "width": 33,
+            "height": 44,
+            "text": "X",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_place_close_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1d666a1606a846ba9ede00de32a21a88",
+          "name": "btn_place_search",
+          "type": "button",
+          "props": {
+            "x": 146,
+            "y": 12,
+            "width": 59,
+            "height": 44,
+            "text": "Search",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_place_search_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5a45cf788ba54d8a9f8ea6de74dff27a",
+          "name": "btn_place_next",
+          "type": "button",
+          "props": {
+            "x": 211,
+            "y": 12,
+            "width": 61,
+            "height": 44,
+            "text": "Next",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_place_next_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d0e15eced927492a861cd32f8f1f951f",
+          "name": "place_text",
+          "type": "textarea",
+          "props": {
+            "x": 6,
+            "y": 112,
+            "width": 469,
+            "height": 46,
+            "text": "",
+            "placeholder": "Place name",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "oneLine": true,
+            "password": false,
+            "maxLength": 64,
+            "acceptedChars": ""
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d24eab1056fb446bba652d640fb3fd24",
+          "name": "place_list",
+          "type": "list",
+          "props": {
+            "x": 6,
+            "y": 164,
+            "width": 469,
+            "height": 88,
+            "items": "",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "selectedColor": "#4FA3FF",
+            "fontSize": 14
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8531ae90d6a5415cb61909470035a759",
+          "name": "place_keyboard",
+          "type": "keyboard",
+          "props": {
+            "x": 0,
+            "y": 260,
+            "width": 480,
+            "height": 220,
+            "mode": "text_lower",
+            "textarea": "",
+            "popover": false
+          },
+          "events": {
+            "READY": "place_keyboard_ready"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2ac33c1f8e454b838391daaf294542c7",
+          "name": "place_slot1",
+          "type": "button",
+          "props": {
+            "x": 6,
+            "y": 66,
+            "width": 42,
+            "height": 40,
+            "text": "1",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "place_slot1_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c50ab05c0d764cfb8998081da52b8d9f",
+          "name": "place_slot2",
+          "type": "button",
+          "props": {
+            "x": 52,
+            "y": 66,
+            "width": 42,
+            "height": 40,
+            "text": "2",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "place_slot2_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d44bebb858ee4a9581350bd87917fcc9",
+          "name": "place_slot3",
+          "type": "button",
+          "props": {
+            "x": 99,
+            "y": 66,
+            "width": 42,
+            "height": 40,
+            "text": "3",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "place_slot3_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8d0e364b11954e5b88e9371ee224bd2f",
+          "name": "place_slot4",
+          "type": "button",
+          "props": {
+            "x": 146,
+            "y": 66,
+            "width": 42,
+            "height": 40,
+            "text": "4",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "place_slot4_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0d5841e37e2844d380339c66cf9645ae",
+          "name": "place_slot5",
+          "type": "button",
+          "props": {
+            "x": 193,
+            "y": 66,
+            "width": 42,
+            "height": 40,
+            "text": "5",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "place_slot5_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "2208d9e4a58d4dbbb8ccd5dfdd34b705",
+      "name": "Style",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "0a61e61c38a247f29cdc9f07d609a54f",
+          "name": "style_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ee9c775e36b4488f916d4836b142d7e6",
+          "name": "style_title",
+          "type": "label",
+          "props": {
+            "x": 61,
+            "y": 14,
+            "width": 150,
+            "height": 34,
+            "text": "Style",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3b203ed3ca3e45ceb16eeb1f4f4742f3",
+          "name": "style_step",
+          "type": "label",
+          "props": {
+            "x": 66,
+            "y": 46,
+            "width": 26,
+            "height": 20,
+            "text": "3/4",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9b0ba4a8d52f4758ac356af28d7f03f8",
+          "name": "btn_style_next",
+          "type": "button",
+          "props": {
+            "x": 410,
+            "y": 12,
+            "width": 61,
+            "height": 44,
+            "text": "Next",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_style_next_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0ff37efc9a7648078d3fe97979ebcfef",
+          "name": "theme_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 92,
+            "width": 117,
+            "height": 26,
+            "text": "Theme",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "91891b8053a64ee69417f2e805fc163b",
+          "name": "sel_theme",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 80,
+            "width": 135,
+            "height": 46,
+            "options": "Night\nDay\nOcean\nSunset",
+            "selected": 0,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f7afa9f0c32f47669e08251832350a71",
+          "name": "unit_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 152,
+            "width": 117,
+            "height": 26,
+            "text": "Temperature",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "89fb488e8b4e4c08adc538971e9b3908",
+          "name": "sel_unit",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 140,
+            "width": 135,
+            "height": 46,
+            "options": "C\nF",
+            "selected": 0,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "398a59ddf6a542c5879aae89dbadcf5b",
+          "name": "wind_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 212,
+            "width": 117,
+            "height": 26,
+            "text": "Wind",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b4a297c4b5654089a5e041bf6fb2b999",
+          "name": "sel_wind",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 200,
+            "width": 135,
+            "height": 46,
+            "options": "km/h\nm/s\nkn",
+            "selected": 0,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3b290b82710a46e6b7dfe73c08e09533",
+          "name": "refresh_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 272,
+            "width": 117,
+            "height": 26,
+            "text": "Update every",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6740678f579b49adbf44fcef94019a16",
+          "name": "sel_refresh",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 260,
+            "width": 135,
+            "height": 46,
+            "options": "15 min\n30 min\n60 min",
+            "selected": 1,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "dacf490df0a245c8959a5c2e0c7f83ef",
+          "name": "lang_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 332,
+            "width": 117,
+            "height": 26,
+            "text": "Language",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "847a3c40a93d40bf9a8e0a5f4870b131",
+          "name": "sel_lang",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 320,
+            "width": 135,
+            "height": 46,
+            "options": "English\nItaliano",
+            "selected": 0,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4a0b9110463443fb8abbc63e5700a78c",
+          "name": "bright_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 392,
+            "width": 123,
+            "height": 28,
+            "text": "Brightness 70%",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "bc8ef324df5e4b8c85ac71f34a30dc01",
+          "name": "sel_bright",
+          "type": "slider",
+          "props": {
+            "x": 337,
+            "y": 395,
+            "width": 126,
+            "height": 14,
+            "min": 35,
+            "max": 100,
+            "value": 70,
+            "bgColor": "#1B2838",
+            "indicatorColor": "#4FA3FF",
+            "knobColor": "#4FA3FF",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "sel_bright_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "a56f1fea832c4456abcc863e58056d15",
+      "name": "Night",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "d72f49c242e442809573ed48a64167ba",
+          "name": "night_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8964c8f21ebc449793ebd96b5ea95410",
+          "name": "night_title",
+          "type": "label",
+          "props": {
+            "x": 5,
+            "y": 13,
+            "width": 150,
+            "height": 34,
+            "text": "Night",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e5d5ed712c7e4005979818fc00e5731c",
+          "name": "night_step",
+          "type": "label",
+          "props": {
+            "x": 9,
+            "y": 46,
+            "width": 26,
+            "height": 20,
+            "text": "4/4",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "fa586d19b4d6400189ef832abf887bd6",
+          "name": "btn_night_cancel",
+          "type": "button",
+          "props": {
+            "x": 146,
+            "y": 12,
+            "width": 59,
+            "height": 44,
+            "text": "Cancel",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_night_cancel_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3253c0e5f2f648ca8611656eafca7d5b",
+          "name": "btn_save",
+          "type": "button",
+          "props": {
+            "x": 211,
+            "y": 12,
+            "width": 61,
+            "height": 44,
+            "text": "Save",
+            "bgColor": "#4FA3FF",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 4
+          },
+          "events": {
+            "CLICKED": "btn_save_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c0c1f557e15b44fe89670cd4db0e5dbe",
+          "name": "dim_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 92,
+            "width": 117,
+            "height": 26,
+            "text": "Dim at night",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1825a99785d34abd965fae13881cdbfb",
+          "name": "sel_night",
+          "type": "switch",
+          "props": {
+            "x": 246,
+            "y": 84,
+            "width": 45,
+            "height": 40,
+            "checked": true,
+            "onColor": "#4FA3FF",
+            "offColor": "#1B2838",
+            "knobColor": "#FFFFFF",
+            "disabled": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "727dde98b7f64fab99d7809053044118",
+          "name": "from_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 162,
+            "width": 117,
+            "height": 26,
+            "text": "From",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c62ab90fe3ab41c594c0f20c56f40afb",
+          "name": "sel_from_hour",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 150,
+            "width": 65,
+            "height": 46,
+            "options": "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+            "selected": 23,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0c614b40a31546b0b7197fb5c7efbbfe",
+          "name": "sel_from_min",
+          "type": "dropdown",
+          "props": {
+            "x": 404,
+            "y": 150,
+            "width": 65,
+            "height": 46,
+            "options": "00\n15\n30\n45",
+            "selected": 0,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "575a795be8414e6081f71e6910a79688",
+          "name": "to_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 222,
+            "width": 117,
+            "height": 26,
+            "text": "To",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "92259811c2d441e481fbfd5a96fdbb74",
+          "name": "sel_to_hour",
+          "type": "dropdown",
+          "props": {
+            "x": 333,
+            "y": 210,
+            "width": 65,
+            "height": 46,
+            "options": "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+            "selected": 5,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "422bd848931b4d668c60808d23ca712c",
+          "name": "sel_to_min",
+          "type": "dropdown",
+          "props": {
+            "x": 404,
+            "y": 210,
+            "width": 65,
+            "height": 46,
+            "options": "00\n15\n30\n45",
+            "selected": 2,
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f0d15a5c97114f18b13bca36605a117d",
+          "name": "night_bright_text",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 292,
+            "width": 123,
+            "height": 28,
+            "text": "Brightness 40%",
+            "textColor": "#F2F5F9",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8c1c6607252444db8e21e26078eab833",
+          "name": "sel_night_bright",
+          "type": "slider",
+          "props": {
+            "x": 337,
+            "y": 296,
+            "width": 126,
+            "height": 14,
+            "min": 35,
+            "max": 100,
+            "value": 40,
+            "bgColor": "#1B2838",
+            "indicatorColor": "#4FA3FF",
+            "knobColor": "#4FA3FF",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "sel_night_bright_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "import json\nimport math\nimport os\nimport sys\nimport time\n\ntry:\n    import network\n    import socket\n    import machine\n    import display_driver\n    ON_BOARD = True\nexcept ImportError:\n    ON_BOARD = False\n\nFILES = (\"/sd/weather.json\", \"/weather.json\")\nSD_PINS = {\"slot\": 2, \"sck\": 48, \"miso\": 41, \"mosi\": 47, \"cs\": 42, \"freq\": 10000000}\nRETRY_S = 60\nMIN_BRIGHT = 35\nTHEMES = (\n    (\"Night\", 0x0E1621, 0x1B2838, 0xF2F5F9, 0x93A4B8, 0x4FA3FF),\n    (\"Day\", 0xDCEBF7, 0xFFFFFF, 0x13263A, 0x5B6E82, 0x1F7AE0),\n    (\"Ocean\", 0x06343F, 0x0C4A58, 0xE8FBFF, 0x8CC3CF, 0x3FD6C6),\n    (\"Sunset\", 0x2B1633, 0x452049, 0xFFF0E6, 0xC7A1B5, 0xFF8A5C),\n)\nUNITS = ((\"C\", \"celsius\"), (\"F\", \"fahrenheit\"))\nWINDS = ((\"km/h\", \"kmh\"), (\"m/s\", \"ms\"), (\"kn\", \"kn\"))\nREFRESH = (15, 30, 60)\nLANGS = (\"en\", \"it\")\nSUN, MOON = 0xFFC83D, 0xE8E2C0\nRAIN, SNOW, BOLT = 0x4FA3FF, 0xBFE6FF, 0xFFD93D\n\nTEXT = {\n    \"it\": {\n        \"days\": (\"Lun\", \"Mar\", \"Mer\", \"Gio\", \"Ven\", \"Sab\", \"Dom\"),\n        \"dirs\": (\"N\", \"NE\", \"E\", \"SE\", \"S\", \"SO\", \"O\", \"NO\"),\n        \"wifi\": \"Rete WiFi\", \"password\": \"Password\", \"scan\": \"Cerco le reti...\",\n        \"rescan\": \"Cerca\", \"pick\": \"Scegli una rete\", \"next\": \"Avanti\",\n        \"connecting\": \"Connessione...\", \"nowifi\": \"Connessione non riuscita\",\n        \"place\": \"Luogo\", \"search\": \"Cerca\", \"searching\": \"Cerco...\",\n        \"notfound\": \"Non trovato\", \"style\": \"Stile\", \"theme\": \"Tema\",\n        \"temp\": \"Temperatura\", \"wind\": \"Vento\", \"every\": \"Aggiorna ogni\",\n        \"lang\": \"Lingua\", \"bright\": \"Luminosita\", \"night\": \"Notte\",\n        \"dim\": \"Riduci di notte\", \"from\": \"Dalle\", \"to\": \"Alle\",\n        \"save\": \"Salva\", \"cancel\": \"Annulla\", \"loading\": \"Aggiorno...\",\n        \"failed\": \"Aggiornamento non riuscito\", \"feels\": \"Percepita\",\n        \"gust\": \"Raffiche\", \"humidity\": \"Umidita\", \"rain\": \"Pioggia\",\n        \"updated\": \"Agg.\", \"place_n_of\": \"Localita %d/5\", \"place_n\": \"Localita %d\", \"saved_n\": \"Localita %d salvata\",\n        \"noplace\": \"Configura almeno una localita\", \"demo\": \"Dati demo - tocca SET per configurare\",\n        \"nohw\": \"WiFi assente: usa ESP32-4848S040\", \"wifioff\": \"WiFi non disponibile\",\n        \"slots\": \"Scegli uno slot da 1 a 5\", \"codes\": (\"Sereno\", \"Poco nuvoloso\", \"Parz. nuvoloso\", \"Coperto\", \"Nebbia\", \"Pioggerella\", \"Pioggia\", \"Neve\", \"Rovesci\", \"Rovesci di neve\", \"Temporale\"),\n    },\n    \"en\": {\n        \"days\": (\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", \"Sat\", \"Sun\"),\n        \"dirs\": (\"N\", \"NE\", \"E\", \"SE\", \"S\", \"SW\", \"W\", \"NW\"),\n        \"wifi\": \"WiFi network\", \"password\": \"Password\", \"scan\": \"Looking for networks...\",\n        \"rescan\": \"Scan\", \"pick\": \"Choose a network\", \"next\": \"Next\",\n        \"connecting\": \"Connecting...\", \"nowifi\": \"Could not connect\",\n        \"place\": \"Place\", \"search\": \"Search\", \"searching\": \"Searching...\",\n        \"notfound\": \"Not found\", \"style\": \"Style\", \"theme\": \"Theme\",\n        \"temp\": \"Temperature\", \"wind\": \"Wind\", \"every\": \"Update every\",\n        \"lang\": \"Language\", \"bright\": \"Brightness\", \"night\": \"Night\",\n        \"dim\": \"Dim at night\", \"from\": \"From\", \"to\": \"To\",\n        \"save\": \"Save\", \"cancel\": \"Cancel\", \"loading\": \"Updating...\",\n        \"failed\": \"Update failed\", \"feels\": \"Feels like\",\n        \"gust\": \"Gusts\", \"humidity\": \"Humidity\", \"rain\": \"Rain\",\n        \"updated\": \"Upd.\", \"place_n_of\": \"Place %d/5\", \"place_n\": \"Place %d\", \"saved_n\": \"Place %d saved\",\n        \"noplace\": \"Set at least one place\", \"demo\": \"Demo data - touch SET to set up\",\n        \"nohw\": \"No WiFi: use the ESP32-4848S040\", \"wifioff\": \"WiFi not available\",\n        \"slots\": \"Choose a slot from 1 to 5\", \"codes\": (\"Clear\", \"Mostly clear\", \"Partly cloudy\", \"Overcast\", \"Fog\", \"Drizzle\", \"Rain\", \"Snow\", \"Showers\", \"Snow showers\", \"Thunderstorm\"),\n    },\n}\nPLAIN = {\"à\": \"a\", \"è\": \"e\", \"é\": \"e\", \"ì\": \"i\", \"ò\": \"o\", \"ù\": \"u\", \"ç\": \"c\", \"ñ\": \"n\", \"À\": \"A\", \"È\": \"E\", \"Ì\": \"I\", \"Ò\": \"O\", \"Ù\": \"U\"}\n\ncfg = {\n    \"ssid\": \"\", \"password\": \"\",\n    \"places\": [{\"place\": \"\", \"lat\": None, \"lon\": None} for i in range(5)],\n    \"place_index\": 0,\n    \"theme\": 0, \"unit\": 0, \"wind\": 0, \"refresh\": 1, \"lang\": 0,\n    \"backlight\": 70, \"night\": True, \"night_backlight\": 40,\n    \"night_from\": 23 * 60, \"night_to\": 5 * 60 + 30,\n}\nDEMO = {\n    \"current\": {\"time\": \"2026-11-08T12:00\", \"temperature_2m\": 18, \"apparent_temperature\": 17,\n                \"relative_humidity_2m\": 65, \"weather_code\": 0, \"wind_speed_10m\": 12,\n                \"wind_direction_10m\": 225, \"wind_gusts_10m\": 20, \"is_day\": 1},\n    \"daily\": {\"time\": (\"2026-11-09\", \"2026-11-10\", \"2026-11-11\", \"2026-11-12\", \"2026-11-13\"),\n              \"weather_code\": (0, 2, 61, 3, 0),\n              \"temperature_2m_max\": (20, 19, 17, 18, 21),\n              \"temperature_2m_min\": (11, 10, 9, 10, 12),\n              \"precipitation_probability_max\": (10, 20, 80, 30, 0),\n              \"wind_speed_10m_max\": (14, 18, 22, 16, 12)},\n    \"utc_offset_seconds\": 3600,\n}\n\ntry:\n    sta = network.WLAN(network.STA_IF) if ON_BOARD else None\nexcept (AttributeError, OSError) as e:\n    print(\"WiFi not available:\", repr(e))\n    sta = None\nweather = None if ON_BOARD else DEMO\nweather_cache = [None] * 5 if ON_BOARD else [DEMO] * 5\ncfg_file = None\nsd_ok = False\nserver_date = None\nclock_ok = False\nstarted = False\non_main = False\nnext_update = 0\njob = None\nicon_groups = []\nssid_selected = \"\"\npending_place = None\nedit_place = 0\n\n\ndef t(key):\n    return TEXT[LANGS[cfg[\"lang\"]]][key]\n\n\ndef plain(s):\n    return \"\".join(c if ord(c) < 128 else PLAIN.get(c, \"\") for c in s)\n\n\ndef colors():\n    return THEMES[cfg[\"theme\"]][1:]\n\n\ndef normalize_places():\n    places = cfg.get(\"places\")\n    if not isinstance(places, list):\n        places = [{\"place\": cfg.get(\"place\", \"\"), \"lat\": cfg.get(\"lat\"), \"lon\": cfg.get(\"lon\")}]\n    while len(places) < 5:\n        places.append({\"place\": \"\", \"lat\": None, \"lon\": None})\n    cfg[\"places\"] = places[:5]\n    cfg[\"place_index\"] = max(0, min(4, cfg.get(\"place_index\", 0)))\n    if cfg[\"places\"][cfg[\"place_index\"]][\"lat\"] is None:\n        for i, place in enumerate(cfg[\"places\"]):\n            if place[\"lat\"] is not None:\n                cfg[\"place_index\"] = i\n                break\n\n\ndef current_place():\n    return cfg[\"places\"][cfg[\"place_index\"]]\n\n\ndef configured():\n    return bool(cfg[\"ssid\"]) and any(p[\"lat\"] is not None for p in cfg[\"places\"])\n\n\ndef mount_sd():\n    global sd_ok\n    try:\n        if \"sd\" not in os.listdir(\"/\"):\n            os.mount(machine.SDCard(**SD_PINS), \"/sd\")\n        sd_ok = True\n    except Exception as e:\n        print(\"SD not available:\", repr(e))\n        sd_ok = False\n\n\ndef load_settings():\n    global cfg_file\n    for path in FILES:\n        if path.startswith(\"/sd\") and not sd_ok:\n            continue\n        try:\n            with open(path) as f:\n                saved = json.load(f)\n            if \"places\" not in saved and \"lat\" in saved:\n                saved[\"places\"] = [{\"place\": saved.get(\"place\", \"\"), \"lat\": saved.get(\"lat\"), \"lon\": saved.get(\"lon\")}]\n            cfg.update(saved)\n            normalize_places()\n            cfg_file = path\n            return\n        except (OSError, ValueError):\n            pass\n\n\ndef save_settings():\n    global cfg_file\n    if not ON_BOARD:\n        cfg_file = \"demo\"\n        return\n    for path in FILES:\n        if path.startswith(\"/sd\") and not sd_ok:\n            continue\n        try:\n            with open(path, \"w\") as f:\n                json.dump(cfg, f)\n            cfg_file = path\n            return\n        except OSError as e:\n            print(\"cannot write\", path, repr(e))\n\n\ndef sync_clock(offset):\n    global clock_ok\n    if not server_date:\n        return\n    w = server_date.split()\n    month = \"JanFebMarAprMayJunJulAugSepOctNovDec\".index(w[3]) // 3 + 1\n    h, m, s = [int(n) for n in w[5].split(\":\")]\n    now = time.localtime(time.mktime((int(w[4]), month, int(w[2]), h, m, s, 0, 0)) + offset)\n    machine.RTC().datetime((now[0], now[1], now[2], now[6], now[3], now[4], now[5], 0))\n    clock_ok = True\n\n\ndef is_night(minutes):\n    start, end = cfg[\"night_from\"], cfg[\"night_to\"]\n    if start <= end:\n        return start <= minutes < end\n    return minutes >= start or minutes < end\n\n\ndef brightness():\n    night = False\n    if cfg[\"night\"] and clock_ok:\n        now = time.localtime()\n        night = is_night(now[3] * 60 + now[4])\n    return max(MIN_BRIGHT, cfg[\"night_backlight\" if night else \"backlight\"])\n\n\ndef apply_brightness():\n    if ON_BOARD:\n        display_driver.backlight(brightness())\n\n\ndef scan():\n    if sta is None:\n        raise OSError(\"WiFi hardware not available\")\n    sta.active(True)\n    best = {}\n    for entry in sta.scan():\n        try:\n            name = entry[0].decode()\n        except ValueError:\n            continue\n        if name and (name not in best or entry[3] > best[name]):\n            best[name] = entry[3]\n    return sorted(best, key=lambda n: -best[n])\n\n\ndef wifi_up(ssid=None, password=None, seconds=20):\n    if sta is None:\n        print(\"wifi: hardware not available on this board\")\n        return False\n    fresh = ssid is not None\n    name = ssid if fresh else cfg[\"ssid\"]\n    secret = password if fresh else cfg[\"password\"]\n    if sta.isconnected() and (not fresh or (name == cfg[\"ssid\"] and secret == cfg[\"password\"])):\n        return True\n    sta.active(True)\n    try:\n        sta.disconnect()\n        time.sleep_ms(200)\n        sta.connect(name, secret)\n    except OSError as e:\n        print(\"wifi:\", repr(e))\n        return False\n    t0 = time.ticks_ms()\n    while not sta.isconnected():\n        if time.ticks_diff(time.ticks_ms(), t0) > seconds * 1000:\n            print(\"wifi: connection timeout, status\", sta.status())\n            sta.disconnect()\n            return False\n        time.sleep_ms(50)\n    print(\"wifi: connected\", sta.ifconfig())\n    return True\n\n\ndef http_get(host, path, seconds=15):\n    addr = socket.getaddrinfo(host, 80)[0][-1]\n    s = socket.socket()\n    s.settimeout(8)\n    try:\n        s.connect(addr)\n        s.write((\"GET %s HTTP/1.0\\r\\nHost: %s\\r\\nUser-Agent: copper-and-code-forecast\\r\\nConnection: close\\r\\n\\r\\n\" % (path, host)).encode())\n        s.settimeout(0)\n        data = bytearray()\n        buf = bytearray(1024)\n        t0 = time.ticks_ms()\n        while True:\n            n = s.readinto(buf)\n            if n == 0:\n                break\n            if n is None:\n                if time.ticks_diff(time.ticks_ms(), t0) > seconds * 1000:\n                    raise OSError(\"timeout\")\n                time.sleep_ms(2)\n            else:\n                data += buf[:n]\n    finally:\n        s.close()\n    end = data.find(b\"\\r\\n\\r\\n\")\n    if end < 0:\n        raise OSError(\"HTTP incomplete response\")\n    if b\" 200 \" not in data[:20]:\n        raise OSError(\"HTTP \" + bytes(data[:20]).decode())\n    global server_date\n    for line in bytes(data[:end]).decode().split(\"\\r\\n\"):\n        if line.startswith(\"Date:\"):\n            server_date = line\n    return bytes(data[end + 4:]).decode()\n\n\ndef quote(s):\n    out = \"\"\n    for b in s.encode():\n        c = chr(b)\n        out += c if c.isalpha() and b < 128 or c.isdigit() else \"%%%02X\" % b\n    return out\n\n\ndef geocode(name):\n    body = http_get(\"geocoding-api.open-meteo.com\", \"/v1/search?count=6&format=json&language=%s&name=%s\" % (LANGS[cfg[\"lang\"]], quote(name)))\n    return json.loads(body).get(\"results\", [])\n\n\ndef forecast():\n    place = current_place()\n    path = (\"/v1/forecast?latitude=%.4f&longitude=%.4f&timezone=auto&forecast_days=5\"\n            \"&temperature_unit=%s&wind_speed_unit=%s\"\n            \"&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,\"\n            \"wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day\"\n            \"&daily=weather_code,temperature_2m_max,temperature_2m_min,\"\n            \"precipitation_probability_max,wind_speed_10m_max\") % (place[\"lat\"], place[\"lon\"], UNITS[cfg[\"unit\"]][1], WINDS[cfg[\"wind\"]][1])\n    return json.loads(http_get(\"api.open-meteo.com\", path))\n\n\ndef bare(parent, x, y, w, h):\n    o = lv.obj(parent)\n    o.remove_style_all()\n    o.remove_flag(lv.obj.FLAG.CLICKABLE)\n    o.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    o.set_pos(x, y)\n    o.set_size(w, h)\n    return o\n\n\ndef block(parent, x, y, w, h, radius, color):\n    o = bare(parent, x, y, w, h)\n    o.set_style_bg_opa(lv.OPA.COVER, 0)\n    o.set_style_bg_color(lv.color_hex(color), 0)\n    o.set_style_radius(radius, 0)\n    return o\n\n\ndef disc(parent, cx, cy, d, color):\n    return block(parent, cx - d // 2, cy - d // 2, d, d, lv.RADIUS_CIRCLE, color)\n\n\ndef stroke(parent, points, width, color):\n    o = lv.line(parent)\n    o.set_points([{\"x\": x, \"y\": y} for x, y in points], len(points))\n    o.set_style_line_width(width, 0)\n    o.set_style_line_color(lv.color_hex(color), 0)\n    o.set_style_line_rounded(True, 0)\n    return o\n\n\ndef sun(p, cx, cy, s):\n    for i in range(8):\n        a = i * math.pi / 4\n        c, d = math.cos(a), math.sin(a)\n        stroke(p, ((int(cx + c * s * 0.31), int(cy + d * s * 0.31)), (int(cx + c * s * 0.44), int(cy + d * s * 0.44))), max(2, s // 28), SUN)\n    disc(p, cx, cy, s * 44 // 100, SUN)\n\n\ndef moon(p, cx, cy, s, back):\n    disc(p, cx, cy, s * 60 // 100, MOON)\n    disc(p, cx + s * 16 // 100, cy - s * 10 // 100, s * 50 // 100, back)\n\n\ndef cloud(p, s, color, y=0):\n    block(p, s * 14 // 100, y + s * 44 // 100, s * 72 // 100, s * 24 // 100, s // 8, color)\n    disc(p, s * 36 // 100, y + s * 46 // 100, s * 34 // 100, color)\n    disc(p, s * 60 // 100, y + s * 42 // 100, s * 44 // 100, color)\n\n\ndef icon(parent, code, x, y, s, night, back):\n    p = bare(parent, x, y, s, s)\n    icon_groups.append(p)\n    grey = 0xC4CEDA if THEMES[cfg[\"theme\"]][0] != \"Day\" else 0x9FB0C2\n    if code <= 1:\n        if night:\n            moon(p, s // 2, s // 2, s, back)\n        else:\n            sun(p, s // 2, s // 2, s)\n    elif code == 2:\n        if night:\n            moon(p, s * 66 // 100, s * 32 // 100, s * 3 // 4, back)\n        else:\n            sun(p, s * 66 // 100, s * 34 // 100, s * 3 // 4)\n        cloud(p, s, grey, s // 10)\n    elif code == 3:\n        cloud(p, s, grey, s // 12)\n    elif code in (45, 48):\n        cloud(p, s, grey, -s // 10)\n        for i in range(3):\n            stroke(p, ((s * (14 + 6 * i) // 100, s * (68 + 11 * i) // 100), (s * (86 - 6 * i) // 100, s * (68 + 11 * i) // 100)), max(2, s // 18), grey)\n    elif code >= 95:\n        cloud(p, s, grey, -s // 8)\n        stroke(p, ((s * 56 // 100, s * 54 // 100), (s * 42 // 100, s * 74 // 100), (s * 54 // 100, s * 74 // 100), (s * 44 // 100, s * 94 // 100)), max(3, s // 16), BOLT)\n    elif 71 <= code <= 77 or code in (85, 86):\n        cloud(p, s, grey, -s // 8)\n        for i, dy in ((0, 0), (1, 16), (2, 0)):\n            disc(p, s * (30 + 20 * i) // 100, s * (68 + dy) // 100, max(4, s // 9), SNOW)\n    else:\n        cloud(p, s, grey, -s // 8)\n        drops = 2 if code < 60 else 3\n        for i in range(drops):\n            x0 = s * (36 + 60 // drops * i) // 100\n            stroke(p, ((x0, s * 64 // 100), (x0 - s // 10, s * 86 // 100)), max(2, s // 18), RAIN)\n    return p\n\n\ndef describe(code):\n    table = ((1, 1), (2, 2), (3, 3), (48, 4), (57, 5), (67, 6), (77, 7), (82, 8), (86, 9), (99, 10))\n    if code == 0:\n        return t(\"codes\")[0]\n    for top, i in table:\n        if code <= top:\n            return t(\"codes\")[i]\n    return \"\"\n\n\ndef compass(parent, x, y, d, degrees):\n    c = colors()\n    p = bare(parent, x, y, d, d)\n    icon_groups.append(p)\n    ring = bare(p, 0, 0, d, d)\n    ring.set_style_radius(lv.RADIUS_CIRCLE, 0)\n    ring.set_style_border_width(3, 0)\n    ring.set_style_border_color(lv.color_hex(c[3]), 0)\n    a = math.radians(degrees + 180)\n    r = d // 2 - 10\n    sx, sy = math.sin(a), -math.cos(a)\n    m = d // 2\n    tip = (int(m + sx * r), int(m + sy * r))\n    tail = (int(m - sx * r), int(m - sy * r))\n    side = []\n    for da in (2.6, -2.6):\n        side.append((int(tip[0] + math.sin(a + da) * r * 0.6), int(tip[1] - math.cos(a + da) * r * 0.6)))\n    stroke(p, (tail, tip), 4, c[4])\n    stroke(p, (side[0], tip, side[1]), 4, c[4])\n\n\ndef button_text(button, text):\n    button.get_child(0).set_text(text)\n\n\ndef apply_language():\n    ui.net_title.set_text(t(\"wifi\"))\n    button_text(ui.btn_scan, t(\"rescan\"))\n    button_text(ui.btn_net_next, t(\"next\"))\n    ui.net_password.set_placeholder_text(t(\"password\"))\n    ui.place_title.set_text(t(\"place\"))\n    button_text(ui.btn_place_search, t(\"search\"))\n    button_text(ui.btn_place_next, t(\"next\"))\n    ui.place_text.set_placeholder_text(t(\"place\"))\n    ui.style_title.set_text(t(\"style\"))\n    ui.theme_text.set_text(t(\"theme\"))\n    ui.unit_text.set_text(t(\"temp\"))\n    ui.wind_text.set_text(t(\"wind\"))\n    ui.refresh_text.set_text(t(\"every\"))\n    ui.lang_text.set_text(t(\"lang\"))\n    button_text(ui.btn_style_next, t(\"next\"))\n    ui.night_title.set_text(t(\"night\"))\n    ui.dim_text.set_text(t(\"dim\"))\n    ui.from_text.set_text(t(\"from\"))\n    ui.to_text.set_text(t(\"to\"))\n    button_text(ui.btn_save, t(\"save\"))\n    button_text(ui.btn_night_cancel, t(\"cancel\"))\n\n\ndef apply_theme():\n    bg, card, text, dim, accent = colors()\n    for o in (ui.bg, ui.net_bg, ui.place_bg, ui.style_bg, ui.night_bg):\n        o.set_style_bg_color(lv.color_hex(bg), 0)\n    for o in (ui.hero, ui.wind_card, ui.day1, ui.day2, ui.day3, ui.day4, ui.day5,\n              ui.net_list, ui.net_password, ui.place_list, ui.place_text,\n              ui.sel_theme, ui.sel_unit, ui.sel_wind, ui.sel_refresh, ui.sel_lang,\n              ui.sel_from_hour, ui.sel_from_min, ui.sel_to_hour, ui.sel_to_min,\n              ui.btn_setup, ui.btn_net_close, ui.btn_place_close, ui.btn_night_cancel,\n              ui.place_slot1, ui.place_slot2, ui.place_slot3, ui.place_slot4, ui.place_slot5):\n        o.set_style_bg_color(lv.color_hex(card), 0)\n    for o in (ui.place_name, ui.temperature, ui.description, ui.wind_now,\n              ui.dayname1, ui.dayname2, ui.dayname3, ui.dayname4, ui.dayname5,\n              ui.temp1, ui.temp2, ui.temp3, ui.temp4, ui.temp5,\n              ui.net_title, ui.place_title, ui.style_title, ui.night_title,\n              ui.theme_text, ui.unit_text, ui.wind_text, ui.refresh_text,\n              ui.lang_text, ui.bright_text, ui.dim_text, ui.from_text,\n              ui.to_text, ui.night_bright_text):\n        o.set_style_text_color(lv.color_hex(text), 0)\n    for o in (ui.status, ui.storage, ui.feels_like, ui.gusts, ui.humidity, ui.rain,\n              ui.wind1, ui.wind2, ui.wind3, ui.wind4, ui.wind5,\n              ui.net_step, ui.place_step, ui.style_step, ui.night_step, ui.place_page):\n        o.set_style_text_color(lv.color_hex(dim), 0)\n    for o in (ui.btn_scan, ui.btn_net_next, ui.btn_place_search, ui.btn_place_next, ui.btn_style_next, ui.btn_save):\n        o.set_style_bg_color(lv.color_hex(accent), 0)\n    for o in (ui.sel_bright, ui.sel_night_bright):\n        o.set_style_bg_color(lv.color_hex(accent), lv.PART.INDICATOR)\n        o.set_style_bg_color(lv.color_hex(accent), lv.PART.KNOB)\n\n\ndef show_forecast():\n    apply_language()\n    apply_theme()\n    ui.place_name.set_text(plain(current_place()[\"place\"] or \"Rome\"))\n    ui.place_page.set_text(t(\"place_n_of\") % (cfg[\"place_index\"] + 1))\n    ui.storage.set_text(\"S\" if cfg_file and cfg_file.startswith(\"/sd\") else \"F\")\n    for o in icon_groups:\n        o.delete()\n    icon_groups.clear()\n    if not weather:\n        ui.status.set_text(t(\"loading\"))\n        return\n    now, days = weather[\"current\"], weather[\"daily\"]\n    ui.status.set_text(\"%s %s\" % (t(\"updated\"), now[\"time\"][11:16]))\n    unit = \"°\" + UNITS[cfg[\"unit\"]][0]\n    speed = WINDS[cfg[\"wind\"]][0]\n    icon(ui.hero, now[\"weather_code\"], 14, 14, 148, not now[\"is_day\"], colors()[1])\n    ui.temperature.set_text(\"%d%s\" % (round(now[\"temperature_2m\"]), unit))\n    ui.description.set_text(describe(now[\"weather_code\"]))\n    ui.feels_like.set_text(\"%s %d%s\" % (t(\"feels\"), round(now[\"apparent_temperature\"]), unit))\n    compass(ui.wind_card, 12, 8, 80, now[\"wind_direction_10m\"])\n    dirs = t(\"dirs\")[int((now[\"wind_direction_10m\"] + 22.5) // 45) % 8]\n    ui.wind_now.set_text(\"%d %s %s\" % (round(now[\"wind_speed_10m\"]), speed, dirs))\n    ui.gusts.set_text(\"%s %d %s\" % (t(\"gust\"), round(now[\"wind_gusts_10m\"]), speed))\n    ui.humidity.set_text(\"%s %d%%\" % (t(\"humidity\"), now[\"relative_humidity_2m\"]))\n    ui.rain.set_text(\"%s %d%%\" % (t(\"rain\"), days[\"precipitation_probability_max\"][0] or 0))\n    cards = (ui.day1, ui.day2, ui.day3, ui.day4, ui.day5)\n    names = (ui.dayname1, ui.dayname2, ui.dayname3, ui.dayname4, ui.dayname5)\n    temps = (ui.temp1, ui.temp2, ui.temp3, ui.temp4, ui.temp5)\n    winds = (ui.wind1, ui.wind2, ui.wind3, ui.wind4, ui.wind5)\n    for i in range(5):\n        day = days[\"time\"][i]\n        wday = time.localtime(time.mktime((int(day[:4]), int(day[5:7]), int(day[8:10]), 12, 0, 0, 0, 0)))[6]\n        names[i].set_text(t(\"days\")[wday])\n        icon(cards[i], days[\"weather_code\"][i], 18, 24, 50, False, colors()[1])\n        temps[i].set_text(\"%d / %d\" % (round(days[\"temperature_2m_max\"][i]), round(days[\"temperature_2m_min\"][i])))\n        winds[i].set_text(\"%d %s\" % (round(days[\"wind_speed_10m_max\"][i]), speed))\n\n\ndef change_place(direction):\n    global weather, next_update, job\n    valid = [i for i, place in enumerate(cfg[\"places\"]) if place[\"lat\"] is not None]\n    if not valid:\n        ui.status.set_text(t(\"noplace\"))\n        return\n    if cfg[\"place_index\"] not in valid:\n        cfg[\"place_index\"] = valid[0]\n    elif len(valid) > 1:\n        position = valid.index(cfg[\"place_index\"])\n        cfg[\"place_index\"] = valid[(position + direction) % len(valid)]\n    weather = weather_cache[cfg[\"place_index\"]]\n    show_forecast()\n    if ON_BOARD:\n        next_update = time.ticks_add(time.ticks_ms(), REFRESH[cfg[\"refresh\"]] * 60000)\n    job = \"update\"\n\n\ndef forecast_gesture(e):\n    direction = lv.indev_active().get_gesture_dir()\n    if direction == lv.DIR.LEFT:\n        change_place(1)\n    elif direction == lv.DIR.RIGHT:\n        change_place(-1)\n\n\ndef request_update():\n    global job\n    job = \"update\"\n\n\ndef do_update():\n    global weather, next_update\n    if on_main:\n        ui.status.set_text(t(\"loading\"))\n    if not ON_BOARD:\n        weather = DEMO\n        if not on_main:\n            ui.load_page(ui.PAGE_FORECAST)\n        show_forecast()\n        ui.status.set_text(t(\"demo\"))\n        return\n    try:\n        if not wifi_up():\n            raise OSError(\"no WiFi\")\n        weather = forecast()\n        weather_cache[cfg[\"place_index\"]] = weather\n        sync_clock(weather[\"utc_offset_seconds\"])\n    except (OSError, ValueError, KeyError, IndexError, AttributeError) as e:\n        print(\"update:\", repr(e))\n        next_update = time.ticks_add(time.ticks_ms(), RETRY_S * 1000)\n        if on_main:\n            ui.status.set_text(t(\"failed\"))\n        return\n    next_update = time.ticks_add(time.ticks_ms(), REFRESH[cfg[\"refresh\"]] * 60000)\n    apply_brightness()\n    if on_main:\n        show_forecast()\n    else:\n        ui.load_page(ui.PAGE_FORECAST)\n\n\ndef fill_list(box, names, pick):\n    box.clean()\n    for i, name in enumerate(names):\n        b = lv.button(box)\n        b.set_pos(4, 4 + i * 38)\n        b.set_size(box.get_width() - 8, 34)\n        b.set_style_radius(4, 0)\n        b.set_style_bg_color(lv.color_hex(colors()[1]), 0)\n        label = lv.label(b)\n        label.set_text(plain(name))\n        label.set_style_text_color(lv.color_hex(colors()[2]), 0)\n        label.center()\n        b.add_event_cb(lambda e, n=name: pick(n), lv.EVENT.CLICKED, None)\n\n\ndef pick_network(name):\n    global ssid_selected\n    ssid_selected = name\n    ui.net_status.set_text(plain(name))\n\n\ndef open_network():\n    global on_main, ssid_selected, job\n    on_main = False\n    apply_language()\n    apply_theme()\n    ssid_selected = cfg[\"ssid\"]\n    ui.net_password.set_text(cfg[\"password\"])\n    ui.net_keyboard.set_textarea(ui.net_password)\n    keyboard_y = lv.screen_active().get_height() - ui.net_keyboard.get_height()\n    ui.net_keyboard.set_align(lv.ALIGN.TOP_LEFT)\n    ui.net_keyboard.set_pos(0, keyboard_y)\n    ui.net_status.set_text(t(\"pick\"))\n    if ON_BOARD and sta is None:\n        ui.net_status.set_text(t(\"nohw\"))\n    elif ON_BOARD:\n        job = \"scan\"\n    else:\n        fill_list(ui.net_list, (\"Home\", \"Office\"), pick_network)\n\n\ndef do_scan():\n    ui.net_status.set_text(t(\"scan\"))\n    try:\n        names = scan() if ON_BOARD else (\"Home\", \"Office\")\n    except OSError as e:\n        print(\"scan:\", repr(e))\n        ui.net_list.clean()\n        ui.net_status.set_text(t(\"wifioff\"))\n        return\n    fill_list(ui.net_list, names, pick_network)\n    ui.net_status.set_text(plain(ssid_selected) if ssid_selected else t(\"pick\"))\n\n\ndef do_connect():\n    if not ssid_selected:\n        ui.net_status.set_text(t(\"pick\"))\n        return\n    ui.net_status.set_text(t(\"connecting\"))\n    password = ui.net_password.get_text()\n    if not ON_BOARD or wifi_up(ssid_selected, password):\n        cfg[\"ssid\"], cfg[\"password\"] = ssid_selected, password\n        ui.load_page(ui.PAGE_PLACE)\n    else:\n        ui.net_status.set_text(t(\"nowifi\"))\n\n\ndef slot_buttons():\n    return (ui.place_slot1, ui.place_slot2, ui.place_slot3, ui.place_slot4, ui.place_slot5)\n\n\ndef update_slots():\n    for i, button in enumerate(slot_buttons()):\n        place = cfg[\"places\"][i]\n        button_text(button, \"%d%s\" % (i + 1, \" OK\" if place[\"lat\"] is not None else \"\"))\n        button.set_style_bg_color(lv.color_hex(colors()[4] if i == edit_place else colors()[1]), 0)\n    ui.place_text.set_text(cfg[\"places\"][edit_place][\"place\"])\n\n\ndef select_slot(index):\n    global edit_place\n    edit_place = index\n    update_slots()\n    ui.place_list.clean()\n    ui.place_status.set_text(t(\"place_n\") % (index + 1))\n\n\ndef open_place():\n    global on_main, edit_place\n    on_main = False\n    edit_place = cfg[\"place_index\"]\n    apply_language()\n    apply_theme()\n    update_slots()\n    ui.place_keyboard.set_textarea(ui.place_text)\n    keyboard_y = lv.screen_active().get_height() - ui.place_keyboard.get_height()\n    ui.place_keyboard.set_align(lv.ALIGN.TOP_LEFT)\n    ui.place_keyboard.set_pos(0, keyboard_y)\n    ui.place_status.set_text(t(\"slots\"))\n\n\ndef pick_place(name, names):\n    global pending_place, job\n    pending_place = names[name]\n    job = \"pick_place\"\n\n\ndef do_search():\n    query = ui.place_text.get_text().strip()\n    if not query:\n        ui.place_status.set_text(t(\"notfound\"))\n        return\n    ui.place_status.set_text(t(\"searching\"))\n    try:\n        if ON_BOARD:\n            if not wifi_up():\n                raise OSError(\"no WiFi\")\n            results = geocode(query)\n        else:\n            results = ({\"name\": \"Rome\", \"admin1\": \"Lazio\", \"country\": \"Italy\", \"latitude\": 41.9028, \"longitude\": 12.4964},\n                       {\"name\": \"Milan\", \"admin1\": \"Lombardy\", \"country\": \"Italy\", \"latitude\": 45.4642, \"longitude\": 9.19},\n                       {\"name\": \"Naples\", \"admin1\": \"Campania\", \"country\": \"Italy\", \"latitude\": 40.8518, \"longitude\": 14.2681},\n                       {\"name\": \"Turin\", \"admin1\": \"Piedmont\", \"country\": \"Italy\", \"latitude\": 45.0703, \"longitude\": 7.6869},\n                       {\"name\": \"Palermo\", \"admin1\": \"Sicily\", \"country\": \"Italy\", \"latitude\": 38.1157, \"longitude\": 13.3615})\n    except (OSError, ValueError) as e:\n        print(\"geocode:\", repr(e))\n        ui.place_status.set_text(t(\"failed\"))\n        return\n    ui.place_status.set_text(\"\" if results else t(\"notfound\"))\n    names = {}\n    for r in results:\n        where = \", \".join(r[k] for k in (\"name\", \"admin1\", \"country\") if k in r)\n        names[where] = r\n    fill_list(ui.place_list, names, lambda n: pick_place(n, names))\n\n\ndef do_pick_place():\n    global weather, edit_place\n    chosen = edit_place\n    cfg[\"places\"][chosen] = {\"place\": pending_place[\"name\"], \"lat\": pending_place[\"latitude\"], \"lon\": pending_place[\"longitude\"]}\n    weather_cache[chosen] = None if ON_BOARD else DEMO\n    if chosen == cfg[\"place_index\"]:\n        weather = weather_cache[chosen]\n    select_slot((chosen + 1) % 5)\n    ui.place_status.set_text(t(\"saved_n\") % (chosen + 1))\n\n\ndef open_style():\n    global on_main\n    on_main = False\n    apply_language()\n    apply_theme()\n    ui.sel_theme.set_selected(cfg[\"theme\"])\n    ui.sel_unit.set_selected(cfg[\"unit\"])\n    ui.sel_wind.set_selected(cfg[\"wind\"])\n    ui.sel_refresh.set_selected(cfg[\"refresh\"])\n    ui.sel_lang.set_selected(cfg[\"lang\"])\n    ui.sel_bright.set_value(max(MIN_BRIGHT, cfg[\"backlight\"]), False)\n    ui.bright_text.set_text(\"%s %d%%\" % (t(\"bright\"), ui.sel_bright.get_value()))\n\n\ndef style_next():\n    for key, widget in ((\"theme\", ui.sel_theme), (\"unit\", ui.sel_unit), (\"wind\", ui.sel_wind), (\"refresh\", ui.sel_refresh), (\"lang\", ui.sel_lang)):\n        cfg[key] = widget.get_selected()\n    cfg[\"backlight\"] = ui.sel_bright.get_value()\n    apply_language()\n    apply_theme()\n    ui.load_page(ui.PAGE_NIGHT)\n\n\ndef open_night():\n    global on_main\n    on_main = False\n    apply_language()\n    apply_theme()\n    if cfg[\"night\"]:\n        ui.sel_night.add_state(lv.STATE.CHECKED)\n    else:\n        ui.sel_night.remove_state(lv.STATE.CHECKED)\n    ui.sel_from_hour.set_selected(cfg[\"night_from\"] // 60)\n    ui.sel_from_min.set_selected(cfg[\"night_from\"] % 60 // 15)\n    ui.sel_to_hour.set_selected(cfg[\"night_to\"] // 60)\n    ui.sel_to_min.set_selected(cfg[\"night_to\"] % 60 // 15)\n    ui.sel_night_bright.set_value(max(MIN_BRIGHT, cfg[\"night_backlight\"]), False)\n    ui.night_bright_text.set_text(\"%s %d%%\" % (t(\"bright\"), ui.sel_night_bright.get_value()))\n\n\ndef change_brightness(night):\n    slider = ui.sel_night_bright if night else ui.sel_bright\n    label = ui.night_bright_text if night else ui.bright_text\n    label.set_text(\"%s %d%%\" % (t(\"bright\"), slider.get_value()))\n    if ON_BOARD:\n        display_driver.backlight(slider.get_value())\n\n\ndef save():\n    global weather, weather_cache\n    if ON_BOARD:\n        weather_cache = [None] * 5\n        weather = None\n    if current_place()[\"lat\"] is None:\n        for i, place in enumerate(cfg[\"places\"]):\n            if place[\"lat\"] is not None:\n                cfg[\"place_index\"] = i\n                weather = weather_cache[i]\n                break\n    cfg[\"night\"] = ui.sel_night.has_state(lv.STATE.CHECKED)\n    cfg[\"night_from\"] = ui.sel_from_hour.get_selected() * 60 + ui.sel_from_min.get_selected() * 15\n    cfg[\"night_to\"] = ui.sel_to_hour.get_selected() * 60 + ui.sel_to_min.get_selected() * 15\n    cfg[\"night_backlight\"] = ui.sel_night_bright.get_value()\n    save_settings()\n    apply_brightness()\n    request_update()\n\n\ndef close_setup():\n    if weather:\n        ui.load_page(ui.PAGE_FORECAST)\n\n\ndef start():\n    global started, on_main, job\n    on_main = True\n    ui.hero.add_flag(lv.obj.FLAG.CLICKABLE)\n    if started:\n        show_forecast()\n        return\n    started = True\n    if ON_BOARD:\n        mount_sd()\n        load_settings()\n        apply_brightness()\n        job = \"update\" if configured() and sta is not None else None\n        if not configured() or sta is None:\n            ui.load_page(ui.PAGE_NETWORK)\n            return\n    show_forecast()\n\n\ndef on_tick():\n    global job\n    current, job = job, None\n    if current == \"update\":\n        do_update()\n    elif current == \"scan\":\n        do_scan()\n    elif current == \"connect\":\n        do_connect()\n    elif current == \"search\":\n        do_search()\n    elif current == \"pick_place\":\n        do_pick_place()\n    if ON_BOARD and on_main and time.ticks_diff(time.ticks_ms(), next_update) >= 0:\n        do_update()\n    if ON_BOARD:\n        apply_brightness()\n",
+    "handlers": {
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()"
+      },
+      "Forecast_screen_loaded": {
+        "widget": "Forecast",
+        "event": "SCREEN_LOADED",
+        "body": "start()"
+      },
+      "Network_screen_loaded": {
+        "widget": "Network",
+        "event": "SCREEN_LOADED",
+        "body": "open_network()"
+      },
+      "Place_screen_loaded": {
+        "widget": "Place",
+        "event": "SCREEN_LOADED",
+        "body": "open_place()"
+      },
+      "Style_screen_loaded": {
+        "widget": "Style",
+        "event": "SCREEN_LOADED",
+        "body": "open_style()"
+      },
+      "Night_screen_loaded": {
+        "widget": "Night",
+        "event": "SCREEN_LOADED",
+        "body": "open_night()"
+      },
+      "btn_setup_clicked": {
+        "widget": "btn_setup",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_NETWORK)"
+      },
+      "hero_clicked": {
+        "widget": "hero",
+        "event": "CLICKED",
+        "body": "request_update()"
+      },
+      "btn_scan_clicked": {
+        "widget": "btn_scan",
+        "event": "CLICKED",
+        "body": "global job\njob = \"scan\""
+      },
+      "btn_net_next_clicked": {
+        "widget": "btn_net_next",
+        "event": "CLICKED",
+        "body": "global job\njob = \"connect\""
+      },
+      "net_keyboard_ready": {
+        "widget": "net_keyboard",
+        "event": "READY",
+        "body": "global job\njob = \"connect\""
+      },
+      "btn_place_search_clicked": {
+        "widget": "btn_place_search",
+        "event": "CLICKED",
+        "body": "global job\njob = \"search\""
+      },
+      "place_keyboard_ready": {
+        "widget": "place_keyboard",
+        "event": "READY",
+        "body": "global job\njob = \"search\""
+      },
+      "btn_place_next_clicked": {
+        "widget": "btn_place_next",
+        "event": "CLICKED",
+        "body": "if configured():\n    ui.load_page(ui.PAGE_STYLE)\nelse:\n    ui.place_status.set_text(t(\"notfound\"))"
+      },
+      "btn_net_close_clicked": {
+        "widget": "btn_net_close",
+        "event": "CLICKED",
+        "body": "close_setup()"
+      },
+      "btn_place_close_clicked": {
+        "widget": "btn_place_close",
+        "event": "CLICKED",
+        "body": "close_setup()"
+      },
+      "btn_night_cancel_clicked": {
+        "widget": "btn_night_cancel",
+        "event": "CLICKED",
+        "body": "close_setup()"
+      },
+      "btn_style_next_clicked": {
+        "widget": "btn_style_next",
+        "event": "CLICKED",
+        "body": "style_next()"
+      },
+      "sel_bright_value_changed": {
+        "widget": "sel_bright",
+        "event": "VALUE_CHANGED",
+        "body": "change_brightness(False)"
+      },
+      "sel_night_bright_value_changed": {
+        "widget": "sel_night_bright",
+        "event": "VALUE_CHANGED",
+        "body": "change_brightness(True)"
+      },
+      "btn_save_clicked": {
+        "widget": "btn_save",
+        "event": "CLICKED",
+        "body": "save()"
+      },
+      "place_slot1_clicked": {
+        "widget": "place_slot1",
+        "event": "CLICKED",
+        "body": "select_slot(0)"
+      },
+      "place_slot2_clicked": {
+        "widget": "place_slot2",
+        "event": "CLICKED",
+        "body": "select_slot(1)"
+      },
+      "place_slot3_clicked": {
+        "widget": "place_slot3",
+        "event": "CLICKED",
+        "body": "select_slot(2)"
+      },
+      "place_slot4_clicked": {
+        "widget": "place_slot4",
+        "event": "CLICKED",
+        "body": "select_slot(3)"
+      },
+      "place_slot5_clicked": {
+        "widget": "place_slot5",
+        "event": "CLICKED",
+        "body": "select_slot(4)"
+      },
+      "Forecast_gesture": {
+        "widget": "Forecast",
+        "event": "GESTURE",
+        "body": "forecast_gesture(e)"
+      }
+    }
+  },
+  "currentPageId": "d63a0a00c2a34ad1b71ec5950e584b16",
+  "assets": {},
+  "variables": [],
+  "projectId": "66a76e9e3ea944548027e09501179765",
+  "board": {
+    "schemaVersion": 1,
+    "id": "esp32_4848s040_480",
+    "revision": 1,
+    "name": "ESP32-4848S040 (480×480)",
+    "adapter": "esp32_4848s040",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911"
+      ]
+    },
+    "physicalWidth": 480,
+    "physicalHeight": 480,
+    "logicalWidth": 480,
+    "logicalHeight": 480,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver"
+    }
+  }
+}

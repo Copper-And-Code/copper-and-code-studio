@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **Five more examples:** the games Frog, Orbit and Sandwich Tower for a 480×480 touch screen, a touch C64 Keyboard that sends the key matrix on a UART, and Forecast, a weather station for the ESP32-4848S040 over WiFi. Each has a README.
+
 ## 0.8.0 — 2026-11-20
 
 Renamed from LVGL MPY Studio to Copper and Code Studio. Settings, the configuration folder and projects are kept, and the old commands still work. The Windows package is that of 0.7.1, under the old name.

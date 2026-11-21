@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 2,
+  "projectName": "C64 Keyboard",
+  "display": {
+    "width": 1024,
+    "height": 600,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "85c4be9370a042da917f3cf162d09da4",
+      "name": "Keyboard",
+      "canvasSize": [
+        1024,
+        600
+      ],
+      "widgets": [
+        {
+          "id": "7e35a749241d43c6b92a14b676e071e7",
+          "name": "kbd",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 1024,
+            "height": 600,
+            "bgColor": "#6B5B48",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "dce28efb43c44b1d986488a283888cee",
+          "name": "echo_bg",
+          "type": "panel",
+          "props": {
+            "x": 8,
+            "y": 8,
+            "width": 1008,
+            "height": 180,
+            "bgColor": "#352879",
+            "borderColor": "#6C5EB5",
+            "borderWidth": 6,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6ac156a461e94d01b01dfc78b004f869",
+          "name": "echo_text",
+          "type": "label",
+          "props": {
+            "x": 26,
+            "y": 20,
+            "width": 770,
+            "height": 112,
+            "text": "READY.",
+            "textColor": "#C9C2FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8e35e7ff92a3415680ca09842fb63c64",
+          "name": "echo_hex",
+          "type": "label",
+          "props": {
+            "x": 26,
+            "y": 136,
+            "width": 770,
+            "height": 20,
+            "text": "TX: -",
+            "textColor": "#9C93E6",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "93c290d084f646cb884ede892394c2ee",
+          "name": "echo_status",
+          "type": "label",
+          "props": {
+            "x": 26,
+            "y": 158,
+            "width": 770,
+            "height": 20,
+            "text": "UART: -",
+            "textColor": "#9C93E6",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6e3817093f574699a52c65ac54ffa082",
+          "name": "btn_setup",
+          "type": "button",
+          "props": {
+            "x": 817,
+            "y": 22,
+            "width": 184,
+            "height": 46,
+            "text": "Setup",
+            "bgColor": "#6C5EB5",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_setup_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b471a75fdbe343e88db84cf20ce01af2",
+          "name": "btn_stop_restore",
+          "type": "button",
+          "props": {
+            "x": 816,
+            "y": 76,
+            "width": 184,
+            "height": 46,
+            "text": "STOP + RESTORE",
+            "bgColor": "#9A3B33",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 6
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "96b5606a44a84be9910a6ab29390e367",
+          "name": "btn_clear",
+          "type": "button",
+          "props": {
+            "x": 816,
+            "y": 130,
+            "width": 184,
+            "height": 46,
+            "text": "Clear echo",
+            "bgColor": "#4B3F99",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_clear_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "d0b1e185486b4bdcb550c6834c7ab0ef",
+      "name": "Setup",
+      "canvasSize": [
+        1024,
+        600
+      ],
+      "widgets": [
+        {
+          "id": "89eb8c540c4f4e459acba3697d21dfa1",
+          "name": "setup_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 1024,
+            "height": 600,
+            "bgColor": "#352879",
+            "borderColor": "#6C5EB5",
+            "borderWidth": 12,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9b002ee649c54cb9a15c67f487030d97",
+          "name": "setup_title",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 30,
+            "width": 600,
+            "height": 34,
+            "text": "UART setup",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4d0c2f2e9cc54a4cad036df448824f82",
+          "name": "lbl_uart",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 102,
+            "width": 200,
+            "height": 26,
+            "text": "UART",
+            "textColor": "#C9C2FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c79e4c6b6f644112ae62374a57ccd558",
+          "name": "lbl_baud",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 172,
+            "width": 200,
+            "height": 26,
+            "text": "Baud rate",
+            "textColor": "#C9C2FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "04bf87107d734dff8469cc038571e3a6",
+          "name": "lbl_parity",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 242,
+            "width": 200,
+            "height": 26,
+            "text": "Parity",
+            "textColor": "#C9C2FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2195898f3ad346a8b09da9b55e61b3ed",
+          "name": "lbl_stop",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 312,
+            "width": 200,
+            "height": 26,
+            "text": "Stop bits",
+            "textColor": "#C9C2FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d22dfce057fb462f99c137601aa5a010",
+          "name": "setup_help",
+          "type": "label",
+          "props": {
+            "x": 600,
+            "y": 90,
+            "width": 380,
+            "height": 290,
+            "text": "Protocol: 1 byte per event, 8 data bits\n\nbit 7    1 = release, 0 = press\nbit 6    1 = RESTORE (not in the matrix)\nbit 5-3  matrix row (CIA1 port A bit)\nbit 2-0  matrix column (CIA1 port B bit)\n\nExamples\nA press 0x0A, A release 0x8A\nRESTORE press 0x40, release 0xC0\n\nDo not choose the UART used by the REPL.",
+            "textColor": "#C9C2FF",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6da7393a3e38481f8cc1e64052347b9d",
+          "name": "btn_save",
+          "type": "button",
+          "props": {
+            "x": 60,
+            "y": 400,
+            "width": 200,
+            "height": 56,
+            "text": "Apply and save",
+            "bgColor": "#2E8B57",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_save_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7974e64ff75c4afdbee82870b2c0404a",
+          "name": "btn_test",
+          "type": "button",
+          "props": {
+            "x": 290,
+            "y": 400,
+            "width": 200,
+            "height": 56,
+            "text": "Send test",
+            "bgColor": "#6C5EB5",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_test_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "dd42717f67ad4db0a2dc0416894abe11",
+          "name": "btn_back",
+          "type": "button",
+          "props": {
+            "x": 520,
+            "y": 400,
+            "width": 200,
+            "height": 56,
+            "text": "Back",
+            "bgColor": "#4B3F99",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b889ebea0e6142c4a74d05cfa887b91f",
+          "name": "setup_msg",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 480,
+            "width": 900,
+            "height": 24,
+            "text": "",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a989a7ce00cf429b870ebf7dc7837880",
+          "name": "setup_hex",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 514,
+            "width": 900,
+            "height": 50,
+            "text": "",
+            "textColor": "#9C93E6",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "aba4aae0d9374aeda0352bc1b8d9576d",
+          "name": "dd_stop",
+          "type": "dropdown",
+          "props": {
+            "x": 280,
+            "y": 300,
+            "width": 260,
+            "height": 48,
+            "options": "1\n2",
+            "selected": 0,
+            "bgColor": "#FFFFFF",
+            "textColor": "#000000",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1998ed28fc36478e8e01ba5df19f381d",
+          "name": "dd_parity",
+          "type": "dropdown",
+          "props": {
+            "x": 280,
+            "y": 230,
+            "width": 260,
+            "height": 48,
+            "options": "None\nEven\nOdd",
+            "selected": 0,
+            "bgColor": "#FFFFFF",
+            "textColor": "#000000",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6cc59c5f76d2428e9c25d33412dc8b09",
+          "name": "dd_baud",
+          "type": "dropdown",
+          "props": {
+            "x": 280,
+            "y": 160,
+            "width": 260,
+            "height": 48,
+            "options": "9600\n19200\n38400\n57600\n115200\n230400\n460800\n921600",
+            "selected": 4,
+            "bgColor": "#FFFFFF",
+            "textColor": "#000000",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "fc7ae893cd5545b2aa8bcfb9dd01dbe6",
+          "name": "dd_uart",
+          "type": "dropdown",
+          "props": {
+            "x": 280,
+            "y": 90,
+            "width": 260,
+            "height": 48,
+            "options": "UART1\nUART2\nUART3\nUART4\nUART5\nUART6\nUART7\nUART8",
+            "selected": 2,
+            "bgColor": "#FFFFFF",
+            "textColor": "#000000",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# C64 KEYBOARD: a virtual Commodore 64 keyboard that sends key events on a UART.\n#\n# Every C64 key sits at a row and a column of the 8x8 keyboard matrix scanned\n# by CIA1. Each press and each release is sent as one byte:\n#   bit 7     1 = release, 0 = press\n#   bit 6     1 = RESTORE (wired to the NMI line, outside the matrix)\n#   bits 5-3  row    (the CIA1 port A bit that selects it)\n#   bits 2-0  column (the CIA1 port B bit that reads it)\n# So the code of a key is row * 8 + column, RESTORE is 64 (0x40), and a\n# release is the code plus 0x80. A press goes out when the finger touches a\n# key and the release when it lifts, so holding a key makes the C64 repeat it.\n#\n# SHIFT, CTRL and C= are one-shot modifiers: one tap holds the modifier down\n# until the next key is released, a second tap locks it, a third releases it.\n# SHIFT LOCK latches the left SHIFT, like the mechanical key of the C64.\n# The UART, baud rate, parity and stop bits are chosen on the Setup page and\n# saved to flash.\n\nimport json\nimport time\n\ntry:\n    from machine import UART\nexcept ImportError:\n    UART = None\n\nCONFIG_FILES = (\"/flash/c64kbd.json\", \"c64kbd.json\")\nBAUDS = (9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600)\nPARITY_NAMES = (\"N\", \"E\", \"O\")\nPARITY_VALUES = (None, 0, 1)        # machine.UART: None, 0 = even, 1 = odd\n\nRETURN = 1\nLSHIFT = 15\nRSHIFT = 52\nCTRL = 58\nCBM = 61                            # the Commodore key\nSTOP = 63\nRESTORE = 64                        # sent with bit 6 set\nSHIFT_LOCK = 65                     # virtual: it only latches the left SHIFT\nMODS = (LSHIFT, RSHIFT, CTRL, CBM)\nCODES = 66\n\n# layout: x and widths are in half key units\nX0 = 17\nUNIT = 55\nKEY_GAP = 5\nKY0 = 204\nROW_PITCH = 76\nKEY_H = 70\n\nKEY_COLOR = 0x4A3B2F\nKEY_TEXT_COLOR = 0xEDE3CF\nFKEY_COLOR = 0xC9B79C\nFKEY_TEXT_COLOR = 0x3A2E22\nPRESSED_COLOR = 0x9A8268\nARMED_COLOR = 0xD9A441\nLOCKED_COLOR = 0xC2412D\n\nECHO_MAX = 600                      # characters kept in the echo buffer\nECHO_LINE = 58                      # characters before a forced line break\nTX_SHOWN = 24                       # bytes shown on the TX line\nTEST_TEXT = \"HELLO\"\nTEST_CODES = (29, 14, 42, 42, 38, RETURN)\n\ncfg = {\"uart\": 3, \"baud\": 4, \"parity\": 0, \"stop\": 1}   # baud is an index\nuart = None\nuart_text = \"UART closed\"\nstarted = False\non_keyboard = False\n\nsent = bytearray(CODES)             # 1 = the press of that code was sent\nmod_state = bytearray(CODES)        # modifiers: 0 off, 1 armed, 2 locked\nshift_lock = False\nheld = -1                           # index of the key under the finger\n\nbuilt = None                        # the panel the keys were created on\nstyles = []                         # styles must stay referenced\ncallbacks = []                      # so must the event callbacks\nkey_objs = []\nkey_code = []\nkey_plain = []                      # echo text without and with SHIFT\nkey_shift = []\necho = \"READY.\\n\"\nline_len = 0\ntx_log = []\n\n\ndef letter(ch, code):\n    return (ch, 2, code, ch, ch.lower())\n\n\ndef key_rows():\n    # (matrix row on screen, first x, keys); a key is\n    # (legend, width, code, echo text, echo text with SHIFT)\n    left = lv.SYMBOL.LEFT\n    right = lv.SYMBOL.RIGHT\n    up = lv.SYMBOL.UP\n    down = lv.SYMBOL.DOWN\n    return (\n        (0, 0, ((left, 2, 57, \"{LARR}\", \"{LARR}\"),\n                (\"!\\n1\", 2, 56, \"1\", \"!\"), (\"\\\"\\n2\", 2, 59, \"2\", \"\\\"\"),\n                (\"#\\n3\", 2, 8, \"3\", \"#\"), (\"$\\n4\", 2, 11, \"4\", \"$\"),\n                (\"%\\n5\", 2, 16, \"5\", \"%\"), (\"&\\n6\", 2, 19, \"6\", \"&\"),\n                (\"'\\n7\", 2, 24, \"7\", \"'\"), (\"(\\n8\", 2, 27, \"8\", \"(\"),\n                (\")\\n9\", 2, 32, \"9\", \")\"), (\"0\", 2, 35, \"0\", \"0\"),\n                (\"+\", 2, 40, \"+\", \"+\"), (\"-\", 2, 43, \"-\", \"-\"),\n                (\"GBP\", 2, 48, \"{POUND}\", \"{POUND}\"),\n                (\"CLR\\nHOME\", 2, 51, \"{HOME}\", \"{CLR}\"),\n                (\"INST\\nDEL\", 2, 0, \"\\b\", \"{INST}\"))),\n        (1, 0, ((\"CTRL\", 3, CTRL, \"\", \"\"),\n                letter(\"Q\", 62), letter(\"W\", 9), letter(\"E\", 14),\n                letter(\"R\", 17), letter(\"T\", 22), letter(\"Y\", 25),\n                letter(\"U\", 30), letter(\"I\", 33), letter(\"O\", 38),\n                letter(\"P\", 41),\n                (\"@\", 2, 46, \"@\", \"@\"), (\"*\", 2, 49, \"*\", \"*\"),\n                (up, 2, 54, \"^\", \"{PI}\"),\n                (\"RESTORE\", 3, RESTORE, \"{RESTORE}\", \"{RESTORE}\"))),\n        (2, 0, ((\"RUN\\nSTOP\", 2, STOP, \"{STOP}\", \"{RUN}\"),\n                (\"SHIFT\\nLOCK\", 2, SHIFT_LOCK, \"\", \"\"),\n                letter(\"A\", 10), letter(\"S\", 13), letter(\"D\", 18),\n                letter(\"F\", 21), letter(\"G\", 26), letter(\"H\", 29),\n                letter(\"J\", 34), letter(\"K\", 37), letter(\"L\", 42),\n                (\"[\\n:\", 2, 45, \":\", \"[\"), (\"]\\n;\", 2, 50, \";\", \"]\"),\n                (\"=\", 2, 53, \"=\", \"=\"),\n                (\"RETURN\", 4, RETURN, \"\\n\", \"\\n\"))),\n        (3, 0, ((\"C=\", 2, CBM, \"\", \"\"), (\"SHIFT\", 3, LSHIFT, \"\", \"\"),\n                letter(\"Z\", 12), letter(\"X\", 23), letter(\"C\", 20),\n                letter(\"V\", 31), letter(\"B\", 28), letter(\"N\", 39),\n                letter(\"M\", 36),\n                (\"<\\n,\", 2, 47, \",\", \"<\"), (\">\\n.\", 2, 44, \".\", \">\"),\n                (\"?\\n/\", 2, 55, \"/\", \"?\"),\n                (\"SHIFT\", 3, RSHIFT, \"\", \"\"),\n                (\"CRSR\\n\" + up + down, 2, 7, \"{DOWN}\", \"{UP}\"),\n                (\"CRSR\\n\" + left + right, 2, 2, \"{RIGHT}\", \"{LEFT}\"))),\n        (4, 7, ((\"\", 18, 60, \" \", \" \"),)),\n        (0, 33, ((\"F1\\nF2\", 3, 4, \"{F1}\", \"{F2}\"),)),\n        (1, 33, ((\"F3\\nF4\", 3, 5, \"{F3}\", \"{F4}\"),)),\n        (2, 33, ((\"F5\\nF6\", 3, 6, \"{F5}\", \"{F6}\"),)),\n        (3, 33, ((\"F7\\nF8\", 3, 3, \"{F7}\", \"{F8}\"),)),\n    )\n\n\n# ---------------------------------------------------------------- UART\n\ndef uart_name():\n    return \"UART%d  %d  8%s%d\" % (cfg[\"uart\"], BAUDS[cfg[\"baud\"]],\n                                  PARITY_NAMES[cfg[\"parity\"]], cfg[\"stop\"])\n\n\ndef open_uart():\n    global uart, uart_text\n    if uart is not None:\n        try:\n            uart.deinit()\n        except Exception:\n            pass\n    uart = None\n    if UART is None:\n        uart_text = uart_name() + \"  -  no UART here: bytes go to the console\"\n        return False\n    try:\n        port = UART(cfg[\"uart\"])\n        port.init(baudrate=BAUDS[cfg[\"baud\"]], bits=8,\n                  parity=PARITY_VALUES[cfg[\"parity\"]], stop=cfg[\"stop\"])\n        uart = port\n        uart_text = uart_name() + \"  -  open\"\n        return True\n    except Exception as err:\n        uart_text = uart_name() + \"  -  error: \" + str(err)\n        return False\n\n\ndef send_byte(b):\n    global uart_text\n    if uart is not None:\n        try:\n            uart.write(bytes((b,)))\n        except Exception as err:\n            uart_text = uart_name() + \"  -  write error: \" + str(err)\n    else:\n        print(\"TX %02X\" % b)\n    tx_log.append(\"%02X\" % b)\n    if len(tx_log) > TX_SHOWN:\n        del tx_log[0]\n\n\ndef set_down(code, down):\n    # send a press or a release, only when the state of the key changes\n    if sent[code] == down:\n        return\n    sent[code] = down\n    send_byte(code if down else code | 0x80)\n\n\ndef clamp(value, low, high):\n    if not isinstance(value, int):\n        return low\n    return low if value < low else high if value > high else value\n\n\ndef load_config():\n    for path in CONFIG_FILES:\n        try:\n            with open(path) as f:\n                data = json.load(f)\n        except Exception:\n            continue\n        cfg[\"uart\"] = clamp(data.get(\"uart\"), 1, 8)\n        cfg[\"baud\"] = clamp(data.get(\"baud\"), 0, len(BAUDS) - 1)\n        cfg[\"parity\"] = clamp(data.get(\"parity\"), 0, 2)\n        cfg[\"stop\"] = clamp(data.get(\"stop\"), 1, 2)\n        return path\n    return None\n\n\ndef save_config():\n    for path in CONFIG_FILES:\n        try:\n            with open(path, \"w\") as f:\n                json.dump(cfg, f)\n            return path\n        except Exception:\n            pass\n    return None\n\n\n# ---------------------------------------------------------------- keys\n\ndef mod_down(code):\n    return mod_state[code] != 0 or (code == LSHIFT and shift_lock)\n\n\ndef paint(code, color):\n    i = 0\n    while i < len(key_code):\n        if key_code[i] == code:\n            key_objs[i].set_style_bg_color(lv.color_hex(color), lv.PART.MAIN)\n        i += 1\n\n\ndef sync_mods():\n    # send the modifier presses and releases and show their state\n    for code in MODS:\n        set_down(code, 1 if mod_down(code) else 0)\n        if on_keyboard:\n            state = mod_state[code]\n            paint(code, LOCKED_COLOR if state == 2 else\n                  ARMED_COLOR if state == 1 else KEY_COLOR)\n    if on_keyboard:\n        paint(SHIFT_LOCK, LOCKED_COLOR if shift_lock else KEY_COLOR)\n\n\ndef release_all():\n    global shift_lock, held\n    held = -1\n    shift_lock = False\n    code = 0\n    while code < CODES:\n        mod_state[code] = 0\n        set_down(code, 0)\n        code += 1\n    sync_mods()\n\n\ndef key_press(i):\n    global shift_lock, held\n    code = key_code[i]\n    if code in MODS:\n        mod_state[code] = (mod_state[code] + 1) % 3\n        sync_mods()\n    elif code == SHIFT_LOCK:\n        shift_lock = not shift_lock\n        sync_mods()\n    else:\n        if held >= 0:\n            key_release(held)\n        held = i\n        set_down(code, 1)\n        echo_key(i)\n    show_tx()\n\n\ndef key_release(i):\n    global held\n    if held != i:\n        return\n    held = -1\n    set_down(key_code[i], 0)\n    for code in MODS:\n        if mod_state[code] == 1:     # an armed modifier lasts one key\n            mod_state[code] = 0\n    sync_mods()\n    show_tx()\n\n\ndef make_callback(i):\n    def callback(e):\n        if e.get_code() == lv.EVENT.PRESSED:\n            key_press(i)\n        else:\n            key_release(i)\n    return callback\n\n\ndef stop_restore_event(e):\n    # RUN/STOP held while RESTORE is pressed: the classic warm reset\n    if e.get_code() == lv.EVENT.PRESSED:\n        set_down(STOP, 1)\n        set_down(RESTORE, 1)\n        add_echo(\"{STOP+RESTORE}\")\n    else:\n        set_down(RESTORE, 0)\n        set_down(STOP, 0)\n    show_tx()\n\n\n# ---------------------------------------------------------------- echo\n\ndef add_echo(text):\n    global echo, line_len\n    if text == \"\\b\":\n        if echo and echo[-1] != \"\\n\":\n            echo = echo[:-1]\n            line_len -= 1\n    else:\n        for ch in text:\n            if ch == \"\\n\":\n                line_len = 0\n            elif line_len >= ECHO_LINE:\n                echo += \"\\n\"\n                line_len = 0\n            if ch != \"\\n\":\n                line_len += 1\n            echo += ch\n    if len(echo) > ECHO_MAX:\n        echo = echo[-ECHO_MAX:]\n    show_echo()\n\n\ndef echo_key(i):\n    shifted = mod_down(LSHIFT) or mod_down(RSHIFT)\n    text = key_shift[i] if shifted else key_plain[i]\n    prefix = \"\"\n    if mod_down(CTRL):\n        prefix += \"CTRL-\"\n    if mod_down(CBM):\n        prefix += \"C=-\"\n    if prefix and text not in (\"\\n\", \"\\b\", \" \"):\n        if text[0] == \"{\":\n            text = text[1:-1]\n        text = \"{\" + prefix + text + \"}\"\n    add_echo(text)\n\n\ndef show_echo():\n    if on_keyboard:\n        ui.echo_text.set_text(echo)\n\n\ndef show_tx():\n    if on_keyboard:\n        ui.echo_hex.set_text(\"TX: \" + \" \".join(tx_log) if tx_log else \"TX: -\")\n        ui.echo_status.set_text(uart_text)\n\n\n# ---------------------------------------------------------------- build\n\ndef new_style(bg, text):\n    style = lv.style_t()\n    style.init()\n    style.set_bg_color(lv.color_hex(bg))\n    style.set_bg_opa(lv.OPA.COVER)\n    style.set_radius(6)\n    style.set_text_color(lv.color_hex(text))\n    style.set_border_side(lv.BORDER_SIDE.BOTTOM)\n    style.set_border_width(4)\n    style.set_border_color(lv.color_hex(0x2A2019))\n    styles.append(style)\n    return style\n\n\ndef legend_font(legend):\n    if len(legend) == 1:\n        return lv.font_montserrat_24\n    lines = legend.split(\"\\n\")\n    if len(lines) == 2 and len(lines[0]) == 1 and len(lines[1]) == 1:\n        return lv.font_montserrat_16\n    return lv.font_montserrat_14\n\n\ndef build():\n    global built, held\n    built = ui.kbd\n    held = -1\n    for items in (styles, callbacks, key_objs, key_code, key_plain, key_shift):\n        items.clear()\n    lv.screen_active().remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    key_style = new_style(KEY_COLOR, KEY_TEXT_COLOR)\n    fkey_style = new_style(FKEY_COLOR, FKEY_TEXT_COLOR)\n    pressed = lv.style_t()\n    pressed.init()\n    pressed.set_bg_color(lv.color_hex(PRESSED_COLOR))\n    pressed.set_translate_y(2)\n    styles.append(pressed)\n    for row, x, keys in key_rows():\n        for legend, width, code, plain, shifted in keys:\n            obj = lv.obj(built)\n            obj.remove_style_all()\n            obj.add_style(fkey_style if x >= 33 else key_style, lv.PART.MAIN)\n            obj.add_style(pressed, lv.PART.MAIN | lv.STATE.PRESSED)\n            obj.set_pos(X0 + x * UNIT // 2, KY0 + row * ROW_PITCH)\n            obj.set_size(width * UNIT // 2 - KEY_GAP, KEY_H)\n            obj.remove_flag(lv.obj.FLAG.SCROLLABLE)\n            obj.add_flag(lv.obj.FLAG.PRESS_LOCK)\n            if legend:\n                label = lv.label(obj)\n                label.set_style_text_font(legend_font(legend), lv.PART.MAIN)\n                label.set_style_text_align(lv.TEXT_ALIGN.CENTER, lv.PART.MAIN)\n                label.set_text(legend)\n                label.center()\n            callback = make_callback(len(key_objs))\n            callbacks.append(callback)\n            for event in (lv.EVENT.PRESSED, lv.EVENT.RELEASED, lv.EVENT.PRESS_LOST):\n                obj.add_event_cb(callback, event, None)\n            key_objs.append(obj)\n            key_code.append(code)\n            key_plain.append(plain)\n            key_shift.append(shifted)\n            x += width\n    # the echo text grows upwards from the bottom of a clipping box\n    box = lv.obj(ui.echo_bg)\n    box.remove_style_all()\n    box.set_pos(12, 6)\n    box.set_size(776, 114)\n    box.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    box.remove_flag(lv.obj.FLAG.CLICKABLE)\n    ui.echo_text.set_parent(box)\n    ui.echo_text.set_width(776)\n    ui.echo_text.set_height(lv.SIZE_CONTENT)\n    ui.echo_text.set_long_mode(lv.label.LONG_MODE.WRAP)\n    ui.echo_text.align(lv.ALIGN.BOTTOM_LEFT, 0, 0)\n    for event in (lv.EVENT.PRESSED, lv.EVENT.RELEASED, lv.EVENT.PRESS_LOST):\n        ui.btn_stop_restore.add_event_cb(stop_restore_event, event, None)\n    ui.btn_stop_restore.add_flag(lv.obj.FLAG.PRESS_LOCK)\n\n\n# ---------------------------------------------------------------- pages\n\ndef enter_keyboard():\n    global started, on_keyboard\n    if not started:\n        started = True\n        load_config()\n        open_uart()\n    on_keyboard = True\n    if built is not ui.kbd:      # the page objects are new\n        build()\n    sync_mods()\n    show_echo()\n    show_tx()\n\n\ndef leave_keyboard():\n    global on_keyboard\n    release_all()                # never leave a key down on the C64\n    on_keyboard = False\n\n\ndef enter_setup():\n    ui.dd_uart.set_selected(cfg[\"uart\"] - 1)\n    ui.dd_baud.set_selected(cfg[\"baud\"])\n    ui.dd_parity.set_selected(cfg[\"parity\"])\n    ui.dd_stop.set_selected(cfg[\"stop\"] - 1)\n    ui.setup_msg.set_text(uart_text)\n    ui.setup_hex.set_text(\"\")\n\n\ndef apply_setup():\n    cfg[\"uart\"] = ui.dd_uart.get_selected() + 1\n    cfg[\"baud\"] = ui.dd_baud.get_selected()\n    cfg[\"parity\"] = ui.dd_parity.get_selected()\n    cfg[\"stop\"] = ui.dd_stop.get_selected() + 1\n    open_uart()\n    path = save_config()\n    saved = (\"saved to \" + path) if path else \"could not be saved\"\n    ui.setup_msg.set_text(uart_text + \"  -  \" + saved)\n\n\ndef send_test():\n    # type TEST_TEXT and RETURN, leaving the C64 time to scan each event\n    del tx_log[:]\n    for code in TEST_CODES:\n        set_down(code, 1)\n        time.sleep_ms(40)\n        set_down(code, 0)\n        time.sleep_ms(40)\n    where = \"sent\" if uart is not None else \"printed to the console (UART not open)\"\n    ui.setup_hex.set_text(\"%s + RETURN %s:\\n%s\" % (TEST_TEXT, where, \" \".join(tx_log)))\n    ui.setup_msg.set_text(uart_text)\n",
+    "handlers": {
+      "Keyboard_screen_loaded": {
+        "widget": "Keyboard",
+        "event": "SCREEN_LOADED",
+        "body": "enter_keyboard()"
+      },
+      "Setup_screen_loaded": {
+        "widget": "Setup",
+        "event": "SCREEN_LOADED",
+        "body": "enter_setup()"
+      },
+      "btn_setup_clicked": {
+        "widget": "btn_setup",
+        "event": "CLICKED",
+        "body": "leave_keyboard()\nui.load_page(ui.PAGE_SETUP)"
+      },
+      "btn_clear_clicked": {
+        "widget": "btn_clear",
+        "event": "CLICKED",
+        "body": "global echo, line_len\necho = \"\"\nline_len = 0\nshow_echo()"
+      },
+      "btn_save_clicked": {
+        "widget": "btn_save",
+        "event": "CLICKED",
+        "body": "apply_setup()"
+      },
+      "btn_test_clicked": {
+        "widget": "btn_test",
+        "event": "CLICKED",
+        "body": "send_test()"
+      },
+      "btn_back_clicked": {
+        "widget": "btn_back",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_KEYBOARD)"
+      }
+    }
+  },
+  "currentPageId": "85c4be9370a042da917f3cf162d09da4",
+  "assets": {},
+  "variables": [],
+  "projectId": "8cd6c7a26dc34d99a67d8d12c389c865",
+  "board": {
+    "schemaVersion": 1,
+    "id": "stm32h7_core_v1_3_1024x600",
+    "revision": 1,
+    "name": "STM32H7_CORE V1.3 (1024×600)",
+    "adapter": "stm32h7_uart",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911",
+        "st_ltdc"
+      ]
+    },
+    "physicalWidth": 1024,
+    "physicalHeight": 600,
+    "logicalWidth": 1024,
+    "logicalHeight": 600,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver",
+      "appRoot": "/flash/lvgl_ide_apps",
+      "mainPath": "/flash/main.py"
+    }
+  }
+}
