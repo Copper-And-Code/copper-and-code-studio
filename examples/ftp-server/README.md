@@ -38,3 +38,5 @@ The server is also run by `tests/test_ftp_server_example.py`, in CPython against
 | `ftp_server` | the FTP server: sessions, commands, data connections, transfers in pieces |
 | `ftp_app` | the screen: address, password, folder, clients, transfer, storage, log |
 | `cac_settings` | the shared settings of the examples, as in [Settings](../settings/README.md) |
+
+On the ESP32-4848S040 it can be started from the board's home menu: see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).

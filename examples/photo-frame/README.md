@@ -39,3 +39,5 @@ for f in photos/*.bin; do curl -T "$f" --ftp-create-dirs --user mpy:PASSWORD ftp
 There is no SD card and no network: three demo pictures take turns, and the clock is the
 simulator's. Open `project.json` and press F5. `tests/test_photo_frame_example.py` checks the
 summer time and the converter.
+
+On the ESP32-4848S040 it can be started from the board's home menu: see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).

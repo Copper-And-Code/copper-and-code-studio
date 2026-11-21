@@ -16,3 +16,5 @@ brightness) and night.
 In the simulator there is no WiFi: the places found and the weather are demo data, so every page
 can be tried. Open `project.json` and press F5. It is the English version of
 an example the author made in Italian; this version was checked in the simulator, not on a board.
+
+On the ESP32-4848S040 it can be started from the board's home menu: see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).

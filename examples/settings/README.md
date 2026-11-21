@@ -36,8 +36,24 @@ flash can read them.
 
 At power-on `boot.py` costs one scan, a couple of seconds, when no saved network is in range.
 
-The home menu of the ESP32-4848S040 in `mpy-lvgl-boards` (`examples/home`) reads the same file:
-it sets the brightness and connects before it starts an app.
+## The home menu of the board
+
+The board repository has a home for the ESP32-4848S040, [`examples/home`](https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home): a shell on the
+display at power-on, and on a tap a menu of apps, with folders and a home button over each app. It
+reads the same `cac_settings.json`: it sets the brightness and connects before it starts an app.
+
+The Studio installs an app in `/lms_apps/app_<id>/`, where the id comes from the project, so it
+is the same on every board. These are the lines of `/sd/home.json` for the examples:
+
+```json
+{"name": "Settings", "path": "/lms_apps/app_265fef53d674/app_main.py"},
+{"name": "Forecast", "path": "/lms_apps/app_1130d29ac8f6/app_main.py"},
+{"name": "FTP Server", "path": "/lms_apps/app_055fd10dc1ca/app_main.py"},
+{"name": "Photo Frame", "path": "/lms_apps/app_9094b9139352/app_main.py"}
+```
+
+Upload each app once from the Studio (**Device → Upload Project**), then add its line to the menu. Started
+from the Studio instead, an app has no home button: there is no menu to go back to.
 
 ## In the simulator
 
