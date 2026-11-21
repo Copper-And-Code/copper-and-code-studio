@@ -1,0 +1,847 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Orbit",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "22efc01d0cdb4320b04584be0922ee59",
+      "name": "Menu",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "5d3dc3ff673243dfaa4392e5c7d9b46b",
+          "name": "buzzer",
+          "type": "buzzer",
+          "props": {},
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e0beb1bc8654461a86e1526bb675426f",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 33,
+            "enabled": false
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b859077998e048ebad8b593179b035f6",
+          "name": "menu_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#070B1E",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6453ce9fcba24118935dbcc4aa5c9e9a",
+          "name": "menu_ring",
+          "type": "panel",
+          "props": {
+            "x": 130,
+            "y": 36,
+            "width": 220,
+            "height": 220,
+            "bgColor": "#070B1E",
+            "borderColor": "#3B4FB8",
+            "borderWidth": 3,
+            "radius": 110,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8fd815dfff554296a7cf2f43d7bf0ee4",
+          "name": "menu_satellite",
+          "type": "panel",
+          "props": {
+            "x": 304,
+            "y": 58,
+            "width": 18,
+            "height": 18,
+            "bgColor": "#FFB02E",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 9,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e48ab708bfde47ec9e0569e4bcd56ce5",
+          "name": "menu_title",
+          "type": "label",
+          "props": {
+            "x": 140,
+            "y": 112,
+            "width": 200,
+            "height": 48,
+            "text": "ORBIT",
+            "textColor": "#F2F5FF",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "bb17a2295b7c4e3a9415bf089f981635",
+          "name": "menu_subtitle",
+          "type": "label",
+          "props": {
+            "x": 150,
+            "y": 164,
+            "width": 180,
+            "height": 22,
+            "text": "Defend the ring",
+            "textColor": "#8FA2E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1c2d6f1ab01e4fdb9ffa27c1c3f561a6",
+          "name": "btn_play",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play",
+            "bgColor": "#2F6BFF",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_play_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ddcbad37d62a4cb5afddc92d12a3d633",
+          "name": "btn_options",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Options",
+            "bgColor": "#1C2550",
+            "textColor": "#DDE4FF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_options_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "73a834a28f9d49ed80e91d68f4bdadf0",
+      "name": "Game",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "b9988a6bfe2a4cc2b6528faa3992f2e9",
+          "name": "field",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#050814",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "15036efc793642248fd51e959f0708f5",
+          "name": "hud_score",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 10,
+            "width": 60,
+            "height": 20,
+            "text": "SCORE",
+            "textColor": "#8FA2E8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4a7e371026154bf1b03aff68046a46d9",
+          "name": "hud_wave",
+          "type": "label",
+          "props": {
+            "x": 180,
+            "y": 10,
+            "width": 120,
+            "height": 20,
+            "text": "WAVE 1",
+            "textColor": "#8FA2E8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "65db0f86711348a79b13b3853dc1bdf5",
+          "name": "life1",
+          "type": "panel",
+          "props": {
+            "x": 376,
+            "y": 12,
+            "width": 26,
+            "height": 12,
+            "bgColor": "#4BE3C1",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a75e76a232f04cb78f1e3547349e6a45",
+          "name": "life2",
+          "type": "panel",
+          "props": {
+            "x": 408,
+            "y": 12,
+            "width": 26,
+            "height": 12,
+            "bgColor": "#4BE3C1",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a2187e5b88564d5e87a096405b06d401",
+          "name": "life3",
+          "type": "panel",
+          "props": {
+            "x": 440,
+            "y": 12,
+            "width": 26,
+            "height": 12,
+            "bgColor": "#4BE3C1",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "eb60cfba0baf44f283321e0eabe32613",
+          "name": "drag_zone_line",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 396,
+            "width": 480,
+            "height": 2,
+            "bgColor": "#1C2550",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "34e05a7cebf44bb289e9ac3a361f829d",
+          "name": "drag_zone_text",
+          "type": "label",
+          "props": {
+            "x": 140,
+            "y": 454,
+            "width": 200,
+            "height": 20,
+            "text": "Drag here",
+            "textColor": "#3B4A85",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0990ab1b00e4403e963b6ffbe86bfd4c",
+          "name": "banner",
+          "type": "label",
+          "props": {
+            "x": 90,
+            "y": 220,
+            "width": 300,
+            "height": 76,
+            "text": "WAVE 1\nDiamond",
+            "textColor": "#FFD76A",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "baadb37e3d3643b5a48b7d66e2cbf8b4",
+          "name": "ship_body",
+          "type": "line",
+          "props": {
+            "x": 220,
+            "y": 416,
+            "width": 40,
+            "height": 24,
+            "points": "2,22 20,2 38,22 20,15 2,22",
+            "lineColor": "#4BE3C1",
+            "lineWidth": 3,
+            "rounded": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "dae755271d0d42da97a7e1738e1bc184",
+      "name": "Options",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "79a7918489204da9b2af772ea1f7892e",
+          "name": "opt_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#070B1E",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a64c5b4f7b484ed4a4b0d3cc2bb0ee71",
+          "name": "opt_title",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 48,
+            "width": 360,
+            "height": 44,
+            "text": "Options",
+            "textColor": "#F2F5FF",
+            "fontSize": 32,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b2a5e759e2fa42ddbc654e8f91b59658",
+          "name": "opt_speed_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 130,
+            "width": 360,
+            "height": 32,
+            "text": "Speed 3",
+            "textColor": "#DDE4FF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e0859426bef5407a92757c95a936dd62",
+          "name": "opt_speed",
+          "type": "slider",
+          "props": {
+            "x": 70,
+            "y": 178,
+            "width": 340,
+            "height": 14,
+            "min": 1,
+            "max": 5,
+            "value": 3,
+            "bgColor": "#1C2550",
+            "indicatorColor": "#2F6BFF",
+            "knobColor": "#F2F5FF",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_speed_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "973502cbe17540199448899d044d6933",
+          "name": "opt_sound_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 248,
+            "width": 200,
+            "height": 32,
+            "text": "Sound",
+            "textColor": "#DDE4FF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3082a1674c8c47a589bb5d1f7dc833fe",
+          "name": "opt_sound",
+          "type": "switch",
+          "props": {
+            "x": 340,
+            "y": 246,
+            "width": 76,
+            "height": 38,
+            "checked": true,
+            "onColor": "#2F6BFF",
+            "offColor": "#1C2550",
+            "knobColor": "#F2F5FF",
+            "disabled": false
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_sound_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "427d62aaa20547d997ab9536145de78a",
+          "name": "btn_back",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 360,
+            "width": 240,
+            "height": 64,
+            "text": "Back",
+            "bgColor": "#2F6BFF",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "009c6a2085db4c4ca247cb98c2b01655",
+      "name": "GameOver",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "2e5d7c59df184ce2bf5155322be63025",
+          "name": "end_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#070B1E",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "91dc6259b3f74548b0ea4fd290c73502",
+          "name": "end_title",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 64,
+            "width": 400,
+            "height": 44,
+            "text": "Game over",
+            "textColor": "#FF6B8B",
+            "fontSize": 32,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c3cb60be8bea416eb2c51c182c1555f6",
+          "name": "end_score_text",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 136,
+            "width": 400,
+            "height": 22,
+            "text": "Score",
+            "textColor": "#8FA2E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d8d02286605c4e5b9df6e53de30fce1c",
+          "name": "end_score",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 160,
+            "width": 400,
+            "height": 52,
+            "text": "0",
+            "textColor": "#F2F5FF",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e253becfe59c4ab5a9f068a1c381e340",
+          "name": "end_wave",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 222,
+            "width": 400,
+            "height": 22,
+            "text": "Wave reached: 1",
+            "textColor": "#8FA2E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3b913dc9482d483aa49519a99d64f077",
+          "name": "btn_replay",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play again",
+            "bgColor": "#2F6BFF",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_replay_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "028a79794b764b30a019619748c11dab",
+          "name": "btn_end_menu",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Menu",
+            "bgColor": "#1C2550",
+            "textColor": "#DDE4FF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_end_menu_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# ORBIT: a swarm of geometric drones comes down towards the orbital ring.\n#\n# Drag a finger in the band at the bottom to move the ship: it fires by itself.\n# The swarm speeds up when few drones are left, fires back, and at each wave it\n# changes shape and is faster. Three lives.\n#\n# Rules for the ESP32: all the objects are created only once, in build(). The\n# on_tick() loop uses only small integers and lists made in advance (no floats,\n# tuples or new strings). The drones are in a single container: one set_pos\n# moves the whole swarm. Each digit of the score is a fixed \"0..9\" column clipped\n# by a container: the column moves, not the label, because moving a label makes\n# it lay out its text again and allocates.\n\nCOLS = 5\nROWS = 3\nSLOTS = 15\nCELL_W = 64\nCELL_H = 46\nDRONE = 36\nPAD_X = 14\nPAD_Y = 5\nSWARM_W = COLS * CELL_W\nSWARM_H = ROWS * CELL_H\nSTART_X = 80\nTOP = 36\nSTEP = 8                    # px of each step of the swarm\nDROP = 16                   # px of descent at the edge\nEDGE = 8\nSHIP_W = 40\nSHIP_H = 24\nSHIP_Y = 416\nDRAG_Y = 396                # above this line the finger does not take the ship\nFIRE_EVERY = 11             # ticks between two automatic shots\nPB_N = 3                    # shots of the ship\nPB_W = 4\nPB_H = 14\nPB_V = 14\nEB_N = 4                    # shots of the drones\nEB_W = 6\nEB_H = 12\nGUARD = 60                  # ticks of invulnerability after a hit\nBOOM_T = 6\nWAVE_T = 40                 # ticks of the wave banner\nEND_T = 30\nWAVE_MAX = 9\nDIGIT_W = 16\nSPEEDS = (0, 60, 80, 100, 120, 140)   # percentage for each position of the slider\nROW_POINTS = (30, 20, 10)   # points for each row of drones\nROW_COLORS = (0xFF4F9A, 0xFFB02E, 0x35C8FF)\n\n# Shapes of the waves, a mask of 5 bits per row.\nSHAPES = (\n    (0b01110, 0b11111, 0b01110),   # Diamond\n    (0b11111, 0b10001, 0b11111),   # Ring\n    (0b10101, 0b11111, 0b10101),   # Trident\n    (0b11111, 0b11111, 0b11111),   # Wall\n)\nSHAPE_NAMES = (\"Diamond\", \"Ring\", \"Trident\", \"Wall\")\n\nDIGIT_STRIP = \"0\\n1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\"\nHUD_WAVE = tuple([\"WAVE %d\" % (n + 1) for n in range(WAVE_MAX)])\nBANNERS = tuple([\"WAVE %d\\n%s\" % (n + 1, SHAPE_NAMES[n % 4]) for n in range(WAVE_MAX)])\nSPEED_TEXT = tuple([\"Speed %d\" % n for n in range(6)])\n\nS_WAVE = 0\nS_PLAY = 1\nS_END = 2\n\nsound = True\nspeed_pct = 100\n\nbuilt = None                # the field the objects were created on\nstyles = []                 # the styles must stay alive\nswarm = None\ndrones = []\ndigits = []\nshots = []\neshots = []\nlives_icons = []\nboom = None\nship = None\nindev = None                # the pointer: remembered when a button is touched\npoint = None\nHIDDEN = 0\nPRESSED = 0\nline_h = 27\n\nalive = bytearray(SLOTS)\nshown = bytearray(5)\npb_x = [0] * PB_N\npb_y = [-1] * PB_N\neb_x = [0] * EB_N\neb_y = [-1] * EB_N          # in eighths of a pixel, -1 = free\n\nstate = S_WAVE\nscore = 0\nlives = 3\nwave = 1\nleft = 0\ncol_min = 0\ncol_max = 0\nrow_max = 0\nfx = START_X\nfy = TOP\nfdir = 1\nmarch = 1\npace = 100                  # overall speed: options plus wave\neb_v = 24\neb_every = 45\neb_wait = 45\nfire_wait = 0\nguard = 0\nboom_t = 0\nphase_t = 0\nship_x = 220\ndragging = False\nrnd = 7\n\n\ndef play_tone(hz, ms):\n    if sound:\n        ui.buzzer.beep(hz, ms)\n\n\ndef remember_touch():\n    global indev\n    device = lv.indev_active()\n    if device is not None:\n        indev = device\n\n\ndef big_titles():\n    if hasattr(lv, \"font_montserrat_40\"):\n        ui.menu_title.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n        ui.end_score.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n\n\ndef set_speed(value):\n    global speed_pct\n    speed_pct = SPEEDS[value]\n    ui.opt_speed_text.set_text_static(SPEED_TEXT[value])\n\n\ndef set_sound(on):\n    global sound\n    sound = on\n    if not on:\n        ui.buzzer.off()\n\n\ndef new_style(color, radius):\n    style = lv.style_t()\n    style.init()\n    style.set_bg_color(lv.color_hex(color))\n    style.set_bg_opa(lv.OPA.COVER)\n    style.set_radius(radius)\n    styles.append(style)\n    return style\n\n\ndef new_object(parent, style, w, h):\n    obj = lv.obj(parent)\n    obj.remove_style_all()\n    if style is not None:\n        obj.add_style(style, lv.PART.MAIN)\n    obj.set_size(w, h)\n    obj.set_pos(0, 0)              # the first set_pos allocates: it is done here\n    obj.remove_flag(lv.obj.FLAG.CLICKABLE)\n    obj.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    return obj\n\n\ndef build():\n    global built, swarm, boom, ship, point, HIDDEN, PRESSED, line_h\n    built = ui.field\n    HIDDEN = lv.obj.FLAG.HIDDEN\n    PRESSED = lv.INDEV_STATE.PRESSED\n    for items in (styles, drones, digits, shots, eshots, lives_icons):\n        items.clear()\n    point = lv.point_t()\n    lv.screen_active().remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.CLICKABLE)\n    star = new_style(0x2A3566, 1)\n    for n in range(6):\n        new_object(built, star, 3, 3).set_pos(40 + n * 79, 70 + (n * 137) % 300)\n    swarm = new_object(built, None, SWARM_W, SWARM_H)\n    for r in range(ROWS):\n        style = new_style(ROW_COLORS[r], 18 if r == 0 else (4 if r == 1 else 10))\n        if r == 2:                 # rings: colour on the border only\n            style.set_bg_opa(lv.OPA.TRANSP)\n            style.set_border_color(lv.color_hex(ROW_COLORS[r]))\n            style.set_border_width(7)\n        for c in range(COLS):\n            drone = new_object(swarm, style, DRONE, DRONE)\n            drone.set_pos(PAD_X + c * CELL_W, PAD_Y + r * CELL_H)\n            drones.append(drone)\n    style = new_style(0xF2F5FF, 0)\n    for n in range(PB_N):\n        shots.append(new_object(built, style, PB_W, PB_H))\n    style = new_style(0xFF6B8B, 3)\n    for n in range(EB_N):\n        eshots.append(new_object(built, style, EB_W, EB_H))\n    style = new_style(0xFFD76A, 18)\n    style.set_bg_opa(lv.OPA.TRANSP)\n    style.set_border_color(lv.color_hex(0xFFD76A))\n    style.set_border_width(3)\n    boom = new_object(built, style, DRONE, DRONE)\n    boom.add_flag(HIDDEN)\n    font = lv.font_montserrat_24\n    line_h = font.get_line_height()\n    box = new_object(built, None, 5 * DIGIT_W, line_h)\n    box.set_pos(66, 4)\n    for n in range(5):\n        column = new_object(box, None, DIGIT_W, 10 * line_h)\n        column.set_pos(n * DIGIT_W, 0)\n        label = lv.label(column)\n        label.set_width(DIGIT_W)\n        label.set_style_text_font(font, lv.PART.MAIN)\n        label.set_style_text_color(lv.color_hex(0xF2F5FF), lv.PART.MAIN)\n        label.set_style_text_align(lv.TEXT_ALIGN.CENTER, lv.PART.MAIN)\n        label.set_text_static(DIGIT_STRIP)\n        digits.append(column)\n    lives_icons.extend((ui.life1, ui.life2, ui.life3))\n    ship = ui.ship_body\n    ui.banner.move_foreground()\n\n\ndef show_score():\n    n = score\n    i = 4\n    while i >= 0:\n        d = n % 10\n        n //= 10\n        if shown[i] != d:\n            shown[i] = d\n            digits[i].set_y(-d * line_h)\n        i -= 1\n\n\ndef clear_shots():\n    i = 0\n    while i < PB_N:\n        pb_y[i] = -1\n        shots[i].add_flag(HIDDEN)\n        i += 1\n    i = 0\n    while i < EB_N:\n        eb_y[i] = -1\n        eshots[i].add_flag(HIDDEN)\n        i += 1\n\n\ndef swarm_edges():\n    global col_min, col_max, row_max\n    col_min = COLS\n    col_max = -1\n    row_max = 0\n    i = 0\n    while i < SLOTS:\n        if alive[i]:\n            c = i % COLS\n            if c < col_min:\n                col_min = c\n            if c > col_max:\n                col_max = c\n            if i // COLS > row_max:\n                row_max = i // COLS\n        i += 1\n\n\ndef prepare_wave():\n    global state, left, fx, fy, fdir, march, pace, eb_v, eb_every, eb_wait, fire_wait, phase_t\n    shape = SHAPES[(wave - 1) % 4]\n    left = 0\n    i = 0\n    while i < SLOTS:\n        on = (shape[i // COLS] >> (i % COLS)) & 1\n        alive[i] = on\n        if on:\n            left += 1\n            drones[i].remove_flag(HIDDEN)\n        else:\n            drones[i].add_flag(HIDDEN)\n        i += 1\n    swarm_edges()\n    pace = speed_pct * (9 + wave) // 10\n    eb_v = max(16, 24 * pace // 100)\n    eb_every = max(14, 4500 // pace)\n    eb_wait = eb_every\n    fire_wait = 0\n    fx = START_X\n    fy = TOP + (wave - 1) * 6\n    fdir = 1\n    march = 1\n    swarm.set_pos(fx, fy)\n    clear_shots()\n    boom.add_flag(HIDDEN)\n    ui.hud_wave.set_text_static(HUD_WAVE[wave - 1])\n    ui.banner.set_text_static(BANNERS[wave - 1])\n    ui.banner.remove_flag(HIDDEN)\n    state = S_WAVE\n    phase_t = WAVE_T\n\n\ndef new_game():\n    global score, lives, wave, ship_x, guard, dragging, boom_t\n    if built is not ui.field:      # a live update creates the page again\n        build()\n    score = 0\n    lives = 3\n    wave = 1\n    guard = 0\n    boom_t = 0\n    dragging = False\n    ship_x = (480 - SHIP_W) // 2\n    ship.set_pos(ship_x, SHIP_Y)\n    ship.remove_flag(HIDDEN)\n    i = 0\n    while i < 3:\n        lives_icons[i].remove_flag(HIDDEN)\n        i += 1\n    i = 0\n    while i < 5:\n        shown[i] = 0\n        digits[i].set_y(0)\n        i += 1\n    prepare_wave()\n    ui.tick.resume()\n\n\ndef read_touch():\n    global ship_x, dragging\n    if indev is None:\n        return\n    if indev.get_state() != PRESSED:\n        dragging = False\n        return\n    indev.get_point(point)\n    if not dragging:\n        if point.y < DRAG_Y:\n            return\n        dragging = True\n    x = point.x - SHIP_W // 2\n    if x < 0:\n        x = 0\n    elif x > 480 - SHIP_W:\n        x = 480 - SHIP_W\n    if x != ship_x:\n        ship_x = x\n        ship.set_pos(x, SHIP_Y)\n\n\ndef lose_life():\n    global lives, guard, state, phase_t\n    lives -= 1\n    lives_icons[lives].add_flag(HIDDEN)\n    clear_shots()\n    if lives == 0:\n        ship.add_flag(HIDDEN)\n        state = S_END\n        phase_t = END_T\n        play_tone(110, 500)\n        return\n    guard = GUARD\n    play_tone(165, 250)\n\n\ndef ship_fire():\n    global fire_wait\n    fire_wait -= 1\n    if fire_wait > 0:\n        return\n    i = 0\n    while i < PB_N:\n        if pb_y[i] < 0:\n            pb_x[i] = ship_x + (SHIP_W - PB_W) // 2\n            pb_y[i] = SHIP_Y - PB_H\n            shots[i].set_pos(pb_x[i], pb_y[i])\n            shots[i].remove_flag(HIDDEN)\n            fire_wait = FIRE_EVERY\n            return\n        i += 1\n\n\ndef drone_in(x, y):\n    rx = x - fx - PAD_X\n    ry = y - fy - PAD_Y\n    if rx < 0 or ry < 0:\n        return -1\n    c = rx // CELL_W\n    r = ry // CELL_H\n    if c >= COLS or r >= ROWS or rx % CELL_W >= DRONE or ry % CELL_H >= DRONE:\n        return -1\n    i = r * COLS + c\n    return i if alive[i] else -1\n\n\ndef shoot_down(i):\n    global left, score, boom_t, wave\n    alive[i] = 0\n    drones[i].add_flag(HIDDEN)\n    left -= 1\n    score += ROW_POINTS[i // COLS] * wave\n    if score > 99999:\n        score = 99999\n    show_score()\n    boom.set_pos(fx + PAD_X + (i % COLS) * CELL_W, fy + PAD_Y + (i // COLS) * CELL_H)\n    boom.remove_flag(HIDDEN)\n    boom_t = BOOM_T\n    if left == 0:\n        if wave < WAVE_MAX:\n            wave += 1\n        play_tone(1047, 160)\n        prepare_wave()\n    else:\n        play_tone(880, 30)\n        swarm_edges()\n\n\ndef move_shots():\n    i = 0\n    while i < PB_N:\n        y = pb_y[i]\n        if y >= 0:\n            y -= PB_V\n            if y < TOP:\n                pb_y[i] = -1\n                shots[i].add_flag(HIDDEN)\n            else:\n                j = drone_in(pb_x[i] + PB_W // 2, y)\n                if j >= 0:\n                    pb_y[i] = -1\n                    shots[i].add_flag(HIDDEN)\n                    shoot_down(j)\n                    if state != S_PLAY:\n                        return\n                else:\n                    pb_y[i] = y\n                    shots[i].set_pos(pb_x[i], y)\n        i += 1\n\n\ndef drones_fire():\n    global rnd\n    i = 0\n    while i < EB_N and eb_y[i] >= 0:\n        i += 1\n    if i == EB_N:\n        return\n    rnd = (rnd * 75 + 74) % 65537\n    if rnd & 1:                    # one shot in two aims at the ship\n        c = (ship_x + SHIP_W // 2 - fx - PAD_X) // CELL_W\n        if c < 0:\n            c = 0\n        elif c >= COLS:\n            c = COLS - 1\n    else:\n        c = (rnd >> 1) % COLS\n    n = COLS\n    while n:\n        r = ROWS - 1\n        while r >= 0:\n            if alive[r * COLS + c]:\n                eb_x[i] = fx + PAD_X + c * CELL_W + (DRONE - EB_W) // 2\n                eb_y[i] = (fy + PAD_Y + r * CELL_H + DRONE) * 8\n                eshots[i].set_pos(eb_x[i], eb_y[i] // 8)\n                eshots[i].remove_flag(HIDDEN)\n                play_tone(330, 25)\n                return\n            r -= 1\n        c = (c + 1) % COLS\n        n -= 1\n\n\ndef move_drone_shots():\n    i = 0\n    while i < EB_N:\n        if eb_y[i] >= 0:\n            eb_y[i] += eb_v\n            y = eb_y[i] // 8\n            if y >= 480:\n                eb_y[i] = -1\n                eshots[i].add_flag(HIDDEN)\n            elif (guard == 0 and y + EB_H > SHIP_Y + 4 and y < SHIP_Y + SHIP_H\n                  and eb_x[i] + EB_W > ship_x + 6 and eb_x[i] < ship_x + SHIP_W - 6):\n                lose_life()\n                return\n            else:\n                eshots[i].set_pos(eb_x[i], y)\n        i += 1\n\n\ndef march_step():\n    global march, fx, fy, fdir\n    march -= 1\n    if march > 0:\n        return\n    # the fewer drones are left, the fewer ticks between two steps\n    march = (3 + left * 2 // 3) * 100 // pace\n    if march < 1:\n        march = 1\n    x = fx + fdir * STEP\n    if x + PAD_X + col_min * CELL_W < EDGE or x + PAD_X + col_max * CELL_W + DRONE > 480 - EDGE:\n        fdir = -fdir\n        fy += DROP\n    else:\n        fx = x\n    swarm.set_pos(fx, fy)\n    if fy + PAD_Y + row_max * CELL_H + DRONE >= SHIP_Y:   # the swarm reaches the ring\n        fy = TOP\n        swarm.set_pos(fx, fy)\n        lose_life()\n\n\ndef end_game():\n    ui.tick.pause()\n    ui.buzzer.off()\n    ui.load_page(ui.PAGE_GAMEOVER)\n\n\ndef show_end():\n    ui.end_score.set_text(str(score))\n    ui.end_wave.set_text(\"Wave reached: %d\" % wave)\n\n\ndef on_tick():\n    global phase_t, state, guard, boom_t, eb_wait\n    if state == S_END:\n        phase_t -= 1\n        if phase_t == 0:\n            end_game()\n        return\n    read_touch()\n    if boom_t:\n        boom_t -= 1\n        if boom_t == 0:\n            boom.add_flag(HIDDEN)\n    if guard:\n        guard -= 1\n        if guard == 0 or guard & 4:\n            ship.remove_flag(HIDDEN)\n        else:\n            ship.add_flag(HIDDEN)\n    if state == S_WAVE:\n        phase_t -= 1\n        if phase_t == 0:\n            ui.banner.add_flag(HIDDEN)\n            state = S_PLAY\n        return\n    ship_fire()\n    move_shots()\n    if state != S_PLAY:\n        return\n    eb_wait -= 1\n    if eb_wait == 0:\n        eb_wait = eb_every\n        drones_fire()\n    move_drone_shots()\n    if state == S_PLAY:\n        march_step()\n",
+    "handlers": {
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()\n"
+      },
+      "Game_screen_loaded": {
+        "widget": "Game",
+        "event": "SCREEN_LOADED",
+        "body": "new_game()\n"
+      },
+      "GameOver_screen_loaded": {
+        "widget": "GameOver",
+        "event": "SCREEN_LOADED",
+        "body": "show_end()\n"
+      },
+      "btn_play_clicked": {
+        "widget": "btn_play",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_options_clicked": {
+        "widget": "btn_options",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_OPTIONS)\n"
+      },
+      "btn_back_clicked": {
+        "widget": "btn_back",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "btn_replay_clicked": {
+        "widget": "btn_replay",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_end_menu_clicked": {
+        "widget": "btn_end_menu",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "opt_speed_value_changed": {
+        "widget": "opt_speed",
+        "event": "VALUE_CHANGED",
+        "body": "set_speed(ui.opt_speed.get_value())\n"
+      },
+      "opt_sound_value_changed": {
+        "widget": "opt_sound",
+        "event": "VALUE_CHANGED",
+        "body": "set_sound(ui.opt_sound.has_state(lv.STATE.CHECKED))\n"
+      },
+      "Menu_screen_loaded": {
+        "widget": "Menu",
+        "event": "SCREEN_LOADED",
+        "body": "big_titles()\n"
+      }
+    }
+  },
+  "currentPageId": "22efc01d0cdb4320b04584be0922ee59",
+  "assets": {},
+  "variables": [],
+  "projectId": "abe9b9d2dd6740cab120cd59e1698e9a"
+}

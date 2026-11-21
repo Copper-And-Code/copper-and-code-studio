@@ -1,0 +1,656 @@
+{
+  "schemaVersion": 3,
+  "projectName": "FTP Server",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "70acc267554245ada4c178a0a744a58b",
+      "name": "Server",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "e4c012b57f54401bbdffc0e96e4dc776",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 20,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0577d1ca5a8f49c19800e2b68993b06e",
+          "name": "bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#121820",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2062d3e11600418c851d8c0c664e424f",
+          "name": "title",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 12,
+            "width": 240,
+            "height": 32,
+            "text": "FTP Server",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "60b86432f07d466abab5396c445ff7f0",
+          "name": "serve_label",
+          "type": "label",
+          "props": {
+            "x": 290,
+            "y": 18,
+            "width": 110,
+            "height": 22,
+            "text": "Serving",
+            "textColor": "#8FA0B5",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_RIGHT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6d0b2038816b440eae8ef62e90a26585",
+          "name": "serve_switch",
+          "type": "switch",
+          "props": {
+            "x": 408,
+            "y": 12,
+            "width": 58,
+            "height": 32,
+            "checked": true,
+            "onColor": "#4CC38A",
+            "offColor": "#2A3444",
+            "knobColor": "#FFFFFF",
+            "disabled": false
+          },
+          "events": {
+            "VALUE_CHANGED": "serve_switch_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "name": "access_panel",
+          "type": "panel",
+          "props": {
+            "x": 12,
+            "y": 54,
+            "width": 456,
+            "height": 196,
+            "bgColor": "#1E2633",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 8,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9993b40b3f0543879e3191617d784754",
+          "name": "address_caption",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 8,
+            "width": 200,
+            "height": 18,
+            "text": "ADDRESS",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a82ee3ceb2574af790401a9128c049d0",
+          "name": "addresses",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 28,
+            "width": 432,
+            "height": 44,
+            "text": "ftp://192.168.1.50   on Home",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7502e2e4082a4550a16425805e72af80",
+          "name": "user_caption",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 80,
+            "width": 120,
+            "height": 18,
+            "text": "USER",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ff08d3bf019c439f8d972ee640591a89",
+          "name": "user",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 102,
+            "width": 120,
+            "height": 30,
+            "text": "mpy",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "81fc929773d74ed099d0c2e1ba030a24",
+          "name": "password_caption",
+          "type": "label",
+          "props": {
+            "x": 150,
+            "y": 80,
+            "width": 150,
+            "height": 18,
+            "text": "PASSWORD",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5d8635ae3c174d03b26b0e5450b72ffd",
+          "name": "password",
+          "type": "label",
+          "props": {
+            "x": 150,
+            "y": 102,
+            "width": 150,
+            "height": 30,
+            "text": "------",
+            "textColor": "#E0742F",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "bd3506ba2f1f4838b983f6abb6b0a084",
+          "name": "new_password_button",
+          "type": "button",
+          "props": {
+            "x": 320,
+            "y": 92,
+            "width": 124,
+            "height": 42,
+            "text": "New password",
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "new_password_button_clicked"
+          },
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "05d7675c0cad493ab1a0513c2c99b330",
+          "name": "folder_caption",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 154,
+            "width": 150,
+            "height": 18,
+            "text": "THE CLIENTS SEE",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "fe50eec9e0bd4fbf85ea21cd0a1e0b6a",
+          "name": "folder",
+          "type": "dropdown",
+          "props": {
+            "x": 172,
+            "y": 144,
+            "width": 272,
+            "height": 40,
+            "options": "Flash and SD card\nSD card\nStudio apps",
+            "selected": 0,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {
+            "VALUE_CHANGED": "folder_value_changed"
+          },
+          "parentId": "246730d7cc2241c7b8e5a5dafab9c7d3",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a2b71672c6d04d02b3b9802620bc7739",
+          "name": "state_panel",
+          "type": "panel",
+          "props": {
+            "x": 12,
+            "y": 258,
+            "width": 456,
+            "height": 134,
+            "bgColor": "#1E2633",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 8,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e6e4ca9aaa254574b2126afc75eb817d",
+          "name": "clients",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 8,
+            "width": 432,
+            "height": 22,
+            "text": "No one connected",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c3948ae07e6f469d94101f4f845e214b",
+          "name": "transfer",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 34,
+            "width": 432,
+            "height": 20,
+            "text": "No transfer",
+            "textColor": "#C8D2DE",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c3b0157696b5475ea5c622469d29cc2e",
+          "name": "transfer_bar",
+          "type": "bar",
+          "props": {
+            "x": 12,
+            "y": 58,
+            "width": 432,
+            "height": 8,
+            "min": 0,
+            "max": 100,
+            "value": 0,
+            "bgColor": "#2A3444",
+            "indicatorColor": "#E0742F",
+            "mode": "LV_BAR_MODE_NORMAL",
+            "animated": true,
+            "startValue": 0
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6a74b89bfda44684850ab9884fbcf3d4",
+          "name": "totals",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 72,
+            "width": 432,
+            "height": 18,
+            "text": "Received 0 B    Sent 0 B",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0825fde3d7e646c48ad1e4afca373b8e",
+          "name": "card_caption",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 96,
+            "width": 90,
+            "height": 18,
+            "text": "STORAGE",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "fc0a5b4e1d8b415c90268d127d0134e7",
+          "name": "card",
+          "type": "label",
+          "props": {
+            "x": 104,
+            "y": 96,
+            "width": 340,
+            "height": 18,
+            "text": "",
+            "textColor": "#FFFFFF",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d00b3d7bbb3a4ef798af57ed98fb38f4",
+          "name": "card_bar",
+          "type": "bar",
+          "props": {
+            "x": 12,
+            "y": 118,
+            "width": 432,
+            "height": 8,
+            "min": 0,
+            "max": 100,
+            "value": 0,
+            "bgColor": "#2A3444",
+            "indicatorColor": "#4CC38A",
+            "mode": "LV_BAR_MODE_NORMAL",
+            "animated": true,
+            "startValue": 0
+          },
+          "events": {},
+          "parentId": "a2b71672c6d04d02b3b9802620bc7739",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "73960a2a659c4b7d9c3d645220e3431d",
+          "name": "log_panel",
+          "type": "panel",
+          "props": {
+            "x": 12,
+            "y": 400,
+            "width": 456,
+            "height": 72,
+            "bgColor": "#1E2633",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 8,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "08c296ef7c4f408594c1a06cf3ae38c7",
+          "name": "log",
+          "type": "label",
+          "props": {
+            "x": 10,
+            "y": 4,
+            "width": 436,
+            "height": 64,
+            "text": "",
+            "textColor": "#C8D2DE",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_CLIP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "73960a2a659c4b7d9c3d645220e3431d",
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# FTP SERVER: the files of the board for a PC on the same WiFi network. The server is in\n# ftp_server, the screen in ftp_app; the timer polls the server every 20 ms, so the screen keeps\n# its pace during a long copy. The network is one of those saved by the Settings example.\nimport ftp_app\n",
+    "handlers": {
+      "Server_screen_loaded": {
+        "widget": "Server",
+        "event": "SCREEN_LOADED",
+        "body": "ftp_app.start(ui)"
+      },
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "ftp_app.tick()"
+      },
+      "serve_switch_value_changed": {
+        "widget": "serve_switch",
+        "event": "VALUE_CHANGED",
+        "body": "ftp_app.serve_changed(e.get_target_obj())"
+      },
+      "new_password_button_clicked": {
+        "widget": "new_password_button",
+        "event": "CLICKED",
+        "body": "ftp_app.new_password()"
+      },
+      "folder_value_changed": {
+        "widget": "folder",
+        "event": "VALUE_CHANGED",
+        "body": "ftp_app.folder_changed(e.get_target_obj())"
+      }
+    }
+  },
+  "currentPageId": "70acc267554245ada4c178a0a744a58b",
+  "assets": {},
+  "variables": [],
+  "projectId": "5aba1aff15e14cb48a46e5c8473b3413",
+  "board": {
+    "schemaVersion": 1,
+    "id": "esp32_4848s040_480",
+    "revision": 1,
+    "name": "ESP32-4848S040 (480×480)",
+    "adapter": "esp32_4848s040",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911"
+      ]
+    },
+    "physicalWidth": 480,
+    "physicalHeight": 480,
+    "logicalWidth": 480,
+    "logicalHeight": 480,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver"
+    }
+  },
+  "modules": [
+    {
+      "id": "e9f5b1f62b514789be5cda1edfbeb491",
+      "name": "cac_settings",
+      "source": "# cac_settings: the settings that every Copper and Code app on a board shares.\n#\n# One file, cac_settings.json, in the flash: /flash/cac_settings.json on boards with a /flash\n# folder (STM32), /cac_settings.json on the others (ESP32, RP2350). The Settings app writes it;\n# boot.py, the home menu of the board and the other apps read it. It holds up to five WiFi\n# networks, and sections of other settings, such as the brightness of the display:\n#\n#     {\"version\": 1, \"wifi\": [{\"ssid\": \"Home\", \"password\": \"...\"}, ...], \"display\": {\"brightness\": 70}}\n#\n# The networks are kept from the most recently used. Passwords are in clear text, like in\n# MicroPython's own examples: whoever can read the flash can read them.\n#\n# Copy the same file into every app that uses it (in the IDE: a Python module of the project).\nimport json\nimport os\nimport sys\nimport time\n\ntry:\n    import network\nexcept ImportError:                        # the simulator and the PC have no WiFi\n    network = None\n\nVERSION = 1\nMAX_NETWORKS = 5\nTIMEOUT_S = 10                             # for each network tried\nDEMO_SCAN = ((\"Home\", -48), (\"Office\", -61), (\"Guest\", -75))\n\n\ndef path():\n    \"\"\"Where the file is: in the flash of a board; next to the program on a PC or in the simulator.\"\"\"\n    if sys.platform in (\"linux\", \"darwin\", \"win32\"):\n        return \"cac_settings.json\"\n    try:\n        if \"flash\" in os.listdir(\"/\"):\n            return \"/flash/cac_settings.json\"\n    except OSError:\n        pass\n    return \"/cac_settings.json\"\n\n\ndef load():\n    \"\"\"The settings, or empty ones when the file is missing or broken.\"\"\"\n    try:\n        with open(path()) as f:\n            data = json.load(f)\n    except (OSError, ValueError):\n        data = {}\n    if not isinstance(data, dict):\n        data = {}\n    networks = [n for n in data.get(\"wifi\", []) if isinstance(n, dict) and n.get(\"ssid\")]\n    data[\"wifi\"] = networks[:MAX_NETWORKS]\n    data[\"version\"] = VERSION\n    return data\n\n\ndef save(data):\n    \"\"\"Write the settings whole: first a new file, then the rename, so a reset never leaves half.\"\"\"\n    name = path()\n    temporary = name + \".new\"\n    with open(temporary, \"w\") as f:\n        json.dump(data, f)\n    try:\n        os.remove(name)\n    except OSError:\n        pass\n    os.rename(temporary, name)\n\n\ndef section(name):\n    \"\"\"One section of other settings, such as \"display\": a dict, empty when there is none.\"\"\"\n    value = load().get(name)\n    return value if isinstance(value, dict) else {}\n\n\ndef set_section(name, value):\n    \"\"\"Replace one section; the networks and the other sections stay.\"\"\"\n    data = load()\n    data[name] = value\n    save(data)\n\n\ndef networks():\n    \"\"\"The saved networks, from the most recently used: a list of {\"ssid\", \"password\"}.\"\"\"\n    return load()[\"wifi\"]\n\n\ndef password(ssid):\n    for item in networks():\n        if item[\"ssid\"] == ssid:\n            return item[\"password\"]\n    return None\n\n\ndef remember(ssid, password):\n    \"\"\"Save a network, or its new password, as the most recently used; the oldest goes when full.\"\"\"\n    data = load()\n    others = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    data[\"wifi\"] = ([{\"ssid\": ssid, \"password\": password}] + others)[:MAX_NETWORKS]\n    save(data)\n\n\ndef forget(ssid):\n    data = load()\n    data[\"wifi\"] = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    save(data)\n\n\ndef station():\n    \"\"\"The WiFi station interface, active, or None without WiFi hardware.\"\"\"\n    if network is None:\n        return None\n    try:\n        sta = network.WLAN(network.STA_IF)\n        sta.active(True)\n        return sta\n    except (AttributeError, OSError):\n        return None\n\n\ndef scan(sta=None):\n    \"\"\"The networks in range, strongest first, as (ssid, rssi); demo names without WiFi hardware.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return list(DEMO_SCAN)\n    best = {}\n    for entry in sta.scan():\n        try:\n            name = entry[0].decode()\n        except ValueError:\n            continue\n        if name and (name not in best or entry[3] > best[name]):\n            best[name] = entry[3]\n    return sorted(best.items(), key=lambda item: -item[1])\n\n\ndef connected_ssid(sta=None):\n    sta = sta or station()\n    if sta is None or not sta.isconnected():\n        return None\n    try:\n        return sta.config(\"essid\")\n    except (OSError, ValueError):\n        return \"?\"\n\n\ndef join(ssid, password, sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to one network; True when connected within timeout_s.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return False\n    try:\n        sta.disconnect()\n    except OSError:\n        pass\n    try:\n        sta.connect(ssid, password)\n    except OSError as e:\n        print(\"cac_settings: connect\", ssid, repr(e))\n        return False\n    start = time.ticks_ms()\n    while not sta.isconnected():\n        if time.ticks_diff(time.ticks_ms(), start) > timeout_s * 1000:\n            try:\n                sta.disconnect()\n            except OSError:\n                pass\n            return False\n        time.sleep_ms(100)\n    return True\n\n\ndef connect(sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to the best saved network in range and return its name, or None.\n\n    Already connected: nothing to do. Otherwise the saved networks found by a scan are tried, the\n    most recently used first and then by signal; the one that works becomes the most recent.\n    Networks that do not answer the scan are not tried: hidden networks are not supported.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return None\n    current = connected_ssid(sta)\n    if current:\n        return current\n    saved = networks()\n    if not saved:\n        return None\n    try:\n        visible = dict(scan(sta))\n    except OSError as e:\n        print(\"cac_settings: scan\", repr(e))\n        return None\n    candidates = [n for n in saved if n[\"ssid\"] in visible]\n    if len(candidates) > 1:\n        first, rest = candidates[0], candidates[1:]\n        candidates = [first] + sorted(rest, key=lambda n: -visible[n[\"ssid\"]])\n    for item in candidates:\n        if join(item[\"ssid\"], item[\"password\"], sta, timeout_s):\n            if item is not saved[0]:\n                remember(item[\"ssid\"], item[\"password\"])\n            print(\"cac_settings: connected to\", item[\"ssid\"], sta.ifconfig()[0])\n            return item[\"ssid\"]\n    return None\n"
+    },
+    {
+      "id": "ad93762fbde14e09afa4840d228bb729",
+      "name": "ftp_server",
+      "source": "# An FTP server in MicroPython, polled from the GUI's timer: it never blocks the screen. Commands\n# are answered at once; files move in pieces, a few milliseconds of each tick, so the screen keeps\n# its pace while a PC copies gigabytes.\n#\n#   server = Server(root=\"/\", user=\"mpy\", password=\"123456\", port=21, note=print)\n#   server.start()\n#   server.poll(budget_ms=10)     # from a timer, every 20 ms\n#   server.stop()\n#\n# Passive (PASV, EPSV) and active (PORT, EPRT) data connections, so every client works: FileZilla,\n# WinSCP, Windows Explorer, the file managers of Linux and macOS, curl, lftp, ftp. Listings in\n# both forms (LIST like ls -l, MLSD with exact times), resume (REST), rename, delete, folders.\n#\n# Plain FTP: the password and the files cross the network in clear. Use it on your own network.\n\nimport errno\nimport os\nimport socket\nimport time\n\ntry:\n    import select\nexcept ImportError:\n    select = None\n\nMONTHS = (\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\")\nPASSIVE_PORTS = range(50000, 50100)\nCHUNK = 16384\nIDLE_SECONDS = 600\nMAX_SESSIONS = 3            # lwIP on the ESP32 has few sockets: a client takes up to three\nWRONG_PASSWORDS = 3\n\nS_IFMT, S_IFDIR, S_IFLNK = 0o170000, 0o040000, 0o120000\n_AGAIN = (errno.EAGAIN, getattr(errno, \"EWOULDBLOCK\", errno.EAGAIN))\n\n\ndef local_addresses():\n    \"\"\"The IPv4 addresses, without 127.x: of the WiFi on a board, from /proc on Linux.\"\"\"\n    found = []\n    try:\n        import network\n\n        for kind in (\"STA_IF\", \"AP_IF\"):\n            wlan = network.WLAN(getattr(network, kind))\n            up = wlan.isconnected() if kind == \"STA_IF\" else wlan.active()\n            if up:\n                ip = wlan.ifconfig()[0]\n                if ip and ip != \"0.0.0.0\" and ip not in found:\n                    found.append(ip)\n        return found\n    except (ImportError, AttributeError, OSError):\n        pass\n    try:\n        with open(\"/proc/net/fib_trie\") as source:\n            last = None\n            for line in source:\n                line = line.strip()\n                if line.startswith(\"|--\"):\n                    last = line[3:].strip()\n                elif line.startswith(\"/32 host LOCAL\") and last and not last.startswith(\"127.\"):\n                    if last not in found:\n                        found.append(last)\n    except OSError:\n        pass\n    return found\n\n\ndef _ip_value(ip):\n    try:\n        a, b, c, d = (int(x) for x in ip.split(\".\"))\n        return (a << 24) | (b << 16) | (c << 8) | d\n    except ValueError:\n        return 0\n\n\ndef _closest(addresses, peer):\n    # The address of the network the client came from: the one with the longest common prefix.\n    best, best_bits = (addresses[0] if addresses else \"127.0.0.1\"), -1\n    p = _ip_value(peer)\n    for ip in addresses:\n        x = _ip_value(ip) ^ p\n        bits = 32\n        while x:\n            x >>= 1\n            bits -= 1\n        if bits > best_bits:\n            best, best_bits = ip, bits\n    return best\n\n\ndef _peer_ip(address):\n    if isinstance(address, tuple):\n        return address[0]\n    if len(address) >= 8:  # MicroPython: the raw sockaddr_in\n        return \".\".join(str(b) for b in address[4:8])\n    return \"?\"\n\n\ndef _mode_text(mode):\n    kind = mode & S_IFMT\n    if not mode & 0o777:                # MicroPython's file systems keep no permissions\n        mode |= 0o755 if kind == S_IFDIR else 0o644\n    text = \"d\" if kind == S_IFDIR else \"l\" if kind == S_IFLNK else \"-\"\n    for shift in (6, 3, 0):\n        bits = (mode >> shift) & 7\n        text += (\"r\" if bits & 4 else \"-\") + (\"w\" if bits & 2 else \"-\") + (\"x\" if bits & 1 else \"-\")\n    return text\n\n\ndef _ls_time(seconds, now):\n    t = time.localtime(seconds)\n    if abs(now - seconds) < 180 * 86400:\n        return \"%s %2d %02d:%02d\" % (MONTHS[t[1] - 1], t[2], t[3], t[4])\n    return \"%s %2d  %4d\" % (MONTHS[t[1] - 1], t[2], t[0])\n\n\ndef _utc_text(seconds):\n    t = time.gmtime(seconds)\n    return \"%04d%02d%02d%02d%02d%02d\" % t[:6]\n\n\ndef _is_dir(path):\n    try:\n        return os.stat(path)[0] & S_IFMT == S_IFDIR\n    except OSError:\n        return False\n\n\ndef _error_text(error):\n    code = error.args[0] if error.args else 0\n    return {errno.ENOENT: \"No such file or folder\", errno.EACCES: \"Permission denied\",\n            errno.EPERM: \"Not allowed\", errno.EEXIST: \"Already exists\",\n            errno.EISDIR: \"It is a folder\", 28: \"The card is full\",\n            39: \"The folder is not empty\", 20: \"Not a folder\", 18: \"Not on the same file system\"}.get(code, \"Error %s\" % code)\n\n\nclass _Transfer:\n    # Data for or from the client: bytes (a listing), a file to send, a file to receive.\n\n    def __init__(self, kind, name, source=None, data=b\"\", target=None):\n        self.kind = kind  # \"list\", \"send\", \"receive\"\n        self.name = name\n        self.source = source\n        self.target = target\n        self.pending = memoryview(data) if data else None\n        self.bytes = 0\n        self.started = time.ticks_ms()\n        self.size = 0\n\n    def close(self):\n        for f in (self.source, self.target):\n            if f:\n                try:\n                    f.close()\n                except OSError:\n                    pass\n\n\nclass Session:\n    def __init__(self, server, sock, peer):\n        self.server = server\n        self.sock = sock\n        self.peer = peer\n        sock.setblocking(False)\n        self.incoming = b\"\"\n        self.outgoing = b\"\"\n        self.user = None\n        self.logged = False\n        self.wrong = 0\n        self.cwd = \"/\"\n        self.listener = None  # passive: our listening socket\n        self.active = None  # active: the client's (ip, port)\n        self.data = None  # the data connection\n        self.transfer = None\n        self.waiting_since = 0\n        self.rename_from = None\n        self.rest = 0\n        self.last = time.time()\n        self.closed = False\n        self.quitting = False\n        self.reply(220, \"MicroPython FTP server ready\")\n\n    # --- the control connection\n\n    def reply(self, code, text):\n        lines = text.split(\"\\n\")\n        out = \"\"\n        for line in lines[:-1]:\n            out += \"%d-%s\\r\\n\" % (code, line)\n        out += \"%d %s\\r\\n\" % (code, lines[-1])\n        self.outgoing += out.encode()\n\n    def poll(self):\n        if self.closed:\n            return False\n        busy = False\n        try:\n            part = self.sock.recv(4096)\n            if not part:\n                self.close()\n                return False\n            self.incoming += part\n            busy = True\n        except OSError as error:\n            if error.args[0] not in _AGAIN:\n                self.close()\n                return False\n        while b\"\\n\" in self.incoming and not self.closed:\n            line, _, self.incoming = self.incoming.partition(b\"\\n\")\n            self.last = time.time()\n            try:\n                text = line.rstrip(b\"\\r\").decode()\n            except UnicodeError:\n                self.reply(501, \"Names must be UTF-8\")\n                continue\n            self.command(text)\n            busy = True\n        if len(self.incoming) > 8192:\n            self.close()\n            return False\n        self._flush()\n        if self.quitting and not self.outgoing:\n            self.close()\n        elif not self.transfer and time.time() - self.last > IDLE_SECONDS:\n            self.reply(421, \"Idle for too long\")\n            self._flush()\n            self.close()\n        return busy\n\n    def _flush(self):\n        while self.outgoing:\n            try:\n                n = self.sock.send(self.outgoing)\n            except OSError as error:\n                if error.args[0] not in _AGAIN:\n                    self.close()\n                return\n            if not n:\n                return\n            self.outgoing = self.outgoing[n:]\n\n    def close(self):\n        if self.closed:\n            return\n        self.closed = True\n        self._end_data()\n        try:\n            self.sock.close()\n        except OSError:\n            pass\n        self.server.note(self.peer, \"left\" if self.logged else \"disconnected\")\n\n    # --- paths: what the client sees (\"/music/a.mp3\") and the real one (root + it)\n\n    def virtual(self, arg):\n        path = arg if arg.startswith(\"/\") else self.cwd.rstrip(\"/\") + \"/\" + arg\n        parts = []\n        for part in path.split(\"/\"):\n            if part in (\"\", \".\"):\n                continue\n            if part == \"..\":\n                if parts:\n                    parts.pop()\n            else:\n                parts.append(part)\n        return \"/\" + \"/\".join(parts)\n\n    def real(self, virtual):\n        root = self.server.root.rstrip(\"/\")\n        return (root + virtual) if virtual != \"/\" else (root or \"/\")\n\n    # --- commands\n\n    def command(self, text):\n        verb, _, arg = text.partition(\" \")\n        verb = verb.upper()\n        if verb in (\"XPWD\", \"XCWD\", \"XMKD\", \"XRMD\", \"XCUP\"):\n            verb = {\"XPWD\": \"PWD\", \"XCWD\": \"CWD\", \"XMKD\": \"MKD\", \"XRMD\": \"RMD\", \"XCUP\": \"CDUP\"}[verb]\n        if not self.logged and verb not in (\"USER\", \"PASS\", \"QUIT\", \"FEAT\", \"SYST\", \"NOOP\", \"AUTH\", \"OPTS\", \"HELP\"):\n            self.reply(530, \"Log in first\")\n            return\n        handler = getattr(self, \"_\" + verb, None) if verb.isalpha() else None\n        if handler is None:\n            self.reply(502, \"%s is not implemented\" % verb)\n            return\n        try:\n            handler(arg)\n        except OSError as error:\n            self.reply(550, _error_text(error))\n        if verb not in (\"REST\", \"RETR\", \"STOR\", \"APPE\"):\n            self.rest = 0\n        if verb not in (\"RNFR\", \"RNTO\"):\n            self.rename_from = None\n\n    def _USER(self, arg):\n        self.user = arg\n        self.logged = False\n        self.reply(331, \"Password, please\")\n\n    def _PASS(self, arg):\n        if self.user == self.server.user and arg == self.server.password:\n            self.logged = True\n            self.reply(230, \"Welcome\")\n            self.server.note(self.peer, \"logged in\")\n            return\n        self.wrong += 1\n        self.server.note(self.peer, \"wrong password\")\n        self.reply(530, \"Wrong user or password\")\n        if self.wrong >= WRONG_PASSWORDS:\n            self.quitting = True\n\n    def _QUIT(self, arg):\n        self.reply(221, \"Goodbye\")\n        self.quitting = True\n\n    def _AUTH(self, arg):\n        self.reply(502, \"No TLS: plain FTP\")\n\n    def _SYST(self, arg):\n        self.reply(215, \"UNIX Type: L8\")\n\n    def _NOOP(self, arg):\n        self.reply(200, \"OK\")\n\n    def _HELP(self, arg):\n        self.reply(214, \"Standard commands, and MLSD, MLST, SIZE, MDTM, REST, EPSV, EPRT\")\n\n    def _FEAT(self, arg):\n        self.reply(211, \"Features:\\n EPRT\\n EPSV\\n MDTM\\n MLST type*;size*;modify*;perm*;\\n\"\n                        \" PASV\\n REST STREAM\\n SIZE\\n UTF8\\nEnd\")\n\n    def _OPTS(self, arg):\n        if arg.upper().startswith(\"UTF8\"):\n            self.reply(200, \"UTF-8 always\")\n        elif arg.upper().startswith(\"MLST\"):\n            self.reply(200, \"MLST OPTS type;size;modify;perm;\")\n        else:\n            self.reply(501, \"Unknown option\")\n\n    def _TYPE(self, arg):\n        self.reply(200, \"Type %s (files go as they are)\" % (arg.upper() or \"I\"))\n\n    def _MODE(self, arg):\n        self.reply(200 if arg.upper() == \"S\" else 504, \"Mode S\")\n\n    def _STRU(self, arg):\n        self.reply(200 if arg.upper() == \"F\" else 504, \"Structure F\")\n\n    def _ALLO(self, arg):\n        self.reply(202, \"No need\")\n\n    def _PWD(self, arg):\n        self.reply(257, '\"%s\" is the current folder' % self.cwd.replace('\"', '\"\"'))\n\n    def _CWD(self, arg):\n        target = self.virtual(arg or \"/\")\n        if _is_dir(self.real(target)):\n            self.cwd = target\n            self.reply(250, \"Now in %s\" % target)\n        else:\n            self.reply(550, \"No such folder\")\n\n    def _CDUP(self, arg):\n        self._CWD(\"..\")\n\n    def _MKD(self, arg):\n        target = self.virtual(arg)\n        os.mkdir(self.real(target))\n        self.server.note(self.peer, \"new folder \" + target)\n        self.reply(257, '\"%s\" created' % target.replace('\"', '\"\"'))\n\n    def _RMD(self, arg):\n        target = self.virtual(arg)\n        if target == \"/\":\n            self.reply(550, \"Not the top folder\")\n            return\n        os.rmdir(self.real(target))\n        self.server.note(self.peer, \"removed \" + target)\n        self.reply(250, \"Folder removed\")\n\n    def _DELE(self, arg):\n        target = self.virtual(arg)\n        os.remove(self.real(target))\n        self.server.note(self.peer, \"deleted \" + target)\n        self.reply(250, \"Deleted\")\n\n    def _RNFR(self, arg):\n        target = self.virtual(arg)\n        os.stat(self.real(target))\n        self.rename_from = target\n        self.reply(350, \"And the new name?\")\n\n    def _RNTO(self, arg):\n        if not self.rename_from:\n            self.reply(503, \"RNFR first\")\n            return\n        target = self.virtual(arg)\n        os.rename(self.real(self.rename_from), self.real(target))\n        self.server.note(self.peer, \"renamed %s to %s\" % (self.rename_from, target))\n        self.rename_from = None\n        self.reply(250, \"Renamed\")\n\n    def _SIZE(self, arg):\n        st = os.stat(self.real(self.virtual(arg)))\n        if st[0] & S_IFMT == S_IFDIR:\n            self.reply(550, \"It is a folder\")\n        else:\n            self.reply(213, str(st[6]))\n\n    def _MDTM(self, arg):\n        st = os.stat(self.real(self.virtual(arg)))\n        self.reply(213, _utc_text(st[8]))\n\n    def _REST(self, arg):\n        try:\n            self.rest = max(0, int(arg))\n        except ValueError:\n            self.reply(501, \"A number, please\")\n            return\n        self.reply(350, \"From byte %d\" % self.rest)\n\n    def _ABOR(self, arg):\n        if self.transfer:\n            self._end_data()\n            self.reply(426, \"Transfer stopped\")\n        self.reply(226, \"Nothing running\")\n\n    # --- data connections\n\n    def _PASV(self, arg):\n        self._open_listener()\n        if not self.listener:\n            return\n        ip = _closest(self.server.addresses(), self.peer).replace(\".\", \",\")\n        port = self.listener_port\n        self.reply(227, \"Entering Passive Mode (%s,%d,%d)\" % (ip, port >> 8, port & 255))\n\n    def _EPSV(self, arg):\n        if arg.upper() == \"ALL\":\n            self.reply(200, \"EPSV only\")\n            return\n        self._open_listener()\n        if self.listener:\n            self.reply(229, \"Entering Extended Passive Mode (|||%d|)\" % self.listener_port)\n\n    def _PORT(self, arg):\n        try:\n            n = [int(x) for x in arg.split(\",\")]\n            ip, port = \"%d.%d.%d.%d\" % tuple(n[:4]), n[4] * 256 + n[5]\n        except (ValueError, IndexError, TypeError):\n            self.reply(501, \"PORT h1,h2,h3,h4,p1,p2\")\n            return\n        self._set_active(ip, port)\n\n    def _EPRT(self, arg):\n        parts = arg.split(arg[:1]) if arg else []\n        if len(parts) < 4 or parts[1] != \"1\":\n            self.reply(522, \"IPv4 only (1)\")\n            return\n        try:\n            self._set_active(parts[2], int(parts[3]))\n        except ValueError:\n            self.reply(501, \"EPRT |1|ip|port|\")\n\n    def _set_active(self, ip, port):\n        if ip != self.peer:  # no connections to a third host (the FTP bounce)\n            self.reply(504, \"Only to your own address\")\n            return\n        self._end_data()\n        self.active = (ip, port)\n        self.reply(200, \"PORT OK\")\n\n    def _open_listener(self):\n        self._end_data()\n        for _ in range(len(PASSIVE_PORTS)):\n            port = PASSIVE_PORTS[self.server.next_port % len(PASSIVE_PORTS)]\n            self.server.next_port += 1\n            listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n            try:\n                listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\n                listener.bind(socket.getaddrinfo(\"0.0.0.0\", port)[0][-1])\n                listener.listen(1)\n                listener.setblocking(False)\n            except OSError:\n                listener.close()\n                continue\n            self.listener, self.listener_port = listener, port\n            return\n        self.reply(425, \"No free port for the data\")\n\n    def _connect_data(self):\n        # True once the data connection is there (accepted, or connected to the client).\n        if self.data:\n            return True\n        if self.listener:\n            try:\n                sock, address = self.listener.accept()\n            except OSError:\n                return False\n            if _peer_ip(address) != self.peer:\n                sock.close()\n                return False\n            self.listener.close()\n            self.listener = None\n            sock.setblocking(False)\n            self.data = sock\n            return True\n        if self.active:\n            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n            sock.settimeout(3)\n            try:\n                sock.connect(socket.getaddrinfo(self.active[0], self.active[1])[0][-1])\n            except OSError:\n                sock.close()\n                self.active = None\n                self._fail(425, \"Cannot connect to your data port\")\n                return False\n            self.active = None\n            sock.setblocking(False)\n            self.data = sock\n            return True\n        return False\n\n    def _start(self, transfer):\n        if not (self.listener or self.active or self.data):\n            transfer.close()\n            self.reply(425, \"PASV or PORT first\")\n            return\n        self.transfer = transfer\n        self.waiting_since = time.time()\n        self.reply(150, \"Here it comes\" if transfer.kind != \"receive\" else \"Send it\")\n        self.server.started(self)\n\n    def _fail(self, code, text):\n        self._end_data()\n        self.reply(code, text)\n\n    def _end_data(self):\n        if self.transfer:\n            self.transfer.close()\n            self.server.finished(self, self.transfer, False)\n            self.transfer = None\n        for sock in (self.data, self.listener):\n            if sock:\n                try:\n                    sock.close()\n                except OSError:\n                    pass\n        self.data = self.listener = None\n        self.active = None\n\n    def _done(self):\n        transfer = self.transfer\n        self.transfer = None\n        transfer.close()\n        try:\n            self.data.close()\n        except OSError:\n            pass\n        self.data = None\n        self.server.finished(self, transfer, True)\n        self.reply(226, \"Done\")\n\n    def step(self, deadline):\n        # Moves the data until the deadline (ticks_ms). True when it moved something.\n        transfer = self.transfer\n        if not transfer or self.closed:\n            return False\n        if not self._connect_data():\n            if self.transfer and time.time() - self.waiting_since > 20:\n                self._fail(425, \"No data connection\")\n            return False\n        moved = False\n        try:\n            while time.ticks_diff(deadline, time.ticks_ms()) > 0:\n                if transfer.kind == \"receive\":\n                    try:\n                        part = self.data.recv(CHUNK)\n                    except OSError as error:\n                        if error.args[0] in _AGAIN:\n                            break\n                        raise\n                    if not part:\n                        self._done()\n                        break\n                    transfer.target.write(part)\n                    transfer.bytes += len(part)\n                    moved = True\n                    continue\n                if transfer.pending is None or not len(transfer.pending):\n                    part = transfer.source.read(CHUNK) if transfer.source else b\"\"\n                    if not part:\n                        self._done()\n                        break\n                    transfer.pending = memoryview(part)\n                try:\n                    n = self.data.send(transfer.pending)\n                except OSError as error:\n                    if error.args[0] in _AGAIN:\n                        break\n                    raise\n                if not n:\n                    break\n                transfer.pending = transfer.pending[n:]\n                transfer.bytes += n\n                moved = True\n        except OSError as error:\n            self._fail(426 if error.args[0] in (errno.ECONNRESET, 32) else 451,\n                       \"Transfer broken\" if error.args[0] in (errno.ECONNRESET, 32) else _error_text(error))\n        self._flush()\n        return moved\n\n    # --- transfers\n\n    def _listing(self, arg, machine):\n        names = [a for a in arg.split(\" \") if a and not a.startswith(\"-\")] if not machine else [arg]\n        target = self.virtual(names[0] if names and names[0] else \".\")\n        path = self.real(target)\n        st = os.stat(path)\n        now = time.time()\n        out = []\n        if st[0] & S_IFMT == S_IFDIR:\n            entries = []\n            for entry in os.ilistdir(path):\n                name = entry[0]\n                if name in (\".\", \"..\"):\n                    continue\n                try:\n                    entries.append((name, os.stat(path.rstrip(\"/\") + \"/\" + name)))\n                except OSError:\n                    entries.append((name, (0o120777, 0, 0, 1, 0, 0, 0, 0, 0, 0)))\n        else:\n            entries = [(target.rsplit(\"/\", 1)[-1], st)]\n        entries.sort(key=lambda e: e[0])\n        for name, s in entries:\n            if machine:\n                folder = s[0] & S_IFMT == S_IFDIR\n                out.append(\"type=%s;size=%d;modify=%s;perm=%s; %s\\r\\n\" % (\n                    \"dir\" if folder else \"file\", s[6], _utc_text(s[8]),\n                    \"flcdmpe\" if folder else \"adfrw\", name))\n            else:\n                out.append(\"%s %3d %-8s %-8s %12d %s %s\\r\\n\" % (\n                    _mode_text(s[0]), s[3], \"root\", \"root\", s[6], _ls_time(s[8], now), name))\n        return \"\".join(out).encode()\n\n    def _LIST(self, arg):\n        self._start(_Transfer(\"list\", \"listing\", data=self._listing(arg, False)))\n\n    def _MLSD(self, arg):\n        target = self.virtual(arg or \".\")\n        if not _is_dir(self.real(target)):\n            self.reply(501, \"Not a folder\")\n            return\n        self._start(_Transfer(\"list\", \"listing\", data=self._listing(arg, True)))\n\n    def _NLST(self, arg):\n        target = self.virtual(arg or \".\")\n        names = [e[0] for e in os.ilistdir(self.real(target)) if e[0] not in (\".\", \"..\")]\n        names.sort()\n        self._start(_Transfer(\"list\", \"listing\", data=\"\".join(n + \"\\r\\n\" for n in names).encode()))\n\n    def _MLST(self, arg):\n        target = self.virtual(arg or \".\")\n        s = os.stat(self.real(target))\n        folder = s[0] & S_IFMT == S_IFDIR\n        self.reply(250, \"Listing %s\\n type=%s;size=%d;modify=%s;perm=%s; %s\\nEnd\" % (\n            target, \"dir\" if folder else \"file\", s[6], _utc_text(s[8]),\n            \"flcdmpe\" if folder else \"adfrw\", target))\n\n    def _RETR(self, arg):\n        target = self.virtual(arg)\n        path = self.real(target)\n        if _is_dir(path):\n            self.reply(550, \"It is a folder\")\n            return\n        source = open(path, \"rb\")\n        if self.rest:\n            source.seek(self.rest)\n        transfer = _Transfer(\"send\", target, source=source)\n        transfer.size = os.stat(path)[6]\n        self._start(transfer)\n\n    def _STOR(self, arg, append=False):\n        target = self.virtual(arg)\n        path = self.real(target)\n        if self.rest and not append:\n            f = open(path, \"r+b\")\n            f.seek(self.rest)\n        else:\n            f = open(path, \"ab\" if append else \"wb\")\n        self._start(_Transfer(\"receive\", target, target=f))\n\n    def _APPE(self, arg):\n        self._STOR(arg, append=True)\n\n\nclass Server:\n    \"\"\"note(who, what) tells the screen what happens.\"\"\"\n\n    def __init__(self, root=\"/\", user=\"mpy\", password=\"\", port=21, note=None):\n        self.root = root\n        self.user = user\n        self.password = password\n        self.port = port\n        self._note = note\n        self.sessions = []\n        self.next_port = 0\n        self.received = 0\n        self.sent = 0\n        self._listener = None\n        self._addresses = []\n        self._addresses_at = None\n\n    def note(self, who, what):\n        if self._note:\n            self._note(who, what)\n\n    def addresses(self):\n        now = time.time()\n        if self._addresses_at is None or now - self._addresses_at > 10:\n            self._addresses = local_addresses()\n            self._addresses_at = now\n        return self._addresses\n\n    def start(self):\n        if self._listener:\n            return\n        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n        try:\n            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\n            listener.bind(socket.getaddrinfo(\"0.0.0.0\", self.port)[0][-1])\n            listener.listen(4)\n            listener.setblocking(False)\n        except OSError:\n            listener.close()\n            raise\n        self._listener = listener\n\n    def stop(self):\n        for session in self.sessions:\n            session.close()\n        self.sessions = []\n        if self._listener:\n            self._listener.close()\n            self._listener = None\n\n    def running(self):\n        return self._listener is not None\n\n    def transfers(self):\n        return [s.transfer for s in self.sessions if s.transfer and s.transfer.kind != \"list\"]\n\n    def started(self, session):\n        t = session.transfer\n        if t.kind != \"list\":\n            self.note(session.peer, (\"sending \" if t.kind == \"send\" else \"receiving \") + t.name)\n\n    def finished(self, session, transfer, complete):\n        if transfer.kind == \"receive\":\n            self.received += transfer.bytes\n        else:\n            self.sent += transfer.bytes\n        if transfer.kind != \"list\":\n            seconds = max(1, time.ticks_diff(time.ticks_ms(), transfer.started)) / 1000\n            self.note(session.peer, \"%s %s: %s, %s/s\" % (\n                (\"got\" if transfer.kind == \"receive\" else \"sent\") if complete else \"stopped\",\n                transfer.name.rsplit(\"/\", 1)[-1], size_text(transfer.bytes), size_text(int(transfer.bytes / seconds))))\n\n    def poll(self, budget_ms=10):\n        if not self._listener:\n            return\n        deadline = time.ticks_add(time.ticks_ms(), budget_ms)\n        for _ in range(4):\n            try:\n                sock, address = self._listener.accept()\n            except OSError:\n                break\n            peer = _peer_ip(address)\n            if len(self.sessions) >= MAX_SESSIONS:\n                try:\n                    sock.send(b\"421 Too many connections\\r\\n\")\n                except OSError:\n                    pass\n                sock.close()\n                continue\n            self.sessions.append(Session(self, sock, peer))\n            self.note(peer, \"connected\")\n        for session in self.sessions:\n            session.poll()\n        # The data, in turns, until the time of this tick is over.\n        busy = [s for s in self.sessions if s.transfer]\n        while busy and time.ticks_diff(deadline, time.ticks_ms()) > 0:\n            moved = False\n            share = time.ticks_add(time.ticks_ms(), max(1, budget_ms // len(busy)))\n            if time.ticks_diff(share, deadline) > 0:\n                share = deadline\n            for s in busy:\n                if s.step(share):\n                    moved = True\n            busy = [s for s in busy if s.transfer]\n            if not moved:\n                break\n        self.sessions = [s for s in self.sessions if not s.closed]\n\n\ndef size_text(n):\n    for unit in (\"B\", \"KB\", \"MB\", \"GB\"):\n        if n < 1024 or unit == \"GB\":\n            return (\"%d %s\" % (n, unit)) if unit == \"B\" else (\"%.1f %s\" % (n, unit))\n        n /= 1024\n"
+    },
+    {
+      "id": "ddc9ef1f679547ab817aa5313253dd49",
+      "name": "ftp_app",
+      "source": "# FTP Server: the board's files for a PC on the same WiFi network. The screen shows the address,\n# the user and the password, who is connected, what moves and how fast, and the free space. The\n# password and the folder the clients see stay in cac_settings.json, section \"ftp\": a client that\n# saved them connects again after a restart. The network is one of those saved by the Settings app.\n\nimport os\nimport time\n\nimport lvgl as lv\n\nimport cac_settings\nfrom ftp_server import Server, size_text\n\ntry:\n    import network  # noqa: F401  only a board has it: the simulator shows made-up clients\n    import machine\n\n    HARDWARE = True\nexcept ImportError:\n    HARDWARE = False\n\nPORT = 21\nUSER = \"mpy\"\nSD_PINS = {\"slot\": 2, \"sck\": 48, \"miso\": 41, \"mosi\": 47, \"cs\": 42, \"freq\": 10000000}   # ESP32-4848S040\n\n_ui = None\n_server = None\n_log = []\n_ticks = 0\n_settings = {}\n_folders = []               # (label, path)\n_log_chars = 50             # what fits in the log, from its size\n_log_lines = 4\n_wifi = None                # the network the board is on, or None\n_job = None                 # what the next tick does first: connecting takes seconds\n\n\ndef _clock():\n    t = time.localtime()\n    return \"%02d:%02d\" % (t[3], t[4])\n\n\ndef note(who, what):\n    # Who, for the arrivals and the departures; the rest is short enough to read in one line.\n    if what in (\"connected\", \"logged in\", \"left\", \"disconnected\", \"wrong password\") or who == \"board\":\n        line = \"%s  %s  %s\" % (_clock(), who, what)\n    else:\n        line = \"%s  %s\" % (_clock(), what)\n    _log.insert(0, line if len(line) <= _log_chars else line[:_log_chars - 3] + \"...\")\n    del _log[_log_lines:]\n    _ui.log.set_text(\"\\n\".join(_log))\n\n\ndef _new_password():\n    return \"%06d\" % (int.from_bytes(os.urandom(4), \"little\") % 1000000)\n\n\ndef _save():\n    try:\n        cac_settings.set_section(\"ftp\", _settings)\n    except OSError as error:\n        note(\"board\", \"settings not saved: %s\" % error)\n\n\ndef _mount_sd():\n    if not HARDWARE:\n        return\n    try:\n        if \"sd\" not in os.listdir(\"/\") or not os.listdir(\"/sd\"):\n            os.mount(machine.SDCard(**SD_PINS), \"/sd\")\n    except Exception as error:\n        print(\"SD card:\", repr(error))\n\n\ndef _has_sd():\n    try:\n        return bool(os.listdir(\"/sd\"))\n    except OSError:\n        return False\n\n\ndef _show_addresses():\n    if not HARDWARE:\n        found = [\"192.168.1.50\"]\n    else:\n        found = _server.addresses()\n    port = \"\" if PORT == 21 else \":%d\" % PORT\n    if found:\n        text = \"\\n\".join(\"ftp://%s%s\" % (ip, port) for ip in found[:2])\n        if _wifi:\n            text += \"   on \" + _wifi\n    elif _job == \"connect\":\n        text = \"Connecting to the WiFi...\"\n    else:\n        text = \"No WiFi: add a network with the Settings app\"\n    _ui.addresses.set_text(text)\n\n\ndef _show_storage():\n    total, free = 3800 * 1024 * 1024, 3100 * 1024 * 1024  # the simulator: a made-up card\n    if HARDWARE:\n        try:\n            st = os.statvfs(_server.root)\n            total, free = st[0] * st[2], st[0] * st[4]\n        except OSError:\n            pass\n    _ui.card.set_text(\"%s free of %s\" % (size_text(free), size_text(total)))\n    _ui.card_bar.set_value(100 - int(free * 100 // max(1, total)), False)\n\n\ndef _show_state():\n    sessions = [s for s in _server.sessions if s.logged]\n    if not HARDWARE:\n        clients = \"Connected: 192.168.1.20\"\n    elif not _server.running():\n        clients = \"Stopped\"\n    elif not sessions:\n        clients = \"No one connected\"\n    else:\n        peers = sorted(set(s.peer for s in sessions))\n        clients = \"Connected: \" + \", \".join(peers)\n    _ui.clients.set_text(clients)\n    transfers = _server.transfers()\n    if transfers:\n        t = transfers[0]\n        seconds = max(1, time.ticks_diff(time.ticks_ms(), t.started)) / 1000\n        verb = \"Sending\" if t.kind == \"send\" else \"Receiving\"\n        _ui.transfer.set_text(\"%s %s  %s, %s/s\" % (verb, t.name.rsplit(\"/\", 1)[-1],\n                                                 size_text(t.bytes), size_text(int(t.bytes / seconds))))\n        _ui.transfer_bar.set_value(int(t.bytes * 100 // t.size) if t.size else 0, False)\n    else:\n        _ui.transfer.set_text(\"No transfer\")\n        _ui.transfer_bar.set_value(0, False)\n    _ui.totals.set_text(\"Received %s    Sent %s\" % (size_text(_server.received), size_text(_server.sent)))\n\n\ndef _connect():\n    global _wifi, _job\n    _wifi = cac_settings.connect()\n    _job = None\n    if _wifi:\n        note(\"board\", \"on \" + _wifi + \": FileZilla, WinSCP, a file manager\")\n        _serve(True)\n    else:\n        note(\"board\", \"no saved WiFi network in range\")\n    _show_addresses()\n\n\ndef tick():\n    # Every 20 ms: the clients, with 10 ms for the data; twice a second the state; every 10 s\n    # the addresses and the storage.\n    global _ticks\n    if _server is None:                 # on a board the timer runs before the page is loaded\n        return\n    _ticks += 1\n    if _job == \"connect\":\n        _connect()\n        return\n    if _server.running():\n        _server.poll(10)\n    if _ticks % 25 == 0:\n        _show_state()\n    if _ticks % 500 == 0:\n        _show_addresses()\n        _show_storage()\n\n\ndef _serve(on):\n    if not HARDWARE:\n        _ui.serve_label.set_text(\"Simulator\")\n        return\n    try:\n        if on:\n            _server.start()\n            _ui.serve_switch.add_state(lv.STATE.CHECKED)\n        else:\n            _server.stop()\n        _ui.serve_label.set_text(\"Serving\" if on else \"Stopped\")\n    except OSError as error:\n        _ui.serve_label.set_text(\"Error %s\" % error)\n        _ui.serve_switch.remove_state(lv.STATE.CHECKED)\n    _show_state()\n\n\ndef serve_changed(switch):\n    _serve(switch.has_state(lv.STATE.CHECKED))\n\n\ndef new_password():\n    _settings[\"password\"] = _new_password()\n    _server.password = _settings[\"password\"]\n    _ui.password.set_text(_settings[\"password\"])\n    _save()\n    note(\"board\", \"new password\")\n    for session in _server.sessions:\n        session.logged = False\n\n\ndef folder_changed(dropdown):\n    index = dropdown.get_selected()\n    if 0 <= index < len(_folders):\n        _settings[\"root\"] = _folders[index][1]\n        _server.root = _settings[\"root\"]\n        for session in _server.sessions:\n            session.cwd = \"/\"\n        _save()\n        note(\"board\", \"the clients now see \" + _settings[\"root\"])\n        _show_storage()\n\n\ndef start(ui):\n    global _ui, _server, _settings, _folders, _log_chars, _log_lines, _job\n    _ui = ui\n    _mount_sd()\n    ui.log.update_layout()\n    _log_chars = max(20, ui.log.get_width() * 2 // 15)\n    _log_lines = max(3, ui.log.get_height() // 17)\n    for bar in (ui.transfer_bar, ui.card_bar):\n        bar.set_style_bg_opa(lv.OPA.COVER, 0)\n    _settings = dict(cac_settings.section(\"ftp\"))\n    if not _settings.get(\"password\"):\n        _settings[\"password\"] = _new_password()\n        _save()\n    _folders = [(\"Flash and SD card\", \"/\"), (\"Studio apps\", \"/lms_apps\")]\n    if _has_sd() or not HARDWARE:\n        _folders.insert(1, (\"SD card\", \"/sd\"))\n    root = _settings.get(\"root\") or \"/\"\n    if root not in [f[1] for f in _folders]:\n        root = \"/\"\n    ui.folder.set_options(\"\\n\".join(f[0] for f in _folders))\n    ui.folder.set_selected([f[1] for f in _folders].index(root))\n    _server = Server(root=root, user=USER, password=_settings[\"password\"], port=PORT, note=note)\n    ui.user.set_text(USER)\n    ui.password.set_text(_settings[\"password\"])\n    _show_storage()\n    if HARDWARE:\n        _job = \"connect\"                # on the next tick, after the screen is shown\n        _ui.serve_label.set_text(\"Waiting\")\n    else:\n        for who, what in ((\"192.168.1.20\", \"connected\"), (\"192.168.1.20\", \"logged in\"),\n                          (\"192.168.1.20\", \"receiving /sd/photos/beach.bin\"),\n                          (\"192.168.1.20\", \"got beach.bin: 450.0 KB, 380.0 KB/s\")):\n            note(who, what)\n        ui.serve_label.set_text(\"Simulator\")\n    _show_addresses()\n    _show_state()\n"
+    }
+  ]
+}

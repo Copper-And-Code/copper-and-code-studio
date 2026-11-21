@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 3,
+  "projectName": "Photo Frame",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "51342959d80549ae88a8579aa8263036",
+      "name": "Frame",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "ab822e0e80784cdea1d50e05ce771a20",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 250,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ff78d94c8bdb4204ba0fc9da2d8cfe03",
+          "name": "empty",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 170,
+            "width": 400,
+            "height": 140,
+            "text": "No photos in /sd/photos.\n\nConvert them with convert_photos.py on the PC and copy them with the FTP Server example.",
+            "textColor": "#C8D2DE",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "dffb4dfd8a3b49c094d4b13806966a40",
+          "name": "top_bar",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 64,
+            "bgColor": "#000000",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4e9d7a0feec64b6abd1874f9a7e09a61",
+          "name": "clock",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 16,
+            "width": 200,
+            "height": 32,
+            "text": "--:--",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "parentId": "dffb4dfd8a3b49c094d4b13806966a40",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9ee2c69d67a44e72ab01f6abf8c55910",
+          "name": "btn_options",
+          "type": "button",
+          "props": {
+            "x": 364,
+            "y": 10,
+            "width": 104,
+            "height": 44,
+            "text": "Options",
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_options_clicked"
+          },
+          "parentId": "dffb4dfd8a3b49c094d4b13806966a40",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "144f76c4d08d42bc839f777c46507cbc",
+          "name": "caption",
+          "type": "label",
+          "props": {
+            "x": 0,
+            "y": 448,
+            "width": 480,
+            "height": 32,
+            "text": "beach  1/12",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "94b56a664e9c41cbabf838f254430516",
+          "name": "night_cover",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#000000",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "94ffabf4eb29458f8e616f67c49be9fa",
+      "name": "Options",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "d44e3779b3a142cfa8f58c56fa878339",
+          "name": "opt_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#121820",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ba0326d1bd3d4d00900ff3e2830cedc8",
+          "name": "opt_title",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 14,
+            "width": 200,
+            "height": 32,
+            "text": "Photo Frame",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e8b72ba7253b41ada56f9972481fe188",
+          "name": "btn_cancel",
+          "type": "button",
+          "props": {
+            "x": 272,
+            "y": 8,
+            "width": 96,
+            "height": 44,
+            "text": "Cancel",
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_cancel_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "524bbd573a6e49418d6695f92b2976b9",
+          "name": "btn_save",
+          "type": "button",
+          "props": {
+            "x": 376,
+            "y": 8,
+            "width": 92,
+            "height": 44,
+            "text": "Save",
+            "bgColor": "#2F6FDE",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_save_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d6ada6dd95c041c9a13dc3e0d4d3657e",
+          "name": "interval_text",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 86,
+            "width": 260,
+            "height": 24,
+            "text": "Next photo every",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b0d92b6d67d14090bba2c254808ef9b9",
+          "name": "sel_interval",
+          "type": "dropdown",
+          "props": {
+            "x": 318,
+            "y": 74,
+            "width": 150,
+            "height": 46,
+            "options": "5 s\n10 s\n30 s\n1 min\n5 min",
+            "selected": 1,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e51db74260ca40d1bd9340c2309b8005",
+          "name": "night_text",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 156,
+            "width": 300,
+            "height": 24,
+            "text": "Display off at night",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "781331297ec749dea19b9e88db563d4b",
+          "name": "sel_night",
+          "type": "switch",
+          "props": {
+            "x": 410,
+            "y": 148,
+            "width": 58,
+            "height": 32,
+            "checked": true,
+            "onColor": "#4CC38A",
+            "offColor": "#2A3444",
+            "knobColor": "#FFFFFF",
+            "disabled": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "eebf420d061546ad9a618baebf3d3e7b",
+          "name": "from_text",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 224,
+            "width": 200,
+            "height": 24,
+            "text": "From",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2a75a29f30d3419c86d8d1479e0ef42c",
+          "name": "sel_from_hour",
+          "type": "dropdown",
+          "props": {
+            "x": 318,
+            "y": 212,
+            "width": 72,
+            "height": 46,
+            "options": "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+            "selected": 22,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8d9af1e0905a474ea075d14df61852cb",
+          "name": "sel_from_min",
+          "type": "dropdown",
+          "props": {
+            "x": 396,
+            "y": 212,
+            "width": 72,
+            "height": 46,
+            "options": "00\n15\n30\n45",
+            "selected": 0,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d4b11befe148494eb753226c721a5251",
+          "name": "to_text",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 284,
+            "width": 200,
+            "height": 24,
+            "text": "To",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6b0ff1435e9c461ca83192acb80bef31",
+          "name": "sel_to_hour",
+          "type": "dropdown",
+          "props": {
+            "x": 318,
+            "y": 272,
+            "width": 72,
+            "height": 46,
+            "options": "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23",
+            "selected": 5,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "101190cfee154840856c39f9314d7aab",
+          "name": "sel_to_min",
+          "type": "dropdown",
+          "props": {
+            "x": 396,
+            "y": 272,
+            "width": 72,
+            "height": 46,
+            "options": "00\n15\n30\n45",
+            "selected": 2,
+            "bgColor": "#2A3444",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "dir": "LV_DIR_BOTTOM",
+            "symbol": "LV_SYMBOL_DOWN",
+            "highlightSelected": true
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "587271b13857418599613c5c4cfe4baf",
+          "name": "opt_hint",
+          "type": "label",
+          "props": {
+            "x": 16,
+            "y": 344,
+            "width": 452,
+            "height": 120,
+            "text": "Swipe left or right for the next or the previous photo; a touch shows the time and this button. At night a touch turns the display on for a minute. The time comes from the network, in Italian time.",
+            "textColor": "#8FA0B5",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# The photo frame: photos from /sd/photos, one every few seconds in a random order with no\n# repeats; a swipe goes to the next or the previous one, a touch shows the time and Options. At\n# night the display goes off, and a touch turns it on for a minute.\n#\n# The photos are LVGL images in RGB565 at the size of the display (convert_photos.py on the PC\n# makes them): 12 bytes of header, then the pixels, drawn with no decoder. Two buffers take turns,\n# so the photo on the screen is never the one being read from the card.\n#\n# The time comes from the network (NTP) through the networks of the Settings example, and is\n# Italian time: CET, and CEST from the last Sunday of March to the last Sunday of October.\nimport os\nimport time\n\nimport lvgl as lv\n\nimport cac_settings\n\ntry:\n    import network  # noqa: F401  only a board has it: the simulator shows demo photos\n    import machine\n    import display_driver\n\n    HARDWARE = True\nexcept ImportError:\n    HARDWARE = False\n\nPHOTOS = \"/sd/photos\"\nSD_PINS = {\"slot\": 2, \"sck\": 48, \"miso\": 41, \"mosi\": 47, \"cs\": 42, \"freq\": 10000000}   # ESP32-4848S040\nHEADER = 12\nMAGIC = 0x19\nINTERVALS = (5, 10, 30, 60, 300)\nDEFAULTS = {\"interval\": 10, \"night\": True, \"night_from\": 22 * 60, \"night_to\": 5 * 60 + 30}\nWAKE_MS = 60000\nOVERLAY_MS = 5000\nSYNC_S = 6 * 3600\nSYNCED_YEAR = 2025                 # a clock before this was never set from the network\n\nsettings = dict(DEFAULTS)\nfiles = []                         # the photos of the folder\norder = []                         # their order for this round\nposition = -1\nbuffers = []\nslot = 0\nshown = None                       # (image descriptor, name) on the screen\nphoto = None                       # the lv.image, made again with the page\nnext_at = 0\nwake_until = 0\noverlay_until = 0\nlast_gesture = -10000\ndark = False\nsynced = False\nlast_sync = None\njob = None\nstarted = False\n\n\ndef now_ms():\n    return time.ticks_ms()\n\n\n# --- time: Italian time from UTC -----------------------------------------------------------\n\ndef _last_sunday(year, month):\n    \"\"\"01:00 UTC of the last Sunday of the month, when Europe changes the clocks.\"\"\"\n    day = 31 if month in (3, 10) else 30\n    t = time.mktime((year, month, day, 1, 0, 0, 0, 0))\n    weekday = time.gmtime(t)[6]                 # Monday is 0\n    return t - ((weekday + 1) % 7) * 86400\n\n\ndef italy_offset(t):\n    year = time.gmtime(t)[0]\n    return 7200 if _last_sunday(year, 3) <= t < _last_sunday(year, 10) else 3600\n\n\ndef local_time():\n    \"\"\"(hour, minute) in Italy, or None while the clock was never set.\"\"\"\n    t = time.time()\n    if time.gmtime(t)[0] < SYNCED_YEAR:\n        return None\n    local = time.gmtime(t + italy_offset(t))\n    return local[3], local[4]\n\n\ndef sync_clock():\n    global synced, last_sync\n    if not HARDWARE:\n        synced = True\n    elif cac_settings.connect() is None:\n        print(\"frame: no saved WiFi network in range: no time, no night\")\n    else:\n        try:\n            import ntptime\n\n            ntptime.settime()\n            synced = True\n            print(\"frame: clock set,\", \"%02d:%02d\" % local_time())\n        except Exception as error:\n            print(\"frame: NTP:\", repr(error))\n    last_sync = time.time()             # after settime(): before it the clock may be in 2000\n\n\ndef is_night():\n    if not settings[\"night\"]:\n        return False\n    now = local_time()\n    if now is None:\n        return False\n    minutes = now[0] * 60 + now[1]\n    start, end = settings[\"night_from\"], settings[\"night_to\"]\n    if start <= end:\n        return start <= minutes < end\n    return minutes >= start or minutes < end\n\n\n# --- photos ----------------------------------------------------------------------------------\n\ndef _mount_sd():\n    if not HARDWARE:\n        return\n    try:\n        if \"sd\" not in os.listdir(\"/\") or not os.listdir(\"/sd\"):\n            os.mount(machine.SDCard(**SD_PINS), \"/sd\")\n    except Exception as error:\n        print(\"frame: SD card:\", repr(error))\n\n\ndef _scan():\n    global files\n    if not HARDWARE:\n        files = [\"Demo sunrise\", \"Demo sea\", \"Demo forest\"]\n        return\n    try:\n        files = sorted(n for n in os.listdir(PHOTOS) if n.lower().endswith(\".bin\"))\n    except OSError:\n        files = []\n\n\ndef _shuffle():\n    global order, position\n    _scan()\n    order = list(range(len(files)))\n    for i in range(len(order) - 1, 0, -1):     # MicroPython's random has no shuffle\n        j = _random(i + 1)\n        order[i], order[j] = order[j], order[i]\n    position = -1\n\n\ndef _random(n):\n    try:\n        import random\n\n        return random.randrange(n)\n    except (ImportError, AttributeError):\n        return int.from_bytes(os.urandom(4), \"little\") % n\n\n\ndef _demo(index, buf, width, height):\n    \"\"\"A gradient for the simulator, one color pair for each demo photo.\"\"\"\n    pairs = ((0x1E5799, 0xF2A541), (0x0B486B, 0x3B8686), (0x1D4D2B, 0x9BC53D))\n    top, bottom = pairs[index % len(pairs)]\n    view = memoryview(buf)\n    row_bytes = width * 2\n    for y in range(height):\n        mix = y * 255 // max(1, height - 1)\n        r = ((top >> 16) * (255 - mix) + (bottom >> 16) * mix) // 255\n        g = (((top >> 8) & 255) * (255 - mix) + ((bottom >> 8) & 255) * mix) // 255\n        b = ((top & 255) * (255 - mix) + (bottom & 255) * mix) // 255\n        value = ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3)\n        view[y * row_bytes:(y + 1) * row_bytes] = bytes((value & 255, value >> 8)) * width\n\n\ndef _load(index):\n    \"\"\"Read photo index into the free buffer; returns its image descriptor, or None.\"\"\"\n    global slot\n    width, height = lv.screen_active().get_width(), lv.screen_active().get_height()\n    if not buffers:\n        buffers.extend((bytearray(width * height * 2), bytearray(width * height * 2)))\n    slot = 1 - slot\n    buf = buffers[slot]\n    if not HARDWARE:\n        _demo(index, buf, width, height)\n        w, h = width, height\n    else:\n        try:\n            with open(PHOTOS + \"/\" + files[index], \"rb\") as f:\n                head = f.read(HEADER)\n                if len(head) < HEADER or head[0] != MAGIC:\n                    raise ValueError(\"not an LVGL image\")\n                w = head[4] | head[5] << 8\n                h = head[6] | head[7] << 8\n                if w * h * 2 > len(buf):\n                    raise ValueError(\"larger than the display: %dx%d\" % (w, h))\n                f.readinto(memoryview(buf)[:w * h * 2])\n        except (OSError, ValueError) as error:\n            print(\"frame:\", files[index], repr(error))\n            return None\n    if hasattr(lv, \"image_cache_drop\"):\n        lv.image_cache_drop(None)               # the buffer is the same, the pixels are not\n    return lv.image_dsc_t({\"header\": {\"magic\": lv.IMAGE_HEADER_MAGIC, \"cf\": lv.COLOR_FORMAT.RGB565,\n                                      \"w\": w, \"h\": h, \"stride\": w * 2},\n                           \"data_size\": w * h * 2, \"data\": buf})\n\n\ndef _show(dsc, name):\n    global shown\n    shown = (dsc, name)\n    photo.set_src(dsc)\n    photo.center()\n    label = name[:-4] if name.lower().endswith(\".bin\") else name\n    ui.caption.set_text(\"%s   %d/%d\" % (label, position + 1, len(order)))\n\n\ndef step(direction):\n    \"\"\"The next (1) or the previous (-1) photo; a new round, shuffled again, after the last.\"\"\"\n    global position, next_at\n    next_at = time.ticks_add(now_ms(), settings[\"interval\"] * 1000)\n    if not order or (direction > 0 and position + 1 >= len(order)):\n        _shuffle()\n    if not order:\n        ui.empty.remove_flag(lv.obj.FLAG.HIDDEN)\n        return\n    ui.empty.add_flag(lv.obj.FLAG.HIDDEN)\n    for _ in range(len(order)):                 # skip the files that cannot be read\n        position = (position + direction) % len(order)\n        dsc = _load(order[position])\n        if dsc is not None:\n            _show(dsc, files[order[position]])\n            return\n\n\n# --- the screen ------------------------------------------------------------------------------\n\ndef _backlight(level):\n    if HARDWARE and hasattr(display_driver, \"backlight\"):\n        display_driver.backlight(level)\n\n\ndef set_dark(on):\n    global dark\n    if on == dark:\n        return\n    dark = on\n    if on:\n        ui.night_cover.remove_flag(lv.obj.FLAG.HIDDEN)\n        _backlight(0)\n    else:\n        ui.night_cover.add_flag(lv.obj.FLAG.HIDDEN)\n        _backlight(cac_settings.section(\"display\").get(\"brightness\", 70))\n\n\ndef show_overlay():\n    global overlay_until\n    overlay_until = time.ticks_add(now_ms(), OVERLAY_MS)\n    ui.top_bar.remove_flag(lv.obj.FLAG.HIDDEN)\n    ui.caption.remove_flag(lv.obj.FLAG.HIDDEN)\n    _show_clock()\n\n\ndef _hide_overlay():\n    ui.top_bar.add_flag(lv.obj.FLAG.HIDDEN)\n    ui.caption.add_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef _show_clock():\n    now = local_time()\n    ui.clock.set_text(\"%02d:%02d\" % now if now else \"--:--\")\n\n\ndef touched():\n    \"\"\"A tap: at night it turns the display on for a minute; by day it shows the time.\"\"\"\n    global wake_until\n    if time.ticks_diff(now_ms(), last_gesture) < 400:   # the end of a swipe is not a tap\n        return\n    if dark:\n        wake_until = time.ticks_add(now_ms(), WAKE_MS)\n        set_dark(False)\n    show_overlay()\n\n\ndef gesture():\n    global last_gesture\n    last_gesture = now_ms()\n    direction = lv.indev_active().get_gesture_dir()\n    if dark:\n        touched()\n    elif direction == lv.DIR.LEFT:\n        step(1)\n    elif direction == lv.DIR.RIGHT:\n        step(-1)\n\n\ndef tick():\n    global job\n    if not started:\n        return\n    now = now_ms()\n    if job == \"sync\" or (last_sync is not None and time.time() - last_sync > SYNC_S):\n        job = None\n        sync_clock()\n        return\n    awake = time.ticks_diff(wake_until, now) > 0\n    set_dark(is_night() and not awake)\n    if dark:\n        return\n    if time.ticks_diff(now, next_at) >= 0:\n        step(1)\n    if not ui.top_bar.has_flag(lv.obj.FLAG.HIDDEN):\n        if time.ticks_diff(now, overlay_until) >= 0:\n            _hide_overlay()\n        else:\n            _show_clock()\n\n\ndef start():\n    \"\"\"The Frame page, at the start and back from Options: the page is made again each time.\"\"\"\n    global photo, started, job, dark\n    screen = lv.screen_active()\n    screen.set_style_bg_color(lv.color_hex(0x000000), 0)\n    screen.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    photo = lv.image(screen)\n    photo.move_background()\n    photo.remove_flag(lv.obj.FLAG.CLICKABLE)\n    screen.add_event_cb(lambda e: touched(), lv.EVENT.CLICKED, None)   # a page has no such events\n    screen.add_event_cb(lambda e: gesture(), lv.EVENT.GESTURE, None)   # in the designer\n    ui.top_bar.set_style_bg_opa(150, 0)\n    dark = False\n    ui.night_cover.remove_flag(lv.obj.FLAG.CLICKABLE)   # a touch at night reaches the screen\n    ui.night_cover.add_flag(lv.obj.FLAG.HIDDEN)\n    _hide_overlay()\n    if not started:\n        started = True\n        _mount_sd()\n        settings.update(cac_settings.section(\"frame\"))\n        job = \"sync\"                            # on the next tick: the screen comes first\n        step(1)\n    elif shown:\n        _show(*shown)\n    else:\n        step(1)\n\n\n# --- Options ---------------------------------------------------------------------------------\n\ndef open_options():\n    interval = settings[\"interval\"]\n    ui.sel_interval.set_selected(INTERVALS.index(interval) if interval in INTERVALS else 1)\n    if settings[\"night\"]:\n        ui.sel_night.add_state(lv.STATE.CHECKED)\n    else:\n        ui.sel_night.remove_state(lv.STATE.CHECKED)\n    ui.sel_from_hour.set_selected(settings[\"night_from\"] // 60)\n    ui.sel_from_min.set_selected(settings[\"night_from\"] % 60 // 15)\n    ui.sel_to_hour.set_selected(settings[\"night_to\"] // 60)\n    ui.sel_to_min.set_selected(settings[\"night_to\"] % 60 // 15)\n\n\ndef save_options():\n    settings[\"interval\"] = INTERVALS[ui.sel_interval.get_selected()]\n    settings[\"night\"] = ui.sel_night.has_state(lv.STATE.CHECKED)\n    settings[\"night_from\"] = ui.sel_from_hour.get_selected() * 60 + ui.sel_from_min.get_selected() * 15\n    settings[\"night_to\"] = ui.sel_to_hour.get_selected() * 60 + ui.sel_to_min.get_selected() * 15\n    try:\n        cac_settings.set_section(\"frame\", dict(settings))\n    except OSError as error:\n        print(\"frame: options not saved:\", repr(error))\n    ui.load_page(ui.PAGE_FRAME)\n",
+    "handlers": {
+      "Frame_screen_loaded": {
+        "widget": "Frame",
+        "event": "SCREEN_LOADED",
+        "body": "start()"
+      },
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "tick()"
+      },
+      "btn_options_clicked": {
+        "widget": "btn_options",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_OPTIONS)"
+      },
+      "Options_screen_loaded": {
+        "widget": "Options",
+        "event": "SCREEN_LOADED",
+        "body": "open_options()"
+      },
+      "btn_save_clicked": {
+        "widget": "btn_save",
+        "event": "CLICKED",
+        "body": "save_options()"
+      },
+      "btn_cancel_clicked": {
+        "widget": "btn_cancel",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_FRAME)"
+      }
+    }
+  },
+  "currentPageId": "51342959d80549ae88a8579aa8263036",
+  "assets": {},
+  "variables": [],
+  "projectId": "0317f6660fd94010938ee13f46981391",
+  "board": {
+    "schemaVersion": 1,
+    "id": "esp32_4848s040_480",
+    "revision": 1,
+    "name": "ESP32-4848S040 (480×480)",
+    "adapter": "esp32_4848s040",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911"
+      ]
+    },
+    "physicalWidth": 480,
+    "physicalHeight": 480,
+    "logicalWidth": 480,
+    "logicalHeight": 480,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver"
+    }
+  },
+  "modules": [
+    {
+      "id": "b5b96d1d520e4e59ad4bbaf6a13691be",
+      "name": "cac_settings",
+      "source": "# cac_settings: the settings that every Copper and Code app on a board shares.\n#\n# One file, cac_settings.json, in the flash: /flash/cac_settings.json on boards with a /flash\n# folder (STM32), /cac_settings.json on the others (ESP32, RP2350). The Settings app writes it;\n# boot.py, the home menu of the board and the other apps read it. It holds up to five WiFi\n# networks, and sections of other settings, such as the brightness of the display:\n#\n#     {\"version\": 1, \"wifi\": [{\"ssid\": \"Home\", \"password\": \"...\"}, ...], \"display\": {\"brightness\": 70}}\n#\n# The networks are kept from the most recently used. Passwords are in clear text, like in\n# MicroPython's own examples: whoever can read the flash can read them.\n#\n# Copy the same file into every app that uses it (in the IDE: a Python module of the project).\nimport json\nimport os\nimport sys\nimport time\n\ntry:\n    import network\nexcept ImportError:                        # the simulator and the PC have no WiFi\n    network = None\n\nVERSION = 1\nMAX_NETWORKS = 5\nTIMEOUT_S = 10                             # for each network tried\nDEMO_SCAN = ((\"Home\", -48), (\"Office\", -61), (\"Guest\", -75))\n\n\ndef path():\n    \"\"\"Where the file is: in the flash of a board; next to the program on a PC or in the simulator.\"\"\"\n    if sys.platform in (\"linux\", \"darwin\", \"win32\"):\n        return \"cac_settings.json\"\n    try:\n        if \"flash\" in os.listdir(\"/\"):\n            return \"/flash/cac_settings.json\"\n    except OSError:\n        pass\n    return \"/cac_settings.json\"\n\n\ndef load():\n    \"\"\"The settings, or empty ones when the file is missing or broken.\"\"\"\n    try:\n        with open(path()) as f:\n            data = json.load(f)\n    except (OSError, ValueError):\n        data = {}\n    if not isinstance(data, dict):\n        data = {}\n    networks = [n for n in data.get(\"wifi\", []) if isinstance(n, dict) and n.get(\"ssid\")]\n    data[\"wifi\"] = networks[:MAX_NETWORKS]\n    data[\"version\"] = VERSION\n    return data\n\n\ndef save(data):\n    \"\"\"Write the settings whole: first a new file, then the rename, so a reset never leaves half.\"\"\"\n    name = path()\n    temporary = name + \".new\"\n    with open(temporary, \"w\") as f:\n        json.dump(data, f)\n    try:\n        os.remove(name)\n    except OSError:\n        pass\n    os.rename(temporary, name)\n\n\ndef section(name):\n    \"\"\"One section of other settings, such as \"display\": a dict, empty when there is none.\"\"\"\n    value = load().get(name)\n    return value if isinstance(value, dict) else {}\n\n\ndef set_section(name, value):\n    \"\"\"Replace one section; the networks and the other sections stay.\"\"\"\n    data = load()\n    data[name] = value\n    save(data)\n\n\ndef networks():\n    \"\"\"The saved networks, from the most recently used: a list of {\"ssid\", \"password\"}.\"\"\"\n    return load()[\"wifi\"]\n\n\ndef password(ssid):\n    for item in networks():\n        if item[\"ssid\"] == ssid:\n            return item[\"password\"]\n    return None\n\n\ndef remember(ssid, password):\n    \"\"\"Save a network, or its new password, as the most recently used; the oldest goes when full.\"\"\"\n    data = load()\n    others = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    data[\"wifi\"] = ([{\"ssid\": ssid, \"password\": password}] + others)[:MAX_NETWORKS]\n    save(data)\n\n\ndef forget(ssid):\n    data = load()\n    data[\"wifi\"] = [n for n in data[\"wifi\"] if n[\"ssid\"] != ssid]\n    save(data)\n\n\ndef station():\n    \"\"\"The WiFi station interface, active, or None without WiFi hardware.\"\"\"\n    if network is None:\n        return None\n    try:\n        sta = network.WLAN(network.STA_IF)\n        sta.active(True)\n        return sta\n    except (AttributeError, OSError):\n        return None\n\n\ndef scan(sta=None):\n    \"\"\"The networks in range, strongest first, as (ssid, rssi); demo names without WiFi hardware.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return list(DEMO_SCAN)\n    best = {}\n    for entry in sta.scan():\n        try:\n            name = entry[0].decode()\n        except ValueError:\n            continue\n        if name and (name not in best or entry[3] > best[name]):\n            best[name] = entry[3]\n    return sorted(best.items(), key=lambda item: -item[1])\n\n\ndef connected_ssid(sta=None):\n    sta = sta or station()\n    if sta is None or not sta.isconnected():\n        return None\n    try:\n        return sta.config(\"essid\")\n    except (OSError, ValueError):\n        return \"?\"\n\n\ndef join(ssid, password, sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to one network; True when connected within timeout_s.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return False\n    try:\n        sta.disconnect()\n    except OSError:\n        pass\n    try:\n        sta.connect(ssid, password)\n    except OSError as e:\n        print(\"cac_settings: connect\", ssid, repr(e))\n        return False\n    start = time.ticks_ms()\n    while not sta.isconnected():\n        if time.ticks_diff(time.ticks_ms(), start) > timeout_s * 1000:\n            try:\n                sta.disconnect()\n            except OSError:\n                pass\n            return False\n        time.sleep_ms(100)\n    return True\n\n\ndef connect(sta=None, timeout_s=TIMEOUT_S):\n    \"\"\"Connect to the best saved network in range and return its name, or None.\n\n    Already connected: nothing to do. Otherwise the saved networks found by a scan are tried, the\n    most recently used first and then by signal; the one that works becomes the most recent.\n    Networks that do not answer the scan are not tried: hidden networks are not supported.\"\"\"\n    sta = sta or station()\n    if sta is None:\n        return None\n    current = connected_ssid(sta)\n    if current:\n        return current\n    saved = networks()\n    if not saved:\n        return None\n    try:\n        visible = dict(scan(sta))\n    except OSError as e:\n        print(\"cac_settings: scan\", repr(e))\n        return None\n    candidates = [n for n in saved if n[\"ssid\"] in visible]\n    if len(candidates) > 1:\n        first, rest = candidates[0], candidates[1:]\n        candidates = [first] + sorted(rest, key=lambda n: -visible[n[\"ssid\"]])\n    for item in candidates:\n        if join(item[\"ssid\"], item[\"password\"], sta, timeout_s):\n            if item is not saved[0]:\n                remember(item[\"ssid\"], item[\"password\"])\n            print(\"cac_settings: connected to\", item[\"ssid\"], sta.ifconfig()[0])\n            return item[\"ssid\"]\n    return None\n"
+    }
+  ]
+}

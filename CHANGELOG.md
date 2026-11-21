@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **Five more examples:** the games Frog, Orbit and Sandwich Tower for a 480×480 touch screen, a touch C64 Keyboard that sends the key matrix on a UART, and Forecast, a weather station for the ESP32-4848S040 over WiFi. Each has a README.
+- **Settings, the WiFi networks of a board kept once for every app.** The Settings example keeps up to five networks in `cac_settings.json` in the flash; `cac_settings.py` connects to the best one in range, and a `boot.py` does it at power-on. Forecast uses it instead of its own network page. A Display page keeps the brightness in the same file.
+- **FTP Server**, an example for the ESP32-4848S040: the files of the flash and of the SD card for a PC on the same WiFi network, with FileZilla, WinSCP, a file manager or `curl`. The network comes from the Settings example, the password stays in `cac_settings.json`.
+- **Photo Frame**, an example for the ESP32-4848S040: the photos of `/sd/photos` one after the other in a random order, swiped by hand, with the display off at night (22:00 to 5:30 by default) in Italian time from the network. `convert_photos.py` makes the photos on the PC, cut to the display and dithered to RGB565.
+
 ## 0.8.0 — 2026-11-20
 
 Renamed from LVGL MPY Studio to Copper and Code Studio. Settings, the configuration folder and projects are kept, and the old commands still work. The Windows package is that of 0.7.1, under the old name.

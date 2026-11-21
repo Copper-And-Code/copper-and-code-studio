@@ -1,0 +1,1057 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Frog",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "49f3addff7574c02a8ba7690acff294a",
+      "name": "Menu",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "a770dea6510142fd9c62b7f1f1be4a61",
+          "name": "buzzer",
+          "type": "buzzer",
+          "props": {},
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "31229941c5d84d57a792b8c9e2edab3f",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 33,
+            "enabled": false
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8ffef8dbb69b4c079526feb6c2dc46f2",
+          "name": "menu_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#071A14",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c2e7c85355a34ef4a44867fcc79137f3",
+          "name": "menu_frog",
+          "type": "panel",
+          "props": {
+            "x": 196,
+            "y": 62,
+            "width": 88,
+            "height": 66,
+            "bgColor": "#58C96B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 26,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "775231eb9465498db7c8ec61bb7756b4",
+          "name": "menu_eye_left",
+          "type": "panel",
+          "props": {
+            "x": 200,
+            "y": 50,
+            "width": 26,
+            "height": 26,
+            "bgColor": "#F4FFF0",
+            "borderColor": "#123B25",
+            "borderWidth": 6,
+            "radius": 13,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d30daecce8e24820b9d9ad75e5572cd4",
+          "name": "menu_eye_right",
+          "type": "panel",
+          "props": {
+            "x": 254,
+            "y": 50,
+            "width": 26,
+            "height": 26,
+            "bgColor": "#F4FFF0",
+            "borderColor": "#123B25",
+            "borderWidth": 6,
+            "radius": 13,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "644a619a3ce44ce0819567d1ae78d867",
+          "name": "menu_firefly",
+          "type": "panel",
+          "props": {
+            "x": 334,
+            "y": 44,
+            "width": 16,
+            "height": 16,
+            "bgColor": "#FFE66B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 8,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "83d812aafd7647918964e4a953cbbeb1",
+          "name": "menu_title",
+          "type": "label",
+          "props": {
+            "x": 120,
+            "y": 150,
+            "width": 240,
+            "height": 48,
+            "text": "FROG",
+            "textColor": "#F4FFF0",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1ac39dcd314548bea16391010c8976c7",
+          "name": "menu_subtitle",
+          "type": "label",
+          "props": {
+            "x": 90,
+            "y": 206,
+            "width": 300,
+            "height": 22,
+            "text": "Catch the fireflies of the pond",
+            "textColor": "#8BD3A0",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "00f9e64a0a9849d3876f5c6c48f7984c",
+          "name": "btn_play",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play",
+            "bgColor": "#2E9E57",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_play_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a24c54cdaadf4dd5a76d3d76209b864a",
+          "name": "btn_options",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Options",
+            "bgColor": "#173A2B",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_options_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "84eb04119f7d45e68d6c79b58948156c",
+      "name": "Game",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "702c26f6077f4e4b87e22a7d32541dc8",
+          "name": "field",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#12331F",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "03bd506969c84397826defa561e9cb0b",
+          "name": "hud_score",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 10,
+            "width": 60,
+            "height": 20,
+            "text": "SCORE",
+            "textColor": "#8BD3A0",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "112fa775c78b4e8291f230d259b66351",
+          "name": "hud_night",
+          "type": "label",
+          "props": {
+            "x": 186,
+            "y": 10,
+            "width": 60,
+            "height": 20,
+            "text": "NIGHT",
+            "textColor": "#8BD3A0",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a117f1e38a314f1ab56a5ecbdd7f4de2",
+          "name": "life1",
+          "type": "panel",
+          "props": {
+            "x": 388,
+            "y": 10,
+            "width": 22,
+            "height": 16,
+            "bgColor": "#58C96B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e5cae0067a6b4d179ad25dc19f9c485b",
+          "name": "life2",
+          "type": "panel",
+          "props": {
+            "x": 418,
+            "y": 10,
+            "width": 22,
+            "height": 16,
+            "bgColor": "#58C96B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d6f2ee09621f4f4d99984eff43246808",
+          "name": "life3",
+          "type": "panel",
+          "props": {
+            "x": 448,
+            "y": 10,
+            "width": 22,
+            "height": 16,
+            "bgColor": "#58C96B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 7,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "bd206c06be594ac1aeb1e1f8e447f40a",
+          "name": "frog_body",
+          "type": "panel",
+          "props": {
+            "x": 206,
+            "y": 362,
+            "width": 28,
+            "height": 28,
+            "bgColor": "#58C96B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 10,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5eab1cc4c06348939e2289dec50e62eb",
+          "name": "eye_left",
+          "type": "panel",
+          "props": {
+            "x": 3,
+            "y": 3,
+            "width": 9,
+            "height": 9,
+            "bgColor": "#F4FFF0",
+            "borderColor": "#123B25",
+            "borderWidth": 2,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "bd206c06be594ac1aeb1e1f8e447f40a",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c022081d294e42c5b975f7b924c96d87",
+          "name": "eye_right",
+          "type": "panel",
+          "props": {
+            "x": 16,
+            "y": 3,
+            "width": 9,
+            "height": 9,
+            "bgColor": "#F4FFF0",
+            "borderColor": "#123B25",
+            "borderWidth": 2,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "bd206c06be594ac1aeb1e1f8e447f40a",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5fe5c3fffd9644418c59a148644d575e",
+          "name": "banner",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 200,
+            "width": 360,
+            "height": 34,
+            "text": "Catch 3 fireflies",
+            "textColor": "#FFE66B",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0ca113b70ed648e885af72bcc4535862",
+          "name": "pad_left",
+          "type": "button",
+          "props": {
+            "x": 6,
+            "y": 402,
+            "width": 108,
+            "height": 72,
+            "text": "",
+            "bgColor": "#173A2B",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "75f937240cac47669ebc19440bc54ba8",
+          "name": "pad_down",
+          "type": "button",
+          "props": {
+            "x": 126,
+            "y": 402,
+            "width": 108,
+            "height": 72,
+            "text": "",
+            "bgColor": "#173A2B",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "eb2eca02bd03487aa103db2155dac5af",
+          "name": "pad_up",
+          "type": "button",
+          "props": {
+            "x": 246,
+            "y": 402,
+            "width": 108,
+            "height": 72,
+            "text": "",
+            "bgColor": "#2E9E57",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2b8017db67aa4fc89df83ec6439c7854",
+          "name": "pad_right",
+          "type": "button",
+          "props": {
+            "x": 366,
+            "y": 402,
+            "width": 108,
+            "height": 72,
+            "text": "",
+            "bgColor": "#173A2B",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3c843b17fae642a68404f4e411230db9",
+          "name": "pond",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 76,
+            "width": 480,
+            "height": 120,
+            "bgColor": "#0E3A5C",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "702c26f6077f4e4b87e22a7d32541dc8",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7de958ff9f0c4a749ea662b6b025f001",
+          "name": "path",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 236,
+            "width": 480,
+            "height": 120,
+            "bgColor": "#2B2A33",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "702c26f6077f4e4b87e22a7d32541dc8",
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "038cfe81d4a74b048ace5a74df4376b6",
+      "name": "Options",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "1dfe9d16b2f84c2a9191586c8c266e56",
+          "name": "opt_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#071A14",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c05215173d2041938bfdb46926519187",
+          "name": "opt_title",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 48,
+            "width": 360,
+            "height": 44,
+            "text": "Options",
+            "textColor": "#F4FFF0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f9b868a32e6348e59260faf8dc53188f",
+          "name": "opt_speed_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 130,
+            "width": 360,
+            "height": 32,
+            "text": "Speed 3",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "80f8d66c84a047bbab419909cf069693",
+          "name": "opt_speed",
+          "type": "slider",
+          "props": {
+            "x": 70,
+            "y": 178,
+            "width": 340,
+            "height": 14,
+            "min": 1,
+            "max": 5,
+            "value": 3,
+            "bgColor": "#173A2B",
+            "indicatorColor": "#2E9E57",
+            "knobColor": "#F4FFF0",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_speed_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "542dedb6007e4de2992143d94f10c74b",
+          "name": "opt_sound_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 248,
+            "width": 200,
+            "height": 32,
+            "text": "Sound",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2a60c7d6fd98482893cf3ab4107e69a1",
+          "name": "opt_sound",
+          "type": "switch",
+          "props": {
+            "x": 340,
+            "y": 246,
+            "width": 76,
+            "height": 38,
+            "checked": true,
+            "onColor": "#2E9E57",
+            "offColor": "#173A2B",
+            "knobColor": "#F4FFF0",
+            "disabled": false
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_sound_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9cc9a6c4580e4c9dac0de28553f95055",
+          "name": "btn_back",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 360,
+            "width": 240,
+            "height": 64,
+            "text": "Back",
+            "bgColor": "#2E9E57",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "fc5ad1d28b8249948de34e4e72105c6b",
+      "name": "GameOver",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "368aca98e7d74afdaa9813cceace3023",
+          "name": "end_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#071A14",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a5462efccca84213ae5476a27a356836",
+          "name": "end_title",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 64,
+            "width": 400,
+            "height": 44,
+            "text": "Game over",
+            "textColor": "#FFB36B",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "724a5ccd3190431a9d13abd87343ead3",
+          "name": "end_score_text",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 136,
+            "width": 400,
+            "height": 22,
+            "text": "Score",
+            "textColor": "#8BD3A0",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ba840d5512224aa7be102a9e9c1b3420",
+          "name": "end_score",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 160,
+            "width": 400,
+            "height": 52,
+            "text": "0",
+            "textColor": "#F4FFF0",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2787adefce0247e1893a168d326617c3",
+          "name": "end_night",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 222,
+            "width": 400,
+            "height": 22,
+            "text": "Night reached: 1",
+            "textColor": "#8BD3A0",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c2119ec855a4477d86ef37e62b38954c",
+          "name": "btn_replay",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play again",
+            "bgColor": "#2E9E57",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_replay_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f0dc16e9c4534ff48dfd389553f8b1b4",
+          "name": "btn_end_menu",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Menu",
+            "bgColor": "#173A2B",
+            "textColor": "#D8F5E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_end_menu_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# FROG: at night a frog crosses the path and the pond to catch the fireflies.\n#\n# The four keys at the bottom make the frog hop by one cell. On the path it must\n# not touch insects and robot mowers; in the pond it must stay on the water\n# lilies, which carry it along. With three fireflies caught the next night\n# comes, with different and faster rows. The fireflies move every night. Three\n# lives.\n#\n# Rules for the ESP32: the objects are created only once, in build(). Each row is\n# a container: one set_x moves the whole row, which repeats with a fixed period,\n# and collisions are computed with the modulo, without walking the objects. Rows\n# advance in steps of 4 px, not at every tick, to redraw less. The on_tick() loop\n# uses only small integers and lists made in advance. The digits are clipped\n# \"0..9\" columns: the column moves, not the label, because moving a label or\n# changing its text allocates.\n\nTOP = 36\nROW_H = 40\nSTART_ROW = 8\nHOP_X = 40\nFROG_W = 28\nFROG_X0 = 206\nFROG_DY = 6\nMARGIN = 5                  # collision tolerance on the path\nRIDE_MIN = -10              # beyond these limits the lily carries the frog away\nRIDE_MAX = 462\nPAD_Y = 400                 # the keys are below this line\nPAD_W = 120\nRING_H = 32\nSTEP = 4                    # px of each step of a row\nSTEP8 = 32                  # the same in eighths of a pixel\nDEAD_T = 30\nINTRO_T = 40\nEND_T = 30\nFLIES = 3\nFLY_D = 18\nFLY_REACH = 26\nNIGHT_MAX = 9\nDIGIT_W = 16\nSPEEDS = (0, 60, 80, 100, 120, 140)   # percentage for each position of the slider\n\n# The six moving rows: three in the pond and three on the path.\nN_ROWS = 6\nN_PONDS = 3\nROW_OF = (1, 2, 3, 5, 6, 7)                # field row of each moving row\nLANE = (-1, 0, 1, 2, -1, 3, 4, 5, -1)      # moving row of each field row\nPERIOD = (160, 200, 180, 240, 180, 160)    # distance between two objects\nWIDTH = (100, 120, 90, 60, 44, 52)         # width of the objects\nROW_COLORS = (0x3FA66B, 0x4DB877, 0x38995F, 0xE0653A, 0xB15CE0, 0xE0B23A)\nROW_RADIUS = (16, 16, 16, 6, 16, 10)\n\n# The nights: speed in eighths of a pixel per tick, and direction of each row.\nNIGHT_V = (\n    (8, 10, 7, 9, 12, 7),\n    (10, 8, 11, 13, 8, 10),\n    (12, 9, 13, 10, 14, 9),\n    (9, 13, 10, 14, 11, 12),\n)\nNIGHT_DIR = (\n    (1, -1, 1, -1, 1, -1),\n    (-1, 1, -1, 1, -1, 1),\n    (1, 1, -1, -1, 1, 1),\n    (-1, 1, 1, -1, -1, 1),\n)\n\nDIGIT_STRIP = \"0\\n1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\"\nSPEED_TEXT = tuple([\"Speed %d\" % n for n in range(6)])\n\nS_INTRO = 0\nS_PLAY = 1\nS_DEAD = 2\nS_END = 3\n\nsound = True\nspeed_pct = 100\n\nbuilt = None                # the field the objects were created on\nstyles = []                 # the styles must stay alive\nrows = []\ndigits = []\nflies = []\nlives_icons = []\nnight_column = None\nsplash = None\nfrog = None\nindev = None                # the pointer: remembered when a button is touched\npoint = None\nHIDDEN = 0\nPRESSED = 0\nline_h = 27\n\nr_off = [0] * N_ROWS\nr_acc = [0] * N_ROWS\nr_v = [0] * N_ROWS\nr_dir = [1] * N_ROWS\nf_x = [0] * FLIES\nf_on = bytearray(FLIES)\nshown = bytearray(5)\n\nstate = S_INTRO\nscore = 0\nlives = 3\nnight = 1\ncaught = 0\nfrog_x = FROG_X0\nfrog_row = START_ROW\nbest_row = START_ROW\nphase_t = 0\nheld = True                 # the finger must be lifted between two hops\nrnd = 11\n\n\ndef play_tone(hz, ms):\n    if sound:\n        ui.buzzer.beep(hz, ms)\n\n\ndef remember_touch():\n    global indev\n    device = lv.indev_active()\n    if device is not None:\n        indev = device\n\n\ndef big_titles():\n    if hasattr(lv, \"font_montserrat_40\"):\n        ui.menu_title.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n        ui.end_score.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n\n\ndef set_speed(value):\n    global speed_pct\n    speed_pct = SPEEDS[value]\n    ui.opt_speed_text.set_text_static(SPEED_TEXT[value])\n\n\ndef set_sound(on):\n    global sound\n    sound = on\n    if not on:\n        ui.buzzer.off()\n\n\ndef new_style(color, radius):\n    style = lv.style_t()\n    style.init()\n    style.set_bg_color(lv.color_hex(color))\n    style.set_bg_opa(lv.OPA.COVER)\n    style.set_radius(radius)\n    styles.append(style)\n    return style\n\n\ndef new_object(parent, style, w, h):\n    obj = lv.obj(parent)\n    obj.remove_style_all()\n    if style is not None:\n        obj.add_style(style, lv.PART.MAIN)\n    obj.set_size(w, h)\n    obj.set_pos(0, 0)              # the first set_pos allocates: it is done here\n    obj.remove_flag(lv.obj.FLAG.CLICKABLE)\n    obj.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    return obj\n\n\ndef digit_column(parent, x):\n    column = new_object(parent, None, DIGIT_W, 10 * line_h)\n    column.set_pos(x, 0)\n    label = lv.label(column)\n    label.set_width(DIGIT_W)\n    label.set_style_text_font(lv.font_montserrat_24, lv.PART.MAIN)\n    label.set_style_text_color(lv.color_hex(0xF4FFF0), lv.PART.MAIN)\n    label.set_style_text_align(lv.TEXT_ALIGN.CENTER, lv.PART.MAIN)\n    label.set_text_static(DIGIT_STRIP)\n    return column\n\n\ndef build():\n    global built, night_column, splash, frog, point, HIDDEN, PRESSED, line_h\n    built = ui.field\n    HIDDEN = lv.obj.FLAG.HIDDEN\n    PRESSED = lv.INDEV_STATE.PRESSED\n    for items in (styles, rows, digits, flies, lives_icons):\n        items.clear()\n    point = lv.point_t()\n    line_h = lv.font_montserrat_24.get_line_height()\n    lv.screen_active().remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.CLICKABLE)\n    for i in range(N_ROWS):\n        period = PERIOD[i]\n        row = new_object(built, None, 480 + period, ROW_H)\n        row.set_pos(-period, TOP + ROW_OF[i] * ROW_H)\n        style = new_style(ROW_COLORS[i], ROW_RADIUS[i])\n        for n in range((480 + 2 * period - 1) // period):\n            item = new_object(row, style, WIDTH[i], RING_H)\n            item.set_pos(n * period, (ROW_H - RING_H) // 2)\n        rows.append(row)\n    style = new_style(0xFFE66B, FLY_D // 2)\n    for i in range(FLIES):\n        fly = new_object(built, style, FLY_D, FLY_D)\n        fly.set_y(TOP + (ROW_H - FLY_D) // 2)\n        flies.append(fly)\n    style = new_style(0xF4FFF0, 16)\n    style.set_bg_opa(lv.OPA.TRANSP)\n    style.set_border_color(lv.color_hex(0xF4FFF0))\n    style.set_border_width(3)\n    splash = new_object(built, style, FROG_W, FROG_W)\n    splash.add_flag(HIDDEN)\n    box = new_object(built, None, 5 * DIGIT_W, line_h)\n    box.set_pos(66, 4)\n    for n in range(5):\n        digits.append(digit_column(box, n * DIGIT_W))\n    box = new_object(built, None, DIGIT_W, line_h)\n    box.set_pos(240, 4)\n    night_column = digit_column(box, 0)\n    lives_icons.extend((ui.life1, ui.life2, ui.life3))\n    frog = ui.frog_body\n    frog.remove_flag(lv.obj.FLAG.CLICKABLE)\n    frog.move_foreground()\n    ui.banner.move_foreground()\n\n\ndef show_score():\n    n = score\n    i = 4\n    while i >= 0:\n        d = n % 10\n        n //= 10\n        if shown[i] != d:\n            shown[i] = d\n            digits[i].set_y(-d * line_h)\n        i -= 1\n\n\ndef add_score(n):\n    global score\n    score += n\n    if score > 99999:\n        score = 99999\n    show_score()\n\n\ndef frog_to_start():\n    global frog_x, frog_row, best_row\n    frog_x = FROG_X0\n    frog_row = START_ROW\n    best_row = START_ROW\n    frog.set_pos(frog_x, TOP + frog_row * ROW_H + FROG_DY)\n    frog.remove_flag(HIDDEN)\n\n\ndef prepare_night():\n    global state, phase_t, caught, rnd\n    n = (night - 1) % 4\n    pace = speed_pct * (9 + night) // 10\n    speeds = NIGHT_V[n]\n    directions = NIGHT_DIR[n]\n    i = 0\n    while i < N_ROWS:\n        v = speeds[i] * pace // 100\n        r_v[i] = v if v < STEP8 else STEP8\n        r_dir[i] = directions[i]\n        r_acc[i] = i * 5           # the rows do not all advance in the same tick\n        i += 1\n    i = 0\n    while i < FLIES:               # one firefly in each third of the screen\n        rnd = (rnd * 75 + 74) % 65537\n        f_x[i] = 20 + i * 150 + rnd % 110\n        f_on[i] = 1\n        flies[i].set_x(f_x[i])\n        flies[i].remove_flag(HIDDEN)\n        i += 1\n    caught = 0\n    night_column.set_y(-night * line_h)\n    splash.add_flag(HIDDEN)\n    frog_to_start()\n    ui.banner.remove_flag(HIDDEN)\n    state = S_INTRO\n    phase_t = INTRO_T\n\n\ndef new_game():\n    global score, lives, night, held\n    if built is not ui.field:      # a live update creates the page again\n        build()\n    score = 0\n    lives = 3\n    night = 1\n    held = True\n    i = 0\n    while i < 3:\n        lives_icons[i].remove_flag(HIDDEN)\n        i += 1\n    show_score()\n    prepare_night()\n    ui.tick.resume()\n\n\ndef move_rows():\n    global frog_x\n    i = 0\n    while i < N_ROWS:\n        a = r_acc[i] + r_v[i]\n        if a >= STEP8:\n            a -= STEP8\n            period = PERIOD[i]\n            d = r_dir[i] * STEP\n            off = (r_off[i] + d) % period\n            r_off[i] = off\n            rows[i].set_x(off - period)\n            if state == S_PLAY and i < N_PONDS and LANE[frog_row] == i:\n                frog_x += d        # the lily carries the frog along\n                frog.set_x(frog_x)\n        r_acc[i] = a\n        i += 1\n\n\ndef die():\n    global lives, state, phase_t\n    lives -= 1\n    lives_icons[lives].add_flag(HIDDEN)\n    frog.add_flag(HIDDEN)\n    splash.set_pos(frog_x, TOP + frog_row * ROW_H + FROG_DY)\n    splash.remove_flag(HIDDEN)\n    if lives == 0:\n        state = S_END\n        phase_t = END_T\n        play_tone(110, 500)\n    else:\n        state = S_DEAD\n        phase_t = DEAD_T\n        play_tone(165, 250)\n\n\ndef check_row():\n    i = LANE[frog_row]\n    if i < 0:\n        return\n    period = PERIOD[i]\n    x = r_off[i] - period\n    if i < N_PONDS:\n        if frog_x < RIDE_MIN or frog_x > RIDE_MAX:\n            die()\n        elif (frog_x + FROG_W // 2 - x) % period >= WIDTH[i]:\n            die()\n    else:\n        rel = (frog_x + MARGIN - x) % period\n        if rel < WIDTH[i] or rel > period - (FROG_W - 2 * MARGIN):\n            die()\n\n\ndef check_flies():\n    global caught, night\n    i = 0\n    while i < FLIES:\n        if f_on[i]:\n            d = frog_x + FROG_W // 2 - f_x[i] - FLY_D // 2\n            if -FLY_REACH < d < FLY_REACH:\n                f_on[i] = 0\n                flies[i].add_flag(HIDDEN)\n                caught += 1\n                add_score(100 * night)\n                if caught == FLIES:\n                    if night < NIGHT_MAX:\n                        night += 1\n                    play_tone(1047, 160)\n                    prepare_night()\n                else:\n                    play_tone(880, 40)\n                    frog_to_start()\n                return\n        i += 1\n\n\ndef hop(dx, dr):\n    global frog_x, frog_row, best_row\n    x = frog_x + dx\n    row = frog_row + dr\n    if row < 0 or row > START_ROW or x < 0 or x > 480 - FROG_W:\n        return\n    frog_x = x\n    frog_row = row\n    frog.set_pos(x, TOP + row * ROW_H + FROG_DY)\n    play_tone(440, 20)\n    if row < best_row:\n        best_row = row\n        add_score(10)\n    if row == 0:\n        check_flies()\n\n\ndef read_touch():\n    global held\n    if indev is None:\n        return\n    if indev.get_state() != PRESSED:\n        held = False\n        return\n    if held:\n        return\n    held = True\n    indev.get_point(point)\n    if point.y < PAD_Y:\n        return\n    c = point.x // PAD_W\n    if c == 0:\n        hop(-HOP_X, 0)\n    elif c == 1:\n        hop(0, 1)\n    elif c == 2:\n        hop(0, -1)\n    else:\n        hop(HOP_X, 0)\n\n\ndef end_game():\n    ui.tick.pause()\n    ui.buzzer.off()\n    ui.load_page(ui.PAGE_GAMEOVER)\n\n\ndef show_end():\n    ui.end_score.set_text(str(score))\n    ui.end_night.set_text(\"Night reached: %d\" % night)\n\n\ndef on_tick():\n    global phase_t, state\n    move_rows()\n    if state == S_PLAY:\n        read_touch()\n        if state == S_PLAY:\n            check_row()\n    elif state == S_INTRO:\n        phase_t -= 1\n        if phase_t == 0:\n            ui.banner.add_flag(HIDDEN)\n            state = S_PLAY\n    elif state == S_DEAD:\n        phase_t -= 1\n        if phase_t == 0:\n            splash.add_flag(HIDDEN)\n            frog_to_start()\n            state = S_PLAY\n    else:\n        phase_t -= 1\n        if phase_t == 0:\n            end_game()\n",
+    "handlers": {
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()\n"
+      },
+      "Menu_screen_loaded": {
+        "widget": "Menu",
+        "event": "SCREEN_LOADED",
+        "body": "big_titles()\n"
+      },
+      "Game_screen_loaded": {
+        "widget": "Game",
+        "event": "SCREEN_LOADED",
+        "body": "new_game()\n"
+      },
+      "GameOver_screen_loaded": {
+        "widget": "GameOver",
+        "event": "SCREEN_LOADED",
+        "body": "show_end()\n"
+      },
+      "btn_play_clicked": {
+        "widget": "btn_play",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_replay_clicked": {
+        "widget": "btn_replay",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_options_clicked": {
+        "widget": "btn_options",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_OPTIONS)\n"
+      },
+      "btn_back_clicked": {
+        "widget": "btn_back",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "btn_end_menu_clicked": {
+        "widget": "btn_end_menu",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "opt_speed_value_changed": {
+        "widget": "opt_speed",
+        "event": "VALUE_CHANGED",
+        "body": "set_speed(ui.opt_speed.get_value())\n"
+      },
+      "opt_sound_value_changed": {
+        "widget": "opt_sound",
+        "event": "VALUE_CHANGED",
+        "body": "set_sound(ui.opt_sound.has_state(lv.STATE.CHECKED))\n"
+      }
+    }
+  },
+  "currentPageId": "49f3addff7574c02a8ba7690acff294a",
+  "assets": {},
+  "variables": [],
+  "projectId": "ad08d639d3654c3382a490a6b8e78d99"
+}

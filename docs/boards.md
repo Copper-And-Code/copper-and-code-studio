@@ -30,6 +30,8 @@ The connection uses UART1 through a CH340 adapter at **115200 8N1**, normally `/
 
 The **ESP32-4848S040 (480×480)** profile uses native 480×480 RGB565 resolution, GT911 touch and 1× scaling. It requires MicroPython 1.29 or later, LVGL 9.5 or later, and the `display_driver` and `gt911` modules. Panel support is integrated into the display driver: a separate `rgbpanel` module is not required. The USB serial connection uses `mpremote`, normally on `/dev/ttyUSB0`; applications are installed under `/lms_apps/` without modifying `boot.py` or `main.py`.
 
+On this board an installed app can also be started from a menu: the home of the board repository ([`examples/home`](https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home)) starts a shell on the display at power-on, and a tap opens a menu of apps listed in `/sd/home.json`, with folders such as Games and a home button over each app. The Studio's examples Settings, Forecast, FTP Server and Photo Frame are written for it: the menu reads the WiFi networks and the brightness that Settings keeps in `cac_settings.json`. The [Settings example](https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/settings) shows the lines of `home.json` for them.
+
 ### Live editing
 
 While an application started from the IDE is running, **Device → Live Editing** sends design changes to the board about half a second after the last edit, with no restart. It rebuilds all pages off screen, shows the page open in the designer, and then deletes the old ones. Python module state survives, but widget state such as a typed text or a slider position returns to the design values. Code, Buzzer or Timer changes are not sent: the status bar asks you to press F5.

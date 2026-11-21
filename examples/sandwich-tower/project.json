@@ -1,0 +1,1289 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Sandwich Tower",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "e73d7d02e67c43c7b05a4d2cf45f3a89",
+      "name": "Menu",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "1e58158cd47b4ed4b40754d40660bc43",
+          "name": "buzzer",
+          "type": "buzzer",
+          "props": {},
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4ce338b5fadc425f94daadd87c0bf071",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 33,
+            "enabled": false
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6c697507f04d4b7da240a7c235f54201",
+          "name": "menu_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#1A1420",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6893cee04a234b6fbeed1cd5272cda79",
+          "name": "menu_bun_top",
+          "type": "panel",
+          "props": {
+            "x": 180,
+            "y": 40,
+            "width": 120,
+            "height": 30,
+            "bgColor": "#E8A55A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 14,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "61382b5fa54f40bca3166af113bf81ca",
+          "name": "menu_lettuce",
+          "type": "panel",
+          "props": {
+            "x": 172,
+            "y": 72,
+            "width": 136,
+            "height": 12,
+            "bgColor": "#58C060",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "1cf3a973df5649a39bc3325c144cdc3b",
+          "name": "menu_cheese",
+          "type": "panel",
+          "props": {
+            "x": 178,
+            "y": 86,
+            "width": 124,
+            "height": 10,
+            "bgColor": "#F2D04A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d6f97756f681463da8fb122a8c2e1803",
+          "name": "menu_bun_bottom",
+          "type": "panel",
+          "props": {
+            "x": 180,
+            "y": 98,
+            "width": 120,
+            "height": 18,
+            "bgColor": "#D9934A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "108ded895527471f96caaffade038abf",
+          "name": "menu_plate",
+          "type": "panel",
+          "props": {
+            "x": 160,
+            "y": 120,
+            "width": 160,
+            "height": 6,
+            "bgColor": "#D8D8E0",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "60c354ed4a8b4448826a0d09139cbe48",
+          "name": "menu_overtitle",
+          "type": "label",
+          "props": {
+            "x": 90,
+            "y": 146,
+            "width": 300,
+            "height": 22,
+            "text": "SANDWICH",
+            "textColor": "#C9B8E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b5a80d12f995467d82ac40f4e429db65",
+          "name": "menu_title",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 168,
+            "width": 360,
+            "height": 48,
+            "text": "TOWER",
+            "textColor": "#FFF4E0",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6deaf00848974c53ba2f4dffcd2849f0",
+          "name": "menu_subtitle",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 222,
+            "width": 360,
+            "height": 22,
+            "text": "Step on the layers, dodge the pickles",
+            "textColor": "#C9B8E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e8bcc5152e1b4afbb4b6d0c4aceee2f3",
+          "name": "btn_play",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play",
+            "bgColor": "#E0653A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_play_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6b9fc509b1aa43e0b536e779c0f1ffd7",
+          "name": "btn_options",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Options",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_options_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "e02a0d5940c648abaa685684415cfbe2",
+      "name": "Game",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "79519aba239143efa07d45d69fb4d9ca",
+          "name": "field",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#1A1420",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ff2be5f37a954ba29099735f112346f5",
+          "name": "floor0",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 110,
+            "width": 480,
+            "height": 4,
+            "bgColor": "#6B5B8A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d6d1fbd9a3a547808e505ebb5b0ca6f9",
+          "name": "floor1",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 182,
+            "width": 480,
+            "height": 4,
+            "bgColor": "#6B5B8A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0970d9b1a28f45f38b3ad5cd2b52696a",
+          "name": "floor2",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 254,
+            "width": 480,
+            "height": 4,
+            "bgColor": "#6B5B8A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d0769ca636804dddb98fa214a770ba45",
+          "name": "floor3",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 326,
+            "width": 480,
+            "height": 4,
+            "bgColor": "#6B5B8A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "02108cf6505744b5a7c6bfe6c5c05a38",
+          "name": "plate0",
+          "type": "panel",
+          "props": {
+            "x": 44,
+            "y": 388,
+            "width": 80,
+            "height": 6,
+            "bgColor": "#D8D8E0",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c08cb64047bf4002ba3bc74d80ff0c7b",
+          "name": "plate1",
+          "type": "panel",
+          "props": {
+            "x": 200,
+            "y": 388,
+            "width": 80,
+            "height": 6,
+            "bgColor": "#D8D8E0",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5c68b9ea25204bc9b4c7cd926895f842",
+          "name": "plate2",
+          "type": "panel",
+          "props": {
+            "x": 356,
+            "y": 388,
+            "width": 80,
+            "height": 6,
+            "bgColor": "#D8D8E0",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "79519aba239143efa07d45d69fb4d9ca",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "29bd7b11f62c452a907527990871c4e7",
+          "name": "hud_score",
+          "type": "label",
+          "props": {
+            "x": 12,
+            "y": 10,
+            "width": 52,
+            "height": 20,
+            "text": "SCORE",
+            "textColor": "#C9B8E8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "929cb7da48504a4286d2ae5d9ad9e234",
+          "name": "hud_level",
+          "type": "label",
+          "props": {
+            "x": 164,
+            "y": 10,
+            "width": 36,
+            "height": 20,
+            "text": "LVL",
+            "textColor": "#C9B8E8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "277d81b37d21491aa96a9589f7341a86",
+          "name": "hud_sprays",
+          "type": "label",
+          "props": {
+            "x": 236,
+            "y": 10,
+            "width": 76,
+            "height": 20,
+            "text": "SPRAYS",
+            "textColor": "#C9B8E8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f5709ec67fb74cd2b0ff425feef3634b",
+          "name": "life1",
+          "type": "panel",
+          "props": {
+            "x": 392,
+            "y": 9,
+            "width": 18,
+            "height": 18,
+            "bgColor": "#F4F4F4",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6d8c885002474f2fbda941355483ae10",
+          "name": "life2",
+          "type": "panel",
+          "props": {
+            "x": 420,
+            "y": 9,
+            "width": 18,
+            "height": 18,
+            "bgColor": "#F4F4F4",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "9d8ade2908994cebbf5d1a69997943ef",
+          "name": "life3",
+          "type": "panel",
+          "props": {
+            "x": 448,
+            "y": 9,
+            "width": 18,
+            "height": 18,
+            "bgColor": "#F4F4F4",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 5,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "6394827849754081b7bc0425152bce99",
+          "name": "chef_body",
+          "type": "panel",
+          "props": {
+            "x": 230,
+            "y": 298,
+            "width": 20,
+            "height": 28,
+            "bgColor": "#F4F4F4",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7c1d4881a39349b89ca82d222516aa26",
+          "name": "apron",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 17,
+            "width": 20,
+            "height": 11,
+            "bgColor": "#E0653A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 3,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "6394827849754081b7bc0425152bce99",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c08cbee619d244bc9748a4391eb89bb1",
+          "name": "eyes",
+          "type": "panel",
+          "props": {
+            "x": 5,
+            "y": 6,
+            "width": 10,
+            "height": 4,
+            "bgColor": "#1A1420",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 2,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "parentId": "6394827849754081b7bc0425152bce99",
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "870b3d66dbaa4e35b783a6952b334847",
+          "name": "banner",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 140,
+            "width": 360,
+            "height": 34,
+            "text": "Finish the sandwiches!",
+            "textColor": "#FFD76A",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "040103e34bd6428d98ef5c3650c0df2f",
+          "name": "pad_left",
+          "type": "button",
+          "props": {
+            "x": 6,
+            "y": 404,
+            "width": 88,
+            "height": 70,
+            "text": "",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7c1e3a37a6c34acc8803ed9bb0c7c85f",
+          "name": "pad_down",
+          "type": "button",
+          "props": {
+            "x": 101,
+            "y": 404,
+            "width": 88,
+            "height": 70,
+            "text": "",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "370321f99c0845078c5d91d485846d89",
+          "name": "pad_up",
+          "type": "button",
+          "props": {
+            "x": 196,
+            "y": 404,
+            "width": 88,
+            "height": 70,
+            "text": "",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7afca6550cad40e4a27a8ecdc3671486",
+          "name": "pad_right",
+          "type": "button",
+          "props": {
+            "x": 291,
+            "y": 404,
+            "width": 88,
+            "height": 70,
+            "text": "",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "17867e4bef8a4d87bbcbae4454e378d0",
+          "name": "pad_spray",
+          "type": "button",
+          "props": {
+            "x": 386,
+            "y": 404,
+            "width": 88,
+            "height": 70,
+            "text": "Spray",
+            "bgColor": "#E0653A",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "radius": 12
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "4f0480ceafdc43209fc0861958db1dff",
+      "name": "Options",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "faed78ea1f7042258f93563418cb62da",
+          "name": "opt_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#1A1420",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "23cd5fe6609648daace58b21a4271f42",
+          "name": "opt_title",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 48,
+            "width": 360,
+            "height": 44,
+            "text": "Options",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d963b427e8684c28a1f6058cb318235f",
+          "name": "opt_speed_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 130,
+            "width": 360,
+            "height": 32,
+            "text": "Speed 3",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "778daa846c3141a7914abfb2b6292d2f",
+          "name": "opt_speed",
+          "type": "slider",
+          "props": {
+            "x": 70,
+            "y": 178,
+            "width": 340,
+            "height": 14,
+            "min": 1,
+            "max": 5,
+            "value": 3,
+            "bgColor": "#3A2E4A",
+            "indicatorColor": "#E0653A",
+            "knobColor": "#FFF4E0",
+            "mode": "normal",
+            "isRange": false,
+            "leftValue": 0
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_speed_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "bc7a30f8e51748d6a8e527a38823037e",
+          "name": "opt_sound_text",
+          "type": "label",
+          "props": {
+            "x": 60,
+            "y": 248,
+            "width": 200,
+            "height": 32,
+            "text": "Sound",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f5c659cbcdcd459dab5c6deacb8440c7",
+          "name": "opt_sound",
+          "type": "switch",
+          "props": {
+            "x": 340,
+            "y": 246,
+            "width": 76,
+            "height": 38,
+            "checked": true,
+            "onColor": "#E0653A",
+            "offColor": "#3A2E4A",
+            "knobColor": "#FFF4E0",
+            "disabled": false
+          },
+          "events": {
+            "VALUE_CHANGED": "opt_sound_value_changed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "73b30566bb664fbcb0b9f57f458a4c13",
+          "name": "btn_back",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 360,
+            "width": 240,
+            "height": 64,
+            "text": "Back",
+            "bgColor": "#E0653A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    },
+    {
+      "id": "f36c5cbcfbb54bd6b8a6544a41190d8a",
+      "name": "GameOver",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "e92320e9cb9f49749c63c3af59c08c43",
+          "name": "end_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#1A1420",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f4e9906529fa4e08980ed497d4db0d5a",
+          "name": "end_title",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 64,
+            "width": 400,
+            "height": 44,
+            "text": "Game over",
+            "textColor": "#FFB36B",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c5268bf6fc8540e2a78171ac3168ff66",
+          "name": "end_score_text",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 136,
+            "width": 400,
+            "height": 22,
+            "text": "Score",
+            "textColor": "#C9B8E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f2d5383a35b34eccaa989cdedde1392e",
+          "name": "end_score",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 160,
+            "width": 400,
+            "height": 52,
+            "text": "0",
+            "textColor": "#FFF4E0",
+            "fontSize": 40,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "90c26bb707584af8a31d6b8bd6a13a49",
+          "name": "end_level",
+          "type": "label",
+          "props": {
+            "x": 40,
+            "y": 222,
+            "width": 400,
+            "height": 22,
+            "text": "Level reached: 1",
+            "textColor": "#C9B8E8",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a373aa5e6da84b11b7b10a7872163df3",
+          "name": "btn_replay",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 286,
+            "width": 240,
+            "height": 64,
+            "text": "Play again",
+            "bgColor": "#E0653A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_replay_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0431cdd92f09425c8841c9d17a2c810e",
+          "name": "btn_end_menu",
+          "type": "button",
+          "props": {
+            "x": 120,
+            "y": 368,
+            "width": 240,
+            "height": 64,
+            "text": "Menu",
+            "bgColor": "#3A2E4A",
+            "textColor": "#FFF4E0",
+            "fontSize": 24,
+            "radius": 12
+          },
+          "events": {
+            "CLICKED": "btn_end_menu_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# SANDWICH TOWER: a chef runs on four floors joined by ladders.\n#\n# Each layer (bread, lettuce, cheese, tomato) has to be stepped on in four\n# places: then it falls by one floor, and if another layer of the same sandwich\n# is below, it pushes that one down in turn. From the last floor the layers go\n# down onto the plate. With the three sandwiches finished the next level comes.\n# A chili, an olive and a gherkin chase the chef: a falling layer squashes them,\n# the spray stuns them for a while. Three lives, a limited number of sprays.\n#\n# Keys on the screen: left, down, up, right (held down) and spray.\n#\n# Rules for the ESP32: the objects are created only once, in build(). The\n# on_tick() loop uses only small integers and lists made in advance. The digits\n# are clipped \"0..9\" columns: the column moves, not the label, because moving a\n# label or changing its text allocates.\n\nFLOORS = 4\nFLOOR_Y = (110, 182, 254, 326)        # y of the feet on each floor\nPLATE_Y = 388\nSTACKS = 3\nSTACK_X = (84, 240, 396)              # centre of each sandwich\nLAYER_W = 64\nLAYER_H = 10\nLAYER_DY = 7                          # a layer sits just above its floor\nLAYERS = 9                            # three layers per sandwich\nMAX_LADDERS = 8\nLADDER_W = 24\nCH_W = 20\nCH_H = 28\nEN_W = 20\nEN_H = 24\nENEMIES = 3\nSPEED = 3                             # px per tick of the chef\nFALL_V = 6\nSNAP = 10                             # largest distance to take a ladder\nHIT_X = 15\nHIT_Y = 16\nSPRAY_RANGE = 84\nSPRAY_T = 8\nSTUN_T = 100\nRESPAWN_T = 120\nDEAD_T = 40\nINTRO_T = 45\nEND_T = 30\nSPRAYS = 5\nLEVEL_MAX = 9\nPAD_Y = 400\nBTN_X0 = 6\nBTN_STEP = 95\nDIGIT_W = 16\nSPEEDS = (0, 60, 80, 100, 120, 140)   # percentage for each position of the slider\n\n# Colours: top bread, filling (different for each sandwich), bottom bread.\nFILLINGS = (0x58C060, 0xF2D04A, 0xE0503A)\nENEMY_COLORS = (0xE0402A, 0x3C4A2A, 0x6BBF4A)\nENEMY_RADIUS = (8, 10, 5)\n\n# Levels: floor of each layer (top, filling, bottom) for each sandwich, and\n# ladders as (x, upper floor); a negative x = ladder not used.\nLEVEL_LAYERS = (\n    ((0, 1, 2), (1, 2, 3), (0, 2, 3)),\n    ((0, 1, 3), (0, 1, 2), (1, 2, 3)),\n    ((0, 2, 3), (0, 1, 3), (0, 1, 2)),\n)\nLEVEL_LAD_X = (\n    (36, 300, 444, 156, 324, 36, 240, 444),\n    (156, 324, 36, 240, 444, 156, 324, -1),\n    (36, 240, 444, 156, 324, 100, 380, -1),\n)\nLEVEL_LAD_TOP = (\n    (0, 0, 0, 1, 1, 2, 2, 2),\n    (0, 0, 1, 1, 1, 2, 2, 0),\n    (0, 0, 0, 1, 1, 2, 2, 0),\n)\n\nDIGIT_STRIP = \"0\\n1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\"\nSPEED_TEXT = tuple([\"Speed %d\" % n for n in range(6)])\n\nS_INTRO = 0\nS_PLAY = 1\nS_DEAD = 2\nS_END = 3\nL_REST = 0\nL_FALL = 1\nL_PLATED = 2\n\nsound = True\nspeed_pct = 100\n\nbuilt = None                # the field the objects were created on\nstyles = []                 # the styles must stay alive\nladders = []\nlayers = []\nenemies = []\ndigits = []\nlives_icons = []\nlevel_column = None\nspray_column = None\ncloud = None\nchef = None\nindev = None                # the pointer: remembered when a button is touched\npoint = None\nHIDDEN = 0\nPRESSED = 0\nline_h = 27\n\nlad_x = [0] * MAX_LADDERS\nlad_top = [0] * MAX_LADDERS\nn_lad = 0\nl_floor = bytearray(LAYERS)\nl_state = bytearray(LAYERS)\nl_mask = bytearray(LAYERS)\nl_count = bytearray(LAYERS)\nl_y = [0] * LAYERS\nplated = bytearray(STACKS)\ne_x = [0] * ENEMIES\ne_y = [0] * ENEMIES\ne_f = bytearray(ENEMIES)\ne_lad = [-1] * ENEMIES\ne_up = bytearray(ENEMIES)\ne_acc = bytearray(ENEMIES)\ne_stun = [0] * ENEMIES\ne_dead = [0] * ENEMIES\nshown = bytearray(5)\n\nstate = S_INTRO\nscore = 0\nlives = 3\nlevel = 1\nsprays = SPRAYS\nplated_total = 0\nn_enemies = 2\ne_v = 14\nc_x = 240\nc_y = FLOOR_Y[3]\nc_f = 3\nc_lad = -1\nfacing = 1\nspray_held = True\ncloud_t = 0\nphase_t = 0\n\n\ndef play_tone(hz, ms):\n    if sound:\n        ui.buzzer.beep(hz, ms)\n\n\ndef remember_touch():\n    global indev\n    device = lv.indev_active()\n    if device is not None:\n        indev = device\n\n\ndef big_titles():\n    if hasattr(lv, \"font_montserrat_40\"):\n        ui.menu_title.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n        ui.end_score.set_style_text_font(lv.font_montserrat_40, lv.PART.MAIN)\n\n\ndef set_speed(value):\n    global speed_pct\n    speed_pct = SPEEDS[value]\n    ui.opt_speed_text.set_text_static(SPEED_TEXT[value])\n\n\ndef set_sound(on):\n    global sound\n    sound = on\n    if not on:\n        ui.buzzer.off()\n\n\ndef new_style(color, radius):\n    style = lv.style_t()\n    style.init()\n    style.set_bg_color(lv.color_hex(color))\n    style.set_bg_opa(lv.OPA.COVER)\n    style.set_radius(radius)\n    styles.append(style)\n    return style\n\n\ndef new_object(parent, style, w, h):\n    obj = lv.obj(parent)\n    obj.remove_style_all()\n    if style is not None:\n        obj.add_style(style, lv.PART.MAIN)\n    obj.set_size(w, h)\n    obj.set_pos(0, 0)              # the first set_pos allocates: it is done here\n    obj.remove_flag(lv.obj.FLAG.CLICKABLE)\n    obj.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    return obj\n\n\ndef digit_column(parent, x):\n    column = new_object(parent, None, DIGIT_W, 10 * line_h)\n    column.set_pos(x, 0)\n    label = lv.label(column)\n    label.set_width(DIGIT_W)\n    label.set_style_text_font(lv.font_montserrat_24, lv.PART.MAIN)\n    label.set_style_text_color(lv.color_hex(0xFFF4E0), lv.PART.MAIN)\n    label.set_style_text_align(lv.TEXT_ALIGN.CENTER, lv.PART.MAIN)\n    label.set_text_static(DIGIT_STRIP)\n    return column\n\n\ndef digit_box(x):\n    box = new_object(built, None, DIGIT_W, line_h)\n    box.set_pos(x, 4)\n    return digit_column(box, 0)\n\n\ndef build():\n    global built, level_column, spray_column, cloud, chef, point, HIDDEN, PRESSED, line_h\n    built = ui.field\n    HIDDEN = lv.obj.FLAG.HIDDEN\n    PRESSED = lv.INDEV_STATE.PRESSED\n    for items in (styles, ladders, layers, enemies, digits, lives_icons):\n        items.clear()\n    point = lv.point_t()\n    line_h = lv.font_montserrat_24.get_line_height()\n    lv.screen_active().remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    built.remove_flag(lv.obj.FLAG.CLICKABLE)\n    style = new_style(0x1A1420, 0)\n    style.set_bg_opa(lv.OPA.TRANSP)\n    style.set_border_color(lv.color_hex(0x9C8AC0))\n    style.set_border_width(3)\n    style.set_border_side(lv.BORDER_SIDE.LEFT | lv.BORDER_SIDE.RIGHT)\n    for k in range(MAX_LADDERS):\n        ladders.append(new_object(built, style, LADDER_W, FLOOR_Y[1] - FLOOR_Y[0] + 20))\n    top = new_style(0xE8A55A, 6)\n    bottom = new_style(0xD9934A, 3)\n    for s in range(STACKS):\n        filling = new_style(FILLINGS[s], 4)\n        for style in (top, filling, bottom):\n            layers.append(new_object(built, style, LAYER_W, LAYER_H))\n    for i in range(ENEMIES):\n        style = new_style(ENEMY_COLORS[i], ENEMY_RADIUS[i])\n        if i == 1:                 # olive: a light ring\n            style.set_border_color(lv.color_hex(0xA8C070))\n            style.set_border_width(4)\n        enemies.append(new_object(built, style, EN_W, EN_H))\n    style = new_style(0xC9F0FF, 10)\n    style.set_bg_opa(lv.OPA._60)\n    cloud = new_object(built, style, 28, 20)\n    cloud.add_flag(HIDDEN)\n    box = new_object(built, None, 5 * DIGIT_W, line_h)\n    box.set_pos(64, 4)\n    for n in range(5):\n        digits.append(digit_column(box, n * DIGIT_W))\n    level_column = digit_box(198)\n    spray_column = digit_box(312)\n    lives_icons.extend((ui.life1, ui.life2, ui.life3))\n    chef = ui.chef_body\n    chef.remove_flag(lv.obj.FLAG.CLICKABLE)\n    chef.move_foreground()\n    ui.banner.move_foreground()\n\n\ndef show_score():\n    n = score\n    i = 4\n    while i >= 0:\n        d = n % 10\n        n //= 10\n        if shown[i] != d:\n            shown[i] = d\n            digits[i].set_y(-d * line_h)\n        i -= 1\n\n\ndef add_score(n):\n    global score\n    score += n\n    if score > 99999:\n        score = 99999\n    show_score()\n\n\ndef place_layer(i):\n    layers[i].set_pos(STACK_X[i // 3] - LAYER_W // 2, l_y[i])\n\n\ndef place_chef():\n    chef.set_pos(c_x - CH_W // 2, c_y - CH_H)\n\n\ndef respawn_enemy(i):\n    # on the side away from the chef, on the top floor\n    e_x[i] = 24 + 8 * i if c_x > 240 else 456 - 8 * i\n    e_y[i] = FLOOR_Y[0]\n    e_f[i] = 0\n    e_lad[i] = -1\n    e_acc[i] = 0\n    e_stun[i] = 0\n    e_dead[i] = 0\n    enemies[i].set_pos(e_x[i] - EN_W // 2, e_y[i] - EN_H)\n    enemies[i].remove_flag(HIDDEN)\n\n\ndef reset_positions():\n    global c_x, c_y, c_f, c_lad, facing, cloud_t, spray_held\n    c_x = 240\n    c_y = FLOOR_Y[FLOORS - 1]\n    c_f = FLOORS - 1\n    c_lad = -1\n    facing = 1\n    cloud_t = 0\n    spray_held = True\n    cloud.add_flag(HIDDEN)\n    place_chef()\n    chef.remove_flag(HIDDEN)\n    i = 0\n    while i < ENEMIES:\n        if i < n_enemies:\n            respawn_enemy(i)\n            e_dead[i] = 30 * i     # they come in one at a time\n            if e_dead[i]:\n                enemies[i].add_flag(HIDDEN)\n        else:\n            e_dead[i] = 0\n            enemies[i].add_flag(HIDDEN)\n        i += 1\n\n\ndef prepare_level():\n    global state, phase_t, n_lad, plated_total, n_enemies, e_v, sprays\n    n = (level - 1) % 3\n    xs = LEVEL_LAD_X[n]\n    tops = LEVEL_LAD_TOP[n]\n    n_lad = 0\n    k = 0\n    while k < MAX_LADDERS:\n        if xs[k] >= 0:\n            lad_x[n_lad] = xs[k]\n            lad_top[n_lad] = tops[k]\n            ladders[n_lad].set_pos(xs[k] - LADDER_W // 2, FLOOR_Y[tops[k]] - 20)\n            ladders[n_lad].remove_flag(HIDDEN)\n            n_lad += 1\n        k += 1\n    k = n_lad\n    while k < MAX_LADDERS:\n        ladders[k].add_flag(HIDDEN)\n        k += 1\n    floors = LEVEL_LAYERS[n]\n    i = 0\n    while i < LAYERS:\n        f = floors[i // 3][i % 3]\n        l_floor[i] = f\n        l_state[i] = L_REST\n        l_mask[i] = 0\n        l_count[i] = 0\n        l_y[i] = FLOOR_Y[f] - LAYER_DY\n        place_layer(i)\n        i += 1\n    i = 0\n    while i < STACKS:\n        plated[i] = 0\n        i += 1\n    plated_total = 0\n    pace = speed_pct * (9 + level) // 10\n    e_v = 14 * pace // 100\n    if e_v < 6:\n        e_v = 6\n    n_enemies = level + 1 if level < ENEMIES else ENEMIES\n    sprays = SPRAYS\n    spray_column.set_y(-sprays * line_h)\n    level_column.set_y(-level * line_h)\n    reset_positions()\n    ui.banner.remove_flag(HIDDEN)\n    state = S_INTRO\n    phase_t = INTRO_T\n\n\ndef new_game():\n    global score, lives, level\n    if built is not ui.field:      # a live update creates the page again\n        build()\n    score = 0\n    lives = 3\n    level = 1\n    i = 0\n    while i < 3:\n        lives_icons[i].remove_flag(HIDDEN)\n        i += 1\n    show_score()\n    prepare_level()\n    ui.tick.resume()\n\n\ndef pressed_key():\n    if indev is None or indev.get_state() != PRESSED:\n        return -1\n    indev.get_point(point)\n    if point.y < PAD_Y:\n        return -1\n    b = (point.x - BTN_X0) // BTN_STEP\n    if b < 0:\n        return 0\n    if b > 4:\n        return 4\n    return b\n\n\ndef ladder_near(x, f, up):\n    # the ladder near x that goes up (up) or down from floor f\n    top = f - 1 if up else f\n    k = 0\n    while k < n_lad:\n        if lad_top[k] == top and -SNAP <= lad_x[k] - x <= SNAP:\n            return k\n        k += 1\n    return -1\n\n\ndef ladder_towards(x, f, up):\n    # the ladder nearest to x that goes the right way from floor f\n    top = f - 1 if up else f\n    best = -1\n    dist = 9999\n    k = 0\n    while k < n_lad:\n        if lad_top[k] == top:\n            d = abs(lad_x[k] - x)\n            if d < dist:\n                dist = d\n                best = k\n        k += 1\n    return best\n\n\ndef squash(f, i):\n    # enemies on floor f under layer i\n    left = STACK_X[i // 3] - LAYER_W // 2 - 8\n    right = left + LAYER_W + 16\n    n = 0\n    while n < n_enemies:\n        if (e_dead[n] == 0 and e_lad[n] < 0 and e_f[n] == f\n                and left <= e_x[n] <= right):\n            e_dead[n] = RESPAWN_T\n            enemies[n].add_flag(HIDDEN)\n            add_score(300)\n            play_tone(196, 120)\n        n += 1\n\n\ndef start_fall(i):\n    l_state[i] = L_FALL\n    l_mask[i] = 0\n    l_count[i] = 0\n    l_y[i] = FLOOR_Y[l_floor[i]] - LAYER_DY\n    squash(l_floor[i], i)\n    play_tone(523, 60)\n\n\ndef push_below(i):\n    # layer i has landed: it pushes down the other layer of its sandwich\n    j = (i // 3) * 3\n    end = j + 3\n    while j < end:\n        if j != i and l_state[j] == L_REST and l_floor[j] == l_floor[i]:\n            start_fall(j)\n        j += 1\n\n\ndef step_on():\n    i = 0\n    while i < LAYERS:\n        if l_state[i] == L_REST and l_floor[i] == c_f:\n            rel = c_x - (STACK_X[i // 3] - LAYER_W // 2)\n            if 0 <= rel < LAYER_W:\n                bit = 1 << (rel * 4 // LAYER_W)\n                if not l_mask[i] & bit:\n                    l_mask[i] |= bit\n                    l_count[i] += 1\n                    l_y[i] = FLOOR_Y[c_f] - LAYER_DY + l_count[i]\n                    place_layer(i)\n                    if l_count[i] == 4:\n                        add_score(50)\n                        start_fall(i)\n                    else:\n                        play_tone(330, 15)\n        i += 1\n\n\ndef move_chef(b):\n    global c_x, c_y, c_f, c_lad, facing\n    if c_lad >= 0:\n        top = lad_top[c_lad]\n        if b == 2:\n            c_y -= SPEED\n            if c_y <= FLOOR_Y[top]:\n                c_y = FLOOR_Y[top]\n                c_f = top\n                c_lad = -1\n        elif b == 1:\n            c_y += SPEED\n            if c_y >= FLOOR_Y[top + 1]:\n                c_y = FLOOR_Y[top + 1]\n                c_f = top + 1\n                c_lad = -1\n        else:\n            return\n    elif b == 0 or b == 3:\n        facing = -1 if b == 0 else 1\n        x = c_x + facing * SPEED\n        if x < CH_W // 2:\n            x = CH_W // 2\n        elif x > 480 - CH_W // 2:\n            x = 480 - CH_W // 2\n        if x == c_x:\n            return\n        c_x = x\n        step_on()\n    else:\n        k = ladder_near(c_x, c_f, b == 2)\n        if k < 0:\n            return\n        c_x = lad_x[k]\n        c_lad = k\n        c_y += SPEED if b == 1 else -SPEED\n    place_chef()\n\n\ndef spray():\n    global sprays, cloud_t\n    if sprays == 0 or c_lad >= 0:\n        play_tone(150, 40)\n        return\n    sprays -= 1\n    spray_column.set_y(-sprays * line_h)\n    cloud.set_pos(c_x + facing * 26 - 14, c_y - 22)\n    cloud.remove_flag(HIDDEN)\n    cloud_t = SPRAY_T\n    n = 0\n    while n < n_enemies:\n        if e_dead[n] == 0 and e_lad[n] < 0 and e_f[n] == c_f:\n            d = (e_x[n] - c_x) * facing\n            if 0 <= d <= SPRAY_RANGE:\n                e_stun[n] = STUN_T\n        n += 1\n    play_tone(1200, 40)\n\n\ndef move_layers():\n    global plated_total, level\n    i = 0\n    while i < LAYERS:\n        if l_state[i] == L_FALL:\n            f = l_floor[i]\n            s = i // 3\n            last = f == FLOORS - 1\n            target = PLATE_Y - LAYER_H * (plated[s] + 1) if last else FLOOR_Y[f + 1] - LAYER_DY\n            y = l_y[i] + FALL_V\n            if y >= target:\n                y = target\n                if last:\n                    l_state[i] = L_PLATED\n                    plated[s] += 1\n                    plated_total += 1\n                    add_score(100)\n                    play_tone(784, 60)\n                else:\n                    l_floor[i] = f + 1\n                    l_state[i] = L_REST\n                    push_below(i)\n                    squash(f + 1, i)\n            l_y[i] = y\n            place_layer(i)\n        i += 1\n    if plated_total == LAYERS:\n        add_score(1000)\n        if level < LEVEL_MAX:\n            level += 1\n        play_tone(1047, 200)\n        prepare_level()\n\n\ndef enemy_step(i, n):\n    k = e_lad[i]\n    if k >= 0:                     # on the ladder up to the floor\n        if e_up[i]:\n            e_y[i] -= n\n            if e_y[i] <= FLOOR_Y[lad_top[k]]:\n                e_y[i] = FLOOR_Y[lad_top[k]]\n                e_f[i] = lad_top[k]\n                e_lad[i] = -1\n        else:\n            e_y[i] += n\n            if e_y[i] >= FLOOR_Y[lad_top[k] + 1]:\n                e_y[i] = FLOOR_Y[lad_top[k] + 1]\n                e_f[i] = lad_top[k] + 1\n                e_lad[i] = -1\n        return\n    f = e_f[i]\n    tx = c_x\n    if f != c_f:                   # towards the ladder to the chef's floor\n        up = c_f < f\n        k = ladder_towards(e_x[i], f, up)\n        if k >= 0:\n            tx = lad_x[k]\n            if e_x[i] == tx:\n                e_lad[i] = k\n                e_up[i] = 1 if up else 0\n                return\n    d = tx - e_x[i]\n    if d > n:\n        d = n\n    elif d < -n:\n        d = -n\n    e_x[i] += d\n\n\ndef move_enemies():\n    i = 0\n    while i < n_enemies:\n        if e_dead[i]:\n            e_dead[i] -= 1\n            if e_dead[i] == 0:\n                respawn_enemy(i)\n        elif e_stun[i]:\n            e_stun[i] -= 1\n            if e_stun[i] == 0 or e_stun[i] & 4:\n                enemies[i].remove_flag(HIDDEN)\n            else:\n                enemies[i].add_flag(HIDDEN)\n        else:\n            a = e_acc[i] + e_v + 2 * i\n            e_acc[i] = a & 7\n            if a >= 8:\n                enemy_step(i, a >> 3)\n                enemies[i].set_pos(e_x[i] - EN_W // 2, e_y[i] - EN_H)\n            if -HIT_X < e_x[i] - c_x < HIT_X and -HIT_Y < e_y[i] - c_y < HIT_Y:\n                die()\n                return\n        i += 1\n\n\ndef die():\n    global lives, state, phase_t\n    lives -= 1\n    lives_icons[lives].add_flag(HIDDEN)\n    cloud.add_flag(HIDDEN)\n    phase_t = DEAD_T\n    if lives == 0:\n        state = S_END\n        phase_t = END_T\n        play_tone(110, 500)\n    else:\n        state = S_DEAD\n        play_tone(165, 250)\n\n\ndef end_game():\n    ui.tick.pause()\n    ui.buzzer.off()\n    ui.load_page(ui.PAGE_GAMEOVER)\n\n\ndef show_end():\n    ui.end_score.set_text(str(score))\n    ui.end_level.set_text(\"Level reached: %d\" % level)\n\n\ndef on_tick():\n    global state, phase_t, spray_held, cloud_t\n    if state == S_PLAY:\n        b = pressed_key()\n        if b == 4:\n            if not spray_held:\n                spray()\n            spray_held = True\n        else:\n            spray_held = False\n            if b >= 0:\n                move_chef(b)\n        move_layers()\n        if state != S_PLAY:\n            return\n        if cloud_t:\n            cloud_t -= 1\n            if cloud_t == 0:\n                cloud.add_flag(HIDDEN)\n        move_enemies()\n    elif state == S_INTRO:\n        phase_t -= 1\n        if phase_t == 0:\n            ui.banner.add_flag(HIDDEN)\n            state = S_PLAY\n    elif state == S_DEAD:\n        phase_t -= 1\n        if phase_t & 4:\n            chef.add_flag(HIDDEN)\n        else:\n            chef.remove_flag(HIDDEN)\n        if phase_t == 0:\n            reset_positions()\n            state = S_PLAY\n    else:\n        phase_t -= 1\n        if phase_t & 4:\n            chef.add_flag(HIDDEN)\n        else:\n            chef.remove_flag(HIDDEN)\n        if phase_t == 0:\n            end_game()\n",
+    "handlers": {
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()\n"
+      },
+      "Menu_screen_loaded": {
+        "widget": "Menu",
+        "event": "SCREEN_LOADED",
+        "body": "big_titles()\n"
+      },
+      "Game_screen_loaded": {
+        "widget": "Game",
+        "event": "SCREEN_LOADED",
+        "body": "new_game()\n"
+      },
+      "GameOver_screen_loaded": {
+        "widget": "GameOver",
+        "event": "SCREEN_LOADED",
+        "body": "show_end()\n"
+      },
+      "btn_play_clicked": {
+        "widget": "btn_play",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_replay_clicked": {
+        "widget": "btn_replay",
+        "event": "CLICKED",
+        "body": "remember_touch()\nplay_tone(660, 40)\nui.load_page(ui.PAGE_GAME)\n"
+      },
+      "btn_options_clicked": {
+        "widget": "btn_options",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_OPTIONS)\n"
+      },
+      "btn_back_clicked": {
+        "widget": "btn_back",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "btn_end_menu_clicked": {
+        "widget": "btn_end_menu",
+        "event": "CLICKED",
+        "body": "play_tone(520, 40)\nui.load_page(ui.PAGE_MENU)\n"
+      },
+      "opt_speed_value_changed": {
+        "widget": "opt_speed",
+        "event": "VALUE_CHANGED",
+        "body": "set_speed(ui.opt_speed.get_value())\n"
+      },
+      "opt_sound_value_changed": {
+        "widget": "opt_sound",
+        "event": "VALUE_CHANGED",
+        "body": "set_sound(ui.opt_sound.has_state(lv.STATE.CHECKED))\n"
+      }
+    }
+  },
+  "currentPageId": "e73d7d02e67c43c7b05a4d2cf45f3a89",
+  "assets": {},
+  "variables": [],
+  "projectId": "f5a0de9057f5419aa0312aa1883b8a63"
+}
