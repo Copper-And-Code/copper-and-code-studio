@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Star Guard",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "2dbaf4aac5b84583bfcc3b86aabf6689",
+      "name": "main",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "64e5133230db453a96117eb8a0324dc1",
+          "name": "buzzer",
+          "type": "buzzer",
+          "props": {},
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f323dde9ad2f476786f75a85c8fd1cdc",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 20,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "a314ee4462b24f37a32ff16aa2b0d333",
+          "name": "bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0B0D1A",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "3cafeab423ee4d9488937e48107b5aea",
+          "name": "score",
+          "type": "label",
+          "props": {
+            "x": 8,
+            "y": 6,
+            "width": 190,
+            "height": 24,
+            "text": "Score 0",
+            "textColor": "#FFFFFF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e1a0edf24c784051982dd0b6d43d93e0",
+          "name": "lives",
+          "type": "label",
+          "props": {
+            "x": 282,
+            "y": 6,
+            "width": 190,
+            "height": 24,
+            "text": "Wave 1   Lives 3",
+            "textColor": "#9FE3B0",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_RIGHT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "8ed1ecdd397146b88379c89bdca1627f",
+          "name": "field",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 32,
+            "width": 480,
+            "height": 368,
+            "bgColor": "#05060E",
+            "borderColor": "#2A3050",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {
+            "CLICKED": "field_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "fcc2ff70498147b687580d42fa56cf7a",
+          "name": "message",
+          "type": "label",
+          "props": {
+            "x": 90,
+            "y": 150,
+            "width": 300,
+            "height": 150,
+            "text": "STAR GUARD\n\nTap here to start",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "182df62c98d549c2b46c0690e2eb6e7c",
+          "name": "btn_left",
+          "type": "button",
+          "props": {
+            "x": 6,
+            "y": 406,
+            "width": 146,
+            "height": 68,
+            "text": "Left",
+            "bgColor": "#2E6FD8",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4fcd1bcba6eb4960b142a947cdf334cd",
+          "name": "btn_fire",
+          "type": "button",
+          "props": {
+            "x": 167,
+            "y": 406,
+            "width": 146,
+            "height": 68,
+            "text": "Fire",
+            "bgColor": "#C0503A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_fire_pressed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0f815e47de6745e6bc3289c70c94f251",
+          "name": "btn_right",
+          "type": "button",
+          "props": {
+            "x": 328,
+            "y": 406,
+            "width": 146,
+            "height": 68,
+            "text": "Right",
+            "bgColor": "#2E6FD8",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# STAR GUARD: a squadron of forty drones marches across the sky, one step at a\n# time, and comes down a row at every edge. Shoot them all before they land.\n# The fewer are left, the faster they march. Four shields crumble a square\n# at a time, under your shots and theirs; now and then a comet crosses the\n# top of the sky for a bonus.\n#\n# Keys: Left and Right (held down) and Fire (held down it fires again as soon\n# as the shot is gone; one shot on the screen at a time). Tap the sky to\n# start, to pause and to go on. Three lives; every new wave starts lower.\n#\n# Rules for the ESP32: every object is made once in setup(). The forty drones\n# are children of one container, so a step of the squadron moves one object.\nimport time\nimport urandom as random\n\nW = 480\nH = 368                    # size of the sky (the field panel)\nCOLS = 8\nROWS = 5\nCW = 44                    # step between two drones across\nRH = 34                    # step between two rows\nSTART_X = (W - COLS * CW) // 2\nSTART_Y = 40\nSTEP = 8                   # px of one march step\nDROP = 16                  # px down at an edge\nROW_KIND = (0, 1, 1, 2, 2)\nKIND_W = (20, 26, 30)\nKIND_H = (16, 18, 18)\nKIND_R = (8, 4, 9)\nKIND_COLOR = (0xC46BFF, 0x3ED3C3, 0xF0A040)\nKIND_POINTS = (30, 20, 10)\n\nSHIELDS = 4\nSH_COLS = 6\nSH_ROWS = 3\nSH_CELL = 8\nSHIELD_Y = 262\nSHIELD_X = tuple(int(58 + i * 105.3) for i in range(SHIELDS))\nSH_SHAPE = (0, 0, 1, 1, 0, 0,               # 1 = a square of the shield: a low dome\n            0, 1, 1, 1, 1, 0,\n            1, 1, 1, 1, 1, 1)\n\nSHIP_W = 36\nSHIP_H = 22\nSHIP_Y = 336\nSHIP_V = 4                 # px per tick\nSHOT_V = 10\nBOMB_V = 5\nBOMBS = 3\nCOMET_Y = 6\nCOMET_W = 40\nCOMET_V = 2\nCOMET_POINTS = (50, 100, 150, 300)\nLIVES = 3\nDYING_MS = 1200\nWAVE_MS = 1500\n\nform = None                # container of the drones\ndrones = []\nalive = bytearray(COLS * ROWS)\ncells = []                 # squares of the shields\ncell_alive = bytearray(SHIELDS * SH_COLS * SH_ROWS)\nship = shot = comet = boom = None\nbombs = []\nbomb_y = [0] * BOMBS\nbomb_x = [0] * BOMBS\nbomb_on = bytearray(BOMBS)\nready = False\n\nstate = \"idle\"             # \"idle\", \"play\", \"pause\", \"dying\", \"wave\", \"over\"\nscore = best = 0\nlives = LIVES\nwave = 1\nfx = fy = 0                # position of the squadron\nfdir = 1\nleft_n = 0                 # drones still flying\nmarch_t = 0\nmarch_note = 0\nship_x = 0\nshot_on = False\nshot_x = shot_y = 0\nfire_req = False\nbomb_t = 0\ncomet_on = False\ncomet_x = 0\ncomet_dir = 1\ncomet_t = 0\nboom_t = 0\nstate_t = 0\nlast_ms = 0\nshown = [None, None]\n\n\ndef _box(parent, x, y, w, h, color, radius=0):\n    o = lv.obj(parent)\n    o.remove_style_all()\n    o.set_pos(x, y)\n    o.set_size(w, h)\n    o.set_style_bg_opa(lv.OPA.COVER, lv.PART.MAIN)\n    o.set_style_bg_color(lv.color_hex(color), lv.PART.MAIN)\n    if radius:\n        o.set_style_radius(radius, lv.PART.MAIN)\n    o.remove_flag(lv.obj.FLAG.CLICKABLE)\n    o.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    return o\n\n\ndef setup():\n    global ready, form, ship, shot, comet, boom, last_ms\n    if not ready:\n        f = ui.field\n        f.remove_flag(lv.obj.FLAG.SCROLLABLE)\n        for i in range(24):                          # a few fixed stars\n            x = (i * 197) % W\n            y = (i * 89) % (H - 120) + 20\n            _box(f, x, y, 2, 2, 0x5A6390 if i % 3 else 0xC8D0F0)\n        form = lv.obj(f)\n        form.remove_style_all()\n        form.set_size(COLS * CW, ROWS * RH)\n        form.remove_flag(lv.obj.FLAG.CLICKABLE)\n        form.remove_flag(lv.obj.FLAG.SCROLLABLE)\n        for r in range(ROWS):\n            k = ROW_KIND[r]\n            w, h = KIND_W[k], KIND_H[k]\n            for c in range(COLS):\n                d = _box(form, c * CW + (CW - w) // 2, r * RH, w, h, KIND_COLOR[k], KIND_R[k])\n                _box(d, w // 2 - 7, 5, 5, 5, 0x10121E, 2)\n                _box(d, w // 2 + 2, 5, 5, 5, 0x10121E, 2)\n                if k == 1:                           # a visor across the middle drones\n                    _box(d, 3, h - 5, w - 6, 2, 0x10121E)\n                drones.append(d)\n        for s in range(SHIELDS):\n            for i in range(SH_COLS * SH_ROWS):\n                o = _box(f, SHIELD_X[s] + (i % SH_COLS) * SH_CELL,\n                         SHIELD_Y + (i // SH_COLS) * SH_CELL, SH_CELL, SH_CELL, 0x4CC47A)\n                cells.append(o)\n        ship = lv.obj(f)\n        ship.remove_style_all()\n        ship.set_size(SHIP_W, SHIP_H)\n        ship.remove_flag(lv.obj.FLAG.CLICKABLE)\n        _box(ship, 0, 10, SHIP_W, 12, 0x6FA8FF, 3)\n        _box(ship, 13, 0, 10, 12, 0xBFD8FF, 3)\n        shot = _box(f, 0, 0, 3, 12, 0xFFFFFF)\n        for _ in range(BOMBS):\n            bombs.append(_box(f, 0, 0, 4, 10, 0xFF6A6A, 2))\n        comet = _box(f, 0, COMET_Y, COMET_W, 14, 0xFF4F8B, 7)\n        _box(comet, 14, 3, 12, 6, 0xFFE0EC, 3)\n        boom = _box(f, 0, 0, 30, 22, 0xFFE066, 11)\n        boom.set_style_bg_opa(200, lv.PART.MAIN)\n        m = ui.message\n        m.set_style_bg_color(lv.color_hex(0x000000), lv.PART.MAIN)\n        m.set_style_bg_opa(190, lv.PART.MAIN)\n        m.set_style_radius(10, lv.PART.MAIN)\n        m.set_style_pad_top(20, lv.PART.MAIN)\n        try:\n            ui.btn_left.get_child(0).set_text(lv.SYMBOL.LEFT)\n            ui.btn_right.get_child(0).set_text(lv.SYMBOL.RIGHT)\n        except Exception:\n            pass\n        ready = True\n    last_ms = time.ticks_ms()\n    reset_wave()\n    hide_moving()\n    ship.add_flag(lv.obj.FLAG.HIDDEN)\n    show_message(\"STAR GUARD\\n\\nTap here to start\")\n    show_hud()\n\n\ndef beep(hz, ms):\n    try:\n        ui.buzzer.beep(hz, ms)\n    except Exception:\n        pass\n\n\ndef show_message(text):\n    ui.message.set_text(text)\n    ui.message.remove_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef hide_message():\n    ui.message.add_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef show_hud():\n    t = \"Score %d\" % score\n    if t != shown[0]:\n        shown[0] = t\n        ui.score.set_text(t)\n    t = \"Wave %d   Lives %d\" % (wave, lives)\n    if t != shown[1]:\n        shown[1] = t\n        ui.lives.set_text(t)\n\n\ndef hide_moving():\n    global shot_on, comet_on, boom_t\n    shot_on = False\n    shot.add_flag(lv.obj.FLAG.HIDDEN)\n    for i in range(BOMBS):\n        bomb_on[i] = 0\n        bombs[i].add_flag(lv.obj.FLAG.HIDDEN)\n    comet_on = False\n    comet.add_flag(lv.obj.FLAG.HIDDEN)\n    boom_t = 0\n    boom.add_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef reset_wave():\n    \"\"\"A full squadron, a bit lower at every wave, and whole shields.\"\"\"\n    global fx, fy, fdir, left_n, march_t, bomb_t, comet_t\n    for i in range(COLS * ROWS):\n        if not alive[i]:\n            drones[i].remove_flag(lv.obj.FLAG.HIDDEN)\n        alive[i] = 1\n    left_n = COLS * ROWS\n    fx = START_X\n    fy = START_Y + min(wave - 1, 5) * 12\n    fdir = 1\n    form.set_pos(fx, fy)\n    for i in range(len(cells)):\n        on = SH_SHAPE[i % (SH_COLS * SH_ROWS)]\n        if on and not cell_alive[i]:\n            cells[i].remove_flag(lv.obj.FLAG.HIDDEN)\n        elif not on:\n            cells[i].add_flag(lv.obj.FLAG.HIDDEN)\n        cell_alive[i] = on\n    march_t = 0\n    bomb_t = 1500\n    comet_t = 15000 + random.getrandbits(13)\n\n\ndef place_ship():\n    global ship_x\n    ship_x = (W - SHIP_W) // 2\n    ship.set_pos(ship_x, SHIP_Y)\n    ship.remove_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef new_game():\n    global score, lives, wave, state\n    score = 0\n    lives = LIVES\n    wave = 1\n    reset_wave()\n    hide_moving()\n    place_ship()\n    hide_message()\n    state = \"play\"\n    show_hud()\n    beep(660, 60)\n\n\ndef tap_field():\n    global state, last_ms\n    if state in (\"idle\", \"over\"):\n        new_game()\n    elif state == \"play\":\n        state = \"pause\"\n        show_message(\"PAUSED\\n\\nTap to go on\")\n    elif state == \"pause\":\n        state = \"play\"\n        last_ms = time.ticks_ms()\n        hide_message()\n\n\ndef fire_pressed():\n    global fire_req\n    fire_req = True\n\n\ndef march_ms():\n    ms = (30 + left_n * 14) * max(55, 100 - (wave - 1) * 9) // 100\n    return ms\n\n\ndef edges():\n    lo = COLS\n    hi = -1\n    for c in range(COLS):\n        for r in range(ROWS):\n            if alive[r * COLS + c]:\n                if c < lo:\n                    lo = c\n                if c > hi:\n                    hi = c\n                break\n    return lo, hi\n\n\ndef lowest_row():\n    for r in range(ROWS - 1, -1, -1):\n        base = r * COLS\n        for c in range(COLS):\n            if alive[base + c]:\n                return r\n    return -1\n\n\ndef march():\n    global fx, fy, fdir, march_note\n    lo, hi = edges()\n    left = fx + lo * CW + 4\n    right = fx + (hi + 1) * CW - 4\n    if (fdir > 0 and right + STEP > W - 4) or (fdir < 0 and left - STEP < 4):\n        fy += DROP\n        fdir = -fdir\n    else:\n        fx += STEP * fdir\n    form.set_pos(fx, fy)\n    march_note ^= 1\n    beep(120 if march_note else 100, 25)\n    r = lowest_row()\n    bottom = fy + r * RH + KIND_H[ROW_KIND[r]]\n    if bottom >= SHIELD_Y:\n        crush_shields()\n    if bottom >= SHIP_Y:\n        landed()\n\n\ndef crush_shields():\n    \"\"\"Drones low enough wipe out the squares of shield they fly over.\"\"\"\n    for r in range(ROWS):\n        k = ROW_KIND[r]\n        top = fy + r * RH\n        bot = top + KIND_H[k]\n        if bot < SHIELD_Y:\n            continue\n        for c in range(COLS):\n            if not alive[r * COLS + c]:\n                continue\n            x0 = fx + c * CW + (CW - KIND_W[k]) // 2\n            x1 = x0 + KIND_W[k]\n            for i in range(len(cells)):\n                if not cell_alive[i]:\n                    continue\n                s = i // (SH_COLS * SH_ROWS)\n                j = i % (SH_COLS * SH_ROWS)\n                cx = SHIELD_X[s] + (j % SH_COLS) * SH_CELL\n                cy = SHIELD_Y + (j // SH_COLS) * SH_CELL\n                if cx < x1 and cx + SH_CELL > x0 and cy < bot and cy + SH_CELL > top:\n                    cell_alive[i] = 0\n                    cells[i].add_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef shield_hit(x, y):\n    if y < SHIELD_Y or y >= SHIELD_Y + SH_ROWS * SH_CELL:\n        return False\n    for s in range(SHIELDS):\n        sx = SHIELD_X[s]\n        if sx <= x < sx + SH_COLS * SH_CELL:\n            i = s * SH_COLS * SH_ROWS + ((y - SHIELD_Y) // SH_CELL) * SH_COLS + (x - sx) // SH_CELL\n            if cell_alive[i]:\n                cell_alive[i] = 0\n                cells[i].add_flag(lv.obj.FLAG.HIDDEN)\n                return True\n            return False\n    return False\n\n\ndef explode(x, y):\n    global boom_t\n    boom.set_pos(x - 15, y - 11)\n    boom.remove_flag(lv.obj.FLAG.HIDDEN)\n    boom_t = 160\n\n\ndef drone_hit(x, y):\n    \"\"\"The drone at (x, y) of the sky, if a living one is there: it goes.\"\"\"\n    global score, left_n, state, state_t\n    rx = x - fx\n    ry = y - fy\n    if rx < 0 or ry < 0 or rx >= COLS * CW or ry >= ROWS * RH:\n        return False\n    c = rx // CW\n    r = ry // RH\n    i = r * COLS + c\n    if not alive[i]:\n        return False\n    k = ROW_KIND[r]\n    ox = (CW - KIND_W[k]) // 2\n    if not (ox - 1 <= rx % CW <= ox + KIND_W[k] and ry % RH <= KIND_H[k]):\n        return False\n    alive[i] = 0\n    drones[i].add_flag(lv.obj.FLAG.HIDDEN)\n    left_n -= 1\n    score += KIND_POINTS[k]\n    explode(fx + c * CW + CW // 2, fy + r * RH + KIND_H[k] // 2)\n    beep(880, 40)\n    if left_n == 0:\n        state = \"wave\"\n        state_t = 0\n        show_message(\"WAVE %d\\n\\nClear!\" % wave)\n        beep(1047, 200)\n    return True\n\n\ndef drop_bomb():\n    for b in range(BOMBS):\n        if not bomb_on[b]:\n            break\n    else:\n        return\n    cols = [c for c in range(COLS) if any(alive[r * COLS + c] for r in range(ROWS))]\n    if not cols:\n        return\n    # aim at the ship one time in three, otherwise a column at random\n    near = min(cols, key=lambda c: abs(fx + c * CW + CW // 2 - ship_x - SHIP_W // 2))\n    c = near if random.getrandbits(2) == 0 else cols[random.getrandbits(8) % len(cols)]\n    for r in range(ROWS - 1, -1, -1):\n        if alive[r * COLS + c]:\n            break\n    bomb_x[b] = fx + c * CW + CW // 2 - 2\n    bomb_y[b] = fy + r * RH + KIND_H[ROW_KIND[r]]\n    bomb_on[b] = 1\n    bombs[b].set_pos(bomb_x[b], bomb_y[b])\n    bombs[b].remove_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef ship_hit():\n    global state, state_t\n    state = \"dying\"\n    state_t = 0\n    explode(ship_x + SHIP_W // 2, SHIP_Y + SHIP_H // 2)\n    beep(150, 400)\n\n\ndef landed():\n    global lives\n    lives = 1\n    ship_hit()\n\n\ndef game_over():\n    global state, best\n    state = \"over\"\n    if score > best:\n        best = score\n    ship.add_flag(lv.obj.FLAG.HIDDEN)\n    show_message(\"GAME OVER\\n\\nScore %d   Best %d\\nTap to play\" % (score, best))\n    beep(110, 500)\n    show_hud()\n\n\ndef move_shots():\n    global shot_on, shot_y, comet_on, score\n    if shot_on:\n        shot_y -= SHOT_V\n        hit = False\n        if shot_y < 0:\n            hit = True\n        elif comet_on and shot_y <= COMET_Y + 14 and comet_x <= shot_x <= comet_x + COMET_W:\n            hit = True\n            comet_on = False\n            comet.add_flag(lv.obj.FLAG.HIDDEN)\n            score += COMET_POINTS[random.getrandbits(2)]\n            explode(comet_x + COMET_W // 2, COMET_Y + 7)\n            beep(1319, 120)\n        elif shield_hit(shot_x + 1, shot_y) or drone_hit(shot_x + 1, shot_y):\n            hit = True\n        if hit:\n            shot_on = False\n            shot.add_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            shot.set_pos(shot_x, shot_y)\n    for b in range(BOMBS):\n        if not bomb_on[b]:\n            continue\n        bomb_y[b] += BOMB_V\n        y = bomb_y[b] + 10\n        x = bomb_x[b] + 2\n        gone = y >= H or shield_hit(x, y)\n        if not gone and state == \"play\" and SHIP_Y + 4 <= y and bomb_y[b] <= SHIP_Y + SHIP_H \\\n                and ship_x <= x <= ship_x + SHIP_W:\n            gone = True\n            ship_hit()\n        if gone:\n            bomb_on[b] = 0\n            bombs[b].add_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            bombs[b].set_pos(bomb_x[b], bomb_y[b])\n\n\ndef on_tick():\n    global last_ms, march_t, ship_x, shot_on, shot_x, shot_y, fire_req\n    global bomb_t, comet_on, comet_x, comet_dir, comet_t, boom_t, state, state_t, lives, wave\n    now = time.ticks_ms()\n    dt = time.ticks_diff(now, last_ms)\n    last_ms = now\n    if dt > 100:\n        dt = 100\n    if boom_t > 0:\n        boom_t -= dt\n        if boom_t <= 0:\n            boom.add_flag(lv.obj.FLAG.HIDDEN)\n    if state == \"dying\":\n        state_t += dt\n        move_shots()\n        if (state_t // 100) % 2:\n            ship.add_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            ship.remove_flag(lv.obj.FLAG.HIDDEN)\n        if state_t >= DYING_MS:\n            lives -= 1\n            if lives <= 0:\n                lives = 0\n                game_over()\n                return\n            hide_moving()\n            place_ship()\n            state = \"play\"\n        show_hud()\n        return\n    if state == \"wave\":\n        state_t += dt\n        if state_t >= WAVE_MS:\n            wave += 1\n            reset_wave()\n            hide_moving()\n            hide_message()\n            state = \"play\"\n        show_hud()\n        return\n    if state != \"play\":\n        fire_req = False\n        return\n    # the ship\n    dx = 0\n    if ui.btn_left.has_state(lv.STATE.PRESSED):\n        dx -= SHIP_V\n    if ui.btn_right.has_state(lv.STATE.PRESSED):\n        dx += SHIP_V\n    if dx:\n        ship_x = max(4, min(W - SHIP_W - 4, ship_x + dx))\n        ship.set_pos(ship_x, SHIP_Y)\n    if (fire_req or ui.btn_fire.has_state(lv.STATE.PRESSED)) and not shot_on:\n        shot_on = True\n        shot_x = ship_x + SHIP_W // 2 - 1\n        shot_y = SHIP_Y - 10\n        shot.set_pos(shot_x, shot_y)\n        shot.remove_flag(lv.obj.FLAG.HIDDEN)\n        beep(1500, 15)\n    fire_req = False\n    move_shots()\n    if state != \"play\":\n        show_hud()\n        return\n    # the squadron\n    march_t += dt\n    if march_t >= march_ms():\n        march_t = 0\n        march()\n        if state != \"play\":\n            return\n    bomb_t -= dt\n    if bomb_t <= 0:\n        drop_bomb()\n        bomb_t = max(250, 1100 - wave * 90) + random.getrandbits(9)\n    # the comet\n    if comet_on:\n        comet_x += COMET_V * comet_dir\n        if comet_x < -COMET_W or comet_x > W:\n            comet_on = False\n            comet.add_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            comet.set_pos(comet_x, COMET_Y)\n    else:\n        comet_t -= dt\n        if comet_t <= 0 and fy > START_Y - 20:\n            comet_on = True\n            comet_dir = 1 if random.getrandbits(1) else -1\n            comet_x = -COMET_W if comet_dir > 0 else W\n            comet.set_pos(comet_x, COMET_Y)\n            comet.remove_flag(lv.obj.FLAG.HIDDEN)\n            comet_t = 18000 + random.getrandbits(13)\n    show_hud()\n",
+    "handlers": {
+      "main_screen_loaded": {
+        "widget": "main",
+        "event": "SCREEN_LOADED",
+        "body": "setup()\n"
+      },
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()\n"
+      },
+      "field_clicked": {
+        "widget": "field",
+        "event": "CLICKED",
+        "body": "tap_field()\n"
+      },
+      "btn_fire_pressed": {
+        "widget": "btn_fire",
+        "event": "PRESSED",
+        "body": "fire_pressed()\n"
+      }
+    }
+  },
+  "currentPageId": "2dbaf4aac5b84583bfcc3b86aabf6689",
+  "assets": {},
+  "variables": [],
+  "projectId": "66e7057414094610b97bd717e156361f",
+  "board": {
+    "schemaVersion": 1,
+    "id": "esp32_4848s040_480",
+    "revision": 1,
+    "name": "ESP32-4848S040 (480×480)",
+    "adapter": "esp32_4848s040",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911"
+      ]
+    },
+    "physicalWidth": 480,
+    "physicalHeight": 480,
+    "logicalWidth": 480,
+    "logicalHeight": 480,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver"
+    }
+  }
+}

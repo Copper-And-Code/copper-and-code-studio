@@ -8,6 +8,7 @@
 - **Settings, the WiFi networks of a board kept once for every app.** The Settings example keeps up to five networks in `cac_settings.json` in the flash; `cac_settings.py` connects to the best one in range, and a `boot.py` does it at power-on. Forecast uses it instead of its own network page. A Display page keeps the brightness in the same file.
 - **FTP Server**, an example for the ESP32-4848S040: the files of the flash and of the SD card for a PC on the same WiFi network, with FileZilla, WinSCP, a file manager or `curl`. The network comes from the Settings example, the password stays in `cac_settings.json`.
 - **Photo Frame**, an example for the ESP32-4848S040: the photos of `/sd/photos` one after the other in a random order, swiped by hand, with the display off at night (22:00 to 5:30 by default) in Italian time from the network. `convert_photos.py` makes the photos on the PC, cut to the display and dithered to RGB565.
+- **Three more games for a 480×480 touch screen:** Block Drop, falling pieces of four blocks that fill rows; Star Guard, a squadron of drones to shoot down before it lands; and Crossword, a new puzzle built on the board each time from a list of words with clues, in English or in Italian, with the language kept in `cac_settings.json`.
 
 ## 0.8.0 — 2026-11-20
 

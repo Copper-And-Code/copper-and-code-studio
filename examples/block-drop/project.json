@@ -1,0 +1,453 @@
+{
+  "schemaVersion": 2,
+  "projectName": "Block Drop",
+  "display": {
+    "width": 480,
+    "height": 480,
+    "colorFormat": "RGB565"
+  },
+  "pages": [
+    {
+      "id": "1d4c680172bd4c168fc11650f8fca203",
+      "name": "main",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "e89ecea224774b9fba41eb4fb031676d",
+          "name": "buzzer",
+          "type": "buzzer",
+          "props": {},
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5326d712e853432ba6b87a4f0cb78e19",
+          "name": "tick",
+          "type": "timer",
+          "props": {
+            "period": 20,
+            "enabled": true
+          },
+          "events": {
+            "TICK": "tick_tick"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "00115eadf1d54a03aa9e285100e0213d",
+          "name": "bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#11131B",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "af0a060c07414b58b4ef5023db998c16",
+          "name": "field",
+          "type": "panel",
+          "props": {
+            "x": 14,
+            "y": 18,
+            "width": 224,
+            "height": 444,
+            "bgColor": "#07080D",
+            "borderColor": "#3A4060",
+            "borderWidth": 2,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {
+            "CLICKED": "field_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e4c68f8a3ba544db88e77664bd3cb305",
+          "name": "title",
+          "type": "label",
+          "props": {
+            "x": 252,
+            "y": 16,
+            "width": 218,
+            "height": 30,
+            "text": "BLOCK DROP",
+            "textColor": "#F2C94C",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "40449e9e0a594247bc4536a46ca07548",
+          "name": "score_text",
+          "type": "label",
+          "props": {
+            "x": 252,
+            "y": 54,
+            "width": 218,
+            "height": 20,
+            "text": "Score",
+            "textColor": "#8A93B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "76699b2de262443f85fec05de6292cf6",
+          "name": "score",
+          "type": "label",
+          "props": {
+            "x": 252,
+            "y": 72,
+            "width": 218,
+            "height": 30,
+            "text": "0",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b2117da2c9a94a37a4526b19c8aeb0b9",
+          "name": "stats",
+          "type": "label",
+          "props": {
+            "x": 252,
+            "y": 108,
+            "width": 218,
+            "height": 20,
+            "text": "Level 1   Lines 0",
+            "textColor": "#C8CEE6",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "df0ef176337a4195b08dfe400ca7e3eb",
+          "name": "next_text",
+          "type": "label",
+          "props": {
+            "x": 252,
+            "y": 136,
+            "width": 218,
+            "height": 20,
+            "text": "Next",
+            "textColor": "#8A93B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "aa05978dd10e4f3f8d2150cf23c0d052",
+          "name": "next_box",
+          "type": "panel",
+          "props": {
+            "x": 301,
+            "y": 156,
+            "width": 120,
+            "height": 76,
+            "bgColor": "#07080D",
+            "borderColor": "#3A4060",
+            "borderWidth": 2,
+            "radius": 6,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "f008f61e97054c909710a5208e2be02d",
+          "name": "btn_rotate",
+          "type": "button",
+          "props": {
+            "x": 256,
+            "y": 246,
+            "width": 210,
+            "height": 64,
+            "text": "Rotate",
+            "bgColor": "#5B4BC4",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_rotate_pressed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "ac3f1d4d621945a49fa866499affd4f8",
+          "name": "btn_left",
+          "type": "button",
+          "props": {
+            "x": 256,
+            "y": 320,
+            "width": 101,
+            "height": 66,
+            "text": "Left",
+            "bgColor": "#2E6FD8",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_left_pressed",
+            "RELEASED": "btn_left_released"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d5ca7f34eae84430a4fe8801d7ae27f3",
+          "name": "btn_right",
+          "type": "button",
+          "props": {
+            "x": 365,
+            "y": 320,
+            "width": 101,
+            "height": 66,
+            "text": "Right",
+            "bgColor": "#2E6FD8",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_right_pressed",
+            "RELEASED": "btn_right_released"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "e8b1a06e83b34c2887f7c4fe8ee395aa",
+          "name": "btn_down",
+          "type": "button",
+          "props": {
+            "x": 256,
+            "y": 396,
+            "width": 101,
+            "height": 66,
+            "text": "Down",
+            "bgColor": "#2E8C5A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_down_pressed",
+            "RELEASED": "btn_down_released"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "b04041bf660246988867b01e7ab66c90",
+          "name": "btn_drop",
+          "type": "button",
+          "props": {
+            "x": 365,
+            "y": 396,
+            "width": 101,
+            "height": 66,
+            "text": "Drop",
+            "bgColor": "#C0503A",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "radius": 10
+          },
+          "events": {
+            "PRESSED": "btn_drop_pressed"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "0e134dca63974fcabd3e6c943f05d6e8",
+          "name": "message",
+          "type": "label",
+          "props": {
+            "x": 24,
+            "y": 130,
+            "width": 204,
+            "height": 210,
+            "text": "Tap here\nto start",
+            "textColor": "#FFFFFF",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_CENTER",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
+    }
+  ],
+  "code": {
+    "module": "# BLOCK DROP: pieces of four blocks fall into a well ten cells wide and\n# twenty tall. Move and turn them so that they fill whole rows: a full row\n# goes away and everything above it comes down. The game ends when a new\n# piece has no room at the top.\n#\n# Keys on the right: Rotate, Left and Right (held down they repeat), Down\n# (held down it drops faster, 1 point a row) and Drop (straight to the\n# bottom, 2 points a row). Tap the well to start, to pause and to go on.\n#\n# Rows: 100, 300, 500 or 800 points for 1 to 4 rows at once, times the\n# level. Every 10 rows the level goes up and the pieces fall faster.\n#\n# Rules for the ESP32: the 200 cells of the well are LVGL objects made once\n# in setup(); a frame changes the colour only of the cells that changed,\n# comparing with what is on the screen, so a move costs a few objects.\nimport time\nimport urandom as random\n\nCOLS = 10\nROWS = 20\nCELL = 22                  # step between two cells\nBLOCK = 20                 # side of one block, with a gap of 2\nLOCK_MS = 450              # time on the floor before a piece locks\nCLEAR_MS = 220             # full rows flash for this long\nDAS_MS = 170               # Left and Right held down: first repeat\nARR_MS = 55                # then one step every ARR_MS\nSOFT_MS = 40               # Down held down: one row every SOFT_MS\nPOINTS = (0, 100, 300, 500, 800)\n\nEMPTY = 0\nGHOST = 8                  # where the piece would land\nFLASH = 9                  # a full row before it goes away\nPALETTE = (0x151824,       # empty cell\n           0x3EC1D3, 0xF2C94C, 0xA05BD5, 0x4CC47A,\n           0xE5534B, 0x3C7DE0, 0xF08C3A,\n           0x2C3350,       # ghost\n           0xFFFFFF)       # flash\n\n# The seven pieces: cells in a box of side n, turned clockwise from there.\nSHAPES = (\n    (4, ((0, 1), (1, 1), (2, 1), (3, 1))),\n    (2, ((0, 0), (1, 0), (0, 1), (1, 1))),\n    (3, ((1, 0), (0, 1), (1, 1), (2, 1))),\n    (3, ((1, 0), (2, 0), (0, 1), (1, 1))),\n    (3, ((0, 0), (1, 0), (1, 1), (2, 1))),\n    (3, ((0, 0), (0, 1), (1, 1), (2, 1))),\n    (3, ((2, 0), (0, 1), (1, 1), (2, 1))),\n)\nKICKS = ((0, 0), (-1, 0), (1, 0), (-2, 0), (2, 0), (0, -1))\n\n\ndef _turns(n, cells):\n    out = [tuple(cells)]\n    for _ in range(3):\n        cells = [(n - 1 - y, x) for (x, y) in cells]\n        out.append(tuple(cells))\n    return tuple(out)\n\n\nROT = tuple(_turns(n, c) for (n, c) in SHAPES)\nSIZE = tuple(n for (n, c) in SHAPES)\n\ncolors = []\ncells = []                 # the 200 objects of the well\nshown = bytearray(COLS * ROWS)\nframe = bytearray(COLS * ROWS)\nboard = bytearray(COLS * ROWS)\npreview = []               # 4 objects in the Next box\nready = False\n\nstate = \"idle\"             # \"idle\", \"run\", \"pause\", \"clear\", \"over\"\nkind = rot = px = py = 0\nnext_kind = 0\nbag = []\nscore = lines = 0\nlevel = 1\nbest = 0\nfall_t = lock_t = clear_t = 0\nfull_rows = []\nheld = None                # \"left\", \"right\" or \"down\" while a key is held\nheld_t = 0\nlast_ms = 0\ndirty = True\nshown_text = [None, None]\n\n\ndef _block(parent, x, y):\n    o = lv.obj(parent)\n    o.remove_style_all()\n    o.set_size(BLOCK, BLOCK)\n    o.set_pos(x, y)\n    o.set_style_radius(3, lv.PART.MAIN)\n    o.set_style_bg_opa(lv.OPA.COVER, lv.PART.MAIN)\n    o.set_style_bg_color(colors[0], lv.PART.MAIN)\n    o.remove_flag(lv.obj.FLAG.CLICKABLE)\n    o.remove_flag(lv.obj.FLAG.SCROLLABLE)\n    return o\n\n\ndef _key_text(button, text):\n    try:\n        button.get_child(0).set_text(text)\n    except Exception:\n        pass\n\n\ndef setup():\n    global ready, last_ms\n    if not ready:\n        for c in PALETTE:\n            colors.append(lv.color_hex(c))\n        for i in range(COLS * ROWS):\n            cells.append(_block(ui.field, 1 + (i % COLS) * CELL, 1 + (i // COLS) * CELL))\n        for _ in range(4):\n            o = _block(ui.next_box, 0, 0)\n            o.add_flag(lv.obj.FLAG.HIDDEN)      # shown from the first piece on\n            preview.append(o)\n        ui.field.remove_flag(lv.obj.FLAG.SCROLLABLE)\n        ui.next_box.remove_flag(lv.obj.FLAG.SCROLLABLE)\n        ui.next_box.remove_flag(lv.obj.FLAG.CLICKABLE)\n        m = ui.message\n        m.set_style_bg_color(lv.color_hex(0x000000), lv.PART.MAIN)\n        m.set_style_bg_opa(200, lv.PART.MAIN)\n        m.set_style_radius(10, lv.PART.MAIN)\n        m.set_style_pad_top(22, lv.PART.MAIN)\n        try:\n            _key_text(ui.btn_rotate, lv.SYMBOL.REFRESH + \" Rotate\")\n            _key_text(ui.btn_left, lv.SYMBOL.LEFT)\n            _key_text(ui.btn_right, lv.SYMBOL.RIGHT)\n            _key_text(ui.btn_down, lv.SYMBOL.DOWN)\n        except Exception:\n            pass\n        for i in range(len(shown)):\n            shown[i] = 255\n        ready = True\n    last_ms = time.ticks_ms()\n    show_message(\"BLOCK DROP\\n\\nTap here\\nto start\")\n    draw()\n\n\ndef beep(hz, ms):\n    try:\n        ui.buzzer.beep(hz, ms)\n    except Exception:\n        pass\n\n\ndef show_message(text):\n    ui.message.set_text(text)\n    ui.message.remove_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef hide_message():\n    ui.message.add_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef pick():\n    if not bag:\n        bag.extend(range(7))\n        for i in range(6, 0, -1):          # shuffle the bag of seven\n            j = random.getrandbits(8) % (i + 1)\n            bag[i], bag[j] = bag[j], bag[i]\n    return bag.pop()\n\n\ndef fits(k, r, x, y):\n    for (cx, cy) in ROT[k][r]:\n        X = x + cx\n        Y = y + cy\n        if X < 0 or X >= COLS or Y >= ROWS:\n            return False\n        if Y >= 0 and board[Y * COLS + X]:\n            return False\n    return True\n\n\ndef new_game():\n    global score, lines, level, next_kind, state, held, fall_t, lock_t\n    for i in range(len(board)):\n        board[i] = EMPTY\n    bag.clear()\n    score = lines = 0\n    level = 1\n    held = None\n    fall_t = lock_t = 0\n    next_kind = pick()\n    state = \"run\"\n    hide_message()\n    spawn()\n    beep(660, 40)\n\n\ndef spawn():\n    global kind, rot, px, py, next_kind, fall_t, lock_t, dirty\n    kind = next_kind\n    next_kind = pick()\n    rot = 0\n    px = (COLS - SIZE[kind]) // 2\n    py = -1 if kind == 0 else 0\n    fall_t = lock_t = 0\n    dirty = True\n    draw_next()\n    if not fits(kind, rot, px, py):\n        game_over()\n\n\ndef game_over():\n    global state, best\n    state = \"over\"\n    if score > best:\n        best = score\n    show_message(\"GAME OVER\\n\\nScore %d\\nBest %d\\n\\nTap to play\" % (score, best))\n    beep(220, 300)\n\n\ndef fall_ms():\n    ms = 800 - (level - 1) * 70\n    return ms if ms > 70 else 70\n\n\ndef move(dx):\n    global px, lock_t, dirty\n    if fits(kind, rot, px + dx, py):\n        px += dx\n        lock_t = 0\n        dirty = True\n        return True\n    return False\n\n\ndef turn():\n    global rot, px, py, lock_t, dirty\n    r = (rot + 1) % 4\n    for (kx, ky) in KICKS:\n        if fits(kind, r, px + kx, py + ky):\n            rot = r\n            px += kx\n            py += ky\n            lock_t = 0\n            dirty = True\n            beep(880, 15)\n            return True\n    return False\n\n\ndef step_down():\n    global py, fall_t, dirty\n    if fits(kind, rot, px, py + 1):\n        py += 1\n        fall_t = 0\n        dirty = True\n        return True\n    return False\n\n\ndef hard_drop():\n    global score\n    n = 0\n    while step_down():\n        n += 1\n    score += 2 * n\n    lock()\n\n\ndef lock():\n    global state, clear_t, dirty\n    for (cx, cy) in ROT[kind][rot]:\n        if py + cy < 0:\n            game_over()\n            return\n        board[(py + cy) * COLS + px + cx] = kind + 1\n    dirty = True\n    full_rows.clear()\n    for y in range(ROWS):\n        base = y * COLS\n        if all(board[base:base + COLS]):\n            full_rows.append(y)\n    if full_rows:\n        state = \"clear\"\n        clear_t = 0\n        beep(520 + 120 * len(full_rows), 120)\n    else:\n        beep(330, 20)\n        spawn()\n\n\ndef remove_rows():\n    global score, lines, level, state\n    keep = [y for y in range(ROWS) if y not in full_rows]\n    n = len(full_rows)\n    old = bytes(board)\n    for i in range(n * COLS):\n        board[i] = EMPTY\n    for j, y in enumerate(keep):\n        d = (n + j) * COLS\n        board[d:d + COLS] = old[y * COLS:(y + 1) * COLS]\n    score += POINTS[n] * level\n    lines += n\n    if lines // 10 + 1 > level:\n        level = lines // 10 + 1\n        beep(1047, 150)\n    full_rows.clear()\n    state = \"run\"\n    spawn()\n\n\ndef draw():\n    global dirty\n    frame[:] = board\n    if state in (\"run\", \"pause\"):\n        gy = py\n        while fits(kind, rot, px, gy + 1):\n            gy += 1\n        cs = ROT[kind][rot]\n        for (cx, cy) in cs:\n            if gy + cy >= 0:\n                frame[(gy + cy) * COLS + px + cx] = GHOST\n        for (cx, cy) in cs:\n            if py + cy >= 0:\n                frame[(py + cy) * COLS + px + cx] = kind + 1\n    elif state == \"clear\" and (clear_t // 60) % 2 == 0:\n        for y in full_rows:\n            for x in range(COLS):\n                frame[y * COLS + x] = FLASH\n    for i in range(COLS * ROWS):\n        v = frame[i]\n        if v != shown[i]:\n            shown[i] = v\n            cells[i].set_style_bg_color(colors[v], lv.PART.MAIN)\n    dirty = False\n    t = \"%d\" % score\n    if t != shown_text[0]:\n        shown_text[0] = t\n        ui.score.set_text(t)\n    t = \"Level %d   Lines %d\" % (level, lines)\n    if t != shown_text[1]:\n        shown_text[1] = t\n        ui.stats.set_text(t)\n\n\ndef draw_next():\n    cs = ROT[next_kind][0]\n    xs = [c[0] for c in cs]\n    ys = [c[1] for c in cs]\n    w = (max(xs) - min(xs) + 1) * CELL\n    h = (max(ys) - min(ys) + 1) * CELL\n    ox = (116 - w) // 2 - min(xs) * CELL + 1\n    oy = (72 - h) // 2 - min(ys) * CELL + 1\n    for o, (cx, cy) in zip(preview, cs):\n        o.set_pos(ox + cx * CELL, oy + cy * CELL)\n        o.set_style_bg_color(colors[next_kind + 1], lv.PART.MAIN)\n        o.remove_flag(lv.obj.FLAG.HIDDEN)\n\n\ndef tap_well():\n    global state, last_ms\n    if state in (\"idle\", \"over\"):\n        new_game()\n    elif state == \"run\":\n        state = \"pause\"\n        show_message(\"PAUSED\\n\\nTap to go on\")\n    elif state == \"pause\":\n        state = \"run\"\n        last_ms = time.ticks_ms()\n        hide_message()\n\n\ndef press(key):\n    global held, held_t, score\n    if state != \"run\":\n        return\n    if key == \"rotate\":\n        turn()\n    elif key == \"drop\":\n        hard_drop()\n    elif key == \"left\" or key == \"right\":\n        move(-1 if key == \"left\" else 1)\n        held = key\n        held_t = 0\n    elif key == \"down\":\n        if step_down():\n            score += 1\n        held = key\n        held_t = 0\n    if dirty:\n        draw()\n\n\ndef release():\n    global held\n    held = None\n\n\nHELD_BUTTONS = {}\n\n\ndef _held_button():\n    if not HELD_BUTTONS:\n        HELD_BUTTONS[\"left\"] = ui.btn_left\n        HELD_BUTTONS[\"right\"] = ui.btn_right\n        HELD_BUTTONS[\"down\"] = ui.btn_down\n    return HELD_BUTTONS[held]\n\n\ndef on_tick():\n    global last_ms, fall_t, lock_t, clear_t, held, held_t, score\n    now = time.ticks_ms()\n    dt = time.ticks_diff(now, last_ms)\n    last_ms = now\n    if dt > 200:\n        dt = 200\n    if state == \"clear\":\n        clear_t += dt\n        if clear_t >= CLEAR_MS:\n            remove_rows()\n        draw()\n        return\n    if state != \"run\":\n        return\n    if held is not None:\n        if not _held_button().has_state(lv.STATE.PRESSED):\n            held = None\n        else:\n            held_t += dt\n            if held == \"down\":\n                while held_t >= SOFT_MS and state == \"run\":\n                    held_t -= SOFT_MS\n                    if step_down():\n                        score += 1\n            elif held_t >= DAS_MS:\n                move(-1 if held == \"left\" else 1)\n                held_t -= ARR_MS\n    if state != \"run\":\n        return\n    if fits(kind, rot, px, py + 1):\n        lock_t = 0\n        fall_t += dt\n        if fall_t >= fall_ms():\n            step_down()\n    else:\n        lock_t += dt\n        if lock_t >= LOCK_MS:\n            lock()\n    if dirty or state == \"clear\":\n        draw()\n",
+    "handlers": {
+      "main_screen_loaded": {
+        "widget": "main",
+        "event": "SCREEN_LOADED",
+        "body": "setup()\n"
+      },
+      "tick_tick": {
+        "widget": "tick",
+        "event": "TICK",
+        "body": "on_tick()\n"
+      },
+      "field_clicked": {
+        "widget": "field",
+        "event": "CLICKED",
+        "body": "tap_well()\n"
+      },
+      "btn_rotate_pressed": {
+        "widget": "btn_rotate",
+        "event": "PRESSED",
+        "body": "press(\"rotate\")\n"
+      },
+      "btn_drop_pressed": {
+        "widget": "btn_drop",
+        "event": "PRESSED",
+        "body": "press(\"drop\")\n"
+      },
+      "btn_left_pressed": {
+        "widget": "btn_left",
+        "event": "PRESSED",
+        "body": "press(\"left\")\n"
+      },
+      "btn_left_released": {
+        "widget": "btn_left",
+        "event": "RELEASED",
+        "body": "release()\n"
+      },
+      "btn_right_pressed": {
+        "widget": "btn_right",
+        "event": "PRESSED",
+        "body": "press(\"right\")\n"
+      },
+      "btn_right_released": {
+        "widget": "btn_right",
+        "event": "RELEASED",
+        "body": "release()\n"
+      },
+      "btn_down_pressed": {
+        "widget": "btn_down",
+        "event": "PRESSED",
+        "body": "press(\"down\")\n"
+      },
+      "btn_down_released": {
+        "widget": "btn_down",
+        "event": "RELEASED",
+        "body": "release()\n"
+      }
+    }
+  },
+  "currentPageId": "1d4c680172bd4c168fc11650f8fca203",
+  "assets": {},
+  "variables": [],
+  "projectId": "ab02c967d5524dcd9eefd4c5f73c26cc",
+  "board": {
+    "schemaVersion": 1,
+    "id": "esp32_4848s040_480",
+    "revision": 1,
+    "name": "ESP32-4848S040 (480×480)",
+    "adapter": "esp32_4848s040",
+    "firmware": {
+      "microPython": "1.29",
+      "lvgl": "9.5",
+      "modules": [
+        "lvgl",
+        "display_driver",
+        "gt911"
+      ]
+    },
+    "physicalWidth": 480,
+    "physicalHeight": 480,
+    "logicalWidth": 480,
+    "logicalHeight": 480,
+    "scale": 1,
+    "colorFormat": "RGB565",
+    "orientations": [
+      0
+    ],
+    "config": {
+      "driver": "display_driver",
+      "touch": "gt911",
+      "buffers": "driver",
+      "eventLoop": "driver"
+    }
+  }
+}

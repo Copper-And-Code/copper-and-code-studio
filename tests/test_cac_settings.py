@@ -65,7 +65,7 @@ class FakeStation:
 
 def test_every_app_has_the_same_cac_settings():
     source = SOURCE.read_text(encoding="utf-8")
-    for name in ("settings", "forecast", "ftp-server", "photo-frame"):
+    for name in ("settings", "forecast", "ftp-server", "photo-frame", "crossword"):
         project = json.loads((EXAMPLES / name / "project.json").read_text(encoding="utf-8"))
         modules = {m["name"]: m["source"] for m in project["modules"]}
         assert modules["cac_settings"] == source, f"{name} has another copy of cac_settings"
