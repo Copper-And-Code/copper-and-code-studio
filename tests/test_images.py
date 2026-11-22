@@ -82,7 +82,12 @@ def test_every_target_gets_the_image(tmp_path):
     project.board = profile
     project.resize(profile["logicalWidth"], profile["logicalHeight"], "keep")
     generated = generate_board(project, profile, tmp_path / "board")
-    assert "a2b_base64" in (tmp_path / "board" / "ui.py").read_text() and "ui.py" in generated["files"]
+    files = [name for name in generated["files"] if name.startswith("lms_image_")]   # on the board a file of its own
+    assert len(files) == 1 and files[0].endswith(".png") and "ui.py" in generated["files"]
+    assert len((tmp_path / "board" / files[0]).read_bytes()) == assets.images(project)[0]["bytes"]
+    source = (tmp_path / "board" / "ui.py").read_text()
+    assert f'_lms_read("{files[0]}")' in source and "a2b_base64" not in source
+    assert generated["manifest"]["files"][files[0]] == __import__("hashlib").sha256((tmp_path / "board" / files[0]).read_bytes()).hexdigest()
     generate_c(project, tmp_path / "c", portable=True)
     assert "lv_image_dsc_t" in (tmp_path / "c" / "ui.c").read_text()
 

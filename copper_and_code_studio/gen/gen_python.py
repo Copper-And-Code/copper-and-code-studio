@@ -1,4 +1,5 @@
 import base64
+import hashlib
 from datetime import datetime, timezone
 import keyword
 import re
@@ -147,7 +148,21 @@ def font_notes(fonts):
     return notes
 
 
-def python_declarations(fonts, custom, images, variables, font_sizes=None):
+def asset_file_name(kind, data, extension):
+    """The name of a font or image in a file of its own: from its bytes, so unchanged means the same file."""
+    return f"lms_{kind}_{hashlib.sha256(data).hexdigest()[:12]}.{extension}"
+
+
+ASSET_READER = """# Fonts and images of the project are files next to this module: read once, at start.
+_lms_dir = __file__.rsplit("/", 1)[0] if "/" in __file__ else "."
+def _lms_read(name):
+    with open(_lms_dir + "/" + name, "rb") as source:
+        return source.read()"""
+
+
+def python_declarations(fonts, custom, images, variables, font_sizes=None, asset_files=None):
+    """asset_files: a dict to fill with {file name: bytes}; the fonts and images are then read from
+    those files, next to ui.py, instead of being written in it in base64."""
     parts = []
     converted = [font for font in custom if (font.get("result") or {}).get("output")]
     for font in converted:
@@ -161,23 +176,35 @@ def python_declarations(fonts, custom, images, variables, font_sizes=None):
     if images["unsupported"]:
         parts.append(f"# Not generated (only PNG and JPEG images are supported): {', '.join(comment_text(path) for path in images['unsupported'])}")
     parts.extend(font_notes(custom))
-    if images["embedded"] or converted: parts.append("import binascii")
+    if (images["embedded"] or converted) and asset_files is None: parts.append("import binascii")
+    if (images["embedded"] or converted) and asset_files is not None: parts.append(ASSET_READER)
     if converted:
         parts.append("# Fonts of the project, converted to LVGL's binary format. Loading them needs\n# lv.binfont_create_from_buffer: a firmware without it draws the text with\n# the nearest Montserrat font")
     for font in converted:
         symbol, result = font["symbol"], font["result"]
-        encoded = base64.b64encode(result["output"]).decode("ascii")
-        parts.append(f'# Font "{comment_text(font["name"])}" {font["size"]} px\nif hasattr(lv, "binfont_create_from_buffer"):\n    {symbol}_data = binascii.a2b_base64("{encoded}")\n    {symbol} = lv.binfont_create_from_buffer({symbol}_data, len({symbol}_data))\n    del {symbol}_data  # LVGL keeps its own copy\nelse:\n    {symbol} = lv.font_montserrat_{font["fallback"]}')
+        if asset_files is None:
+            read = 'binascii.a2b_base64("%s")' % base64.b64encode(result["output"]).decode("ascii")
+        else:
+            name = asset_file_name("font", result["output"], "bin")
+            asset_files[name] = result["output"]
+            read = f'_lms_read("{name}")'
+        parts.append(f'# Font "{comment_text(font["name"])}" {font["size"]} px\nif hasattr(lv, "binfont_create_from_buffer"):\n    {symbol}_data = {read}\n    {symbol} = lv.binfont_create_from_buffer({symbol}_data, len({symbol}_data))\n    del {symbol}_data  # LVGL keeps its own copy\nelse:\n    {symbol} = lv.font_montserrat_{font["fallback"]}')
     for image in images["embedded"]:
         symbol, info, data = image["symbol"], image["info"], image["data"]
         png = info["format"] == "png"
-        parts.append(f'# Image "{comment_text(image["name"])}" ({info["width"]}x{info["height"]} {"PNG" if png else "JPEG"}), decoded at run time by LVGL\n{symbol}_data = binascii.a2b_base64("{data["base64"]}")\n{symbol} = lv.image_dsc_t({{"header": {{"magic": lv.IMAGE_HEADER_MAGIC, "cf": lv.COLOR_FORMAT.{"RAW_ALPHA" if png else "RAW"}, "w": {info["width"]}, "h": {info["height"]}}}, "data_size": len({symbol}_data), "data": {symbol}_data}})')
+        if asset_files is None:
+            read = f'binascii.a2b_base64("{data["base64"]}")'
+        else:
+            name = asset_file_name("image", data["bytes"], "png" if png else "jpg")
+            asset_files[name] = data["bytes"]
+            read = f'_lms_read("{name}")'
+        parts.append(f'# Image "{comment_text(image["name"])}" ({info["width"]}x{info["height"]} {"PNG" if png else "JPEG"}), decoded at run time by LVGL\n{symbol}_data = {read}\n{symbol} = lv.image_dsc_t({{"header": {{"magic": lv.IMAGE_HEADER_MAGIC, "cf": lv.COLOR_FORMAT.{"RAW_ALPHA" if png else "RAW"}, "w": {info["width"]}, "h": {info["height"]}}}, "data_size": len({symbol}_data), "data": {symbol}_data}})')
     if variables:
         parts.append("# Variables for data binding (LVGL subjects): read and write them with get_int()/set_int()\n" + "\n".join(f"{var['name']} = lv.subject_t()\n{var['name']}.init_int({var['initial']})" for var in variables))
     return "\n".join(parts)
 
 
-def build_project_code(project_data, converted_fonts=None, language="micropython", font_sizes=None):
+def build_project_code(project_data, converted_fonts=None, language="micropython", font_sizes=None, asset_files=None):
     converted_fonts = converted_fonts or {}
     ids = IdentifierAllocator()
     base_name = ids.allocate(project_data.get("projectName") or "ui", "ui")
@@ -282,7 +309,7 @@ def build_project_code(project_data, converted_fonts=None, language="micropython
     images = {"embedded": list(embedded.values()), "filePaths": file_paths, "unsupported": unsupported}
     custom = [dict(font, result=converted_fonts.get(font["key"])) for font in custom_fonts.values()]
     variable_list = list(variables.values())
-    declarations = c_declarations(public_widget_names, fonts, custom, images, opa_helper[0] if opa_helper else None, variable_list, variables_init) if language == "c" else python_declarations(fonts, custom, images, variable_list, font_sizes)
+    declarations = c_declarations(public_widget_names, fonts, custom, images, opa_helper[0] if opa_helper else None, variable_list, variables_init) if language == "c" else python_declarations(fonts, custom, images, variable_list, font_sizes, asset_files)
     font_requests = [{"key": font["key"], "name": font["name"], "size": font["size"], "symbol": font["symbol"], "data": font["asset"].get("data"), "characters": "".join(font["characters"])} for font in custom_fonts.values()]
     model = {"pages": [{"name": page["name"], "nodes": page["nodes"]} for page in pages]}
     return {"baseName": base_name, "pages": pages_data, "eventCallbacks": event_callbacks, "declarations": declarations, "fontRequests": font_requests, "model": model}
@@ -344,8 +371,10 @@ def share_styles(pages):
     return ["".join(source) + "\n"]
 
 
-def generate_python(project_data, generated_date=None, converted_fonts=None, usage=None, font_sizes=None):
+def generate_python(project_data, generated_date=None, converted_fonts=None, usage=None, font_sizes=None, asset_files=None):
     """usage limits the code to what the project uses; None generates everything.
+
+    asset_files: see python_declarations; the board's upload passes it.
 
     font_sizes: the Montserrat sizes the target has; None keeps the three of the legacy generator.
     """
@@ -358,7 +387,7 @@ def generate_python(project_data, generated_date=None, converted_fonts=None, usa
     if converted_fonts is None:
         first = build_project_code(project_data)
         converted_fonts = {request["key"]: {"error": "fonts are converted by the desktop app"} for request in first["fontRequests"]}
-    project = build_project_code(project_data, converted_fonts, font_sizes=font_sizes)
+    project = build_project_code(project_data, converted_fonts, font_sizes=font_sizes, asset_files=asset_files)
     style_source = share_styles(project["pages"])
     for page, model_page in zip(project["pages"], project["model"]["pages"]):
         page["globals"] = []

@@ -287,6 +287,13 @@ def test_upload_progress_follows_bytes_and_estimates_inside_a_file(qtbot):
     dialog.report(100_000, 100_000, "", 0)
     assert dialog.bar.value() == 1000 and "left" not in dialog.detail_label.text()
     assert UploadProgress(clock=lambda: now[0]).rate == UploadProgress.FIRST_RATE
+    reusing = UploadProgress(clock=lambda: now[0], rate=5_000)  # files copied inside the board: counted, not timed
+    qtbot.addWidget(reusing)
+    reusing.report(90_000, 100_000, "manifest.json", 10_000)
+    now[0] += 2
+    reusing.report(100_000, 100_000, "", 0)
+    assert reusing.rate == 5_000
+    reusing.finish()
 
     asked = []
     dialog.cancelRequested.connect(lambda: asked.append(True))

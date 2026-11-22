@@ -138,6 +138,50 @@ def test_upload_and_run_puts_the_app_on_the_board_and_starts_it(esp32, tmp_path)
     session.disconnect()
 
 
+def test_a_second_upload_sends_only_what_changed(esp32, tmp_path):
+    session = DeviceSession(interrupt=lambda port: None)
+    session.connect(esp32.port, esp32_profile())
+    project = _weather()
+    first = session.upload(project, tmp_path / "out")
+    assert first["reused"] == []   # nothing on the board yet
+    app = esp32.flash / first["appPath"].lstrip("/")
+    (app / "forecast.mpy").write_bytes(b"changed on the board by hand")
+    sent = []
+    again = session.upload(project, tmp_path / "out", progress=lambda done, total, name, size: sent.append(name))
+    assert "ui.mpy" in again["reused"] and "app_events.mpy" in again["reused"]
+    assert "forecast.mpy" not in again["reused"] and "manifest.json" not in again["reused"]
+    assert {name for name in sent if name} == {"forecast.mpy", "manifest.json"}
+    for name in first["files"]:   # the app on the board is the one of the PC, file by file
+        assert (app / name).read_bytes() == (tmp_path / "out" / name).read_bytes(), name
+    session.disconnect()
+
+
+def test_fonts_and_images_are_files_that_travel_only_when_they_change(esp32, tmp_path):
+    from copper_and_code_studio.core import assets
+    from virtual_board import ROOT
+
+    font = ROOT / ".reference" / "lvgl-bindings" / "lvgl" / "scripts" / "built_in_font" / "Montserrat-Medium.ttf"
+    if not font.exists():
+        pytest.skip("LVGL sources not available")
+    project = _weather()   # three images
+    name = assets.add_font(project, "Montserrat Medium.ttf", font.read_bytes())
+    label = next(widget for widget in project.widgets if widget.type == "label")
+    label.props["font"] = name
+    session = DeviceSession(interrupt=lambda port: None)
+    session.connect(esp32.port, esp32_profile())
+    first = session.upload(project, tmp_path / "out", run=True)
+    assert first["active"] is True, first.get("output")   # ui.py found and read its files on the board
+    files = [name for name in first["files"] if name.startswith("lms_")]
+    assert len([name for name in files if name.startswith("lms_font_")]) == 1 and len([name for name in files if name.startswith("lms_image_")]) == 3
+    session.stop()
+    label.props["text"] = "Changed"   # ui.py changes, its font and images do not
+    again = session.upload(project, tmp_path / "out", run=True)
+    assert again["active"] is True
+    assert "ui.mpy" not in again["reused"] and set(files) <= set(again["reused"])
+    session.stop()
+    session.disconnect()
+
+
 # ---- When things go wrong half way ----
 
 def test_cancel_during_a_copy_leaves_the_old_file(session, board, tmp_path):

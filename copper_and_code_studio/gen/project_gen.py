@@ -210,8 +210,10 @@ LEGACY_HEADER = "LVGL Version: 9.3 (lv_micropython binding)"
 HEADER = "LVGL Version: 9.5 (PyDevices binding)"
 
 
-def ui_source(data, full, expose_all=False, fonts=None):
+def ui_source(data, full, expose_all=False, fonts=None, asset_files=None):
     """ui.py: the legacy generator stays byte for byte as it is, the version line is corrected here.
+
+    asset_files: a dict to fill with the fonts and images as files of their own (see python_declarations).
 
     fonts: Montserrat sizes of the target; by default those of the project's board, or of the simulator.
     """
@@ -220,7 +222,7 @@ def ui_source(data, full, expose_all=False, fonts=None):
     from .fonts import convert_fonts  # it imports this package's generator: not at the top
 
     converted = convert_fonts(data) if (data.get("assets") or {}).get("fonts") else None
-    return generate_python(data, "2026-01-01T00:00:00.000Z", converted_fonts=converted, usage=usage, font_sizes=fonts).replace(LEGACY_HEADER, HEADER) + ui_imports(full)
+    return generate_python(data, "2026-01-01T00:00:00.000Z", converted_fonts=converted, usage=usage, font_sizes=fonts, asset_files=asset_files).replace(LEGACY_HEADER, HEADER) + ui_imports(full)
 
 
 def design_warnings(project):

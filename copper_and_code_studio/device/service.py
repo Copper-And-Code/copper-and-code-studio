@@ -137,6 +137,47 @@ def _remove_tree_script(path):
 remove_tree({path!r})"""
 
 
+BOARD_COPY_SPEED = 16384  # bytes per second of a copy inside the board's flash, slowest seen, for its timeout
+
+
+def reuse_script(current, staging, wanted):
+    """Copy into staging the files of the app on the board that are already as wanted.
+
+    wanted is {name: [size, sha256 hex]}. The board checks each file of current itself, size and
+    hash of what is there now, so a file changed on the board by hand is sent again. A firmware
+    without hashlib copies nothing: every file is sent, as before.
+    """
+    return f"""import os,json
+r=[]
+try:
+ import hashlib,binascii
+except ImportError:
+ hashlib=None
+b=bytearray(4096)
+m=memoryview(b)
+for n,(z,h) in json.loads({json.dumps(wanted)!r}).items():
+ if hashlib is None:break
+ s={current + '/'!r}+n
+ try:
+  if os.stat(s)[6]!=z:continue
+ except OSError:
+  continue
+ d=hashlib.sha256()
+ with open(s,'rb') as f:
+  while True:
+   k=f.readinto(b)
+   if not k:break
+   d.update(m[:k])
+ if binascii.hexlify(d.digest()).decode()!=h:continue
+ with open(s,'rb') as f,open({staging + '/'!r}+n,'wb') as t:
+  while True:
+   k=f.readinto(b)
+   if not k:break
+   t.write(m[:k])
+ r.append(n)
+print('LMS_REUSED='+json.dumps(r))"""
+
+
 def stop_script(app_root):
     """Stop the app and forget its modules, user modules included: they all live under app_root."""
     return (
@@ -552,7 +593,16 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
                 self._exec(f"import os\nos.mkdir({staging!r})", 20)
                 checks = {name: (output / name).stat().st_size for name in generated["files"]}
                 total, sent = sum(checks.values()), 0
+                # Files already on the board as they are now (a font that did not change, a module) are
+                # copied inside the board: much faster than through the serial link.
+                wanted = {name: [size, hashlib.sha256((output / name).read_bytes()).hexdigest()] for name, size in checks.items() if name != "manifest.json"}
+                reused = marked_json(self._exec(reuse_script(current, staging, wanted), 30 + sum(checks.values()) / BOARD_COPY_SPEED, cancel), "LMS_REUSED", missing=[])
+                reused = [name for name in reused if name in wanted] if isinstance(reused, list) else []
+                generated["reused"] = reused  # in the result: the files that did not travel
+                sent = sum(checks[name] for name in reused)
                 for name, size in checks.items():
+                    if name in reused:
+                        continue
                     self._check_cancel(cancel)
                     if progress:  # sent bytes, all bytes, the file being written and its size
                         progress(sent, total, name, size)

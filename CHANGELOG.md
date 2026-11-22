@@ -10,6 +10,11 @@
 - **Photo Frame**, an example for the ESP32-4848S040: the photos of `/sd/photos` one after the other in a random order, swiped by hand, with the display off at night (22:00 to 5:30 by default) in Italian time from the network. `convert_photos.py` makes the photos on the PC, cut to the display and dithered to RGB565.
 - **Three more games for a 480×480 touch screen:** Block Drop, falling pieces of four blocks that fill rows; Star Guard, a squadron of drones to shoot down before it lands; and Crossword, a new puzzle built on the board each time from a list of words with clues, in English or in Italian, with the language kept in `cac_settings.json`.
 
+### Changed
+
+- **A second upload sends only what changed.** A file that the board already has, with the same size and SHA-256, is copied inside the board instead of through the serial link; the IDE says how many were not sent again. A firmware without `hashlib` gets every file, as before.
+- **Fonts and images of the project are files of their own on the board**, next to the app, instead of base64 text in `ui.py`. After a change to the pages they stay on the board: on the virtual ESP32, a project with three fonts and three images sent 6 kB of 90 kB the second time. They also take less RAM: fonts about their own size, where before they took about 2.4 times. The simulator, the Python export and live editing still embed them in `ui.py`.
+
 ## 0.8.0 — 2026-11-20
 
 Renamed from LVGL MPY Studio to Copper and Code Studio. Settings, the configuration folder and projects are kept, and the old commands still work. The Windows package is that of 0.7.1, under the old name.

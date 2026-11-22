@@ -13,7 +13,7 @@ from copper_and_code_studio.core.i18n import tr
 from .gen_python import build_project_code
 
 _cache = {}
-RAM_FACTOR = 2.5  # on a board a font is held as text in the module and as LVGL's own copy: 2.3 times, measured
+RAM_FACTOR = 1.2  # on a board a font is read from its file and held by LVGL: 1.03 times, measured (2.4 when it was text in ui.py)
 
 
 def _convert(data, size, characters):

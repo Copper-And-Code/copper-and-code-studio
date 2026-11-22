@@ -153,6 +153,7 @@
   "Cancel operation": "Annulla operazione",
   "Wait for the device operation to finish.": "Attendere il termine dell'operazione sul dispositivo.",
   "Upload completed": "Trasferimento completato",
+  "{reused} of {count} files were already on the board and were not sent again.": "{reused} file su {count} erano già sulla board e non sono stati inviati di nuovo.",
   "Board application started; the LVGL timer remains active after bootstrap.": "Esecuzione sulla board avviata; il timer LVGL resta attivo dopo il bootstrap.",
   "Board stopped; the last image may remain visible.": "Board fermata; l'ultima immagine può restare visibile.",
   "Device Error": "Errore dispositivo",

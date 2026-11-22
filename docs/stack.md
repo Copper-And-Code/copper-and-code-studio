@@ -116,7 +116,7 @@ Places worth reading first:
 | File | Why |
 |---|---|
 | `copper_and_code_studio/device/uart.py` | A raw-REPL transport written for the STM32H7 boards, reached through a UART adapter: chunked writes that stay inside the raw REPL |
-| `copper_and_code_studio/device/service.py` | Upload as a transaction: staging folder, size check, rename, rollback |
+| `copper_and_code_studio/device/service.py` | Upload as a transaction: staging folder, unchanged files copied on the board, size check, rename, rollback |
 | `copper_and_code_studio/gen/binfont.py`, `fontconv.py` | A TrueType to LVGL binary font converter, kerning included, compared in the tests with LVGL's own Montserrat |
 | `native/lvsim/` | The C side of the simulator and its protocol, shared by the MicroPython and the C targets |
 | `copper_and_code_studio/gen/` | The generators: one project, MicroPython and C, compared pixel by pixel in the tests |

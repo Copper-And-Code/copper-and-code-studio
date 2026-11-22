@@ -94,6 +94,7 @@ class UploadProgress(QDialog):
         self._started = clock()
         self._sent = self._total = self._size = self._file_start = 0
         self._reported = self._first = None
+        self._first_sent = 0
         self.rate = float(rate or self.FIRST_RATE)  # bytes per second
         self._name = ""
         self._cancelling = False
@@ -121,9 +122,11 @@ class UploadProgress(QDialog):
     def report(self, sent, total, name, size):
         now = self._clock()
         if self._first is None:
-            self._first = now  # what comes before is preparation, not writing
-        elif sent > 0 and now > self._first:
-            self.rate = sent / (now - self._first)
+            # What comes before is preparation, not writing; the bytes already counted at the first
+            # report were copied inside the board, not through the link, and say nothing of its speed.
+            self._first, self._first_sent = now, sent
+        elif sent > self._first_sent and now > self._first:
+            self.rate = (sent - self._first_sent) / (now - self._first)
         if name != self._name:
             self._name, self._file_start = name, sent
         self._sent, self._total, self._size, self._reported = sent, total, size, now

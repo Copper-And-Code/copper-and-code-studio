@@ -171,8 +171,9 @@ def generate_board(project, profile, output_dir, fonts=None):
     data = legacy_data(project)
     model = build_project_code(data)
     app_source, sourcemap = generate_app_events(project)
+    assets = {}  # fonts and images in files of their own: an upload sends them again only when they change
     files = {
-        "ui.py": ui_source(data, project.to_dict(), fonts=fonts or profile_fonts(profile)),
+        "ui.py": ui_source(data, project.to_dict(), fonts=fonts or profile_fonts(profile), asset_files=assets),
         "app_events.py": app_source,
         "app_main.py": _board_main(project, model, profile),
         "sourcemap.json": json.dumps(sourcemap, indent=2) + "\n",
@@ -186,7 +187,11 @@ def generate_board(project, profile, output_dir, fonts=None):
     _validate_sources(files, sourcemap)
     for name, source in files.items():
         (output / name).write_text(source, encoding="utf-8", newline="\n")
-    manifest = {"schemaVersion": 1, "entryPoint": "app_main.py", "profileId": profile["id"], "profileRevision": profile["revision"], "files": {name: hashlib.sha256(source.encode("utf-8")).hexdigest() for name, source in files.items()}}
+    for name, data in assets.items():
+        (output / name).write_bytes(data)
+    digests = {name: hashlib.sha256(source.encode("utf-8")).hexdigest() for name, source in files.items()}
+    digests.update({name: hashlib.sha256(data).hexdigest() for name, data in assets.items()})
+    manifest = {"schemaVersion": 1, "entryPoint": "app_main.py", "profileId": profile["id"], "profileRevision": profile["revision"], "files": digests}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
     precompile = [name for name in PRECOMPILED if name in files] + [name for name in block_modules if name not in PRECOMPILED] + list(user_modules)
-    return {"files": list(files) + ["manifest.json"], "warnings": warnings + extra_warnings + _memory_warnings(project), "manifest": manifest, "sourcemap": sourcemap, "profile": profile, "precompile": precompile}
+    return {"files": list(files) + list(assets) + ["manifest.json"], "warnings": warnings + extra_warnings + _memory_warnings(project), "manifest": manifest, "sourcemap": sourcemap, "profile": profile, "precompile": precompile}

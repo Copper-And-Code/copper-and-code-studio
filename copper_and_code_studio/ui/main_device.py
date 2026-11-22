@@ -324,6 +324,8 @@ class DeviceMixin:
             self._live_upload_key = live.upload_key(project) if self.device_app_active else None
             self._live_design_key = live.design_key(project, next((index for index, page in enumerate(project.pages) if page.id == project.currentPageId), 0)) if self.device_app_active else None
             message = tr("Board application started; the LVGL timer remains active after bootstrap.") if run else tr("Upload completed")
+            if result.get("reused"):
+                message += " " + tr("{reused} of {count} files were already on the board and were not sent again.", reused=len(result["reused"]), count=len(result.get("files", [])))
             self.statusBar().showMessage(message, 5000)
             self.device_console.message(message)
         if not self._device_task(operation, completed):
