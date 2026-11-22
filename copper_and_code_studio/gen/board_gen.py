@@ -158,7 +158,13 @@ def export_board(project, profile, directory):
     return generated
 
 
-def generate_board(project, profile, output_dir, fonts=None):
+def generate_board(project, profile, output_dir, fonts=None, asset_files=False):
+    """The files of the app for a board, written in output_dir.
+
+    asset_files: the fonts and images of the project become files of their own next to ui.py, as
+    the upload wants: one that did not change is not sent again. Without it they are text in
+    ui.py, as in an export, which is then made of sources alone.
+    """
     warnings = validate_project(project) + design_warnings(project)
     profile = portable_profile(profile)
     validate_profile(profile)
@@ -171,9 +177,9 @@ def generate_board(project, profile, output_dir, fonts=None):
     data = legacy_data(project)
     model = build_project_code(data)
     app_source, sourcemap = generate_app_events(project)
-    assets = {}  # fonts and images in files of their own: an upload sends them again only when they change
+    assets = {}
     files = {
-        "ui.py": ui_source(data, project.to_dict(), fonts=fonts or profile_fonts(profile), asset_files=assets),
+        "ui.py": ui_source(data, project.to_dict(), fonts=fonts or profile_fonts(profile), asset_files=assets if asset_files else None),
         "app_events.py": app_source,
         "app_main.py": _board_main(project, model, profile),
         "sourcemap.json": json.dumps(sourcemap, indent=2) + "\n",
@@ -187,10 +193,14 @@ def generate_board(project, profile, output_dir, fonts=None):
     _validate_sources(files, sourcemap)
     for name, source in files.items():
         (output / name).write_text(source, encoding="utf-8", newline="\n")
-    for name, data in assets.items():
-        (output / name).write_bytes(data)
+    for name, content in assets.items():
+        (output / name).write_bytes(content)
+    if asset_files:  # named after their bytes: a font or image that changed would leave its old file here
+        for old in [*output.glob("lms_font_*.bin"), *output.glob("lms_image_*.png"), *output.glob("lms_image_*.jpg")]:
+            if old.name not in assets:
+                old.unlink(missing_ok=True)
     digests = {name: hashlib.sha256(source.encode("utf-8")).hexdigest() for name, source in files.items()}
-    digests.update({name: hashlib.sha256(data).hexdigest() for name, data in assets.items()})
+    digests.update({name: hashlib.sha256(content).hexdigest() for name, content in assets.items()})
     manifest = {"schemaVersion": 1, "entryPoint": "app_main.py", "profileId": profile["id"], "profileRevision": profile["revision"], "files": digests}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8", newline="\n")
     precompile = [name for name in PRECOMPILED if name in files] + [name for name in block_modules if name not in PRECOMPILED] + list(user_modules)

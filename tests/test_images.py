@@ -81,7 +81,9 @@ def test_every_target_gets_the_image(tmp_path):
     profile = builtin_profiles()[0]
     project.board = profile
     project.resize(profile["logicalWidth"], profile["logicalHeight"], "keep")
-    generated = generate_board(project, profile, tmp_path / "board")
+    generated = generate_board(project, profile, tmp_path / "export")   # an export is made of sources alone
+    assert "a2b_base64" in (tmp_path / "export" / "ui.py").read_text() and not [name for name in generated["files"] if name.startswith("lms_")]
+    generated = generate_board(project, profile, tmp_path / "board", asset_files=True)   # as the upload asks
     files = [name for name in generated["files"] if name.startswith("lms_image_")]   # on the board a file of its own
     assert len(files) == 1 and files[0].endswith(".png") and "ui.py" in generated["files"]
     assert len((tmp_path / "board" / files[0]).read_bytes()) == assets.images(project)[0]["bytes"]
@@ -90,6 +92,34 @@ def test_every_target_gets_the_image(tmp_path):
     assert generated["manifest"]["files"][files[0]] == __import__("hashlib").sha256((tmp_path / "board" / files[0]).read_bytes()).hexdigest()
     generate_c(project, tmp_path / "c", portable=True)
     assert "lv_image_dsc_t" in (tmp_path / "c" / "ui.c").read_text()
+
+
+def test_an_image_that_changes_does_not_leave_its_old_file_for_the_board(tmp_path):
+    project, name = with_image(tmp_path)
+    profile = builtin_profiles()[0]
+    project.board = profile
+    project.resize(profile["logicalWidth"], profile["logicalHeight"], "keep")
+    folder = tmp_path / "board"
+    first = [item for item in generate_board(project, profile, folder, asset_files=True)["files"] if item.startswith("lms_image_")]
+    (folder / "lms_notes.txt").write_text("not one of ours")
+    assets.remove_image(project, name)
+    project.find_widget("pic").props["src"] = assets.add_image(project, "My Logo.png", picture(tmp_path / "other.png", 32, 32).read_bytes())
+    second = [item for item in generate_board(project, profile, folder, asset_files=True)["files"] if item.startswith("lms_image_")]
+    assert first != second and sorted(path.name for path in folder.glob("lms_image_*")) == second   # the file is named after its bytes
+    assert (folder / "lms_notes.txt").is_file()
+
+
+def test_the_export_for_a_board_is_made_of_sources_alone(tmp_path):
+    from copper_and_code_studio.gen.board_gen import export_board
+
+    project, _name = with_image(tmp_path)
+    profile = builtin_profiles()[0]
+    project.board = profile
+    project.resize(profile["logicalWidth"], profile["logicalHeight"], "keep")
+    generated = export_board(project, profile, tmp_path / "export_py")
+    assert not [path.name for path in (tmp_path / "export_py").iterdir() if path.suffix not in (".py", ".json")]
+    assert "a2b_base64" in (tmp_path / "export_py" / "ui.py").read_text() and "_lms_read" not in (tmp_path / "export_py" / "ui.py").read_text()
+    assert set(generated["manifest"]["files"]) == set(generated["files"]) - {"manifest.json"}
 
 
 def test_a_large_image_says_what_it_costs(tmp_path):

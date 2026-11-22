@@ -264,11 +264,11 @@ def test_fonts_too_heavy_for_the_board_are_reported():
     project, _name = with_font(size=60)
     data = legacy_data(project)
     assert font_memory_warning(data, 28_000_000) is None  # the STM32H7
-    warning = font_memory_warning(data, 100_000)          # a board with little RAM left
-    assert warning and "100 kB free" in warning and "need about" in warning  # more than half: some 60 kB of font
-    assert font_memory_warning(data, 192_000) is None     # the RP2350: the font is read from its file, not held twice
+    warning = font_memory_warning(data, 192_000)          # the RP2350
+    assert warning and "192 kB free" in warning and "need about 125 kB" in warning  # 59 kB of font: LVGL's copy, and its file while it loads
+    assert font_memory_warning(data, 260_000) is None     # no longer 2.4 times, as when the font was text in ui.py
     project.find_widget("text").props["font"] = ""
-    assert font_memory_warning(legacy_data(project), 100_000) is None
+    assert font_memory_warning(legacy_data(project), 192_000) is None
 
 
 def test_memory_is_measured_after_the_reset_and_the_warning_survives_a_failed_start(tmp_path):
@@ -303,7 +303,7 @@ def test_memory_is_measured_after_the_reset_and_the_warning_survives_a_failed_st
             assert runner.resets == 2  # one to free the memory to measure, one to start clean
 
     assert not [warning for warning in upload(28_000_000)["warnings"] if "RAM" in warning]
-    assert [warning for warning in upload(100_000)["warnings"] if "100 kB free" in warning]
+    assert [warning for warning in upload(192_000)["warnings"] if "192 kB free" in warning]
     with pytest.raises(DeviceError) as failure:
-        upload(100_000, fails=True)
-    assert [warning for warning in failure.value.warnings if "100 kB free" in warning]
+        upload(192_000, fails=True)
+    assert [warning for warning in failure.value.warnings if "192 kB free" in warning]

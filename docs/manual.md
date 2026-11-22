@@ -139,7 +139,7 @@ Text is drawn with Montserrat, the font built into LVGL, in the sizes the target
 - The font file is stored inside the project file. Type its name in the `font` of another widget to use it again.
 - When the code is generated the font is converted for each size in use, with the printable ASCII characters and the characters of the widgets that use it. Text set from code can use those characters; a character the font does not have is listed in the output.
 - The glyphs are the same LVGL's own converter would make. Kerning, the fine spacing between particular pairs of letters such as “AV”, is converted too.
-- On a board each converted size is a file of its own next to the app, sent again only when it changes, and costs about its size in memory: some 13 kB for ASCII at 24 pixels. On upload the IDE warns when the fonts would take more than half the free RAM of the board. The C export includes the fonts of the project and loads them from memory, which needs `LV_USE_FS_MEMFS` in `lv_conf.h`.
+- On a board each converted size is a file of its own next to the app, sent again only when it changes, and costs about its size in memory, and as much again while the app loads it: some 13 kB for ASCII at 24 pixels. On upload the IDE warns when the fonts would take more than half the free RAM of the board. The C export includes the fonts of the project and loads them from memory, which needs `LV_USE_FS_MEMFS` in `lv_conf.h`.
 
 ### Components
 

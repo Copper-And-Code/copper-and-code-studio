@@ -12,8 +12,8 @@
 
 ### Changed
 
-- **A second upload sends only what changed.** A file that the board already has, with the same size and SHA-256, is copied inside the board instead of through the serial link; the IDE says how many were not sent again. A firmware without `hashlib` gets every file, as before.
-- **Fonts and images of the project are files of their own on the board**, next to the app, instead of base64 text in `ui.py`. After a change to the pages they stay on the board: on the virtual ESP32, a project with three fonts and three images sent 6 kB of 90 kB the second time. They also take less RAM: fonts about their own size, where before they took about 2.4 times. The simulator, the Python export and live editing still embed them in `ui.py`.
+- **A second upload sends only what changed.** A file that the board already has, with the same size and SHA-256, is copied inside the board instead of through the serial link; the IDE says how many were not sent again. A firmware without `hashlib` gets every file, as before, and so does a board that cannot read one of its files.
+- **An upload puts the fonts and images of the project in files of their own on the board**, next to the app, instead of base64 text in `ui.py`. After a change to the pages they stay on the board: on the virtual ESP32, a project with three fonts and three images sent 6 kB of 90 kB the second time. They also take less RAM: fonts about their own size, where before they took about 2.4 times, and the warning about the memory of the fonts counts that, plus the largest font once more while it loads. The simulator, **Export MicroPython Code** and live editing still embed them in `ui.py`.
 
 ## 0.8.0 — 2026-11-20
 

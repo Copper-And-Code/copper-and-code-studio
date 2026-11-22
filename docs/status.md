@@ -34,7 +34,8 @@ below as an open question, not as a formality.
 | Live editing on a board | yes | | ESP32-4848S040 | the other boards |
 | Pictures in a project | yes | yes | STM32H7_CORE (seen on the display) | RP2350, ESP32-S3 |
 | Fonts of a project, kerning | yes, against LVGL's Montserrat | yes | STM32H7_CORE (seen), RP2350 (loaded) | ESP32-S3 |
-| Font memory warning | yes | | Waveshare RP2350 | |
+| Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py` | the estimate for fonts in files (their size, plus the largest once more while it loads): the size measured on the virtual board only, the peak not measured |
+| Upload of only the files that changed; fonts and pictures as files on the board | yes: on a virtual board through the real `mpremote`: a second upload, a file changed on the board by hand, a file the board cannot read, a project with a font and three pictures started twice | | | a real board; a firmware without `hashlib`; Windows |
 | C export | yes, pixel parity with MicroPython in the simulator | | | in a real C project; fonts in C on a board |
 | Device Console as a terminal (keys as typed, ANSI colours and cursor) | yes: the VT100 sequences cell by cell, the keys, the port taken and given back | | STM32H7_CORE V1.3 and ESP32-4848S040, 13 November 2026, driven by a script through the IDE's code: the shell typed to and read back, the console stopped and started again three times | typed by a person; full-screen editors on a board; Windows |
 | Programs without pages in the simulator (Run Program) | yes: the service while waiting for a key, Ctrl-C, the flash that cannot be left, reset, the IDE | yes: Run Program and typing in the terminal, on Linux | the shell of `mpy-lvgl-boards` with `edit` and `vi`, driven by the tests of this work, not yet used by a person | used by a person; Windows, not available |
@@ -110,7 +111,9 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   number or a name such as `PA5`, and nothing warns when it is one the display or the memory
   already uses.
 - **The RAM budget** shown in the status bar is measured in the 64-bit simulator and is an
-  overestimate for 32-bit boards.
+  overestimate for 32-bit boards. It also counts the fonts and pictures of the project as text
+  in `ui.py`, as the simulator has them, while a board reads them from files: for fonts about
+  2.4 times their size where the board uses about once.
 - **Renaming a Python module** does not rewrite the code that imports it; the IDE warns.
 - **Reference images that hold a changing value** fail when the generator changes: the EIM-01
   example shows the free memory on a page, and its image had to be regenerated for 0.6.
@@ -119,8 +122,11 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   core, of the runtime and of the IDE, and the self-test. On the Linux machine 72 tests are
   skipped, because they need what is not built there: the launchers of single-file games, the
   WebAssembly runtime, Wine, a browser. Packages are built and checked by hand.
-- **An upload sends every file again**, also those that did not change: a project with fonts
-  takes tens of seconds on a slow link each time.
+- **An upload that sends only what changed is not tried on a real board.** On the virtual board a
+  second upload sends the files that changed and copies the others inside the board. How much
+  time that saves on a serial link, and whether every firmware has the `hashlib` it needs, is
+  not measured: without it every file is sent, as before. A project with many pictures sends
+  more files than before the first time, one copy each.
 
 ## What is not there
 

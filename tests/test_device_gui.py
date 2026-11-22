@@ -287,12 +287,15 @@ def test_upload_progress_follows_bytes_and_estimates_inside_a_file(qtbot):
     dialog.report(100_000, 100_000, "", 0)
     assert dialog.bar.value() == 1000 and "left" not in dialog.detail_label.text()
     assert UploadProgress(clock=lambda: now[0]).rate == UploadProgress.FIRST_RATE
-    reusing = UploadProgress(clock=lambda: now[0], rate=5_000)  # files copied inside the board: counted, not timed
+    reusing = UploadProgress(clock=lambda: now[0], rate=7_000)  # files copied inside the board: counted, not timed
     qtbot.addWidget(reusing)
-    reusing.report(90_000, 100_000, "manifest.json", 10_000)
-    now[0] += 2
+    reusing.report(80_000, 100_000, "manifest.json", 1_000)
+    now[0] += 1
+    reusing.report(81_000, 100_000, "ui.mpy", 19_000)
+    assert reusing.rate == 7_000   # 1 kB in a second says how long a copy takes to start, not how fast the link is
+    now[0] += 3
     reusing.report(100_000, 100_000, "", 0)
-    assert reusing.rate == 5_000
+    assert reusing.rate == 5_000   # the 20 kB that travelled, in 4 s: the 80 kB copied on the board do not count
     reusing.finish()
 
     asked = []

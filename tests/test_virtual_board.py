@@ -156,6 +156,23 @@ def test_a_second_upload_sends_only_what_changed(esp32, tmp_path):
     session.disconnect()
 
 
+def test_a_file_the_board_cannot_read_is_sent_again(esp32, tmp_path):
+    import os
+
+    if os.geteuid() == 0:
+        pytest.skip("root reads every file")
+    session = DeviceSession(interrupt=lambda port: None)
+    session.connect(esp32.port, esp32_profile())
+    project = _weather()
+    first = session.upload(project, tmp_path / "out")
+    app = esp32.flash / first["appPath"].lstrip("/")
+    (app / "ui.mpy").chmod(0)   # a bad block of the flash: the file is there, reading it fails
+    again = session.upload(project, tmp_path / "out")
+    assert "ui.mpy" not in again["reused"] and "app_events.mpy" in again["reused"]
+    assert (app / "ui.mpy").read_bytes() == (tmp_path / "out" / "ui.mpy").read_bytes()
+    session.disconnect()
+
+
 def test_fonts_and_images_are_files_that_travel_only_when_they_change(esp32, tmp_path):
     from copper_and_code_studio.core import assets
     from virtual_board import ROOT

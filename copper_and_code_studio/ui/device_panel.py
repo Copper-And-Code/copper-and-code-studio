@@ -83,6 +83,7 @@ class UploadProgress(QDialog):
     DELAY_MS = 800
     TICK_MS = 200
     FIRST_RATE = 4000  # bytes per second: slower than the boards measured, so the bar never runs ahead
+    MIN_SAMPLE = 8192  # bytes through the link before their speed is believed: fewer say how long a copy takes to start
 
     def __init__(self, parent=None, clock=time.monotonic, rate=None):
         super().__init__(parent)
@@ -125,7 +126,7 @@ class UploadProgress(QDialog):
             # What comes before is preparation, not writing; the bytes already counted at the first
             # report were copied inside the board, not through the link, and say nothing of its speed.
             self._first, self._first_sent = now, sent
-        elif sent > self._first_sent and now > self._first:
+        elif sent - self._first_sent >= self.MIN_SAMPLE and now > self._first:
             self.rate = (sent - self._first_sent) / (now - self._first)
         if name != self._name:
             self._name, self._file_start = name, sent

@@ -302,3 +302,12 @@ As of 2026-10-28, the public commit above still declares LVGL 9.3 for MicroPytho
   (`RUNTIME_HEAP`, `-X heapsize`), and mpy-cross with 64 MB (2026-11-18): with the default
   2 MB a project of about 2000 widgets did not start, while the boards with a display have far
   more. The memory budget measures what the app allocates, not the heap, so it does not change.
+
+## An upload that sends only what changed (2026-11-22)
+
+- An upload wrote every file again through the serial link, about 4 kB per second on the slowest boards. Now the IDE tells the board the size and SHA-256 of each file, and the board copies into the staging folder those its active app already has. The board computes the hash of what is in its flash now, not of what a manifest says, so a file changed there by hand is sent again. The transaction is the same as before: staging folder, check of the sizes, rename, previous version kept.
+- This step only saves time, so it never stops an upload: a file the board cannot read or copy is sent, a firmware without `hashlib` gets every file, and an error of the whole step sends every file with a warning. The list goes a few files at a time, because it is an argument of `mpremote` and a command line on Windows holds 32767 characters.
+- Fonts and pictures were base64 text in `ui.py`, so any change to a page sent them again. For an upload they are now files next to the app, named after their bytes (`lms_font_<hash>.bin`, `lms_image_<hash>.png`), which `ui.py` reads at start. A font also takes less memory: 1.03 times its size, measured on the virtual board, against 2.4 when the module held it as text too.
+- The simulator, live editing and **Export MicroPython Code** keep them in `ui.py`. An export is made of sources that a person copies, freezes into a firmware or puts in another project: a `ui.py` that needs files next to it would break there.
+- Not done: the RAM budget of the status bar still measures the simulator's `ui.py`; a first upload of many pictures makes one copy for each.
+

@@ -262,6 +262,45 @@ def test_upload_sends_bytecode_and_verifies_sizes(tmp_path):
     assert "ui.mpy" in result["files"]
 
 
+def test_upload_sends_every_file_when_the_board_cannot_say_what_it_has(tmp_path):
+    class Runner(FakeRunner):
+        def __call__(self, command, timeout):
+            if "LMS_REUSED=" in (command[-1] if command else ""):
+                raise DeviceError("device.command", "OSError: [Errno 5] EIO")
+            return super().__call__(command, timeout)
+
+    runner = Runner()
+    result = connected(runner).upload(project(), tmp_path / "out")
+    assert result["reused"] == [] and runner.activations == 1
+    assert {Path(source).name for source, _destination in runner.copies} == set(result["files"])
+    assert [warning for warning in result["warnings"] if "could not be checked" in warning]
+
+
+def test_upload_asks_what_the_board_has_a_few_files_at_a_time(tmp_path, monkeypatch):
+    from copper_and_code_studio.device import service
+
+    class Runner(FakeRunner):
+        def __call__(self, command, timeout):
+            script = command[-1] if command else ""
+            if "LMS_REUSED=" in script:   # the board has the first file of each question
+                wanted = json.loads(eval(script.split("json.loads(", 1)[1].split(").items()", 1)[0]))
+                asked.append(list(wanted))
+                return "LMS_REUSED=" + json.dumps(asked[-1][:1]) + "\n"
+            if "LMS_SIZES=" in script:   # the files copied on the board are there too, not only those sent
+                names = eval(script.split("for n in ", 1)[1].split(":\n", 1)[0])
+                return "LMS_SIZES=" + json.dumps({name: (tmp_path / "out" / name).stat().st_size for name in names})
+            return super().__call__(command, timeout)
+
+    asked = []
+    monkeypatch.setattr(service, "REUSE_BATCH", 3)
+    runner = Runner()
+    result = connected(runner).upload(project(), tmp_path / "out")
+    names = [name for name in result["files"] if name != "manifest.json"]
+    assert [name for batch in asked for name in batch] == names and all(len(batch) <= 3 for batch in asked) and len(asked) > 1
+    assert result["reused"] == [batch[0] for batch in asked]
+    assert {Path(source).name for source, _destination in runner.copies} == set(result["files"]) - set(result["reused"])
+
+
 def test_upload_reports_bytes_at_each_file(tmp_path):
     session = DeviceSession(runner=FakeRunner())
     current = project()

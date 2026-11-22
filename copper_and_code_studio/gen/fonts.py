@@ -13,7 +13,7 @@ from copper_and_code_studio.core.i18n import tr
 from .gen_python import build_project_code
 
 _cache = {}
-RAM_FACTOR = 1.2  # on a board a font is read from its file and held by LVGL: 1.03 times, measured (2.4 when it was text in ui.py)
+RAM_FACTOR = 1.1  # on a board LVGL's own copy of a font takes 1.03 times its file, measured (2.4 when the font was text in ui.py)
 
 
 def _convert(data, size, characters):
@@ -57,7 +57,9 @@ def font_warnings(data):
 
 def font_memory_warning(data, free):
     """A warning if the fonts of the project take more than half the free RAM of the board, else None."""
-    need = int(RAM_FACTOR * sum(len(result["output"]) for result in convert_fonts(data).values() if result.get("output")))
+    sizes = [len(result["output"]) for result in convert_fonts(data).values() if result.get("output")]
+    # Each font is read from its file and LVGL copies it: while the largest loads, its file is in memory as well.
+    need = int(RAM_FACTOR * sum(sizes)) + max(sizes, default=0)
     if need and free and need > free // 2:
         return tr("The fonts of the project need about {need} kB of RAM and the board has {free} kB free: use fewer sizes, or the built-in fonts.", need=-(-need // 1000), free=free // 1000)
     return None

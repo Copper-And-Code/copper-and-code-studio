@@ -138,43 +138,51 @@ remove_tree({path!r})"""
 
 
 BOARD_COPY_SPEED = 16384  # bytes per second of a copy inside the board's flash, slowest seen, for its timeout
+REUSE_BATCH = 40  # files asked in one command: its text is an argument of mpremote, and Windows allows 32767 characters
 
 
 def reuse_script(current, staging, wanted):
     """Copy into staging the files of the app on the board that are already as wanted.
 
     wanted is {name: [size, sha256 hex]}. The board checks each file of current itself, size and
-    hash of what is there now, so a file changed on the board by hand is sent again. A firmware
-    without hashlib copies nothing: every file is sent, as before.
+    hash of what is there now, so a file changed on the board by hand is sent again. A file that
+    cannot be read or copied is left out, and so sent; a firmware without hashlib copies nothing:
+    every file is sent, as before.
     """
     return f"""import os,json
 r=[]
 try:
  import hashlib,binascii
-except ImportError:
+ hashlib.sha256
+except (ImportError,AttributeError):
  hashlib=None
 b=bytearray(4096)
 m=memoryview(b)
-for n,(z,h) in json.loads({json.dumps(wanted)!r}).items():
- if hashlib is None:break
- s={current + '/'!r}+n
- try:
-  if os.stat(s)[6]!=z:continue
- except OSError:
-  continue
+def same(s,z,h):
+ if os.stat(s)[6]!=z:return False
  d=hashlib.sha256()
  with open(s,'rb') as f:
   while True:
    k=f.readinto(b)
    if not k:break
    d.update(m[:k])
- if binascii.hexlify(d.digest()).decode()!=h:continue
- with open(s,'rb') as f,open({staging + '/'!r}+n,'wb') as t:
+ return binascii.hexlify(d.digest()).decode()==h
+def copy(s,t):
+ with open(s,'rb') as f,open(t,'wb') as g:
   while True:
    k=f.readinto(b)
    if not k:break
-   t.write(m[:k])
- r.append(n)
+   g.write(m[:k])
+for n,(z,h) in json.loads({json.dumps(wanted)!r}).items():
+ if hashlib is None:break
+ t={staging + '/'!r}+n
+ try:
+  if same({current + '/'!r}+n,z,h):
+   copy({current + '/'!r}+n,t)
+   r.append(n)
+ except Exception:
+  try:os.remove(t)
+  except OSError:pass
 print('LMS_REUSED='+json.dumps(r))"""
 
 
@@ -541,6 +549,23 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
         if cancel is not None and cancel.is_set():
             raise DeviceError("device.cancelled")
 
+    def _reuse(self, current, staging, wanted, warnings, cancel=None):
+        """The files of wanted that the board copied from its active app into staging: they do not travel.
+
+        It only saves time: if the board cannot do it, every file is sent, with a warning."""
+        reused, names = [], list(wanted)
+        try:
+            for start in range(0, len(names), REUSE_BATCH):
+                batch = {name: wanted[name] for name in names[start:start + REUSE_BATCH]}
+                timeout = 30 + sum(size for size, _digest in batch.values()) / BOARD_COPY_SPEED
+                answer = marked_json(self._exec(reuse_script(current, staging, batch), timeout, cancel), "LMS_REUSED", missing=[])
+                reused += [name for name in answer if name in batch] if isinstance(answer, list) else []
+        except DeviceError as exc:
+            if exc.code == "device.cancelled":
+                raise
+            warnings.append(tr("The files already on the board could not be checked: the upload sends them again."))
+        return reused
+
     def upload(self, project, output_dir=None, run=False, progress=None, cancel=None):
         self._require()
         with self._operation:
@@ -557,7 +582,7 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
             try:
                 output = Path(output_dir) if output_dir else Path(temporary.name)
                 try:
-                    generated = generate_board(project, profile, output)
+                    generated = generate_board(project, profile, output, asset_files=True)
                 except BoardSyntaxError as exc:
                     raise DeviceError("device.syntax", json.dumps(exc.errors, ensure_ascii=False), exc.errors) from exc
                 info = self._info(profile)
@@ -567,7 +592,7 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
                 fonts = info.get("fonts")
                 if fonts and sorted(fonts) != profile_fonts(profile):
                     # The firmware decides: text in a size it lacks would stop the app at start-up.
-                    generated = generate_board(project, profile, output, fonts=sorted(fonts))
+                    generated = generate_board(project, profile, output, fonts=sorted(fonts), asset_files=True)
                     generated["warnings"].append(tr("The board has Montserrat fonts {board}, the profile lists {profile}: the code uses those of the board, so text can differ from the preview. Set them in the board profile.", board=", ".join(str(size) for size in sorted(fonts)), profile=", ".join(str(size) for size in profile_fonts(profile))))
                 if (project.assets or {}).get("fonts") and info.get("binfont") is False:
                     generated["warnings"].append(tr("This firmware cannot load fonts at run time: the fonts of the project are replaced by the built-in font."))
@@ -596,8 +621,7 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
                 # Files already on the board as they are now (a font that did not change, a module) are
                 # copied inside the board: much faster than through the serial link.
                 wanted = {name: [size, hashlib.sha256((output / name).read_bytes()).hexdigest()] for name, size in checks.items() if name != "manifest.json"}
-                reused = marked_json(self._exec(reuse_script(current, staging, wanted), 30 + sum(checks.values()) / BOARD_COPY_SPEED, cancel), "LMS_REUSED", missing=[])
-                reused = [name for name in reused if name in wanted] if isinstance(reused, list) else []
+                reused = self._reuse(current, staging, wanted, generated["warnings"], cancel)
                 generated["reused"] = reused  # in the result: the files that did not travel
                 sent = sum(checks[name] for name in reused)
                 for name, size in checks.items():
