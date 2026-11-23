@@ -153,6 +153,7 @@
   "Cancel operation": "Annulla operazione",
   "Wait for the device operation to finish.": "Attendere il termine dell'operazione sul dispositivo.",
   "Upload completed": "Trasferimento completato",
+  "General code, line {line}: {name} is also the name of the function generated for the {event} handler of {widget}. The handler replaces it, and a handler that calls it calls itself: give it another name.": "Codice generale, riga {line}: {name} è anche il nome della funzione generata per il gestore {event} di {widget}. Il gestore la sostituisce, e un gestore che la chiama chiama sé stesso: dalle un altro nome.",
   "The files already on the board could not be checked: the upload sends them again.": "Non è stato possibile controllare i file già sulla board: il trasferimento li invia di nuovo.",
   "{reused} of {count} files were already on the board and were not sent again.": "{reused} file su {count} erano già sulla board e non sono stati inviati di nuovo.",
   "Board application started; the LVGL timer remains active after bootstrap.": "Esecuzione sulla board avviata; il timer LVGL resta attivo dopo il bootstrap.",

@@ -41,6 +41,42 @@ def test_empty_handler_called_from_code_is_kept():
     assert "def btn1_clicked(e):\n    pass" in source
 
 
+def test_a_name_of_the_general_code_that_a_handler_takes_is_reported(tmp_path):
+    from copper_and_code_studio.gen.project_gen import code_warnings
+
+    project = Project("demo")
+    project.add_widget(project.pages[0], "button", name="btn1")
+    _name, handler = project.ensure_handler("btn1")
+    handler.body = "btn1_clicked(e)\n"   # meant for the function below: it calls itself instead
+    project.code.module = "count = 0\n\ndef btn1_clicked(e):\n    global count\n    count += 1\n"
+    warnings = code_warnings(project)
+    assert len(warnings) == 1 and "line 3" in warnings[0] and "btn1_clicked" in warnings[0] and "CLICKED" in warnings[0] and "btn1" in warnings[0]
+    assert warnings[0] in generate_project(project, tmp_path)["warnings"]   # shown at Run and at Upload
+    project.code.module = "count = 0\n\ndef add_one(e):\n    global count\n    count += 1\n"
+    handler.body = "add_one(e)\n"
+    assert code_warnings(project) == []
+    # a variable or an import with the name of a handler is lost the same way; a local name is not
+    project.code.module = "if True:\n    btn1_clicked = None\n"
+    assert "line 2" in code_warnings(project)[0]
+    project.code.module = "def other():\n    btn1_clicked = 1\n    return [btn1_clicked for btn1_clicked in ()]\n"
+    assert code_warnings(project) == []
+    project.code.module = "def broken(:\n"   # reported where the code is compiled, not here
+    assert code_warnings(project) == []
+
+
+def test_a_function_written_as_if_it_were_the_handler_is_reported():
+    from copper_and_code_studio.gen.project_gen import code_warnings
+
+    project = Project()
+    project.add_widget(project.pages[0], "button", name="btn1")
+    project.ensure_handler("btn1")   # left empty: the code below was meant to be it
+    project.code.module = "def btn1_clicked(e):\n    print('clicked')\n"
+    assert generate_app_events(project)[0].count("def btn1_clicked") == 2   # the empty one comes last and wins
+    assert len(code_warnings(project)) == 1
+    project.code.module = ""   # an empty handler that nothing names generates no function, and takes no name
+    assert code_warnings(project) == []
+
+
 def compact_project():
     project = Project("demo")
     project.add_widget(project.pages[0], "button", {"radius": 9}, "used")

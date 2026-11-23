@@ -13,7 +13,7 @@ from copper_and_code_studio.core.validation import validate_project
 from copper_and_code_studio.platform import CREATE_NO_WINDOW
 from .gen_python import build_project_code
 from .components import BUZZER_MODULE, block_files
-from .project_gen import design_warnings, generate_app_events, legacy_data, screen_statements, ui_source
+from .project_gen import code_warnings, design_warnings, generate_app_events, legacy_data, screen_statements, ui_source
 
 
 PRECOMPILED = ("ui.py", "app_events.py", f"{BUZZER_MODULE}.py")
@@ -165,7 +165,7 @@ def generate_board(project, profile, output_dir, fonts=None, asset_files=False):
     the upload wants: one that did not change is not sent again. Without it they are text in
     ui.py, as in an export, which is then made of sources alone.
     """
-    warnings = validate_project(project) + design_warnings(project)
+    warnings = validate_project(project) + design_warnings(project) + code_warnings(project)
     profile = portable_profile(profile)
     validate_profile(profile)
     if adapter_requirements(profile) is None:

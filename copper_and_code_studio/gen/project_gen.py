@@ -1,3 +1,4 @@
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -6,6 +7,7 @@ import shutil
 
 from copper_and_code_studio.core.boards import profile_fonts
 from copper_and_code_studio.core.components import is_component
+from copper_and_code_studio.core.i18n import tr
 from copper_and_code_studio.core.model import Project
 from copper_and_code_studio.core.modules import module_files
 from copper_and_code_studio.core.validation import validate_project
@@ -85,6 +87,46 @@ def component_statements(data, expose_all=False):
 def handler_identifiers(code):
     identifiers = IdentifierAllocator()
     return {name: identifiers.allocate(name, "event_cb") for name in code.get("handlers") or {}}
+
+
+def _top_level_names(tree):
+    """The names a module binds at its top level, each with the line of the first time: functions,
+    classes, assignments and imports, also inside if, try, with and loops. Not what is inside a
+    function or a class, nor the variable of a comprehension."""
+    names, pending = {}, list(tree.body)
+    while pending:
+        node = pending.pop(0)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            names.setdefault(node.name, node.lineno)
+        elif isinstance(node, (ast.Import, ast.ImportFrom)):
+            for alias in node.names:
+                names.setdefault((alias.asname or alias.name).split(".")[0], node.lineno)
+        elif isinstance(node, ast.Name):
+            if isinstance(node.ctx, ast.Store):
+                names.setdefault(node.id, node.lineno)
+        elif not isinstance(node, (ast.Lambda, ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp)):
+            pending.extend(ast.iter_child_nodes(node))
+    return names
+
+
+def code_warnings(project):
+    """Names of the general code that a handler takes away.
+
+    A handler is a function of app_events.py named after its widget and event, written after the
+    general code: a function or variable of that code with the same name is replaced by it, and a
+    handler that calls such a function calls itself, until MicroPython stops it."""
+    data = project.to_dict() if isinstance(project, Project) else project
+    code = data.get("code") or {}
+    try:
+        names = _top_level_names(ast.parse(str(code.get("module") or "")))
+    except (SyntaxError, ValueError):
+        return []  # the code does not compile: that is reported where it is compiled
+    identifiers = handler_identifiers(code)
+    warnings = []
+    for name, handler in active_handlers(code).items():
+        if identifiers[name] in names:
+            warnings.append(tr("General code, line {line}: {name} is also the name of the function generated for the {event} handler of {widget}. The handler replaces it, and a handler that calls it calls itself: give it another name.", line=names[identifiers[name]], name=identifiers[name], event=handler.get("event"), widget=handler.get("widget")))
+    return warnings
 
 
 def indent_body(body):
@@ -240,7 +282,7 @@ def generate_project(project, output_dir, runtime_dir=None, initial_page=None, e
     expose_all: ui exposes every widget and helper, even those the code does not use; it serves
     whoever looks inside the app from outside, such as the simulator probe.
     """
-    warnings = validate_project(project) + design_warnings(project)
+    warnings = validate_project(project) + design_warnings(project) + code_warnings(project)
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     previous = _previous_files(output)

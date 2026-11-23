@@ -242,6 +242,8 @@ def aggiungi(punti):
     ui.punti.set_text(str(punteggio))
 ```
 
+Non dare a una funzione o a una variabile di **(Generale)** il nome di un gestore, come `button1_clicked`: il gestore è una funzione con quel nome scritta dopo il tuo codice, quindi ne prende il posto, e un gestore che la chiama chiama sé stesso. L'IDE lo dice nell'output quando avvii o carichi l'app, con la riga da cambiare.
+
 ### Moduli Python
 
 Quando il codice cresce, puoi dividerlo in **moduli**: file `.py` del progetto, che i gestori, il codice di **(Generale)** e gli altri moduli usano con `import`.

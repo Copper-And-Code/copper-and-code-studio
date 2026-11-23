@@ -242,6 +242,8 @@ def add(points):
     ui.points.set_text(str(score))
 ```
 
+Do not give a function or a variable of **(General)** the name of a handler, such as `button1_clicked`: the handler is a function with that name written after your code, so it takes its place, and a handler that calls it calls itself. The IDE says so in the output when you start or upload the app, with the line to change.
+
 ### Python modules
 
 When the code grows you can split it into **modules**: `.py` files of the project, which handlers, the **(General)** code and other modules use with `import`.

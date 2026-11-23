@@ -28,7 +28,7 @@ from .core.model import Project, file_revision, widget_definitions
 from .core.validation import validate_project
 from .device.service import DeviceError, DeviceSession
 from .gen.live import live_script
-from .gen.project_gen import design_warnings
+from .gen.project_gen import code_warnings, design_warnings
 from .mcp_tools import SPECS
 from .platform import adopt_old_config, config_dir
 from .sim.script import check_script, play
@@ -125,7 +125,7 @@ def _save(path, project, arguments):
     replacement of the file, in which an outside write would be lost: it is not a transaction,
     and without a lock it cannot be one.
     """
-    warnings = validate_project(project) + design_warnings(project)
+    warnings = validate_project(project) + design_warnings(project) + code_warnings(project)
     current = file_revision(path)
     if current != arguments[LOADED]:
         raise RevisionConflict(path, arguments.get("expected_revision") or arguments[LOADED], current)
@@ -547,7 +547,7 @@ def adapt_page(arguments):
 
 def validate(arguments):
     _path, project = _load(arguments)
-    return {"warnings": validate_project(project) + design_warnings(project), "outOfBounds": project.widgets_outside()}
+    return {"warnings": validate_project(project) + design_warnings(project) + code_warnings(project), "outOfBounds": project.widgets_outside()}
 
 
 def render_page(arguments):
