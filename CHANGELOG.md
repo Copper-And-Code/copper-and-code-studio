@@ -15,6 +15,10 @@
 - **A second upload sends only what changed.** A file that the board already has, with the same size and SHA-256, is copied inside the board instead of through the serial link; the IDE says how many were not sent again. A firmware without `hashlib` gets every file, as before, and so does a board that cannot read one of its files.
 - **An upload puts the fonts and images of the project in files of their own on the board**, next to the app, instead of base64 text in `ui.py`. After a change to the pages they stay on the board: on the ESP32-4848S040, a project with a font in three sizes and three images took 50 s to upload and 12 s after a change to a text, with 6 kB of 90 kB sent. They also take less RAM: on that board 70 kB of fonts took 103 kB where before they took 196 kB. The warning about the memory of the fonts counts one and a half times their size, plus the largest font once more while it loads. The simulator, **Export MicroPython Code** and live editing still embed them in `ui.py`.
 
+### Fixed
+
+- **Forecast: a swipe left or right changes the place.** It did nothing: a function of the example had the name of the handler generated for the gesture of the page, `forecast_gesture`, so the handler replaced it and called itself. Found on the ESP32-4848S040 with two places set. A test now checks that no example defines a function twice.
+
 ## 0.8.0 — 2026-11-20
 
 Renamed from LVGL MPY Studio to Copper and Code Studio. Settings, the configuration folder and projects are kept, and the old commands still work. The Windows package is that of 0.7.1, under the old name.

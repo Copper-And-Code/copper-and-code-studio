@@ -40,3 +40,19 @@ def test_example_draws_what_it_asks(path):
     from copper_and_code_studio.core.model import Project
 
     assert Project.load(path).text_warnings() == []
+
+
+@pytest.mark.parametrize("path", PROJECTS, ids=lambda p: p.parent.name)
+def test_example_code_defines_each_function_once(path):
+    """The handler of an event is a function named after its widget and event: a function of the
+    project with the same name is replaced by it, and a handler that calls it then calls itself.
+    Forecast's swipe between places did nothing for that reason."""
+    import ast
+    from collections import Counter
+
+    from copper_and_code_studio.core.model import Project
+    from copper_and_code_studio.gen.project_gen import generate_app_events
+
+    source, _sourcemap = generate_app_events(Project.load(path))
+    names = Counter(node.name for node in ast.parse(source).body if isinstance(node, (ast.FunctionDef, ast.ClassDef)))
+    assert [name for name, count in names.items() if count > 1] == []
