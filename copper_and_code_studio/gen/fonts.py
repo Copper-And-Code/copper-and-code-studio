@@ -13,7 +13,7 @@ from copper_and_code_studio.core.i18n import tr
 from .gen_python import build_project_code
 
 _cache = {}
-RAM_FACTOR = 1.1  # on a board LVGL's own copy of a font takes 1.03 times its file, measured (2.4 when the font was text in ui.py)
+RAM_FACTOR = 1.5  # fonts read from files take 1.46 times their size on the ESP32-4848S040, measured (2.78 as text in ui.py)
 
 
 def _convert(data, size, characters):

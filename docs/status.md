@@ -34,8 +34,8 @@ below as an open question, not as a formality.
 | Live editing on a board | yes | | ESP32-4848S040 | the other boards |
 | Pictures in a project | yes | yes | STM32H7_CORE (seen on the display) | RP2350, ESP32-S3 |
 | Fonts of a project, kerning | yes, against LVGL's Montserrat | yes | STM32H7_CORE (seen), RP2350 (loaded) | ESP32-S3 |
-| Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py` | the estimate for fonts in files (their size, plus the largest once more while it loads): the size measured on the virtual board only, the peak not measured |
-| Upload of only the files that changed; fonts and pictures as files on the board | yes: on a virtual board through the real `mpremote`: a second upload, a file changed on the board by hand, a file the board cannot read, a project with a font and three pictures started twice | | | a real board; a firmware without `hashlib`; Windows |
+| Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py`. ESP32-4848S040, 23 November 2026: a font in three sizes, 70 kB of files, takes 103 kB of the heap read from files and 196 kB as text in `ui.py`, measured with `gc.mem_alloc()` on a project of three labels | the peak while a font loads; the RP2350 with fonts in files |
+| Upload of only the files that changed; fonts and pictures as files on the board | yes: on a virtual board through the real `mpremote`: a second upload, a file changed on the board by hand, a file the board cannot read, a project with a font and three pictures started twice | | ESP32-4848S040, 23 November 2026, driven by a script through the IDE's code: Weather uploaded twice (15.7 s, then 6.3 s with 10 files of 11 copied on the board); with a font in three sizes 49.8 s, then 12.4 s after a change to a text (6 kB of 90 kB sent); the app started each time with its pictures and fonts read from their files; Block Drop, Star Guard and Crossword uploaded and started | from the IDE's window by a person; the other boards; a firmware without `hashlib`; Windows |
 | C export | yes, pixel parity with MicroPython in the simulator | | | in a real C project; fonts in C on a board |
 | Device Console as a terminal (keys as typed, ANSI colours and cursor) | yes: the VT100 sequences cell by cell, the keys, the port taken and given back | | STM32H7_CORE V1.3 and ESP32-4848S040, 13 November 2026, driven by a script through the IDE's code: the shell typed to and read back, the console stopped and started again three times | typed by a person; full-screen editors on a board; Windows |
 | Programs without pages in the simulator (Run Program) | yes: the service while waiting for a key, Ctrl-C, the flash that cannot be left, reset, the IDE | yes: Run Program and typing in the terminal, on Linux | the shell of `mpy-lvgl-boards` with `edit` and `vi`, driven by the tests of this work, not yet used by a person | used by a person; Windows, not available |
@@ -112,8 +112,8 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   already uses.
 - **The RAM budget** shown in the status bar is measured in the 64-bit simulator and is an
   overestimate for 32-bit boards. It also counts the fonts and pictures of the project as text
-  in `ui.py`, as the simulator has them, while a board reads them from files: for fonts about
-  2.4 times their size where the board uses about once.
+  in `ui.py`, as the simulator has them, while a board reads them from files: for fonts 2.8
+  times their size where the ESP32-4848S040 uses 1.5.
 - **Renaming a Python module** does not rewrite the code that imports it; the IDE warns.
 - **Reference images that hold a changing value** fail when the generator changes: the EIM-01
   example shows the free memory on a page, and its image had to be regenerated for 0.6.
@@ -122,11 +122,12 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   core, of the runtime and of the IDE, and the self-test. On the Linux machine 72 tests are
   skipped, because they need what is not built there: the launchers of single-file games, the
   WebAssembly runtime, Wine, a browser. Packages are built and checked by hand.
-- **An upload that sends only what changed is not tried on a real board.** On the virtual board a
-  second upload sends the files that changed and copies the others inside the board. How much
-  time that saves on a serial link, and whether every firmware has the `hashlib` it needs, is
-  not measured: without it every file is sent, as before. A project with many pictures sends
-  more files than before the first time, one copy each.
+- **An upload that sends only what changed is tried on one board**, the ESP32-4848S040. Whether
+  the firmware of the other boards has the `hashlib` it needs is not checked: without it every
+  file is sent, as before. A project with many pictures sends more files than before the first
+  time, one copy each. Fonts read from files take less memory than before, but more on the
+  ESP32-4848S040 (1.46 times their size) than on the virtual board (1.03), and why is not
+  understood: of three sizes loaded one at a time, the largest kept about twice its size.
 
 ## What is not there
 
