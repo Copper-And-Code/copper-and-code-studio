@@ -39,7 +39,8 @@ At power-on `boot.py` costs one scan, a couple of seconds, when no saved network
 ## The home menu of the board
 
 The board repository has a home for the ESP32-4848S040, [`examples/home`](https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home): a shell on the
-display at power-on, and on a tap a menu of apps, with folders and a home button over each app. It
+display at power-on, and on a tap a menu of apps, with folders and a home button over each app
+(hidden until a pull down from the top edge, so that it covers nothing). It
 reads the same `cac_settings.json`: it sets the brightness and connects before it starts an app.
 
 The Studio installs an app in `/lms_apps/app_<id>/`, where the id comes from the project, so it
