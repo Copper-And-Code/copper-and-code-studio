@@ -11,8 +11,8 @@ at the bottom; **Del** clears. **<** and **>** go to the previous and the next w
 marks the wrong letters in red, **Reveal** fills in the word you are on, in blue. The button on
 the top right switches language and starts a new puzzle in it.
 
-The language is kept in the shared settings file, `cac_settings.json`, section `crossword`
-(see the `settings` example). Italian words are written without accents, as in Italian
+The language is the one of every app on the board, chosen in the Settings example and kept in
+`cac_settings.json`, section `general`: the button changes it for the other apps too. Italian words are written without accents, as in Italian
 crosswords; in the clues an accent is an apostrophe (piu', caffe'), because the built-in
 fonts have only ASCII.
 

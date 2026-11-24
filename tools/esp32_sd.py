@@ -113,8 +113,12 @@ def menu_text(menu, start=None):
     def line(entry, indent):
         if "apps" in entry:
             inner = ",\n".join(line(item, indent + "  ") for item in entry["apps"])
-            return f'{indent}{{"name": {json.dumps(entry["name"])}, "apps": [\n{inner}\n{indent}]}}'
-        return indent + json.dumps({"name": entry["name"], "path": card_path(entry)})
+            italian = f', "name_it": {json.dumps(entry["name_it"])}' if entry.get("name_it") else ""
+            return f'{indent}{{"name": {json.dumps(entry["name"])}{italian}, "apps": [\n{inner}\n{indent}]}}'
+        item = {"name": entry["name"], "path": card_path(entry)}
+        if entry.get("name_it"):
+            item["name_it"] = entry["name_it"]
+        return indent + json.dumps(item)
 
     head = f'{{"start": {json.dumps(card_path(start))},\n "apps": [\n' if start else '{"apps": [\n'
     return head + ",\n".join(line(entry, "  ") for entry in menu) + "\n]}\n"
@@ -166,6 +170,10 @@ def build_card(plan, boards, staging, bytecode=None, say=print):
 
     for target, relative in plan.get("boardFiles", {}).items():
         from_boards(relative, target)
+    for target, relative in plan.get("studioFiles", {}).items():   # files of this repository
+        (staging / target).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, staging / target)
+        files[target] = staging / target
     for entry in entries(plan["menu"]):
         if "program" in entry:
             from_boards(entry["program"], f"{APPS}/{Path(entry['program']).name}")

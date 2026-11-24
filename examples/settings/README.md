@@ -3,14 +3,15 @@
 The settings of a board, kept once for every app: the WiFi networks, the brightness of the
 display and the app that starts at power-on. **Settings** adds up to five networks, from a scan,
 with their passwords; touches one to choose it, **Connect** tries it, **Forget** removes it. The
-networks are kept from the most recently used. **Display** sets the brightness. **Start** chooses
+networks are kept from the most recently used. **Display** sets the brightness and the language,
+English or Italian, of every app of the board. **Start** chooses
 what the [home menu of the board](#the-home-menu-of-the-board) starts at power-on instead of the
 shell: one of the apps of its menu, not those of a folder such as Games, or the shell itself.
 
 They live in one file in the flash, `cac_settings.json`:
 
 ```json
-{"version": 1, "wifi": [{"ssid": "Home", "password": "..."}], "display": {"brightness": 70}, "home": {"start": "/sd/apps/forecast/app_main.py"}}
+{"version": 1, "wifi": [{"ssid": "Home", "password": "..."}], "display": {"brightness": 70}, "general": {"language": "en"}, "home": {"start": "/sd/apps/forecast/app_main.py"}}
 ```
 
 `cac_settings.section("display")` and `cac_settings.set_section("display", ...)` read and write a

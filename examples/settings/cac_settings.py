@@ -7,6 +7,9 @@
 #
 #     {"version": 1, "wifi": [{"ssid": "Home", "password": "..."}, ...], "display": {"brightness": 70}}
 #
+# A section "general" holds the language of the apps, "en" or "it": language(), translator() and
+# translate() give each app its texts in it.
+#
 # The networks are kept from the most recently used. Passwords are in clear text, like in
 # MicroPython's own examples: whoever can read the flash can read them.
 #
@@ -78,6 +81,56 @@ def set_section(name, value):
     data = load()
     data[name] = value
     save(data)
+
+
+LANGUAGES = ("en", "it")
+
+
+def language():
+    """The language chosen in Settings for every app: "en" or "it", English when none."""
+    code = section("general").get("language")
+    return code if code in LANGUAGES else "en"
+
+
+def translator(italian):
+    """t(text): the English text, or its Italian from the dict italian when the board speaks Italian."""
+    if language() != "it":
+        return lambda text: text
+    return lambda text: italian.get(text, text)
+
+
+def translate(ui, italian):
+    """The texts of the widgets of ui, written in English in the designer, in the board's language.
+
+    italian maps each English text to its Italian: the text of a label, a button or a checkbox,
+    the options of a dropdown or a roller, the placeholder of a text area."""
+    if language() != "it":
+        return
+    import lvgl as lv
+
+    for name in dir(ui):
+        o = getattr(ui, name)
+        try:
+            if isinstance(o, (lv.dropdown, lv.roller)):
+                text = italian.get(o.get_options())
+                if text is not None:
+                    o.set_options(text) if isinstance(o, lv.dropdown) else o.set_options(text, lv.roller.MODE.NORMAL)
+            elif isinstance(o, lv.textarea):
+                text = italian.get(o.get_placeholder_text())
+                if text is not None:
+                    o.set_placeholder_text(text)
+            elif isinstance(o, (lv.label, lv.checkbox)):
+                text = italian.get(o.get_text())
+                if text is not None:
+                    o.set_text(text)
+            elif isinstance(o, lv.button) and o.get_child_count():
+                label = o.get_child(0)
+                if isinstance(label, lv.label):
+                    text = italian.get(label.get_text())
+                    if text is not None:
+                        label.set_text(text)
+        except (AttributeError, TypeError):
+            pass
 
 
 def networks():

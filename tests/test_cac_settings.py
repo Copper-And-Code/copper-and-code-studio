@@ -65,10 +65,13 @@ class FakeStation:
 
 def test_every_app_has_the_same_cac_settings():
     source = SOURCE.read_text(encoding="utf-8")
-    for name in ("settings", "forecast", "ftp-server", "photo-frame", "crossword"):
-        project = json.loads((EXAMPLES / name / "project.json").read_text(encoding="utf-8"))
-        modules = {m["name"]: m["source"] for m in project["modules"]}
-        assert modules["cac_settings"] == source, f"{name} has another copy of cac_settings"
+    copies = 0
+    for path in sorted(EXAMPLES.glob("*/project.json")):
+        modules = {m["name"]: m["source"] for m in json.loads(path.read_text(encoding="utf-8")).get("modules", [])}
+        if "cac_settings" in modules:
+            copies += 1
+            assert modules["cac_settings"] == source, f"{path.parent.name} has another copy of cac_settings"
+    assert copies >= 12
 
 
 def test_networks_are_kept_from_the_most_recent_and_five_at_most(settings):
@@ -129,3 +132,15 @@ def test_a_section_is_kept_apart_from_the_networks(settings):
     assert [n["ssid"] for n in settings.networks()] == ["Office", "Home"]
     settings.set_section("display", "not a dict")
     assert settings.section("display") == {}
+
+
+def test_the_language_is_english_unless_italian_is_chosen(settings):
+    assert settings.language() == "en"
+    t = settings.translator({"Save": "Salva"})
+    assert t("Save") == "Save"
+    settings.set_section("general", {"language": "it"})
+    assert settings.language() == "it"
+    t = settings.translator({"Save": "Salva"})
+    assert t("Save") == "Salva" and t("Other") == "Other"
+    settings.set_section("general", {"language": "fr"})   # a language the apps do not speak
+    assert settings.language() == "en"
