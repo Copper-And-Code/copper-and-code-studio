@@ -13,7 +13,10 @@ from copper_and_code_studio.core.i18n import tr
 from .gen_python import build_project_code
 
 _cache = {}
-RAM_FACTOR = 1.5  # fonts read from files take 1.46 times their size on the ESP32-4848S040, measured (2.78 as text in ui.py)
+# LVGL keeps a font in about its size, in a pool of its own that it grows by 64 kB at a time (more
+# for a larger request) and never gives back: measured on the ESP32-4848S040, where ten loads of
+# the same 9 kB font took 16 bytes each, except two that took 64 and 128 kB.
+LVGL_POOL_STEP = 65536
 
 
 def _convert(data, size, characters):
@@ -58,8 +61,9 @@ def font_warnings(data):
 def font_memory_warning(data, free):
     """A warning if the fonts of the project take more than half the free RAM of the board, else None."""
     sizes = [len(result["output"]) for result in convert_fonts(data).values() if result.get("output")]
-    # Each font is read from its file and LVGL copies it: while the largest loads, its file is in memory as well.
-    need = int(RAM_FACTOR * sum(sizes)) + max(sizes, default=0)
+    # Each font is read from its file and LVGL copies it: the file of the largest can stay in memory as
+    # well, and the pool of LVGL may have just grown by a step it does not fill.
+    need = sum(sizes) + max(sizes, default=0) + (LVGL_POOL_STEP if sizes else 0)
     if need and free and need > free // 2:
         return tr("The fonts of the project need about {need} kB of RAM and the board has {free} kB free: use fewer sizes, or the built-in fonts.", need=-(-need // 1000), free=free // 1000)
     return None

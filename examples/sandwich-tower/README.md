@@ -10,4 +10,5 @@ Keys on the screen: left, down, up, right (held down) and **Spray**. The code is
 ESP32: the objects are created once and the game loop does not allocate.
 
 Open `project.json` and press F5. It is the English version of an example the author made in
-Italian; it was checked in the simulator, not on a board.
+Italian. On the ESP32-4848S040 it runs from the board's home menu, with its texts in English or Italian, the language chosen on the Display page of [Settings](../settings/README.md):
+see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).

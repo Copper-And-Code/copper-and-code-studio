@@ -42,8 +42,8 @@ At power-on `boot.py` costs one scan, a couple of seconds, when no saved network
 
 ## The home menu of the board
 
-The board repository has a home for the ESP32-4848S040, [`examples/home`](https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home): a shell on the
-display at power-on, and on a tap a menu of apps, with folders and a home button over each app
+The board repository has a home for the ESP32-4848S040, [`examples/home`](https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home): the app chosen on **Start** at
+power-on, or else a shell on the display, and on a tap a menu of apps, with folders and a home button over each app
 (hidden until a pull down from the top edge, so that it covers nothing). It
 reads the same `cac_settings.json`: it sets the brightness and connects before it starts an app.
 
@@ -67,8 +67,8 @@ examples made for this screen, each in a folder of `/sd/apps`, and writes the me
 
 At power-on the home starts the app chosen on **Start**, or, before a choice, the one the menu
 names in `"start"`: Forecast, on a card filled by `tools/esp32_sd.py`. For two seconds the screen
-shows its name, and a touch then gives the shell instead. The home button of an app always goes
-to the shell. The choice is kept in the flash, so a new card does not change it; a choice that is
+shows its name, and a touch then gives the shell instead. The home button of an app goes to the
+menu, with no shell behind it; the Shell tile of the menu starts the shell. The choice is kept in the flash, so a new card does not change it; a choice that is
 not on the card gives the shell.
 
 ## In the simulator

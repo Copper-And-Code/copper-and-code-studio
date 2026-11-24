@@ -265,8 +265,8 @@ def test_fonts_too_heavy_for_the_board_are_reported():
     data = legacy_data(project)
     assert font_memory_warning(data, 28_000_000) is None  # the STM32H7
     warning = font_memory_warning(data, 192_000)          # the RP2350
-    assert warning and "192 kB free" in warning and "need about 149 kB" in warning  # 59 kB of font: one and a half times, and its file while it loads
-    assert font_memory_warning(data, 300_000) is None
+    assert warning and "192 kB free" in warning and "need about 185 kB" in warning  # 59 kB of font, its file while it loads, a step of LVGL's pool
+    assert font_memory_warning(data, 400_000) is None
     project.find_widget("text").props["font"] = ""
     assert font_memory_warning(legacy_data(project), 192_000) is None
 

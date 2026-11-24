@@ -13,4 +13,5 @@ once, times the level.
 The code is written for the ESP32: the 200 cells of the well are LVGL objects created once, and
 a frame changes the colour only of the cells that changed, so a move redraws a few blocks.
 
-Open `project.json` and press F5. It was checked in the simulator.
+Open `project.json` and press F5. On the ESP32-4848S040 it runs from the board's home menu,
+with its texts in English or Italian, the language chosen on the Display page of [Settings](../settings/README.md): see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).

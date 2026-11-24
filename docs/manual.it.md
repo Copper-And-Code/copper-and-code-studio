@@ -139,7 +139,7 @@ Il testo è disegnato con Montserrat, il font incluso in LVGL, nelle misure che 
 - Il file del font viene salvato dentro il file del progetto. Scrivi il suo nome nel `font` di un altro widget per usarlo di nuovo.
 - Quando si genera il codice il font viene convertito per ogni misura in uso, con i caratteri ASCII stampabili e quelli dei widget che lo usano. Il testo impostato dal codice può usare quei caratteri; un carattere che il font non ha viene elencato nell'output.
 - I glifi sono gli stessi che produrrebbe il convertitore di LVGL. Viene convertito anche il kerning, cioè la spaziatura fine tra particolari coppie di lettere come «AV».
-- Su una board ogni misura convertita è un file a sé accanto all'app, inviato di nuovo solo quando cambia, e costa in memoria circa una volta e mezza il suo peso, più il suo peso ancora una volta mentre l'app lo carica: l'ASCII a 24 pixel è un file di 13 kB e ne occupa circa 20. Al caricamento l'IDE avvisa quando i font occuperebbero più di metà della RAM libera della board. L'esportazione C comprende i font del progetto e li carica dalla memoria: serve `LV_USE_FS_MEMFS` in `lv_conf.h`.
+- Su una board ogni misura convertita è un file a sé accanto all'app, inviato di nuovo solo quando cambia, e costa in memoria circa il suo peso. LVGL prende dalla board la memoria per i suoi font a passi di 64 kB, e il file del font più grande può restare in memoria anche lui: per questo il primo font di un'app può costare fino a un passo in più. Al caricamento l'IDE avvisa quando i font occuperebbero più di metà della RAM libera della board. L'esportazione C comprende i font del progetto e li carica dalla memoria: serve `LV_USE_FS_MEMFS` in `lv_conf.h`.
 
 ### Componenti
 

@@ -40,3 +40,5 @@ The server is also run by `tests/test_ftp_server_example.py`, in CPython against
 | `cac_settings` | the shared settings of the examples, as in [Settings](../settings/README.md) |
 
 On the ESP32-4848S040 it can be started from the board's home menu: see [the home menu of the board](../settings/README.md#the-home-menu-of-the-board).
+Its screen is in English or Italian, the language chosen on the Display page of Settings; the
+log stays in English, as the commands of FTP it shows.

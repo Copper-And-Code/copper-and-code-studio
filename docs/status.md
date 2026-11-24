@@ -111,8 +111,8 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   number or a name such as `PA5`, and nothing warns when it is one the display or the memory
   already uses.
 - **The RAM budget** shown in the status bar is measured in the 64-bit simulator and is an
-  overestimate for 32-bit boards, except for the fonts of a project: the simulator keeps a font
-  in about its size, the ESP32-4848S040 in 1.46 times.
+  overestimate for 32-bit boards. The fonts of a project take about their size on both, but on
+  the ESP32-4848S040 LVGL grows its memory in steps of 64 kB, which the budget does not count.
 - **Renaming a Python module** does not rewrite the code that imports it; the IDE warns.
 - **Reference images that hold a changing value** fail when the generator changes: the EIM-01
   example shows the free memory on a page, and its image had to be regenerated for 0.6.
@@ -123,9 +123,7 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   WebAssembly runtime, Wine, a browser. Packages are built and checked by hand.
 - **An upload that sends only what changed is tried on one board**, the ESP32-4848S040. Whether
   the firmware of the other boards has the `hashlib` it needs is not checked: without it every
-  file is sent, as before. Fonts read from files take less memory than before, but more on the
-  ESP32-4848S040 (1.46 times their size) than on the virtual board (1.03), and why is not
-  understood: of three sizes loaded one at a time, the largest kept about twice its size.
+  file is sent, as before.
 
 ## What is not there
 
