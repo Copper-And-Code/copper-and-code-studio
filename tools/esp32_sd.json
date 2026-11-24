@@ -13,6 +13,21 @@
   "studioFiles": {
     "lib/cac_settings.py": "examples/settings/cac_settings.py"
   },
+  "kit": {
+    "firmware": {"release": "v0.1.8", "file": "ESP32_4848S040-v0.1.8.bin"},
+    "flashBoardFiles": {
+      "main.py": "examples/home/main.py",
+      "shell.py": "examples/shell/shell.py",
+      "ansiterm.py": "examples/shell/ansiterm.py",
+      "ansifont.py": "examples/shell/ansifont.py",
+      "OFL.txt": "examples/shell/OFL.txt"
+    },
+    "flashStudioFiles": {
+      "boot.py": "examples/settings/boot.py",
+      "cac_settings.py": "examples/settings/cac_settings.py"
+    },
+    "cardFolders": ["photos"]
+  },
   "menu": [
     {"name": "Settings", "example": "settings", "name_it": "Impostazioni"},
     {"name": "Forecast", "example": "forecast", "name_it": "Meteo"},

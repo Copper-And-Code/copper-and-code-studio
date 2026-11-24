@@ -34,7 +34,7 @@ below as an open question, not as a formality.
 | Live editing on a board | yes | | ESP32-4848S040 | the other boards |
 | Pictures in a project | yes | yes | STM32H7_CORE (seen on the display) | RP2350, ESP32-S3 |
 | Fonts of a project, kerning | yes, against LVGL's Montserrat | yes | STM32H7_CORE (seen), RP2350 (loaded) | ESP32-S3 |
-| Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py`. ESP32-4848S040, 23 November 2026: a font in three sizes, 70 kB of files, takes 103 kB of the heap read from files and 196 kB as text in `ui.py`, measured with `gc.mem_alloc()` on a project of three labels | the peak while a font loads; the RP2350 with fonts in files |
+| Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py`. ESP32-4848S040, 23 November 2026: a font in three sizes, 70 kB of files, takes 103 kB of the heap read from files and 196 kB as text in `ui.py`, measured with `gc.mem_alloc()` on a project of three labels. 24 November 2026: fonts of 9, 33 and 74 kB loaded from the SD card one at a time, in both orders, and the same font ten times: LVGL keeps a font in about its size, in a pool that grows by 64 or 128 kB steps; always below the warning's sum + largest + 64 kB | the peak while a font loads; the RP2350 with fonts in files |
 | Upload of only the files that changed; fonts and pictures as files on the board | yes: on a virtual board through the real `mpremote`: a second upload, a file changed on the board by hand, a file the board cannot read, a project with a font and three pictures started twice | | ESP32-4848S040, 23 November 2026, driven by a script through the IDE's code: Weather uploaded twice (15.7 s, then 6.3 s with 10 files of 11 copied on the board); with a font in three sizes 49.8 s, then 12.4 s after a change to a text (6 kB of 90 kB sent); the app started each time with its pictures and fonts read from their files; Block Drop, Star Guard and Crossword uploaded and started. 24 November 2026, the small files written by one script: a project with 30 pictures, 37 files and 18 kB, in 15.1 s where one copy for each file took 34.9 s; Weather in 9.8 s where it took 18.2 s | from the IDE's window by a person; the other boards; a firmware without `hashlib`; Windows |
 | C export | yes, pixel parity with MicroPython in the simulator | | | in a real C project; fonts in C on a board |
 | Device Console as a terminal (keys as typed, ANSI colours and cursor) | yes: the VT100 sequences cell by cell, the keys, the port taken and given back | | STM32H7_CORE V1.3 and ESP32-4848S040, 13 November 2026, driven by a script through the IDE's code: the shell typed to and read back, the console stopped and started again three times | typed by a person; full-screen editors on a board; Windows |
@@ -124,6 +124,10 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
 - **An upload that sends only what changed is tried on one board**, the ESP32-4848S040. Whether
   the firmware of the other boards has the `hashlib` it needs is not checked: without it every
   file is sent, as before.
+- **The kit of the ESP32-4848S040** is checked by tests (its content, the firmware checked against
+  the release, the same zip twice) and its card is the one `tools/esp32_sd.py` writes, tried on
+  the board; a board set up from the kit alone, firmware erased and written again, is not tried
+  yet.
 
 ## What is not there
 

@@ -115,6 +115,16 @@ Only the files that are missing or different are written. In the folder of an ap
 
 On the board, in the flash, the home needs its `main.py` (`examples/home` of the board repository) and, for the WiFi and the brightness, the `boot.py` and `cac_settings.py` of `examples/settings`. Tried on 24 November 2026: a folder on the PC; the card in the board, 101 files and 740 kB in a little more than four minutes; the twelve apps of the list started from the card through the home.
 
+### The kit
+
+For a person without the repositories, `tools/esp32_kit.py` puts everything in one zip, which a release carries as `esp32-4848s040-kit-<tag>.zip`:
+
+```bash
+tools/esp32_kit.py --boards ~/copper-and-code-mcu-boards dist/esp32-4848s040-kit-v0.9.0.zip
+```
+
+Inside, under one folder: `firmware/`, the firmware of the board, downloaded from the release of the board repository that the `"kit"` section of `tools/esp32_sd.json` names and checked against that release's `SHA256SUMS` (`--firmware` gives a file already downloaded); `flash/`, the files of the flash (`main.py` of the home, `boot.py` and `cac_settings.py` of Settings, and the shell for a board with no card); `sd/`, the card as `tools/esp32_sd.py` writes it, with an empty `photos` folder. The texts come from `tools/esp32_kit/`: `README.md` and `LEGGIMI.md` say how to put the kit on a board, `GUIDE.md` and `GUIDA.md` how to use the board, for whoever receives it. The same sources give the same zip, byte for byte.
+
 ## Videos
 
 `tools/showreel` makes the videos of the website: it drives the real IDE offscreen through a storyboard and encodes the frames with `ffmpeg`. See `tools/showreel/README.md`.
