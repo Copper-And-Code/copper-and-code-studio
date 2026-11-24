@@ -10,6 +10,7 @@
 - **Photo Frame**, an example for the ESP32-4848S040: the photos of `/sd/photos` one after the other in a random order, swiped by hand, with the display off at night (22:00 to 5:30 by default) in Italian time from the network. `convert_photos.py` makes the photos on the PC, cut to the display and dithered to RGB565.
 - **Three more games for a 480×480 touch screen:** Block Drop, falling pieces of four blocks that fill rows; Star Guard, a squadron of drones to shoot down before it lands; and Crossword, a new puzzle built on the board each time from a list of words with clues, in English or in Italian, with the language kept in `cac_settings.json`.
 - **An app at power-on on the ESP32-4848S040.** The Settings example has a Start page: the app of the menu of the board that starts at power-on instead of the shell, or the shell. `tools/esp32_sd.py` makes Forecast the one before a choice. It needs the home of the board repository from 24 November 2026.
+- **Clock**, an analog clock for a 480×480 touch screen: a dark face with the date in English or Italian, dark red with the backlight down at night, the time from the network in Italian time. The Settings example has a language for the apps that speak more than one.
 
 ### Changed
 
