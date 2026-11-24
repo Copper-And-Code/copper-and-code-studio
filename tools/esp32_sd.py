@@ -5,7 +5,8 @@ The card holds the home of the board (the shell and the touch menu of apps, from
 copper-and-code-mcu-boards), the programs of its menu and the apps made with Copper and Code
 Studio: the examples of this repository, generated for the board as an upload does, each in a
 folder of its own in /sd/apps. What goes on the card, and the menu, are in esp32_sd.json next
-to this file: add an entry there and run the script again.
+to this file: add an entry there and run the script again. Its "start" names the app of the menu
+that starts at power-on instead of the shell, until one is chosen in the Settings app.
 
     tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards /media/you/CARD     # the card in this computer
     tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards --port /dev/ttyUSB0 # the card in the board
@@ -94,15 +95,29 @@ def card_path(entry):
     return entry["path"]  # something already on the board: only listed
 
 
-def menu_text(menu):
-    """home.json as the home reads it, one entry on each line so that it is easy to read and to compare."""
+def start_entry(plan):
+    """The entry of the menu that starts at power-on, or None: only one of the first level, not of a folder."""
+    name = plan.get("start")
+    if not name:
+        return None
+    entry = next((item for item in plan["menu"] if item.get("name") == name and "apps" not in item), None)
+    if entry is None:
+        raise Problem(f"start {name!r}: not an app of the first level of the menu")
+    return entry
+
+
+def menu_text(menu, start=None):
+    """home.json as the home reads it, one entry on each line so that it is easy to read and to compare.
+
+    start: the entry that starts at power-on, written as its path."""
     def line(entry, indent):
         if "apps" in entry:
             inner = ",\n".join(line(item, indent + "  ") for item in entry["apps"])
             return f'{indent}{{"name": {json.dumps(entry["name"])}, "apps": [\n{inner}\n{indent}]}}'
         return indent + json.dumps({"name": entry["name"], "path": card_path(entry)})
 
-    return '{"apps": [\n' + ",\n".join(line(entry, "  ") for entry in menu) + "\n]}\n"
+    head = f'{{"start": {json.dumps(card_path(start))},\n "apps": [\n' if start else '{"apps": [\n'
+    return head + ",\n".join(line(entry, "  ") for entry in menu) + "\n]}\n"
 
 
 def check_plan(plan):
@@ -117,6 +132,7 @@ def check_plan(plan):
             # import finds a folder before a module of the same name, and a program is run by its file
             raise Problem(f"{stem}: two entries of the menu would have the same name in /sd/{APPS}")
         names[stem] = entry
+    start_entry(plan)
 
 
 def build_app(example, profile, folder, bytecode):
@@ -162,7 +178,7 @@ def build_card(plan, boards, staging, bytecode=None, say=print):
                 say(f"  {entry['example']}: {warning}")
             files.update({f"{folder}/{name}": staging / folder / name for name in names})
             folders.append(folder)
-    (staging / MENU).write_text(menu_text(plan["menu"]), encoding="utf-8", newline="\n")
+    (staging / MENU).write_text(menu_text(plan["menu"], start_entry(plan)), encoding="utf-8", newline="\n")
     files[MENU] = staging / MENU
     return files, folders
 

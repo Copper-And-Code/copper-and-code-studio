@@ -103,7 +103,7 @@ tools/manual_on_x.sh          # the same, and the self-test, on a real X display
 
 ## The SD card of the ESP32-4848S040
 
-`tools/esp32_sd.py` fills a new SD card for the ESP32-4848S040, or brings one up to date: the home of the board (the shell and the touch menu, from [copper-and-code-mcu-boards](https://github.com/Copper-And-Code/copper-and-code-mcu-boards)), the programs of its menu, and the examples of this repository made for that screen, each generated as an upload does and put in a folder of `/sd/apps`. The menu, `/sd/home.json`, is written from the same list, `tools/esp32_sd.json`: to add an app, add a line there and run the script again.
+`tools/esp32_sd.py` fills a new SD card for the ESP32-4848S040, or brings one up to date: the home of the board (the shell and the touch menu, from [copper-and-code-mcu-boards](https://github.com/Copper-And-Code/copper-and-code-mcu-boards)), the programs of its menu, and the examples of this repository made for that screen, each generated as an upload does and put in a folder of `/sd/apps`. The menu, `/sd/home.json`, is written from the same list, `tools/esp32_sd.json`: to add an app, add a line there and run the script again. Its `"start"` names the app of the first level of the menu that the home starts at power-on, Forecast, until another is chosen on the Start page of the Settings app.
 
 ```bash
 tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards /media/you/CARD       # the card in this computer: seconds

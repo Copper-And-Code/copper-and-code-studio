@@ -9,6 +9,7 @@ from tools import esp32_sd
 ROOT = Path(__file__).parents[1]
 PLAN = {
     "board": "esp32_4848s040_480",
+    "start": "Settings",
     "boardFiles": {"lib/home.py": "examples/home/home.py"},
     "menu": [
         {"name": "Settings", "example": "settings"},
@@ -45,7 +46,7 @@ def test_the_card_has_the_home_the_programs_and_each_app_in_a_folder(tmp_path, b
     if esp32_sd.local_bytecode_version(tmp_path) is not None:
         assert "apps/settings/ui.mpy" in files and "apps/settings/ui.py" not in files
     menu = json.loads(files["home.json"].read_text())
-    assert menu == {"apps": [
+    assert menu == {"start": "/sd/apps/settings/app_main.py", "apps": [
         {"name": "Settings", "path": "/sd/apps/settings/app_main.py"},
         {"name": "Mine", "path": "/sd/mine/main.py"},   # something already on the card: listed, nothing copied
         {"name": "Games", "apps": [{"name": "Snake", "path": "/sd/apps/snake.py"}, {"name": "Star Guard", "path": "/sd/apps/star-guard/app_main.py"}]},
@@ -91,12 +92,14 @@ def test_what_is_wrong_is_said_in_one_line(tmp_path, boards, capsys):
     card = tmp_path / "card"
     card.mkdir()
     plan = tmp_path / "plan.json"
-    plan.write_text(json.dumps({**PLAN, "menu": [{"name": "Snake", "program": "examples/missing.py"}]}))
+    plan.write_text(json.dumps({**PLAN, "start": None, "menu": [{"name": "Snake", "program": "examples/missing.py"}]}))
     assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan)], said.append) == 1 and "not found" in said[-1]
-    plan.write_text(json.dumps({**PLAN, "menu": [{"name": "Eim", "example": "eim-01"}]}))   # an example for another screen
+    plan.write_text(json.dumps({**PLAN, "start": None, "menu": [{"name": "Eim", "example": "eim-01"}]}))   # an example for another screen
     assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan)], said.append) == 1 and "another screen size" in said[-1]
-    plan.write_text(json.dumps({**PLAN, "menu": [{"name": "Snake", "program": "examples/snake.py"}, {"name": "Snake too", "example": "snake"}]}))
+    plan.write_text(json.dumps({**PLAN, "start": None, "menu": [{"name": "Snake", "program": "examples/snake.py"}, {"name": "Snake too", "example": "snake"}]}))
     assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan)], said.append) == 1 and "same name" in said[-1]
+    plan.write_text(json.dumps({**PLAN, "start": "Star Guard"}))   # in the folder Games: not an app of power-on
+    assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan)], said.append) == 1 and "first level" in said[-1]
     assert not list(card.iterdir())   # nothing was written before the mistake was found
 
 
@@ -111,6 +114,9 @@ def test_the_script_run_as_a_command_fills_a_folder(tmp_path, boards):
     assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan), "--source"], said.append) == 0
     assert (card / "apps" / "settings" / "ui.py").is_file() and not (card / "apps" / "settings" / "ui.mpy").exists()   # --source: no bytecode
     assert json.loads((card / "home.json").read_text())["apps"][0]["path"] == "/sd/apps/settings/app_main.py"
+    plan.write_text(json.dumps({key: value for key, value in PLAN.items() if key != "start"}))
+    assert esp32_sd.main([str(card), "--boards", str(boards), "--plan", str(plan)], said.append) == 0
+    assert "start" not in json.loads((card / "home.json").read_text())   # without a start the shell starts
 
 
 def test_the_list_in_the_repository_names_examples_for_this_board():

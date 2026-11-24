@@ -1,5 +1,6 @@
 {
   "board": "esp32_4848s040_480",
+  "start": "Forecast",
   "boardFiles": {
     "lib/home.py": "examples/home/home.py",
     "lib/shell.py": "examples/shell/shell.py",

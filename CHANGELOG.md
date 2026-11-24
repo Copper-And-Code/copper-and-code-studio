@@ -9,6 +9,7 @@
 - **FTP Server**, an example for the ESP32-4848S040: the files of the flash and of the SD card for a PC on the same WiFi network, with FileZilla, WinSCP, a file manager or `curl`. The network comes from the Settings example, the password stays in `cac_settings.json`.
 - **Photo Frame**, an example for the ESP32-4848S040: the photos of `/sd/photos` one after the other in a random order, swiped by hand, with the display off at night (22:00 to 5:30 by default) in Italian time from the network. `convert_photos.py` makes the photos on the PC, cut to the display and dithered to RGB565.
 - **Three more games for a 480×480 touch screen:** Block Drop, falling pieces of four blocks that fill rows; Star Guard, a squadron of drones to shoot down before it lands; and Crossword, a new puzzle built on the board each time from a list of words with clues, in English or in Italian, with the language kept in `cac_settings.json`.
+- **An app at power-on on the ESP32-4848S040.** The Settings example has a Start page: the app of the menu of the board that starts at power-on instead of the shell, or the shell. `tools/esp32_sd.py` makes Forecast the one before a choice. It needs the home of the board repository from 24 November 2026.
 
 ### Changed
 

@@ -64,7 +64,7 @@
           "props": {
             "x": 20,
             "y": 16,
-            "width": 300,
+            "width": 260,
             "height": 32,
             "text": "WiFi networks",
             "textColor": "#F2F5F9",
@@ -290,9 +290,9 @@
           "name": "btn_display",
           "type": "button",
           "props": {
-            "x": 356,
+            "x": 384,
             "y": 10,
-            "width": 104,
+            "width": 84,
             "height": 40,
             "text": "Display",
             "bgColor": "#1B2838",
@@ -302,6 +302,27 @@
           },
           "events": {
             "CLICKED": "btn_display_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "7235616da0034f19ab667fb3768948b4",
+          "name": "btn_start",
+          "type": "button",
+          "props": {
+            "x": 292,
+            "y": 10,
+            "width": 84,
+            "height": 40,
+            "text": "Start",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_start_clicked"
           },
           "customStyles": {},
           "animations": []
@@ -654,10 +675,148 @@
           "animations": []
         }
       ]
+    },
+    {
+      "id": "a3b1b0fba6644c10b600932a5b75946c",
+      "name": "Start",
+      "canvasSize": [
+        480,
+        480
+      ],
+      "widgets": [
+        {
+          "id": "65e45fdb0c2f442e9470c395042927ae",
+          "name": "start_bg",
+          "type": "panel",
+          "props": {
+            "x": 0,
+            "y": 0,
+            "width": 480,
+            "height": 480,
+            "bgColor": "#0E1621",
+            "borderColor": "#BDBDBD",
+            "borderWidth": 0,
+            "radius": 0,
+            "flexFlow": "none",
+            "flexMainPlace": "none",
+            "flexCrossPlace": "none",
+            "padTop": 0,
+            "padBottom": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "padRow": 0,
+            "padColumn": 0,
+            "scrollbarMode": "LV_SCROLLBAR_MODE_OFF"
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "5fe8efda38f540b994700cd135664a5e",
+          "name": "start_title",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 14,
+            "width": 300,
+            "height": 32,
+            "text": "At power-on",
+            "textColor": "#F2F5F9",
+            "fontSize": 24,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "4ccda85a9417420793d092e168760bbc",
+          "name": "btn_start_back",
+          "type": "button",
+          "props": {
+            "x": 356,
+            "y": 10,
+            "width": 104,
+            "height": 40,
+            "text": "Back",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "fontSize": 16,
+            "radius": 6
+          },
+          "events": {
+            "CLICKED": "btn_start_back_clicked"
+          },
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "d1d8cd5482db413ab7461c4e9f2b4c13",
+          "name": "start_status",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 56,
+            "width": 440,
+            "height": 24,
+            "text": "At power-on: Forecast",
+            "textColor": "#4FA3FF",
+            "fontSize": 16,
+            "longMode": "LV_LABEL_LONG_MODE_DOTS",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "2bd6ce7b3c264c4784f8933a4577925e",
+          "name": "start_list",
+          "type": "list",
+          "props": {
+            "x": 12,
+            "y": 88,
+            "width": 456,
+            "height": 300,
+            "items": "",
+            "bgColor": "#1B2838",
+            "textColor": "#F2F5F9",
+            "selectedColor": "#4FA3FF",
+            "fontSize": 16
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        },
+        {
+          "id": "c5b4187fec0b4691a6da56a3b6a55681",
+          "name": "start_hint",
+          "type": "label",
+          "props": {
+            "x": 20,
+            "y": 398,
+            "width": 440,
+            "height": 76,
+            "text": "The apps of the menu of the board, not those of a folder such as Games. The home button of an app goes to the shell; at power-on a touch while the name of the app shows gives the shell too.",
+            "textColor": "#93A4B8",
+            "fontSize": 14,
+            "longMode": "LV_LABEL_LONG_MODE_WRAP",
+            "textAlign": "LV_TEXT_ALIGN_LEFT",
+            "recolor": false
+          },
+          "events": {},
+          "customStyles": {},
+          "animations": []
+        }
+      ]
     }
   ],
   "code": {
-    "module": "# SETTINGS: the WiFi networks that every Copper and Code app on this board uses.\n#\n# Up to five networks are kept by cac_settings in cac_settings.json in the flash, from the most\n# recently used. boot.py connects to the best one in range at power-on; the other apps call\n# cac_settings.connect() when they need the network. Here they are added, chosen, tried and\n# forgotten. Scanning and connecting take seconds, so a touch only asks for them and the timer\n# runs them on its next tick, after the screen has shown \"Connecting...\".\nimport cac_settings\n\nUNSELECTED = 0x1B2838\nSELECTED = 0x4FA3FF\nDEFAULT_BRIGHTNESS = 70\n\nsta = cac_settings.station()\njob = None\nselected = None             # the saved network chosen on Networks\npicked = None               # the network chosen on Add\n\n\ndef row_buttons():\n    return (ui.net1, ui.net2, ui.net3, ui.net4, ui.net5)\n\n\ndef button_text(button, text):\n    button.get_child(0).set_text(text)\n\n\ndef saved_names():\n    return [n[\"ssid\"] for n in cac_settings.networks()]\n\n\ndef show_networks():\n    global selected\n    saved = saved_names()\n    if selected not in saved:\n        selected = saved[0] if saved else None\n    current = cac_settings.connected_ssid(sta)\n    for i, button in enumerate(row_buttons()):\n        if i < len(saved):\n            name = saved[i]\n            button_text(button, name + (\"   connected\" if name == current else \"\"))\n            button.set_style_bg_color(lv.color_hex(SELECTED if name == selected else UNSELECTED), 0)\n            button.remove_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            button.add_flag(lv.obj.FLAG.HIDDEN)\n    if not saved:\n        ui.status.set_text(\"No network saved: touch Add\")\n    elif sta is None:\n        ui.status.set_text(\"No WiFi in the simulator: networks are saved only\")\n    elif current:\n        ui.status.set_text(\"Connected to \" + current)\n    else:\n        ui.status.set_text(\"Not connected\")\n\n\ndef choose_row(index):\n    global selected\n    saved = saved_names()\n    if index < len(saved):\n        selected = saved[index]\n        show_networks()\n\n\ndef forget_selected():\n    global selected\n    if selected:\n        cac_settings.forget(selected)\n        selected = None\n    show_networks()\n\n\ndef start_connect():\n    global job\n    if not selected:\n        return\n    if sta is None:\n        ui.status.set_text(\"No WiFi in the simulator\")\n        return\n    ui.status.set_text(\"Connecting to \" + selected + \"...\")\n    job = \"connect\"\n\n\ndef do_connect():\n    secret = cac_settings.password(selected)\n    if cac_settings.join(selected, secret, sta):\n        cac_settings.remember(selected, secret)\n        show_networks()\n    else:\n        ui.status.set_text(\"Could not connect to \" + selected)\n\n\ndef open_add():\n    global picked, job\n    picked = None\n    ui.password.set_text(\"\")\n    ui.keyboard.set_textarea(ui.password)\n    ui.keyboard.set_align(lv.ALIGN.TOP_LEFT)    # a keyboard is aligned to the bottom by LVGL\n    ui.keyboard.set_pos(0, lv.screen_active().get_height() - ui.keyboard.get_height())\n    ui.scan_list.clean()\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef start_scan():\n    global job\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef pick(name):\n    global picked\n    picked = name\n    secret = cac_settings.password(name)\n    ui.password.set_text(secret or \"\")\n    ui.add_status.set_text(name + (\": saved, password filled in\" if secret is not None else \": type the password\"))\n\n\ndef do_scan():\n    try:\n        found = cac_settings.scan(sta)\n    except OSError as e:\n        print(\"scan:\", repr(e))\n        ui.add_status.set_text(\"WiFi not available\")\n        return\n    saved = saved_names()\n    box = ui.scan_list\n    box.clean()\n    for name, rssi in found:\n        b = lv.button(box)                     # the list lays its children out in a column\n        b.set_size(lv.pct(100), 38)\n        b.set_style_radius(4, 0)\n        b.set_style_bg_color(lv.color_hex(UNSELECTED), 0)\n        label = lv.label(b)\n        label.set_text(name + (\"   saved\" if name in saved else \"\"))\n        label.set_style_text_color(lv.color_hex(0xF2F5F9), 0)\n        label.center()\n        b.add_event_cb(lambda e, n=name: pick(n), lv.EVENT.CLICKED, None)\n    ui.add_status.set_text(\"Touch a network\" if found else \"No network in range\")\n\n\ndef start_save():\n    global job\n    if not picked:\n        ui.add_status.set_text(\"Touch a network first\")\n        return\n    ui.add_status.set_text(\"Connecting to \" + picked + \"...\")\n    job = \"save\"\n\n\ndef do_save():\n    global selected\n    secret = ui.password.get_text()\n    if sta is not None and not cac_settings.join(picked, secret, sta):\n        ui.add_status.set_text(\"Could not connect: check the password\")\n        return\n    cac_settings.remember(picked, secret)\n    selected = picked\n    ui.load_page(ui.PAGE_NETWORKS)\n\n\ndef backlight(level):\n    try:\n        import display_driver\n    except ImportError:\n        return\n    if hasattr(display_driver, \"backlight\"):          # the simulator has no backlight\n        display_driver.backlight(level)\n\n\ndef show_brightness(level):\n    ui.bright_text.set_text(\"Brightness %d%%\" % level)\n\n\ndef open_display():\n    level = cac_settings.section(\"display\").get(\"brightness\", DEFAULT_BRIGHTNESS)\n    ui.bright.set_style_bg_color(lv.color_hex(UNSELECTED), lv.PART.MAIN)    # the track, visible\n    ui.bright.set_style_bg_opa(lv.OPA.COVER, lv.PART.MAIN)\n    ui.bright.set_value(level, False)\n    show_brightness(level)\n\n\ndef change_brightness():\n    level = ui.bright.get_value()\n    show_brightness(level)\n    backlight(level)\n\n\ndef save_brightness():\n    \"\"\"Written when the finger leaves the slider, not at every step: the flash wears out.\"\"\"\n    display = cac_settings.section(\"display\")\n    display[\"brightness\"] = ui.bright.get_value()\n    cac_settings.set_section(\"display\", display)\n\n\ndef on_tick():\n    global job\n    current, job = job, None\n    if current == \"connect\":\n        do_connect()\n    elif current == \"scan\":\n        do_scan()\n    elif current == \"save\":\n        do_save()\n",
+    "module": "# SETTINGS: the WiFi networks that every Copper and Code app on this board uses.\n#\n# Up to five networks are kept by cac_settings in cac_settings.json in the flash, from the most\n# recently used. boot.py connects to the best one in range at power-on; the other apps call\n# cac_settings.connect() when they need the network. Here they are added, chosen, tried and\n# forgotten. Scanning and connecting take seconds, so a touch only asks for them and the timer\n# runs them on its next tick, after the screen has shown \"Connecting...\".\n#\n# Start chooses the app that the home of the board starts at power-on instead of the shell,\n# among the apps of its menu, /sd/home.json, kept in the section \"home\" of cac_settings.json.\nimport json\nimport sys\n\nimport cac_settings\n\nUNSELECTED = 0x1B2838\nSELECTED = 0x4FA3FF\nDEFAULT_BRIGHTNESS = 70\n\nsta = cac_settings.station()\njob = None\nselected = None             # the saved network chosen on Networks\npicked = None               # the network chosen on Add\nstart_buttons = []          # (button, path, name) of the list on Start\n\nMENU = \"/sd/home.json\"      # the menu of the board's home\nDEMO_MENU = {\"start\": \"/sd/apps/forecast/app_main.py\", \"apps\": [\n    {\"name\": \"Settings\", \"path\": \"/sd/apps/settings/app_main.py\"},\n    {\"name\": \"Forecast\", \"path\": \"/sd/apps/forecast/app_main.py\"},\n    {\"name\": \"Photo Frame\", \"path\": \"/sd/apps/photo-frame/app_main.py\"},\n    {\"name\": \"Games\", \"apps\": [{\"name\": \"Snake\", \"path\": \"/sd/apps/snake.py\"}]}]}\n\n\ndef row_buttons():\n    return (ui.net1, ui.net2, ui.net3, ui.net4, ui.net5)\n\n\ndef button_text(button, text):\n    button.get_child(0).set_text(text)\n\n\ndef saved_names():\n    return [n[\"ssid\"] for n in cac_settings.networks()]\n\n\ndef show_networks():\n    global selected\n    saved = saved_names()\n    if selected not in saved:\n        selected = saved[0] if saved else None\n    current = cac_settings.connected_ssid(sta)\n    for i, button in enumerate(row_buttons()):\n        if i < len(saved):\n            name = saved[i]\n            button_text(button, name + (\"   connected\" if name == current else \"\"))\n            button.set_style_bg_color(lv.color_hex(SELECTED if name == selected else UNSELECTED), 0)\n            button.remove_flag(lv.obj.FLAG.HIDDEN)\n        else:\n            button.add_flag(lv.obj.FLAG.HIDDEN)\n    if not saved:\n        ui.status.set_text(\"No network saved: touch Add\")\n    elif sta is None:\n        ui.status.set_text(\"No WiFi in the simulator: networks are saved only\")\n    elif current:\n        ui.status.set_text(\"Connected to \" + current)\n    else:\n        ui.status.set_text(\"Not connected\")\n\n\ndef choose_row(index):\n    global selected\n    saved = saved_names()\n    if index < len(saved):\n        selected = saved[index]\n        show_networks()\n\n\ndef forget_selected():\n    global selected\n    if selected:\n        cac_settings.forget(selected)\n        selected = None\n    show_networks()\n\n\ndef start_connect():\n    global job\n    if not selected:\n        return\n    if sta is None:\n        ui.status.set_text(\"No WiFi in the simulator\")\n        return\n    ui.status.set_text(\"Connecting to \" + selected + \"...\")\n    job = \"connect\"\n\n\ndef do_connect():\n    secret = cac_settings.password(selected)\n    if cac_settings.join(selected, secret, sta):\n        cac_settings.remember(selected, secret)\n        show_networks()\n    else:\n        ui.status.set_text(\"Could not connect to \" + selected)\n\n\ndef open_add():\n    global picked, job\n    picked = None\n    ui.password.set_text(\"\")\n    ui.keyboard.set_textarea(ui.password)\n    ui.keyboard.set_align(lv.ALIGN.TOP_LEFT)    # a keyboard is aligned to the bottom by LVGL\n    ui.keyboard.set_pos(0, lv.screen_active().get_height() - ui.keyboard.get_height())\n    ui.scan_list.clean()\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef start_scan():\n    global job\n    ui.add_status.set_text(\"Looking for networks...\")\n    job = \"scan\"\n\n\ndef pick(name):\n    global picked\n    picked = name\n    secret = cac_settings.password(name)\n    ui.password.set_text(secret or \"\")\n    ui.add_status.set_text(name + (\": saved, password filled in\" if secret is not None else \": type the password\"))\n\n\ndef do_scan():\n    try:\n        found = cac_settings.scan(sta)\n    except OSError as e:\n        print(\"scan:\", repr(e))\n        ui.add_status.set_text(\"WiFi not available\")\n        return\n    saved = saved_names()\n    box = ui.scan_list\n    box.clean()\n    for name, rssi in found:\n        b = lv.button(box)                     # the list lays its children out in a column\n        b.set_size(lv.pct(100), 38)\n        b.set_style_radius(4, 0)\n        b.set_style_bg_color(lv.color_hex(UNSELECTED), 0)\n        label = lv.label(b)\n        label.set_text(name + (\"   saved\" if name in saved else \"\"))\n        label.set_style_text_color(lv.color_hex(0xF2F5F9), 0)\n        label.center()\n        b.add_event_cb(lambda e, n=name: pick(n), lv.EVENT.CLICKED, None)\n    ui.add_status.set_text(\"Touch a network\" if found else \"No network in range\")\n\n\ndef start_save():\n    global job\n    if not picked:\n        ui.add_status.set_text(\"Touch a network first\")\n        return\n    ui.add_status.set_text(\"Connecting to \" + picked + \"...\")\n    job = \"save\"\n\n\ndef do_save():\n    global selected\n    secret = ui.password.get_text()\n    if sta is not None and not cac_settings.join(picked, secret, sta):\n        ui.add_status.set_text(\"Could not connect: check the password\")\n        return\n    cac_settings.remember(picked, secret)\n    selected = picked\n    ui.load_page(ui.PAGE_NETWORKS)\n\n\ndef backlight(level):\n    try:\n        import display_driver\n    except ImportError:\n        return\n    if hasattr(display_driver, \"backlight\"):          # the simulator has no backlight\n        display_driver.backlight(level)\n\n\ndef show_brightness(level):\n    ui.bright_text.set_text(\"Brightness %d%%\" % level)\n\n\ndef open_display():\n    level = cac_settings.section(\"display\").get(\"brightness\", DEFAULT_BRIGHTNESS)\n    ui.bright.set_style_bg_color(lv.color_hex(UNSELECTED), lv.PART.MAIN)    # the track, visible\n    ui.bright.set_style_bg_opa(lv.OPA.COVER, lv.PART.MAIN)\n    ui.bright.set_value(level, False)\n    show_brightness(level)\n\n\ndef change_brightness():\n    level = ui.bright.get_value()\n    show_brightness(level)\n    backlight(level)\n\n\ndef save_brightness():\n    \"\"\"Written when the finger leaves the slider, not at every step: the flash wears out.\"\"\"\n    display = cac_settings.section(\"display\")\n    display[\"brightness\"] = ui.bright.get_value()\n    cac_settings.set_section(\"display\", display)\n\n\ndef on_tick():\n    global job\n    current, job = job, None\n    if current == \"connect\":\n        do_connect()\n    elif current == \"scan\":\n        do_scan()\n    elif current == \"save\":\n        do_save()\n\n\ndef board_menu():\n    \"\"\"The menu of the board, /sd/home.json; in the simulator, which has no card, an example of it.\"\"\"\n    try:\n        with open(MENU) as f:\n            menu = json.load(f)\n        return menu if isinstance(menu, dict) else {}\n    except (OSError, ValueError):\n        return DEMO_MENU if sys.platform in (\"linux\", \"darwin\", \"win32\", \"webassembly\") else {}\n\n\ndef start_choices(menu):\n    \"\"\"The shell, then the apps of the first level of the menu: a folder, such as Games, is left out.\"\"\"\n    apps = [(a[\"name\"], a[\"path\"]) for a in menu.get(\"apps\", []) if isinstance(a, dict) and a.get(\"name\") and isinstance(a.get(\"path\"), str)]\n    return [(\"Shell\", \"\")] + apps\n\n\ndef current_start(menu):\n    \"\"\"The path that starts at power-on: the choice made here, else the start of the menu; \"\" is the shell.\"\"\"\n    chosen = cac_settings.section(\"home\")\n    return chosen[\"start\"] if \"start\" in chosen else (menu.get(\"start\") or \"\")\n\n\ndef show_start():\n    global start_buttons\n    menu = board_menu()\n    box = ui.start_list\n    box.clean()\n    start_buttons = []\n    for name, path in start_choices(menu):\n        b = lv.button(box)\n        b.set_size(lv.pct(100), 42)\n        b.set_style_radius(4, 0)\n        label = lv.label(b)\n        label.set_text(name)\n        label.set_style_text_color(lv.color_hex(0xF2F5F9), 0)\n        label.center()\n        b.add_event_cb(lambda e, p=path: choose_start(p), lv.EVENT.CLICKED, None)\n        start_buttons.append((b, path, name))\n    mark_start(menu)\n\n\ndef mark_start(menu):\n    \"\"\"The colour of the chosen app, and its name above the list. The buttons stay: one of them may be in its own click.\"\"\"\n    current = current_start(menu)\n    for b, path, _name in start_buttons:\n        b.set_style_bg_color(lv.color_hex(SELECTED if path == current else UNSELECTED), 0)\n    name = next((n for _b, p, n in start_buttons if p == current), None)\n    if not menu:\n        ui.start_status.set_text(\"No menu on the card: \" + MENU)\n    elif name is None:\n        ui.start_status.set_text(\"The app chosen is not in the menu: the shell starts\")\n    else:\n        ui.start_status.set_text(\"At power-on: \" + name)\n\n\ndef choose_start(path):\n    home = cac_settings.section(\"home\")\n    home[\"start\"] = path\n    cac_settings.set_section(\"home\", home)\n    mark_start(board_menu())\n",
     "handlers": {
       "Networks_screen_loaded": {
         "widget": "Networks",
@@ -758,6 +917,21 @@
         "widget": "btn_disp_back",
         "event": "CLICKED",
         "body": "ui.load_page(ui.PAGE_NETWORKS)"
+      },
+      "Start_screen_loaded": {
+        "widget": "Start",
+        "event": "SCREEN_LOADED",
+        "body": "show_start()\n"
+      },
+      "btn_start_clicked": {
+        "widget": "btn_start",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_START)\n"
+      },
+      "btn_start_back_clicked": {
+        "widget": "btn_start_back",
+        "event": "CLICKED",
+        "body": "ui.load_page(ui.PAGE_NETWORKS)\n"
       }
     }
   },
