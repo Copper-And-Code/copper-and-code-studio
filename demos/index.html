@@ -1334,6 +1334,118 @@ The agent must run tests in the simulator and document the results, without clai
 </div>
 <details><summary>Creation prompt</summary><p class="demo-prompt">Build a system monitor for the STM32H7_CORE V1.3 (1024×600) as an LVGL MPY Studio project in `examples/sysmon`. On a Linux PC it shows three gauges, CPU, memory and disk, read from `/proc/stat`, `/proc/meminfo` and `os.statvfs(&quot;/&quot;)`; the distribution, kernel and uptime at the top; a chart of the CPU over the last 60 seconds, refreshed every second; and a Processes button that runs `ps` through `os.system` and lists the five busiest processes. Put the reading of the system in a module of its own. The same project must run on a board: where `sys.platform` is not `&quot;linux&quot;`, show the CPU as not available, MicroPython&#x27;s heap as the memory, the flash as the disk, and say that Processes needs the PC. Use only the font sizes of the board. Check it with simulate on Linux, and once more with the board&#x27;s path forced from a scenario, before you finish.</p><p>Not the original prompt: an AI agent built this demo through the MCP server in a conversation with the author. This prompt, written afterwards, asks for the same result. On a Linux PC the full dashboard runs in the simulator; the browser has no operating system, so the page shows the board&#x27;s view.</p></details>
 </article>
+<article class="demo-card" id="block-drop">
+<a href="block-drop/"><img class="demo-thumbnail" src="block-drop/thumbnail.png" alt="Block Drop initial page"></a>
+<h2>Block Drop</h2>
+<p>A falling-block puzzle: move and turn the pieces to fill whole rows, faster at every level, with a shadow where the piece lands.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>55.0 KiB</dd>
+<dt>RAM</dt><dd>132.8 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="block-drop/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/block-drop">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="star-guard">
+<a href="star-guard/"><img class="demo-thumbnail" src="star-guard/thumbnail.png" alt="Star Guard initial page"></a>
+<h2>Star Guard</h2>
+<p>Shoot a marching squadron of forty drones before it lands, behind four shields that crumble, with a comet now and then for a bonus.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>65.2 KiB</dd>
+<dt>RAM</dt><dd>137.8 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="star-guard/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/star-guard">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="frog">
+<a href="frog/"><img class="demo-thumbnail" src="frog/thumbnail.png" alt="Frog initial page"></a>
+<h2>Frog</h2>
+<p>At night a frog crosses a path and a pond to catch three fireflies, dodging insects and mowers and riding the water lilies.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>19.1 KiB</dd>
+<dt>RAM</dt><dd>61.9 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="frog/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/frog">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="orbit">
+<a href="orbit/"><img class="demo-thumbnail" src="orbit/thumbnail.png" alt="Orbit initial page"></a>
+<h2>Orbit</h2>
+<p>Drag the ship along the bottom of the screen; it fires by itself at a swarm of drones that changes shape at every wave.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>19.5 KiB</dd>
+<dt>RAM</dt><dd>57.3 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="orbit/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/orbit">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="sandwich-tower">
+<a href="sandwich-tower/"><img class="demo-thumbnail" src="sandwich-tower/thumbnail.png" alt="Sandwich Tower initial page"></a>
+<h2>Sandwich Tower</h2>
+<p>A chef runs on four floors and steps on the layers of the sandwiches to drop them onto the plates, chased by a chili, an olive and a gherkin.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>22.8 KiB</dd>
+<dt>RAM</dt><dd>76.8 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="sandwich-tower/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/sandwich-tower">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="crossword">
+<a href="crossword/"><img class="demo-thumbnail" src="crossword/thumbnail.png" alt="Crossword initial page"></a>
+<h2>Crossword</h2>
+<p>A new crossword every time, built on the board from a list of words with their clues, in English or Italian.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Game</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>67.4 KiB</dd>
+<dt>RAM</dt><dd>190.4 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="crossword/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/crossword">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.</p></details>
+</article>
+<article class="demo-card" id="clock">
+<a href="clock/"><img class="demo-thumbnail" src="clock/thumbnail.png" alt="Clock initial page"></a>
+<h2>Clock</h2>
+<p>An analog clock with a dark face, a thin orange second hand and the date; on the board it turns dark red at night and takes the time from the network.</p>
+<dl class="demo-facts">
+<dt>Type</dt><dd>Application</dd>
+<dt>Resolution</dt><dd>480 × 480</dd>
+<dt>Flash</dt><dd>33.5 KiB</dd>
+<dt>RAM</dt><dd>34.3 KiB</dd>
+</dl>
+<div class="demo-actions">
+<a class="md-button md-button--primary" href="clock/">Play</a>
+<a class="md-button" href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/clock">Source project</a>
+</div>
+<details><summary>Creation prompt</summary><p class="demo-prompt">An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.</p></details>
+</article>
 </div>
 
 
