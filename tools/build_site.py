@@ -16,13 +16,13 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QImage
 
 from copper_and_code_studio.build.budget import measure_budget
-from copper_and_code_studio.build.preview import render_with_log
+from copper_and_code_studio.build.preview import prepare_page, render_with_log
 from copper_and_code_studio.build.release import THIRD_PARTY_LICENSES
 from copper_and_code_studio.build.visual import rgb565_to_rgb, write_png
 from copper_and_code_studio.build.program import prepare_program, program_board
 from copper_and_code_studio.build.web import RUNTIME_FILES, build_web, copy_program_files, copy_program_runtime, web_runtime, web_template
 from copper_and_code_studio.core.model import Project
-from copper_and_code_studio.platform import runtime_path
+from copper_and_code_studio.platform import RUNTIME_ENTRY, runtime_environment, runtime_path
 
 ROOT = Path(__file__).parents[1]
 REPOSITORY = "https://github.com/Copper-And-Code/copper-and-code-studio"
@@ -96,8 +96,46 @@ def load_demos(root=ROOT):
     return sorted(demos, key=lambda item: item[0]["order"])
 
 
+THUMBNAIL_SECONDS = 1.5  # what a visitor sees once the app has started: Crossword builds its puzzle at the first tick
+
+
+def running_frame(project, page_index, seconds=THUMBNAIL_SECONDS):
+    """The screen of the app after it has run for seconds in real time, and its output; (None, output) without one.
+
+    The headless runtime writes the dump at every frame, so the last complete one is taken while it runs.
+    """
+    expected = project.display.width * project.display.height * 2
+    with tempfile.TemporaryDirectory(prefix="site-thumbnail-") as temporary:
+        directory = Path(temporary)
+        prepare_page(project, page_index, directory)
+        frame, output = directory / "frame.raw", directory / "output.txt"
+        environment = runtime_environment(LVSIM_HEADLESS="1", LVSIM_DUMP=str(frame))
+        with open(output, "wb") as log:
+            process = subprocess.Popen([str(runtime_path()), *RUNTIME_ENTRY], cwd=directory, env=environment, stdout=log, stderr=subprocess.STDOUT)
+            pixels = None
+            try:
+                time.sleep(seconds)
+                for _attempt in range(100):  # a dump being written is shorter than a frame
+                    data = frame.read_bytes() if frame.exists() else b""
+                    if len(data) == expected:
+                        pixels = data
+                        break
+                    if process.poll() is not None:
+                        break
+                    time.sleep(0.02)
+            finally:
+                process.kill()
+                process.wait()
+        text = output.read_text(encoding="utf-8", errors="replace")
+    if "Traceback (most recent call last)" in text:
+        return None, text
+    return pixels, text
+
+
 def write_thumbnail(project, page_index, path):
-    pixels, log = render_with_log(project, page_index, design_only=False)
+    pixels, log = running_frame(project, page_index)
+    if pixels is None:  # the first frame, as the designer draws it
+        pixels, log = render_with_log(project, page_index, design_only=False)
     if pixels is None:
         raise RuntimeError(f"Could not render {project.projectName}: {log.strip()}")
     save_thumbnail(rgb565_to_rgb(pixels), project.display.width, project.display.height, path)

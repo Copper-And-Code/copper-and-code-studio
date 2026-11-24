@@ -5,6 +5,11 @@
 ### Added
 
 - **The website shows the new examples:** Block Drop, Star Guard, Frog, Orbit, Sandwich Tower, Crossword and Clock run in the browser among the demos, and the Videos page has Block Drop, Crossword and Clock, each with its `showreel.toml`.
+- **A portable package for Windows in the release of 0.9.0**, `Copper_and_Code_Studio-0.9.0-portable-win64.zip`, the first under the new name, with the Windows runtime built again under that name.
+
+### Changed
+
+- **The thumbnails of the website show an app after it has run for a second and a half**, not its first frame: Crossword showed an empty grid while its puzzle was being made.
 
 ## 0.9.0 — 2026-11-24
 
