@@ -101,6 +101,20 @@ tools/manual_on_x.sh          # the same, and the self-test, on a real X display
 
 [How it is tested](testing.md) describes them, with the other checks and what none of them sees.
 
+## The SD card of the ESP32-4848S040
+
+`tools/esp32_sd.py` fills a new SD card for the ESP32-4848S040, or brings one up to date: the home of the board (the shell and the touch menu, from [copper-and-code-mcu-boards](https://github.com/Copper-And-Code/copper-and-code-mcu-boards)), the programs of its menu, and the examples of this repository made for that screen, each generated as an upload does and put in a folder of `/sd/apps`. The menu, `/sd/home.json`, is written from the same list, `tools/esp32_sd.json`: to add an app, add a line there and run the script again.
+
+```bash
+tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards /media/you/CARD       # the card in this computer: seconds
+tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards --port /dev/ttyUSB0   # the card in the board: minutes the first time
+tools/esp32_sd.py --boards ~/copper-and-code-mcu-boards /media/you/CARD --dry-run
+```
+
+Only the files that are missing or different are written. In the folder of an app the files it no longer has are removed; photos, settings and anything that is not in the list stay as they are. The menu that is replaced is kept as `home.json.previous`. Through the board the script restarts it at the end, so that the menu shows the new list.
+
+On the board, in the flash, the home needs its `main.py` (`examples/home` of the board repository) and, for the WiFi and the brightness, the `boot.py` and `cac_settings.py` of `examples/settings`. Tried on 24 November 2026: a folder on the PC; the card in the board, 101 files and 740 kB in a little more than four minutes; the twelve apps of the list started from the card through the home.
+
 ## Videos
 
 `tools/showreel` makes the videos of the website: it drives the real IDE offscreen through a storyboard and encodes the frames with `ffmpeg`. See `tools/showreel/README.md`.

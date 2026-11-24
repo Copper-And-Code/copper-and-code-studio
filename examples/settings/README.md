@@ -56,6 +56,11 @@ is the same on every board. These are the lines of `/sd/home.json` for the examp
 Upload each app once from the Studio (**Device → Upload Project**), then add its line to the menu. Started
 from the Studio instead, an app has no home button: there is no menu to go back to.
 
+The apps can live on the SD card instead of the flash. [`tools/esp32_sd.py`](../../tools/esp32_sd.py)
+of this repository fills a card, in a PC or in the board, with the home, its programs and the
+examples made for this screen, each in a folder of `/sd/apps`, and writes the menu for them: see
+[Development](../../docs/development.md#the-sd-card-of-the-esp32-4848s040).
+
 ## In the simulator
 
 There is no WiFi: the scan shows three demo networks, and the networks are saved in a file next

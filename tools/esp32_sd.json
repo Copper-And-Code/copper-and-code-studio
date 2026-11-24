@@ -1,0 +1,33 @@
+{
+  "board": "esp32_4848s040_480",
+  "boardFiles": {
+    "lib/home.py": "examples/home/home.py",
+    "lib/shell.py": "examples/shell/shell.py",
+    "lib/ansiterm.py": "examples/shell/ansiterm.py",
+    "lib/ansifont.py": "examples/shell/ansifont.py",
+    "lib/OFL.txt": "examples/shell/OFL.txt",
+    "bin/vi.py": "examples/shell/vi.py",
+    "bin/edit.py": "examples/shell/edit.py"
+  },
+  "menu": [
+    {"name": "Settings", "example": "settings"},
+    {"name": "Forecast", "example": "forecast"},
+    {"name": "EIM-01", "example": "eim-01-480"},
+    {"name": "FTP Server", "example": "ftp-server"},
+    {"name": "Photo Frame", "example": "photo-frame"},
+    {"name": "Games", "apps": [
+      {"name": "Snake", "program": "examples/snake.py"},
+      {"name": "Breakout", "program": "examples/breakout.py"},
+      {"name": "Pong", "program": "examples/pong.py"},
+      {"name": "Simon", "program": "examples/simon.py"},
+      {"name": "Tic-tac-toe", "program": "examples/tictactoe.py"},
+      {"name": "Block Drop", "example": "block-drop"},
+      {"name": "Star Guard", "example": "star-guard"},
+      {"name": "Crossword", "example": "crossword"},
+      {"name": "Frog", "example": "frog"},
+      {"name": "Orbit", "example": "orbit"},
+      {"name": "Sandwich Tower", "example": "sandwich-tower"},
+      {"name": "Fifteen", "example": "fifteen"}
+    ]}
+  ]
+}
