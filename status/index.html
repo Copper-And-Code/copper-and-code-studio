@@ -1248,8 +1248,8 @@
 
 
 <h1 id="status-what-is-verified-and-how">Status: what is verified, and how<a class="headerlink" href="#status-what-is-verified-and-how" title="Permanent link">&para;</a></h1>
-<p>Version 0.8.0, the first under the name Copper and Code Studio, is published as a GitHub release, with
-an AppImage for Linux; the portable package for Windows is that of 0.7.1, under the old name. This page separates what has been
+<p>Version 0.9.0 is published as a GitHub release, with an AppImage for Linux and the kit of the
+ESP32-4848S040; the portable package for Windows is that of 0.7.1, under the old name. This page separates what has been
 checked from what has only been written.</p>
 <h2 id="read-this-first">Read this first<a class="headerlink" href="#read-this-first" title="Permanent link">&para;</a></h2>
 <p>The project was built broad on purpose: features expected to be useful were included from the
@@ -1340,8 +1340,15 @@ below as an open question, not as a formality.</p>
 <td>Font memory warning</td>
 <td>yes</td>
 <td></td>
-<td>Waveshare RP2350</td>
+<td>Waveshare RP2350, when fonts were text in <code>ui.py</code>. ESP32-4848S040, 23 November 2026: a font in three sizes, 70 kB of files, takes 103 kB of the heap read from files and 196 kB as text in <code>ui.py</code>, measured with <code>gc.mem_alloc()</code> on a project of three labels. 24 November 2026: fonts of 9, 33 and 74 kB loaded from the SD card one at a time, in both orders, and the same font ten times: LVGL keeps a font in about its size, in a pool that grows by 64 or 128 kB steps; always below the warning's sum + largest + 64 kB</td>
+<td>the peak while a font loads; the RP2350 with fonts in files</td>
+</tr>
+<tr>
+<td>Upload of only the files that changed; fonts and pictures as files on the board</td>
+<td>yes: on a virtual board through the real <code>mpremote</code>: a second upload, a file changed on the board by hand, a file the board cannot read, a project with a font and three pictures started twice</td>
 <td></td>
+<td>ESP32-4848S040, 23 November 2026, driven by a script through the IDE's code: Weather uploaded twice (15.7 s, then 6.3 s with 10 files of 11 copied on the board); with a font in three sizes 49.8 s, then 12.4 s after a change to a text (6 kB of 90 kB sent); the app started each time with its pictures and fonts read from their files; Block Drop, Star Guard and Crossword uploaded and started. 24 November 2026, the small files written by one script: a project with 30 pictures, 37 files and 18 kB, in 15.1 s where one copy for each file took 34.9 s; Weather in 9.8 s where it took 18.2 s</td>
+<td>from the IDE's window by a person; the other boards; a firmware without <code>hashlib</code>; Windows</td>
 </tr>
 <tr>
 <td>C export</td>
@@ -1487,7 +1494,7 @@ below as an open question, not as a formality.</p>
 <td>AppImage for Linux</td>
 <td></td>
 <td>yes, run from inside the package</td>
-<td>the package of 0.8.0, released, built from a clean clone of the tag: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.2, released: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB (<a href="../chromebook/">Running on a Chromebook</a>). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
+<td>the package of 0.9.0, released, built from a clean clone of the tag: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.8.0, released, built from a clean clone of the tag: the same checks. The package of 0.7.2, released: <code>--version</code>, self-test from an empty folder (105 steps passed) and a single-file game built by it, started with <code>--selftest</code>, on the author's computer. The package of 0.7.1, released: self-test from an empty folder, 82 steps passed, on the author's computer. The package of 0.7.0, released: the same self-test on the author's computer and, on 14 November 2026, on Ubuntu 24.04, Debian 13, Fedora 43 and Arch Linux in containers without a display; it needs glibc 2.38, so it does not start on Debian 12 or Ubuntu 22.04. On a Chromebook, by the author: installed in the Linux development environment on Debian 13, glibc 2.41, the self-test passed, the simulator with touch and sound, a board over USB (<a href="../chromebook/">Running on a Chromebook</a>). The package of 0.6.1, released: self-test, 82 steps passed. The package of 0.6.0, on the author's computer: self-test, visual tests of EIM-01, board and C generation, single-file games for Linux (needing glibc 2.34 or later) and Windows, browser version</td>
 <td>on Ubuntu 22.04 and Debian 12, where it does not start; the window seen on another Linux system</td>
 </tr>
 <tr>
@@ -1495,7 +1502,7 @@ below as an open question, not as a formality.</p>
 <td></td>
 <td></td>
 <td>the package of 0.6.0: contents inspected (no bundled ICU, the icon in the program file, the blocks) and started by the author on a real Windows. The package of 0.6.1, released: contents inspected, started by the author on Windows, no console windows flashing</td>
-<td>the packages of 0.7.0 and 0.7.1 (0.7.2 and 0.8.0 have no package of their own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built</td>
+<td>the packages of 0.7.0 and 0.7.1 (0.7.2, 0.8.0 and 0.9.0 have no package of their own), released: contents inspected (version, no bundled ICU, the launcher, the display driver of contract 1), not started on Windows yet; the installer, never built</td>
 </tr>
 </tbody>
 </table>
@@ -1545,7 +1552,8 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   number or a name such as <code>PA5</code>, and nothing warns when it is one the display or the memory
   already uses.</li>
 <li><strong>The RAM budget</strong> shown in the status bar is measured in the 64-bit simulator and is an
-  overestimate for 32-bit boards.</li>
+  overestimate for 32-bit boards. The fonts of a project take about their size on both, but on
+  the ESP32-4848S040 LVGL grows its memory in steps of 64 kB, which the budget does not count.</li>
 <li><strong>Renaming a Python module</strong> does not rewrite the code that imports it; the IDE warns.</li>
 <li><strong>Reference images that hold a changing value</strong> fail when the generator changes: the EIM-01
   example shows the free memory on a page, and its image had to be regenerated for 0.6.</li>
@@ -1554,8 +1562,13 @@ usable, in the author's judgement. Its checks are recorded in that repository, n
   core, of the runtime and of the IDE, and the self-test. On the Linux machine 72 tests are
   skipped, because they need what is not built there: the launchers of single-file games, the
   WebAssembly runtime, Wine, a browser. Packages are built and checked by hand.</li>
-<li><strong>An upload sends every file again</strong>, also those that did not change: a project with fonts
-  takes tens of seconds on a slow link each time.</li>
+<li><strong>An upload that sends only what changed is tried on one board</strong>, the ESP32-4848S040. Whether
+  the firmware of the other boards has the <code>hashlib</code> it needs is not checked: without it every
+  file is sent, as before.</li>
+<li><strong>The kit of the ESP32-4848S040</strong> is checked by tests (its content, the firmware checked against
+  the release, the same zip twice) and its card is the one <code>tools/esp32_sd.py</code> writes, tried on
+  the board; a board set up from the kit alone, firmware erased and written again, is not tried
+  yet.</li>
 </ul>
 <h2 id="what-is-not-there">What is not there<a class="headerlink" href="#what-is-not-there" title="Permanent link">&para;</a></h2>
 <ul>

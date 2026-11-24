@@ -2208,7 +2208,7 @@
 <li>The font file is stored inside the project file. Type its name in the <code>font</code> of another widget to use it again.</li>
 <li>When the code is generated the font is converted for each size in use, with the printable ASCII characters and the characters of the widgets that use it. Text set from code can use those characters; a character the font does not have is listed in the output.</li>
 <li>The glyphs are the same LVGL's own converter would make. Kerning, the fine spacing between particular pairs of letters such as “AV”, is converted too.</li>
-<li>On a board each converted size costs memory, roughly two and a half times its size: about 30 kB for ASCII at 24 pixels. On upload the IDE warns when the fonts would take more than half the free RAM of the board. The C export includes the fonts of the project and loads them from memory, which needs <code>LV_USE_FS_MEMFS</code> in <code>lv_conf.h</code>.</li>
+<li>On a board each converted size is a file of its own next to the app, sent again only when it changes, and costs about its size in memory. LVGL takes the memory for its fonts from the board in steps of 64 kB, and the file of the largest font can stay in memory too: so the first font of an app can cost up to a step more. On upload the IDE warns when the fonts would take more than half the free RAM of the board. The C export includes the fonts of the project and loads them from memory, which needs <code>LV_USE_FS_MEMFS</code> in <code>lv_conf.h</code>.</li>
 </ul>
 <h3 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h3>
 <p>Components are not visible on the page: they appear in the <strong>Components</strong> panel at the bottom.</p>
@@ -2292,6 +2292,7 @@
     <span class="n">score</span> <span class="o">+=</span> <span class="n">points</span>
     <span class="n">ui</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
 </code></pre></div>
+<p>Do not give a function or a variable of <strong>(General)</strong> the name of a handler, such as <code>button1_clicked</code>: the handler is a function with that name written after your code, so it takes its place, and a handler that calls it calls itself. The IDE says so in the output when you start or upload the app, with the line to change.</p>
 <h3 id="python-modules">Python modules<a class="headerlink" href="#python-modules" title="Permanent link">&para;</a></h3>
 <p>When the code grows you can split it into <strong>modules</strong>: <code>.py</code> files of the project, which handlers, the <strong>(General)</strong> code and other modules use with <code>import</code>.</p>
 <ol>
