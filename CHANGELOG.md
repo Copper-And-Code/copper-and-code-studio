@@ -13,6 +13,7 @@
 - **Clock**, an analog clock for a 480×480 touch screen: a dark face with the date in English or Italian, dark red with the backlight down at night, the time from the network in Italian time. The Settings example has a language for the apps that speak more than one.
 - **Photo Frame: photos from a phone.** Add photos, in Options, shows a QR code: a phone on the same WiFi opens a page that fits its photos to the frame in the browser and sends them ready, with a PIN shown on the screen. The page also lists and deletes the photos. Nothing has to be installed on a PC.
 - **The apps of the ESP32-4848S040 speak English and Italian**, as chosen on the Display page of Settings, English by default: Settings, Forecast, Clock, EIM-01, FTP Server, Photo Frame and the games, and the names in the menu of the board. `cac_settings` has `language()`, `translator()` and `translate()` for it: an app keeps an `IT` dict from each English text to its Italian, and the texts of its pages are translated when it starts. Forecast and Crossword no longer keep a language of their own.
+- **Settings opens on a welcome page**: what is set now (the WiFi, the language, the app of power-on), a short help, and the buttons WiFi, Start and Display. It opened on the WiFi networks, which looked like a request to connect.
 
 ### Changed
 

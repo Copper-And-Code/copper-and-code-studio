@@ -1,8 +1,9 @@
 # Settings
 
 The settings of a board, kept once for every app: the WiFi networks, the brightness of the
-display and the app that starts at power-on. **Settings** adds up to five networks, from a scan,
-with their passwords; touches one to choose it, **Connect** tries it, **Forget** removes it. The
+display and the app that starts at power-on. It opens on a welcome page that says what is set
+now, the WiFi, the language and the app of power-on, with a short help, and its three buttons at
+the top right: **WiFi** adds up to five networks, from a scan, with their passwords; touches one to choose it, **Connect** tries it, **Forget** removes it. The
 networks are kept from the most recently used. **Display** sets the brightness and the language,
 English or Italian, of every app of the board. **Start** chooses
 what the [home menu of the board](#the-home-menu-of-the-board) starts at power-on instead of the
