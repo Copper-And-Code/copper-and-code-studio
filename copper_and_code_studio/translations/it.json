@@ -145,6 +145,7 @@
   "Uploading to the board": "Trasferimento sulla board",
   "Preparing…": "Preparazione…",
   "Writing {name}": "Scrittura di {name}",
+  "{count} files": "{count} file",
   "{sent} of {total} kB": "{sent} di {total} kB",
   "Elapsed {time}": "Trascorsi {time}",
   "about {time} left": "mancano circa {time}",

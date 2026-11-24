@@ -32,6 +32,8 @@ class FakeRunner:
     def __init__(self):
         self.calls = []
         self.copies = []
+        self.sizes = {}      # what each copy left on the board, by destination
+        self.commands = 0    # exchanges that carried files
         self.resets = 0
         self.activations = 0
         self.incomplete = False
@@ -44,7 +46,23 @@ class FakeRunner:
         cp = command.index("cp")
         source, destination = command[cp + 1:cp + 3]
         self.copies.append((source, destination))
+        if not source.startswith(":"):
+            self.sizes[destination] = Path(source).stat().st_size
+        self.commands += 1
         return True
+
+    def write_script(self, script):
+        """The script that writes several small files at once: each one counts as a copy."""
+        import ast, base64
+
+        folder = ast.literal_eval(script.split("f=open(", 1)[1].split("+n,", 1)[0])
+        for line in script.splitlines():
+            if line.startswith("w("):
+                name, data = ast.literal_eval(line[1:])
+                self.copies.append((name, ":" + folder + name))
+                self.sizes[":" + folder + name] = len(base64.b64decode(data))
+        self.commands += 1
+        return "LMS_WROTE=%d\n" % sum(line.startswith("w(") for line in script.splitlines())
 
     def __call__(self, command, timeout):  # noqa: PLR0912
         self.calls.append((command, timeout))
@@ -61,8 +79,10 @@ class FakeRunner:
         if "LMS_SIZES=" in script:
             if self.incomplete:
                 return "LMS_SIZES=" + json.dumps({"broken": -1})
-            sizes = {Path(source).name: Path(source).stat().st_size for source, destination in self.copies if destination.startswith(":") and "/lms_apps/" in destination}
+            sizes = {Path(destination).name: size for destination, size in self.sizes.items() if "/lms_apps/" in destination}
             return "LMS_SIZES=" + json.dumps(sizes)
+        if "LMS_WROTE=" in script:
+            return self.write_script(script)
         if "os.rename" in script and ".uploading" in script:
             self.activations += 1
             return ""
@@ -301,7 +321,36 @@ def test_upload_asks_what_the_board_has_a_few_files_at_a_time(tmp_path, monkeypa
     assert {Path(source).name for source, _destination in runner.copies} == set(result["files"]) - set(result["reused"])
 
 
-def test_upload_reports_bytes_at_each_file(tmp_path):
+def test_copy_groups_put_small_files_together_and_large_ones_alone():
+    from copper_and_code_studio.device.service import TOGETHER_BYTES, TOGETHER_FILE, TOGETHER_FILES, copy_groups
+
+    small, large = TOGETHER_FILE, TOGETHER_FILE + 1
+    files = [("ui.mpy", large), ("a", 10), ("b", small), ("font.bin", large), ("c", 30)]
+    assert copy_groups(files) == [[("ui.mpy", large)], [("a", 10), ("b", small), ("c", 30)], [("font.bin", large)]]
+    assert copy_groups(files, together=False) == [[item] for item in files]   # over the serial adapter
+    many = [(str(index), 1) for index in range(TOGETHER_FILES + 3)]
+    assert [len(group) for group in copy_groups(many)] == [TOGETHER_FILES, 3]
+    heavy = [(str(index), TOGETHER_FILE) for index in range(TOGETHER_BYTES // TOGETHER_FILE + 2)]
+    assert all(sum(size for _name, size in group) <= TOGETHER_BYTES for group in copy_groups(heavy)) and len(copy_groups(heavy)) == 2
+    assert copy_groups([]) == []
+
+
+def test_upload_sends_the_small_files_with_one_command(tmp_path):
+    runner = FakeRunner()
+    reports = []
+    result = connected(runner).upload(project(), tmp_path, progress=lambda *report: reports.append(report))
+    sizes = {name: (tmp_path / name).stat().st_size for name in result["files"]}
+    assert runner.commands == 1   # one script writes the seven files: with mpremote's copy each is several exchanges
+    assert [Path(source).name for source, _destination in runner.copies] == list(sizes)
+    assert all(destination.endswith(".uploading/" + Path(source).name) for source, destination in runner.copies)
+    assert [report[2] for report in reports] == [f"{len(sizes)} files", ""]
+    assert reports[0][:2] == (0, sum(sizes.values())) and reports[0][3] == sum(sizes.values())
+
+
+def test_upload_reports_bytes_at_each_file(tmp_path, monkeypatch):
+    from copper_and_code_studio.device import service
+
+    monkeypatch.setattr(service, "TOGETHER_FILE", 0)   # as if every file were large: each goes alone
     session = DeviceSession(runner=FakeRunner())
     current = project()
     current.board = builtin_profiles()[0]
@@ -310,7 +359,7 @@ def test_upload_reports_bytes_at_each_file(tmp_path):
     result = session.upload(current, tmp_path, progress=lambda *report: reports.append(report))
     sizes = {name: (tmp_path / name).stat().st_size for name in result["files"]}
     total = sum(sizes.values())
-    # mpremote says nothing while it writes: one report as each file starts, and one at the end
+    # mpremote says nothing while it writes: one report as each large file starts, and one at the end
     assert [report[2] for report in reports] == [*sizes, ""]
     assert all(report[1] == total for report in reports)
     assert [report[0] for report in reports] == [sum(list(sizes.values())[:index]) for index in range(len(sizes) + 1)]

@@ -150,7 +150,8 @@ def test_a_second_upload_sends_only_what_changed(esp32, tmp_path):
     again = session.upload(project, tmp_path / "out", progress=lambda done, total, name, size: sent.append(name))
     assert "ui.mpy" in again["reused"] and "app_events.mpy" in again["reused"]
     assert "forecast.mpy" not in again["reused"] and "manifest.json" not in again["reused"]
-    assert {name for name in sent if name} == {"forecast.mpy", "manifest.json"}
+    assert set(again["files"]) - set(again["reused"]) == {"forecast.mpy", "manifest.json"}
+    assert [name for name in sent if name] == ["2 files"]   # small files travel together, with one mpremote
     for name in first["files"]:   # the app on the board is the one of the PC, file by file
         assert (app / name).read_bytes() == (tmp_path / "out" / name).read_bytes(), name
     session.disconnect()

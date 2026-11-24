@@ -1,3 +1,4 @@
+import base64
 import codecs
 import copy
 import hashlib
@@ -60,9 +61,31 @@ RAW_REPL_FAILED = "could not enter raw repl"
 PUT_SLOWEST = 4096  # bytes per second of the slowest link seen, for the timeout of a copy
 
 
+TOGETHER_FILE = 8192    # a file up to this size is written with others by one script: a copy with mpremote is several exchanges with the board for each file
+TOGETHER_FILES = 24     # files in one script at most
+TOGETHER_BYTES = 16384  # and bytes: the board holds the script, half as long again in base64, while it compiles it
+
+
 def put_timeout(size):
     """Seconds allowed to copy a file of size bytes: 30, plus what the slowest link needs."""
     return 30 + size / PUT_SLOWEST
+
+
+def copy_groups(files, together=True):
+    """files, [(name, size)], in the groups to copy with one command each.
+
+    Small files go together, up to TOGETHER_FILES and TOGETHER_BYTES; a larger file goes alone,
+    with mpremote's own copy. Without together every file is a group."""
+    groups, small = [], None
+    for name, size in files:
+        if not together or size > TOGETHER_FILE:
+            groups.append([(name, size)])
+            continue
+        if small is None or len(small) >= TOGETHER_FILES or sum(item[1] for item in small) + size > TOGETHER_BYTES:
+            small = []
+            groups.append(small)
+        small.append((name, size))
+    return groups
 
 
 def break_in(port, sleep=time.sleep):
@@ -186,6 +209,14 @@ for n,(z,h) in json.loads({json.dumps(wanted)!r}).items():
 print('LMS_REUSED='+json.dumps(r))"""
 
 
+def write_script(folder, files):
+    """A script that writes files, {name: bytes}, in a folder of the board, and says how many."""
+    lines = ["import binascii", "def w(n,d):", f" f=open({folder + '/'!r}+n,'wb')", " f.write(binascii.a2b_base64(d))", " f.close()"]
+    lines += [f"w({name!r},{base64.b64encode(data).decode('ascii')!r})" for name, data in files.items()]
+    lines.append(f"print('LMS_WROTE={len(files)}')")
+    return "\n".join(lines) + "\n"
+
+
 def stop_script(app_root):
     """Stop the app and forget its modules, user modules included: they all live under app_root."""
     return (
@@ -290,6 +321,23 @@ class DeviceSession(AutostartMixin):
                 return self._uart.put(str(source), destination, timeout, cancel, written)
             except UartError as exc:
                 raise DeviceError(exc.code, exc.output) from exc
+
+    def _put_together(self, sources, folder, cancel=None):
+        """Write several small files in a folder of the board with one script."""
+        files = {Path(source).name: Path(source).read_bytes() for source in sources}
+        output = self._run_script(write_script(folder, files), put_timeout(sum(len(data) for data in files.values())), cancel)
+        if f"LMS_WROTE={len(files)}" not in output:
+            raise DeviceError("device.transfer.incomplete", output)
+        return output
+
+    def _run_script(self, script, timeout, cancel=None):
+        """Run a script that can be long. On Windows a command line cannot hold it: it goes through a file."""
+        if self._uart is not None or self._custom_runner:
+            return self._exec(script, timeout, cancel)
+        with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-run-") as temporary:
+            path = Path(temporary) / "script.py"
+            path.write_text(script, encoding="utf-8", newline="\n")
+            return self._execute(["connect", self.port, "resume", "run", str(path)], timeout=timeout, cancel=cancel)
 
     def _exec(self, source, timeout=20, cancel=None):
         """Run MicroPython source on the board without resetting it, and return what it printed."""
@@ -624,13 +672,18 @@ print('LMS_INFO='+json.dumps(r))'''.replace("@MODULES@", repr(modules)).replace(
                 reused = self._reuse(current, staging, wanted, generated["warnings"], cancel)
                 generated["reused"] = reused  # in the result: the files that did not travel
                 sent = sum(checks[name] for name in reused)
-                for name, size in checks.items():
-                    if name in reused:
-                        continue
+                pending = [(name, size) for name, size in checks.items() if name not in reused]
+                # Over the serial adapter a file costs nothing to start, and its bytes are followed one by one.
+                for group in copy_groups(pending, together=self._uart is None):
                     self._check_cancel(cancel)
-                    if progress:  # sent bytes, all bytes, the file being written and its size
+                    size = sum(item[1] for item in group)
+                    name = group[0][0] if len(group) == 1 else tr("{count} files", count=len(group))
+                    if progress:  # sent bytes, all bytes, what is being written and its size
                         progress(sent, total, name, size)
-                    self._put(output / name, f"{staging}/{name}", cancel, (lambda done, sent=sent, name=name, size=size: progress(sent + done, total, name, size)) if progress else None)
+                    if len(group) == 1:
+                        self._put(output / name, f"{staging}/{name}", cancel, (lambda done, sent=sent, name=name, size=size: progress(sent + done, total, name, size)) if progress else None)
+                    else:
+                        self._put_together([output / item[0] for item in group], staging, cancel)
                     sent += size
                 if progress:
                     progress(total, total, "", 0)
@@ -823,14 +876,7 @@ except OSError:
         """Update the UI of the running app. The app and its Python state stay alive."""
         self._require()
         with self._operation:
-            if self._uart is not None or self._custom_runner:
-                output = self._exec(script, 30, cancel)
-            else:
-                # On Windows a command line cannot hold a large UI.
-                with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-live-") as temporary:
-                    path = Path(temporary) / "live.py"
-                    path.write_text(script, encoding="utf-8", newline="\n")
-                    output = self._execute(["connect", self.port, "resume", "run", str(path)], timeout=30, cancel=cancel)
+            output = self._run_script(script, 30, cancel)  # a large UI does not fit a command line
         if LIVE_OK not in output:
             raise DeviceError("device.live", output)
         return output
