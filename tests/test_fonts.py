@@ -271,6 +271,22 @@ def test_fonts_too_heavy_for_the_board_are_reported():
     assert font_memory_warning(legacy_data(project), 192_000) is None
 
 
+@needs_runtime
+def test_the_budget_counts_a_font_as_a_board_holds_it():
+    from copper_and_code_studio.build.budget import measure_budget
+    from copper_and_code_studio.gen.fonts import convert_fonts
+    from copper_and_code_studio.gen.project_gen import legacy_data
+
+    project, _name = with_font(size=60)
+    size = sum(len(result["output"]) for result in convert_fonts(legacy_data(project)).values() if result.get("output"))
+    with_font_budget = measure_budget(project)
+    project.find_widget("text").props["font"] = ""
+    plain = measure_budget(project)
+    ram, flash = with_font_budget["ram"] - plain["ram"], with_font_budget["flash"] - plain["flash"]
+    assert size > 50_000 and 0.9 * size < ram < 1.5 * size     # read from its file: not also as text in ui.py, 2.4 times
+    assert 0.9 * size < flash < 1.2 * size                      # the file as it is, not base64, a third more
+
+
 def test_memory_is_measured_after_the_reset_and_the_warning_survives_a_failed_start(tmp_path):
     from test_device import FakeRunner
 

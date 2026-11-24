@@ -1,4 +1,6 @@
-"""How much a project weighs: exact flash size and RAM measured in the simulator."""
+"""How much a project weighs: exact flash size and RAM measured in the simulator.
+
+Both count the app as an upload puts it on a board, with fonts and images in files of their own."""
 
 import copy
 import os
@@ -51,9 +53,9 @@ def _measure_ram(directory):
 def _measure_flash(project, simulator_dir, directory, board_mpy):
     if project.board and compatible(project, project.board):
         profile = portable_profile(project.board)
-        generated = precompile_board(generate_board(project, profile, directory), directory, board_mpy)
+        generated = precompile_board(generate_board(project, profile, directory, asset_files=True), directory, board_mpy)
         return sum((directory / name).stat().st_size for name in generated["files"])
-    return sum(path.stat().st_size for path in simulator_dir.glob("*.mpy"))
+    return sum(path.stat().st_size for pattern in ("*.mpy", "lms_font_*", "lms_image_*") for path in simulator_dir.glob(pattern))
 
 
 def measure_budget(project, board_mpy=None):
@@ -61,7 +63,7 @@ def measure_budget(project, board_mpy=None):
     with tempfile.TemporaryDirectory(prefix="copper-and-code-studio-budget-", ignore_cleanup_errors=True) as temporary:
         simulator = Path(temporary) / "simulator"
         try:
-            generate_project(project, simulator)
+            generate_project(project, simulator, asset_files=True)  # fonts and images as a board holds them: files, not text in ui.py
             compile_python(simulator)
             local_mpy = (simulator / "ui.mpy").read_bytes()[1]
             flash = _measure_flash(project, simulator, Path(temporary) / "board", board_mpy if board_mpy is not None else local_mpy)

@@ -276,11 +276,14 @@ def design_warnings(project):
     return project.text_warnings() + (font_warnings(legacy_data(project)) if (project.assets or {}).get("fonts") else [])
 
 
-def generate_project(project, output_dir, runtime_dir=None, initial_page=None, expose_all=False, loop_module=None):
+def generate_project(project, output_dir, runtime_dir=None, initial_page=None, expose_all=False, loop_module=None, asset_files=False):
     """initial_page: index of the page to start from, otherwise the initial page of the project.
 
     expose_all: ui exposes every widget and helper, even those the code does not use; it serves
     whoever looks inside the app from outside, such as the simulator probe.
+
+    asset_files: the fonts and images of the project in files of their own next to ui.py, as an
+    upload puts them on a board; the memory budget measures the app that way.
     """
     warnings = validate_project(project) + design_warnings(project) + code_warnings(project)
     output = Path(output_dir)
@@ -293,13 +296,17 @@ def generate_project(project, output_dir, runtime_dir=None, initial_page=None, e
     if initial_page is None:
         current = full.get("currentPageId")
         initial_page = next((index for index, page in enumerate(full["pages"]) if page.get("id") == current), 0)
-    (output / "ui.py").write_text(ui_source(data, full, expose_all), encoding="utf-8", newline="\n")
+    assets = {} if asset_files else None
+    (output / "ui.py").write_text(ui_source(data, full, expose_all, asset_files=assets), encoding="utf-8", newline="\n")
     (output / "app_events.py").write_text(app_source, encoding="utf-8", newline="\n")
     (output / "main.py").write_text(generate_main(project, model, initial_page, expose_all, loop_module), encoding="utf-8", newline="\n")
     (output / "sourcemap.json").write_text(json.dumps(sourcemap, indent=2) + "\n", encoding="utf-8", newline="\n")
     runtime_dir = Path(runtime_dir) if runtime_dir else Path(__file__).parents[2] / "runtime"
     shutil.copyfile(runtime_dir / "display_driver.py", output / "display_driver.py")
     files = ["ui.py", "app_events.py", "main.py", "display_driver.py", "sourcemap.json"]
+    for name, content in (assets or {}).items():
+        (output / name).write_bytes(content)
+        files.append(name)
     modules = list(APP_MODULES)
     for name, source in block_files(full)[0].items():
         (output / name).write_text(source, encoding="utf-8", newline="\n")
