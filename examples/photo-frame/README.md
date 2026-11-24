@@ -17,14 +17,32 @@ a network there is no time: the clock shows `--:--` and the display stays on.
 ## The photos
 
 The firmware of the board decodes PNG but not JPEG, and a PNG of 480×480 takes more than half a
-second. So the photos are prepared on the PC as LVGL images in RGB565, drawn at once with no
-decoder, about 460 KB each:
+second. So the photos are LVGL images in RGB565, drawn at once with no decoder, about 460 KB each.
+
+### From a phone, with Add photos
+
+In **Options**, **Add photos** starts a small web server on the board and shows a QR code, the
+address and a PIN. A phone or a PC on the same WiFi opens the page, by the code or by the address
+and the PIN, and chooses photos from its gallery. The page prepares each photo in the browser,
+upright, cut to the screen (or whole, with black bands) and dithered, and sends it ready; the
+board only writes it to `/sd/photos`. The page also lists the photos of the frame and deletes
+them. **Done** stops the server, and the new photos come in at once. Nothing has to be installed.
+
+The page speaks the language chosen in Settings. Without the PIN, which changes each time, the
+others on the network cannot add or delete photos; the page and the photos travel in plain HTTP,
+so use it on your own network. On the ESP32-4848S040 two photos of 4032×3024 from a phone took
+ten seconds, preparing and sending. The server is `photo_web`, a module of the project.
+
+### On the PC
+
+The photos can also be prepared on the PC:
 
 ```bash
 python convert_photos.py ~/Pictures/holidays --output photos
 ```
 
-Run it with the Python of Copper and Code Studio, which has PySide6. Each photo is turned upright
+Run it with the Python of Copper and Code Studio, which has PySide6. The page of Add photos does
+the same in the browser. Each photo is turned upright
 from its EXIF orientation, scaled to cover the screen and cut at the centre (`--fit` keeps the
 whole photo with black bands; `--size` for another display), and dithered, so that the skies have
 no bands in the 65 thousand colours of the display. Then copy the folder to `/sd/photos` with the

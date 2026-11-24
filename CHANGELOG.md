@@ -11,6 +11,7 @@
 - **Three more games for a 480×480 touch screen:** Block Drop, falling pieces of four blocks that fill rows; Star Guard, a squadron of drones to shoot down before it lands; and Crossword, a new puzzle built on the board each time from a list of words with clues, in English or in Italian, with the language kept in `cac_settings.json`.
 - **An app at power-on on the ESP32-4848S040.** The Settings example has a Start page: the app of the menu of the board that starts at power-on instead of the shell, or the shell. `tools/esp32_sd.py` makes Forecast the one before a choice. It needs the home of the board repository from 24 November 2026.
 - **Clock**, an analog clock for a 480×480 touch screen: a dark face with the date in English or Italian, dark red with the backlight down at night, the time from the network in Italian time. The Settings example has a language for the apps that speak more than one.
+- **Photo Frame: photos from a phone.** Add photos, in Options, shows a QR code: a phone on the same WiFi opens a page that fits its photos to the frame in the browser and sends them ready, with a PIN shown on the screen. The page also lists and deletes the photos. Nothing has to be installed on a PC.
 
 ### Changed
 
