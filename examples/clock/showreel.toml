@@ -1,0 +1,52 @@
+# The showreel of Clock: python -m tools.showreel examples/clock
+[video]
+title = "Clock"
+subtitle = "An analog clock for a 480×480 ESP32 screen, built in Copper and Code Studio"
+gif = { from = "start", seconds = 8 }
+poster = "wait"
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project for the ESP32-4848S040, 480×480"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["bg"]
+balloon = "One panel: the face is drawn by the code"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "Clock"
+per_frame = 1
+balloon = "A timer moves the hands"
+anchor = "project"
+
+[[step]]
+do = "code"
+module = true
+lines = [138, 158]
+balloon = "A hand is an LVGL line: two points from the angle of the hour"
+anchor = "code.editor"
+
+[[step]]
+do = "code"
+handler = "tick_tick"
+balloon = "At every tick of the timer"
+anchor = "code.editor"
+
+[[step]]
+do = "start"
+balloon = "Start: in the simulator the time is the PC's; on the board it comes from the network"
+anchor = "simulator"
+
+[[step]]
+do = "wait"
+seconds = 6
+
+[[step]]
+do = "end"

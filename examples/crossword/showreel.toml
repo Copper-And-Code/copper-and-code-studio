@@ -1,0 +1,98 @@
+# The showreel of Crossword: python -m tools.showreel examples/crossword
+[video]
+title = "Crossword"
+subtitle = "A new puzzle every time, on a 480×480 ESP32 screen, built in Copper and Code Studio"
+gif = { from = "start", seconds = 10 }
+poster = "wait"
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project for the ESP32-4848S040, 480×480"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["bg", "grid", "keys"]
+balloon = "Drag widgets from the Toolbox onto the page: the grid and a keyboard"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "main"
+per_frame = 2
+balloon = "The buttons, the clue and the status"
+anchor = "canvas"
+
+[[step]]
+do = "code"
+handler = "grid_clicked"
+balloon = "The handler of a touch on the grid"
+anchor = "code.editor"
+
+[[step]]
+do = "code"
+module = true
+lines = [312, 334]
+balloon = "The general code: the square under the finger, and the word it belongs to"
+anchor = "code.editor"
+
+[[step]]
+do = "start"
+balloon = "Start: the board builds a new puzzle from a list of words"
+anchor = "simulator"
+
+[[step]]
+do = "wait"
+seconds = 2
+
+[[step]]
+do = "tap"
+x = 90
+y = 360
+balloon = "Type with the keys at the bottom"
+anchor = "simulator"
+hold = 0.5
+speed = 0.4
+
+[[step]]
+do = "tap"
+x = 138
+y = 360
+hold = 0.5
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_reveal"
+balloon = "Reveal fills in the word, in blue"
+anchor = "simulator"
+hold = 1
+speed = 0.4
+
+[[step]]
+do = "tap"
+widget = "btn_next"
+balloon = "The next word, and its clue"
+anchor = "simulator"
+hold = 1
+speed = 0.4
+
+[[step]]
+do = "tap"
+widget = "btn_reveal"
+hold = 1
+speed = 0.4
+
+[[step]]
+do = "tap"
+widget = "btn_lang"
+balloon = "In Italian: a new puzzle, from another list"
+anchor = "simulator"
+hold = 2.5
+speed = 0.4
+
+[[step]]
+do = "end"

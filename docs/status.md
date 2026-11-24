@@ -63,12 +63,16 @@ below as an open question, not as a formality.
 
 ## Project website
 
-The English documentation and six browser demos are published at
+The English documentation, fourteen browser demos and six videos are published at
 <https://copper-and-code.github.io/copper-and-code-studio/> from the `gh-pages` branch. On 12 November
 2026, the public home, manual, gallery, and the five demos of that day were checked in Chromium. Each demo
 reported a running WebAssembly application and a non-black canvas; a simulated touch changed the
 Fifteen screen, and no requests went to external domains. The IDE test for **Help → Online
-Documentation** also passed and opens the same public address.
+Documentation** also passed and opens the same public address. On 24 November the seven demos added
+that day (Block Drop, Star Guard, Frog, Orbit, Sandwich Tower, Crossword, Clock) were started in
+headless Chromium: no errors in the console, and a press on the screen started Block Drop, Frog and
+Orbit. Examples that need WiFi, the SD card or the board (Forecast, Photo Frame, FTP Server,
+Settings) are not demos.
 
 Firefox, Safari, and a real phone with touch and sound have not been tried.
 

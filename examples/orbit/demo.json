@@ -1,0 +1,10 @@
+{
+  "id": "orbit",
+  "name": "Orbit",
+  "description": "Drag the ship along the bottom of the screen; it fires by itself at a swarm of drones that changes shape at every wave.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.",
+  "order": 110
+}

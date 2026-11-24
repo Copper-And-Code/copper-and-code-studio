@@ -1,0 +1,10 @@
+{
+  "id": "clock",
+  "name": "Clock",
+  "description": "An analog clock with a dark face, a thin orange second hand and the date; on the board it turns dark red at night and takes the time from the network.",
+  "kind": "application",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.",
+  "order": 140
+}

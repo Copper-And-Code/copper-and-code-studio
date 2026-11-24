@@ -1,0 +1,10 @@
+{
+  "id": "frog",
+  "name": "Frog",
+  "description": "At night a frog crosses a path and a pond to catch three fireflies, dodging insects and mowers and riding the water lilies.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.",
+  "order": 100
+}

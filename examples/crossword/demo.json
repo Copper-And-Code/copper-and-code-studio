@@ -1,0 +1,10 @@
+{
+  "id": "crossword",
+  "name": "Crossword",
+  "description": "A new crossword every time, built on the board from a list of words with their clues, in English or Italian.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.",
+  "order": 130
+}

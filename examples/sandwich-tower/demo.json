@@ -1,0 +1,10 @@
+{
+  "id": "sandwich-tower",
+  "name": "Sandwich Tower",
+  "description": "A chef runs on four floors and steps on the layers of the sandwiches to drop them onto the plates, chased by a chili, an olive and a gherkin.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "The English version of an example the author made in Italian, adapted for the ESP32-4848S040; there is no single prompt.",
+  "order": 120
+}

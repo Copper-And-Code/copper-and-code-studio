@@ -35,6 +35,9 @@ VIDEOS = (
     ("eim-01", "EIM-01 industrial monitor", "Five pages and 256 widgets on an STM32H7 board at 1024×600: a property changed, a handler written from the Events tab, the general code, then the app touched in the simulator."),
     ("weather", "Weather", "A forecast for a 480×480 ESP32 screen, with images, a Python module and a settings page; in the simulator the cities change and the switch moves to °F."),
     ("snake", "Snake", "A game: a timer moves the snake and touches turn it. The run is played with taps on the simulator screen."),
+    ("block-drop", "Block Drop", "A falling-block game for the 480×480 ESP32 screen: the keys call the general code, which turns and drops the pieces; in the simulator the keys are touched."),
+    ("crossword", "Crossword", "A new puzzle every time, built from a list of words with their clues: a touch on the grid finds the square, the keyboard types, Reveal fills in a word, and the language button starts a puzzle in Italian."),
+    ("clock", "Clock", "An analog clock drawn by the code: each hand is an LVGL line moved by a timer. In the simulator the time is the PC's."),
 )
 README_GIF = ("eim-01-short", "eim-01-short.gif")
 SHOWREEL = "build/showreel"

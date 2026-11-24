@@ -1,0 +1,10 @@
+{
+  "id": "star-guard",
+  "name": "Star Guard",
+  "description": "Shoot a marching squadron of forty drones before it lands, behind four shields that crumble, with a comet now and then for a bonus.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.",
+  "order": 90
+}

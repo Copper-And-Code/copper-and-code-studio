@@ -1,0 +1,118 @@
+# The showreel of Block Drop: python -m tools.showreel examples/block-drop
+[video]
+title = "Block Drop"
+subtitle = "A falling-block game for a 480×480 ESP32 screen, built in Copper and Code Studio"
+gif = { from = "start", seconds = 10 }
+poster = "wait"
+
+[[step]]
+do = "title"
+
+[[step]]
+do = "create"
+balloon = "A new project for the ESP32-4848S040, 480×480"
+anchor = "toolbar.resolution"
+
+[[step]]
+do = "add"
+widgets = ["bg", "field", "btn_rotate"]
+balloon = "Drag widgets from the Toolbox onto the page"
+anchor = "toolbox"
+
+[[step]]
+do = "fill"
+page = "main"
+per_frame = 2
+balloon = "The well, the next piece and the keys; a timer and a buzzer too"
+anchor = "canvas"
+
+[[step]]
+do = "code"
+handler = "btn_rotate_pressed"
+balloon = "A key's handler: one line that calls the game"
+anchor = "code.editor"
+
+[[step]]
+do = "code"
+module = true
+lines = [264, 277]
+balloon = "The general code: a turn tries the rotation, then a step aside"
+anchor = "code.editor"
+
+[[step]]
+do = "start"
+balloon = "Start: the real MicroPython and LVGL, compiled for the PC"
+anchor = "simulator"
+
+[[step]]
+do = "tap"
+widget = "field"
+balloon = "Touch the well to play"
+anchor = "simulator"
+
+[[step]]
+do = "wait"
+seconds = 0.6
+
+[[step]]
+do = "tap"
+widget = "btn_rotate"
+hold = 0.5
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_left"
+hold = 0.4
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_left"
+hold = 0.4
+speed = 0.2
+
+[[step]]
+do = "tap"
+widget = "btn_drop"
+hold = 0.8
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_right"
+hold = 0.4
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_right"
+hold = 0.4
+speed = 0.2
+
+[[step]]
+do = "tap"
+widget = "btn_rotate"
+hold = 0.4
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_drop"
+hold = 0.8
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_rotate"
+hold = 0.4
+speed = 0.3
+
+[[step]]
+do = "tap"
+widget = "btn_drop"
+hold = 1.2
+speed = 0.3
+
+[[step]]
+do = "end"

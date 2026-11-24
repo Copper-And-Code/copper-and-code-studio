@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **The website shows the new examples:** Block Drop, Star Guard, Frog, Orbit, Sandwich Tower, Crossword and Clock run in the browser among the demos, and the Videos page has Block Drop, Crossword and Clock, each with its `showreel.toml`.
+
 ## 0.9.0 — 2026-11-24
 
 The ESP32-4848S040 as a finished device: an app at power-on, a clock, photos sent from a phone, every app in English or Italian, and a kit with the firmware, the flash and the SD card in one zip. An upload sends only what changed. The Windows package is that of 0.7.1, under the old name.

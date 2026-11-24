@@ -102,11 +102,11 @@ summary lists what was completed without frames.
 
 ## The videos of the website
 
-`tools/build_site.py` copies `build/showreel/{eim-01,weather,snake}/` and
+`tools/build_site.py` copies `build/showreel/{eim-01,weather,snake,block-drop,crossword,clock}/` and
 `build/showreel/eim-01-short/eim-01-short.gif` into the site, and adds the Videos page; without
 them it leaves the page out and says so. To make them:
 
 ```bash
-for example in eim-01 weather snake; do .venv/bin/python -m tools.showreel examples/$example; done
+for example in eim-01 weather snake block-drop crossword clock; do .venv/bin/python -m tools.showreel examples/$example; done
 .venv/bin/python -m tools.showreel examples/eim-01 --storyboard examples/eim-01/showreel-short.toml --name eim-01-short --no-webm
 ```

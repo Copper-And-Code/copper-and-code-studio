@@ -1,0 +1,10 @@
+{
+  "id": "block-drop",
+  "name": "Block Drop",
+  "description": "A falling-block puzzle: move and turn the pieces to fill whole rows, faster at every level, with a shadow where the piece lands.",
+  "kind": "game",
+  "page": null,
+  "prompt": null,
+  "prompt_note": "An AI agent built it through the MCP server of the IDE and checked it with the simulator, over several requests of the author; there is no single prompt.",
+  "order": 80
+}
