@@ -967,6 +967,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-board-firmware-in-an-emulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The board firmware in an emulator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#known-defects-and-open-points" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1191,6 +1202,17 @@
     <span class="md-ellipsis">
       
         The IDE in the browser
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-board-firmware-in-an-emulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The board firmware in an emulator
       
     </span>
   </a>
@@ -1524,6 +1546,22 @@ Settings) are not demos.</p>
 that holds this one as a git submodule at a tag and runs its <code>core/</code>, <code>gen/</code> and <code>build/</code> in
 Pyodide. It is published at <a href="https://copper-and-code.github.io/copper-and-code-studio-web/">https://copper-and-code.github.io/copper-and-code-studio-web/</a>. It is a work in progress: experimental, but already
 usable, in the author's judgement. Its checks are recorded in that repository, not here.</p>
+<h2 id="the-board-firmware-in-an-emulator">The board firmware in an emulator<a class="headerlink" href="#the-board-firmware-in-an-emulator" title="Permanent link">&para;</a></h2>
+<p>A <a href="https://github.com/Copper-And-Code/velxio">fork of Velxio</a>, a multi-board simulator in the
+browser, runs the firmware of three boards of
+<a href="https://github.com/Copper-And-Code/copper-and-code-mcu-boards">copper-and-code-mcu-boards</a> on
+emulated chips, with the examples of this repository copied in by a script of that fork: the
+STM32H7_CORE V1.3 in Renode, the ESP32-4848S040 and the Waveshare RP2350-Touch-LCD-4 in QEMU
+builds of the author's own. Unlike the simulator of the IDE, which runs LVGL and MicroPython on
+the PC, this runs the board's MicroPython, memory and REPL. According to the author, on 26 November
+2026 the fourteen examples ran on the ESP32-4848S040, twelve on the RP2350 (FTP Server and Photo
+Frame need a radio, which that board does not have), and seven on the STM32H7_CORE. These checks
+are recorded in that fork, not here.</p>
+<p>It is the firmware's <code>VELXIO</code> variant, not the one written to the boards: a virtual screen stands
+for the panel and its driver, the touch is read in another way on the ESP32-S3 and the STM32H743,
+the RP2350 has no double coprocessor, the STM32H743 has no USB and no SD card, and nothing runs at
+the speed of the chip. An app that runs there can still fail on a board: the README of the fork
+lists what it does not show. The IDE does not start it, and nothing in this repository depends on it.</p>
 <h2 id="known-defects-and-open-points">Known defects and open points<a class="headerlink" href="#known-defects-and-open-points" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Windows.</strong> The portable package of 0.4 did not start on a real Windows: it bundled a copy
