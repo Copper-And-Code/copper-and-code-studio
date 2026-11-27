@@ -504,6 +504,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#other-stm32-boards-and-the-rp2350-at-480480" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other STM32 boards, and the RP2350 at 480×480
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#esp32-4848s040" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1198,6 +1209,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#other-stm32-boards-and-the-rp2350-at-480480" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other STM32 boards, and the RP2350 at 480×480
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#esp32-4848s040" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1309,6 +1331,13 @@
 <h3 id="stm32h7_core-v13">STM32H7_CORE V1.3<a class="headerlink" href="#stm32h7_core-v13" title="Permanent link">&para;</a></h3>
 <p>The <strong>STM32H7_CORE V1.3 (1024×600)</strong> profile uses the 1024×600 RGB565 LTDC IPS panel, GT911 touch and 1× scaling. It requires MicroPython 1.29 or later, LVGL 9.5 or later, and the <code>display_driver</code>, <code>gt911</code> and <code>st_ltdc</code> modules. Pick the board in the selector next to <strong>Run</strong>; the logical resolution is 1024×600.</p>
 <p>The connection uses UART1 through a CH340 adapter at <strong>115200 8N1</strong>, normally <code>/dev/ttyUSB0</code> on Linux. Native USB is not used. The IDE sets DTR=1 and RTS=0 before opening the port, waits 3 seconds for boot and keeps the same port open for probing, upload, execution and console. Do not use <code>mpremote</code> or another program on the same port: RTS=1 holds the board in reset and every reopening causes a hard reset. <strong>Restart</strong> uses a soft reset without reopening the port. Applications are installed under <code>/flash/lms_apps/</code>; autostart only affects <code>/flash/main.py</code> and does not modify <code>display_config.py</code> or other user files.</p>
+<h3 id="other-stm32-boards-and-the-rp2350-at-480480">Other STM32 boards, and the RP2350 at 480×480<a class="headerlink" href="#other-stm32-boards-and-the-rp2350-at-480480" title="Permanent link">&para;</a></h3>
+<p>These profiles come with the IDE for the other boards of the <a href="https://github.com/Copper-And-Code/copper-and-code-mcu-boards">board repository</a>. Their firmware has run on each board, but <strong>the IDE has not been tried with any of them yet</strong> (<a href="../status/">status</a>).</p>
+<ul>
+<li><strong>STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 (1024×600)</strong>: the same LTDC panel, GT911 touch and modules as the V1.3 (<code>display_driver</code>, <code>gt911</code>, <code>st_ltdc</code>), reached on the board's own USB (<code>/dev/ttyACM0</code> on Linux) through <code>mpremote</code>, as the ESP32 and the RP2350. Applications are installed under <code>/flash/lms_apps/</code>, and autostart writes <code>/flash/main.py</code>.</li>
+<li><strong>STM32F769I-DISCO (800×480)</strong>, with the MB1166 display: MIPI-DSI through the LTDC, FT6206 touch, audio codec; it needs the <code>display_driver</code>, <code>ft6x06</code>, <code>st_ltdc</code> and <code>audio</code> modules, and is reached on its USB. Its firmware is in development and in no release of the board repository yet. A profile of the same id imported before from that repository becomes a customization of the built-in one.</li>
+<li><strong>Waveshare RP2350-Touch-LCD-4 with PSRAM (480×480)</strong>: the RP2350 with an 8 MB QSPI PSRAM soldered on the empty U9 footprint, at 1× scaling. The firmware (v0.1.8 or later) chooses 480×480 at boot when the PSRAM is there, and 240×240 otherwise: the probe of <strong>Device Information</strong> reports a board whose resolution is not that of the profile.</li>
+</ul>
 <h3 id="esp32-4848s040">ESP32-4848S040<a class="headerlink" href="#esp32-4848s040" title="Permanent link">&para;</a></h3>
 <p>The <strong>ESP32-4848S040 (480×480)</strong> profile uses native 480×480 RGB565 resolution, GT911 touch and 1× scaling. It requires MicroPython 1.29 or later, LVGL 9.5 or later, and the <code>display_driver</code> and <code>gt911</code> modules. Panel support is integrated into the display driver: a separate <code>rgbpanel</code> module is not required. The USB serial connection uses <code>mpremote</code>, normally on <code>/dev/ttyUSB0</code>; applications are installed under <code>/lms_apps/</code> without modifying <code>boot.py</code> or <code>main.py</code>.</p>
 <p>On this board an installed app can also be started from a menu: the home of the board repository (<a href="https://github.com/Copper-And-Code/copper-and-code-mcu-boards/tree/main/examples/home"><code>examples/home</code></a>) starts at power-on the app chosen on the Start page of Settings, Forecast until another is chosen, or else a shell on the display, where a tap opens a menu of apps listed in <code>/sd/home.json</code>, with folders such as Games. Each app has a home button that goes back to the menu, hidden until a pull down from the top edge, so that it covers nothing of the app. The Studio's examples Settings, Forecast, Clock, FTP Server and Photo Frame are written for it: the menu reads the WiFi networks, the brightness and the language that Settings keeps in <code>cac_settings.json</code>. The <a href="https://github.com/Copper-And-Code/copper-and-code-studio/tree/main/examples/settings">Settings example</a> shows the lines of <code>home.json</code> for them.</p>
