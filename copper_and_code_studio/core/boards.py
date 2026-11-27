@@ -25,6 +25,18 @@ ADAPTERS = {
         "modules": ["lvgl", "display_driver", "gt911"],
         "eventLoop": "driver",
     },
+    # The STM32H743 boards reached on their own USB, through mpremote as the ESP32 and the RP2350.
+    "stm32h7_usb": {
+        "colorFormats": {"RGB565"},
+        "modules": ["lvgl", "display_driver", "gt911", "st_ltdc"],
+        "eventLoop": "driver",
+    },
+    # The STM32F769I-DISCO with the MB1166 display: MIPI-DSI through the LTDC, FT6206 touch, audio codec.
+    "stm32f769i_disco": {
+        "colorFormats": {"RGB565"},
+        "modules": ["lvgl", "display_driver", "ft6x06", "st_ltdc", "audio"],
+        "eventLoop": "driver",
+    },
 }
 
 

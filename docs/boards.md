@@ -26,6 +26,14 @@ The **STM32H7_CORE V1.3 (1024×600)** profile uses the 1024×600 RGB565 LTDC IPS
 
 The connection uses UART1 through a CH340 adapter at **115200 8N1**, normally `/dev/ttyUSB0` on Linux. Native USB is not used. The IDE sets DTR=1 and RTS=0 before opening the port, waits 3 seconds for boot and keeps the same port open for probing, upload, execution and console. Do not use `mpremote` or another program on the same port: RTS=1 holds the board in reset and every reopening causes a hard reset. **Restart** uses a soft reset without reopening the port. Applications are installed under `/flash/lms_apps/`; autostart only affects `/flash/main.py` and does not modify `display_config.py` or other user files.
 
+### Other STM32 boards, and the RP2350 at 480×480
+
+These profiles come with the IDE for the other boards of the [board repository](https://github.com/Copper-And-Code/copper-and-code-mcu-boards). Their firmware has run on each board, but **the IDE has not been tried with any of them yet** ([status](status.md)).
+
+- **STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 (1024×600)**: the same LTDC panel, GT911 touch and modules as the V1.3 (`display_driver`, `gt911`, `st_ltdc`), reached on the board's own USB (`/dev/ttyACM0` on Linux) through `mpremote`, as the ESP32 and the RP2350. Applications are installed under `/flash/lms_apps/`, and autostart writes `/flash/main.py`.
+- **STM32F769I-DISCO (800×480)**, with the MB1166 display: MIPI-DSI through the LTDC, FT6206 touch, audio codec; it needs the `display_driver`, `ft6x06`, `st_ltdc` and `audio` modules, and is reached on its USB. Its firmware is in development and in no release of the board repository yet. A profile of the same id imported before from that repository becomes a customization of the built-in one.
+- **Waveshare RP2350-Touch-LCD-4 with PSRAM (480×480)**: the RP2350 with an 8 MB QSPI PSRAM soldered on the empty U9 footprint, at 1× scaling. The firmware (v0.1.8 or later) chooses 480×480 at boot when the PSRAM is there, and 240×240 otherwise: the probe of **Device Information** reports a board whose resolution is not that of the profile.
+
 ### ESP32-4848S040
 
 The **ESP32-4848S040 (480×480)** profile uses native 480×480 RGB565 resolution, GT911 touch and 1× scaling. It requires MicroPython 1.29 or later, LVGL 9.5 or later, and the `display_driver` and `gt911` modules. Panel support is integrated into the display driver: a separate `rgbpanel` module is not required. The USB serial connection uses `mpremote`, normally on `/dev/ttyUSB0`; applications are installed under `/lms_apps/` without modifying `boot.py` or `main.py`.

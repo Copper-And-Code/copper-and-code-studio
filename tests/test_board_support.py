@@ -5,7 +5,7 @@ import pytest
 from PySide6.QtWidgets import QDialog
 
 from copper_and_code_studio.cli import main
-from copper_and_code_studio.core.boards import ProfileStore, builtin_profiles
+from copper_and_code_studio.core.boards import ProfileStore, adapter_requirements, builtin_profiles, validate_profile
 from copper_and_code_studio.core.i18n import set_language, tr
 from copper_and_code_studio.gen.board_gen import generate_board
 from copper_and_code_studio.core.model import Project
@@ -242,3 +242,17 @@ def test_dynamic_tabs_and_object_names_survive_language_changes(qtbot):
     assert window.document.project.to_dict() == before
     assert "Pagina: Codice" not in [window.code_panel.object_combo.itemText(index) for index in range(window.code_panel.object_combo.count())]
     window.document.undo_stack.setClean()
+
+
+@pytest.mark.parametrize("profile", builtin_profiles(), ids=lambda profile: profile["id"])
+def test_every_builtin_board_is_valid_and_generates(tmp_path, profile):
+    validate_profile(profile)
+    assert adapter_requirements(profile)["modules"] == profile["firmware"]["modules"]
+    project = Project("board")
+    project.set_display_size(profile["logicalWidth"], profile["logicalHeight"])
+    project.board = profile
+    project.add_widget(project.pages[0], "button")
+    generate_board(project, profile, tmp_path)
+    adapter = (tmp_path / "board_adapter.py").read_text()
+    assert f"LOGICAL_SIZE = ({profile['logicalWidth']}, {profile['logicalHeight']})" in adapter
+    assert json.loads((tmp_path / "board_profile.json").read_text())["id"] == profile["id"]

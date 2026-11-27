@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "stm32f769i_disco_800x480",
+  "revision": 2,
+  "name": "STM32F769I-DISCO (800×480)",
+  "adapter": "stm32f769i_disco",
+  "firmware": {
+    "microPython": "1.29",
+    "lvgl": "9.5",
+    "modules": [
+      "lvgl",
+      "display_driver",
+      "ft6x06",
+      "st_ltdc",
+      "audio"
+    ]
+  },
+  "physicalWidth": 800,
+  "physicalHeight": 480,
+  "logicalWidth": 800,
+  "logicalHeight": 480,
+  "scale": 1,
+  "colorFormat": "RGB565",
+  "fonts": [
+    14,
+    16,
+    24,
+    32,
+    40
+  ],
+  "orientations": [
+    0
+  ],
+  "config": {
+    "driver": "display_driver",
+    "touch": "ft6x06",
+    "buffers": "driver",
+    "eventLoop": "driver",
+    "appRoot": "/flash/lms_apps",
+    "mainPath": "/flash/main.py"
+  },
+  "buzzer": {
+    "audio": true
+  }
+}

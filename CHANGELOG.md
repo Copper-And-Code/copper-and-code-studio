@@ -5,6 +5,7 @@
 ### Added
 
 - **The website shows the new examples:** Block Drop, Star Guard, Frog, Orbit, Sandwich Tower, Crossword and Clock run in the browser among the demos, and the Videos page has Block Drop, Crossword and Clock, each with its `showreel.toml`.
+- **Profiles of the other boards of the board repository**, not tried with the IDE yet: STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 at 1024×600 on their own USB (adapter `stm32h7_usb`), the STM32F769I-DISCO at 800×480 (adapter `stm32f769i_disco`), and the Waveshare RP2350-Touch-LCD-4 with PSRAM at 480×480.
 - **A portable package for Windows in the release of 0.9.0**, `Copper_and_Code_Studio-0.9.0-portable-win64.zip`, the first under the new name, with the Windows runtime built again under that name.
 
 ### Changed
