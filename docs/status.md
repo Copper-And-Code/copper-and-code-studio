@@ -83,6 +83,25 @@ that holds this one as a git submodule at a tag and runs its `core/`, `gen/` and
 Pyodide. It is published at <https://copper-and-code.github.io/copper-and-code-studio-web/>. It is a work in progress: experimental, but already
 usable, in the author's judgement. Its checks are recorded in that repository, not here.
 
+## The board firmware in an emulator
+
+A [fork of Velxio](https://github.com/Copper-And-Code/velxio), a multi-board simulator in the
+browser, runs the firmware of three boards of
+[copper-and-code-mcu-boards](https://github.com/Copper-And-Code/copper-and-code-mcu-boards) on
+emulated chips, with the examples of this repository copied in by a script of that fork: the
+STM32H7_CORE V1.3 in Renode, the ESP32-4848S040 and the Waveshare RP2350-Touch-LCD-4 in QEMU
+builds of the author's own. Unlike the simulator of the IDE, which runs LVGL and MicroPython on
+the PC, this runs the board's MicroPython, memory and REPL. According to the author, on 26 November
+2026 the fourteen examples ran on the ESP32-4848S040, twelve on the RP2350 (FTP Server and Photo
+Frame need a radio, which that board does not have), and seven on the STM32H7_CORE. These checks
+are recorded in that fork, not here.
+
+It is the firmware's `VELXIO` variant, not the one written to the boards: a virtual screen stands
+for the panel and its driver, the touch is read in another way on the ESP32-S3 and the STM32H743,
+the RP2350 has no double coprocessor, the STM32H743 has no USB and no SD card, and nothing runs at
+the speed of the chip. An app that runs there can still fail on a board: the README of the fork
+lists what it does not show. The IDE does not start it, and nothing in this repository depends on it.
+
 ## Known defects and open points
 
 - **Windows.** The portable package of 0.4 did not start on a real Windows: it bundled a copy

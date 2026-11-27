@@ -68,6 +68,8 @@ To see the IDE use itself, with a report of each step:
 .venv/bin/copper-and-code-studio selftest --show
 ```
 
+Without a board, the board firmware itself, with these examples, also runs on emulated chips in a [fork of Velxio](https://github.com/Copper-And-Code/velxio); [what that does and does not show](docs/status.md#the-board-firmware-in-an-emulator).
+
 ## Documentation
 
 - [User manual](docs/manual.md), [boards](docs/boards.md), [publishing a game on the web](docs/publish-web.md)
