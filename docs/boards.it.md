@@ -28,7 +28,7 @@ Il collegamento avviene tramite UART1 e convertitore CH340 a **115200 8N1**, nor
 
 ### Altre board STM32, e la RP2350 a 480×480
 
-Questi profili sono nell'IDE per le altre board del [repository delle board](https://github.com/Copper-And-Code/copper-and-code-mcu-boards). La loro firmware ha girato su ciascuna board, ma **l'IDE non è ancora stato provato con nessuna di esse** ([stato](status.md)).
+Questi profili sono nell'IDE per le altre board del [repository delle board](https://github.com/Copper-And-Code/copper-and-code-mcu-boards). La loro firmware ha girato su ciascuna board. **La prova dell'IDE con queste board è in corso**, nel laboratorio dell'autore: finché i risultati non sono nella [pagina dello stato](status.md), considera questi profili non provati.
 
 - **STM32H7_CORE V1.0, DEV190806042 e FK743M5-XIH6 (1024×600)**: lo stesso pannello LTDC, lo stesso touch GT911 e gli stessi moduli della V1.3 (`display_driver`, `gt911`, `st_ltdc`), raggiunte sulla USB della board (`/dev/ttyACM0` su Linux) con `mpremote`, come la ESP32 e la RP2350. Le applicazioni si installano in `/flash/lms_apps/` e l'avvio automatico scrive `/flash/main.py`.
 - **STM32F769I-DISCO (800×480)**, con il display MB1166: MIPI-DSI attraverso l'LTDC, touch FT6206, codec audio; servono i moduli `display_driver`, `ft6x06`, `st_ltdc` e `audio`, e si raggiunge sulla sua USB. La sua firmware è in sviluppo e non è ancora in nessuna release del repository delle board. Un profilo con lo stesso id importato prima da quel repository diventa una personalizzazione di quello integrato.

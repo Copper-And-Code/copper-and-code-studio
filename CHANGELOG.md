@@ -2,10 +2,15 @@
 
 ## Unreleased
 
+## 0.9.1 — 2026-11-28
+
+Profiles for the other boards of the board repository, whose test with the IDE is in progress, and the website with the new examples. The Windows package is that of 0.9.0.
+
 ### Added
 
 - **The website shows the new examples:** Block Drop, Star Guard, Frog, Orbit, Sandwich Tower, Crossword and Clock run in the browser among the demos, and the Videos page has Block Drop, Crossword and Clock, each with its `showreel.toml`.
-- **Profiles of the other boards of the board repository**, not tried with the IDE yet: STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 at 1024×600 on their own USB (adapter `stm32h7_usb`), the STM32F769I-DISCO at 800×480 (adapter `stm32f769i_disco`), and the Waveshare RP2350-Touch-LCD-4 with PSRAM at 480×480.
+- **Profiles of the other boards of the board repository**, being tried with the IDE in the author's lab: STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 at 1024×600 on their own USB (adapter `stm32h7_usb`), the STM32F769I-DISCO at 800×480 (adapter `stm32f769i_disco`), and the Waveshare RP2350-Touch-LCD-4 with PSRAM at 480×480.
+- **The board firmware in an emulator**: the [status page](docs/status.md#the-board-firmware-in-an-emulator) says what the [Velxio fork](https://github.com/Copper-And-Code/velxio) runs of the firmware of the ESP32-4848S040, the RP2350 and the STM32H7_CORE, and what it does not show. The IDE does not depend on it.
 - **A portable package for Windows in the release of 0.9.0**, `Copper_and_Code_Studio-0.9.0-portable-win64.zip`, the first under the new name, with the Windows runtime built again under that name.
 
 ### Changed

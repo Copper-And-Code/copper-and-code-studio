@@ -1,4 +1,4 @@
 """Visual IDE for LVGL projects."""
 
-__version__ = "0.9.0"
+__version__ = "0.9.1"
 WEBSITE = "https://copper-and-code.github.io/copper-and-code-studio/"  # the pages of the project: guides and the examples to play in the browser

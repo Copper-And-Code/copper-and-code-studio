@@ -28,7 +28,7 @@ The connection uses UART1 through a CH340 adapter at **115200 8N1**, normally `/
 
 ### Other STM32 boards, and the RP2350 at 480×480
 
-These profiles come with the IDE for the other boards of the [board repository](https://github.com/Copper-And-Code/copper-and-code-mcu-boards). Their firmware has run on each board, but **the IDE has not been tried with any of them yet** ([status](status.md)).
+These profiles come with the IDE for the other boards of the [board repository](https://github.com/Copper-And-Code/copper-and-code-mcu-boards). Their firmware has run on each board. **Trying the IDE with them is in progress**, in the author's lab: until its results are in the [status page](status.md), treat these profiles as not tried.
 
 - **STM32H7_CORE V1.0, DEV190806042 and FK743M5-XIH6 (1024×600)**: the same LTDC panel, GT911 touch and modules as the V1.3 (`display_driver`, `gt911`, `st_ltdc`), reached on the board's own USB (`/dev/ttyACM0` on Linux) through `mpremote`, as the ESP32 and the RP2350. Applications are installed under `/flash/lms_apps/`, and autostart writes `/flash/main.py`.
 - **STM32F769I-DISCO (800×480)**, with the MB1166 display: MIPI-DSI through the LTDC, FT6206 touch, audio codec; it needs the `display_driver`, `ft6x06`, `st_ltdc` and `audio` modules, and is reached on its USB. Its firmware is in development and in no release of the board repository yet. A profile of the same id imported before from that repository becomes a customization of the built-in one.

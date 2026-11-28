@@ -1,7 +1,7 @@
 # Status: what is verified, and how
 
-Version 0.9.0 is published as a GitHub release, with an AppImage for Linux, a portable package
-for Windows, the first under the new name, and the kit of the ESP32-4848S040. This page separates what has been
+Version 0.9.1 is published as a GitHub release, with an AppImage for Linux and the kit of the
+ESP32-4848S040; the portable package for Windows is that of 0.9.0, the first under the new name. This page separates what has been
 checked from what has only been written.
 
 ## Read this first
@@ -32,7 +32,7 @@ below as an open question, not as a formality.
 | Files, commands and the network on the PC ([page](pc-programs.md)) | | | the examples, on the Linux runtime; the modules listed from each runtime, Windows under Wine | a real Windows |
 | MicroPython generation, upload as bytecode | yes: Upload and Run of an example on a virtual board, through the real `mpremote` | | ESP32-4848S040, STM32H7_CORE, Waveshare RP2350 | |
 | Live editing on a board | yes | | ESP32-4848S040 | the other boards |
-| Profiles of the other boards: STM32H7_CORE V1.0, DEV190806042, FK743M5-XIH6, STM32F769I-DISCO, the RP2350 with PSRAM at 480×480 (added on 27 November 2026) | yes: each is valid, and generates | | | the IDE on any of these boards: connecting over their USB, upload, run, console. Their firmware has run on each board, the F769's not in a release yet |
+| Profiles of the other boards: STM32H7_CORE V1.0, DEV190806042, FK743M5-XIH6, STM32F769I-DISCO, the RP2350 with PSRAM at 480×480 (added on 27 November 2026) | yes: each is valid, and generates | | | the IDE on any of these boards: connecting over their USB, upload, run, console; the author is trying them in the lab since 28 November 2026, results to come. Their firmware has run on each board, the F769's not in a release yet |
 | Pictures in a project | yes | yes | STM32H7_CORE (seen on the display) | RP2350, ESP32-S3 |
 | Fonts of a project, kerning | yes, against LVGL's Montserrat | yes | STM32H7_CORE (seen), RP2350 (loaded) | ESP32-S3 |
 | Font memory warning | yes | | Waveshare RP2350, when fonts were text in `ui.py`. ESP32-4848S040, 23 November 2026: a font in three sizes, 70 kB of files, takes 103 kB of the heap read from files and 196 kB as text in `ui.py`, measured with `gc.mem_alloc()` on a project of three labels. 24 November 2026: fonts of 9, 33 and 74 kB loaded from the SD card one at a time, in both orders, and the same font ten times: LVGL keeps a font in about its size, in a pool that grows by 64 or 128 kB steps; always below the warning's sum + largest + 64 kB | the peak while a font loads; the RP2350 with fonts in files |
